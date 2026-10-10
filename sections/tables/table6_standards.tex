@@ -1,0 +1,78 @@
+% Table VI -- standards mapping (DESIGN 8.9). Wording: alignment, never conformance.
+% Clause numbers and titles were checked against the ETSI PDFs (GR RIS 002 V1.2.1, GR RIS 003
+% V1.2.1, GS RIS 008 V1.1.1; local copies in research/scratch/etsi, text extracted 10 Oct 2026).
+% GR RIS 002 defines "RIS controller", "micro-controller" and "RIS panel" (clauses 3.1, 5.1);
+% it has no "RIS actuator" role, so none is mapped. Each row cites its document, so the
+% clause numbers count as cited identifiers (check_claims.py number rule).
+% sremu elements: control/controller.py + engine/barriers.py + transport/control_server.py
+% (controller); engine/commands.py + physics/nonideal.py (micro-controller); contracts.
+% LatencyModel + CommandRecord (control signalling); physics/response.py (Gamma tables);
+% physics/ris_kernel.py + quadrature.py (K1, po_patch); contracts.RisCapabilities;
+% ris_kernel.energy_budget (PH-23); channel/transitions.py + LatencyModel (reconfiguration).
+\begin{table*}[t]
+\caption{Alignment of \sremu{} with the ETSI documents on RIS. A dash in the last column
+marks a clause that \sremu{} does not model. The mapping states alignment of terms and
+models; it is not a conformance claim.}
+\label{tab:standards}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{tabular}{@{}L{0.95in}L{2.05in}L{2.95in}L{0.85in}@{}}
+\toprule
+Document & Clause and term or parameter & Element of the emulator & Evidence \\
+\midrule
+GR RIS 002 V1.2.1 &
+  \S3.1, \S4.2: RIS controller, which generates the control information; five controlling
+  types~\cite{ETSI_GR_RIS002_v121} &
+  External or in-process controller (one protocol; barriers in lockstep); the controlling
+  types are not modelled separately & RT-08, IO-03 \\
+ & \S3.1, \S5.1: micro-controller, which configures the elements~\cite{ETSI_GR_RIS002_v121} &
+  Panel command logic: control granularity, quantizer, failure map, switch per receiver &
+  RT-05, PH-30 \\
+ & \S5.1: control signalling from controller to RIS~\cite{ETSI_GR_RIS002_v121} &
+  Control socket; latency model (fixed plus keyed jitter); command records with lateness &
+  RT-06, RT-17 \\
+\midrule
+GR RIS 003 V1.2.1 &
+  \S5.1.2: locally periodic discrete model; alphabet of reflection
+  coefficients~\cite{ETSI_GR_RIS003_v121} &
+  Response tables $\Gamma(s,f,\theta_i,\theta_s)$ with provenance and validators & PH-31 \\
+ & \S5.1.3: mutually coupled antenna model~\cite{ETSI_GR_RIS003_v121} &
+  Not modelled; coupling enters through per-configuration tables; hook without
+  coefficients & --- \\
+ & \S6.3.1.2: path-loss model, general case, with the recommended cell
+  gain~\cite{ETSI_GR_RIS003_v121} &
+  K1 with one point per cell is algebraically equal to it & PH-02 \\
+ & \S6.6: reradiation integral with factor $j$ and point-wise
+  $\Gamma$~\cite{ETSI_GR_RIS003_v121} &
+  Factor $j$ of K1; \texttt{po\_patch} quadrature of the cell integral; one reradiated
+  mode per state & PH-05, PH-26 \\
+ & \S6.8: polarized element modelling~\cite{ETSI_GR_RIS003_v121} &
+  Not modelled (scalar co-polar fields) & --- \\
+\midrule
+GS RIS 008 V1.1.1 &
+  \S4.1, \S4.2: operating frequency range; maximum operating
+  bandwidth~\cite{ETSI_GS_RIS008} &
+  Frequency axis and validity bandwidth of a table; capabilities
+  \texttt{operating\_band\_hz}, \texttt{max\_bandwidth\_hz}; wider signals rejected &
+  PH-31 \\
+ & \S4.3, \S4.4: bistatic radar cross section; reflected-beam spatial
+  characteristics~\cite{ETSI_GS_RIS008} &
+  Incidence and reflection angle axes of a table; beam patterns compared with MATLAB
+  (code to code) & G2, G3 \\
+ & \S4.5: total reflected power~\cite{ETSI_GS_RIS008} &
+  Energy diagnostic: scattered power at most the intercepted power & PH-23 \\
+ & \S4.6: modulated-signal quality (EVM)~\cite{ETSI_GS_RIS008} &
+  EVM measured by an RX application on received IQ samples
+  (Section~\ref{sec:cases}) & F9 \\
+ & \S4.7: static configuration power consumption~\cite{ETSI_GS_RIS008} &
+  Capability \texttt{static\_power\_w}, kept as metadata & --- \\
+ & \S4.8: reconfiguration time, from command receipt to effective
+  configuration~\cite{ETSI_GS_RIS008} &
+  Command latency (latency model, measured lateness) plus the transition, whose default
+  duration is \texttt{reconfiguration\_time\_s} & RT-12, RT-17 \\
+\bottomrule
+\end{tabular}
+\end{table*}

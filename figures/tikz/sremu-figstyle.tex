@@ -1,0 +1,47 @@
+% sremu-figstyle.tex -- shared style of the TikZ diagrams F1 and F2 (WP12; DESIGN 13.4).
+% Fonts: Times (newtx), as in the IEEEtran body text; every label is at least 8 pt at print
+% size because the diagrams are drawn at their printed width (F1: \columnwidth = 252 pt;
+% F2: \textwidth = 516 pt) and included without scaling.
+% Colours: Okabe-Ito (colour-blind safe). Every colour coding is doubled by a line style
+% (data plane solid, control plane dashed, recording dotted), so the diagrams also read in
+% grey scale.
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,patterns,decorations.pathreplacing}
+
+\definecolor{okBlack}{HTML}{000000}
+\definecolor{okOrange}{HTML}{E69F00}
+\definecolor{okSky}{HTML}{56B4E9}
+\definecolor{okGreen}{HTML}{009E73}
+\definecolor{okYellow}{HTML}{F0E442}
+\definecolor{okBlue}{HTML}{0072B2}
+\definecolor{okVermillion}{HTML}{D55E00}
+\definecolor{okPurple}{HTML}{CC79A7}
+
+\newcommand{\figfont}{\fontsize{8}{9.4}\selectfont\hyphenpenalty=10000\exhyphenpenalty=10000}
+\newcommand{\figtitle}{\fontsize{8}{9.4}\selectfont\bfseries}
+
+\tikzset{
+  every picture/.style={font=\figfont, line width=0.6pt,
+    >={Stealth[length=4.5pt,width=3.6pt,line width=0pt]}},
+  box/.style={draw=okBlack, rounded corners=1.5pt, align=center, inner sep=2.5pt,
+    fill=white},
+  app/.style={box, fill=okSky!18},
+  eng/.style={box, fill=okOrange!14},
+  rec/.style={box, fill=okGreen!14},
+  step/.style={box, fill=okOrange!10, text width=#1},
+  step/.default={5.1cm},
+  ask/.style={box, fill=okSky!14, rounded corners=5pt, text width=#1},
+  ask/.default={3.0cm},
+  side/.style={box, fill=white, dashed, text width=#1},
+  side/.default={1.9cm},
+  data/.style={draw=okBlue, line width=1.0pt, ->},
+  data2/.style={draw=okBlue, line width=1.0pt, <->},
+  ctrl/.style={draw=okVermillion, line width=1.0pt, dash pattern=on 3pt off 1.8pt, ->},
+  ctrl2/.style={draw=okVermillion, line width=1.0pt, dash pattern=on 3pt off 1.8pt, <->},
+  recd/.style={draw=okGreen, line width=1.3pt, dash pattern=on 0.8pt off 1.6pt, ->},
+  flow/.style={draw=okBlack, ->},
+  lane/.style={draw=okBlack!55, line width=0.5pt},
+  note/.style={align=left, inner sep=1pt},
+}

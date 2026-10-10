@@ -1,0 +1,42 @@
+% Limitations table (DESIGN 1.5 non-goals, plus the RisEnv backend limit of the committed
+% code: sremu/ml/env.py accepts backend="batch" and raises for the IQ backends).
+\begin{table}[t]
+\caption{What the current release of \sremu{} does not model or provide, and what it offers
+instead.}
+\label{tab:limitations}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.52in}>{\raggedright\arraybackslash}p{1.86in}@{}}
+\toprule
+Not modelled or not provided & Instead \\
+\midrule
+Unmodified UHD applications; a virtual USRP driver &
+  UHD-shaped API and sockets; virtual-USRP emulation is the approach of
+  ACHEM~\cite{Gurses2026ACHEM} \\
+Hard real time; paced timing on Windows &
+  Soft real time with counted misses; timing results from Linux hosts \\
+Ray tracing, buildings, terrain profiles, several knife edges on one path, walls of order
+  two, RIS--wall paths &
+  Explicit scenes: LOS, flat ground, order-one walls, one knife edge per path, additive
+  diffuse term \\
+RIS--RIS paths; polarization & Single-bounce RIS paths; scalar co-polar fields \\
+Mutual-coupling physics &
+  Per-configuration tables~\cite{ETSI_GR_RIS003_v121}; a coupling hook without shipped
+  coefficients \\
+Frequency-dependent $\Gamma$ filters; non-reciprocal tables &
+  Signals wider than a table's validity bandwidth and non-reciprocal tables are rejected \\
+Sampling-frequency offset, IQ imbalance, amplifier and converter models &
+  CFO, phase noise, full-scale clipping, \texttt{sc16} saturation \\
+Rate conversion between overlapping bands; several channels per stream &
+  Linked streams share one rate; one channel per stream \\
+Web server, dashboard, authentication &
+  Static HTML report; loopback sockets by default \\
+E2SM-RIS adapter; TSDSI conformance; GPU IQ path; vectorized environments &
+  Future work (Section~\ref{sec:future}) \\
+Learning-based controller research; IQ backends of \texttt{RisEnv} &
+  Controller protocol; \texttt{RisEnv} on the batch path; a UCB1 baseline \\
+\bottomrule
+\end{tabular}
+\end{table}
