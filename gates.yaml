@@ -1,0 +1,96 @@
+# gates.yaml -- test gates that must be green in the pinned junit before any paper figure is
+# generated (DESIGN 10.13). tools/build_paper.py --mode final refuses otherwise.
+# Ids are matched inside pytest node ids (test names carry spec ids, e.g. test_ph02_*).
+# Only implementation tests count: oracle self-tests (tests/oracles) and golden-harness
+# tests without "sremu" in their name (tests/golden) are not evidence. An id is green only
+# if no matching test failed, none was skipped or xfailed, and at least one passed.
+# The junit must record the pinned sremu commit and a clean tree (testsuite properties
+# sremu_commit / sremu_dirty, or a sidecar <junit stem>.meta.json); see README.md.
+#
+# backend_rule: DESIGN 10.13 requires PH-17...PH-22 "on both backends". Each listed id must
+# pass in at least one node id per backend, i.e. the backend parametrization id
+# ([numpy_ref], [numba_cpu]) must be part of the test id; one status per id is not enough.
+
+gates:
+  GATE-PHY:
+    - PH-01
+    - PH-02
+    - PH-03
+    - PH-04
+    - PH-05
+    - PH-06
+    - PH-07
+    - PH-08
+    - PH-09
+    - PH-10
+    - PH-11
+    - PH-13
+    - PH-14
+    - PH-15
+    - PH-16
+    - PH-23
+    - PH-24
+    - PH-25
+    - PH-26
+    - PH-27
+    - PH-28
+    - PH-29
+    - PH-30
+    - PH-31
+    - PH-32
+    - ST-02
+    - ST-03
+    - G1
+    - G2
+    - G3
+    - G6
+    - G7
+    - G8
+    - V-TANG-1
+
+  GATE-RT:
+    - RT-01
+    - RT-02
+    - RT-03
+    - RT-04
+    - RT-05
+    - RT-06
+    - RT-07
+    - RT-08
+    - RT-09
+    - RT-10
+    - RT-11
+    - RT-12
+    - RT-13
+    - RT-14
+    - RT-15
+    - RT-16
+    - RT-17
+    - RT-18
+    - RT-19
+    - PH-17
+    - PH-18
+    - PH-19
+    - PH-20
+    - PH-21
+    - PH-22
+    - ST-01
+    - G4
+    - G5
+    - V-CFO-1
+    - V-CFO-2
+
+backend_rule:
+  backends: [numpy_ref, numba_cpu]
+  ids: [PH-17, PH-18, PH-19, PH-20, PH-21, PH-22]
+
+# reference_rule: DESIGN 10.13 evaluates GATE-PHY's PH ids "on numpy_ref". At least one
+# passed node id of each such id must run the numpy reference: it names numpy_ref, or it
+# names none of `others` (an unparametrized physics test runs the numpy kernels). A node
+# parametrized only with [numba_cpu] is not numpy_ref evidence; failures on any backend
+# still make the id red.
+reference_rule:
+  - gate: GATE-PHY
+    prefix: PH-
+    backend: numpy_ref
+    others: [numba_cpu]

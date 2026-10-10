@@ -1,0 +1,50 @@
+% sremu-macros.tex -- build-mode switches and pipeline macros (WP12).
+%
+% \ifsremudraft is set by generated/buildmode.tex, which tools/build_paper.py writes.
+% A bare `latexmk` without that file builds in draft mode.
+%
+%   \sremuPlaceholder{name}  a pipeline number that is not available yet: bold ?? in draft,
+%                            a hard error in final (numbers come only from generated macros).
+%   \sremustub{text}         planned content of a section that is not written yet: grey
+%                            italics in draft, a hard error in final.
+%   \sremufigure{Fid}{width}{caption}{label}
+%                            includes figures/out/<Fid>.pdf when the pipeline produced it;
+%                            otherwise a framed placeholder (draft) or an error (final).
+%   \claim{ID}               optional per-sentence claim marker; prints nothing. IDs are
+%                            checked against claims.yaml by tools/check_claims.py.
+
+\newif\ifsremudraft
+\sremudrafttrue
+\InputIfFileExists{generated/buildmode}{}{}
+
+\newcommand{\sremuPlaceholder}[1]{%
+  \ifsremudraft
+    \textcolor{red}{\textbf{??}}%
+  \else
+    \PackageError{sremu}{Unresolved pipeline number '#1'}{Run tools/build_paper.py with results available.}%
+  \fi}
+
+\newcommand{\sremustub}[1]{%
+  \ifsremudraft
+    \par{\color{gray}\itshape [Planned] #1\par}%
+  \else
+    \PackageError{sremu}{Section stub left in a final build}{Write the section text.}%
+  \fi}
+
+\newcommand{\sremufigure}[4]{%
+  \IfFileExists{figures/out/#1.pdf}{%
+    \includegraphics[width=#2]{figures/out/#1.pdf}%
+  }{%
+    \ifsremudraft
+      \fbox{\parbox[c][0.45#2][c]{0.95#2}{\centering\small Figure #1 not generated yet\\
+        (see figures/registry.yaml)}}%
+    \else
+      \PackageError{sremu}{Figure #1 missing}{Run tools/build_paper.py --mode final.}%
+    \fi}%
+  \caption{#3}\label{#4}}
+
+\newcommand{\claim}[1]{}
+
+% Notation
+\newcommand{\sremu}{\texttt{sremu}}
+\newcommand{\tsw}{t_{\mathrm{sw}}}

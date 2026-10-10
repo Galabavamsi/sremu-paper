@@ -1,0 +1,44 @@
+% Section VII -- Case studies (SKELETON; DESIGN section 11).
+\section{Case Studies}\label{sec:cases}
+
+\subsection{Intra-frame RIS reconfiguration}
+\sremustub{E-B1 mechanism and E-B2 timing requirement with timed, asap and legacy
+semantics; mapping to GS RIS 008 reconfiguration time and modulated-signal quality.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F9}{\textwidth}{(a) Per-symbol EVM around a switch inside a packet.
+(b) Packet error rate versus command-latency jitter for timed, asap and legacy command
+semantics (SIM-sremu; ASSUMED).}{fig:F9}
+\end{figure*}
+
+\subsection{Signaling delay in closed-loop binary RIS control}
+\sremustub{E-A0 reproduction (reported as values under the area-tied kernel) and E-A1
+blocked corridor; pre-registered hypotheses H-A1 to H-A3; IQ consistency subset.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F10}{\textwidth}{Received power over the blocked LOS versus signaling delay
+for several controllers and carrier frequencies; inset: IQ path versus batch path
+(SIM-sremu).}{fig:F10}
+\end{figure*}
+
+\subsection{Non-ideality ablation}
+\sremustub{E-C rows and the binary mirror/steerable decomposition, citing prior discrete
+and non-ideal RIS work; Table VIII.}
+\begin{figure}[t]
+\centering
+\sremufigure{F11}{\columnwidth}{Loss relative to ideal continuous phase for each
+non-ideality across three geometries (SIM-sremu; ANALYTIC; ASSUMED; REPORTED).}{fig:F11}
+\end{figure}
+
+\subsection{FM-band dimensioning}
+\sremustub{E-D, labelled model-based dimensioning, not validated; P.526 as an
+EXPERIMENTAL sensitivity row.}
+\begin{figure}[t]
+\centering
+\sremufigure{F12}{\columnwidth}{Required RIS aperture versus obstruction excess loss
+(SIM-sremu; ANALYTIC).}{fig:F12}
+\end{figure}
+
+\subsection{Integration with external IQ applications}
+\sremustub{E-E1 two-process native ZMQ run (V-CFO-3); E-E2 GNU Radio with the raw mode if
+IO-08 passes; E-E3 srsRAN if its time-box succeeds.}

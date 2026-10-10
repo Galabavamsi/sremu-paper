@@ -1,0 +1,79 @@
+% Table I -- tool comparison. Every cell is taken from research/related_work.md, Section 3
+% (primary sources fetched 10 Oct 2026). Keep "nv" (not verified), "no evid." (primary source
+% read, feature not mentioned) and "no" (source states the feature is absent) distinct.
+% Every tool row carries its citation, so its numbers count as cited (check_claims.py).
+\begin{table*}[t]
+\caption{RIS simulators, ray tracers, controller frameworks and IQ-level emulators,
+as of 10 Oct 2026. \emph{nv}: not verified from a primary source either way;
+\emph{no evid.}: a primary source was read and does not mention the feature;
+\emph{no}: the source states the feature is absent; ---: not applicable.
+Coef.: channel coefficients; TS: time-series coefficients; IQ: complex-baseband samples;
+DES: discrete-event simulation; PO: physical optics.}
+\label{tab:tools}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{tabular}{@{}L{1.08in}L{0.80in}L{0.72in}L{1.06in}L{0.80in}L{0.74in}L{0.82in}L{0.70in}@{}}
+\toprule
+Tool (version, date) & Level & Wall-clock & RIS model & Measured responses & Mobility &
+External RIS control & Open; licence \\
+\midrule
+SimRIS v2.0 (2020; code 2023)~\cite{Basar2020SimRIS,SimRISRepo} &
+  Coef.\ (Monte Carlo $H$, $G$, $D$) & No & Statistical mmWave cascade, ideal phase &
+  no evid. & no evid. & No & Yes; MATLAB; GPL-2.0 \\
+QRIS (2023)~\cite{Burtakov2023QRIS,QRISPage} &
+  TS (QuaDRiGa) & No & Unit-cell patterns on QuaDRiGa geometry, interacting surfaces &
+  Yes (unit-cell patterns from measurement or CST) & Inherited from QuaDRiGa; QRIS-specific nv &
+  no evid. & On request; licence not stated \\
+Sionna RT: v0.18--0.19 (legacy); v1.0--2.2.0 (29 Sep 2026)~\cite{SionnaRTReleases,DegliEsposti2022Reradiation} &
+  Coef./CIR, radio maps & No & Legacy: macroscopic reradiation, per-cell profiles.
+  v1.0--2.2.0: none & Legacy: partial (spatial profiles; state table nv) & nv &
+  Legacy: gradient-based optimization & Yes; Python; Apache-2.0 \\
+MATLAB R2025a+ (checked in R2026a)~\cite{MathWorksRectangularRIS,MathWorksRISCDL} &
+  Coef.\ and samples, offline & No & Element-pattern unit cell; CDL cascade per GR RIS 003 &
+  Partial (tabulated element pattern; bistatic state table nv) & Via user script &
+  User script & No (commercial) \\
+Wireless InSite EES (Dec 2022)~\cite{RemcomEES,DeJong2022EES} &
+  Ray paths, coverage & No & Phase-gradient metasurface (uniform-ray PO), single static
+  configuration & nv & nv & No & No (commercial) \\
+CoopeRIS (2024)~\cite{Segata2024CoopeRIS} &
+  Packets (DES; SINR/MCS) & No (DES) & Far-field per-element phase sum & nv &
+  Yes (SUMO vehicles) & Internal oracle controller & Yes; C++; GPL-2.0 \\
+GoSimRIS (2025; code public 31 Mar 2026)~\cite{ElGhalbzouri2025GoSimRIS} &
+  Coef.\ + SNR/rate & E2 exchange (author claim) & Configurable phases, at most 64 elements &
+  no evid. & Position list input; model nv & Yes (FlexRIC xApp, E2SM-RIS) &
+  Yes; Go; Apache-2.0 \\
+ORIX / E-GoSimRIS (2026, early access)~\cite{Kayraklik2026ORIX} &
+  Coef. & Near-RT loop, 10~ms--1~s & Quantized phase, phase-dependent amplitude &
+  Parametric fit (not a table) & 3GPP InF temporal dynamics & Yes (E2SM-RIS) & nv \\
+Colosseum + RIS scenarios (2025)~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing,Bonati2021Colosseum} &
+  IQ (FPGA FIR, 256 SDRs) & Yes (hardware) & Precomputed QuaDRiGa cascade, phases fixed
+  offline & No & Precomputed taps & RAN xApps: yes; RIS during a run: no &
+  No (facility) \\
+OAI rfsimulator (develop, accessed 10 Oct 2026)~\cite{OAIrfsim} &
+  IQ (TCP) & No (by design) & None; run-time beam-gain table & No &
+  Channel model via telnet; trajectories nv & Telnet channel control &
+  Yes; C; OAI CSSL v1.0 \\
+srsRAN 4G ZMQ (accessed 10 Oct 2026)~\cite{srsRANZMQ} &
+  IQ (ZeroMQ) & Software timing; nv & None (user flowgraph) & No & User-built &
+  User-built & Yes; C++; AGPL-3.0 \\
+ACHEM (arXiv v1, Apr 2026)~\cite{Gurses2026ACHEM} &
+  IQ + SDR API (unmodified UHD applications) & Yes (benchmarked) & None &
+  Antenna patterns; no RIS & Yes (ArduPilot SITL) & Online channel reconfiguration; no RIS &
+  Yes; licence nv \\
+TRACE (arXiv v1, Aug 2026)~\cite{Kumar2026TRACE} &
+  Symbols & nv; UDP control RTT 5.2~ms reported & Ideal continuous phase, unit amplitude &
+  No & Channel evolution (random walk, Gauss--Markov) & Yes (UDP control plane) &
+  Code ``upon acceptance'' \\
+\midrule
+\sremu{} (this work) &
+  IQ + SDR-style API (UHD-shaped) & Lockstep: sample-exact; paced: measured
+  (Section~\ref{sec:wallclock}) & Area-tied PO kernel; per-state tables
+  $\Gamma(s,f,\theta_i,\theta_s)$ & Yes (state, frequency and both angles, with
+  provenance) & Analytic trajectories, geometric Doppler & Yes (timestamped, applied and
+  logged per receiver) & Licence pending (H-2) \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,34 @@
+% Section III -- Design (SKELETON; text written in stage C after GATE-RT).
+\section{Design}\label{sec:design}
+
+\subsection{Architecture}
+\sremustub{Processes and planes (F1): TX and RX applications, external controller
+processes, engine, native framed ZMQ and raw REQ/REP data planes versus the JSON control
+plane, recorder (SigMF, events.jsonl, manifest). DESIGN sections 1.1, 8.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F1}{\textwidth}{Architecture of \sremu{}: applications, controllers, engine,
+data planes, control plane and recorder.}{fig:F1}
+\end{figure*}
+
+\subsection{Time model and command semantics}
+\sremustub{Exact rational time base and rounding rules (R1--R5); page and segment grid;
+switch time defined at the RIS and applied per receiver at to\_ticks of the switch time
+plus the RIS-to-receiver delay; late commands; same-time ties; transitions; lockstep
+barriers and paced mode (F2). DESIGN sections 4.1--4.10.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F2}{\textwidth}{(a) Page and segment processing. (b) Life cycle of a RIS
+command from wall-clock receipt to the applied sample on each receiver, with one late
+command and one barrier.}{fig:F2}
+\end{figure*}
+
+\subsection{Interfaces}
+\sremustub{UHD-shaped Python API, compatibility wrappers, native ZMQ frame header, control
+socket vocabulary, security defaults; Table III maps sremu calls to UHD, srsRAN ZMQ and
+GNU Radio counterparts (cite UHDManual, srsRANZMQ, SigMF). DESIGN section 8.}
+
+\subsection{State library and ETSI GS RIS 008}
+\sremustub{Response-table data model, provenance, load-time validators, importers and
+built-in tables; Table VI maps GR RIS 002/003 and GS RIS 008 parameters to sremu elements,
+worded as alignment. DESIGN sections 5.5, 8.9.}

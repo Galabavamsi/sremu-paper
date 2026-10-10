@@ -1,0 +1,1254 @@
+{
+ "generated_utc": "2026-10-10T07:37:30Z",
+ "bib": "refs.bib",
+ "title_min_ratio": 0.9,
+ "results": {
+  "ITU2023M2160": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "DiRenzo2020SRE": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Smart Radio Environments Empowered by Reconfigurable Intelligent Surfaces: How It Works, State of Research, and The Road Ahead",
+     "year": 2020,
+     "container": "IEEE Journal on Selected Areas in Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "WuZhang2020IRS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Towards Smart and Reconfigurable Environment: Intelligent Reflecting Surface Aided Wireless Network",
+     "year": 2020,
+     "container": "IEEE Communications Magazine",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Basar2019Access": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Wireless Communications Through Reconfigurable Intelligent Surfaces",
+     "year": 2019,
+     "container": "IEEE Access",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Gkonis2020Sim5G": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A Comprehensive Study on Simulation Techniques for 5G Networks: State of the Art Results, Analysis, and Future Challenges",
+     "year": 2020,
+     "container": "Electronics",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Gomez2023Survey": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A survey on network simulators, emulators, and testbeds used for research and education",
+     "year": 2023,
+     "container": "Computer Networks",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS001_v121": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS002_v121": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS003_v121": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS004": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS005": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS006": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GR_RIS007": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ETSI_GS_RIS008": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "TSDSI_STD5003": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "TSDSI_TR6060": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "TGPP_TR38867": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "TGPP_Rel20": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "FuTURE2025RISStd": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "RISTA2023WP": {
+   "checks": [
+    {
+     "method": "doi-handle",
+     "http": 200,
+     "response_code": 1
+    }
+   ],
+   "verdict": "match"
+  },
+  "SixGBRICKS_D32": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "SixGBRICKS_D34": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Mishra2025WCL": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "On the Control of Binary RIS Under User Mobility: Structural Results and Implications",
+     "year": 2025,
+     "container": "IEEE Wireless Communications Letters",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Mishra2025NCC": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Opportunistic Sensing via ISAC-Capable RIS",
+     "year": 2025,
+     "container": "2025 National Conference on Communications (NCC)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Khan2025INDICON": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Experience with RF Energy Harvesting-Driven Self-Powered RIS",
+     "year": 2025,
+     "container": "2025 IEEE 22nd India Council International Conference (INDICON)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Kaur2026SLR": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A systematic literature review on simulation models and deployments for reconfigurable intelligent surfaces",
+     "year": 2026,
+     "container": "Ad Hoc Networks",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Basar2020SimRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "SimRIS Channel Simulator for Reconfigurable Intelligent Surface-Empowered Communication Systems",
+     "year": 2020,
+     "container": "2020 IEEE Latin-American Conference on Communications (LATINCOM)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Basar2021TCOM": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Indoor and Outdoor Physical Channel Modeling and Efficient Positioning for Reconfigurable Intelligent Surfaces in mmWave Bands",
+     "year": 2021,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "SimRISRepo": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Burtakov2023QRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "QRIS: A QuaDRiGa-Based Simulation Platform for Reconfigurable Intelligent Surfaces",
+     "year": 2023,
+     "container": "IEEE Access",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "QRISPage": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Jaeckel2014QuaDRiGa": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "QuaDRiGa: A 3-D Multi-Cell Channel Model With Time Evolution for Enabling Virtual Field Trials",
+     "year": 2014,
+     "container": "IEEE Transactions on Antennas and Propagation",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Habib2023NYUSIMRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Extended NYUSIM-based MmWave Channel Model and Simulator for RIS-Assisted Systems",
+     "year": 2023,
+     "container": "2023 Joint European Conference on Networks and Communications &amp; 6G Summit (EuCNC/6G Summit)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Sun2017NYUSIM": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A novel millimeter-wave channel simulator and applications for 5G wireless communications",
+     "year": 2017,
+     "container": "2017 IEEE International Conference on Communications (ICC)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Bjornson2022SPM": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Reconfigurable Intelligent Surfaces: A signal processing perspective with wireless applications",
+     "year": 2022,
+     "container": "IEEE Signal Processing Magazine",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "GarciaSanchez2023RISSTAR": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "RIS-STAR: RIS-based Spatio-Temporal Channel Hardening for Single-Antenna Receivers",
+     "year": 2023,
+     "container": "IEEE INFOCOM 2023 - IEEE Conference on Computer Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Hao2023ViennaRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "The Extended Vienna System-Level Simulator for Reconfigurable Intelligent Surfaces",
+     "year": 2023,
+     "container": "2023 Joint European Conference on Networks and Communications &amp; 6G Summit (EuCNC/6G Summit)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Sihlbom2023SLS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Reconfigurable Intelligent Surfaces: Performance Assessment Through a System-Level Simulator",
+     "year": 2023,
+     "container": "IEEE Wireless Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Hoydis2022Sionna": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Sionna: An Open-Source Library for Next-Generation Physical Layer Research",
+     "year": 2022,
+     "version_id": "http://arxiv.org/abs/2203.11854v2",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Hoydis2023SionnaRT": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Sionna RT: Differentiable Ray Tracing for Radio Propagation Modeling",
+     "year": 2023,
+     "container": "2023 IEEE Globecom Workshops (GC Wkshps)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "AitAoudia2025SionnaRTReport": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Sionna RT: Technical Report",
+     "year": 2025,
+     "version_id": "http://arxiv.org/abs/2504.21719v3",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "SionnaRTReleases": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "DegliEsposti2022Reradiation": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Reradiation and Scattering From a Reconfigurable Intelligent Surface: A General Macroscopic Model",
+     "year": 2022,
+     "container": "IEEE Transactions on Antennas and Propagation",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Vitucci2023RayRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "An Efficient Ray-Based Modeling Approach for Scattering from Reconfigurable Intelligent Surfaces",
+     "year": 2023,
+     "container": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "DeJong2022EES": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Uniform Ray Description of Physical Optics Scattering by Finite Locally Periodic Metasurfaces",
+     "year": 2022,
+     "container": "IEEE Transactions on Antennas and Propagation",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "RemcomEES": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Habib2025CloudRT": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Integration of RIS into CloudRT Simulator for Railway Tunnel Scenarios",
+     "year": 2025,
+     "container": "2025 19th European Conference on Antennas and Propagation (EuCAP)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Sandh2024RTRIS": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Ray Tracing Algorithm for Reconfigurable Intelligent Surfaces",
+     "year": 2024,
+     "version_id": "http://arxiv.org/abs/2402.13034v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Herold2023RISRayTracing": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A Concept for the Efficient Integration of Reconfigurable Intelligent Surfaces into a Ray Tracing Framework",
+     "year": 2023,
+     "container": "2023 48th International Conference on Infrared, Millimeter, and Terahertz Waves (IRMMW-THz)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Faqiri2023PhysFad": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "PhysFad: Physics-Based End-to-End Channel Modeling of RIS-Parametrized Environments With Adjustable Fading",
+     "year": 2023,
+     "container": "IEEE Transactions on Wireless Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Gradoni2021MutualCoupling": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "End-to-End Mutual Coupling Aware Communication Model for Reconfigurable Intelligent Surfaces: An Electromagnetic-Compliant Approach Based on Mutual Impedances",
+     "year": 2021,
+     "container": "IEEE Wireless Communications Letters",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Papadopoulos2022OpenPlatform": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "An Open Platform for Simulating the Physical Layer of 6G Communication Systems with Multiple Intelligent Surfaces",
+     "year": 2022,
+     "container": "2022 18th International Conference on Network and Service Management (CNSM)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Tang2021PathLoss": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Wireless Communications With Reconfigurable Intelligent Surface: Path Loss Modeling and Experimental Measurement",
+     "year": 2021,
+     "container": "IEEE Transactions on Wireless Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Ellingson2021PathLoss": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Path Loss in Reconfigurable Intelligent Surface-Enabled Channels",
+     "year": 2021,
+     "container": "2021 IEEE 32nd Annual International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Path Loss in Reconfigurable Intelligent Surface-Enabled Channels",
+     "year": 2019,
+     "version_id": "http://arxiv.org/abs/1912.06759v3",
+     "linked_doi": "10.1109/PIMRC50174.2021.9569465",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "MathWorksRectangularRIS": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 403
+    }
+   ],
+   "verdict": "unreachable"
+  },
+  "MathWorksRISCDL": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 403
+    }
+   ],
+   "verdict": "unreachable"
+  },
+  "Segata2024CoopeRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "CoopeRIS: A framework for the simulation of reconfigurable intelligent surfaces in cooperative driving environments",
+     "year": 2024,
+     "container": "Computer Networks",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Pagin2022IRSAF": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "End-to-End Simulation of 5G Networks Assisted by IRS and AF Relays",
+     "year": 2022,
+     "container": "2022 20th Mediterranean Communication and Computer Networking Conference (MedComNet)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Grieco2024IoDSimIRS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A System-Level Simulation Module for Multi-UAV IRS-Assisted Communications",
+     "year": 2024,
+     "container": "IEEE Transactions on Vehicular Technology",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Zubow2024Ns3Sionna": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Ns3 meets Sionna: Using Realistic Channels in Network Simulation",
+     "year": 2024,
+     "version_id": "http://arxiv.org/abs/2412.20524v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Heimann2021RISVehicular": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Modeling and Simulation of Reconfigurable Intelligent Surfaces for Hybrid Aerial and Ground-based Vehicular Communications",
+     "year": 2021,
+     "container": "Proceedings of the 24th International ACM Conference on Modeling, Analysis and Simulation of Wireless and Mobile Systems",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "ElGhalbzouri2025GoSimRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Neural-Driven Control of RIS in 6G Networks: A GoSimRIS and xApp-Based Framework",
+     "year": 2025,
+     "container": "IEEE Networking Letters",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Kayraklik2026ORIX": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "ORIX: Orchestration of RIS With xApps for Smart Wireless Factory Environments",
+     "year": 2026,
+     "container": "IEEE Wireless Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Sahin2025RISmeetsORAN": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "RIS Meets O-RAN: A Practical Demonstration of Multi-user RIS Optimization Through RIC",
+     "year": 2025,
+     "container": "2025 Joint European Conference on Networks and Communications &amp;amp; 6G Summit (EuCNC/6G Summit)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Gurses2026ACHEM": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "ACHEM: A Real-Time Digital Twin Framework with Channel and Radio Emulation",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2604.04742v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Iye2025OWDT": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Open Wireless Digital Twin: End-to-End 5G Mobility Emulation With OpenAirInterface and Ray Tracing",
+     "year": 2025,
+     "container": "IEEE Access",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Mastronarde2022RFSITL": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "RF-SITL: A Software-in-the-loop Channel Emulator for UAV Swarm Networks",
+     "year": 2022,
+     "container": "2022 IEEE 23rd International Symposium on a World of Wireless, Mobile and Multimedia Networks (WoWMoM)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Bonati2021Colosseum": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Colosseum: Large-Scale Wireless Experimentation Through Hardware-in-the-Loop Network Emulation",
+     "year": 2021,
+     "container": "2021 IEEE International Symposium on Dynamic Spectrum Access Networks (DySPAN)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Polese2024ColosseumDT": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Colosseum: The Open RAN Digital Twin",
+     "year": 2024,
+     "container": "IEEE Open Journal of the Communications Society",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Tsampazi2025RISColosseum": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "System-Level Experimental Evaluation of Reconfigurable Intelligent Surfaces for NextG Communication Systems",
+     "year": 2025,
+     "container": "IEEE Transactions on Vehicular Technology",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Tsampazi2025ORISing": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "O-RIS-ing: Evaluating RIS-Assisted NextG Open RAN",
+     "year": 2025,
+     "container": "IEEE INFOCOM 2025 - IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "OAIrfsim": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "srsRANZMQ": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "AODTRepo": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "OpenRISRepo": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Heinrichs2023OpenSourceRIS": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Open Source Reconfigurable Intelligent Surface for the Frequency Range of 5 GHz WiFi",
+     "year": 2023,
+     "container": "2023 IEEE International Symposium On Antennas And Propagation (ISAP)",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Chen2026OpenRIS": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "OpenRIS: Democratizing reconfigurable intelligent surfaces for real-world wireless enhancements",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2608.09352v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Rossanese2024OpenMeas": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Open Experimental Measurements of Sub-6GHz Reconfigurable Intelligent Surfaces",
+     "year": 2024,
+     "container": "IEEE Internet Computing",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Euchner2025ESPARGOS": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "ESPARGOS: An Ultra Low-Cost, Realtime-Capable Multi-Antenna WiFi Channel Sounder",
+     "year": 2025,
+     "version_id": "http://arxiv.org/abs/2502.09405v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Karakelle2026DTRIS": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Ray Tracing-Enabled Digital Twin for RIS Phase Optimization: Implementation and Experimental Validation",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2604.17929v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Lichtman_PySDR": {
+   "checks": [
+    {
+     "method": "http",
+     "http": null,
+     "error": "URLError"
+    }
+   ],
+   "verdict": "unreachable"
+  },
+  "EttusUHDPython": {
+   "checks": [
+    {
+     "method": "http",
+     "http": null,
+     "error": "URLError"
+    }
+   ],
+   "verdict": "unreachable"
+  },
+  "Kay1989Freq": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A fast and accurate single frequency estimator",
+     "year": 1989,
+     "container": "IEEE Transactions on Acoustics, Speech, and Signal Processing",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Moose1994CFO": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A technique for orthogonal frequency division multiplexing frequency offset correction",
+     "year": 1994,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Bettstetter2003RWP": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "The node distribution of the random waypoint mobility model for wireless ad hoc networks",
+     "year": 2003,
+     "container": "IEEE Transactions on Mobile Computing",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Nain2005RD": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Properties of random direction models",
+     "year": null,
+     "container": "Proceedings IEEE 24th Annual Joint Conference of the IEEE Computer and Communications Societies.",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Ariyakhajorn2006GM": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A Comparative Study of Random Waypoint and Gauss-Markov Mobility Models in the Performance Evaluation of MANET",
+     "year": 2006,
+     "container": "2006 International Symposium on Communications and Information Technologies",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Chiang2004RW": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A 2-D Random-Walk Mobility Model for Location-Management Studies in Wireless Networks",
+     "year": 2004,
+     "container": "IEEE Transactions on Vehicular Technology",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "VanDerPol1946FM": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "The fundamental principles of frequency modulation",
+     "year": 1946,
+     "container": "Journal of the Institution of Electrical Engineers - Part III: Radio and Communication Engineering",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "ITU_BS412": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "ITU_P1546": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Tang2022mmWave": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Path Loss Modeling and Measurements for Reconfigurable Intelligent Surfaces in the Millimeter-Wave Frequency Band",
+     "year": 2022,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Path Loss Modeling and Measurements for Reconfigurable Intelligent Surfaces in the Millimeter-Wave Frequency Band",
+     "year": 2021,
+     "version_id": "http://arxiv.org/abs/2101.08607v2",
+     "linked_doi": "10.1109/TCOMM.2022.3193400",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Kumar2026TRACE": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "TRACE: A Modular Framework for RIS-Assisted Channel Estimation and Differential Channel-Aware Reconfiguration",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2608.11798v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "WuZhang2020Discrete": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Beamforming Optimization for Wireless Network Aided by Intelligent Reflecting Surface With Discrete Phase Shifts",
+     "year": 2020,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Beamforming Optimization for Wireless Network Aided by Intelligent Reflecting Surface with Discrete Phase Shifts",
+     "year": 2019,
+     "version_id": "http://arxiv.org/abs/1906.03165v4",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Abeywickrama2020Practical": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Intelligent Reflecting Surface: Practical Phase Shift Model and Beamforming Optimization",
+     "year": 2020,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Intelligent Reflecting Surface: Practical Phase Shift Model and Beamforming Optimization",
+     "year": 2020,
+     "version_id": "http://arxiv.org/abs/2002.10112v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Matthiesen2021Mobility": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Intelligent Reflecting Surface Operation Under Predictable Receiver Mobility: A Continuous Time Propagation Model",
+     "year": 2021,
+     "container": "IEEE Wireless Communications Letters",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Intelligent Reflecting Surface Operation under Predictable Receiver Mobility: A Continuous Time Propagation Model",
+     "year": 2020,
+     "version_id": "http://arxiv.org/abs/2006.06991v3",
+     "linked_doi": "10.1109/LWC.2020.3024781",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Laakso1996FracDelay": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Splitting the unit delay [FIR/all pass filters design]",
+     "year": 1996,
+     "container": "IEEE Signal Processing Magazine",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Zhao2024OptimalDiscrete": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Optimal Passive Beamforming for Reconfigurable Intelligent Surface-Assisted Communications With Discrete Phase Shifts",
+     "year": 2024,
+     "container": "IEEE Wireless Communications Letters",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Zhang2022OptimalBinary": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Configuring Intelligent Reflecting Surface With Performance Guarantees: Optimal Beamforming",
+     "year": 2022,
+     "container": "IEEE Journal of Selected Topics in Signal Processing",
+     "title_ratio": 1.0
+    },
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Configuring Intelligent Reflecting Surface with Performance Guarantees: Optimal Beamforming",
+     "year": 2021,
+     "version_id": "http://arxiv.org/abs/2112.02260v1",
+     "linked_doi": "10.1109/JSTSP.2022.3176479",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "SigMF": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "UHDManual": {
+   "checks": [
+    {
+     "method": "http",
+     "http": 200
+    }
+   ],
+   "verdict": "match"
+  }
+ }
+}

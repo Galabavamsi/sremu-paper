@@ -1,0 +1,175 @@
+# figures/registry.yaml -- one entry per paper figure F1-F12 (DESIGN 13.4).
+#
+# Style for every figure: vector PDF; width 3.5 in (single column) or 7.16 in (double);
+# fonts >= 8 pt, Type-42; Okabe-Ito palette; no titles inside; log axes for timing with an
+# RTF = 1 reference line; every caption names its data classes.
+#
+# Fields
+#   title        short description (caption source)
+#   width        single | double
+#   source       tikz (drawn in TeX, no data) | script (Python, writes data + PDF)
+#   script       path of the figure script, relative to paper/ (null until written)
+#   sweep        sweep spec under paper/sweeps/ (WP11 data side) or null
+#   inputs       data files whose sha256 enters the content key
+#   evidence     spec ids the figure shows (tests, studies, benchmarks, experiments)
+#   data_classes subset of {MEAS, DIG, REPORTED, ASSUMED, SIM-sremu, SIM-legacy-v1,
+#                SIM-legacy-v2, ANALYTIC, MATLAB}; empty for diagrams
+#   outputs      files the script writes (PDF under figures/out, data + meta under figures/data)
+#   owner        work package that writes the script
+#   status       pending | ready
+#
+# build_paper.py computes content key = sha256(sremu commit, sweep spec, input hashes, script)
+# and reruns an entry only when figures/data/<id>.meta.json records a different key.
+# No figure is generated before GATE-PHY and GATE-RT are green (DESIGN 10.13).
+#
+# Script contract (run from paper/ with the sremu venv, final mode only):
+#   python <script> --profile fast|full --figure <Fid> --content-key <key>
+# It must write figures/out/<Fid>.pdf, figures/data/<Fid>.csv and figures/data/<Fid>.meta.json
+# with at least {content_key, sremu_commit, data_classes, inputs: [{path, sha256, data_class}],
+# assumptions: [...]}; the PDF caption in the .tex names the same data classes.
+
+figures:
+  F1:
+    title: "Architecture: TX app, RX app and controller processes; engine; native/raw data planes vs control plane; recorder"
+    width: double
+    source: tikz
+    script: null
+    sweep: null
+    inputs: []
+    evidence: []
+    data_classes: []
+    outputs: [figures/out/F1.pdf]
+    owner: WP12
+    status: pending
+  F2:
+    title: "(a) Page/segment processing flowchart; (b) RIS command lifecycle: wall receive, t_req at the RIS, per-RX k_applied with tau_RIS->r offsets, one late command, one barrier"
+    width: double
+    source: tikz
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [RT-05, RT-06, RT-08]
+    data_classes: []
+    outputs: [figures/out/F2.pdf]
+    owner: WP12
+    status: pending
+  F3:
+    title: "(a) Fixed-aperture refinement: K1 flat vs legacy v2 growth per 4x refinement; (b) Tang et al. model curves vs sremu with digitized measured points"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [PH-04, V-TANG-1, V-TANG-2]
+    data_classes: [ANALYTIC, SIM-sremu, SIM-legacy-v2, DIG]
+    outputs: [figures/out/F3.pdf, figures/data/F3.csv, figures/data/F3.meta.json]
+    owner: WP10
+    status: pending
+  F4:
+    title: "Lab consistency check: measured / predicted / residual maps on identical polar axes; inset: Delta-RMSE distribution and decoy detection rate"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [V-LAB]
+    data_classes: [DIG, SIM-sremu, ASSUMED]
+    outputs: [figures/out/F4.pdf, figures/data/F4.csv, figures/data/F4.meta.json]
+    owner: WP10
+    status: pending
+  F5:
+    title: "(a) CFO estimate before/after; (b) RMSE vs CRB; (c) BER vs Eb/N0 with Clopper-Pearson intervals"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [V-CFO-1, V-CFO-2, V-CFO-3, V-CFO-4, E-F, ST-04]
+    data_classes: [DIG, SIM-legacy-v1, SIM-sremu, ANALYTIC]
+    outputs: [figures/out/F5.pdf, figures/data/F5.csv, figures/data/F5.meta.json]
+    owner: WP10
+    status: pending
+  F6:
+    title: "Instantaneous frequency of LOS and RIS paths vs analytic; block-constant alias; verify_interp error vs T_u"
+    width: single
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [PH-17, PH-18]
+    data_classes: [SIM-sremu, ANALYTIC]
+    outputs: [figures/out/F6.pdf, figures/data/F6.csv, figures/data/F6.meta.json]
+    owner: WP12
+    status: pending
+  F7:
+    title: "(a) Lockstep RTF vs links (log-log) for N and feature sets with the RTF = 1 line; (b) aggregate MS/s; laptop vs c6i"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [B2]
+    data_classes: [MEAS]
+    outputs: [figures/out/F7.pdf, figures/data/F7.csv, figures/data/F7.meta.json]
+    owner: WP11
+    status: pending
+  F8:
+    title: "Paced mode: miss rate vs slack; page-latency CCDF with stage breakdown; command lateness"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [B3, B4]
+    data_classes: [MEAS]
+    outputs: [figures/out/F8.pdf, figures/data/F8.csv, figures/data/F8.meta.json]
+    owner: WP11
+    status: pending
+  F9:
+    title: "E-B: (a) per-symbol EVM trace around an intra-frame switch; (b) PER vs latency jitter for timed / asap / legacy semantics"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [E-B, VA-5]
+    data_classes: [SIM-sremu, ASSUMED]
+    outputs: [figures/out/F9.pdf, figures/data/F9.csv, figures/data/F9.meta.json]
+    owner: WP11
+    status: pending
+  F10:
+    title: "E-A: power over blocked LOS vs tau_SUI (log x), controllers, 1 and 2.4 GHz; inset: IQ vs batch agreement"
+    width: double
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [E-A, VA-1]
+    data_classes: [SIM-sremu]
+    outputs: [figures/out/F10.pdf, figures/data/F10.csv, figures/data/F10.meta.json]
+    owner: WP11
+    status: pending
+  F11:
+    title: "E-C non-ideality ablation bars across three geometries"
+    width: single
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [E-C]
+    data_classes: [SIM-sremu, ANALYTIC, ASSUMED, REPORTED]
+    outputs: [figures/out/F11.pdf, figures/data/F11.csv, figures/data/F11.meta.json]
+    owner: WP11
+    status: pending
+  F12:
+    title: "E-D sizing map: required aperture vs obstruction excess loss; P.526 row labelled EXPERIMENTAL; model-based dimensioning, not validated"
+    width: single
+    source: script
+    script: null
+    sweep: null
+    inputs: []
+    evidence: [E-D, V-FM]
+    data_classes: [SIM-sremu, ANALYTIC]
+    outputs: [figures/out/F12.pdf, figures/data/F12.csv, figures/data/F12.meta.json]
+    owner: WP11
+    status: pending

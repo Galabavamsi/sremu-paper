@@ -1,0 +1,70 @@
+% main.tex -- sremu journal paper (IEEEtran, two-column journal). WP12 skeleton.
+% Build: python tools/build_paper.py --mode draft   (or --mode final, which refuses while
+% any pipeline number, stub, figure or gate is outstanding). See README.md.
+\documentclass[journal]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\input{sremu-macros}
+\input{generated/numbers}
+
+\begin{document}
+
+\title{Evaluating RIS Control Under Signaling Delay and Non-Ideal Element States:\\
+An Open, Sample-Accurate IQ-Level Emulator}
+
+\author{Galaba~Vamsi,
+        Shubhika~Mishra,
+        Anurag~Jaiswal,
+        Smriti~Kumar,
+        Mansi~Ambwani,
+        and~Arzad~Alam~Kherani%
+\thanks{The authors are with the Department of Electrical Engineering, Indian Institute of
+Technology Bhilai, India.}%
+\thanks{Corresponding author: Galaba Vamsi (e-mail: galabavamsi@iitbhilai.ac.in).}}
+
+\ifsremudraft
+  \markboth{DRAFT build: values shown as ?? are not yet produced by the pipeline}%
+           {Vamsi \MakeLowercase{\textit{et al.}}: Evaluating RIS Control Under Signaling Delay}
+\else
+  \markboth{Preprint}%
+           {Vamsi \MakeLowercase{\textit{et al.}}: Evaluating RIS Control Under Signaling Delay}
+\fi
+
+\maketitle
+
+\input{sections/abstract}
+
+\begin{IEEEkeywords}
+Reconfigurable intelligent surface, smart radio environment, IQ-level emulation,
+software-defined radio, controller in the loop, signaling delay, channel emulation,
+verification and validation.
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_design}
+\input{sections/04_physical_model}
+\input{sections/05_verification_validation}
+\input{sections/06_wallclock}
+\input{sections/07_case_studies}
+\input{sections/08_discussion}
+\input{sections/09_future_work}
+\input{sections/10_conclusion}
+
+\appendices
+\input{sections/appendix}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

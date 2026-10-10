@@ -1,0 +1,20 @@
+% Abstract (DESIGN 13.1 template, shortened). Every result value is a pipeline macro
+% (numbers.yaml); tools/check_arxiv.py bounds the length (<= 1920 characters, <= 200 words)
+% by counting each macro that is still a placeholder at its max_chars budget, so the result
+% phrases written by the pipeline must respect those budgets.
+\begin{abstract}
+Controllers for reconfigurable intelligent surfaces (RIS) are usually evaluated with ideal
+element states, instantaneous reconfiguration and channel coefficients instead of
+waveforms, which hides the effect of control timing and hardware states on a live link. We
+present sremu, an open-source, software-only emulator that applies RIS-assisted
+propagation to complex-baseband samples exchanged with external applications through an
+SDR-style interface. RIS configurations are timestamped commands from an external
+controller, each applied at an exact, logged sample on every receiver; per-state element
+responses can be imported from measurements. The area-tied kernel reproduces published
+RIS path-loss model curves within \numTangCurveMaxDevDb~dB, and a pre-registered
+comparison with digitized \numLabFreqGHz~GHz laboratory data \txtVLabOutcome. Lockstep
+runs are sample-exact and deterministic; wall-clock-paced runs on \txtPacedPlatform{}
+sustain \numPacedLinks{} links at \numPacedMSps~MS/s with a deadline-miss rate below
+\numSustainMissRate. Two studies use these semantics: a RIS switch inside a packet
+\txtEBResult, and position-driven binary control under signaling delay \txtEAResult.
+\end{abstract}

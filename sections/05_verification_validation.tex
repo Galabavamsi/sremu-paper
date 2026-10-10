@@ -1,0 +1,51 @@
+% Section V -- Verification and validation (SKELETON; filled after both gates).
+\section{Verification and Validation}\label{sec:vv}
+
+\sremustub{Verification compares code with mathematics or an independent implementation;
+validation compares with physical measurement. MATLAB agreement is code-to-code.}
+
+\subsection{Analytic oracles}
+\sremustub{Table IV generated from the pinned junit: PH, RT, IO and ST identifiers with
+oracle, tolerance and status. DESIGN sections 10.2--10.5.}
+
+\subsection{MATLAB code-to-code comparison}
+\sremustub{Goldens G1--G8 regenerated against K1 in MATLAB R2026a; the paper states that
+G2/G3 agreement shows code agreement, not absolute RIS power. DESIGN section 10.6.}
+
+\subsection{Published RIS path-loss model and measurements}
+\sremustub{V-TANG-1 and V-TANG-2 with the wording of DESIGN section 10.8.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F3}{\textwidth}{(a) Fixed-aperture refinement of K1 and of the legacy
+kernel. (b) Published model curves, sremu, and digitized measurements
+(ANALYTIC; SIM-sremu; SIM-legacy-v2; DIG).}{fig:F3}
+\end{figure*}
+
+\subsection{Laboratory consistency check}
+\sremustub{V-LAB protocol, decoy power analysis, decision rules C1--C3, Table V; naming
+rule of DESIGN section 10.9.}
+\begin{figure*}[t]
+\centering
+\sremufigure{F4}{\textwidth}{Digitized laboratory map, prior-median prediction and
+residual on identical polar axes; inset: distribution of the RMSE difference and decoy
+detection rate (DIG; SIM-sremu; ASSUMED).}{fig:F4}
+\end{figure*}
+
+\subsection{CFO before and after, and link metrics}
+\sremustub{V-CFO-1 to V-CFO-4 and E-F BER. DESIGN sections 10.10 and 11 (E-F).}
+\begin{figure*}[t]
+\centering
+\sremufigure{F5}{\textwidth}{(a) CFO estimate versus applied offset before and after the
+fix. (b) Estimator RMSE versus the Cram\'er--Rao bound. (c) BER versus Eb/N0 with
+Clopper--Pearson intervals (DIG; SIM-legacy-v1; SIM-sremu; ANALYTIC).}{fig:F5}
+\end{figure*}
+
+\subsection{Doppler and mobility}
+\sremustub{PH-17 and PH-18: geometric Doppler of LOS and RIS paths, block-constant
+aliasing of the legacy scheme, verify\_interp error.}
+\begin{figure}[t]
+\centering
+\sremufigure{F6}{\columnwidth}{Instantaneous frequency of the LOS and RIS paths versus
+the analytic values, and the alias of the block-constant scheme (SIM-sremu;
+ANALYTIC).}{fig:F6}
+\end{figure}

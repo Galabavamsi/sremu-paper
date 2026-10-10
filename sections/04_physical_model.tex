@@ -1,0 +1,24 @@
+% Section IV -- Physical model (SKELETON). The kernel equation is the normative K1 of
+% DESIGN 5.3; Table II is generated from sremu/docs/model_card.yaml by the pipeline.
+\section{Physical Model}\label{sec:model}
+
+\sremustub{Stack (snapshot, combine, render), LOS and antennas, ground image expansion,
+order-1 walls, occluders and knife edge, mobility and chord-delay Doppler with its error
+bound, noise per receiver, non-ideality pipeline. DESIGN sections 5.1--5.12.}
+
+The RIS contribution of every link is the area-tied physical-optics kernel K1
+\begin{equation}
+\begin{split}
+h_{\mathrm{RIS}}={}&\sum_{q}\sqrt{G_T(\hat r^{i}_q)\,G_R(-\hat r^{s}_q)}\;
+  \Gamma_{n(q)}(s,f,\theta_{iq},\theta_{sq})\\
+&\times\frac{A_q\,o(\theta_{iq},\theta_{sq})}{4\pi\, r_{iq}\, r_{sq}}\;
+  j\,e^{-jk(r_{iq}+r_{sq})}\\
+&\times\mathbb{1}[\cos\theta_{iq}>0,\ \cos\theta_{sq}>0],
+\end{split}
+\label{eq:k1}
+\end{equation}
+\sremustub{Symbol table and the three equivalent forms (Tang Eq. 12, ETSI GR RIS 003
+cell gain, Ellingson with area gain); cell model auto/point/po\_patch and the model-form
+spread; guards. DESIGN sections 5.3, 5.4.}
+
+\input{generated/tables/table2_model_card}

@@ -1,0 +1,48 @@
+# human_gates.yaml -- human gates of DESIGN section 16 that block paper claims.
+# Status changes ONLY when the named people have decided; record who and when.
+# A claim in claims.yaml that lists an open gate is "pending": tolerated in draft builds,
+# refused in final builds (tools/check_claims.py).
+# Lead amendment A1: the generative-AI disclosure is NOT part of H-8 for now (deferred until
+# the author consults Dr. Kherani; IEEE requires it in the acknowledgments at submission).
+
+gates:
+  H-1:
+    title: Lab answers (Tx position/height/antenna, tile layout and pitch, sigma1/sigma2 origin and |Gamma|, Tx power and cables), permission to publish the Fig. 4(b) CSV, and which v1 commit the WCL letter used
+    who: Author / lab
+    blocks: V-LAB "validation" wording; publication of the data file; the lineage sentence naming v1 as the WCL letter's simulator
+    status: open
+  H-2:
+    title: Licence (MIT vs Apache-2.0) and arXiv licence
+    who: Six authors + IIT Bhilai
+    blocks: Public repository, CITATION.cff licence field, the words "open-source"/"Open" in title and abstract, arXiv posting
+    status: open
+  H-3:
+    title: WCL Eq. (2) dimensional check
+    who: Mishra, Kherani
+    blocks: Any statement about the letter's kernel
+    status: open
+  H-4:
+    title: TRACE differentiation wording
+    who: Kumar, Ambwani
+    blocks: The TRACE paragraph and Table I row
+    status: open
+  H-5:
+    title: AWS launches
+    who: User, per instance
+    blocks: B3/B4/B5 numbers (paced-mode headline)
+    status: open
+  H-6:
+    title: Zenodo/OSF deposit of the V-LAB protocol and E-A hypotheses before unblinding
+    who: User account
+    blocks: The word "pre-registered" and the pre-registration sentence
+    status: open
+  H-7:
+    title: Name availability of "sremu" on GitHub (PyPI checked free on 10 Oct 2026, amendment A2)
+    who: Author
+    blocks: Public push
+    status: open
+  H-8:
+    title: Integrity items RQ-01...08 (phantom references, CAISc template, git identity) and arXiv endorsement; AI disclosure deferred (A1)
+    who: Author
+    blocks: Posting
+    status: open

@@ -1,0 +1,119 @@
+# numbers.yaml -- every number or result phrase quoted in the paper text (DESIGN 1.6 rule 7).
+#
+# tools/build_paper.py renders generated/numbers.tex from this file. A macro whose value is
+# not yet produced by the pipeline expands to \sremuPlaceholder{name}: a bold ?? in draft
+# builds and a hard error in final builds. A fixed `value` is allowed ONLY for
+# definitional constants (source type `definition`, e.g. the thresholds of DESIGN 12.1) and
+# for dataset facts (source type `data`), never for results.
+#
+# Fields
+#   macro        LaTeX macro name, letters only (used as \macro{} in the text)
+#   kind         number | text   (text = a short result phrase filled by the pipeline)
+#   description  what the number is
+#   unit         unit printed after the macro in the text, if any
+#   source       {type: test|figure|study|benchmark|experiment|definition|data, id: ...}
+#   value        fixed value (definition/data only)
+#   max_chars    length budget used by tools/check_arxiv.py to bound the abstract length
+#                while placeholders remain (default 8 for numbers, 80 for text)
+
+macros:
+  # ------------------------------------------------------------------ definitions / data
+  - macro: numSustainMissRate
+    kind: number
+    description: Deadline-miss-rate threshold in the definition of "Sustainable" (DESIGN 12.1)
+    source: {type: definition, id: "DESIGN-12.1-Sustainable"}
+    value: "\\ensuremath{10^{-3}}"
+    max_chars: 5
+  - macro: numSustainSlackMs
+    kind: number
+    description: Slack used in the definition of "Sustainable"
+    unit: ms
+    source: {type: definition, id: "DESIGN-12.1-Sustainable"}
+    value: "1"
+    max_chars: 1
+  - macro: numSustainMinDurationS
+    kind: number
+    description: Minimum paced-run duration in the definition of "Sustainable"
+    unit: s
+    source: {type: definition, id: "DESIGN-12.1-Sustainable"}
+    value: "60"
+    max_chars: 2
+  - macro: numLabFreqGHz
+    kind: number
+    description: Carrier frequency of the digitized laboratory map (ANTS Fig. 4(b) dataset, DIG)
+    unit: GHz
+    source: {type: data, id: "V-LAB-dataset"}
+    value: "3.5"
+    max_chars: 3
+
+  # ------------------------------------------------------------------ verification and validation
+  - macro: numOracleCount
+    kind: number
+    description: Number of analytic oracle checks (PH/RT/IO/ST ids) passing in the pinned junit
+    source: {type: test, id: "junit:count(PH,RT,IO,ST)"}
+    max_chars: 3
+  - macro: numTangCurveMaxDevDb
+    kind: number
+    description: Max |difference| between sremu and Tang et al.'s published model curves
+    unit: dB
+    source: {type: study, id: "V-TANG-1"}
+    max_chars: 5
+  - macro: numTangMeasBiasDb
+    kind: number
+    description: Bias of digitized Tang chamber measurements relative to the published model
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+  - macro: numTangMeasSdDb
+    kind: number
+    description: SD of the same residuals
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+  - macro: numTangMeasN
+    kind: number
+    description: Number of digitized measurement points used in V-TANG-2
+    source: {type: study, id: "V-TANG-2"}
+  - macro: txtVLabOutcome
+    kind: text
+    description: Verb phrase completing "a pre-registered comparison with digitized lab data ..." (C1-C3 outcome and power label)
+    source: {type: study, id: "V-LAB"}
+    max_chars: 72
+  - macro: numCfoSlopeLegacy
+    kind: number
+    description: CFO estimate slope reproduced by the legacy truncation adapter
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 6
+  - macro: numCfoSlopeFixed
+    kind: number
+    description: CFO estimate slope of the new engine across two processes
+    source: {type: study, id: "V-CFO-3"}
+    max_chars: 6
+
+  # ------------------------------------------------------------------ wall-clock behaviour
+  - macro: txtPacedPlatform
+    kind: text
+    description: Platform of the paced-mode headline (Linux host and instance type)
+    source: {type: benchmark, id: "B3"}
+    max_chars: 30
+  - macro: numPacedLinks
+    kind: number
+    description: Number of links sustained in paced mode on that platform
+    source: {type: benchmark, id: "B3"}
+    max_chars: 4
+  - macro: numPacedMSps
+    kind: number
+    description: Per-stream sample rate of that paced configuration
+    unit: MS/s
+    source: {type: benchmark, id: "B3"}
+    max_chars: 5
+
+  # ------------------------------------------------------------------ case studies
+  - macro: txtEBResult
+    kind: text
+    description: E-B headline phrase (intra-frame switch; timed vs asap vs legacy semantics)
+    source: {type: experiment, id: "E-B"}
+    max_chars: 84
+  - macro: txtEAResult
+    kind: text
+    description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
+    source: {type: experiment, id: "E-A"}
+    max_chars: 84

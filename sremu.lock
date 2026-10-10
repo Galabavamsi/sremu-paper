@@ -1,0 +1,6 @@
+# sremu.lock -- the sremu commit this paper is built from (DESIGN 2.1, 13.5 step 1).
+# tools/build_paper.py --mode final refuses unless `commit` is a full 40-hex sha that equals
+# the HEAD of `repo` and both working trees are clean. The lead pins it after GATE-PHY and
+# GATE-RT are green.
+repo: ../sremu
+commit: UNPINNED

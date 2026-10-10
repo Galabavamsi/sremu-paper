@@ -1,0 +1,130 @@
+# claims.yaml -- every capability or result claim in the paper, mapped to its evidence
+# (DESIGN 1.6 and 13.6, minimal version). tools/check_claims.py enforces it.
+#
+# Fields
+#   text      the claim in one sentence (what the paper asserts)
+#   where     files that state it (a \claim{ID} marker there is optional)
+#   evidence  list of  test:<spec id>   passes in the pinned junit (PH, RT, IO, ST, G, W, VA, V-*)
+#                      fig:<F1..F12>    figure registered and generated (meta + PDF present)
+#                      cite:<bib key>   entry exists in refs.bib
+#                      table:<label>    LaTeX label exists (e.g. tab:tools)
+#                      spec:<section>   design-spec reference (informational, always satisfied)
+#   gates     human gates (human_gates.yaml) that must be closed
+#   banned_word_uses
+#             optional list of {word, context}: allows a banned word (DESIGN 1.6 rule 5) or an
+#             unqualified "real-time" in the text unit containing `context`, under this claim
+#
+# A claim is "supported" when every test passes, every figure exists and every gate is
+# closed; otherwise it is "pending". Draft builds report pending claims; final builds refuse.
+
+claims:
+  C-GAP:
+    text: "As of 10 Oct 2026, no surveyed open tool combines (i) IQ-level multi-node emulation behind an SDR-style interface, (ii) runtime external RIS commands applied at an explicit logged sample, (iii) imported measured per-state responses, and (iv) characterized wall-clock behaviour."
+    where: [sections/01_introduction.tex, sections/02_related_work.tex]
+    evidence:
+      - table:tab:tools
+      - cite:Gurses2026ACHEM
+      - cite:ElGhalbzouri2025GoSimRIS
+      - cite:Kayraklik2026ORIX
+      - cite:Burtakov2023QRIS
+      - cite:Tsampazi2025RISColosseum
+      - cite:OAIrfsim
+      - cite:srsRANZMQ
+      - cite:SionnaRTReleases
+      - test:RT-05
+      - test:IO-02
+      - test:IO-03
+      - test:PH-31
+      - fig:F7
+      - fig:F8
+    gates: []
+  C-OPEN:
+    text: "sremu is open source (title: 'An Open ... Emulator'; abstract: 'open-source')."
+    where: [main.tex, sections/abstract.tex]
+    evidence: [spec:DESIGN-2.1]
+    gates: [H-2]
+  C-SOFTWARE-ONLY:
+    text: "sremu is software-only: it needs no radio hardware; external applications exchange samples with it over sockets or in process (DESIGN 1.1)."
+    where: [sections/abstract.tex, sections/01_introduction.tex]
+    evidence: [test:IO-02, test:IO-07, spec:DESIGN-1.1]
+    gates: []
+    banned_word_uses:
+      - {word: only, context: "software-only emulator"}
+  C-MODELCARD:
+    text: "Table II (generated from sremu docs/model_card.yaml): model, validity domain, evidence and default per component, including 'statistical background only' for diffuse fading and 'coupling via tables only'."
+    where: [generated/tables/table2_model_card.tex]
+    evidence: [test:PH-01, test:PH-02, test:PH-04, test:PH-26, test:PH-28, test:PH-31, test:PH-10, test:PH-32, test:PH-08, test:PH-11, test:ST-02, test:G6, test:PH-17, test:PH-18, test:PH-19, test:PH-20, test:PH-21, test:G5, test:PH-13, test:PH-15, test:RT-12, table:tab:modelcard]
+    gates: []
+    banned_word_uses:
+      - {word: only, context: "Statistical background only"}
+      - {word: only, context: "coupling via tables only"}
+  C-TIMED-CMD:
+    text: "A RIS command for switch time t_sw takes effect on receiver r at the sample nearest to (t_sw + tau_r) f_s, and requested and applied samples are logged."
+    where: [sections/01_introduction.tex, sections/abstract.tex]
+    evidence: [test:RT-05, test:RT-06, test:RT-07, test:IO-03, fig:F2]
+    gates: []
+  C-LOCKSTEP-EXACT:
+    text: "Lockstep runs are sample-exact and deterministic, including with controllers in the loop."
+    where: [sections/abstract.tex]
+    evidence: [test:RT-03, test:RT-08, test:RT-16, test:IO-02]
+    gates: []
+  C-CONTRIB-1:
+    text: "Timed RIS control in an IQ-level emulator: per-receiver application, one physical switch time for late commands, command log, deterministic barriers, measured paced mode, UHD-shaped API, framed ZMQ data plane, GS RIS 008-aligned table schema."
+    where: [sections/01_introduction.tex]
+    evidence: [test:RT-05, test:RT-06, test:RT-08, test:RT-18, test:IO-02, test:IO-03, test:IO-05, fig:F1, fig:F2, cite:ETSI_GS_RIS008]
+    gates: []
+  C-CONTRIB-2:
+    text: "A verified physical model with a stated validity domain: area-tied kernel, model card, CI oracle count, MATLAB code-to-code, Tang curves, pre-registered lab consistency check, CFO root cause."
+    where: [sections/01_introduction.tex, sections/abstract.tex]
+    evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-CFO-2, test:V-CFO-3, fig:F3, fig:F4, fig:F5]
+    gates: [H-6]
+  C-CONTRIB-3:
+    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling, cost-model fit on a laptop and a Linux server."
+    where: [sections/01_introduction.tex, sections/abstract.tex]
+    evidence: [test:RT-18, fig:F7, fig:F8]
+    gates: [H-5]
+  C-CONTRIB-4:
+    text: "Results that need a sample-level emulator: intra-frame reconfiguration timing (E-B), signaling-delay time scale in a blocked corridor (E-A), non-ideality ablation (E-C), FM dimensioning (E-D)."
+    where: [sections/01_introduction.tex, sections/abstract.tex]
+    evidence: [test:VA-5, test:VA-1, fig:F9, fig:F10, fig:F11, fig:F12]
+    gates: [H-6]
+  C-SCOPE:
+    text: "Scope box: not a UHD drop-in, not hard real time, not a ray tracer, no mutual-coupling physics (tables only), scalar co-polar, single-bounce RIS paths, order-1 walls; paced timing measured per platform."
+    where: [sections/01_introduction.tex]
+    evidence: [spec:DESIGN-1.5, cite:ETSI_GR_RIS003_v121]
+    gates: []
+  C-LINEAGE:
+    text: "sremu is the third generation of the in-house emulator; v1 is the simulator of the WCL letter (Sec. IV-A); audits found the kernel normalization, truncated sample counts and the CFO gain error; legacy behaviour kept behind adapters."
+    where: [sections/01_introduction.tex, sections/02_related_work.tex]
+    evidence: [cite:Mishra2025WCL, test:PH-04, test:V-CFO-2]
+    gates: [H-1]
+  C-TRACE:
+    text: "TRACE paragraph and Table I row (DESIGN 1.2 wording)."
+    where: [sections/02_related_work.tex, sections/tables/table1_tools.tex]
+    evidence: [cite:Kumar2026TRACE]
+    gates: [H-4]
+  C-ABS-TANG:
+    text: "The kernel reproduces published RIS path-loss model curves within \\numTangCurveMaxDevDb dB."
+    where: [sections/abstract.tex]
+    evidence: [test:V-TANG-1, fig:F3, cite:Tang2022mmWave]
+    gates: []
+  C-ABS-LAB:
+    text: "Pre-registered comparison with digitized 3.5 GHz laboratory data (outcome phrase from the protocol's decision rules)."
+    where: [sections/abstract.tex]
+    evidence: [fig:F4]
+    gates: [H-1, H-6]
+  C-ABS-PACED:
+    text: "Wall-clock-paced runs on the named platform sustain N links at Y MS/s with a deadline-miss rate below 1e-3 (Sustainable, DESIGN 12.1)."
+    where: [sections/abstract.tex]
+    evidence: [fig:F8, spec:DESIGN-12.1]
+    gates: [H-5]
+  C-ABS-EB:
+    text: "E-B headline (RIS switch inside a packet)."
+    where: [sections/abstract.tex]
+    evidence: [fig:F9, test:VA-5]
+    gates: []
+  C-ABS-EA:
+    text: "E-A headline (position-driven binary control under signaling delay)."
+    where: [sections/abstract.tex]
+    evidence: [fig:F10, test:VA-1]
+    gates: [H-6]

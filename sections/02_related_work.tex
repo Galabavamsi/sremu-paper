@@ -1,0 +1,84 @@
+% Section II -- Related work and gap (DRAFT TEXT, WP12 skeleton stage).
+% Source: research/related_work.md (snapshot of 10 Oct 2026), sections 2-4.
+% The TRACE paragraph uses the DESIGN 1.2 wording; it needs human gate H-4 (agreement of
+% Smriti Kumar and Mansi Ambwani) before posting. The lineage paragraph needs H-1.
+\section{Related Work and Gap}\label{sec:related}
+
+\subsection{Coefficient-level simulators and ray tracers}
+SimRIS generates statistical millimeter-wave RIS channel matrices by Monte Carlo
+simulation with ideal phase control~\cite{Basar2020SimRIS,Basar2021TCOM}. QRIS extends
+QuaDRiGa~\cite{Jaeckel2014QuaDRiGa} with unit-cell patterns taken from measurements or
+full-wave simulation and with several interacting surfaces; its code is distributed on
+request~\cite{Burtakov2023QRIS,QRISPage}. NYUSIM-RIS extends the statistical NYUSIM channel
+model~\cite{Habib2023NYUSIMRIS}, and system-level simulators evaluate RIS deployments with
+abstracted links~\cite{Hao2023ViennaRIS,Sihlbom2023SLS}. Among ray tracers, Sionna added
+RIS in version 0.18 and Sionna RT removed it in version 1.0; no release up to 2.2.0
+(29 Sep 2026) has a RIS module~\cite{SionnaRTReleases,Hoydis2023SionnaRT}. Wireless InSite
+describes engineered electromagnetic surfaces with a uniform-ray physical-optics model for
+a static configuration~\cite{RemcomEES,DeJong2022EES}. MATLAB provides rectangular RIS
+objects with a user-defined unit-cell element and a reflector that processes sample
+vectors offline~\cite{MathWorksRectangularRIS,MathWorksRISCDL}. Electromagnetic models with
+mutual coupling~\cite{Faqiri2023PhysFad,Gradoni2021MutualCoupling} and macroscopic
+reradiation models~\cite{DegliEsposti2022Reradiation} describe the surface itself rather
+than a running link. In this group the RIS configuration is an input to an offline
+computation, not a command received while a radio link is running.
+
+\subsection{Network simulators and controller-in-the-loop frameworks}
+CoopeRIS couples a far-field RIS gain model to vehicular network simulation and assumes an
+oracle controller that knows the vehicle position~\cite{Segata2024CoopeRIS}. ns-3 modules
+model IRS-assisted 5G and UAV links at packet level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS}.
+GoSimRIS closes an O-RAN E2 loop between an xApp and a RIS channel simulator through an
+E2SM-RIS service model and supports at most 64 elements~\cite{ElGhalbzouri2025GoSimRIS}.
+ORIX runs a near-RT loop of 10~ms to 1~s with quantized phases and a phase-dependent
+amplitude model, and neglects mutual coupling and reconfiguration delay~\cite{Kayraklik2026ORIX}.
+These frameworks exchange channel coefficients, signal-to-noise ratios or rates, not
+waveform samples.
+
+\subsection{IQ-level emulators}
+Colosseum emulates channels between 256 software-defined radios with an FPGA channel
+emulator fed by precomputed scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
+Tsampazi and Melodia installed RIS-cascaded channels generated with QuaDRiGa in Colosseum
+and ran srsRAN end to end; the RIS phases were optimized before the experiment and are not
+reconfigured during it~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}. The OAI
+rfsimulator replaces the RF driver and forwards IQ samples over TCP; its documentation
+states that it is not designed to keep pace with wall-clock time, and a telnet interface
+changes channel models and per-beam gains during a run~\cite{OAIrfsim}. The srsRAN ZMQ
+virtual radios exchange IQ samples, and channels can be inserted with a GNU Radio
+flowgraph~\cite{srsRANZMQ}. ACHEM runs unmodified UHD applications through a virtual USRP,
+emulates channels at the IQ level at wall-clock rate with mobility from vehicle
+simulators, and reports end-to-end validation against the AERPAW testbed; it has no RIS
+model~\cite{Gurses2026ACHEM}. Integrating a RIS operator with such a transport is
+discussed as future work in Section~\ref{sec:future}.
+
+\subsection{TRACE}
+\claim{C-TRACE}TRACE~\cite{Kumar2026TRACE}, by some of the present authors, is a
+socket-based modular framework that decouples transmitter, radio environment, controller
+and receiver through separate control-plane and data-plane interfaces. It evaluates MMSE
+and OMP channel estimation and a differential channel-aware update (DCAR) on symbol-level
+i.i.d.\ Rayleigh channels with Gaussian random-walk and Gauss--Markov evolution, with an
+ideal continuous-phase, unit-amplitude surface, and reports a control-plane round-trip
+time of 5.2~ms over UDP~\cite{Kumar2026TRACE}. TRACE and \sremu{} are complementary: TRACE
+studies estimation and tracking algorithms on symbol-level channels; \sremu{} provides a
+sample-level radio environment with timed RIS control. A TRACE-style controller could
+drive \sremu{}'s control plane.
+
+\subsection{Gap}
+\input{sections/tables/table1_tools}
+Table~\ref{tab:tools} summarizes the comparison. \claim{C-GAP}Each of properties
+(i)--(iv) of Section~\ref{sec:intro} appears in some row, and no surveyed open tool has all
+four. ACHEM has (i) at a stronger level than \sremu{}, since it runs unmodified UHD
+applications, and has (iv), but no RIS~\cite{Gurses2026ACHEM}. GoSimRIS and ORIX have
+(ii) at the level of channel coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}.
+QRIS accepts measured or simulated unit-cell patterns, which is close to (iii), but runs
+offline~\cite{Burtakov2023QRIS}. The gap is therefore a combination, and it is dated: a
+RIS operator could be added to an existing IQ-level emulator.
+
+\subsection{Lineage}\label{sec:related-lineage}
+\claim{C-LINEAGE}\sremu{} is the third generation of an in-house emulator. Generation v1
+is the Python discrete-time pass-band IQ simulator described in~\cite[Sec.~IV-A]{Mishra2025WCL};
+v2 reworked its transport and added a web dashboard. Audits of both found a RIS kernel
+normalization that grows with aperture refinement, sample counts truncated per time step,
+and a resulting CFO gain error. \sremu{} replaces each of these with a tested alternative
+and keeps the legacy behaviour behind explicit adapters for comparison
+(Section~\ref{sec:vv}). Timing results of v1 or v2 are compared with \sremu{} solely when
+both run on the same host.
