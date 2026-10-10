@@ -8,7 +8,9 @@
 #   title        short description (caption source)
 #   width        single | double
 #   source       tikz (drawn in TeX, no data) | script (Python, writes data + PDF)
-#   script       path of the figure script, relative to paper/ (null until written)
+#   script       path of the figure script, relative to paper/ (null until written); for
+#                tikz: the standalone .tex source, compiled by build_paper.py whenever LaTeX
+#                runs (key = sha256 of the source and its `inputs`, e.g. the shared style)
 #   sweep        sweep spec under paper/sweeps/ (WP11 data side) or null
 #   inputs       data files whose sha256 enters the content key
 #   evidence     spec ids the figure shows (tests, studies, benchmarks, experiments)
@@ -31,28 +33,28 @@
 figures:
   F1:
     title: "Architecture: TX app, RX app and controller processes; engine; native/raw data planes vs control plane; recorder"
-    width: double
+    width: single
     source: tikz
-    script: null
+    script: figures/tikz/F1.tex
     sweep: null
-    inputs: []
-    evidence: []
+    inputs: [figures/tikz/sremu-figstyle.tex]
+    evidence: [IO-02, IO-03, RT-16]
     data_classes: []
-    outputs: [figures/out/F1.pdf]
+    outputs: [figures/out/F1.pdf, figures/data/F1.meta.json]
     owner: WP12
-    status: pending
+    status: ready
   F2:
     title: "(a) Page/segment processing flowchart; (b) RIS command lifecycle: wall receive, t_req at the RIS, per-RX k_applied with tau_RIS->r offsets, one late command, one barrier"
     width: double
     source: tikz
-    script: null
+    script: figures/tikz/F2.tex
     sweep: null
-    inputs: []
-    evidence: [RT-05, RT-06, RT-08]
+    inputs: [figures/tikz/sremu-figstyle.tex]
+    evidence: [RT-05, RT-06, RT-08, RT-17]
     data_classes: []
-    outputs: [figures/out/F2.pdf]
+    outputs: [figures/out/F2.pdf, figures/data/F2.meta.json]
     owner: WP12
-    status: pending
+    status: ready
   F3:
     title: "(a) Fixed-aperture refinement: K1 flat vs legacy v2 growth per 4x refinement; (b) Tang et al. model curves vs sremu with digitized measured points"
     width: double

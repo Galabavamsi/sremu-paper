@@ -273,3 +273,56 @@ def test_bad_evidence_is_an_error_in_any_mode(paper_copy: Path) -> None:
                    "figure F13 not in", "cite key NoKey", "table label tab:x",
                    "malformed evidence 'proof:y'", "unknown human gate H-9"):
         assert any(needle in e for e in errs), needle
+
+
+# --------------------------------------------------------------------------- pytest evidence
+def test_pytest_reference_status() -> None:
+    from check_claims import pytest_status
+
+    cases = [
+        CaseResult("tests.unit.test_wp9_env::test_env_api_spaces_and_types", "passed"),
+        CaseResult("tests.unit.test_wp9_env::test_env_codebook[a]", "passed"),
+        CaseResult("tests.unit.test_wp9_env::test_env_codebook[b]", "skipped"),
+        CaseResult("tests.unit.test_wp9_env_extra::test_other", "failed"),
+        CaseResult("tests.io.test_x.TestGroup::test_in_class", "passed"),
+    ]
+    assert pytest_status("tests/unit/test_wp9_env.py", cases) == "skipped"
+    assert pytest_status("tests/unit/test_wp9_env.py::test_env_api_spaces_and_types",
+                         cases) == "passed"
+    assert pytest_status("tests/unit/test_wp9_env.py::test_env_codebook", cases) == "skipped"
+    assert pytest_status("tests/unit/test_wp9_env.py::test_env_api", cases) == "missing"
+    assert pytest_status("tests/unit/test_wp9_env_extra.py", cases) == "failed"
+    assert pytest_status("tests/io/test_x.py::test_in_class", cases) == "passed"
+    assert pytest_status("tests/unit/test_nope.py", cases) == "missing"
+
+
+def test_pytest_evidence_is_checked(paper_copy: Path, tmp_path: Path) -> None:
+    claims = paper_copy / "claims.yaml"
+    doc = yaml.safe_load(claims.read_text(encoding="utf-8"))
+    doc["claims"]["C-PYT"] = {"text": "t", "where": [], "gates": [],
+                              "evidence": ["pytest:tests/unit/test_wp9_env.py"]}
+    doc["claims"]["C-PYT-BAD"] = {"text": "t", "where": [], "gates": [],
+                                  "evidence": ["pytest:unit/test_wp9_env", "pytest:tests/x/y.py"]}
+    claims.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+    j = tmp_path / "j.xml"
+    j.write_text(junit_xml({"test_env_ok": "passed"}).replace(
+        'classname="tests.t"', 'classname="tests.unit.test_wp9_env"'), encoding="utf-8")
+    rep = check_claims(paper_copy, "draft", junit=[j])
+    assert not any(n.startswith("C-PYT pending") for n in rep.notes), rep.render()
+    assert any("'unit/test_wp9_env' is not tests/<path>.py" in e for e in rep.errors)
+    sremu_dir = (paper_copy.parent / "sremu")
+    if sremu_dir.is_dir():  # only when a checkout sits next to the copy
+        assert any("tests/x/y.py does not exist" in e for e in rep.errors)
+    rep = check_claims(paper_copy, "draft", junit=[])
+    assert any("C-PYT pending: pytest tests/unit/test_wp9_env.py no junit" in n
+               for n in rep.notes)
+
+
+def test_code_identifiers_in_texttt_are_not_prose(paper_copy: Path) -> None:
+    errs = _errors_after(paper_copy, "The field \\texttt{first\\_sample} is set.")
+    assert not any("banned word" in e for e in errs), errs
+    errs = _errors_after(paper_copy, "The first sample is set.")
+    assert any("banned word 'first'" in e for e in errs)
+    # numbers inside \texttt are still numbers
+    errs = _errors_after(paper_copy, "Port \\texttt{5600} is used.")
+    assert any("['5600'] neither cited nor macros" in e for e in errs), errs

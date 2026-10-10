@@ -26,7 +26,7 @@ computation, not a command received while a radio link is running.
 \subsection{Network simulators and controller-in-the-loop frameworks}
 CoopeRIS couples a far-field RIS gain model to vehicular network simulation and assumes an
 oracle controller that knows the vehicle position~\cite{Segata2024CoopeRIS}. ns-3 modules
-model IRS-assisted 5G and UAV links at packet level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS}.
+model 5G and unmanned-aerial-vehicle links assisted by intelligent reflecting surfaces at packet level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS}.
 GoSimRIS closes an O-RAN E2 loop between an xApp and a RIS channel simulator through an
 E2SM-RIS service model and supports at most 64 elements~\cite{ElGhalbzouri2025GoSimRIS}.
 ORIX runs a near-RT loop of 10~ms to 1~s with quantized phases and a phase-dependent
@@ -35,8 +35,8 @@ These frameworks exchange channel coefficients, signal-to-noise ratios or rates,
 waveform samples.
 
 \subsection{IQ-level emulators}
-Colosseum emulates channels between 256 software-defined radios with an FPGA channel
-emulator fed by precomputed scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
+Colosseum emulates channels between 256 software-defined radios with a channel emulator built on
+field-programmable gate arrays (FPGAs), fed by precomputed scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
 Tsampazi and Melodia installed RIS-cascaded channels generated with QuaDRiGa in Colosseum
 and ran srsRAN end to end; the RIS phases were optimized before the experiment and are not
 reconfigured during it~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}. The OAI
@@ -53,8 +53,8 @@ discussed as future work in Section~\ref{sec:future}.
 \subsection{TRACE}
 \claim{C-TRACE}TRACE~\cite{Kumar2026TRACE}, by some of the present authors, is a
 socket-based modular framework that decouples transmitter, radio environment, controller
-and receiver through separate control-plane and data-plane interfaces. It evaluates MMSE
-and OMP channel estimation and a differential channel-aware update (DCAR) on symbol-level
+and receiver through separate control-plane and data-plane interfaces. It evaluates minimum mean-square-error
+(MMSE) and orthogonal-matching-pursuit (OMP) channel estimation and a differential channel-aware update (DCAR) on symbol-level
 i.i.d.\ Rayleigh channels with Gaussian random-walk and Gauss--Markov evolution, with an
 ideal continuous-phase, unit-amplitude surface, and reports a control-plane round-trip
 time of 5.2~ms over UDP~\cite{Kumar2026TRACE}. TRACE and \sremu{} are complementary: TRACE

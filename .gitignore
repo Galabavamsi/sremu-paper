@@ -13,6 +13,9 @@ main.pdf
 
 # build mode switch written by tools/build_paper.py
 generated/buildmode.tex
+
+# TikZ build directory (figures/out/F1.pdf, F2.pdf are the outputs)
+figures/build/
 generated/tables/model_card.md
 
 # junit copied in from the pinned sremu CI run (inputs, not sources)

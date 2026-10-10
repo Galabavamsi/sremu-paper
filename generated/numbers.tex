@@ -5,7 +5,7 @@
 \newcommand{\numSustainSlackMs}{1}% definition:DESIGN-12.1-Sustainable
 \newcommand{\numSustainMinDurationS}{60}% definition:DESIGN-12.1-Sustainable
 \newcommand{\numLabFreqGHz}{3.5}% data:V-LAB-dataset
-\newcommand{\numOracleCount}{\sremuPlaceholder{numOracleCount}}% test:junit:count(PH,RT,IO,ST)
+\newcommand{\numOracleCount}{\sremuPlaceholder{numOracleCount}}% test:junit:count(PH,RT,IO)
 \newcommand{\numTangCurveMaxDevDb}{\sremuPlaceholder{numTangCurveMaxDevDb}}% study:V-TANG-1
 \newcommand{\numTangMeasBiasDb}{\sremuPlaceholder{numTangMeasBiasDb}}% study:V-TANG-2
 \newcommand{\numTangMeasSdDb}{\sremuPlaceholder{numTangMeasSdDb}}% study:V-TANG-2
@@ -18,3 +18,41 @@
 \newcommand{\numPacedMSps}{\sremuPlaceholder{numPacedMSps}}% benchmark:B3
 \newcommand{\txtEBResult}{\sremuPlaceholder{txtEBResult}}% experiment:E-B
 \newcommand{\txtEAResult}{\sremuPlaceholder{txtEAResult}}% experiment:E-A
+\newcommand{\numPageTargetMs}{0.5}% code:sremu.timebase:float(Fraction(DEFAULT_PAGE_TARGET_S) * 1000)
+\newcommand{\numPageMin}{64}% code:sremu.timebase:PAGE_MIN
+\newcommand{\numPageMax}{16384}% code:sremu.timebase:PAGE_MAX
+\newcommand{\numStallTimeoutS}{2}% code:sremu.engine.emulator:EngineConfig.__dataclass_fields__['stall_timeout_s'].default
+\newcommand{\numPacedLagMs}{1}% code:sremu.engine.emulator:float(EngineConfig.__dataclass_fields__['d_lag_s'].default * 1000)
+\newcommand{\numPacedSlacksMs}{0, 1 and 5}% code:sremu.engine.emulator:[float(s * 1000) for s in EngineConfig.__dataclass_fields__['slacks_s'].default]
+\newcommand{\numPacedSpinMs}{1.5}% code:sremu.engine.pacer:SPIN_NS / 1e6
+\newcommand{\numMetricsWindowMs}{100}% code:sremu.metrics.rt:float(RTF_WINDOW_S * 1000)
+\newcommand{\txtControlEndpoint}{tcp://127.0.0.1:5600}% code:sremu.contracts:DEFAULT_CONTROL_ENDPOINT
+\newcommand{\numFrameHeaderBytes}{48}% code:sremu.transport.framing:HEADER_SIZE
+\newcommand{\numFrameMaxSamplesExp}{22}% code:sremu.contracts:int(math.log2(MAX_FRAME_SAMPLES))
+\newcommand{\numSchemaVersion}{1}% code:sremu.transport.messages:SCHEMA_VERSION
+\newcommand{\numMaxMessageMiB}{1}% code:sremu.contracts:MAX_MESSAGE_BYTES / 2**20
+\newcommand{\numHardMessageMiB}{16}% code:sremu.transport.control_server:HARD_MESSAGE_LIMIT / 2**20
+\newcommand{\numMaxElements}{65,536}% code:sremu.contracts:MAX_ELEMENTS_PER_COMMAND
+\newcommand{\numMaxCmdRateKHz}{10}% code:sremu.contracts:DEFAULT_MAX_COMMAND_RATE_HZ / 1e3
+\newcommand{\numEpsRel}{\ensuremath{10^{-3}}}% code:sremu.channel.interp:EPS_REL
+\newcommand{\numTuMaxMs}{10}% code:sremu.channel.interp:float(T_U_MAX_S * 1000)
+\newcommand{\numTuHalvingsMax}{4}% code:sremu.channel.interp:M_MAX
+\newcommand{\numVerifyStride}{64}% code:sremu.channel.interp:VERIFY_INTERP_STRIDE
+\newcommand{\numVerifyFlagFactor}{2}% code:sremu.channel.interp:VERIFY_INTERP_FLAG / EPS_REL
+\newcommand{\numNarrowbandRad}{0.05}% code:sremu.channel.interp:NB_EPS_RAD
+\newcommand{\numFdTaps}{8, 16 and 32}% code:sremu.channel.fd:[taps for _band, taps in FD_ROWS]
+\newcommand{\numFdBands}{0.2, 0.6 and 0.8}% code:sremu.channel.fd:[band for band, _taps in FD_ROWS]
+\newcommand{\numKaiserBeta}{8}% code:sremu.channel.fd:KAISER_BETA
+\newcommand{\numFdPhases}{1024}% code:sremu.channel.fd:N_PHASES
+\newcommand{\numFdTargetDb}{\ensuremath{-60}}% code:sremu.channel.fd:DEFAULT_FD_TARGET_DB
+\newcommand{\numIntegerDelayRad}{0.05}% code:sremu.channel.fd:INTEGER_MAX_PHASE_RAD
+\newcommand{\numPointMaxPitch}{0.5}% code:sremu.scenario.models:Numerics.model_fields['point_max_pitch_wavelengths'].default
+\newcommand{\numSubcellMax}{0.2}% code:sremu.scenario.models:Numerics.model_fields['subcell_max_wavelengths'].default
+\newcommand{\numRichardsonTolDb}{0.05}% code:sremu.scenario.models:Numerics.model_fields['richardson_tol_db'].default
+\newcommand{\numRichardsonLinks}{8}% code:sremu.physics.quadrature:inspect.signature(representative_links).parameters['n'].default
+\newcommand{\numRichardsonHalvings}{2}% code:sremu.physics.quadrature:inspect.signature(richardson_check).parameters['max_halvings'].default
+\newcommand{\numDensityMax}{0.35}% code:sremu.physics.response:DENSITY_MAX
+\newcommand{\numTzeroK}{290}% code:sremu.units:T0
+\newcommand{\numThermalDbmHz}{\ensuremath{-173.975}}% code:sremu.units:DBM_PER_HZ_THERMAL
+\newcommand{\numDiffuseMinSinusoids}{48}% code:sremu.physics.diffuse:MIN_SINUSOIDS
+\newcommand{\numDiffuseMaxTaps}{4}% code:sremu.physics.diffuse:MAX_TAPS

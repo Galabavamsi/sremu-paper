@@ -1,16 +1,74 @@
-% Appendices (SKELETON). Lead amendment A1: no generative-AI disclosure section here; the
-% decision is deferred until the author consults Dr. Kherani (IEEE requires the disclosure
+% Appendices (WP12 draft, stage C). Lead amendment A1: no generative-AI disclosure section here;
+% the decision is deferred until the author consults Dr. Kherani (IEEE requires the disclosure
 % in the acknowledgments at journal submission).
+% Checked against sremu commit 2a016a6: tests/oracles (closed forms; import isolation in
+% tests/oracles/test_oracle_isolation.py and tests/unit/test_layering.py), tests/golden
+% (MATLAB R2026a goldens G1-G8), physics/legacy.py and legacy/{truncation,next_tick}.py
+% (teeth), tools/tasks.py paper-junit (junit + {sremu_commit, sremu_dirty} sidecar),
+% paper/tools/build_paper.py (final-mode refusals), record/manifest.py, contracts.DataClass.
 \section{Oracle Details}\label{app:oracles}
-\sremustub{Closed forms and tolerances of the PH, RT, IO and ST oracles not detailed in
-Section V.}
+\claim{C-ORACLES}The tests of \sremu{} form four tiers. Analytic oracles (identifiers PH,
+RT and IO) compare the code with closed forms or exact properties in double or exact
+arithmetic and run in continuous integration. Statistical oracles (ST) run seeded Monte Carlo
+experiments with stated confidence levels. Code-to-code references (G1--G8) compare the
+emulator with stored outputs of MATLAB R2026a scripts (those of the RIS kernel were written
+for K1); MATLAB is not needed to run them, and their agreement shows agreement between two
+codes, not validity.
+Validation and reproduction studies (V) use published or measured data.
+
+\claim{C-ORACLE-INDEPENDENCE}The closed forms live in a separate test package that was
+written from independent derivations and scripts, not from the emulator's code, and that may
+not import the physics, channel or impairment packages; a static check of the imports and a
+check in a fresh interpreter enforce this. The physics oracles cover the Friis equation, image
+theory for plates and disks, the monostatic radar cross section of a plate, the
+far-field gain of a focused panel, focusing saturation, Fresnel reflection and the two-ray
+model, the knife-edge Fresnel integral, the losses of finite alphabets and of the
+phase-dependent amplitude model, and exhaustive searches for the exact optimum. The runtime
+oracles cover exact sample counts and round trips at several incommensurate rates, the switch
+sample of a distant receiver, bitwise invariance under chunking, cuts, skipped pages and
+thread counts, closed-form transition profiles and the paced-mode counters; property tests
+draw random rational rates, times and periods. The interface oracles feed malformed frames
+and messages, check the size and element limits and the loopback rule, and check the
+structure of the SigMF recordings. The statistical oracles test the stationary distribution
+of the random-waypoint model, the autocorrelation and level-crossing rate of the diffuse term
+against Clarke's model, and the Monte Carlo losses of quantization and failures.
+
+\claim{C-TEETH}Each guard against a defect of the earlier generations has a twin test that
+runs the legacy behaviour and must fail it: the earlier kernel whose power grows with subdivision, K1 without $j$, Doppler held constant per
+block, a short Lagrange fractional-delay filter, the earlier single-slot command semantics,
+per-tick oscillator phase and truncated per-tick sample counts. A guard that passes the
+legacy behaviour is broken. Section~\ref{sec:vv} lists every check with its tolerance and
+status as recorded in the test record of the pinned commit; a spec identifier counts as
+passed when at least one of its implementation tests passed and none failed or was skipped,
+and the tests of the rendering path count once per backend.
 
 \section{Reproducibility}\label{app:repro}
-\sremustub{One command from a clean clone of both repositories: the paper pipeline with
-the fast or full profile; sremu.lock pins the emulator commit; every run directory carries
-a manifest with versions, seeds and input hashes.}
+\claim{C-REPRO}The paper is built from two repositories, the emulator and the paper, by a
+Python pipeline rather than by hand. The paper's lock file names the emulator commit. In the
+emulator repository, \texttt{python tools/tasks.py paper-junit FILE} runs the test tiers and
+writes a test record with the commit and the state of the working tree. In the paper
+repository, the single command
+\texttt{python tools/build\_paper.py --mode final --profile full --junit FILE} then rebuilds
+every stale figure and table and compiles the paper. It refuses to produce a PDF unless the
+installed emulator is the locked commit, both working trees are clean, every identifier of
+both verification gates passed in a test record of that commit, every figure is current,
+every number is a macro written by the pipeline and every claim is supported. A figure is
+current when its stored content key, a hash of the emulator commit, the sweep specification,
+the input files and the figure script, matches. The constants and defaults quoted in
+Sections~\ref{sec:design} and~\ref{sec:model} are read from the locked code at build time,
+so the text cannot drift from the code. Every run directory carries the manifest of
+Section~\ref{sec:design-arch}, and a replay reproduces its received samples bit for bit.
 
 \section{Data Provenance}\label{app:provenance}
-\sremustub{Data classes (MEAS, DIG, REPORTED, ASSUMED, SIM-sremu, SIM-legacy, ANALYTIC,
-MATLAB) of every input and figure; digitized data with their uncertainty; audits of the
-legacy code that motivated the replacements.}
+\claim{C-PROVENANCE}Every input and every figure carries data classes: MEAS (measured
+data), DIG (digitized from a figure, with its digitization uncertainty), REPORTED
+(quoted from a publication), ASSUMED (chosen where no data exist, such as the amplitudes of
+the laboratory states), SIM-sremu, SIM-legacy-v1 and SIM-legacy-v2 (outputs of this emulator
+and of the two earlier generations), ANALYTIC (closed forms) and MATLAB (code-to-code
+references). Run manifests list the hash and data class of every input, and every figure
+caption names the classes it shows. Input files are copied into the repositories with their
+hashes and provenance; data not yet cleared for publication are read from a private location,
+and the tests that need them are skipped when it is absent. Response tables keep their own
+provenance (Section~\ref{sec:design-states}). The legacy behaviour that motivated the
+replacements (Section~\ref{sec:related-lineage}) is kept behind explicit adapters, which the
+teeth tests above exercise and which are never used by the physical model.

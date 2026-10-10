@@ -1,34 +1,270 @@
-% Section III -- Design (SKELETON; text written in stage C after GATE-RT).
+% Section III -- Design (WP12 draft, stage C). Describes ONLY what sremu commit 2a016a6
+% implements; module paths in comments are for the lead's check. Every number is a macro
+% (numbers.yaml; `code` macros are read from the sremu code at build time) or cited.
+% Claims: claims.yaml (C-* ids in the \claim{} markers).
 \section{Design}\label{sec:design}
 
-\subsection{Architecture}
-\sremustub{Processes and planes (F1): TX and RX applications, external controller
-processes, engine, native framed ZMQ and raw REQ/REP data planes versus the JSON control
-plane, recorder (SigMF, events.jsonl, manifest). DESIGN sections 1.1, 8.}
+\subsection{Architecture}\label{sec:design-arch}
+% sremu/api/device.py (Device.inproc, Device.connect, Device.from_engine; EngineProtocol of
+% contracts.py); sremu/engine/emulator.py; sremu/transport/{control_server,zmq_native,
+% rawreqrep}.py; sremu/commands/serve.py (served runs, --paused default); sremu/record/*.
+\claim{C-ARCH}Fig.~\ref{fig:F1} shows the processes of \sremu{} and the planes that connect
+them. The engine computes the samples of every receive (RX) stream from the samples of every
+transmit (TX) stream, the propagation model and the RIS configurations in force. It runs
+inside the Python process of an application (\texttt{Device.inproc}) or as a served process
+that applications and controllers reach through sockets (\texttt{Device.connect}). Both
+forms implement one engine interface; a run whose TX and RX applications are separate
+operating-system processes gives the same RX samples, bit for bit, as the same run in one
+process (IO-02).
+
+\claim{C-PLANES}A served engine uses ZMQ sockets~\cite{ZeroMQ}. On the IQ data plane, TX
+applications push framed samples to one ingress socket and each RX stream has its own egress
+socket; a raw request--reply data plane serves radio software that exchanges unframed
+samples (Section~\ref{sec:design-if}). On the control plane, JavaScript Object Notation
+(JSON) requests reach one \texttt{ROUTER} socket (by default \texttt{\txtControlEndpoint}):
+stream management, RIS commands, controller registration and session control. Registered
+controllers receive their barrier messages on the same connection, never on the publish
+socket, which may drop messages; a separate \texttt{PUB} socket carries telemetry. A served
+session can start paused, the default of the serving command, so that clients can open
+streams and issue timed commands before virtual time advances.
+
+\claim{C-RECORDING}A recorder writes one directory per run: a manifest (software versions,
+git commit and dirty flag, platform, seed and random-number scheme, hashes and data classes
+of the inputs, mode, backend, per-link interpolation and filter choices, loss counters), the
+resolved scenario, an event log with one JSON line per change of a command record, flushed as
+it is written, a metrics log per \numMetricsWindowMs~ms of virtual time and, optionally,
+SigMF recordings~\cite{SigMF} of the streams whose annotations mark each applied command at
+its sample. A replay tool and a static HTML report read run directories.
+% record/manifest.py, record/eventlog.py, record/sigmf.py, record/replay.py,
+% record/report.py; metrics/rt.py RTF_WINDOW_S.
+
+\begin{figure}[t]
+\centering
+\sremufigure{F1}{\columnwidth}{Architecture of \sremu{}. Applications and controllers are
+separate processes (or run in the engine's process through \texttt{Device.inproc}). Solid
+lines: IQ data plane; dashed: control plane; dotted: recording. TikZ diagram; no data.}{fig:F1}
+\end{figure}
+
+\subsection{Time model and command semantics}\label{sec:design-time}
+% sremu/timebase.py: R1-R5, to_ticks, count, page_size; DEFAULT_PAGE_TARGET_S, PAGE_MIN/MAX.
+% engine/scheduler.py (advance_group, JobBuilder.render_range), D-1..D-6; channel/interp.py.
+\claim{C-TIMEBASE}Sample rates and virtual times are exact rational numbers, and sample~$0$
+of every stream is at $t=0$. A time maps to a sample as $\mathrm{to\_ticks}(t,f)=\lfloor
+tf+1/2\rfloor$, the nearest sample with ties rounded up as in UHD~\cite{UHDManual}, so an
+event lands within $1/(2f)$ of its requested time; a stream produces $\lceil
+t_1f\rceil-\lceil t_0f\rceil$ samples on $[t_0,t_1)$ for any mix of rates (RT-01, RT-02).
+Floating-point times from the Python interface are converted through their shortest decimal
+representation. Wall-clock time never enters data-plane arithmetic (RT-15).
+
+\claim{C-INVARIANCE}Each RX stream $r$ is processed in pages of
+$P_r=\mathrm{clamp}\bigl(2^{\mathrm{round}(\log_2 f_rT_{\mathrm p})},P_{\min},P_{\max}\bigr)$
+samples on an absolute grid, with a page target $T_{\mathrm p}$ of \numPageTargetMs~ms by
+default, $P_{\min}=\numPageMin$ and $P_{\max}=\numPageMax$; streams of equal rate and page size
+share one cursor. A page is cut into segments at snapshot boundaries, at every switch sample
+of every RIS command, at barrier limits and where TX input ends (Fig.~\ref{fig:F2}(a)).
+Per-sample quantities are closed-form functions of the absolute sample index and of the two
+enclosing snapshots, recursions restart from closed-form anchors at page starts and snapshot
+boundaries, and sums run in a fixed order while parallel work splits samples. The RX samples
+are therefore identical bit for bit however clients chunk their calls, wherever events,
+barriers or input availability cut a page, whether inactive pages were skipped and, in
+deterministic mode, whatever the thread count (RT-03, RT-10). A change of the page target
+is not bit-exact: it changes the double-precision accumulators within the relative
+tolerance of RT-04 (Section~\ref{sec:vv}).
+
 \begin{figure*}[t]
 \centering
-\sremufigure{F1}{\textwidth}{Architecture of \sremu{}: applications, controllers, engine,
-data planes, control plane and recorder.}{fig:F1}
+\sremufigure{F2}{\textwidth}{(a) Processing of one page portion of a rate group.
+(b) Life cycle of RIS commands on the time axes of the surface and of two receivers. Left:
+a registered controller decides at barrier $t_b$ after every receiver has been computed up
+to $t_b+L_{\min}$, so its command at $t_{\mathrm{sw}}\ge t_b+L_{\min}$ lands without
+lateness at $k_r=\mathrm{to\_ticks}(t_{\mathrm{sw}}+\tau_r,f_r)$. Right: a command that
+arrives after its samples were computed is moved to the single surface time $t'$ that every
+receiver can still honour; the record keeps requested and applied samples. TikZ diagram;
+no data.}{fig:F2}
 \end{figure*}
 
-\subsection{Time model and command semantics}
-\sremustub{Exact rational time base and rounding rules (R1--R5); page and segment grid;
-switch time defined at the RIS and applied per receiver at to\_ticks of the switch time
-plus the RIS-to-receiver delay; late commands; same-time ties; transitions; lockstep
-barriers and paced mode (F2). DESIGN sections 4.1--4.10.}
-\begin{figure*}[t]
-\centering
-\sremufigure{F2}{\textwidth}{(a) Page and segment processing. (b) Life cycle of a RIS
-command from wall-clock receipt to the applied sample on each receiver, with one late
-command and one barrier.}{fig:F2}
-\end{figure*}
+\paragraph*{RIS commands}
+% engine/commands.py (switch time at the RIS, per-RX per-tile k_{r,j}, time forms, late
+% policies, ties, counterfactual enable timeline, transitions as Mixture); contracts.py
+% CommandRecord and config_hash (blake2b-128 of int16 states + enable byte).
+\claim{C-TIMED-CMD}A RIS command carries a switch time $t_{\mathrm{sw}}$ defined at the
+surface. Receiver $r$ sees the change on the paths of render tile $j$ at sample
+\begin{equation}
+k_{r,j}=\mathrm{to\_ticks}\bigl(t_{\mathrm{sw}}+\tau_{r,j}(t_{\mathrm{sw}}),\,f_r\bigr),
+\label{eq:kr}
+\end{equation}
+where $\tau_{r,j}$ is the propagation delay from the reference point of tile $j$ (the panel
+centre for an untiled panel) to the receiver in the geometry at $t_{\mathrm{sw}}$ (RT-05).
+Receivers at different distances thus see one switch at different samples
+(Fig.~\ref{fig:F2}(b)). The time of a command is an exact surface time, a sample of a named
+RX stream, or `as soon as possible', the earliest time that every receiver can still honour.
+\claim{C-LATE-CMD}The frontier of a receiver is its earliest uncomputed sample, and a command
+is late when a switch sample falls below a frontier. The default policy,
+\texttt{apply\_on\_arrival} as in UHD, moves the switch to the single surface time
+$t'=\max_{r,j}(\mathrm{frontier}_r/f_r-\tau_{r,j})$ and maps every receiver again
+with~\eqref{eq:kr}, so all receivers still see one physical switch; the policy
+\texttt{reject} returns \texttt{LATE\_COMMAND} and applies nothing (RT-06).
+\claim{C-TIES}Every command is kept: of two configuration commands for one panel at one time,
+the later sequence number wins and the earlier is recorded as superseded (RT-07).
+\claim{C-RECORDS}Each command yields one record with its identifiers, requested and applied
+surface times, requested and applied sample per receiver, their difference (the lateness),
+wall-clock receipt and delivery times, status and a BLAKE2b hash of the applied
+configuration. \claim{C-COUNTERFACTUAL}Switching a panel off and on (`RIS absent') is a
+separate timeline with the same per-receiver switch samples; its records are flagged as
+counterfactual, and it never changes element states.
 
-\subsection{Interfaces}
-\sremustub{UHD-shaped Python API, compatibility wrappers, native ZMQ frame header, control
-socket vocabulary, security defaults; Table III maps sremu calls to UHD, srsRAN ZMQ and
-GNU Radio counterparts (cite UHDManual, srsRANZMQ, SigMF). DESIGN section 8.}
+\claim{C-TRANSITIONS}A reconfiguration need not be instantaneous. The changing elements form
+transition classes, and each class follows a profile $g_c$: a step (the default), a linear
+ramp over $T_c$, or $1-e^{-t/T_c}$. Because $\mathrm{combine}$ is linear in $\Gamma$, the
+channel at receiver $r$ is exactly
+$h(t)=h_{\mathrm{old}}(t)+\sum_c g_c(t-t_{\mathrm{sw},r})\,\Delta h_c(t)$, where $\Delta h_c$
+is the change of the channel when the elements of class $c$ take their new state; each
+$\Delta h_c$ is interpolated between snapshots like any path, so the expression holds under
+mobility (RT-12). A command that arrives during a transition starts from the instantaneous
+reflection coefficients. The default duration is the panel capability
+\texttt{reconfiguration\_time\_s}, named after the GS RIS 008 parameter~\cite{ETSI_GS_RIS008};
+the complex-linear path between states is an engineering choice (ENG) until a measured
+transition is available.
+% channel/transitions.py (classes single | by_edge; freeze_terms for re-command); no
+% gamma_path table is implemented, so none is claimed.
 
-\subsection{State library and ETSI GS RIS 008}
-\sremustub{Response-table data model, provenance, load-time validators, importers and
-built-in tables; Table VI maps GR RIS 002/003 and GS RIS 008 parameters to sremu elements,
-worded as alignment. DESIGN sections 5.5, 8.9.}
+\paragraph*{Controllers in the loop}
+% engine/barriers.py (t_b = m T_c, limit to_ticks(t_b + L_min), observation before
+% to_ticks(t_b), latency = fixed + keyed jitter, LookaheadViolation), engine/emulator.py
+% (_observation), transport/control_server.py (remote ctrl.barrier / ctrl.ack),
+% control/remote.py (run_remote).
+\claim{C-BARRIERS}A controller registers with a period $T_c$ and a minimum latency
+$L_{\min}$. At each barrier $t_b=mT_c$ the engine computes every receiver up to sample
+$\mathrm{to\_ticks}(t_b+L_{\min},f_r)$, exclusive, and then gives the controller an
+observation built from samples before $\mathrm{to\_ticks}(t_b,f_r)$: the power measured from
+each receiver's IQ samples over a window and the RIS state, plus, on request, node positions
+(optionally delayed and perturbed), an IQ window, or oracle channel state, whose use the
+manifest flags. Actions take effect at $t_b$ plus a latency drawn from a keyed model and
+never smaller than $L_{\min}$; an earlier action raises \texttt{LOOKAHEAD\_VIOLATION}
+(RT-17). The frontier limit and~\eqref{eq:kr} use the same monotone rounding and
+$\tau_{r,j}\ge0$, so these actions are never late, and the time a controller takes to decide
+changes no RX sample (RT-08); this is the lookahead rule of conservative parallel
+discrete-event simulation. A remote controller receives \texttt{ctrl.barrier}, sends its
+commands and replies \texttt{ctrl.ack}; in-process and remote forms of one controller give
+identical RX samples (RT-08).
+
+\paragraph*{Lockstep and paced operation}
+% engine/streams.py (TX commitment), engine/scheduler.py (wait on TX), engine/emulator.py
+% (stall report, nondeterministic_inputs, coupling matrix in EngineConfig), engine/pacer.py
+% (release R_j, hybrid sleep, slacks), streams.py (TIME_ERROR, underflow, overflow pages).
+\claim{C-LOCKSTEP}In lockstep mode virtual time advances as far as the inputs allow. A TX
+stream is committed through sample $K$ when its samples cover $K$, when its last burst ended,
+or after it announced idleness up to $K$ (\texttt{idle\_until}, an extension of the UHD
+interface); after \numStallTimeoutS~s of wall time without progress the engine writes a stall
+report (RT-13). Runs with barrier controllers are deterministic; timed commands from other
+sources are deterministic when they arrive on time, and otherwise the manifest flags
+nondeterministic inputs. \claim{C-PACED}In paced mode, page $j$ is released at wall time
+$R_j=t_0+k_1/f+D_{\mathrm{lag}}$, with page end $k_1$ and \numPacedLagMs~ms of input slack
+$D_{\mathrm{lag}}$ by default; the pacer sleeps and then spins for the last
+\numPacedSpinMs~ms. Late timed TX bursts are dropped with a time error, missing untimed
+samples become zeros with an underflow report, an RX client that falls behind loses pages
+with an overflow report, and deadline misses are counted at slacks of
+\numPacedSlacksMs~ms (RT-18). Paced mode is soft real time: it counts misses rather than
+assuming their absence (Section~\ref{sec:wallclock}). It admits asynchronous controllers,
+whose commands then carry measured lateness; lockstep mode with asynchronous controllers is
+rejected.
+
+\claim{C-BATCH}A batch path evaluates $\mathrm{combine}(\mathrm{snapshot}(t),\mathrm{cfg}(t))$
+on a time grid without IQ samples, with the same model, command semantics, controllers and
+random keys; it applies switches at their surface time, since surface-to-receiver delays are
+negligible at this level, and reports those delays. In a static scene with noise off, an
+in-process controller and no signaling delay, its time-averaged received power equals that
+of the IQ path within the relative tolerance of VA-4; agreement under mobility is a
+separate check (Section~\ref{sec:cases}).
+\claim{C-REPLAY}A replay re-injects the recorded TX streams and commands at their applied
+times and reproduces the recorded RX samples bit for bit (RT-16).
+% engine/batch.py (run_batch); record/replay.py.
+
+\subsection{Interfaces}\label{sec:design-if}
+\input{generated/tables/table3_api}
+% api/device.py, api/streams.py, api/metadata.py (codes, modes, table_iii), compat.py;
+% Table III is generated by tools/gen_tables.py from sremu.api.metadata.table_iii().
+\claim{C-API}The Python API follows UHD~\cite{UHDManual} without binary compatibility
+(Table~\ref{tab:api}). TX and RX streams carry UHD-style metadata with exact time
+specifications, RX streams follow the UHD stream modes, and timing and protocol failures are status codes: the
+UHD receive and asynchronous codes plus codes for schema errors, lookahead violations, unknown
+targets, out-of-domain queries, oversize messages, refused operations and rate mismatches
+(IO-06). RIS commands carry state indices, phases (quantized by the panel) or a codebook
+index, an optional transition and a late policy; \texttt{set\_command\_time} times later
+commands as in UHD. Each stream has one channel, and an unmodified UHD application does not
+run against this interface (Section~\ref{sec:future}). \claim{C-COMPAT}The wrappers
+\texttt{Send\_to\_sim} and \texttt{Receive\_from\_sim} keep the names of the earlier emulator;
+the ported v1 TX and RX scripts deliver every sample through them (IO-07).
+
+\claim{C-FRAMES}A data-plane message has a \numFrameHeaderBytes-byte little-endian header and
+a payload sent without copying. The header holds a magic word, version, flags (start and end
+of burst, timed, idle-until, gap before, late, end of stream), stream identifier, a
+per-stream sequence number whose gaps raise a sequence error, the absolute index of the
+earliest sample, the sample count (at most $2^{\numFrameMaxSamplesExp}$), the channel count,
+the sample format (\texttt{cf32\_le} or \texttt{sc16\_le}) and the sender's monotonic clock,
+which feeds latency metrics and never the data plane. Malformed frames are dropped and
+counted, and no client input makes the engine raise (IO-01); TX sockets block at their
+high-water mark, which gives lockstep backpressure.
+% transport/framing.py, transport/zmq_native.py.
+
+\claim{C-CONTROL}Control messages are JSON objects (envelope version \numSchemaVersion)
+validated before dispatch in a fixed order: size (at most \numMaxMessageMiB~MiB), syntax,
+element count (at most \numMaxElements{} per command) and schema, so every refusal has one
+code and is counted (IO-01, IO-04); a message above the transport limit of
+\numHardMessageMiB~MiB closes the connection without a reply. The operations cover version negotiation, panel
+capabilities, frontier time, RIS configurations, codebooks, the counterfactual enable state,
+node positions and trajectories, streams, controller registration, acknowledgement and
+removal, recording markers, statistics, and pause, resume and shutdown; a socket command
+lands at its exact sample with zero lateness in lockstep mode (IO-03).
+\claim{C-SECURITY}No message field is interpreted as a file path, sockets bind to loopback
+addresses unless remote binding is allowed, there is no authentication, and commands above a
+per-client rate limit (\numMaxCmdRateKHz~kHz by default) are refused and counted (IO-04).
+% transport/messages.py (parse_request order), transport/control_server.py (OPS, loopback
+% check, token bucket max_command_rate_hz).
+
+\claim{C-RAW}For radio software that exchanges raw samples over request--reply sockets, the
+engine takes the broker role of the srsRAN ZMQ setup~\cite{srsRANZMQ}: it requests TX samples
+from the peer and answers its receive requests. Timing is implicit in sample counts, so this
+mode is lockstep. Its two request formats were taken from the srsRAN 4G and GNU Radio sources
+and are tested against stub peers (IO-08); no srsRAN or GNU Radio binary has been run against
+it yet, so we call it an srsRAN-style raw-IQ mode.
+% transport/rawreqrep.py (srsran_dummy, gnuradio_count).
+
+\subsection{State library and ETSI GS RIS 008 alignment}\label{sec:design-states}
+% physics/response.py (ResponseTable, Provenance, validators, from_csv, from_matlab_scurve,
+% from_state_library, sample, half_difference extension), physics/tables/*.yaml (built-ins),
+% contracts.RisCapabilities (GS RIS 008 names).
+\claim{C-TABLES}Element responses are tables $\Gamma(s,f,\theta_i,\theta_s)$ over state,
+frequency, and incidence and reflection angles measured from the panel normal; one angle grid
+serves both angles, and tables without angle or frequency dependence are special cases.
+Mandatory provenance records the kind of source (measured, full-wave, circuit, analytic,
+digitized or assumed), reference, reference plane, polarization, whether the cell pattern is
+included, magnitude and phase standard deviations, a hash of the raw data, licence, creation
+record and every transformation applied after loading. \claim{C-TABLE-CHECKS}Validators
+reject a table that is not passive ($|\Gamma|$ above unity beyond a tolerance that
+grows with the stated uncertainty of measured and digitized data), not reciprocal
+($\Gamma(s;\theta_i,\theta_s)\neq\Gamma(s;\theta_s,\theta_i)$ beyond a tolerance derived from
+the stated deviations; recorded symmetrization is available) or too coarse (adjacent entries
+differ by more than \numDensityMax{} of the largest magnitude) when it is loaded, and they
+reject a query outside its grid and a linked signal wider than its validity bandwidth
+(PH-31). Interpolation is complex-linear
+in angle and linear in frequency, never in magnitude and unwrapped phase, so the channel
+stays linear in $\Gamma$. A table that depends on incidence alone enters through the recorded
+reciprocal extension $\Gamma(\theta_i,\theta_s)=g(|\theta_i-\theta_s|/2)$ (PH-28); raw
+non-reciprocal tables are rejected.
+
+\claim{C-TABLE-IMPORT}Tables are imported from long-form CSV (comma-separated values) files
+with a provenance sidecar, or from MATLAB unit-cell phase curves labelled as simulated
+stand-ins. The built-in tables are the two-state laboratory alphabet, whose unknown
+amplitudes must be set and are recorded as assumptions; the published states of the two
+millimeter-wave surfaces of Tang et al.~\cite{Tang2022mmWave}; ideal $b$-bit and antipodal
+alphabets; the on--off alphabet of~\cite{Mishra2025WCL}; and the phase-dependent amplitude
+model of~\cite{Abeywickrama2020Practical}. A table can draw perturbed copies from its stated
+uncertainty for Monte Carlo studies.
+
+\claim{C-CAPS}Panel capabilities are named after the parameters of GS RIS
+008~\cite{ETSI_GS_RIS008} where such a parameter exists: number of elements, layout, control granularity (element, column, tile or
+groups), state labels, source of $\Gamma$ (measured with the data hash, or analytic with the
+model name), operating band, maximum bandwidth, reconfiguration time, maximum command rate
+and static power, kept as metadata. Table~\ref{tab:standards} (Section~\ref{sec:discussion})
+maps these fields and the kernel to the ETSI documents as alignment, not conformance.

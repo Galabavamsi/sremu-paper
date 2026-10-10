@@ -25,7 +25,9 @@ def test_real_bibliography_passes() -> None:
     rep = check_refs(PAPER_ROOT)
     assert rep.ok, rep.render()
     entries = parse_bib((PAPER_ROOT / "refs.bib").read_text(encoding="utf-8"))
-    assert len(entries) == 101
+    # 101 entries of stage A plus 4 verified for Sections III-IV and VIII (stage C): Philox,
+    # UCB1, Gymnasium, ZeroMQ (rows with origin "new" in refs_verification.md)
+    assert len(entries) == 105
     rows = parse_verification_rows((PAPER_ROOT / "refs_verification.md").read_text("utf-8"))
     assert set(rows) == {e.key for e in entries}
 

@@ -49,8 +49,8 @@ macros:
   # ------------------------------------------------------------------ verification and validation
   - macro: numOracleCount
     kind: number
-    description: Number of analytic oracle checks (PH/RT/IO/ST ids) passing in the pinned junit
-    source: {type: test, id: "junit:count(PH,RT,IO,ST)"}
+    description: Number of analytic oracle checks (PH/RT/IO ids, the CI tier; ST ids are statistical and counted separately) passing in the pinned junit
+    source: {type: test, id: "junit:count(PH,RT,IO)"}
     max_chars: 3
   - macro: numTangCurveMaxDevDb
     kind: number
@@ -117,3 +117,214 @@ macros:
     description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
     source: {type: experiment, id: "E-A"}
     max_chars: 84
+
+  # ------------------------------------------------------------------ sremu code (read at build time)
+  # Constants and defaults of the committed sremu code, read from the installed (final build:
+  # the pinned) sremu by tools/resolve_code_numbers.py. Never typed here (DESIGN 1.6 rule 7).
+  - macro: numPageTargetMs
+    kind: number
+    description: Default page duration target (scenario numerics.page_target_s)
+    unit: ms
+    source: {type: code, id: sremu.timebase, expr: "float(Fraction(DEFAULT_PAGE_TARGET_S) * 1000)"}
+    max_chars: 4
+  - macro: numPageMin
+    kind: number
+    description: Smallest page size, samples
+    source: {type: code, id: sremu.timebase, expr: "PAGE_MIN"}
+    max_chars: 3
+  - macro: numPageMax
+    kind: number
+    description: Largest page size, samples
+    source: {type: code, id: sremu.timebase, expr: "PAGE_MAX"}
+    max_chars: 6
+  - macro: numStallTimeoutS
+    kind: number
+    description: Default stall timeout of lockstep runs (wall clock)
+    unit: s
+    source: {type: code, id: sremu.engine.emulator, expr: "EngineConfig.__dataclass_fields__['stall_timeout_s'].default"}
+    max_chars: 3
+  - macro: numPacedLagMs
+    kind: number
+    description: Default TX input slack D_lag of paced mode
+    unit: ms
+    source: {type: code, id: sremu.engine.emulator, expr: "float(EngineConfig.__dataclass_fields__['d_lag_s'].default * 1000)"}
+    max_chars: 3
+  - macro: numPacedSlacksMs
+    kind: text
+    description: Default deadline slacks at which paced mode counts misses
+    unit: ms
+    source: {type: code, id: sremu.engine.emulator, expr: "[float(s * 1000) for s in EngineConfig.__dataclass_fields__['slacks_s'].default]"}
+    max_chars: 12
+  - macro: numPacedSpinMs
+    kind: number
+    description: Final spin interval of the hybrid sleep before a page release
+    unit: ms
+    source: {type: code, id: sremu.engine.pacer, expr: "SPIN_NS / 1e6"}
+    max_chars: 3
+  - macro: numMetricsWindowMs
+    kind: number
+    description: Virtual-time window of the metrics log and of RTF_min
+    unit: ms
+    source: {type: code, id: sremu.metrics.rt, expr: "float(RTF_WINDOW_S * 1000)"}
+    max_chars: 3
+  - macro: txtControlEndpoint
+    kind: text
+    description: Default control (ROUTER) endpoint of a served emulator
+    source: {type: code, id: sremu.contracts, expr: "DEFAULT_CONTROL_ENDPOINT"}
+    max_chars: 22
+  - macro: numFrameHeaderBytes
+    kind: number
+    description: Size of the native data-plane frame header
+    unit: bytes
+    source: {type: code, id: sremu.transport.framing, expr: "HEADER_SIZE"}
+    max_chars: 2
+  - macro: numFrameMaxSamplesExp
+    kind: number
+    description: log2 of the largest sample count of one frame
+    source: {type: code, id: sremu.contracts, expr: "int(math.log2(MAX_FRAME_SAMPLES))"}
+    max_chars: 2
+  - macro: numSchemaVersion
+    kind: number
+    description: Version of the JSON control envelope
+    source: {type: code, id: sremu.transport.messages, expr: "SCHEMA_VERSION"}
+    max_chars: 2
+  - macro: numMaxMessageMiB
+    kind: number
+    description: Largest accepted control message
+    unit: MiB
+    source: {type: code, id: sremu.contracts, expr: "MAX_MESSAGE_BYTES / 2**20"}
+    max_chars: 2
+  - macro: numHardMessageMiB
+    kind: number
+    description: Transport limit of the control ROUTER socket (ZMQ MAXMSGSIZE); larger messages close the connection without a reply
+    unit: MiB
+    source: {type: code, id: sremu.transport.control_server, expr: "HARD_MESSAGE_LIMIT / 2**20"}
+    max_chars: 3
+  - macro: numMaxElements
+    kind: number
+    description: Largest number of elements (states, phases, indices) in one command
+    source: {type: code, id: sremu.contracts, expr: "MAX_ELEMENTS_PER_COMMAND", fmt: ",d"}
+    max_chars: 7
+  - macro: numMaxCmdRateKHz
+    kind: number
+    description: Default per-client command rate limit
+    unit: kHz
+    source: {type: code, id: sremu.contracts, expr: "DEFAULT_MAX_COMMAND_RATE_HZ / 1e3"}
+    max_chars: 3
+  - macro: numEpsRel
+    kind: number
+    description: Shared interpolation error target epsilon_rel (|dh|/|h|)
+    source: {type: code, id: sremu.channel.interp, expr: "EPS_REL", fmt: sci}
+    max_chars: 5
+  - macro: numTuMaxMs
+    kind: number
+    description: Cap of the snapshot period T_u
+    unit: ms
+    source: {type: code, id: sremu.channel.interp, expr: "float(T_U_MAX_S * 1000)"}
+    max_chars: 3
+  - macro: numTuHalvingsMax
+    kind: number
+    description: Largest m of the candidate snapshot periods T_u0/2^m
+    source: {type: code, id: sremu.channel.interp, expr: "M_MAX"}
+    max_chars: 2
+  - macro: numVerifyStride
+    kind: number
+    description: verify_interp checks every n-th snapshot interval
+    source: {type: code, id: sremu.channel.interp, expr: "VERIFY_INTERP_STRIDE"}
+    max_chars: 3
+  - macro: numVerifyFlagFactor
+    kind: number
+    description: verify_interp flags runs above this multiple of epsilon_rel
+    source: {type: code, id: sremu.channel.interp, expr: "VERIFY_INTERP_FLAG / EPS_REL"}
+    max_chars: 2
+  - macro: numNarrowbandRad
+    kind: number
+    description: Narrowband threshold on pi*B*delta_tau
+    unit: rad
+    source: {type: code, id: sremu.channel.interp, expr: "NB_EPS_RAD"}
+    max_chars: 4
+  - macro: numFdTaps
+    kind: text
+    description: Tap counts of the Kaiser-sinc FD filters (by occupied band)
+    source: {type: code, id: sremu.channel.fd, expr: "[taps for _band, taps in FD_ROWS]"}
+    max_chars: 14
+  - macro: numFdBands
+    kind: text
+    description: Largest B/f_s of each FD filter row
+    source: {type: code, id: sremu.channel.fd, expr: "[band for band, _taps in FD_ROWS]"}
+    max_chars: 16
+  - macro: numKaiserBeta
+    kind: number
+    description: Kaiser window beta of the FD filters
+    source: {type: code, id: sremu.channel.fd, expr: "KAISER_BETA"}
+    max_chars: 2
+  - macro: numFdPhases
+    kind: number
+    description: Fractional phases of the polyphase FD table
+    source: {type: code, id: sremu.channel.fd, expr: "N_PHASES"}
+    max_chars: 5
+  - macro: numFdTargetDb
+    kind: number
+    description: Default in-band error target of the FD filters
+    unit: dB
+    source: {type: code, id: sremu.channel.fd, expr: "DEFAULT_FD_TARGET_DB"}
+    max_chars: 4
+  - macro: numIntegerDelayRad
+    kind: number
+    description: Integer-only delay allowed when pi*B/(2 f_s) is at most this value
+    unit: rad
+    source: {type: code, id: sremu.channel.fd, expr: "INTEGER_MAX_PHASE_RAD"}
+    max_chars: 4
+  - macro: numPointMaxPitch
+    kind: number
+    description: cell_model auto selects point up to this pitch (wavelengths)
+    source: {type: code, id: sremu.scenario.models, expr: "Numerics.model_fields['point_max_pitch_wavelengths'].default"}
+    max_chars: 4
+  - macro: numSubcellMax
+    kind: number
+    description: Largest po_patch sub-cell side (wavelengths)
+    source: {type: code, id: sremu.scenario.models, expr: "Numerics.model_fields['subcell_max_wavelengths'].default"}
+    max_chars: 4
+  - macro: numRichardsonTolDb
+    kind: number
+    description: Richardson-check tolerance
+    unit: dB
+    source: {type: code, id: sremu.scenario.models, expr: "Numerics.model_fields['richardson_tol_db'].default"}
+    max_chars: 4
+  - macro: numRichardsonLinks
+    kind: number
+    description: Representative links of the Richardson check
+    source: {type: code, id: sremu.physics.quadrature, expr: "inspect.signature(representative_links).parameters['n'].default"}
+    max_chars: 2
+  - macro: numRichardsonHalvings
+    kind: number
+    description: Largest number of sub-cell halvings of the Richardson check
+    source: {type: code, id: sremu.physics.quadrature, expr: "inspect.signature(richardson_check).parameters['max_halvings'].default"}
+    max_chars: 2
+  - macro: numDensityMax
+    kind: number
+    description: Grid-density limit on adjacent |dGamma|/max|Gamma| of a response table
+    source: {type: code, id: sremu.physics.response, expr: "DENSITY_MAX"}
+    max_chars: 4
+  - macro: numTzeroK
+    kind: number
+    description: Reference noise temperature T0
+    unit: K
+    source: {type: code, id: sremu.units, expr: "T0"}
+    max_chars: 3
+  - macro: numThermalDbmHz
+    kind: number
+    description: Thermal noise density k_B*T0
+    unit: dBm/Hz
+    source: {type: code, id: sremu.units, expr: "DBM_PER_HZ_THERMAL", fmt: ".3f"}
+    max_chars: 9
+  - macro: numDiffuseMinSinusoids
+    kind: number
+    description: Smallest (default) number of sinusoids of a diffuse SoS tap
+    source: {type: code, id: sremu.physics.diffuse, expr: "MIN_SINUSOIDS"}
+    max_chars: 3
+  - macro: numDiffuseMaxTaps
+    kind: number
+    description: Largest number of diffuse taps per link
+    source: {type: code, id: sremu.physics.diffuse, expr: "MAX_TAPS"}
+    max_chars: 2

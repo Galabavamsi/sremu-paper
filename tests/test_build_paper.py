@@ -30,6 +30,7 @@ from paper_common import (
     Report,
     junit_provenance,
     junit_provenance_errors,
+    load_code_values,
     load_junit,
     load_numbers_spec,
     placeholder_count,
@@ -87,7 +88,8 @@ def _green_junit(path: Path, props: dict[str, str] | None = None, drop: str = ""
 def test_committed_numbers_tex_equals_generator_output() -> None:
     spec = load_numbers_spec(PAPER_ROOT / "numbers.yaml")
     committed = (PAPER_ROOT / "generated" / "numbers.tex").read_text(encoding="utf-8")
-    assert committed == render_numbers_tex(spec, load_results(PAPER_ROOT)[0])
+    want = render_numbers_tex(spec, load_results(PAPER_ROOT)[0], load_code_values(PAPER_ROOT))
+    assert committed == want
 
 
 def test_committed_table2_equals_sremu_model_card() -> None:

@@ -7,8 +7,8 @@ Controllers for reconfigurable intelligent surfaces (RIS) are usually evaluated 
 element states, instantaneous reconfiguration and channel coefficients instead of
 waveforms, which hides the effect of control timing and hardware states on a live link. We
 present sremu, an open-source, software-only emulator that applies RIS-assisted
-propagation to complex-baseband samples exchanged with external applications through an
-SDR-style interface. RIS configurations are timestamped commands from an external
+propagation to complex-baseband samples exchanged with external applications through a
+software-defined-radio-style interface. RIS configurations are timestamped commands from an external
 controller, each applied at an exact, logged sample on every receiver; per-state element
 responses can be imported from measurements. The area-tied kernel reproduces published
 RIS path-loss model curves within \numTangCurveMaxDevDb~dB, and a pre-registered

@@ -1,4 +1,25 @@
-% Section X -- Conclusion (SKELETON).
+% Section X -- Conclusion (WP12 skeleton with pipeline macros). Every result is a macro of
+% numbers.yaml (?? until the pipeline fills it); each sentence is mapped to a claim whose
+% evidence (tests, figures, human gates) decides whether it may stay in a final build.
 \section{Conclusion}\label{sec:conclusion}
 
-\sremustub{Written last, from the supported claims of claims.yaml.}
+We presented \sremu{}, a software-only emulator of RIS-assisted radio environments at the
+level of complex-baseband samples. \claim{C-TIMED-CMD}RIS configurations are timestamped
+commands from external controllers, applied at an exact and logged sample on every receiver,
+and element responses are tables imported with their provenance. \claim{C-LOCKSTEP-EXACT}Exact
+rational time, closed-form per-sample evaluation and keyed random numbers make lockstep runs
+deterministic, also with controllers in the loop, and make their received samples identical
+bit for bit under any client chunking, any cut by events or barriers, and across process
+boundaries. \claim{C-CONTRIB-2}The area-tied kernel equals three published forms of the RIS
+path-loss model and reproduces published model curves within \numTangCurveMaxDevDb~dB, and
+the emulator as a whole passes \numOracleCount{} analytic oracle checks. \claim{C-ABS-LAB}A pre-registered comparison with
+digitized laboratory data \txtVLabOutcome. \claim{C-LINEAGE}Counting samples exactly moves the
+slope of the estimated carrier-frequency offset of the legacy engine from \numCfoSlopeLegacy{}
+to \numCfoSlopeFixed{}. \claim{C-ABS-PACED}In wall-clock-paced mode on \txtPacedPlatform{} the
+emulator sustains \numPacedLinks{} links at \numPacedMSps~MS/s with a deadline-miss rate below
+\numSustainMissRate. \claim{C-ABS-EB}In one case study, a RIS switch inside a packet
+\txtEBResult. \claim{C-ABS-EA}In the other, position-driven binary control under signaling
+delay \txtEAResult. Both results depend on when a command takes effect within the sample
+stream, which coefficient-level and block-level tools do not represent.
+\sremustub{Closing sentences on what the results imply for the design and testing of RIS
+controllers, written from the supported claims of claims.yaml once the studies are complete.}

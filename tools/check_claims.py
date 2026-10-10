@@ -3,11 +3,13 @@
 Checks (both modes unless noted)
   1. claims.yaml schema: unique ids, known evidence kinds, spec ids well formed, figure ids
      registered, cite keys in refs.bib, table labels defined, gates known.
-  2. Evidence status: test ids must pass in the pinned junit, figures must have their meta
-     and PDF, gates must be closed. Pending claims are notes in draft and errors in final.
+  2. Evidence status: test ids (and pytest:<file>[::<test>] references for tests without
+     a spec id) must pass in the pinned junit, figures must have their meta and PDF, gates
+     must be closed. Pending claims are notes in draft and errors in final.
      In final mode every junit file must record the sremu.lock commit and a clean tree.
   3. Banned words (DESIGN 1.6 rule 5) in the paper text: an error unless the text unit is
      mapped by a claim's banned_word_uses (and, in final mode, that claim is supported).
+     Code identifiers in 	exttt{...} are names, not prose, and are skipped by rules 3-4.
   4. "real-time" never unqualified (rule 3): allowed in "real-time factor", "hard real
      time", "soft real time" and "non-real-time"; anything else needs a mapped claim.
   5. Numbers (rule 7): in every text unit (sentence, list item or table row) without a
@@ -55,7 +57,11 @@ from paper_common import (
     tex_source_files,
 )
 
-EVIDENCE_KINDS = ("test", "fig", "cite", "table", "spec")
+EVIDENCE_KINDS = ("test", "pytest", "fig", "cite", "table", "spec")
+# pytest:<path>[::<test name>]: sremu tests without a spec id (e.g. tests/unit/test_wp9_env.py
+# for RisEnv). Green when at least one matching implementation test passed and none failed
+# or was skipped in the junit; the file must exist in the sremu checkout of sremu.lock.
+PYTEST_REF_RE = re.compile(r"^(tests/[A-Za-z0-9_/]+\.py)(?:::([A-Za-z_][A-Za-z0-9_]*))?$")
 REALTIME_RE = re.compile(r"real[\s~-]*time", re.I)
 REALTIME_ALLOWED = [
     re.compile(r"real[\s~-]*time[\s~-]+factor", re.I),
@@ -253,6 +259,33 @@ def load_claims(path: Path) -> list[Claim]:
     return out
 
 
+def pytest_status(ref: str, cases: list[CaseResult]) -> str:
+    """Status of a ``tests/<path>.py[::name]`` reference in a junit: 'missing', 'failed',
+    'skipped' (any matching test skipped or xfailed) or 'passed'. The module matches the
+    junit classname (``tests.unit.test_x``, possibly followed by a class name); the name
+    matches the test function, with or without its parametrization suffix."""
+    m = PYTEST_REF_RE.match(ref)
+    if not m:
+        return "missing"
+    module = m.group(1)[: -len(".py")].replace("/", ".").lower()
+    name = (m.group(2) or "").lower()
+    hits = []
+    for c in cases:
+        cls, _, test = c.nodeid.partition("::")
+        if not (cls == module or cls.startswith(module + ".")):
+            continue
+        if name and not (test == name or test.startswith(name + "[")):
+            continue
+        hits.append(c)
+    if not hits:
+        return "missing"
+    if any(c.status == "failed" for c in hits):
+        return "failed"
+    if any(c.status == "skipped" for c in hits):
+        return "skipped"
+    return "passed"
+
+
 def evaluate_claims(
     claims: list[Claim],
     *,
@@ -263,6 +296,7 @@ def evaluate_claims(
     gates: dict,
     cases: list[CaseResult] | None,
     rep: Report,
+    sremu_root: Path | None = None,
 ) -> None:
     ids = [c.cid for c in claims]
     for dup in sorted({i for i in ids if ids.count(i) > 1}):
@@ -292,6 +326,17 @@ def evaluate_claims(
                 st = "missing" if cases is None else spec_id_status(ident, cases)
                 if st != "passed":
                     c.reasons.append(f"test {ident} {st if cases is not None else 'no junit'}")
+            elif kind == "pytest":
+                m = PYTEST_REF_RE.match(ident)
+                if not m:
+                    rep.error(f"{c.cid}: {ident!r} is not tests/<path>.py[::<test name>]")
+                    continue
+                if sremu_root is not None and not (sremu_root / m.group(1)).is_file():
+                    rep.error(f"{c.cid}: {m.group(1)} does not exist in {sremu_root}")
+                    continue
+                st = "missing" if cases is None else pytest_status(ident, cases)
+                if st != "passed":
+                    c.reasons.append(f"pytest {ident} {st if cases is not None else 'no junit'}")
             elif kind == "fig":
                 if not FIGURE_ID_RE.match(ident) or ident not in registry:
                     rep.error(f"{c.cid}: figure {ident} not in figures/registry.yaml")
@@ -338,8 +383,11 @@ def check_tex_string(
             rep.error(f"{rel}: \\claim{{{m.group(1)}}} not in claims.yaml")
     for unit in split_units(prepare(raw)):
         snippet = unit[:90] + ("..." if len(unit) > 90 else "")
+        # Code identifiers in typewriter font (\texttt{first\_sample}) are names, not prose
+        # claims: the word rules skip them; the number rule still sees them.
+        prose = remove_command(unit, "texttt", 1)
         for word in BANNED_WORDS:
-            if _banned_pattern(word).search(unit):
+            if _banned_pattern(word).search(prose):
                 c = _mapped(word, unit, claims)
                 if c is None:
                     rep.error(f"{rel}: banned word '{word}' without a mapped claim: {snippet}")
@@ -347,8 +395,8 @@ def check_tex_string(
                     (rep.error if mode == "final" else rep.note)(
                         f"{rel}: '{word}' mapped to pending claim {c.cid}"
                     )
-        for m in REALTIME_RE.finditer(unit):
-            window = unit[max(0, m.start() - 12) : m.end() + 12]
+        for m in REALTIME_RE.finditer(prose):
+            window = prose[max(0, m.start() - 12) : m.end() + 12]
             if any(p.search(window) for p in REALTIME_ALLOWED):
                 continue
             c = _mapped("real-time", unit, claims)
@@ -421,8 +469,11 @@ def check_claims(
         for msg in junit_provenance_errors(junit, str(lock.get("commit", ""))):
             rep.error(msg)
 
+    lock = read_yaml(paper_root / "sremu.lock") or {}
+    sremu_root = (paper_root / str(lock.get("repo", "../sremu"))).resolve()
     evaluate_claims(claims, paper_root=paper_root, bib_keys=bib_keys, labels=labels,
-                    registry=registry, gates=gates, cases=cases, rep=rep)
+                    registry=registry, gates=gates, cases=cases, rep=rep,
+                    sremu_root=sremu_root if sremu_root.is_dir() else None)
     pending = [c for c in claims if c.status != "supported"]
     n_sup = len(claims) - len(pending)
     rep.note(f"{len(claims)} claims: {n_sup} supported, {len(pending)} pending")

@@ -9,16 +9,22 @@ Steps
   3. figures: registry entries; each placed once with its registered width, label and data
               classes in the caption; content key = sha256(commit, sweep, inputs, script);
               stale entries rerun only in final mode after the gates are green; a figure
-              is current only if its meta carries the registry data classes and the commit
-  4./5. generated/numbers.tex from numbers.yaml (+ generated/results.json), and Table II
-              from sremu docs/model_card.yaml (sremu's own generator)
+              is current only if its meta carries the registry data classes and the commit.
+              TikZ diagrams (F1, F2: no data, no data classes) are drawn with latexmk in
+              both modes whenever LaTeX runs; their key is sha256(source, style inputs)
+  4./5. generated/numbers.tex from numbers.yaml (+ generated/results.json, + `code` values
+              read from the installed sremu by tools/resolve_code_numbers.py), Table II
+              from sremu docs/model_card.yaml (sremu's own generator) and Table III from
+              sremu.api.metadata / sremu.compat (tools/gen_tables.py)
   6. checks:  check_claims, check_refs, check_arxiv; final refuses while any placeholder,
               stub, missing figure, pending claim or open human gate remains
   7. latexmk, then check_arxiv --post-build (.bbl present) and the LaTeX log
 
 Modes
-  draft  never runs git, never runs figure scripts, compiles with ?? placeholders and grey
-         stubs, and reports everything outstanding as notes. Exit 0 unless a check fails.
+  draft  never runs git, never runs figure scripts (TikZ diagrams are drawn), compiles with
+         ?? placeholders and grey stubs, and reports everything outstanding as notes. Exit 0
+         unless a check fails. Code values and Table III need an importable sremu; without
+         one they stay placeholders / the committed table (warnings).
   final  refuses (non-zero exit, no PDF) on any outstanding item.
 
 Usage: python tools/build_paper.py [--mode draft|final] [--profile fast|full]
@@ -35,6 +41,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -51,6 +58,7 @@ from paper_common import (
     SPEC_ID_RE,
     CaseResult,
     Report,
+    code_number_requests,
     junit_provenance_errors,
     load_junit,
     load_numbers_spec,
@@ -226,6 +234,10 @@ def validate_registry(reg: dict, rep: Report) -> None:
             rep.error(f"registry {fid}: status must be pending or ready")
         if e["status"] == "ready" and e["source"] == "script" and not e["script"]:
             rep.error(f"registry {fid}: ready but no script")
+        if e["source"] == "tikz" and e["script"] and not str(e["script"]).endswith(".tex"):
+            rep.error(f"registry {fid}: a TikZ figure's script must be its .tex source")
+        if e["source"] == "tikz" and e["data_classes"]:
+            rep.error(f"registry {fid}: a TikZ diagram carries no data classes")
         unknown = set(e["data_classes"]) - DATA_CLASSES
         if unknown:
             rep.error(f"registry {fid}: unknown data classes {sorted(unknown)}")
@@ -311,13 +323,38 @@ def content_key(paper_root: Path, entry: dict, commit: str) -> str | None:
     return hashlib.sha256(json.dumps(doc, sort_keys=True).encode()).hexdigest()
 
 
+def tikz_key(paper_root: Path, entry: dict) -> str | None:
+    """sha256 over a TikZ diagram's source and its style inputs; None without a source.
+    The sremu commit is not part of it: a diagram carries no data."""
+    if not entry.get("script"):
+        return None
+    doc = {
+        "source": sha256_file(paper_root / entry["script"]),
+        "inputs": {str(p): sha256_file(paper_root / p) for p in sorted(entry.get("inputs") or [])},
+    }
+    return hashlib.sha256(json.dumps(doc, sort_keys=True).encode()).hexdigest()
+
+
 def figure_state(paper_root: Path, fid: str, entry: dict, commit: str) -> str:
     """'pending' (no script / TikZ not drawn), 'stale', 'missing-input', 'meta-mismatch'
     (the meta of a current figure does not carry the registry's data classes or the pinned
-    commit; DESIGN 11: every figure meta carries data classes) or 'current'."""
+    commit; DESIGN 11: every figure meta carries data classes) or 'current'.
+    A TikZ diagram with a registered source is current when its meta records the source's
+    key (:func:`tikz_key`); one without a source is current when its PDF exists."""
     pdf = paper_root / "figures" / "out" / f"{fid}.pdf"
     if entry["source"] == "tikz":
-        return "current" if pdf.is_file() else "pending"
+        if not pdf.is_file():
+            return "pending"
+        try:
+            key = tikz_key(paper_root, entry)
+        except OSError:
+            return "missing-input"
+        if key is None:
+            return "current"
+        meta_path = paper_root / "figures" / "data" / f"{fid}.meta.json"
+        if not meta_path.is_file():
+            return "stale"
+        return "current" if json.loads(read_text(meta_path)).get("content_key") == key else "stale"
     if not entry.get("script"):
         return "pending"
     try:
@@ -337,10 +374,46 @@ def figure_state(paper_root: Path, fid: str, entry: dict, commit: str) -> str:
     return "current"
 
 
+TIKZ_BUILD_DIR = Path("figures") / "build"
+
+
+def draw_tikz(paper_root: Path, fid: str, entry: dict, rep: Report,
+              runner: Runner = default_runner) -> bool:
+    """Compile a TikZ diagram (standalone class) with latexmk into figures/build, copy the PDF
+    to figures/out/<Fid>.pdf and record its key in figures/data/<Fid>.meta.json."""
+    exe = shutil.which("latexmk")
+    if exe is None:
+        rep.warn(f"figure {fid}: latexmk not found; TikZ diagram not drawn")
+        return False
+    src = Path(entry["script"])
+    build_dir = paper_root / TIKZ_BUILD_DIR
+    build_dir.mkdir(parents=True, exist_ok=True)
+    cmd = [exe, "-pdf", "-interaction=nonstopmode", "-halt-on-error",
+           f"-outdir={TIKZ_BUILD_DIR.as_posix()}", src.as_posix()]
+    rc, _ = runner(cmd, paper_root)
+    built = build_dir / f"{src.stem}.pdf"
+    if rc != 0 or not built.is_file():
+        rep.error(f"figure {fid}: TikZ compilation of {src.as_posix()} failed (exit {rc}); "
+                  f"see {(TIKZ_BUILD_DIR / (src.stem + '.log')).as_posix()}")
+        return False
+    out = paper_root / "figures" / "out" / f"{fid}.pdf"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(built, out)
+    meta = {"figure": fid, "content_key": tikz_key(paper_root, entry), "source": src.as_posix(),
+            "inputs": sorted(entry.get("inputs") or []), "data_classes": [],
+            "tool": "latexmk (standalone TikZ)"}
+    meta_path = paper_root / "figures" / "data" / f"{fid}.meta.json"
+    meta_path.parent.mkdir(parents=True, exist_ok=True)
+    meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n")
+    return True
+
+
 def step_figures(
     paper_root: Path, commit: str, mode: str, profile: str, gates_green: bool, rep: Report,
-    run_script: Runner = default_runner,
+    run_script: Runner = default_runner, draw: bool = False,
 ) -> None:
+    """Registry, placement and currency of every figure. ``draw``: compile stale TikZ
+    diagrams (whenever LaTeX runs; they carry no data, so no gate applies)."""
     reg = load_registry(paper_root)
     validate_registry(reg, rep)
     if not rep.ok:
@@ -349,7 +422,10 @@ def step_figures(
     for fid in EXPECTED_FIGURES:
         entry = reg[fid]
         state = figure_state(paper_root, fid, entry, commit)
-        if state == "stale" and mode == "final" and gates_green:
+        tikz_stale = entry["source"] == "tikz" and entry.get("script") and state != "current"
+        if tikz_stale and draw and draw_tikz(paper_root, fid, entry, rep, run_script):
+            state = figure_state(paper_root, fid, entry, commit)
+        if state == "stale" and mode == "final" and gates_green and entry["source"] == "script":
             cmd = [sys.executable, entry["script"], "--profile", profile, "--figure", fid,
                    "--content-key", str(content_key(paper_root, entry, commit))]
             rc, _ = run_script(cmd, paper_root)
@@ -359,7 +435,8 @@ def step_figures(
 
 
 # --------------------------------------------------------------------------- step 4/5
-def step_numbers(paper_root: Path, rep: Report, mode: str = "draft", commit: str = "") -> None:
+def step_numbers(paper_root: Path, rep: Report, mode: str = "draft", commit: str = "",
+                 runner: Runner = default_runner) -> None:
     spec = load_numbers_spec(paper_root / "numbers.yaml")
     try:
         results, produced_at = load_results(paper_root)
@@ -376,10 +453,61 @@ def step_numbers(paper_root: Path, rep: Report, mode: str = "draft", commit: str
     fixed = sorted(m.macro for m in spec if m.value is not None and m.macro in results)
     if fixed:
         rep.error(f"results.json overrides definition/data macros {fixed}")
+    coded = sorted(m.macro for m in spec if m.source_type == "code" and m.macro in results)
+    if coded:
+        rep.error(f"results.json overrides code macros {coded} (they are read from sremu)")
+    code_values = resolve_code_values(paper_root, spec, mode, rep, runner)
     out = paper_root / "generated" / "numbers.tex"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(render_numbers_tex(spec, results), encoding="utf-8", newline="\n")
+    out.write_text(render_numbers_tex(spec, results, code_values), encoding="utf-8", newline="\n")
     rep.note(f"numbers.tex: {len(spec)} macros, {placeholder_count(read_text(out))} placeholders")
+
+
+RESOLVER = Path(__file__).resolve().parent / "resolve_code_numbers.py"
+
+
+def resolve_code_values(paper_root: Path, spec: list, mode: str, rep: Report,
+                        runner: Runner = default_runner) -> dict[str, str]:
+    """Values of the `code` macros, read from the sremu that this interpreter imports (a final
+    build has checked it is the pinned checkout). Writes generated/code_values.json.
+    Unresolved macros stay placeholders: a warning in draft, an error in final mode."""
+    requests = code_number_requests(spec)
+    if not requests:
+        return {}
+    with tempfile.TemporaryDirectory() as tmp:
+        req_path = Path(tmp) / "code_requests.json"
+        req_path.write_text(json.dumps(requests), encoding="utf-8")
+        rc, out = runner([sys.executable, str(RESOLVER), str(req_path)], paper_root)
+    try:
+        doc = json.loads(out) if rc == 0 else {}
+    except json.JSONDecodeError:
+        doc = {}
+    values = {str(k): str(v) for k, v in (doc.get("values") or {}).items()}
+    errors = dict(doc.get("errors") or {}) if doc else {r["macro"]: f"resolver exit {rc}"
+                                                         for r in requests}
+    report = rep.error if mode == "final" else rep.warn
+    for macro, msg in sorted(errors.items()):
+        report(f"code number {macro} unresolved: {msg}")
+    path = paper_root / "generated" / "code_values.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"values": dict(sorted(values.items()))}, indent=2,
+                               ensure_ascii=True) + "\n", encoding="utf-8", newline="\n")
+    rep.note(f"code numbers: {len(values)}/{len(requests)} read from sremu "
+             f"({doc.get('sremu_file') or 'sremu not importable'})")
+    return values
+
+
+TABLE_GENERATOR = Path(__file__).resolve().parent / "gen_tables.py"
+
+
+def step_tables(paper_root: Path, mode: str, rep: Report, runner: Runner = default_runner) -> None:
+    """Table III from sremu.api.metadata and sremu.compat (tools/gen_tables.py). Without an
+    importable sremu the committed table stays (warning in draft, error in final mode)."""
+    rc, out = runner([sys.executable, str(TABLE_GENERATOR), "--out",
+                      str(paper_root / "generated" / "tables")], paper_root)
+    if rc != 0:
+        (rep.error if mode == "final" else rep.warn)(
+            f"Table III generation failed (exit {rc}): {out.strip()[:200]}")
 
 
 def step_model_card(paper_root: Path, sremu_root: Path, mode: str, rep: Report,
@@ -465,9 +593,10 @@ def build(
     junit = check_claims.default_junit(paper_root) if junit is None else junit
     commit = step_pin(paper_root, sremu_root, mode, git or GitProbe(), rep, runner=runner)
     green = step_gates(paper_root, junit, mode, rep, commit=commit)
-    step_figures(paper_root, commit, mode, profile, green, rep, run_script=runner)
-    step_numbers(paper_root, rep, mode=mode, commit=commit)
+    step_figures(paper_root, commit, mode, profile, green, rep, run_script=runner, draw=latex)
+    step_numbers(paper_root, rep, mode=mode, commit=commit, runner=runner)
     step_model_card(paper_root, sremu_root, mode, rep, runner=runner)
+    step_tables(paper_root, mode, rep, runner=runner)
     rep.extend(check_claims.check_claims(paper_root, mode, junit))
     rep.extend(check_refs.check_refs(paper_root))
     rep.extend(check_arxiv.check_arxiv(paper_root, post_build=False))
