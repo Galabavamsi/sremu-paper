@@ -1,0 +1,21 @@
+# E-B2 timing requirement (DESIGN.md section 11, E-B), lab alphabet (|Gamma| = 1 ASSUMED),
+# LOS present and the LOS-blocked sensitivity variant. 2000 packets alternating RX1/RX2
+# (TdmaAlternate decisions), guards G, command latency 0.2 ms + U[0, J] (keyed LatencyModel),
+# semantics timed (lead 0.5 / 2 / 5 ms; late -> apply_on_arrival), asap, legacy
+# (LegacyNextTickAdapter, 2 ms ticks). lead_s is ignored by asap and legacy.
+# Runner: sremu/experiments/eb.py:run_eb2_point. Run with
+#   python -m experiments.run_sweeps eb2 --jobs 12      (from the sremu repo root)
+name: eb2_lab
+description: "E-B2 PER and EVM vs latency jitter, lab alphabet, LOS present and blocked"
+runner: "experiments.eb:run_eb2_point"
+base:
+  alphabet: lab
+  n_packets: 2000
+zip:
+  los:       [present, present, present, present, present, blocked, blocked, blocked, blocked, blocked]
+  semantics: [timed, timed, timed, asap, legacy, timed, timed, timed, asap, legacy]
+  lead_s:    ["5e-4", "2e-3", "5e-3", "5e-4", "5e-4", "5e-4", "2e-3", "5e-3", "5e-4", "5e-4"]
+grid:
+  guard_s: ["1e-4", "5e-4", "1e-3"]
+  jitter_s: ["0", "1e-4", "3e-4", "1e-3", "3e-3"]
+seeds: [20261010]

@@ -1,0 +1,22 @@
+# E-A signaling-delay sweep (DESIGN.md section 11, E-A; pre-registration
+# paper/preregistration/E-A.md). Controllers: Urap(0.2) (period tau_SUI), WclHeuristic(4,3)
+# and ExactOptimum in DelayedController(tau_SUI, report_delay 0) with a 1 cm GridChannel,
+# ProbeBandit (16 exact optima, dwell max(20 ms, tau_SUI)); command latency 1 ms.
+# Runner: sremu/experiments/ea.py:run_point (batch path, vectorized; 20 batches x 333 333
+# steps of 5 ms = 33 333.3 s per point). Run with
+#   python -m experiments.run_sweeps ea --jobs 12      (from the sremu repo root)
+name: ea_tau
+description: "E-A controllers vs tau_SUI per geometry (A0 reproduction, A1 blocked corridor)"
+runner: "experiments.ea:run_point"
+base:
+  n_batches: 20
+  steps_per_batch: 333333
+zip:
+  regime:  [A0, A0, A0, A0, A1, A1, A1, A1, A1s, A1s, A1s, A1s]
+  fc_hz:   [1.0e9, 1.0e9, 1.0e9, 1.0e9, 1.0e9, 1.0e9, 2.4e9, 2.4e9, 1.0e9, 1.0e9, 2.4e9, 2.4e9]
+  h_m:     [1, 2, 4, 6, 2, 4, 2, 4, 2, 2, 2, 2]
+  loss_db: [0, 0, 0, 0, 20, 20, 20, 20, 10, 30, 10, 30]
+grid:
+  controller: [exact, wcl, urap, bandit]
+  tau_sui_s: ["0.01", "0.03", "0.1", "0.3", "1", "3", "10"]
+seeds: [20261010]

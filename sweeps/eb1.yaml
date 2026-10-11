@@ -1,0 +1,14 @@
+# E-B1 mechanism (DESIGN.md section 11, E-B; VA-5). One QPSK packet (64 + 512 symbols,
+# 4 samples/symbol, 1 MS/s) to RX1 of scenarios/lab_like_A.yaml (lab-like SIM geometry);
+# the RIS switches from RX1's to RX2's exact optimum at delta * T_p after the packet start.
+# Runner: sremu/experiments/eb.py:run_eb1_point. Run with
+#   python -m experiments.run_sweeps eb1 --jobs 12      (from the sremu repo root)
+name: eb1
+description: "E-B1 intra-frame switch: per-symbol EVM, per-packet EVM/BER, VA-5 sample exactness"
+runner: "experiments.eb:run_eb1_point"
+grid:
+  alphabet: [lab, ideal1]
+  los: [present, blocked]
+  transition: [step, linear20us, linear200us]
+  delta: ["-0.5", "0.05", "0.25", "0.5", "0.75", "1.05"]
+seeds: [20261010]

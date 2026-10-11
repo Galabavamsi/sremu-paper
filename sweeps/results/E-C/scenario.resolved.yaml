@@ -1,0 +1,774 @@
+schema_version: '1.0'
+name: ec_lab_polar30
+seed: 20261010
+description: E-C lab-like panel, Tx at the V-LAB prior median, 30-point polar grid (SIM)
+numerics:
+  page_target_s: '0.0005'
+  interp_rel_error: 0.001
+  t_u_max_s: '0.01'
+  t_u_s: null
+  fd_error_target_db: -60.0
+  narrowband_phase_rad: 0.05
+  point_max_pitch_wavelengths: 0.5
+  subcell_max_wavelengths: 0.2
+  richardson_tol_db: 0.05
+  deterministic: true
+  backend: numba_cpu
+  verify_interp: true
+environment:
+  ground: null
+  walls: []
+  occluders: []
+  edges: []
+  diffuse: null
+nodes:
+- id: ap
+  position_m:
+  - 1.8477590650225735
+  - -0.7653668647301796
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: tx0
+    direction: tx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: 10000.0
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r00
+  position_m:
+  - 0.6
+  - 0.0
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r01
+  position_m:
+  - 0.5977168188550473
+  - 0.0522934456485949
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r02
+  position_m:
+  - 0.579555495773441
+  - 0.15529142706151244
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r03
+  position_m:
+  - 0.5437846722219899
+  - 0.2535709570444197
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r04
+  position_m:
+  - 0.49149122657339506
+  - 0.3441458618106276
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r05
+  position_m:
+  - 0.4242640687119285
+  - 0.4242640687119285
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r06
+  position_m:
+  - 0.9
+  - 0.0
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r07
+  position_m:
+  - 0.896575228282571
+  - 0.07844016847289235
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r08
+  position_m:
+  - 0.8693332436601615
+  - 0.23293714059226867
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r09
+  position_m:
+  - 0.815677008332985
+  - 0.3803564355666295
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r10
+  position_m:
+  - 0.7372368398600926
+  - 0.5162187927159415
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r11
+  position_m:
+  - 0.6363961030678928
+  - 0.6363961030678928
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r12
+  position_m:
+  - 1.2
+  - 0.0
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r13
+  position_m:
+  - 1.1954336377100947
+  - 0.1045868912971898
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r14
+  position_m:
+  - 1.159110991546882
+  - 0.3105828541230249
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r15
+  position_m:
+  - 1.0875693444439798
+  - 0.5071419140888394
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r16
+  position_m:
+  - 0.9829824531467901
+  - 0.6882917236212552
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r17
+  position_m:
+  - 0.848528137423857
+  - 0.848528137423857
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r18
+  position_m:
+  - 1.5
+  - 0.0
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r19
+  position_m:
+  - 1.4942920471376184
+  - 0.13073361412148726
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r20
+  position_m:
+  - 1.4488887394336025
+  - 0.3882285676537811
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r21
+  position_m:
+  - 1.3594616805549748
+  - 0.6339273926110491
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r22
+  position_m:
+  - 1.2287280664334876
+  - 0.8603646545265691
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r23
+  position_m:
+  - 1.0606601717798214
+  - 1.0606601717798214
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r24
+  position_m:
+  - 1.8
+  - 0.0
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r25
+  position_m:
+  - 1.793150456565142
+  - 0.1568803369457847
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r26
+  position_m:
+  - 1.738666487320323
+  - 0.46587428118453733
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r27
+  position_m:
+  - 1.63135401666597
+  - 0.760712871133259
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r28
+  position_m:
+  - 1.4744736797201852
+  - 1.032437585431883
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+- id: r29
+  position_m:
+  - 1.2727922061357857
+  - 1.2727922061357857
+  - 0.0
+  trajectory: null
+  antenna:
+    pattern: isotropic
+    boresight: null
+  streams:
+  - name: rx0
+    direction: rx
+    fc_hz: 3500000000.0
+    rate_sps: '1000000'
+    occupied_bw_hz: null
+    full_scale_dbm: 0.0
+    gain_db: 0.0
+    noise_figure_db: 0.0
+    lo:
+      cfo_hz: 0.0
+      linewidth_hz: 0.0
+    adc_clip: false
+ris:
+- id: ris0
+  enabled: true
+  pose:
+    center_m:
+    - 0.0
+    - 0.0
+    - 0.0
+    normal:
+    - 1.0
+    - 0.0
+    - 0.0
+    u_axis:
+    - 0.0
+    - 1.0
+    - 0.0
+  grid:
+    n_u: 24
+    n_v: 5
+    pitch_u_m: 0.0428
+    pitch_v_m: 0.0428
+    cell_model: auto
+  tiles:
+    n_tiles_u: 3
+    n_tiles_v: 1
+    gap_m: 0.002
+    gap_gamma: null
+  states:
+    library: ideal_antipodal
+    file: null
+    assume_mag: null
+    efficiency: 1.0
+    override_efficiency: false
+  control:
+    granularity: element
+    groups: null
+  initial:
+    fill: 0
+    states: null
+  failures: null
+  transition:
+    model: step
+    duration_s: null
+    classes: single
+  capabilities:
+    reconfiguration_time_s: null
+    max_command_rate_hz: 10000.0
+    static_power_w: null
+controllers: []
+run:
+  mode: lockstep
+  coupling: barrier
+  duration_s: '5'
+  late_policy: apply_on_arrival
+  on_stall: wait
+  stall_timeout_s: 2.0
+  paced:
+    d_lag_s: '0.001'
+    slacks_s:
+    - '0'
+    - '0.001'
+    - '0.005'
+record:
+  iq: true
+  events: true
+  metrics: true
+  snapshots: false
+traffic: []

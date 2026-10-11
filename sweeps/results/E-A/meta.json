@@ -1,0 +1,116 @@
+{
+  "experiment": "E-A",
+  "data_classes": [
+    "SIM-sremu"
+  ],
+  "description": "E-A aggregation: gains over RisAbsent, retention rho(tau), tau_half and the pre-registered hypotheses H-A1..H-A3 (paper/preregistration/E-A.md)",
+  "assumptions": [
+    "gain CI: Student-t over 20 paired per-batch dB gains (19 d.o.f.)",
+    "tau_half CI: Student-t over 20 per-batch log10 tau_half (censored batches clipped to the sweep range and counted)",
+    "evaluation rule per point: mid",
+    "AP offset d0 = 0.5 m from the user line, on the side away from the RIS (documented V-WCL deviation; side is an ENG choice)",
+    "A1 partition: factor applied to the LOS path only (DESIGN 5.2); RIS hops unattenuated [ENG]",
+    "one RWP trajectory realization (scenario seed 20261010) shared by every point (paired)",
+    "ProbeBandit evaluated with FastProbeBandit (bitwise-identical decisions, O(K) means)",
+    "batch path evaluated in vectorized form (experiments/ea.py): channel sampled on a 1 mm (0.5 mm above 1.5 GHz) grid and interpolated complex-linearly; see interp_check",
+    "5 ms pieces split at switch times, each evaluated at its mid point",
+    "controller channel model = scene model on a 1 cm GridChannel (oracle geometry)",
+    "command latency 1 ms; switch at t_b + 1 ms (RIS-time convention)"
+  ],
+  "inputs": [
+    {
+      "path": "data/states/on_off.yaml",
+      "sha256": "d373f35adcb18747c35930e9f8fb8f02490825517f77546f1d47b3fff9083c0b",
+      "data_class": "ANALYTIC"
+    }
+  ],
+  "files": {
+    "gains.csv": "per geometry/controller/tau: absolute power and gain over RisAbsent",
+    "retention.csv": "rho(tau) of ExactOptimum per geometry",
+    "tau_half.csv": "tau_half per geometry with CI",
+    "hypotheses.json": "H-A1, H-A2, H-A3 decisions per the pre-registration"
+  },
+  "code": {
+    "files": {
+      "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+      "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+      "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+      "experiments/ea_iq.py": "d381202d2ae2e86c6a336a6d6079a1d01744f6f9e2e8b2b6a4efcb6aa14a0cd8",
+      "experiments/eb.py": "dff7b9565155f58832ecefac2142da8928b71bf11e11357b7a506ccf51225949",
+      "experiments/eb_aggregate.py": "75ae755d5158d8432c057a91e12f8db91618be105164742c05fef8c32048157f",
+      "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+      "experiments/ef.py": "0237a8cefd2dc657334de38bae364221f184a0c5cb9e7a4a30f8a73b8b76a351",
+      "experiments/finalize.py": "6c97cae57773efa11f87aa0ceb2542774a6c4fa1f79654a7ce30cd83f357f9f1",
+      "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+      "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d",
+      "paper/sweeps/ea_ref.yaml": "fba0d7c7cd05ff3da218e8c311ac2c9b53d7863f108649f354d570118c5c0f89",
+      "paper/sweeps/ea_tau.yaml": "8413059a75307f39df5611770c0757605e42a68023c99d44507ffdf2ed65c818",
+      "paper/sweeps/eb1.yaml": "b5c8b53ddaf1787097e6f813a695de67e34afd7395e5a12447a4fbc7526cf79f",
+      "paper/sweeps/eb2_ideal1.yaml": "a428bf9606ab8aa6f08e54ab39e2c96b592ed327355eda1ae948ab8727b3852f",
+      "paper/sweeps/eb2_lab.yaml": "3dec21b80634c55e105279560c7dca609de28368deefd864804204a484c4f7a2"
+    },
+    "src_sremu_tree_sha256": "b226771181d3954fd2b70c664ac16611b71d7f1e217500f312d486f076a1643c"
+  },
+  "written_utc": "2026-10-10T18:39:10.361262Z",
+  "sweep_roots": [
+    "runs\\wp11\\ea_ref",
+    "runs\\wp11\\ea_tau"
+  ],
+  "checks_per_geometry": {
+    "f1.0G_h1_L0": {
+      "interp_max_db_err_all_on": 0.00048127727031451335,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h2_L0": {
+      "interp_max_db_err_all_on": 0.0004898102644165814,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h4_L0": {
+      "interp_max_db_err_all_on": 0.0004887239507234813,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h6_L0": {
+      "interp_max_db_err_all_on": 0.0004876883714374651,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h2_L20": {
+      "interp_max_db_err_all_on": 0.0012641271233515775,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h4_L20": {
+      "interp_max_db_err_all_on": 0.0007995353157112522,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f2.4G_h2_L20": {
+      "interp_max_db_err_all_on": 0.0010117307089897447,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f2.4G_h4_L20": {
+      "interp_max_db_err_all_on": 0.0008766807427000428,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h2_L10": {
+      "interp_max_db_err_all_on": 0.0005301908738093376,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f1.0G_h2_L30": {
+      "interp_max_db_err_all_on": 0.0020034710388415486,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f2.4G_h2_L10": {
+      "interp_max_db_err_all_on": 0.0007365982810759958,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    },
+    "f2.4G_h2_L30": {
+      "interp_max_db_err_all_on": 0.00794294272526945,
+      "trajectory_check_max_abs_m": 5.6346038945775945e-12
+    }
+  },
+  "decision_table_checks": {
+    "points": 168,
+    "barriers": 50400,
+    "decision_mismatches": 0,
+    "index_mismatches": 0
+  }
+}

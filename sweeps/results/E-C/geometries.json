@@ -1,0 +1,27 @@
+{
+  "lab": {
+    "n_points": 30,
+    "n_cells": 120,
+    "direct_over_ris_cont_db": -3.427576707702222
+  },
+  "synth_near": {
+    "n_points": 1,
+    "n_cells": 256,
+    "direct_over_ris_cont_db": 1.5887527191556985
+  },
+  "synth_far": {
+    "n_points": 1,
+    "n_cells": 256,
+    "direct_over_ris_cont_db": 0.16283127557397917
+  },
+  "synth_spec": {
+    "n_points": 1,
+    "n_cells": 256,
+    "direct_over_ris_cont_db": 0.4805662876491782
+  },
+  "corridor": {
+    "n_points": 999,
+    "n_cells": 133,
+    "direct_over_ris_cont_db": -9.376209154251193
+  }
+}

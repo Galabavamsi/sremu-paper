@@ -1,0 +1,17 @@
+{
+  "n_points": 72,
+  "n_failed_points": 0,
+  "failed_points": [],
+  "n_step_switches_inside_packet": 16,
+  "n_pass": 16,
+  "all_before_bitwise_identical": true,
+  "all_panels_k_applied_equal_expected": true,
+  "linear_first_minus_applied": [
+    1
+  ],
+  "criterion": "first RX1 sample differing from the no-switch run == to_ticks(t_sw + tau_RIS->RX1) == engine k_applied (step switch while the TX is active; with several panels, the earliest over the panels whose states change, and every panel's k_applied equals its own to_ticks(t_sw + tau_panel->RX1)); every sample before it bitwise identical",
+  "geometry_labels": [
+    "lab-like SIM geometry (not the lab's)"
+  ],
+  "pass": true
+}

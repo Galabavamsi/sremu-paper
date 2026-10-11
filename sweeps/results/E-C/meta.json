@@ -1,0 +1,36 @@
+{
+  "experiment": "E-C",
+  "data_classes": [
+    "SIM-sremu",
+    "ANALYTIC",
+    "ASSUMED",
+    "REPORTED"
+  ],
+  "description": "E-C non-ideality ablation (Table VIII / F11): loss vs ideal continuous phase per geometry, large-N eta, binary m/d decomposition and mirror share",
+  "assumptions": [
+    "lab state amplitudes ASSUMED (|sigma1| = 1; |sigma2| as per row)",
+    "Tang RIS1 alphabet: published 27 GHz table values (REPORTED) applied as an angle-independent alphabet at each geometry's carrier [ENG]",
+    "Abeywickrama: beta_min 0.2, alpha 1.6, phi 0, b = 2 [ENG choice of b]",
+    "failure rows on the lab |Gamma| = 1 alphabet; the optimizer knows the failed cells; 200 keyed maps per point (lab, synthetic), 10 per position (corridor, averaged over the RWP pdf)",
+    "loss = power-averaged optimum over the geometry's points / that of the ideal continuous phase (loss_ris_db_mean_*: mean of per-point dB losses)",
+    "lab geometry: V-LAB prior median Tx (2 m, -22.5 deg) and the 30-point polar grid; SIM geometry, no measured data read"
+  ],
+  "inputs": [
+    {
+      "path": "data/states/ideal_antipodal.yaml",
+      "sha256": "25d6aa27f60ac568b554ab415295e62db323c8548cb4bc934dc2aa212db5605c",
+      "data_class": "ANALYTIC"
+    },
+    {
+      "path": "data/states/on_off.yaml",
+      "sha256": "d373f35adcb18747c35930e9f8fb8f02490825517f77546f1d47b3fff9083c0b",
+      "data_class": "ANALYTIC"
+    }
+  ],
+  "files": {
+    "table8.csv": "one row per ablation row; loss columns per geometry",
+    "per_point.csv": "per point and row (lab, synthetic)",
+    "geometries.json": "points, cells and the direct/RIS power ratio per geometry"
+  },
+  "written_utc": "2026-10-10T18:09:07.286610Z"
+}

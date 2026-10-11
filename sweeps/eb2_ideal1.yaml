@@ -1,0 +1,16 @@
+# E-B2 timing requirement (DESIGN.md section 11, E-B), ideal 1-bit alphabet, LOS present.
+# Same protocol as eb2_lab.yaml. Runner: sremu/experiments/eb.py:run_eb2_point.
+name: eb2_ideal1
+description: "E-B2 PER and EVM vs latency jitter, ideal 1-bit alphabet, LOS present"
+runner: "experiments.eb:run_eb2_point"
+base:
+  alphabet: ideal1
+  los: present
+  n_packets: 2000
+zip:
+  semantics: [timed, timed, timed, asap, legacy]
+  lead_s:    ["5e-4", "2e-3", "5e-3", "5e-4", "5e-4"]
+grid:
+  guard_s: ["1e-4", "5e-4", "1e-3"]
+  jitter_s: ["0", "1e-4", "3e-4", "1e-3", "3e-3"]
+seeds: [20261010]

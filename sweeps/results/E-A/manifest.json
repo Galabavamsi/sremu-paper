@@ -1,0 +1,70 @@
+{
+  "manifest_version": "1.0",
+  "sremu_version": "0.1.0.dev0",
+  "git_commit": "2a016a65efe156db33380abaf0bf5b76d9699979",
+  "git_dirty": true,
+  "dirty_patch_sha256": "66454fac66419b127fc804c3c7e4a8c3b3581edc84354265bc4cb127f363f013",
+  "contract_version": "1.1",
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "pydantic": "2.14.0",
+    "pyzmq": "27.2.0",
+    "torch": null
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "logical_cpus": 16,
+  "power_plan_or_governor": "Balanced",
+  "gpu": [
+    "NVIDIA GeForce RTX 4070 Laptop GPU, 581.08, 8188 MiB"
+  ],
+  "aws_instance": null,
+  "scenario_name": "none",
+  "scenario_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "inputs": [],
+  "assumptions": [],
+  "seed": 20261010,
+  "rng_scheme": "philox4x32-10/blake2b-v1",
+  "mode": "analysis",
+  "coupling": "none",
+  "backend": "none",
+  "threads": 16,
+  "deterministic": true,
+  "numba_disable_svml": false,
+  "page_size": {},
+  "links": {},
+  "verify_interp_max_rel": null,
+  "richardson_db": null,
+  "counters": {
+    "late_samples": 0,
+    "underflow_slip_samples": 0,
+    "overflow_pages": 0,
+    "bad_packets": 0,
+    "schema_errors": 0,
+    "seq_errors": 0,
+    "rec_dropped": 0,
+    "stall_zero_samples": 0,
+    "late_commands": 0,
+    "rejected_commands": 0,
+    "rate_limited_commands": 0,
+    "deadline_misses": 0
+  },
+  "nondeterministic_inputs": false,
+  "oracle_csi_used": false,
+  "argv": [
+    "-c"
+  ],
+  "t_start_utc": "2026-10-10T18:39:08.834621Z",
+  "t_end_utc": "2026-10-10T18:39:13.481007Z",
+  "wall_s": 4.646653999996488,
+  "host_load_samples": [
+    {
+      "t_utc": "2026-10-10T18:39:11.488782Z",
+      "cpu_busy_fraction": 1.0,
+      "loadavg_1min": null
+    }
+  ]
+}

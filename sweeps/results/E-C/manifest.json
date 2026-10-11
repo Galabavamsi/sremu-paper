@@ -1,0 +1,81 @@
+{
+  "manifest_version": "1.0",
+  "sremu_version": "0.1.0.dev0",
+  "git_commit": "2a016a65efe156db33380abaf0bf5b76d9699979",
+  "git_dirty": true,
+  "dirty_patch_sha256": "cf4bf8e06e763b9061280fd2e0c2ae642da3c2ba69becbd6adfc46af5a139826",
+  "contract_version": "1.1",
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "pydantic": "2.14.0",
+    "pyzmq": "27.2.0",
+    "torch": null
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "logical_cpus": 16,
+  "power_plan_or_governor": "Balanced",
+  "gpu": [
+    "NVIDIA GeForce RTX 4070 Laptop GPU, 581.08, 8188 MiB"
+  ],
+  "aws_instance": null,
+  "scenario_name": "ec_lab_polar30",
+  "scenario_sha256": "aa400ffe182d75cebb058d143e74eb7ea17e6b1ce9c6dbad1564a19b6826fd98",
+  "inputs": [
+    {
+      "path": "data/states/ideal_antipodal.yaml",
+      "sha256": "25d6aa27f60ac568b554ab415295e62db323c8548cb4bc934dc2aa212db5605c",
+      "data_class": "ANALYTIC"
+    },
+    {
+      "path": "data/states/on_off.yaml",
+      "sha256": "d373f35adcb18747c35930e9f8fb8f02490825517f77546f1d47b3fff9083c0b",
+      "data_class": "ANALYTIC"
+    }
+  ],
+  "assumptions": [],
+  "seed": 20261010,
+  "rng_scheme": "philox4x32-10/blake2b-v1",
+  "mode": "batch",
+  "coupling": "none",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "numba_disable_svml": false,
+  "page_size": {},
+  "links": {},
+  "verify_interp_max_rel": null,
+  "richardson_db": null,
+  "counters": {
+    "late_samples": 0,
+    "underflow_slip_samples": 0,
+    "overflow_pages": 0,
+    "bad_packets": 0,
+    "schema_errors": 0,
+    "seq_errors": 0,
+    "rec_dropped": 0,
+    "stall_zero_samples": 0,
+    "late_commands": 0,
+    "rejected_commands": 0,
+    "rate_limited_commands": 0,
+    "deadline_misses": 0
+  },
+  "nondeterministic_inputs": false,
+  "oracle_csi_used": false,
+  "argv": [
+    "-c"
+  ],
+  "t_start_utc": "2026-10-10T17:51:56.550253Z",
+  "t_end_utc": "2026-10-10T18:09:11.680546Z",
+  "wall_s": 1035.1302948999946,
+  "host_load_samples": [
+    {
+      "t_utc": "2026-10-10T18:09:07.288628Z",
+      "cpu_busy_fraction": 0.9999914730092319,
+      "loadavg_1min": null
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# E-A reference points (DESIGN.md section 11, E-A; pre-registration paper/preregistration/E-A.md).
+# Per geometry: RisAbsent (baseline), the instantaneous exact optimum P(0) (tau_SUI -> 0, no
+# latency) and the stale reference P_stale (exact optimum for an independent position).
+# Runner: sremu/experiments/ea.py:run_point (batch path, vectorized; 20 batches x 333 333
+# steps of 5 ms = 33 333.3 s per point). Run with
+#   python -m experiments.run_sweeps ea --jobs 12      (from the sremu repo root)
+name: ea_ref
+description: "E-A reference points: RisAbsent, instantaneous optimum, stale optimum per geometry"
+runner: "experiments.ea:run_point"
+base:
+  n_batches: 20
+  steps_per_batch: 333333
+zip:
+  regime:  [A0, A0, A0, A0, A1, A1, A1, A1, A1s, A1s, A1s, A1s]
+  fc_hz:   [1.0e9, 1.0e9, 1.0e9, 1.0e9, 1.0e9, 1.0e9, 2.4e9, 2.4e9, 1.0e9, 1.0e9, 2.4e9, 2.4e9]
+  h_m:     [1, 2, 4, 6, 2, 4, 2, 4, 2, 2, 2, 2]
+  loss_db: [0, 0, 0, 0, 20, 20, 20, 20, 10, 30, 10, 30]
+grid:
+  controller: [absent, instant, stale]
+seeds: [20261010]
