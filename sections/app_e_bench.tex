@@ -1,0 +1,156 @@
+% Appendix E -- benchmark protocol and further results (moved from Section VI for length,
+% 2026-10-12; text unchanged apart from joins). Every number is a macro of numbers.yaml filled
+% by tools/gen_results.py (via tools/bench_results.py) from paper/sweeps/results/bench (MEAS).
+% No number is compared across instance types or with the laptop.
+\section{Benchmark Protocol and Further Results}\label{app:bench}
+
+This appendix extends Section~\ref{sec:wallclock}.
+
+\subsection{Hosts and protocol}
+\input{generated/tables/table7_platforms}
+\claim{C-WC-HOSTS}Table~\ref{tab:platforms} lists the hosts; the cross-tool
+context (B6) comes from a laptop. The AWS runs B1--B4 used one emulator commit; B1 and B2
+recorded a dirty flag, although their uploaded file tree equals that commit's
+(Appendix~\ref{app:provenance}). B2 packed up to \numBtwoSlots{} points onto the server at a time, each
+pinned to \numBtwoSlotCpus{} logical CPUs of whole cores in one NUMA node. A B3 point runs up
+to \numBthreeReps{} repetitions of \numBthreeMeasureS~s, each with at least
+\numBthreeMinPages{} pages, and counts as Sustainable when every repetition is; an
+unsustainable repetition ends the point. The benchmark scenes have one carrier and a non-zero
+surface path on every link; the rest of each host was idle apart from the B4 command client,
+and the laptop of B6 was not idle. A scene with $L$ links has
+$n_{\mathrm{tx}}n_{\mathrm{rx}}=L$; for example,
+\numBtwoMaxLinks{} links are \numBtwoLimTx{} transmitters and \numBtwoLimRx{} receivers.
+\claim{C-WC-DEFS}Because a page is computed from its release on, every page misses a deadline
+of zero slack. \claim{C-WC-LIMITS}Another host needs its own runs.
+
+\subsection{Lockstep points and isolation}
+\claim{C-WC-LOCKSTEP}Fig.~\ref{fig:F7} shows the lockstep scaling of
+Section~\ref{sec:wallclock}: the RTF over links and element counts, static and with mobility
+(a); the cumulative feature sets at one link (b), with RTF \numBtwoRtfFzero{} without noise
+(F0), \numBtwoBaseRtf{} with noise (F1), \numBtwoRtfFtwo{} with oscillator impairments (F2),
+\numBtwoRtfFthree{} with mobility (F3) and \numBtwoRtfFfour{} with recording (F4); and the
+aggregate throughput, which peaks with noise (F1) at \numBtwoAggMaxMsps~MS/s with
+\numBtwoAggMaxRx{} receivers at \numBtwoAggMaxRate~MS/s and an RTF below one (c).
+
+\begin{figure*}[t]
+\centering
+\sremufigure{F7}{\textwidth}{Lockstep scaling on one AWS \txtHostServer{} instance (B2;
+MEAS), up to \numBtwoSlots{} points running concurrently. (a) RTF versus the number of links $L$ at
+\numBtwoBaseMsps~MS/s with one surface, for every element count $N$, static (F1, solid) and
+with mobility (F3, dashed); open markers: isolation reference points run alone; dotted:
+$\mathrm{RTF}=1$. (b) RTF versus $L$ for the cumulative feature sets F0--F4 at
+$N=\numBtwoBaseN$. (c) Aggregate received throughput, $n_{\mathrm{rx}}f_s\,\mathrm{RTF}$ with
+$n_{\mathrm{rx}}$ receivers among the $L$ links, for four sample rates. Feature set F5 (native
+ZMQ data plane) awaits its rerun at the pinned commit.}{fig:F7}
+\end{figure*}
+
+\claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran:
+\numBtwoOk{} completed, \numBtwoBelowFloor{} of the heaviest mobility points fell below the
+pilot floor and were not measured, and \numBtwoFailed{} failed. Every failure was a point
+with the native ZMQ data plane (feature set F5): three receive time-outs came from an error
+of the benchmark, whose served run ended before the clients' streams, and one benchmark error
+hit a point below the floor. Both are fixed in the benchmark, not in the emulator. F5 is
+therefore left out of Fig.~\ref{fig:F7}, and its RTF at the base point (\numBtwoFfiveRtf)
+comes from the rerun at the pinned commit.
+
+\claim{C-WC-ISOLATION}Concurrent points share the last-level cache, memory bandwidth and the
+power budget of the host. Rerun alone, the \numBtwoIsoPoints{} reference points of the
+isolation check were up to \numBtwoIsoMaxPct~\% faster (ratio \numBtwoIsoMin--\numBtwoIsoMax),
+so the packed values in Fig.~\ref{fig:F7} are conservative. The link limit lies within this
+margin: at \numBtwoLsixteen{} links the packed RTF is \numBtwoLsixteenMin--\numBtwoLsixteenMax{}
+over $N$, while the same base configuration measured alone in B1 reached \numBoneLsixteenRtf.
+We therefore state the limit as \numBtwoMaxLinks{} links packed and between \numBtwoMaxLinks{}
+and \numBtwoLsixteen{} links alone.
+
+\subsection{Paced series and short pages}
+\claim{C-WC-PACED}The single link at \numBthreeTopMsps~MS/s uses pages of
+\numBthreeTopPageUs~$\mu$s and has a miss rate of \numBthreeTopMiss. With pages of
+\numBthreeHalfPageUs~$\mu$s the emulator
+sustains one link (p99 \numBthreeHalfPninetynineUs~$\mu$s), and with pages of
+\numBthreeQuarterPageUs~$\mu$s \numBthreeQuarterLinks{} links. At
+\numBthreeMidMsps~MS/s (pages of \numBthreeMidPageUs~$\mu$s) the limit is \numBthreeMidLinks{}
+links. With pages of \numBthreeHalfPageUs~$\mu$s, four surfaces sustain
+\numBthreeFourRisLinks{} links, more than one surface does, and $N=\numBthreeBigN$ one link:
+at such pages the limit is not set by the computation alone.
+
+\claim{C-WC-SHORTPAGES}Two links with \numBthreeHalfPageUs~$\mu$s pages keep the engine busy
+for a median fraction
+\numBthreeTwoLinkUtil{} of each page, yet one of the three repetitions missed
+\numBthreeTwoLinkMissMax{} of the deadlines (the other two at most
+\numBthreeTwoLinkMissOther): a few stalls of up to \numBthreeStallMaxMs~ms each delay dozens of
+short pages. With mobility (F3) one link misses \numBthreeFthreeMissPct~\% of the deadlines at
+\numBthreeHalfPageUs~$\mu$s pages.
+The geometry snapshot is recomputed every \numBthreeFthreeTuMs~ms, and the page that holds the
+recomputation takes up to \numBthreeFthreeUtilMs~ms (p99) although the mean load stays below
+the wall clock. The fraction of pages that hold a snapshot, \numBthreeFthreeSnapPct~\%, is close
+to the miss rate: the snapshot work is not spread over pages. At \numBthreeLowMsps~MS/s a page
+holds \numBthreeLowPage{} samples (\numBthreeLowPageMs~ms) and the engine works for
+\numBthreeLowUtilPct~\% of it (median), yet \numBthreeLowMissPages{} pages had latencies of
+\numSustainSlackMs~ms to \numBthreeLowMaxMs~ms. The resulting miss rate,
+\numBthreeLowMiss{}, misses the threshold in the single repetition run. These delays are not
+explained by per-page cost or by timer resolution, since the engine spins rather than
+sleeps before releases closer than \numPacedSpinMs~ms; the runs record no stage breakdown that
+would identify them.
+
+\subsection{Control loop}
+\claim{C-WC-LOCKCMD}At
+the highest lockstep rate the last command of a run switches after the end of the run and is never
+applied; the benchmark's original check counted it as a failure, and the corrected check,
+recomputed offline from the same records, passes. The per-command engine cost of
+Section~\ref{sec:wc-loop} (barrier, decision and configuration change) holds at
+\numBfourRateMidHz~Hz and above, and is computed from the RTF with and without the loop.
+
+\claim{C-WC-PACEDCMD}In the served paced runs, at \numBfourRateMidHz~commands/s
+\numBfourMissMidMinPct--\numBfourMissMidMaxPct~\% of the pages missed the deadline. A
+configuration change costs
+the engine about as much time as the slack (see the lockstep cost), so the page that
+holds it, and
+often the next, miss their deadlines; at the lower rate this explains a part of the misses,
+so the served process also misses deadlines between commands. The paced schedule accounts
+for at most one page of the visible latency, because an asap command takes effect at the
+earliest uncomputed sample and the page holding it is released at most one page later. The
+floor of about \numBfourVisMinMs~ms matches the engine's work on the page with the configuration
+change, and the spread is consistent with the hand-over between the control-socket thread and
+the paced loop. In numbers, \numBfourLateLow{} of
+\numBfourCmdsLow{} timed commands at \numBfourRateLowHz~commands/s (the per-repetition fraction
+depends on the error of the client's clock estimate) and \numBfourLateMid{} of \numBfourCmdsMid{} at
+\numBfourRateMidHz~commands/s arrived after their switch sample had been computed. At
+\numBfourRateHighKHz~kHz and above the engine is the bottleneck: the request-reply client
+achieved \numBfourAchievedMin--\numBfourAchievedMax{} commands/s, page latencies grew to as
+much as \numBfourPageLatMaxS~s, and a repetition took up to \numBfourLagPct~\% longer than its
+virtual duration because the engine caught up after the client had stopped. Timed commands then
+lay in the virtual future of the lagging engine, and some became visible as late as
+\numBfourTimedVisMaxS~s after their receipt.
+
+\subsection{Cost model}
+\claim{C-WC-COSTMODEL}B1 fits a page cost model, a constant plus linear terms
+for snapshots, fractional-delay filtering, receivers and paths, to \numBonePoints{} engine
+points measured on an otherwise idle server. The fit is indicative: its relative RMS error
+is \numBoneRelRmsPct~\% and its largest error \numBoneRelMaxPct~\%. The constant term,
+\numBoneFixedUs~$\mu$s per page, is \numBoneFixedSharePct~\% of the single-link page cost of
+\numBoneBasePageUs~$\mu$s, so short pages pay mostly fixed cost. The largest errors are
+underestimates of mobility points. There, a snapshot costs about \numBoneSnapMs~ms plus
+\numBoneSnapLinkMs~ms per link, with little dependence on the number of surface rows and
+quadrature points $RQ$ at the sizes of these points; a diagnostic fit with these terms reaches
+\numBoneExtRelRmsPct~\%, but with \numBoneExtCoeffs{} coefficients for \numBonePoints{} points it
+is not used for prediction, and at the larger element counts of B2 the snapshot cost does grow
+with $N$ (Fig.~\ref{fig:F7}(a)).
+The kernel itself scales as expected: the snapshot time grows as
+$(RQ)^{\numBoneSnapExpNumpy}$ on the NumPy reference backend for $RQ$ from \numBoneRqMin{} to
+\numBoneRqMax, and as $(RQ)^{\numBoneSnapExpNumba}$ with numba up to \numBoneRqMaxNumba, where
+fixed costs dominate the small sizes.
+
+\subsection{Cross-tool context}
+\claim{C-WC-CROSSTOOL}For context, B6 times one evaluation of the same near-field surface sum
+on the laptop for $N=\numBsixNmin$ to \numBsixNmax{} elements with \sremu{} and with MATLAB
+\txtBsixMatlab{}; where both compute the same model the results agree to
+\numBsixAgreeDb~dB. \sremu{} takes \numBsixFullMinUs--\numBsixFullMaxUs~$\mu$s for new
+positions and \numBsixCombMinUs--\numBsixCombMaxUs~$\mu$s for a configuration change with the
+geometry cached; a vectorized MATLAB script takes \numBsixVecMinUs--\numBsixVecMaxUs~$\mu$s, a
+per-element MATLAB loop \numBsixLoopMinUs--\numBsixLoopMaxUs~$\mu$s, and the toolbox's
+far-field \texttt{phased.RISReflector}, a different model,
+\numBsixRisrMinUs--\numBsixRisrMaxUs~$\mu$s. These numbers are not a ranking: the calls do
+different work (the \sremu{} times include Python dispatch and the line-of-sight path; the
+MATLAB times exclude its start-up), they come from one machine whose other processes were busy
+for \numBsixBusyPct~\% of the time during the \sremu{} timings, and a streaming emulator's cost
+is per page, not per call.

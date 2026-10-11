@@ -1,68 +1,36 @@
-% Section VIII -- Discussion (WP12 draft, stage C). Standards mapping (Table VI), AI/ML hooks,
-% limitations (DESIGN 1.5). Checked against sremu commit 2a016a6: control/controller.py
-% (Controller protocol, BaseController), control/builtin.py (built-ins), control/remote.py
-% (run_remote), ml/env.py (RisEnv: backend "batch" only; info optimum_dbm / regret_db from
-% the exact optimum with oracle CSI), physics/optimize.py.
+% Section VIII -- Discussion (WP12 draft, stage C; condensed for length 2026-10-12). Standards
+% alignment (table and detail in Appendix A), AI/ML hooks (detail in Appendix B), limitations
+% (DESIGN 1.5; table in Appendix C). Checked against sremu commit 2a016a6:
+% control/controller.py (Controller protocol, BaseController), control/builtin.py (built-ins),
+% control/remote.py (run_remote), ml/env.py (RisEnv: backend "batch" only; info optimum_dbm /
+% regret_db from the exact optimum with oracle CSI), physics/optimize.py.
 \section{Discussion}\label{sec:discussion}
 
 \subsection{Alignment with standards}\label{sec:disc-standards}
-\claim{C-STANDARDS}Table~\ref{tab:standards} maps the terms and models of the ETSI documents
-on RIS to elements of \sremu{}. ETSI GR RIS 002~\cite{ETSI_GR_RIS002_v121} separates the RIS
-controller, which generates control information, from the micro-controller, which configures
-the elements. \sremu{} keeps this split: controllers decide, and the engine applies their
-commands with the panel's control granularity, quantizer and failure map at the sample of
-each receiver. The general-case path-loss model of ETSI GR RIS 003~\cite{ETSI_GR_RIS003_v121}
-equals K1 for one point per cell, and its reradiation integral has the factor $j$ that K1
-keeps; its mutually coupled antenna model and its polarized elements are outside the model
-of \sremu{}. The parameters of ETSI GS RIS 008~\cite{ETSI_GS_RIS008} appear as fields of the
-response tables and of the panel capabilities. GS RIS 008 measures the reconfiguration time
-from the receipt of a command to the effective configuration; in \sremu{} that interval is
-the command latency, which is drawn or measured and logged per command, plus the transition,
-whose default duration is the panel's reconfiguration time. The modulated-signal quality of
-GS RIS 008, the error vector magnitude (EVM), is measured by an RX application on received
-samples; Section~\ref{sec:cases} uses it. The E2 service model for
-RIS used in O-RAN
+\claim{C-STANDARDS}\sremu{} keeps the split of ETSI GR RIS 002~\cite{ETSI_GR_RIS002_v121}
+between the RIS controller, which generates control information, and the micro-controller,
+which configures the elements (here the engine, at the sample of each receiver). The
+general-case path-loss model of GR RIS 003~\cite{ETSI_GR_RIS003_v121} equals K1 for one point
+per cell, and the reconfiguration time of GS RIS 008~\cite{ETSI_GS_RIS008}, from the receipt
+of a command to the effective configuration, is in \sremu{} the logged command latency plus the
+transition. Appendix~\ref{app:survey} maps the ETSI terms to \sremu{} as alignment, not
+conformance; the E2 service model for RIS of O-RAN
 frameworks~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX} is not implemented.
 
 \subsection{Hooks for learning-based control}\label{sec:disc-ml}
-\claim{C-CONTROLLER-API}Learning-based control is outside the scope of this paper, but
-\sremu{} provides three hooks for it: a controller protocol, an environment with a standard
-learning interface, and a regret reference. A controller
-has a name, a period, a minimum latency, an observation specification and a latency model,
-and two methods: \texttt{setup} receives the panel capabilities and a keyed random generator,
-and \texttt{decide} maps an observation to actions. The same object runs inside the engine at
-barriers or in an external process (\texttt{run\_remote}), and both give identical
-received samples (RT-08), so a controller tested in process can be deployed as a separate
-process without changes. The built-in
-controllers are a fixed configuration; RIS absent; the uniform random activation and our
-reading of the position-driven heuristic of~\cite{Mishra2025WCL}; the exact optimum; phase
-alignment followed by quantization; a design for an ideal alphabet deployed on the true
-states; a cyclic codebook sweep; an upper-confidence-bound (UCB1) bandit~\cite{Auer2002UCB}
-over windowed received power; a genetic algorithm; a controller that alternates
-configurations between the packets of two receivers; and a wrapper that delays the position
-reports of any position-driven controller. Every random draw of a controller comes from its
-keyed generator, so its decisions are reproducible.
-
-\claim{C-RISENV}The environment, \texttt{RisEnv}, wraps a scenario in the reset/step
-interface of Gymnasium~\cite{Towers2024Gymnasium}; it subclasses Gymnasium's
-environment class when that package is installed and imitates it otherwise. An action is a
-state vector or a codebook index, applied after a configurable latency; the reward is the
-received pilot-tone power over the decision period; the samplers of the action and
-observation spaces and the scene are keyed by the reset seed. In this release the
-environment computes rewards on the batch path; its IQ backends are not yet connected to the
-engine. \claim{C-REGRET}For the regret reference, the environment reports at every step the exact finite-alphabet optimum (Section~\ref{sec:model-nonideal}), computed
-from oracle channel state at the same evaluation times, and the gap between that optimum and
-the achieved power. The gap is zero for an optimal controller; it ignores panel failures, so
-it can be negative when cells are dead. The optimum bounds every built-in controller at every
-tested position (VA-3).
+\claim{C-CONTROLLER-API}Learning-based control is outside our scope, but \sremu{} provides
+three hooks: one controller object runs in the engine or in an external process with identical
+samples (RT-08), with built-in baselines (Appendix~\ref{app:interfaces});
+\claim{C-RISENV}an environment, \texttt{RisEnv}, wraps a scenario in the reset/step interface
+of Gymnasium~\cite{Towers2024Gymnasium}, with rewards computed on the batch path in this
+release; \claim{C-REGRET}and at every step it reports the exact finite-alphabet optimum
+(Section~\ref{sec:model-nonideal}) from oracle channel state and the gap to the achieved power,
+a regret reference that bounds every built-in controller at every tested position (VA-3).
 
 \subsection{Limitations}\label{sec:disc-limits}
-\input{sections/tables/table_limitations}
-\claim{C-LIMITS}Table~\ref{tab:limitations} lists what the current release does not model or
-provide.
-Three limits matter most for reading the results of this paper. The paced mode is soft real
-time: it counts deadline misses and does not prevent them. Agreement with MATLAB is a
-comparison of two codes and does not validate absolute RIS power; validation needs
-measurements (Section~\ref{sec:vv}). And mutual coupling between elements enters solely
-through measured or simulated tables of whole configurations, so a controller cannot exploit
-coupling that its tables do not contain.
+\claim{C-LIMITS}Appendix~\ref{app:model} lists what the release does not model or provide.
+Three limits matter most here. The paced mode is soft real time: it counts
+deadline misses and does not prevent them. Agreement with MATLAB compares two codes and does
+not validate absolute RIS power; validation needs measurements (Section~\ref{sec:vv}). And
+mutual coupling enters solely through measured or simulated tables of whole configurations, so
+a controller cannot exploit coupling that its tables do not contain.

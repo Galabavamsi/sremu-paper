@@ -1,0 +1,55 @@
+% Table I (main text) -- compact tool comparison: the four gap properties of Section I and
+% openness, condensed from the full table (sections/tables/table1_tools.tex, Appendix A, label
+% tab:tools), whose cells come from research/related_work.md, Section 3 (primary sources fetched
+% 10 Oct 2026). Same conventions: "nv" (not verified), "no evid." (primary source read, feature
+% not mentioned), "no" (source states the feature is absent). Every tool row carries its
+% citation, so its numbers count as cited (check_claims.py). No reported macro is used here.
+\begin{table*}[t]
+\caption{Surveyed tools against the four properties of Section~\ref{sec:intro} (as of 10 Oct
+2026): (i) level and interface, (ii) run-time RIS control, (iii) RIS model and measured
+per-state responses, (iv) wall-clock behaviour. nv: not verified from a primary source; no
+evid.: a primary source does not mention it. Coef.: channel coefficients; TS: time series;
+IQ: complex-baseband samples; DES: discrete-event simulation; PO: physical optics.
+Appendix~\ref{app:survey} gives versions, dates, mobility and licences.}
+\label{tab:toolsmain}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.05}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{tabular}{@{}L{1.42in}L{0.92in}L{1.12in}L{1.78in}L{0.92in}L{0.58in}@{}}
+\toprule
+Tool & (i) Level & (ii) Run-time RIS control & (iii) RIS model; measured responses &
+(iv) Wall-clock & Open \\
+\midrule
+SimRIS~\cite{Basar2020SimRIS,SimRISRepo} & Coef. & No & Statistical, ideal phase; no evid. &
+  No & Yes \\
+QRIS~\cite{Burtakov2023QRIS,QRISPage} & TS (QuaDRiGa) & no evid. & Unit-cell patterns; yes &
+  No & On request \\
+Sionna RT~\cite{SionnaV018Release,SionnaRTReleases} & Coef./CIR & Gradient opt.\ (v0.18--0.19)
+  & Reradiation until v0.19; partial & No & Yes \\
+MATLAB~\cite{MathWorksRectangularRIS,MathWorksRISCDL} & Coef., samples & User script &
+  Element-pattern cell; partial & No (offline) & No \\
+Wireless InSite EES~\cite{RemcomEES,DeJong2022EES} & Ray paths & No & Static PO metasurface;
+  nv & No & No \\
+CoopeRIS~\cite{Segata2024CoopeRIS} & Packets (DES) & Oracle controller & Far-field phase sum;
+  nv & No (DES) & Yes \\
+GoSimRIS~\cite{ElGhalbzouri2025GoSimRIS} & Coef., SNR & Yes (E2SM-RIS) & Configurable
+  phases; no evid. & E2 (author claim) & Yes \\
+ORIX~\cite{Kayraklik2026ORIX} & Coef. & Yes (E2SM-RIS) & Quantized phase; parametric fit &
+  Near-RT loop & nv \\
+Colosseum + RIS~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing,Bonati2021Colosseum} & IQ
+  (FPGA) & No (fixed in a run) & Precomputed cascade; no & Yes (hardware) & No \\
+OAI rfsimulator~\cite{OAIrfsim} & IQ (TCP) & Telnet, no RIS & None; no & No (by design) &
+  Yes \\
+srsRAN 4G ZMQ~\cite{srsRANZMQ} & IQ (ZeroMQ) & User-built & None; no & nv & Yes \\
+ACHEM~\cite{Gurses2026ACHEM} & IQ, UHD API & Channel, no RIS & None; antenna patterns & Yes &
+  Yes \\
+TRACE~\cite{Kumar2026TRACE} & Symbols & Yes (UDP) & Ideal phase; no & nv & On acceptance \\
+\midrule
+\sremu{} (this work) & IQ, UHD-shaped API & Yes, at a logged sample & Area-tied PO;
+  $\Gamma(s,f,\theta_i,\theta_s)$ tables, import tested & Lockstep exact; paced measured & To be
+  released \\
+\bottomrule
+\end{tabular}
+\end{table*}

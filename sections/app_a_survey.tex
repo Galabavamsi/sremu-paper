@@ -1,0 +1,40 @@
+% Appendix A -- tool survey and standards alignment (moved from Section II (full Table I) and
+% Section VIII-A (standards table and its discussion) for length, 2026-10-12; text unchanged
+% apart from joins). Table cells: research/related_work.md, Section 3 (primary sources fetched
+% 10 Oct 2026); ETSI clauses checked against the ETSI PDFs (see the table file comments).
+\section{Tool Survey and Standards Alignment}\label{app:survey}
+
+\claim{C-GAP}Table~\ref{tab:tools} gives the full comparison behind
+Table~\ref{tab:toolsmain}: versions and dates, the level of each tool, wall-clock behaviour,
+RIS model, measured responses, mobility, external RIS control and licence, with the survey
+method of Section~\ref{sec:related-gap}.
+
+\input{sections/tables/table1_tools}
+
+Some details of the tools of Section~\ref{sec:related} complete the table. Wireless InSite
+describes engineered electromagnetic surfaces with a uniform-ray physical-optics model for a
+static configuration~\cite{RemcomEES,DeJong2022EES}, and a ray-traced model of a deployed
+surface has been used to choose its phases and checked against
+measurements~\cite{Karakelle2026DTRIS}. The ns-3 modules model 5G and unmanned-aerial-vehicle
+links~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS}, and ns-3 can draw its channels from Sionna RT,
+whose current releases have no RIS~\cite{Zubow2024Ns3Sionna}. The hardware demonstration
+of~\cite{Sahin2025RISmeetsORAN} closes the loop through the RAN intelligent controller. The
+Colosseum channel emulator is built on field-programmable gate arrays
+(FPGAs)~\cite{Bonati2021Colosseum}. Software-in-the-loop emulators couple the OAI rfsimulator
+with ray-traced channel taps~\cite{Iye2025OWDT} or run GNU Radio channel models for swarms of
+unmanned aerial vehicles~\cite{Mastronarde2022RFSITL}, and NVIDIA's ray-traced RAN simulation
+platform (AODT) has no RIS files in its repository~\cite{AODTRepo}.
+
+\claim{C-STANDARDS}Table~\ref{tab:standards} maps the terms and models of the ETSI documents
+on RIS to elements of \sremu{}. In the split of GR RIS 002~\cite{ETSI_GR_RIS002_v121},
+controllers decide, and the engine applies their commands with the panel's control
+granularity, quantizer and failure map at the sample of each receiver. The reradiation integral of GR RIS
+003~\cite{ETSI_GR_RIS003_v121} has the factor $j$ that K1 keeps; its mutually coupled antenna
+model and its polarized elements are outside the model of \sremu{}. The parameters of GS RIS
+008~\cite{ETSI_GS_RIS008} appear as fields of the response tables and of the panel
+capabilities (Appendix~\ref{app:interfaces}), and the default duration of the transition is
+the panel's reconfiguration time. The modulated-signal quality of GS RIS 008, the error
+vector magnitude (EVM), is measured by an RX application on received samples;
+Section~\ref{sec:cases} uses it.
+
+\input{sections/tables/table6_standards}

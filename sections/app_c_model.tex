@@ -1,0 +1,122 @@
+% Appendix C -- physical-model details (moved from Section IV and the limitations table of
+% Section VIII-C for length, 2026-10-12; text unchanged apart from joins). Module paths for the
+% lead's check are in the comments of sections/04_physical_model.tex (sremu commit 2a016a6).
+% Every number is a macro (numbers.yaml; `code` macros are read from the sremu code) or cited.
+\section{Physical-Model Details}\label{app:model}
+
+This appendix extends Section~\ref{sec:model}. \claim{C-MODELCARD}Table~\ref{tab:modelcard}
+lists every component of the model with its validity domain, verification evidence and
+default; the identifiers refer to Section~\ref{sec:vv} and Appendix~\ref{app:vv}.
+
+\input{generated/tables/table2_model_card}
+
+\subsection{Conventions and line of sight}
+% contracts.py conventions; physics/los.py, antennas.py, diffraction.py, ground.py, walls.py,
+% diffuse.py.
+\claim{C-STACK}The trajectories are static, piecewise-linear waypoints, constant velocity, one-
+and two-dimensional random waypoint~\cite{Bettstetter2003RWP} with keyed legs, a cubic-spline
+trace, or timed updates from a client, so positions never depend on an update grid. Tables
+without angle dependence use a separable form of
+the coefficient tensor. Channel coefficients are dimensionless and normalized as in the Friis
+equation, $P_R=P_T|h|^2$, with antenna gains inside $h$. The complex baseband signal $x(t)$
+of a carrier $f_c$ is $s(t)=\sqrt2\,\mathrm{Re}\{x(t)e^{j2\pi f_ct}\}$, and a path with delay
+$\tau$ maps $x(t)$ to $a\,x(t-\tau)\,e^{-j2\pi f_c\tau}$.
+
+\claim{C-LOS}The LOS path is $h_{\mathrm{LOS}}=\sqrt{G_TG_R}\,
+\lambda/(4\pi d)\,V$ with scalar co-polar antenna patterns (isotropic, a $\cos^\alpha$
+pattern with peak gain $2(\alpha+1)$, or a tabulated pattern with provenance) and an explicit
+visibility factor $V$: zero behind an opaque occluder, $10^{-L/20}$ through a partition with
+transmission loss $L$~dB (an engineering choice), or the Fresnel knife-edge factor $F(\nu)$
+of one edge, which keeps its phase and adds coherently to the RIS paths. Scenario names
+never imply blockage. Optional mechanisms add a flat-ground image path with Fresnel
+coefficients, image expansion of the two RIS hops over that ground, order-one images in
+finite walls and an additive diffuse term (Table~\ref{tab:modelcard}).
+
+\subsection{Kernel guards, cell models and non-idealities}
+% scenario/guards.py CELL_NEAR / CELL_TOO_CLOSE; ris_kernel.energy_budget, KIRCHHOFF_WARNING;
+% physics/quadrature.py; physics/nonideal.py.
+\claim{C-K1-GUARDS}A scenario check warns when a cell is closer to a node than
+three wavelengths, where the point-scatterer approximation weakens, and rejects distances
+below one wavelength. With the default obliquity the scattered power of a passive panel does
+not exceed the power it intercepts in any tested configuration (PH-23); the alternative obliquity
+$(\cos\theta_i+\cos\theta_s)/2$ can exceed it for anomalous reflection and therefore
+emits a validity warning when selected.
+
+\claim{C-CELL-MODEL}Forcing \texttt{point} on cells larger than the \texttt{auto} threshold
+emits a warning, and tables whose measurement already contains the cell pattern force
+\texttt{point} without obliquity, so that the pattern is not counted twice. The two models are
+not numerically equivalent: a patch carries the sub-aperture factor of a uniform patch, which a
+point omits. \claim{C-RICHARDSON}For \texttt{po\_patch}
+panels a Richardson check computes the received power of up to \numRichardsonLinks{}
+representative links at sub-cell size $\Delta$ and at $\Delta/2$, halves $\Delta$ at most
+\numRichardsonHalvings{} times while the change exceeds \numRichardsonTolDb~dB, and fails
+otherwise; the accepted size and the estimate go to the manifest.
+
+\claim{C-NONIDEAL}A command (state indices, phases or a codebook entry) is expanded from
+controls to physical cells by the panel's control granularity. Stuck and dead cells follow a
+failure map, and dead cells absorb by default. The efficiency factor scales the amplitude by
+$\sqrt{\eta}$; it is refused for measured or digitized tables unless explicitly overridden,
+because their data already contain the loss. The transition of
+Section~\ref{sec:design-time} acts in time.
+
+\claim{C-OPTIMUM}For a direction $\theta$ the best per-element choice is
+$s_n(\theta)=\arg\max_s\mathrm{Re}\{Z[s,n]e^{-j\theta}\}$; it can change at the critical
+angles $\arg(Z[a,n]-Z[b,n])\pm\pi/2$ and nowhere else, and the optimum is the choice at the
+direction of the optimal sum, which the sweep over the sorted critical angles finds.
+
+\subsection{Interpolation bound and fractional delay}
+% channel/interp.py (EPS_REL split D1, t_curv_s, tile_side_max_m, choose_policy, M_MAX,
+% T_U_MAX_S, VERIFY_INTERP_STRIDE, VERIFY_INTERP_FLAG, verify_interp); channel/fd.py (Kaiser
+% sinc, FD_ROWS, N_PHASES polyphase table with linear interpolation, INTEGER_MAX_PHASE_RAD).
+\claim{C-DOPPLER}For static scenes snapshots are evaluated at events, and configuration
+switches are discontinuities at exact sample indices. Between two snapshots
+the delay of a path without a RIS is a chord, linear in time between its delays at the two
+snapshots, and its amplitude is complex-linear; the residual of a tile is the sum of its
+cells' coefficients relative to the tile's reference delay, interpolated complex-linearly.
+\claim{C-INTERP-BOUND}Half of the target $\varepsilon_{\mathrm{rel}}$ goes to each source of
+error. The chord error of a path with range $r$ is $k\ddot rT_u^2/8$ with $\ddot r\le
+v_\perp^2/r_{\min}$, which gives
+\begin{equation}
+T_{\mathrm{curv}}=\sqrt{8(\varepsilon_{\mathrm{rel}}/2)\,r_{\min}/(k\,v_\perp^2)}.
+\label{eq:tcurv}
+\end{equation}
+The residual of a tile with side $D_t$ turns by $\Delta\phi$, equal to
+$2\pi v_{\mathrm{rel}}D_tT_u/(\lambda R_{\min})$, per interval, and the midpoint dip of linear interpolation,
+$\Delta\phi^2/8$, must stay below $\varepsilon_{\mathrm{rel}}/2$, which bounds $D_t$. The
+policy starts from $T_{u0}=\min(T_{\mathrm{curv}},T_{u,\max})$ with $T_{u,\max}$ of
+\numTuMaxMs~ms (a scenario can lower $T_u$ but not raise it), evaluates the periods
+$T_{u0}/2^m$ for $m$ up to \numTuHalvingsMax{} with the tile counts each needs, and picks
+the pair with the lowest estimated compute cost; the choice goes to the manifest.
+\claim{C-VERIFY-INTERP}Each run checks the bound: in every \numVerifyStride{}th snapshot
+interval the engine evaluates the exact snapshot at the interval midpoint and logs
+$\max|h_{\mathrm{interp}}-h_{\mathrm{true}}|/|h|$ per link; the manifest keeps the maximum,
+and runs above $\numVerifyFlagFactor\,\varepsilon_{\mathrm{rel}}$ are flagged (PH-18).
+Section~\ref{sec:vv} compares the rendered Doppler shifts of LOS and RIS paths with closed
+forms (PH-17).
+
+\claim{C-FD}Each TX stream declares its occupied bandwidth $B$. A link is narrowband when
+$\pi B\Delta\tau\le\numNarrowbandRad$~rad over its delay spread $\Delta\tau$; its paths then
+share one envelope delay and keep their own exact carrier phases. Otherwise the paths are
+grouped so that each group passes the same test, and each group gets its own
+FD filter at its chord delay. The FD filters are Kaiser-windowed sinc
+filters ($\beta=\numKaiserBeta$)~\cite{Laakso1996FracDelay} with \numFdTaps{} taps for
+$B/f_s$ up to \numFdBands{}, respectively, applied through a polyphase table of
+\numFdPhases{} fractional phases with linear interpolation between neighbouring phases.
+Their in-band error stays below \numFdTargetDb~dB for every fractional delay (PH-20); a
+wider band is rejected. An integer delay without a filter is used when the band is narrow
+enough for the half-sample error, $\pi B/(2f_s)$, to stay below \numIntegerDelayRad~rad.
+
+\claim{C-NOISE}The thermal noise is complex Gaussian. \claim{C-RNG}Random keys are derived with
+a BLAKE2b hash of the seed, purpose and name, and the counter-based Philox4x32-10
+generator~\cite{Salmon2011Philox} takes the absolute index as its counter. Further
+impairments are carrier-frequency offsets of TX and RX oscillators,
+computed as phases of the absolute sample index (RT-09), Wiener phase noise with keyed
+increments, and a front end with full-scale mapping, gain and optional clipping.
+
+\subsection{What the release does not model}
+% Limitations table (DESIGN 1.5 non-goals, plus the RisEnv backend limit of the committed
+% code: sremu/ml/env.py accepts backend="batch" and raises for the IQ backends).
+\input{sections/tables/table_limitations}
+\claim{C-LIMITS}Table~\ref{tab:limitations} lists what the current release does not model or
+provide, and what it offers instead; Section~\ref{sec:disc-limits} names the three limits that
+matter most for reading the results of this paper.

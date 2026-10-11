@@ -5,80 +5,74 @@
 % the transparency sentence at the end (claim C-LINEAGE) is its single mention of the
 % authors' earlier in-house simulator. Third-party numbers are REPORTED-class macros of
 % numbers.yaml (DESIGN 1.6 rule 7); each sentence cites the key named there.
+% Length round 2026-10-12: Table I here is the compact comparison (gap columns); the full
+% table (label tab:tools) and the remaining survey notes are in Appendix A
+% (sections/app_a_survey.tex).
 \section{Related Work and Gap}\label{sec:related}
+% Table I (compact) is input in Section I, next to its first citation, so that the double-column
+% float lands at the top of page 2.
 
 \subsection{Coefficient-level simulators and ray tracers}
-SimRIS generates statistical millimeter-wave RIS channel matrices by Monte Carlo
-simulation with ideal phase control~\cite{Basar2020SimRIS,Basar2021TCOM}. QRIS extends
-QuaDRiGa~\cite{Jaeckel2014QuaDRiGa} with unit-cell patterns taken from measurements or
-full-wave simulation and with several interacting surfaces; its code is distributed on
-request~\cite{Burtakov2023QRIS,QRISPage}. NYUSIM-RIS extends the statistical NYUSIM channel
-model~\cite{Habib2023NYUSIMRIS}, and system-level simulators evaluate RIS deployments with
-abstracted links~\cite{Hao2023ViennaRIS,Sihlbom2023SLS}. Among ray tracers, Sionna added
+SimRIS generates statistical millimeter-wave RIS channels with ideal phase
+control~\cite{Basar2020SimRIS,Basar2021TCOM}; QRIS extends QuaDRiGa~\cite{Jaeckel2014QuaDRiGa}
+with measured or full-wave unit-cell patterns and several surfaces, with code on
+request~\cite{Burtakov2023QRIS,QRISPage}; NYUSIM-RIS extends a statistical channel
+model~\cite{Habib2023NYUSIMRIS}, and system-level simulators~\cite{Hao2023ViennaRIS,Sihlbom2023SLS}
+abstract the links. Among ray tracers, Sionna added
 RIS in version \txtRepSionnaRisAddedVersion~\cite{SionnaV018Release}, and Sionna
 RT~\cite{Hoydis2023SionnaRT,AitAoudia2025SionnaRTReport} removed it in version
 \txtRepSionnaRisRemovedVersion; no release up to \txtRepSionnaLatestVersion{} (29 Sep 2026)
-has a RIS module~\cite{SionnaRTReleases}. Wireless InSite
-describes engineered electromagnetic surfaces with a uniform-ray physical-optics model for
-a static configuration~\cite{RemcomEES,DeJong2022EES}. Other ray tracers model RIS
-reradiation with ray-based or macroscopic
-models~\cite{Vitucci2023RayRIS,Sandh2024RTRIS,Herold2023RISRayTracing,Habib2025CloudRT}, and
-a ray-traced model of a deployed surface has been used to choose its phases and checked
-against measurements~\cite{Karakelle2026DTRIS}. MATLAB provides rectangular RIS
-objects with a user-defined unit-cell element and a reflector that processes sample
-vectors offline~\cite{MathWorksRectangularRIS,MathWorksRISCDL}. Electromagnetic models with
-mutual coupling~\cite{Faqiri2023PhysFad,Gradoni2021MutualCoupling} and macroscopic
-reradiation models~\cite{DegliEsposti2022Reradiation} describe the surface itself rather
-than a running link. In this group the RIS configuration is an input to an offline
-computation, not a command received while a radio link is running. A systematic review of
-RIS simulation models and deployments, co-authored by three of the present authors, covers
-the group in more breadth~\cite{Kaur2026SLR}.
+has a RIS module~\cite{SionnaRTReleases}. Wireless InSite models engineered surfaces in a
+static configuration~\cite{RemcomEES,DeJong2022EES}, other ray tracers model RIS reradiation
+with ray-based or macroscopic
+models~\cite{Vitucci2023RayRIS,Sandh2024RTRIS,Herold2023RISRayTracing,Habib2025CloudRT,Karakelle2026DTRIS},
+and MATLAB provides RIS objects with a user-defined unit cell that process sample vectors
+offline~\cite{MathWorksRectangularRIS,MathWorksRISCDL}. Electromagnetic models with mutual
+coupling~\cite{Faqiri2023PhysFad,Gradoni2021MutualCoupling} and macroscopic reradiation
+models~\cite{DegliEsposti2022Reradiation} describe the surface rather than a running link. Here the
+RIS configuration is an input to an offline computation, not a command received while a link
+runs; a systematic review co-authored by three of the present authors covers this group in
+more breadth~\cite{Kaur2026SLR}.
 
 \subsection{Network simulators and controller-in-the-loop frameworks}
-CoopeRIS couples a far-field RIS gain model to vehicular network simulation and assumes an
-oracle controller that knows the vehicle position~\cite{Segata2024CoopeRIS}. ns-3 modules
-model 5G and unmanned-aerial-vehicle links assisted by intelligent reflecting surfaces at packet level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS},
-and ns-3 can draw its channels from Sionna RT, whose current releases have no
-RIS~\cite{Zubow2024Ns3Sionna}.
-GoSimRIS closes an O-RAN E2 loop between an xApp and a RIS channel simulator through an
-E2SM-RIS service model and supports at most \numRepGoSimRisMaxElements{}
-elements~\cite{ElGhalbzouri2025GoSimRIS}.
+CoopeRIS couples a far-field RIS gain model to vehicular network simulation with an oracle
+controller that knows the vehicle position~\cite{Segata2024CoopeRIS}; ns-3 modules model
+links assisted by intelligent reflecting surfaces at packet
+level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS} or draw channels from Sionna
+RT~\cite{Zubow2024Ns3Sionna}. GoSimRIS closes an O-RAN E2 loop between an xApp and a RIS
+channel simulator through an E2SM-RIS service model and supports at most
+\numRepGoSimRisMaxElements{} elements~\cite{ElGhalbzouri2025GoSimRIS}.
 ORIX runs a near-RT loop of \numRepOrixLoopMinMs~ms to \numRepOrixLoopMaxS~s with quantized
 phases and a phase-dependent
 amplitude model, and neglects mutual coupling and reconfiguration delay~\cite{Kayraklik2026ORIX}.
-These frameworks exchange channel coefficients, signal-to-noise ratios or rates, not
-waveform samples. A hardware demonstration closes the same loop through the RAN intelligent
-controller with a physical surface~\cite{Sahin2025RISmeetsORAN}.
+These frameworks exchange coefficients, signal-to-noise ratios or rates, not waveform
+samples; a hardware demonstration closes the loop with a physical
+surface~\cite{Sahin2025RISmeetsORAN}.
 
 \subsection{IQ-level emulators}
 Colosseum combines \numRepColosseumSdrs{} software-defined radios with a channel emulator
-built on field-programmable gate arrays (FPGAs) that runs precomputed
-scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
-Tsampazi and Melodia installed RIS-cascaded channels generated with QuaDRiGa in Colosseum
-and ran srsRAN end to end; the RIS phases were optimized before the experiment and are not
-reconfigured during it~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}. The OAI
-rfsimulator replaces the RF driver and forwards IQ samples over TCP; its documentation
-states that it is not designed to keep pace with wall-clock time, and a telnet interface
-changes channel models and per-beam gains during a run~\cite{OAIrfsim}. The srsRAN ZMQ
-virtual radios exchange IQ samples, and channels can be inserted with a GNU Radio
-flowgraph~\cite{srsRANZMQ}. Software-in-the-loop emulators couple the OAI rfsimulator with
-ray-traced channel taps~\cite{Iye2025OWDT} or run GNU Radio channel models for swarms of
-unmanned aerial vehicles~\cite{Mastronarde2022RFSITL}, and NVIDIA's ray-traced RAN simulation
-platform (AODT) has no RIS files in its repository~\cite{AODTRepo}. ACHEM runs unmodified
-UHD applications through a virtual USRP,
-emulates channels at the IQ level at wall-clock rate with mobility from vehicle
-simulators, and reports end-to-end validation against the AERPAW testbed; it has no RIS
-model~\cite{Gurses2026ACHEM}. Integrating a RIS operator with such a transport is
-discussed as future work in Section~\ref{sec:future}.
+on field-programmable gate arrays that runs precomputed
+scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}. Tsampazi and Melodia installed
+RIS-cascaded QuaDRiGa channels in it and ran srsRAN end to end, with RIS phases optimized
+before the experiment and not reconfigured during
+it~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}. The OAI rfsimulator forwards IQ
+samples over TCP, is by its documentation not designed to keep pace with wall-clock time, and
+changes channel models and per-beam gains during a run through a telnet
+interface~\cite{OAIrfsim}; the srsRAN ZMQ virtual radios exchange IQ samples, and a GNU Radio
+flowgraph can insert channels~\cite{srsRANZMQ};
+software-in-the-loop emulators add channel models to such transports (Appendix~\ref{app:survey}).
+ACHEM runs unmodified UHD applications through a virtual USRP,
+emulates channels at the IQ level at wall-clock rate with mobility from vehicle simulators,
+and reports end-to-end validation against the AERPAW testbed; it has no RIS
+model~\cite{Gurses2026ACHEM}.
 
 \subsection{Open RIS hardware and measurement data}
-Open RIS designs publish their hardware, firmware and
+Open RIS designs publish hardware, firmware and
 measurements~\cite{OpenRISRepo,Heinrichs2023OpenSourceRIS,Chen2026OpenRIS}. Rossanese et al.\
-released sub-6\,GHz beam-scan measurements in an anechoic chamber~\cite{Rossanese2024OpenMeas}
-of a surface whose cells switch between seven reflective phase states and an absorbing
-state~\cite{Rossanese2022WiNTECH}. Such data are the next validation step for \sremu{}
-(Section~\ref{sec:future}); this paper compares against the chamber measurements of Tang et
-al.~\cite{Tang2022mmWave} (Section~\ref{sec:vv-tang}).
+released sub-6\,GHz chamber beam scans~\cite{Rossanese2024OpenMeas} of a surface with seven
+reflective phase states and an absorbing state~\cite{Rossanese2022WiNTECH}, the next
+validation step for \sremu{} (Section~\ref{sec:future}); this paper compares against the
+chamber measurements of Tang et al.~\cite{Tang2022mmWave} (Section~\ref{sec:vv-tang}).
 
 \subsection{TRACE}
 \claim{C-TRACE}TRACE~\cite{Kumar2026TRACE}, by some of the present authors, is a
@@ -92,26 +86,23 @@ studies estimation and tracking algorithms on symbol-level channels; \sremu{} pr
 sample-level radio environment with timed RIS control. A TRACE-style controller could
 drive \sremu{}'s control plane.
 
-\subsection{Gap}
-\input{sections/tables/table1_tools}
-Table~\ref{tab:tools} summarizes the comparison. \claim{C-GAP}We surveyed RIS simulators,
-ray tracers, network simulators, controller frameworks, IQ-level emulators and open RIS
-hardware and data releases published or released up to 10 Oct 2026, found through Crossref
-and arXiv searches, the reference lists of the papers found and the repositories and
-documentation they link; a tool entered Table~\ref{tab:tools} when it models a RIS or
-exchanges IQ samples with radio software, and each feature was read from a primary source
-(paper, documentation or code). A tool counts as open when its code is publicly
-downloadable. Each of properties
-(i)--(iv) of Section~\ref{sec:intro} appears in some row, and no surveyed open tool has all
-four. ACHEM has (i) at a stronger level than \sremu{}, since it runs unmodified UHD
-applications, and has (iv), but no RIS~\cite{Gurses2026ACHEM}. GoSimRIS and ORIX have
-(ii) at the level of channel coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}.
-QRIS accepts measured or simulated unit-cell patterns, which is close to (iii), but runs
-offline~\cite{Burtakov2023QRIS}. In \sremu{}, (iii) is an import path that is tested; this
-paper exercises it with reported and assumed states, not with a measured per-state table
-(Section~\ref{sec:vv}). The gap is
-therefore a combination, and it is dated: a RIS operator could be added to an existing
-IQ-level emulator.
+\subsection{Gap}\label{sec:related-gap}
+\claim{C-GAP}We surveyed RIS simulators, ray tracers, network simulators, controller
+frameworks, IQ-level emulators and open RIS hardware and data releases published or released
+up to 10 Oct 2026, found through Crossref and arXiv searches, the reference lists of the papers
+found and the repositories and documentation they link; a tool entered the comparison when it
+models a RIS or exchanges IQ samples with radio software, each feature was read from a primary
+source (paper, documentation or code), and a tool counts as open when its code is publicly
+downloadable. Table~\ref{tab:toolsmain} shows that each of properties (i)--(iv) of
+Section~\ref{sec:intro} appears in some row and no surveyed open tool has all four. ACHEM
+has (i) at a stronger level than \sremu{}, since it runs unmodified UHD applications, and
+(iv), but no RIS~\cite{Gurses2026ACHEM}; GoSimRIS and ORIX have (ii) at the level of channel
+coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}; QRIS accepts measured unit-cell
+patterns, close to (iii), but runs offline~\cite{Burtakov2023QRIS}. In \sremu{}, (iii) is a
+tested import path that this paper exercises with reported and assumed states, not with a
+measured per-state table (Section~\ref{sec:vv}). The gap is therefore a combination, and it is
+dated: a RIS operator could be added to an existing IQ-level emulator
+(Section~\ref{sec:future}).
 
 \claim{C-LINEAGE}An earlier in-house simulator by the authors was used
 in~\cite{Mishra2025WCL,Mishra2025NCC}; \sremu{} is an independent new implementation.

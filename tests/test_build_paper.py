@@ -357,7 +357,9 @@ def test_figure_sources_match_registry() -> None:
 
 
 def test_figure_sources_teeth(paper_copy: Path) -> None:
-    vv = paper_copy / "sections" / "05_verification_validation.tex"
+    # F5 and F6 sit in Appendix D (sections/app_d_vv.tex) since the length restructure of
+    # 2026-10-12; the teeth are the same, only the file that holds the two figures moved.
+    vv = paper_copy / "sections" / "app_d_vv.tex"
     text = vv.read_text(encoding="utf-8")
     for old, new in (("(SIM-sremu;\nANALYTIC).}{fig:F6}", "(SIM-sremu).}{fig:F6}"),
                      ("\\sremufigure{F6}{\\columnwidth}", "\\sremufigure{F6}{\\textwidth}"),
@@ -369,7 +371,7 @@ def test_figure_sources_teeth(paper_copy: Path) -> None:
            "\n\\sremufigure{F3}{\\textwidth}{Again (DIG).}{fig:F3}\n")
     rep = Report("t")
     check_figure_sources(paper_copy, load_registry(paper_copy), rep)
-    rel = "sections/05_verification_validation.tex"
+    rel = "sections/app_d_vv.tex"
     for needle in (f"F6 ({rel}): caption does not name data class ANALYTIC",
                    f"F6 ({rel}): width \\textwidth, registry says single",
                    "label 'fig:F5x'", "figure F3: placed 2 times"):

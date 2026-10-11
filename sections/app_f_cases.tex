@@ -1,0 +1,156 @@
+% Appendix F -- case-study details (moved from Section VII for length, 2026-10-12; text
+% unchanged apart from joins). Every number is a macro of numbers.yaml filled by
+% tools/gen_results.py from paper/sweeps/results and sremu validation/fm (or a definition
+% macro); figure F12 comes from figures/src/f12_*.py. E-D is "model-based dimensioning, not
+% validated". E-E: sremu examples/gnuradio_zmq, experiments/ee_gnuradio.py; results in
+% sweeps/results/E-E (laptop WSL2 run of a working tree, to be repeated at the pinned commit)
+% and E-E-laptop.
+\section{Case-Study Details}\label{app:cases}
+
+This appendix extends Section~\ref{sec:cases}.
+
+\subsection{E-B: setup, cases and lab-like geometry}
+\claim{C-EB-WHY}Three lessons stand out in E-B: an equalizer trained before a switch inside a
+packet sees an error as large as the signal after it; a long linear transition spreads the
+damage but does not remove it; and with a strong line of sight QPSK tolerates the wrong
+configuration, so the timing of a command matters where the RIS path dominates or the margin
+is small.
+
+\claim{C-EB-SETUP}In the arc geometry each uncertain distance and angle takes the middle of its
+known range, the two receivers stand at different angles at positions that are an engineering
+choice (ENG), and $E_s/N_0$ at RX1 is set against the physical noise. A lab-like SIM geometry with one panel of three tiles is a supporting
+case. Three assumptions apply to both geometries. The two states of the laboratory cells have
+unit amplitude ($|\Gamma|=1$, ASSUMED), because their magnitudes were not measured. During a
+transition the response follows the complex-linear path between the states, an engineering
+choice (ENG). When the line of sight is blocked, the occluder removes the direct path and leaves
+the RIS hops unattenuated; on the arc a real plate of that size would also shadow some RIS
+rays, so this case is an idealization. The packets run at \numEbSps{} samples per symbol and
+\numEbRateMsps~MS/s.
+
+\claim{C-EB-TIMING}The slice of E-B2 shown uses guard intervals of \numEbGuardMs~ms, and on the
+arc each controller message carries one command per tile. The arc run fixed three cases before
+any point ran: the line of sight present at $E_s/N_0=\numEbEsnoDb$~dB, the same at
+\numEbArcEsnoLowDb~dB as a sensitivity, and the line of sight blocked. With the line of sight
+present at \numEbEsnoDb~dB QPSK tolerates the wrong configuration, although the EVM of the
+affected packets rises. With a lead of \numEbLeadMinMs~ms, timed commands fail already at
+$J=\numEbJitterOneMs$~ms (\numEbArcTimedHalfPerOneLosPct~\% with the line of sight present at
+\numEbArcEsnoLowDb~dB and \numEbArcTimedHalfPerOneBlkPct~\% with it blocked); with
+\numEbLeadMaxMs~ms they lose no packet at any jitter. \claim{C-EB-SERVED}On the served path of
+Section~\ref{sec:wc-loop} an asap command became visible after a median of
+\numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms, with p99
+\numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms and rare outliers of up to
+\numBfourVisMaxMs~ms; a timed command there is on time when its lead exceeds the command
+latency plus the error of the client's estimate of virtual time.
+\claim{C-EB-TICK}The clock of the tick-based semantics starts at $t=0$
+and keeps one pending command per panel. Its losses hold in both cases of
+Fig.~\ref{fig:F9}(b): with a timer period of the order of a packet, alignment with the frame
+decides.
+
+\claim{C-EB-LABLIKE}In the lab-like geometry (Fig.~\ref{fig:F9}(c), (d)), with the line of
+sight blocked, the switch changes the channel of RX1 by
+\numEbBlockedChangeDb~dB and \numEbBlockedRotDeg$^\circ$, and \numEbOneErrors{} payload bits
+fail for the same switch time. Timed commands with the \numEbLeadMidMs~ms lead lose no packet
+up to $J=\numEbJitterOneMs$~ms and \numEbTimedTwoPerThreePct~\% at $J=\numEbJitterMaxMs$~ms.
+Asap commands lose \numEbAsapPerOnePct~\% at $J=\numEbJitterOneMs$~ms. Tick-based semantics
+lose \numEbTickPerZeroPct~\% without jitter and up to \numEbTickPerMaxPct~\% with it. With the
+line of sight present, no semantics loses a packet at \numEbEsnoDb~dB; this geometry was not
+run at \numEbArcEsnoLowDb~dB.
+
+\subsection{E-A: protocol record and time scale}
+\claim{C-EA-SETUP}The access point sits \numEaApOffsetM~m off the user line, which keeps
+the line-of-sight power finite everywhere on the line, and the partition loss gives the RIS
+room to help. The
+hypotheses and their ranges were in the emulator's design document before the sweep: GitHub's
+push log (Section~\ref{sec:vv-lab}) records it in the initial push of the emulator repository.
+The plan that adds the decision rules and the evaluation rule (SHA-256 \txtEaPlanSha\ldots{}
+with LF line ends) was written before the sweep by the authors' record, but committed to the
+paper repository after it (commit \txtEaPlanCommit), so no third party dates those parts. One
+amendment, made before the full sweep after a short IQ run showed that evaluating each time
+step at its start overestimates the power, moved the evaluation to the step's midpoint; the
+plan discloses it and a short pipeline test seen before it.
+
+\claim{C-EA-RESULT}For isotropic scattering the field and envelope correlations fall to one
+half after \numClarkeFieldHalf{} and \numClarkeEnvHalf{} $\lambda/v$~\cite{Clarke1968}. The
+rule-of-thumb coherence time $\sqrt{9/(16\pi)}/f_D=\numCoherenceRuleLambdaV\,\lambda/v$ lies
+close to the E-A constant, but it is the geometric mean of $1/f_D$ and the envelope
+half-correlation time, not a correlation level. The ratio of the two half-lives, \numEaRatio{}
+(\numEaRatioLo--\numEaRatioHi), lies \numEaRatioOffsetPct~\% above the wavelength ratio
+\numEaRatioPred; the corridor is the same in metres at both carriers, so it is not the same
+geometry in wavelengths and exact scaling is not expected. The ranges fixed before the sweep
+were \numEaHaOneLoS--\numEaHaOneHiS~s for H-A1 and \numEaHaTwoLo--\numEaHaTwoHi{} for H-A2, so
+their support is a weak test. What E-A adds to the classical scaling is the constant for this
+geometry, the retention metric and the result for controllers without positions: besides the
+bandit (H-A3 supported), URAP gains \numEaGainUrap~dB, and our reading of the heuristic
+of~\cite{Mishra2025WCL} reaches \numEaGainWclFast~dB at the shortest delay.
+
+\subsection{E-C per geometry}
+\claim{C-EC}Fig.~\ref{fig:F11} and Table~\ref{tab:ablation} give the loss of the optimized RIS
+term relative to ideal continuous phase in four settings, per alphabet or defect, with the
+large-$N$ closed-form loss. The prior work they agree with concerns discrete and
+phase-dependent states~\cite{WuZhang2020Discrete,Abeywickrama2020Practical}; the laboratory
+state amplitudes are ASSUMED as in Section~\ref{sec:cases-eb}.
+
+\begin{figure}[t]
+\centering
+\sremufigure{F11}{\columnwidth}{Loss of the optimized RIS term relative to ideal continuous
+phase for each alphabet or defect in the lab-like geometry, the synthetic panel with a near
+and a far receiver and the blocked corridor; black ticks: large-$N$ closed form. Data classes:
+SIM-sremu (optimized runs), ANALYTIC (ideal alphabets, closed form), ASSUMED (laboratory state
+amplitudes), REPORTED (published states of Tang et al.).}{fig:F11}
+\end{figure}
+
+\input{generated/tables/table8_ablation}
+
+\subsection{FM-band dimensioning (E-D)}\label{sec:cases-ed}
+\claim{C-ED}This subsection is model-based dimensioning, not validated. Can a focused RIS
+restore an FM broadcast link of \numFmLinkKm~km at \numFmFreqMHz~MHz behind an obstruction?
+With a flat-earth two-ray direct path, a coherent knife edge and ground on both RIS hops, the
+aperture needed for a RIS path as strong as the direct path is \numFmAreqMin--\numFmAreqMax~m$^2$
+over the receiver heights and distances of Fig.~\ref{fig:F12}. At grazing obstruction, over the
+same heights and distances, the RIS path of a \numFmPanelMtwo~m$^2$ panel is
+\numFmGapMinDb--\numFmGapMaxDb~dB weaker than the direct path. Over all map entries with this direct path, for two placements of the panel and
+with or without ground on its hops, the panel suffices in \numFmPrimarySufficient{} of
+\numFmPrimaryEntries{}. A four-ray direct path over flat ground, a model-form sensitivity,
+gives \numFmFourRaySufficient{} entries. The picture changes with the direct-path model: with the
+experimental ITU-R P.526 smooth-earth path of \sremu{}, which is weaker, the same panel suffices in
+\numFmPfiveSufficient{} of \numFmPfiveEntries{} entries. That module is not validated, so the
+dimensioning question is decided by the direct-path model rather than by the RIS.
+
+\begin{figure}[t]
+\centering
+\sremufigure{F12}{\columnwidth}{Model-based dimensioning, not validated: aperture that a
+focused RIS needs for a path as strong as the direct path, versus the knife-edge loss of the
+obstruction, for three RIS-to-receiver distances and two receiver heights; the dotted line
+marks the panel size; grey: the experimental P.526 direct path. Data classes: SIM-sremu,
+ANALYTIC (panel aperture), ASSUMED (ground constants).}{fig:F12}
+\end{figure}
+
+\subsection{E-E: GNU Radio runs}
+\input{generated/tables/table_ee_gnuradio}
+\claim{C-EE}The two earlier external-process runs are the frequency-offset sweep between two
+processes over the native data plane (V-CFO-3) and the consistency runs of E-A with an external
+controller and receiver (VA-1). The GNU Radio DQPSK modem uses \numEeSps{} samples per symbol,
+and the partition attenuates the direct path of the E-E scene.
+\claim{C-EE-LINK}Table~\ref{tab:ee} lists the static runs of Section~\ref{sec:cases-ee}, one
+fresh run with a fresh modem per RIS configuration; the block error rate counts uncoded
+200-bit blocks. Where at least one hundred symbol errors were counted with the link up, the
+symbol error rate (SER) implies
+an implementation loss of \numEeLossMinDb--\numEeLossMaxDb~dB against coherent DQPSK theory at
+the estimated $E_s/N_0$; with the link lost, the implied loss is larger.
+
+\claim{C-EE-TIMING}The change point of the switching run is the maximum-likelihood change
+point of the received IQ, and in every run every engine and transport counter stayed zero.
+
+\claim{C-EE-SPEED}In \txtEeLaptopSweeps{} sweeps of single runs on a laptop (\txtEeLaptopCpu{}, WSL2,
+host load not controlled), the lockstep loop with GNU Radio advanced at an RTF of
+\numEeLaptopRtfLoMin--\numEeLaptopRtfLoMax{} at \numEeRateMsps~MS/s and
+\numEeLaptopRtfHiMin--\numEeLaptopRtfHiMax{} at \numEeLaptopRateHiMsps~MS/s; on an AWS
+\txtEeAwsInstance{} instance it reached \numEeAwsRtfLo{} at \numEeRateMsps~MS/s.
+
+\claim{C-EE-NOTRUN}srsRAN and OpenAirInterface were analysed but not run. srsRAN~4G pads its
+transmit stream to the end of the receive block it is about to read and no further, while
+lockstep needs the transmit stream one fractional-delay look-ahead beyond the received
+samples; a lockstep srsRAN pair therefore needs a per-peer transmit delay and partial receive
+replies, and srsRAN~4G has no package for the Ubuntu release used here. The OpenAirInterface
+RF simulator would need a new transport for its own TCP framing~\cite{OAIrfsim}. Both are
+future work.

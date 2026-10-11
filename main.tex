@@ -64,12 +64,23 @@ verification and validation.
 \input{sections/09_future_work}
 \input{sections/10_conclusion}
 
-\appendices
-\input{sections/appendix}
-
 \input{sections/back_matter}
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
+
+% Appendices follow the references, so that the main text with its references stands alone
+% (about 14 pages) and a journal version can move the appendices to a supplementary file.
+% Appendices A-F extend Sections II-VII in order; G-I are the DESIGN 13.3 appendices (oracle
+% details, reproducibility, data provenance). The main text cites appendix floats only through
+% their appendix, so every float is numbered in order of first citation.
+\appendices
+\input{sections/app_a_survey}
+\input{sections/app_b_interfaces}
+\input{sections/app_c_model}
+\input{sections/app_d_vv}
+\input{sections/app_e_bench}
+\input{sections/app_f_cases}
+\input{sections/appendix}
 
 \end{document}

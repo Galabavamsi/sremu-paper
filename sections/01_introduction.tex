@@ -1,4 +1,4 @@
-% Section I -- Introduction (DRAFT TEXT, WP12 skeleton stage).
+% Section I -- Introduction (DRAFT TEXT, WP12 skeleton stage; condensed for length 2026-10-12).
 % Honesty rules (DESIGN 1.6): no banned words; every number is cited or a pipeline macro;
 % claims are mapped in claims.yaml (C-* ids in the \claim{} markers below).
 \section{Introduction}\label{sec:intro}
@@ -8,85 +8,77 @@ elements whose reflection states are set by a controller, so that part of the pr
 environment becomes a configurable system component~\cite{DiRenzo2020SRE,Basar2019Access,WuZhang2020IRS}.
 Standards bodies now describe their use cases, architectures, channel models and test
 methods~\cite{ETSI_GR_RIS001_v121,ETSI_GR_RIS002_v121,ETSI_GR_RIS003_v121,ETSI_GS_RIS008}.
-A large part of the literature asks how a controller should choose a configuration: with
-discrete phase states~\cite{WuZhang2020Discrete,Zhang2022OptimalBinary,Zhao2024OptimalDiscrete},
-with phase-dependent element amplitudes~\cite{Abeywickrama2020Practical}, under receiver
-mobility~\cite{Matthiesen2021Mobility,Mishra2025WCL}, or for sensing~\cite{Mishra2025NCC}.
+Much of the literature asks how a controller should choose a configuration: with discrete
+phase states~\cite{WuZhang2020Discrete,Zhang2022OptimalBinary,Zhao2024OptimalDiscrete},
+phase-dependent amplitudes~\cite{Abeywickrama2020Practical}, receiver
+mobility~\cite{Matthiesen2021Mobility,Mishra2025WCL} or sensing~\cite{Mishra2025NCC}.
 
-Most of these controllers are evaluated under three simplifications. Element states are
-ideal (unit amplitude with any phase, or a uniform discrete alphabet), reconfiguration is
-instantaneous, and the channel is one coefficient per block rather than a waveform.
-Hardware departs from each of them. Measured unit cells have state-dependent and
-angle-dependent responses~\cite{Tang2021PathLoss,Tang2022mmWave}, amplitude and phase are
-coupled~\cite{Abeywickrama2020Practical}, and the specification GS RIS 008 of the
-European Telecommunications Standards Institute (ETSI) lists reconfiguration time
-and modulated-signal quality among the parameters a RIS test has to
-measure~\cite{ETSI_GS_RIS008}. A configuration command also travels over a control link
-with its own delay, so a position-driven controller acts on a stale
-position~\cite{Mishra2025WCL}. Some consequences of these effects, such as a
-reconfiguration that lands inside a packet, appear in the received samples and are
-invisible to a per-block coefficient model.
+% Table I (compact tool comparison, sections/tables/table1_tools_compact.tex) is input here so
+% that the double-column float lands at the top of page 2, next to its first citation below.
+\input{sections/tables/table1_tools_compact}
 
-Existing tools cover parts of this problem (Section~\ref{sec:related} and
-Table~\ref{tab:tools}). Coefficient-level simulators model RIS channels
-offline~\cite{Basar2020SimRIS,Burtakov2023QRIS}. Open Radio Access Network (O-RAN)
-frameworks close a controller loop
-around such coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}. IQ-level
-emulators exchange complex-baseband samples with radio software but have no RIS
-model~\cite{Gurses2026ACHEM,OAIrfsim,srsRANZMQ}, or install RIS channels that are fixed
-before the experiment starts~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}.
+Most of these controllers are evaluated with ideal element states, instantaneous
+reconfiguration and one channel coefficient per block. Hardware departs from each: unit cells
+have state- and angle-dependent responses~\cite{Tang2021PathLoss,Tang2022mmWave} with coupled
+amplitude and phase~\cite{Abeywickrama2020Practical}; the specification GS RIS 008 of the
+European Telecommunications Standards Institute (ETSI) lists reconfiguration time and
+modulated-signal quality among the parameters a RIS test has to measure~\cite{ETSI_GS_RIS008};
+and a command travels over a control link with its own delay, so a position-driven controller
+acts on a stale position~\cite{Mishra2025WCL}. A reconfiguration inside a packet shows in the
+received samples, not in a per-block coefficient.
+
+Existing tools cover parts of this problem (Section~\ref{sec:related},
+Table~\ref{tab:toolsmain}): coefficient-level simulators run
+offline~\cite{Basar2020SimRIS,Burtakov2023QRIS}, Open Radio Access Network (O-RAN) frameworks
+loop over coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}, and IQ-level
+emulators have no RIS model~\cite{Gurses2026ACHEM,OAIrfsim,srsRANZMQ} or fix the RIS channels
+in advance~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}.
 \claim{C-GAP}To our knowledge, as of 10 Oct 2026, no surveyed open tool combines
 (i)~multi-node emulation at the level of complex-baseband (IQ) samples behind an interface in the style
 of a software-defined radio (SDR); (ii)~RIS configurations issued at run time by an external controller and
 applied at an explicit, logged sample; (iii)~per-state responses imported from
 measurements as functions of state, frequency, incidence angle and reflection angle; and
-(iv)~characterized wall-clock behaviour. Each property exists in some tool. The
+(iv)~characterized wall-clock behaviour. Each property exists in some tool; the
 contribution of this paper is their integration, together with the evidence needed to
 trust the result.
 
 We present \sremu{}, a software-only emulator of a RIS-assisted radio environment at the
-level of complex-baseband samples. External transmitter, receiver and controller
-processes connect to it through an SDR-style interface. Time is an exact rational sample
-count. \claim{C-TIMED-CMD}A RIS command requested for the switch time $\tsw$ at the surface
+level of complex-baseband samples, to which external transmitter, receiver and controller
+processes connect through an SDR-style interface. Time is an exact rational sample count.
+\claim{C-TIMED-CMD}A RIS command requested for the switch time $\tsw$ at the surface
 takes effect on receiver~$r$ at the sample nearest to $(\tsw+\tau_r)f_s$, where $\tau_r$ is
 the propagation delay from the surface to that receiver and $f_s$ its sample rate, and
-both the requested and the applied sample are logged. Element responses are tables
-$\Gamma(s,f,\theta_i,\theta_s)$ over state, frequency and the two angles, with provenance
-and load-time checks, and the propagation kernel ties each cell's contribution to its
-area. The paper makes four contributions.
+both the requested and the applied sample are logged. The paper makes four contributions.
 \begin{itemize}
 \item \emph{Timed RIS control in an IQ-level emulator} (Section~\ref{sec:design}).
-  \claim{C-CONTRIB-1}The switch time is defined at the surface and applied per receiver;
-  a late command keeps one physical switch time for all receivers; every command is
-  logged. A lockstep mode with virtual-time barriers makes controller-in-the-loop runs
-  deterministic, and a wall-clock-paced mode measures and reports its own timing. The
-  interfaces are a Python application programming interface (API) shaped after the USRP
-  Hardware Driver (UHD)~\cite{UHDManual}, a framed ZeroMQ (ZMQ) data plane, and a response-table
-  schema whose fields are aligned with the parameters of ETSI GS RIS
+  \claim{C-CONTRIB-1}The switch time is defined at the surface and applied per receiver, a
+  late command keeps one physical switch time for all receivers, and every command is logged;
+  in lockstep mode, virtual-time barriers make controller-in-the-loop runs deterministic, and a
+  paced mode measures its own timing. The interfaces are a Python application programming
+  interface (API) shaped after the USRP Hardware Driver (UHD)~\cite{UHDManual}, a framed ZeroMQ
+  (ZMQ) data plane, and a response-table schema aligned with the parameters of ETSI GS RIS
   008~\cite{ETSI_GS_RIS008}.
 \item \emph{Case studies of timed control} (Section~\ref{sec:cases}).
   \claim{C-CONTRIB-4}At the sample level, in lockstep with an in-process controller and a
-  modelled command latency: what a reconfiguration inside a packet does to the received
-  symbols, and when timestamped commands, commands applied on arrival and switching on a
-  free-running timer lose packets. On the coefficient path, which agrees with the sample
-  level within the pre-specified tolerance: the time scale on which signaling delay erodes
-  position-driven binary control in a blocked corridor, and a non-ideality ablation. A
-  model-based dimensioning of an FM-band surface completes the set.
+  modelled command latency: what a reconfiguration inside a packet does to the symbols, and
+  when timestamped commands, commands applied on arrival and switching on a free-running
+  timer lose packets. On the coefficient path, which agrees with the sample level within the
+  pre-specified tolerance: the time scale on which signaling delay erodes position-driven
+  binary control in a blocked corridor, and a non-ideality ablation. Appendix~\ref{app:cases} adds a model-based
+  dimensioning of an FM-band surface.
 \item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
-  \claim{C-CONTRIB-3}Explicit definitions of lockstep and paced operation; the real-time
-  factor (RTF), deadline misses and latency percentiles; scaling over links, elements,
-  surfaces, sample rates and feature sets on AWS Linux servers; and the latency of commands
-  served over the control socket.
+  \claim{C-CONTRIB-3}Definitions of lockstep and paced operation, the real-time factor (RTF),
+  deadline misses and latency percentiles; scaling over links, elements, surfaces, sample rates and feature sets
+  on AWS Linux servers; and the latency of commands served over the control socket.
 \item \emph{A verified physical model with stated validity and accuracy}
-  (Sections~\ref{sec:model} and~\ref{sec:vv}). \claim{C-CONTRIB-2}An area-tied
-  physical-optics kernel with an explicit cell model and a model card; \numOracleCount{}
-  analytic oracle checks taken from the continuous-integration record; MATLAB code-to-code
-  comparisons; agreement with published path-loss model curves and, as accuracy, with
-  third-party chamber measurements~\cite{Tang2022mmWave}; a consistency check against a
-  laboratory measurement collected by the authors, analysed under a pre-specified plan that
-  was hash-locked before unblinding, with its null result and the measurement-design lesson
-  it teaches; and carrier-frequency-offset (CFO) and bit-error-rate checks against the
-  Cram\'er--Rao bound and theory.
+  (Sections~\ref{sec:model},~\ref{sec:vv}). \claim{C-CONTRIB-2}An area-tied physical-optics
+  kernel with a cell model and a model card; \numOracleCount{} analytic oracle checks;
+  MATLAB code-to-code checks; agreement with a published path-loss model and, as
+  accuracy, with third-party chamber measurements~\cite{Tang2022mmWave}; a consistency check
+  against a laboratory measurement collected by the authors, under a pre-specified plan
+  hash-locked before unblinding, with its null result and measurement-design lesson; and
+  carrier-frequency-offset (CFO) and bit-error-rate checks against the Cram\'er--Rao bound
+  and theory.
 \end{itemize}
 
 \emph{Scope.} \claim{C-SCOPE}\sremu{} is not a UHD drop-in: it offers a UHD-shaped API, and
@@ -95,11 +87,6 @@ hard-real-time emulator, not a ray tracer, and not a model of mutual coupling, w
 solely through measured or simulated per-configuration tables~\cite{ETSI_GR_RIS003_v121}.
 Fields are scalar and co-polar, RIS paths are single-bounce, and wall reflections are of
 order one. Paced-mode timing is measured and reported per platform, never assumed.
-
-The rest of the paper is organized as follows.
-Section~\ref{sec:related} reviews related tools. Section~\ref{sec:design} describes the
-design and Section~\ref{sec:model} the physical model. Section~\ref{sec:vv} separates
-verification from validation. Section~\ref{sec:wallclock} characterizes wall-clock
-behaviour and Section~\ref{sec:cases} presents the case studies.
-Sections~\ref{sec:discussion}--\ref{sec:conclusion} discuss limitations, future work and
-conclusions.
+Appendices~\ref{app:survey}--\ref{app:cases}, after the references, extend
+Sections~\ref{sec:related}--\ref{sec:cases}; Appendices~\ref{app:oracles}--\ref{app:provenance}
+describe the oracles, the build and the provenance of every result.

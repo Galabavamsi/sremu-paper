@@ -1,0 +1,178 @@
+% Appendix B -- implementation and interface details (moved from Sections III and VIII-B for
+% length, 2026-10-12; text unchanged apart from joins). Module paths for the lead's check are
+% the ones in the comments of sections/03_design.tex and sections/08_discussion.tex (sremu
+% commit 2a016a6). Every number is a macro (`code` macros are read from the sremu code).
+\section{Implementation and Interface Details}\label{app:interfaces}
+
+This appendix extends Section~\ref{sec:design} and the hooks of Section~\ref{sec:disc-ml}.
+\claim{C-ARCH}Fig.~\ref{fig:F1} shows the processes of \sremu{} and the planes that connect
+them.
+
+\begin{figure}[t]
+\centering
+\sremufigure{F1}{\columnwidth}{Architecture of \sremu{}. Applications and controllers are
+separate processes (or run in the engine's process through \texttt{Device.inproc}). Solid
+lines: IQ data plane; dashed: control plane; dotted: recording. TikZ diagram; no data.}{fig:F1}
+\end{figure}
+
+\subsection{Recording, time base and command bookkeeping}
+% record/manifest.py, record/eventlog.py, record/sigmf.py, record/replay.py,
+% record/report.py; metrics/rt.py RTF_WINDOW_S; timebase.py; engine/commands.py;
+% engine/pacer.py; engine/streams.py.
+\claim{C-RECORDING}A recorder writes one directory per run: a manifest (software versions,
+git commit and dirty flag, platform, seed and random-number scheme, hashes and data classes
+of the inputs, mode, backend, per-link interpolation and filter choices, loss counters), the
+resolved scenario, an event log with one JSON line per change of a command record, flushed as
+it is written, a metrics log per \numMetricsWindowMs~ms of virtual time and, optionally,
+SigMF recordings~\cite{SigMF} of the streams whose annotations mark each applied command at
+its sample. A replay tool and a static HTML report read run directories.
+\claim{C-PLANES}The control plane carries stream management, RIS commands, controller
+registration and session control. Registered controllers receive their barrier messages on
+the control connection, never on the publish socket, which may drop messages. A served
+session can start paused, the default of the serving command, so that clients can open
+streams and issue timed commands before virtual time advances.
+
+\claim{C-TIMEBASE}With $\mathrm{to\_ticks}$ an event lands within $1/(2f)$ of its requested
+time. Floating-point times from the Python interface are converted through their
+shortest decimal representation. \claim{C-INVARIANCE}Each RX stream $r$ is processed in pages
+of $P_r=\mathrm{clamp}\bigl(2^{\mathrm{round}(\log_2 f_rT_{\mathrm p})},P_{\min},P_{\max}\bigr)$
+samples on an absolute grid, with a page target $T_{\mathrm p}$ of \numPageTargetMs~ms by
+default, $P_{\min}=\numPageMin$ and $P_{\max}=\numPageMax$; streams of equal rate and page size
+share one cursor. Per-sample quantities depend on the absolute sample index and the two
+enclosing snapshots, recursions restart from closed-form anchors at page starts and snapshot
+boundaries, parallel work splits samples, and the RX samples do not depend on barrier limits,
+input availability or whether inactive pages were skipped (RT-03, RT-10). A change of the page target is not bit-exact: it changes the double-precision
+accumulators within the relative tolerance of RT-04 (Section~\ref{sec:vv}).
+
+\claim{C-RECORDS}A command record also holds the command's identifiers, and the
+configuration hash is a BLAKE2b hash of the applied configuration.
+\claim{C-TIES}Every command is kept: of two configuration commands for one panel at one time,
+the later sequence number wins and the earlier is recorded as superseded (RT-07).
+\claim{C-COUNTERFACTUAL}Switching a panel off and on (`RIS absent') is a
+separate timeline with the same per-receiver switch samples; its records are flagged as
+counterfactual, and it never changes element states. \claim{C-TRANSITIONS}The transition
+profiles are a step, a linear ramp over $T_c$ or $1-e^{-t/T_c}$; the complex-linear path
+between states stays an engineering choice until a measured transition is available. A command
+that arrives during a transition starts from the instantaneous reflection coefficients.
+
+\claim{C-BARRIERS}The observation of a barrier controller holds the power measured from each
+receiver's IQ samples over a window and the RIS state, plus, on request, node positions
+(optionally delayed and perturbed), an IQ window, or oracle channel state, whose use the
+manifest flags. A remote controller receives \texttt{ctrl.barrier}, sends its commands and
+replies \texttt{ctrl.ack}. \claim{C-BATCH}The batch path applies switches at their surface time
+because surface-to-receiver delays are negligible at its level, and it reports those delays.
+
+\claim{C-LOCKSTEP}In lockstep mode, after \numStallTimeoutS~s of wall time without progress
+the engine writes a stall report (RT-13). \claim{C-PACED}In paced mode the input slack
+$D_{\mathrm{lag}}$ is \numPacedLagMs~ms by default, and the pacer sleeps and then spins for
+the last \numPacedSpinMs~ms before a release. Late timed TX bursts are dropped with a time
+error, missing untimed samples become zeros with an underflow report, an RX client that falls
+behind loses pages with an overflow report, and deadline misses are counted at slacks of
+\numPacedSlacksMs~ms (RT-18). Lockstep mode with asynchronous controllers is rejected.
+
+\subsection{Python API and wrappers}
+% api/device.py, api/streams.py, api/metadata.py (codes, modes, table_iii), compat.py;
+% the API table is generated by tools/gen_tables.py from sremu.api.metadata.table_iii().
+\input{generated/tables/table3_api}
+\claim{C-API}Table~\ref{tab:api} lists the Python API of \sremu{} next to its UHD
+counterparts~\cite{UHDManual}. TX and RX streams carry UHD-style metadata with exact time
+specifications, RX streams follow the UHD stream modes, and timing and protocol failures are status codes: the
+UHD receive and asynchronous codes plus codes for schema errors, lookahead violations, unknown
+targets, out-of-domain queries, oversize messages, refused operations and rate mismatches
+(IO-06). Phases in a RIS command are quantized by the panel, and \texttt{set\_command\_time}
+times later commands as in UHD. \claim{C-COMPAT}Two wrappers,
+\texttt{Send\_to\_sim} and \texttt{Receive\_from\_sim}, give simple scripts a one-call
+interface; a BPSK transmitter and receiver script pair delivers every sample through them
+(IO-07).
+
+\subsection{Data plane, control plane and security}
+% transport/framing.py, transport/zmq_native.py; transport/messages.py (parse_request order),
+% transport/control_server.py (OPS, loopback check, token bucket max_command_rate_hz).
+\claim{C-FRAMES}A data-plane message has a \numFrameHeaderBytes-byte little-endian header and
+a payload sent without copying. The header holds a magic word, version, flags (start and end
+of burst, timed, idle-until, gap before, late, end of stream), stream identifier, a
+per-stream sequence number whose gaps raise a sequence error, the absolute index of the
+earliest sample, the sample count (at most $2^{\numFrameMaxSamplesExp}$), the channel count,
+the sample format (\texttt{cf32\_le} or \texttt{sc16\_le}) and the sender's monotonic clock,
+which feeds latency metrics and never the data plane. Malformed frames are dropped and
+counted, and no input of the fuzzed corpus made the engine raise (IO-01); TX sockets block at their
+high-water mark, which gives lockstep backpressure.
+
+\claim{C-CONTROL}Control messages are JSON objects (envelope version \numSchemaVersion)
+validated before dispatch in a fixed order: size (at most \numMaxMessageMiB~MiB), syntax,
+element count (at most \numMaxElements{} per command) and schema, so every refusal has one
+code and is counted (IO-01, IO-04); a message above the transport limit of
+\numHardMessageMiB~MiB closes the connection without a reply. The operations cover version negotiation, panel
+capabilities, frontier time, RIS configurations, codebooks, the counterfactual enable state,
+node positions and trajectories, streams, controller registration, acknowledgement and
+removal, recording markers, statistics, and pause, resume and shutdown; a socket command
+lands at its exact sample with zero lateness in lockstep mode (IO-03).
+\claim{C-SECURITY}No message field is interpreted as a file path, sockets bind to loopback
+addresses unless remote binding is allowed, there is no authentication, and commands above a
+per-client rate limit (\numMaxCmdRateKHz~kHz by default) are refused and counted (IO-04).
+
+\subsection{Response tables and panel capabilities}
+% physics/response.py (ResponseTable, Provenance, validators, from_csv, from_matlab_scurve,
+% from_state_library, sample, half_difference extension), physics/tables/*.yaml (built-ins),
+% contracts.RisCapabilities (GS RIS 008 names).
+\claim{C-TABLES}One angle grid serves both angles of a table, and tables without angle or
+frequency dependence are special cases. The provenance records the kind of source (measured,
+full-wave, circuit, analytic, digitized or assumed), the reference, reference plane,
+polarization, whether the cell pattern is included, magnitude and phase standard deviations,
+a hash of the raw data, licence, creation record and every transformation applied after
+loading.
+\claim{C-TABLE-CHECKS}Validators reject a table that is not passive ($|\Gamma|$ above unity
+beyond a tolerance that grows with the stated uncertainty of measured and digitized data), not
+reciprocal ($\Gamma(s;\theta_i,\theta_s)\neq\Gamma(s;\theta_s,\theta_i)$ beyond a tolerance
+derived from the stated deviations; recorded symmetrization is available) or too coarse
+(adjacent entries differ by more than \numDensityMax{} of the largest magnitude) when it is
+loaded, and they reject a query outside its grid and a linked signal wider than its validity
+bandwidth (PH-31). Interpolation is complex-linear in angle and linear in frequency, never in
+magnitude and unwrapped phase. A table that depends on incidence alone enters through the
+recorded reciprocal extension $\Gamma(\theta_i,\theta_s)=g(|\theta_i-\theta_s|/2)$ (PH-28);
+raw non-reciprocal tables are rejected.
+
+\claim{C-TABLE-IMPORT}Tables are imported from long-form CSV files
+with a provenance sidecar, or from MATLAB unit-cell phase curves labelled as simulated
+stand-ins. The built-in tables are the two-state laboratory alphabet, whose unknown
+amplitudes must be set and are recorded as assumptions; the published states of the two
+millimeter-wave surfaces of Tang et al.~\cite{Tang2022mmWave}; ideal $b$-bit and antipodal
+alphabets; the on--off alphabet of~\cite{Mishra2025WCL}; and the phase-dependent amplitude
+model of~\cite{Abeywickrama2020Practical}. A table can draw perturbed copies from its stated
+uncertainty for Monte Carlo studies.
+
+\claim{C-CAPS}Panel capabilities are named after the parameters of GS RIS
+008~\cite{ETSI_GS_RIS008} where such a parameter exists: number of elements, layout, control granularity (element, column, tile or
+groups), state labels, source of $\Gamma$ (measured with the data hash, or analytic with the
+model name), operating band, maximum bandwidth, reconfiguration time, maximum command rate
+and static power, kept as metadata. Table~\ref{tab:standards} (Appendix~\ref{app:survey})
+maps these fields and the kernel to the ETSI documents as alignment, not conformance.
+
+\subsection{Controllers and learning environment}
+% control/controller.py (Controller protocol, BaseController), control/builtin.py (built-ins),
+% control/remote.py (run_remote), ml/env.py (RisEnv: backend "batch" only; info optimum_dbm /
+% regret_db from the exact optimum with oracle CSI), physics/optimize.py.
+\claim{C-CONTROLLER-API}A controller
+has a name, a period, a minimum latency, an observation specification and a latency model,
+and two methods: \texttt{setup} receives the panel capabilities and a keyed random generator,
+and \texttt{decide} maps an observation to actions. The same object runs inside the engine at
+barriers or in an external process (\texttt{run\_remote}), and both give identical
+received samples (RT-08), so a controller tested in process can be deployed as a separate
+process without changes. The built-in
+controllers are a fixed configuration; RIS absent; the uniform random activation and our
+reading of the position-driven heuristic of~\cite{Mishra2025WCL}; the exact optimum; phase
+alignment followed by quantization; a design for an ideal alphabet deployed on the true
+states; a cyclic codebook sweep; an upper-confidence-bound (UCB1) bandit~\cite{Auer2002UCB}
+over windowed received power; a genetic algorithm; a controller that alternates
+configurations between the packets of two receivers; and a wrapper that delays the position
+reports of any position-driven controller. Every random draw of a controller comes from its
+keyed generator, so its decisions are reproducible.
+
+\claim{C-RISENV}\texttt{RisEnv} subclasses Gymnasium's
+environment class when that package is installed and imitates it otherwise. An action is a
+state vector or a codebook index, applied after a configurable latency; the reward is the
+received pilot-tone power over the decision period; the samplers of the action and
+observation spaces and the scene are keyed by the reset seed. Its IQ backends are not yet
+connected to the engine. \claim{C-REGRET}The optimum is computed at the same evaluation times as the achieved power.
+The regret gap is zero for an optimal controller; it
+ignores panel failures, so it can be negative when cells are dead.

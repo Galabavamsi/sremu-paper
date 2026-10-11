@@ -1,66 +1,45 @@
-% Section V -- Verification and validation (WP12 draft, stage C). Every number is a macro of
-% numbers.yaml filled by tools/gen_results.py from committed result files (or a code or
-% definition macro); figures F3-F6 come from figures/src/*.py. Honesty rules (DESIGN 1.6):
-% verification != validation; MATLAB is code-to-code; digitized data are DIG; the lab study
-% is a "consistency check under geometric uncertainty" (no lab geometry supplied, H-1).
-% The tick-truncation pitfall is a generic design lesson. Tang et al. (V-C) is reported as
-% accuracy, measured minus emulator (author decision D-12 of 2026-10-11, reversing DESIGN 10.8).
+% Section V -- Verification and validation (WP12 draft, stage C; condensed for length
+% 2026-10-12). Every number is a macro of numbers.yaml filled by tools/gen_results.py from
+% committed result files (or a code or definition macro); figure F3 comes from
+% figures/src/*.py. Honesty rules (DESIGN 1.6): verification != validation; MATLAB is
+% code-to-code; digitized data are DIG; the lab study is a "consistency check under geometric
+% uncertainty" (no lab geometry supplied, H-1). The tick-truncation pitfall is a generic design
+% lesson. Tang et al. (V-C) is reported as accuracy, measured minus emulator (author decision
+% D-12 of 2026-10-11, reversing DESIGN 10.8). The detail moved for length (test-record notes,
+% MATLAB references, refinement, Tang per geometry, lab protocol with Table V and F4, CFO, CRB
+% and BER with F5, Doppler with F6) is in Appendix D (sections/app_d_vv.tex), same markers.
 \section{Verification and Validation}\label{sec:vv}
 
-This section keeps two questions apart. \emph{Verification} asks whether the code computes
-what the model states. We answer it with closed forms, exact properties and an independent
-code. \emph{Validation} asks whether the model describes the physical world. That needs
-measurements. Agreement with MATLAB is therefore verification. Data read off a
-published figure are labelled DIG and carry their digitization uncertainty, and every figure
-caption names the classes of the data it shows (Appendix~\ref{app:provenance}).
+\emph{Verification} asks whether the code computes what the model states; closed forms,
+exact properties and an independent code answer it. \emph{Validation} asks whether the model
+describes the physical world, which needs measurements; agreement with MATLAB is therefore
+verification. Data read off a published figure are labelled DIG with their digitization
+uncertainty, and every caption names the classes of its data (Appendix~\ref{app:provenance}).
 
 \subsection{Analytic oracles}\label{sec:vv-oracles}
-\input{generated/tables/table4_vv}
-\claim{C-VV-TABLE}Table~\ref{tab:vv} summarizes the test record of the emulator commit used
-for this paper. Each identifier names one property, its oracle and a fixed tolerance. The
-oracles are closed forms or exact properties. They live in a separate test package that may
-not import the code under test (Appendix~\ref{app:oracles}). All \numOracleCount{} analytic
-identifiers (PH, RT and IO) pass, in \numOracleTests{} implementation tests. The statistical
+\claim{C-VV-TABLE}The test record of the emulator commit used for this paper is summarized per
+tier in Appendix~\ref{app:vv}. Each identifier names one property, its oracle (a closed form or
+exact property, kept in a test package that may not import the code under test,
+Appendix~\ref{app:oracles}) and a fixed tolerance. All \numOracleCount{} analytic
+identifiers (PH, RT and IO) pass, in \numOracleTests{} implementation tests; the statistical
 tier adds \numStatIds{} identifiers and the code-to-code tier \numGoldenIds{}. In total
-\numJunitPassed{} tests passed and \numJunitSkipped{} were skipped. No skipped test carries an
-identifier: they test fallback behaviour for modules that are now present, and a
-processor-affinity call that this platform lacks. An identifier counts as passed when at
-least one of its implementation tests passed and none failed or was skipped. Tests of the
-rendering path count once per backend. Appendix~\ref{app:provenance} lists the commit and
-date of this record with those of every other result; the record does not state its host.
-
-The analytic tier spans the whole emulator. On the physics side it checks the Friis
-equation, the equality of K1 with three published forms, image theory, the $N^2$ law of a
-focused panel, the two-ray model, the knife edge and the losses of finite alphabets. On the
-runtime side it checks exact sample counts at incommensurate rates, the switch sample of a
-distant receiver, late and tied commands, barrier determinism and bitwise invariance under
-any chunking of the client calls. Section~\ref{sec:design} cites these identifiers where it
-states a property.
+\numJunitPassed{} tests passed and \numJunitSkipped{} were skipped, none of them with an
+identifier.
 
 \subsection{MATLAB code-to-code comparison}\label{sec:vv-matlab}
-\claim{C-MATLAB}Eight golden references, G1--G8, come from MATLAB R2026a scripts. G1 sums K1
-per element with toolbox primitives for laboratory-like layouts and for the geometries of
-Tang et al. G2 and G3 compare steered and one-bit beam patterns with MATLAB's RIS reflector
-object. G4, G5 and G6 compare the frequency offset, thermal noise and fading statistics with
-communications-toolbox objects. G7 evaluates the far-field closed form of ETSI GR RIS
-003~\cite{ETSI_GR_RIS003_v121}, and G8 is MATLAB's two-ray channel. All \numGoldenIds{} pass
-(Table~\ref{tab:vv}). MATLAB is not needed to run them: the outputs are stored with the
-script hash and the MATLAB version. These comparisons show that two codes agree; they are not
-validation. MATLAB's reflector uses unit-gain cells, so G2 and G3 compare beam shapes after a
-documented constant is removed. They say nothing about absolute RIS power.
+\claim{C-MATLAB}Eight golden references, G1--G8, from MATLAB R2026a scripts cover the
+per-element kernel, beam patterns, frequency offset, thermal noise, fading statistics, the
+far-field closed form of ETSI GR RIS 003~\cite{ETSI_GR_RIS003_v121} and a two-ray channel; all
+\numGoldenIds{} pass. They show that two codes agree; they are not validation
+(Appendix~\ref{app:vv}).
 
 \subsection{Published RIS path-loss model and measurements}\label{sec:vv-tang}
-\claim{C-REFINE}Fig.~\ref{fig:F3}(a) checks a property that published curves cannot test.
-When a fixed aperture is cut into more cells, the received power must not change. Far from
-the panel, at specular reflection, K1 with the default cell model stays within
-\numRefineFarMaxDevDb~dB of the closed form for every cell count from \numRefineNmin{} to
-\numRefineNmax{} (PH-04). Near the panel, at an anomalous angle, the patch model stays within
-\numRefineNearMaxDevDb~dB of the continuous physical-optics integral, which we evaluate
-independently. One point per cell is off by \numRefinePointCoarseDb~dB for the coarsest
-cells and converges slowly. At the smallest count with a pitch below half a wavelength
-(\numRefinePointFirstAutoN{} cells) it is still off by \numRefinePointFirstAutoDb~dB. This is
-the model-form difference of Section~\ref{sec:model-cells}, not a refinement error, and it is
-why the default switches to patches for larger cells.
+\claim{C-REFINE}Fig.~\ref{fig:F3}(a) checks a property that published curves cannot test:
+when a fixed aperture is cut into more cells, the received power must not change. Far from
+the panel, K1 with the default cell model stays within \numRefineFarMaxDevDb~dB of the closed
+form for every cell count from \numRefineNmin{} to \numRefineNmax{} (PH-04); near the panel,
+the patch model stays within \numRefineNearMaxDevDb~dB of the continuous physical-optics
+integral, while one point per cell converges slowly (Appendix~\ref{app:vv}).
 
 \claim{C-ABS-TANG}Tang et al.\ measured the path loss of millimeter-wave surfaces in an
 anechoic chamber and fitted a model to it~\cite{Tang2022mmWave}. We extracted the model curves
@@ -69,18 +48,17 @@ paper~\cite{Tang2022mmWave} (DIG) and ran the same \numTangMeasN{} links, four g
 of nine receiver distances, through the emulator with the default cell model, the reported
 unit-cell state and the reported link budget (REPORTED). The emulator reproduces the
 published model curves within \numTangCurveMaxDevDb~dB; since K1 equals that model for one
-point per cell (Section~\ref{sec:model-k1}), this checks the implementation. Against the
-chamber measurements, the emulator's received power is low by \numTangMeasBiasDb~dB on
-average (SD \numTangMeasSdDb~dB, RMSE \numTangMeasRmseDb~dB, largest difference
-\numTangMeasMaxDb~dB; per geometry \numTangPanelBiasMinDb--\numTangPanelBiasMaxDb~dB,
-Appendix~\ref{app:tang}), and every measured point lies above it (Fig.~\ref{fig:F3}(b)). This is
-the accuracy of the model class that the emulator shares with Tang et al.'s model, against
-third-party measurements of one \numTangFcGHz~GHz surface in one state and in specular
-geometries: it tests the absolute level and its dependence on distance and angle, not
-reconfiguration or near-field structure. The points are digitized, the source states no
-measurement uncertainty, their distances were snapped to the nominal grid of receiver
-distances, and the points of one geometry are not independent. We do not fit
-away the constant part of the error, which may come from the reported link-budget terms.
+point per cell, this checks the implementation. Against the chamber measurements, the
+emulator's received power is low by \numTangMeasBiasDb~dB on average (SD
+\numTangMeasSdDb~dB, RMSE \numTangMeasRmseDb~dB, largest difference \numTangMeasMaxDb~dB;
+per geometry \numTangPanelBiasMinDb--\numTangPanelBiasMaxDb~dB, Appendix~\ref{app:tang}), and
+every measured point lies above it (Fig.~\ref{fig:F3}(b)). This is the accuracy of the model
+class that the emulator shares with Tang et al.'s model, against third-party measurements of
+one \numTangFcGHz~GHz surface in one state and in specular geometries: it tests the absolute
+level and its dependence on distance and angle, not reconfiguration or near-field structure.
+The points are digitized without a stated measurement uncertainty, their distances were
+snapped to the nominal grid, and the points of one geometry are not independent. We do not
+fit away the constant part of the error, which may come from the reported link-budget terms.
 
 \begin{figure*}[t]
 \centering
@@ -95,169 +73,61 @@ measurements), REPORTED (link budget).}{fig:F3}
 \end{figure*}
 
 \subsection{Laboratory consistency check}\label{sec:vv-lab}
-\claim{C-LAB-DATA}The data set is a laboratory measurement collected by the
-authors: the received power at \numLabFreqGHz~GHz on a polar grid of \numLabCells{} cells in
-front of a binary RIS of six tiles. What survives is a colour map, so we digitized it
-(DIG, \numLabSigDigMinDb--\numLabSigDigMaxDb~dB per cell). The geometry was not recorded to
-the precision a model needs. The distance from the transmitter to the tiles, the angular span
-of the tiles, the cell type and the measurement positions are known within ranges, the
-positions to about $\pm\numLabPriorPosCm$~cm.
+\claim{C-LAB-DATA}The data set is a laboratory measurement collected by the authors: the
+received power at \numLabFreqGHz~GHz on a polar grid of \numLabCells{} cells in front of a
+binary RIS of six tiles, which survives as a colour map that we digitized
+(DIG, \numLabSigDigMinDb--\numLabSigDigMaxDb~dB per cell). Its geometry is known within ranges,
+the measurement positions to about $\pm\numLabPriorPosCm$~cm.
 
 \claim{C-LAB-PRESPEC}We therefore wrote the analysis plan before any comparison of model and
-data. The plan draws \numLabDraws{} geometries from a prior over the unknown quantities and
-predicts the map with five models, each with a fitted offset: line of sight alone (M0),
-a log-distance fit that also fits its exponent (M0n), a uniform mirror (M1), the laboratory configuration (M2) and M2 with
-a floor (M3). The offsets are fitted on three rings (\numLabTrainCells{} cells) and scored on
-the other two (\numLabTestCells{} cells). Three decision rules were fixed in advance. C1
-(level consistent) needs a median absolute bias of at most \numLabConeBiasMaxDb~dB and a
-median RMSE of M2 at most \numLabConeMarginDb~dB above that of M0n. Because each offset absorbs the unknown power and
-gains, C1 tests the level of the held-out rings, not absolute power. C2 (the RIS model
-explains spatial structure) needs a median RMSE gain of M2 over M0 of at least
-\numLabCtwoMinDb~dB, a paired-bootstrap interval that excludes zero in at least
-\numLabCtwoCiFracPct~\% of the draws, and a Spearman correlation of at least
-\numLabCtwoRhoMin{} whose interval excludes zero. C3 is C2 with M1 in place of M0. The protocol
-files were hashed, and the data loader refuses the measured map unless the hash matches. The
-hash was committed to the emulator repository (commit \txtLabLockCommit) and pushed to its
-private GitHub repository on \txtLabLockDate, after a descriptive inspection of the
-digitized map but before any comparison of model and data. GitHub's server-side push log,
-exported later, records that push (Appendix~\ref{app:provenance}). Two commits followed: an
-option of the run script that names the columns of the measured file, and a test change
-(commit \txtLabCodeCommit), pushed at \txtLabCodePushTime; the unblinded run started at
-\txtLabRunTime{} from a clean tree of that commit, and its result
-(commit \txtLabResultCommit) was pushed at \txtLabResultPushTime. No public registry deposit
-(Zenodo or OSF) was made before unblinding; the plan, its hash and the lock records can still
-be deposited, as a retrospective record. The plan is therefore pre-specified and hash-locked,
-with a timestamp from the repository host, not from a public registry.
-
-\claim{C-LAB-POWER}The plan also asked whether the test could succeed at all. Before
-unblinding, it ran the full analysis on \numLabDecoys{} synthetic maps drawn from M2 itself.
-C2 held in \numLabDecoyDetections{} of them (\numCiPct\,\% upper limit \numLabDecoyCiHighPct~\%),
-a detection rate far below the pre-set threshold of \numLabUnderpoweredRate{}. C1 held in
-\numLabDecoyConeDetections{} and C3 in \numLabDecoyCthreeDetections{} of them. The study was labelled
+data: \numLabDraws{} geometries drawn from a prior over the unknowns, five models with fitted
+offsets, among them line of sight alone (M0), a log-distance fit (M0n) and the laboratory
+configuration (M2), fitted on three rings and scored on two, and three decision rules: C1
+(level consistent), C2 (the RIS model explains spatial structure better than M0) and C3
+(better than a uniform mirror). The data loader refuses the measured map unless the hash of
+the protocol files matches; the hash was pushed to the emulator's private GitHub repository on
+\txtLabLockDate, after a descriptive inspection of the digitized map but before any comparison,
+as GitHub's server-side push log records (Appendix~\ref{app:vv}). The plan is therefore
+pre-specified and hash-locked, with a timestamp from the repository host, not from a public
+registry, in which nothing was deposited before unblinding. \claim{C-LAB-POWER}Before unblinding, the plan ran
+the full analysis on \numLabDecoys{} synthetic maps drawn from M2 itself: C2 held in
+\numLabDecoyDetections{} of them (\numCiPct\,\% upper limit \numLabDecoyCiHighPct~\%), far
+below the pre-set threshold of \numLabUnderpoweredRate{}, so the study was labelled
 underpowered before the data were opened.
 
-\claim{C-LAB-RESULT}The outcome is a null result (Table~\ref{tab:lab}, Fig.~\ref{fig:F4}). The
-median test RMSE is \numLabRmseMzero~dB for M0, \numLabRmseMzeroN~dB for M0n and
-\numLabRmseMtwo~dB for M2 (\numQuantLoPct--\numQuantHiPct\,\% range:
-\numLabRmseMtwoLo--\numLabRmseMtwoHi~dB), with a
-median M2 bias of \numLabBiasMtwo~dB. The RMSE gain of M2 over M0 is \numLabDeltaRmse~dB, its
-bootstrap interval excludes zero in \numLabCiExcludesPct~\% of the draws, and the Spearman
-correlation is \numLabSpearman{} (\numCiPct\,\% interval \numLabSpearmanLo{} to
-\numLabSpearmanHi). C1, C2 and C3 all fail, also in every pre-set sensitivity run. For
-orientation, outside the decision rules: the observed RMSE gain lies close to the median
-of the decoys drawn from M2 (\numLabDecoyDeltaMtwoDb~dB) and above that of decoys drawn from
-M0 (\numLabDecoyDeltaMzeroDb~dB). The digitized map does not discriminate the RIS model from LOS-only at the available
-geometric knowledge. The comparison is underpowered, so this outcome is not evidence for or
-against the model. One cell, pinned to the edge of the colour scale, has a residual of
-\numLabResidualOutlierDb~dB.
-
-\claim{C-LAB-LESSON}Which extra fact would have made the test informative? A diagnostic
-outside the protocol repeated the power analysis with narrower priors. None of
-\numLabDiagSingleFacts{} single facts (for example the transmitter-to-tile distance to a few
-millimetres, the tile angles, the cell type, the antenna pattern or the state reflection
-coefficients, or even the measurement positions alone to $\pm\numLabDiagPosMm$~mm) lifted
-the C2 detection rate above zero. Knowing the as-built tile geometry
-exactly and the measurement positions to $\pm\numLabDiagPosMm$~mm gave
-\numLabDiagRate{} (\numCiPct\,\% interval \numLabDiagRateLo--\numLabDiagRateHi, \numLabDiagDecoys{} decoys);
-with positions to $\pm\numLabDiagPosFiveMm$~mm it stayed at zero, and knowing every
-geometric quantity exactly gave \numLabDiagGeomRate. At \numLabFreqGHz~GHz the wavelength is
-\numLabLambdaMm~mm, and the map's structure comes from path differences of a fraction of it.
-A RIS map at this frequency therefore needs its geometry recorded to about a millimetre, for
-example with a fixture or a laser tracker, before it can separate the models. Even then the
-detection rate stays close to the pre-set threshold. We report this as a lesson for
-measurement design; the word \emph{validation} is reserved for a data set with a recorded
-geometry.
-
-\input{generated/tables/table5_lab}
-\begin{figure*}[t]
-\centering
-\sremufigure{F4}{\textwidth}{Laboratory consistency check under geometric uncertainty.
-(a) Digitized map of a laboratory measurement collected by the authors. (b) Median
-prediction of the laboratory-configuration model M2 over the prior draws. (c) Measured minus
-predicted; the colour scale is clipped and the outlier is marked. Test-ring cells are
-outlined. (d) RMSE gain of M2 over the line-of-sight model M0 on the test rings over the prior
-draws, with the pre-specified C2 threshold. Data classes: DIG (measured), SIM-sremu
-(predictions), ASSUMED (geometry and reflection-coefficient prior, decision rules).}{fig:F4}
-\end{figure*}
+\claim{C-LAB-RESULT}The outcome is a null result: the median test RMSE is
+\numLabRmseMzero~dB for M0, \numLabRmseMzeroN~dB for M0n and \numLabRmseMtwo~dB for M2, the
+RMSE gain of M2 over M0 is \numLabDeltaRmse~dB with a Spearman correlation of
+\numLabSpearman, and C1, C2 and C3 all fail, also in every pre-set sensitivity run. Since the
+comparison is underpowered, this is not evidence for or against the model.
+\claim{C-LAB-LESSON}A diagnostic outside the protocol found that no single extra fact lifts the
+C2 detection rate above zero, while the exact as-built tile geometry with positions known to
+$\pm\numLabDiagPosMm$~mm gives \numLabDiagRate. At \numLabFreqGHz~GHz the wavelength is
+\numLabLambdaMm~mm and the map's structure comes from path differences of a fraction of it, so
+a RIS map at this frequency needs its geometry recorded to about a millimetre before it can
+separate the models, and even then the detection rate stays near the pre-set threshold: a
+measurement-design lesson. The word \emph{validation} is reserved
+for a data set with a recorded geometry.
 
 \subsection{CFO estimation and link metrics}\label{sec:vv-cfo}
-\claim{C-CFO}A receiver oscillator offset $f$ rotates the received baseband at $f$. With noise
-off we swept $f$ over \numCfoSweepPoints{} values within $\pm\numCfoSweepMaxHz$~Hz on a BPSK
-burst of \numCfoBurstSamples{} samples at \numCfoRateSps~S/s. A least-squares phase estimator
-recovers $f$ within \numCfoLsMaxErrHz~Hz and a lag-1 estimator within \numCfoLagMaxErrHz~Hz
-(Fig.~\ref{fig:F5}(a)). The received samples are identical for three different client epoch
-lengths (V-CFO-1). The same sweep through two
-operating-system processes over the native ZMQ data plane gives bitwise identical samples
-(V-CFO-3).
-
-\claim{C-CFO-LESSON}Fig.~\ref{fig:F5}(a) also shows a generic pitfall. At
-\numCfoRateSps~S/s a tick of \numCfoTickMs~ms holds \numCfoSamplesPerTick{} samples. A time
-base that delivers a whole number of samples per tick, here \numCfoSamplesDelivered{}, drops
-samples without notice, and every frequency estimate is scaled by the ratio of the two counts:
-a slope of \numCfoTickScale{}, an error of \numCfoTickScalePct~\%. We reproduced the effect by
-re-timing the emulator's own output. Exact rational sample counts
-(Section~\ref{sec:design-time}) remove it.
-
-\claim{C-CRB}With the emulator's thermal noise at per-sample SNRs of \numCfoSnrLo{},
-\numCfoSnrMid{} and \numCfoSnrHi~dB and \numCfoTrials{} keyed trials at each of
-\numCfoPoints{} offsets, a periodogram estimator on \numCfoHeaderSamples{} samples reaches the
-Cram\'er--Rao bound of a tone in white Gaussian noise~\cite{Kay1989Freq}. Its pooled RMSE is
-\numCfoRatioZero, \numCfoRatioTen{} and \numCfoRatioTwenty{} times the bound. An unbiased
-estimator cannot beat the bound, so values below one are sampling error of the pooled
-estimate. The lowest lies \numCfoRatioTwentySe{} standard errors below one. We checked that the
-emulator's noise is white and has the stated power, and the gate does not depend on this
-value. The worst single offset at the two gated SNRs is \numCfoRatioMaxPoint{} times the bound, within the
-pre-set limit of \numCfoGateFactor{} (Fig.~\ref{fig:F5}(b); V-CFO-4, ST-05). The lag-1
-estimator follows its own small-error theory but not the bound: its variance falls with the
-number of samples, the bound's with its cube.
-
-\claim{C-BER}Fig.~\ref{fig:F5}(c) sends BPSK and QPSK through a static lab-like link with the
-emulator's physical noise. The transmit power sets $E_b/N_0$ from \numBerEbnoMin{} to \numBerEbnoMax~dB, and
-each point collects at least \numBerMinErrors{} errors or \numBerMaxBits{} bits. With genie
-channel knowledge the theoretical bit error rate lies inside the \numCiPct\,\% Clopper--Pearson
-interval at all \numBerPoints{} points. With a least-squares channel estimate from
-\numBerPilots{} pilots, theory falls outside the interval at \numBerLsOutside{} points, all at
-$E_b/N_0\le\numBerLsOutsideMaxEbnoDb$~dB, as expected from the estimation loss. ST-04 repeats
-the genie check with \numBerStCiPct\,\% intervals in the test record.
-
-\begin{figure*}[t]
-\centering
-\sremufigure{F5}{\textwidth}{(a) Error of the estimated frequency offset versus the applied
-offset, noise off: the emulator (exact sample counts) and a generic pitfall, the emulator's own
-output re-timed with a whole number of samples per tick, with its analytic slope. (b) RMSE of
-two estimators versus SNR against the Cram\'er--Rao bound and the lag-1 small-error theory.
-(c) BER versus $E_b/N_0$ through the emulator with genie and pilot-based detection,
-Clopper--Pearson intervals, and theory; markers are offset horizontally for legibility.
-Data classes: SIM-sremu (emulator runs), ANALYTIC
-(bound, theory, slope), ASSUMED (unit amplitudes of the lab states in (c)).}{fig:F5}
-\end{figure*}
+\claim{C-CFO}With noise off, a receiver oscillator offset swept over \numCfoSweepPoints{}
+values within $\pm\numCfoSweepMaxHz$~Hz is recovered by a least-squares phase estimator
+within \numCfoLsMaxErrHz~Hz, and the received samples are identical for three client epoch
+lengths and through two processes over the native ZMQ data plane (V-CFO-1, V-CFO-3).
+\claim{C-CFO-LESSON}Exact rational sample counts avoid a generic pitfall: a time base that
+delivers a whole number of samples per tick scales every frequency estimate by the ratio of
+the two counts, an error of \numCfoTickScalePct~\% for ticks of \numCfoTickMs~ms at
+\numCfoRateSps~S/s. \claim{C-CRB}With the emulator's thermal noise, a periodogram estimator
+reaches the Cram\'er--Rao bound of a tone in white Gaussian noise~\cite{Kay1989Freq}, within
+the pre-set limit of \numCfoGateFactor{} times the bound at every gated offset (V-CFO-4,
+ST-05). \claim{C-BER}Through a static lab-like link, the theoretical bit error rate (BER) of
+BPSK and QPSK with genie channel knowledge lies inside the \numCiPct\,\% Clopper--Pearson
+interval at all \numBerPoints{} points (ST-04; Appendix~\ref{app:vv}).
 
 \subsection{Doppler and mobility}\label{sec:vv-doppler}
-\claim{C-DOPPLER-VV}Doppler shifts follow from the geometry (Section~\ref{sec:model-doppler}).
-In Fig.~\ref{fig:F6}(a) a receiver approaches the transmitter at \numDopVms~m/s at
-\numDopFcGHz~GHz and passes a panel. The rendered line-of-sight path has the closed-form
-shift of \numDopLosHz~Hz within \numDopLosDevHz~Hz over one second (PH-17). The RIS
-contribution, taken as the difference between runs with and without the panel, follows an
-independent per-cell sum of K1. Near a null of the panel pattern the phase of the sum jumps
-and no frequency is defined. We therefore compare the samples where the reference RIS
-amplitude exceeds \numDopRisNullPct~\% of its maximum (\numDopRisKeptPct~\% of the samples).
-There the largest deviation is \numDopRisDevHz~Hz and the median \numDopRisMedHz~Hz. The interpolation bound
-applies to the whole channel, so a weak RIS term inherits a larger relative error.
-
-Fig.~\ref{fig:F6}(b) shows the error of the snapshot grid. At the automatic period of
-\numDopTuAutoUs~$\mu$s the largest relative error against a channel evaluated at every sample
-is \numDopErrAuto, well below the target $\varepsilon_{\mathrm{rel}}=\numEpsRel$. The error
-grows as $T_u^2$ and reaches \numDopErrMax{} at \numDopTuMaxMs~ms. The engine's own
-estimate, \texttt{verify\_interp}, follows it but reads low, by up to \numDopViMaxLowPct~\% at
-the largest period. PH-18 checks the bound against per-element brute
-force in three scenes on both backends.
-
-\begin{figure}[t]
-\centering
-\sremufigure{F6}{\columnwidth}{(a) Doppler shift of the rendered line-of-sight path and RIS
-contribution of a moving receiver against the closed forms; RIS samples near nulls of the
-panel pattern are omitted. (b) Largest relative interpolation error over one second versus
-the snapshot period: against a channel evaluated at every sample, and as estimated by the
-engine. Data classes: engine runs and closed forms with the target (SIM-sremu;
-ANALYTIC).}{fig:F6}
-\end{figure}
+\claim{C-DOPPLER-VV}For a receiver passing a panel at \numDopVms~m/s and \numDopFcGHz~GHz, the
+rendered line-of-sight path has the closed-form Doppler shift of \numDopLosHz~Hz within
+\numDopLosDevHz~Hz (PH-17), the RIS contribution follows an independent per-cell sum of K1
+away from pattern nulls, and at the automatic snapshot period the largest relative
+interpolation error is \numDopErrAuto, below the target $\varepsilon_{\mathrm{rel}}=\numEpsRel$
+(PH-18; Appendix~\ref{app:vv}).

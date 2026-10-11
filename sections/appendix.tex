@@ -36,7 +36,7 @@ failures.
 \claim{C-TEETH}Several guards have a negative-control twin: a test that runs a deliberately
 wrong variant and must reject it, for example a kernel without the factor $j$, a
 fractional-delay filter that is too short, or a replay that drops a command. A guard that accepts its wrong
-variant is broken. Section~\ref{sec:vv} lists every check with its tolerance and
+variant is broken. Section~\ref{sec:vv} and Appendix~\ref{app:vv} summarize every check with its tolerance and
 status as recorded in the test record of the pinned commit; a spec identifier counts as
 passed when at least one of its implementation tests passed and none failed or was skipped,
 and the tests of the rendering path count once per backend.
@@ -54,7 +54,8 @@ both verification gates passed in a test record of that commit, every figure is 
 every number is a macro written by the pipeline and every claim is supported. A figure is
 current when its stored content key, a hash of the emulator commit, the sweep specification,
 the input files and the figure script, matches. The constants and defaults quoted in
-Sections~\ref{sec:design} and~\ref{sec:model} are read from the locked code at build time,
+Sections~\ref{sec:design} and~\ref{sec:model} and Appendices~\ref{app:interfaces}
+and~\ref{app:model} are read from the locked code at build time,
 so the text cannot drift from the code. Every run directory carries the manifest of
 Section~\ref{sec:design-arch}, and a replay reproduces its received samples bit for bit. The
 build checks the lock commit, the test record and the figure content keys; the results
@@ -77,9 +78,8 @@ measurement of Section~\ref{sec:vv-lab} is a measurement collected by the author
 as a digitized map (DIG). Process records carry no physical quantity: GitHub's push log of
 the emulator repository, quoted in Section~\ref{sec:vv-lab}, is kept as an exported copy with
 its hash. Table~\ref{tab:provenance} lists the producing commit, tree state, host and date of
-every result. \label{app:tang}The digitized measurements of Tang et al.\ enter as DIG with the
-reported link budget (REPORTED); Table~\ref{tab:tang} breaks their comparison with the
+every result. The digitized measurements of Tang et al.\ enter as DIG with the
+reported link budget (REPORTED); Appendix~\ref{app:tang} breaks their comparison with the
 emulator (Section~\ref{sec:vv-tang}) down by geometry.
 
 \input{generated/tables/tableA_provenance}
-\input{generated/tables/tableA_tang}

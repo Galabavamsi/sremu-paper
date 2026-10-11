@@ -1,37 +1,24 @@
-% Section IV -- Physical model (WP12 draft, stage C). The kernel equation is the normative K1
-% of DESIGN 5.3 as implemented in sremu/physics/ris_kernel.py (commit 2a016a6); Table II is
-% generated from sremu/docs/model_card.yaml by the pipeline. Every number is a macro
-% (numbers.yaml; `code` macros are read from the sremu code) or cited.
+% Section IV -- Physical model (WP12 draft, stage C; condensed for length 2026-10-12). The kernel
+% equation is the normative K1 of DESIGN 5.3 as implemented in sremu/physics/ris_kernel.py
+% (commit 2a016a6); the model card (table generated from sremu/docs/model_card.yaml) and the
+% detail moved for length (trajectory kinds, conventions, LOS options, guards, Richardson check,
+% non-ideality details, interpolation bound, FD filters, impairments) are in Appendix C
+% (sections/app_c_model.tex), with the same markers. Every number is a macro (numbers.yaml;
+% `code` macros are read from the sremu code) or cited.
 \section{Physical Model}\label{sec:model}
 
-\subsection{Scene, snapshots and conventions}\label{sec:model-stack}
+\subsection{Scene and snapshots}\label{sec:model-stack}
 % physics/geometry.py (Static, Waypoints, ConstantVelocity, RandomWaypoint1D/2D,
 % TraceTrajectory, ExternalTrajectory), physics/propagation.py (snapshot, combine; B[r,s,n]
 % or separable C[r,n] with gamma[s]; rows = (link, hop variant)), contracts.py conventions.
-\claim{C-STACK}Node positions follow analytic trajectories in continuous time: static,
-piecewise-linear waypoints, constant velocity, one- and two-dimensional random
-waypoint~\cite{Bettstetter2003RWP} with keyed legs, a cubic-spline trace, or timed updates
-from a client. Positions therefore never depend on an update grid. At a snapshot time $t$ the
-propagation model evaluates, in double precision, the paths of every link that do not
-involve a RIS and, for every RIS panel, a coefficient tensor $B[r,s,n]$ over rows $r$ (a link
-together with a ground variant of its two hops), states $s$ and physical cells $n$; tables
-without angle dependence use a separable form. A configuration selects one state per cell,
-and $\mathrm{combine}$ then forms one path per panel, row and render tile; this step is
-linear in $\Gamma$. Channel coefficients are dimensionless and normalized as in the Friis
-equation, $P_R=P_T|h|^2$, with antenna gains inside $h$. The complex baseband signal $x(t)$
-of a carrier $f_c$ is $s(t)=\sqrt2\,\mathrm{Re}\{x(t)e^{j2\pi f_ct}\}$, and a path with delay
-$\tau$ maps $x(t)$ to $a\,x(t-\tau)\,e^{-j2\pi f_c\tau}$.
-
-\claim{C-LOS}The line-of-sight (LOS) path is $h_{\mathrm{LOS}}=\sqrt{G_TG_R}\,
-\lambda/(4\pi d)\,V$ with scalar co-polar antenna patterns (isotropic, a $\cos^\alpha$
-pattern with peak gain $2(\alpha+1)$, or a tabulated pattern with provenance) and an explicit
-visibility factor $V$: zero behind an opaque occluder, $10^{-L/20}$ through a partition with
-transmission loss $L$~dB (an engineering choice), or the Fresnel knife-edge factor $F(\nu)$
-of one edge, which keeps its phase and adds coherently to the RIS paths. Scenario names
-never imply blockage. Optional mechanisms add a flat-ground image path with Fresnel
-coefficients, image expansion of the two RIS hops over that ground, order-one images in
-finite walls and an additive diffuse term (Table~\ref{tab:modelcard}).
-% physics/los.py, antennas.py, diffraction.py, ground.py, walls.py, diffuse.py.
+\claim{C-STACK}Node positions follow analytic trajectories in continuous time. At a snapshot
+time the model evaluates, in double precision, every path without a RIS and, per panel, a
+coefficient tensor $B[r,s,n]$ over rows $r$ (a link with a ground variant of its two hops),
+states $s$ and cells $n$; a configuration selects one state per cell, and $\mathrm{combine}$
+forms one path per panel, row and render tile, linearly in $\Gamma$. \claim{C-LOS}The line-of-sight (LOS) path follows the
+Friis equation with scalar co-polar antenna patterns and an explicit visibility factor (an
+occluder, a partition loss or a coherent knife edge); ground, order-one walls and a diffuse
+term are optional (Appendix~\ref{app:model}).
 
 \subsection{RIS kernel K1}\label{sec:model-k1}
 % physics/ris_kernel.py (k1_terms, accumulate_cells; obliquity sqrt default, kirchhoff
@@ -48,148 +35,76 @@ h_{\mathrm{RIS}}={}&\sum_{q}\sqrt{G_T(\hat r^{i}_q)\,G_R(-\hat r^{s}_q)}\;
 \end{split}
 \label{eq:k1}
 \end{equation}
-where $q$ runs over quadrature points (one per physical cell, or sub-cells, see
+where $q$ runs over quadrature points (one per physical cell, or sub-cells,
 Section~\ref{sec:model-cells}) and $n(q)$ is the cell that carries the state and $\Gamma$;
-$A_q$ is the pitch area of the quadrature cell, gaps between cells included, so the areas of
-the sub-cells of one cell add up to its pitch area; $r_{iq}$ and $r_{sq}$ are the distances
-from transmitter and receiver to the point; $\theta_{iq}$ and $\theta_{sq}$ are the angles
-toward them from the panel normal; $\hat r^i_q$ and $\hat r^s_q$ are the unit vectors from
-transmitter to point and from point to receiver; $o=\sqrt{\cos\theta_i\cos\theta_s}$ is the
-default obliquity, the cosine pattern measured by Tang et al.~\cite{Tang2022mmWave}; $j$ is the
-Huygens (physical-optics) factor; and the indicator keeps front-side incidence and reflection,
-so a path to the back of a panel contributes exactly zero (PH-09).
+$A_q$ is the pitch area of the quadrature cell, gaps included, so the sub-cell areas of a cell
+add up to its pitch area; $r_{iq}$, $r_{sq}$ are the distances from transmitter and receiver to
+the point and $\theta_{iq}$, $\theta_{sq}$ the angles toward them from the panel normal;
+$\hat r^i_q$, $\hat r^s_q$ are the unit vectors from transmitter to point and from point to
+receiver; $o=\sqrt{\cos\theta_i\cos\theta_s}$ is the default obliquity, the cosine pattern
+measured by Tang et al.~\cite{Tang2022mmWave}; $j$ is the Huygens (physical-optics) factor; and
+the indicator keeps front-side incidence and reflection, so a path to the back of a panel
+contributes exactly zero (PH-09).
 
-\claim{C-K1-AREA}Two properties of K1 matter for every result in this paper. The
-contribution of each cell is tied to its area, so subdividing a fixed aperture into more cells
-leaves the received power unchanged (PH-04, Section~\ref{sec:vv-tang}); a kernel with a fixed
-per-cell gain would instead grow with every subdivision. The factor $j$ sets the phase of the
-RIS path relative to the LOS path; without it the phase would be wrong by a quarter turn,
-which a comparison with image theory detects (PH-05). \claim{C-K1-FORMS}For one quadrature point per cell, K1 is algebraically
-equal to three published forms: the cell model of Tang et al.~\cite{Tang2022mmWave} times
-$j$, the general path-loss model of ETSI GR RIS 003~\cite[clause 6.3.1.2]{ETSI_GR_RIS003_v121}
-with its recommended cell gain $G=4\pi d_xd_y/\lambda^2$, and the model of
+\claim{C-K1-AREA}Because each cell's contribution is tied to its area, subdividing a fixed
+aperture into more cells leaves the received power unchanged (PH-04,
+Section~\ref{sec:vv-tang}), whereas a fixed per-cell gain would grow with every subdivision;
+and the factor $j$ sets the phase of the RIS path relative to the LOS path, which would
+otherwise be wrong by a quarter turn, as image theory detects (PH-05).
+\claim{C-K1-FORMS}For one quadrature point per cell, K1 is algebraically equal to three
+published forms: the cell model of Tang et al.~\cite{Tang2022mmWave} times $j$, the general
+path-loss model of ETSI GR RIS 003~\cite[clause 6.3.1.2]{ETSI_GR_RIS003_v121} with its
+recommended cell gain $G=4\pi d_xd_y/\lambda^2$, and the model of
 Ellingson~\cite{Ellingson2021PathLoss} with an element gain tied to the cell area,
-$G_e(\psi)=(4\pi A/\lambda^2)\cos\psi$. A test checks the equality to double precision
-(PH-02). \claim{C-K1-GUARDS}A scenario check warns when a cell is closer to a node than
-three wavelengths, where the point-scatterer approximation weakens, and rejects distances
-below one wavelength. With the default obliquity the scattered power of a passive panel does
-not exceed the power it intercepts in any tested configuration (PH-23); the alternative obliquity
-$(\cos\theta_i+\cos\theta_s)/2$ can exceed it for anomalous reflection and therefore
-emits a validity warning when selected.
-% scenario/guards.py CELL_NEAR / CELL_TOO_CLOSE; ris_kernel.energy_budget, KIRCHHOFF_WARNING.
+$G_e(\psi)=(4\pi A/\lambda^2)\cos\psi$; a test checks the equality to double precision (PH-02).
 
 \subsection{Cell model}\label{sec:model-cells}
 % physics/quadrature.py (resolve_cell_model, build_quadrature, representative_links,
 % richardson_check); scenario/models.py Numerics defaults.
-\claim{C-CELL-MODEL}Each panel selects one of three cell models. \texttt{point} places one
-quadrature point per physical cell; it is the model that Tang et al.\ compared with their
-measurements~\cite{Tang2022mmWave}. \texttt{po\_patch} splits each cell into sub-cells with
-sides of at most \numSubcellMax$\lambda$ that share the cell's $\Gamma$, a uniform-patch
-physical-optics model. \texttt{auto}, the default, selects \texttt{point} when the cell pitch
-is at most \numPointMaxPitch$\lambda$ and \texttt{po\_patch} otherwise. Forcing
-\texttt{point} on larger cells emits a warning, and tables whose measurement already contains
-the cell pattern force \texttt{point} without obliquity, so that the pattern is not counted
-twice. The two models are not numerically equivalent: a patch carries the sub-aperture factor
-of a uniform patch, which a point omits. They agree near specular reflection and differ by
-several decibels for half-wavelength cells at wide non-specular angles (PH-26); we treat
-this difference as model-form uncertainty. \claim{C-RICHARDSON}For \texttt{po\_patch}
-panels a Richardson check computes the received power of up to \numRichardsonLinks{}
-representative links at sub-cell size $\Delta$ and at $\Delta/2$, halves $\Delta$ at most
-\numRichardsonHalvings{} times while the change exceeds \numRichardsonTolDb~dB, and fails
-otherwise; the accepted size and the estimate go to the manifest.
+\claim{C-CELL-MODEL}Each panel selects a cell model: \texttt{point}, one quadrature point per
+cell, which Tang et al.\ compared with their measurements~\cite{Tang2022mmWave};
+\texttt{po\_patch}, sub-cells with sides of at most \numSubcellMax$\lambda$ that share the
+cell's $\Gamma$, a uniform-patch physical-optics model; or \texttt{auto} (default):
+\texttt{point} for pitches up to \numPointMaxPitch$\lambda$, else \texttt{po\_patch}. The two agree near
+specular reflection and differ by several decibels for half-wavelength cells at wide
+non-specular angles (PH-26), a model-form uncertainty.
 
 \subsection{Element states and non-idealities}\label{sec:model-nonideal}
 % physics/nonideal.py (pipeline order, quantize_phases, FailureMap, efficiency_factor,
 % CouplingHook without kappa values, binary_md); physics/optimize.py (exact optimum).
-\claim{C-NONIDEAL}The reflection coefficient of each cell comes from its response table
-(Section~\ref{sec:design-states}) through a fixed pipeline. A command (state indices, phases
-or a codebook entry) is expanded from controls to physical cells by the panel's control
-granularity. Continuous phases are quantized by
-$s=\arg\max_s\mathrm{Re}\{\bar\Gamma(s)e^{-j\phi}\}$, which stays correct when the states
-have unequal amplitudes (PH-30). Stuck and dead cells follow a failure map; dead cells absorb
-by default. The table is evaluated at each cell's angles. An efficiency factor scales the
-amplitude by $\sqrt{\eta}$; it is refused for measured or digitized tables unless explicitly
-overridden, because their data already contain the loss. A coupling hook can add a
-state-dependent correction, but no coupling coefficients are shipped: coupling enters
-through measured or simulated per-configuration tables~\cite{ETSI_GR_RIS003_v121}. The
-transition of Section~\ref{sec:design-time} acts in time. Closed-form losses of finite
-alphabets and the mirror and steerable parts of a binary alphabet, $\Gamma=m+ds$ with
-$s=\pm1$, check this pipeline (PH-13, PH-15, PH-25).
-
-\claim{C-OPTIMUM}An exact maximizer of $|z_0+\sum_n Z[s_n,n]|$ over any finite alphabet
-serves as an upper bound for controllers and studies. For a direction $\theta$ the best
-per-element choice is $s_n(\theta)=\arg\max_s\mathrm{Re}\{Z[s,n]e^{-j\theta}\}$; it can
-change at the critical angles $\arg(Z[a,n]-Z[b,n])\pm\pi/2$ and nowhere else, and the
-optimum is the choice at the direction of the optimal sum. A sweep over the sorted critical
-angles therefore finds the optimum in $O(S^2N\log(S^2N))$ operations for $S$ states and $N$
-cells, and it matches exhaustive search in every tested instance (PH-24, PH-29). The method
-is not new: optimal discrete-phase beamforming has been solved
+\claim{C-NONIDEAL}Each cell's reflection coefficient comes from its response table through a
+fixed pipeline: expansion by the panel's control granularity, quantization of continuous
+phases by $s=\arg\max_s\mathrm{Re}\{\bar\Gamma(s)e^{-j\phi}\}$, correct for unequal amplitudes
+(PH-30), a failure map, the table at the cell's angles, an efficiency factor, and a coupling
+hook without shipped coefficients, so coupling enters through measured or simulated
+per-configuration tables~\cite{ETSI_GR_RIS003_v121}. Closed-form losses of finite alphabets
+and the mirror and steerable parts of a binary alphabet, $\Gamma=m+ds$ with $s=\pm1$, check the
+pipeline (PH-13, PH-15, PH-25). \claim{C-OPTIMUM}An exact maximizer of
+$|z_0+\sum_n Z[s_n,n]|$ over any finite alphabet, found by a sweep over the sorted critical
+angles $\arg(Z[a,n]-Z[b,n])\pm\pi/2$ in $O(S^2N\log(S^2N))$ operations for $S$ states and $N$
+cells, bounds controllers and studies and matches exhaustive search in every tested instance
+(PH-24, PH-29). The method is not new: optimal discrete-phase beamforming has been solved
 before~\cite{Zhang2022OptimalBinary,Zhao2024OptimalDiscrete}.
 
-\subsection{Mobility, Doppler and interpolation}\label{sec:model-doppler}
+\subsection{Mobility, delay and noise}\label{sec:model-doppler}\label{sec:model-noise}
 % channel/interp.py (EPS_REL split D1, t_curv_s, tile_side_max_m, choose_policy, M_MAX,
 % T_U_MAX_S, VERIFY_INTERP_STRIDE, VERIFY_INTERP_FLAG, verify_interp); engine/scheduler.py
-% (snapshot grid, switches never interpolated across).
+% (snapshot grid, switches never interpolated across); channel/fd.py; impair/noise.py; rng.py.
 \claim{C-DOPPLER}Doppler shifts are not parameters: they follow from the geometry. Snapshots
-are evaluated at $t_k=kT_u$ on an absolute grid (for static scenes at events). Between two
-snapshots each path without a RIS has a chord delay, linear in time between its delays at
-the two snapshots, and the carrier phase that is exact for that delay,
-$e^{-j2\pi f_c\tau_p(t)}$; its amplitude is complex-linear. Each RIS panel row is split into
-render tiles. A tile has a reference delay, rendered like a path, and a residual: the sum of
-its cells' coefficients relative to that reference, interpolated complex-linearly.
-Configuration switches are discontinuities at exact sample indices and are never
-interpolated across.
-
-\claim{C-INTERP-BOUND}One target, $\varepsilon_{\mathrm{rel}}=\numEpsRel$ for $|\Delta
-h|/|h|$, sets both the snapshot period and the tile size; half of it goes to each source of
-error. The chord error of a path with range $r$ is $k\ddot rT_u^2/8$ with $\ddot r\le
-v_\perp^2/r_{\min}$, which gives
-\begin{equation}
-T_{\mathrm{curv}}=\sqrt{8(\varepsilon_{\mathrm{rel}}/2)\,r_{\min}/(k\,v_\perp^2)}.
-\label{eq:tcurv}
-\end{equation}
-The residual of a tile with side $D_t$ turns by $\Delta\phi$, equal to
-$2\pi v_{\mathrm{rel}}D_tT_u/(\lambda R_{\min})$, per interval, and the midpoint dip of linear interpolation,
-$\Delta\phi^2/8$, must stay below $\varepsilon_{\mathrm{rel}}/2$, which bounds $D_t$. The
-policy starts from $T_{u0}=\min(T_{\mathrm{curv}},T_{u,\max})$ with $T_{u,\max}$ of
-\numTuMaxMs~ms (a scenario can lower $T_u$ but not raise it), evaluates the periods
-$T_{u0}/2^m$ for $m$ up to \numTuHalvingsMax{} with the tile counts each needs, and picks
-the pair with the lowest estimated compute cost; the choice goes to the manifest.
-\claim{C-VERIFY-INTERP}Each run checks the bound: in every \numVerifyStride{}th snapshot
-interval the engine evaluates the exact snapshot at the interval midpoint and logs
-$\max|h_{\mathrm{interp}}-h_{\mathrm{true}}|/|h|$ per link; the manifest keeps the maximum,
-and runs above $\numVerifyFlagFactor\,\varepsilon_{\mathrm{rel}}$ are flagged (PH-18).
-Section~\ref{sec:vv} compares the rendered Doppler shifts of LOS and RIS paths with closed
-forms (PH-17).
-
-\subsection{Delay, bandwidth and noise}\label{sec:model-noise}
-% channel/interp.py (is_narrowband, plan_groups), channel/fd.py (Kaiser sinc, FD_ROWS,
-% N_PHASES polyphase table with linear interpolation, INTEGER_MAX_PHASE_RAD), impair/noise.py
-% (thermal_sigma per RX), rng.py (philox4x32-10/blake2b-v1 keys, absolute counters),
-% impair/oscillator.py (CFO, Wiener PN), impair/frontend.py.
-\claim{C-FD}Each TX stream declares its occupied bandwidth $B$. A link is narrowband when
-$\pi B\Delta\tau\le\numNarrowbandRad$~rad over its delay spread $\Delta\tau$; its paths then
-share one envelope delay and keep their own exact carrier phases. Otherwise the paths are
-grouped so that each group passes the same test, and each group gets its own
-fractional-delay (FD) filter at its chord delay. The FD filters are Kaiser-windowed sinc
-filters ($\beta=\numKaiserBeta$)~\cite{Laakso1996FracDelay} with \numFdTaps{} taps for
-$B/f_s$ up to \numFdBands{}, respectively, applied through a polyphase table of
-\numFdPhases{} fractional phases with linear interpolation between neighbouring phases.
-Their in-band error stays below \numFdTargetDb~dB for every fractional delay (PH-20); a
-wider band is rejected. An integer delay without a filter is used when the band is narrow
-enough for the half-sample error, $\pi B/(2f_s)$, to stay below \numIntegerDelayRad~rad.
-
-\claim{C-NOISE}Thermal noise is added once per receiver, not per link: complex Gaussian
-noise of power $k_BT_0Ff_s$ with $T_0=\numTzeroK$~K and the receiver noise factor $F$
-($k_BT_0$ is \numThermalDbmHz~dBm/Hz) (PH-21). \claim{C-RNG}Every random variate is a pure
-function of the master seed, a purpose, a name and an absolute sample or step index: keys
-are derived with a BLAKE2b hash of the seed, purpose and name, and the counter-based
-Philox4x32-10 generator~\cite{Salmon2011Philox} takes the absolute index as its counter.
-Adding a node or chunking a run differently therefore changes no other variate, and the
-compiled and reference backends produce identical integer streams (RT-14). Further
-impairments are carrier-frequency offsets of TX and RX oscillators, computed as phases of
-the absolute sample index (RT-09), Wiener phase noise with keyed increments, and a front end
-with full-scale mapping, gain and optional clipping. Table~\ref{tab:modelcard} lists every
-component with its validity domain, verification evidence and default.
-
-\input{generated/tables/table2_model_card}
+lie on an absolute grid $t_k=kT_u$; between two of them each path without a RIS has a delay
+linear in time and the exact carrier phase $e^{-j2\pi f_c\tau_p(t)}$ for that delay, and each
+RIS panel row is split into render tiles with a reference delay and an interpolated residual.
+Configuration switches are never interpolated across. \claim{C-INTERP-BOUND}One target,
+$\varepsilon_{\mathrm{rel}}=\numEpsRel$ for $|\Delta h|/|h|$, sets both the snapshot period
+and the tile size, \claim{C-VERIFY-INTERP}and each run checks it at the midpoint of every
+\numVerifyStride{}th snapshot interval (PH-18; Appendix~\ref{app:model}). \claim{C-FD}Paths whose delay spread is too large for one envelope
+delay get Kaiser-windowed sinc fractional-delay (FD) filters~\cite{Laakso1996FracDelay} with
+an in-band error below \numFdTargetDb~dB (PH-20). \claim{C-NOISE}Thermal noise of power
+$k_BT_0Ff_s$, with $T_0=\numTzeroK$~K and the receiver noise factor $F$ ($k_BT_0$ is
+\numThermalDbmHz~dBm/Hz), is added once per receiver, not per link (PH-21). \claim{C-RNG}Every
+random variate is a pure function of the master seed, a purpose, a name and an absolute sample
+or step index (BLAKE2b keys, Philox4x32-10 counters~\cite{Salmon2011Philox}), so adding a node
+or chunking a run differently changes no other variate, and the compiled and reference
+backends produce identical integer streams (RT-14). Oscillator offsets, phase noise and a
+front end with optional clipping complete the impairments; Appendix~\ref{app:model} gives the model card
+with the validity domain, evidence and default of every component.
