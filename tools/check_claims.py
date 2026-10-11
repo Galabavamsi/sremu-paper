@@ -14,7 +14,7 @@ Checks (both modes unless noted)
      time", "soft real time" and "non-real-time"; anything else needs a mapped claim.
   5. Numbers (rule 7): in every text unit (sentence, list item or table row) without a
      citation, a number must come from a macro. A citation does not cover a unit that
-     talks about sremu itself. Identifiers (v2, 6G, PH-02, GS RIS 008), years and dates are
+     talks about sremu itself. Identifiers (v0.18, 6G, PH-02, GS RIS 008), years and dates are
      allowed; numbers glued to units (5.2ms, 3x, 1e-3) are numbers. Inside math, decimals,
      integers >= 2 after a relation (N = 1024) and integers with a unit are flagged.
   6. Every \\claim{ID} marker names a claim in claims.yaml.
@@ -182,7 +182,7 @@ OWN_WORK_RE = re.compile(
     re.I,
 )
 # A number glued to a unit or written in scientific notation is a number, not an identifier
-# (5.2ms, 10dB, 3x, 1e-3). 5G, 6G, 2D, v2, R2026a stay identifiers.
+# (5.2ms, 10dB, 3x, 1e-3). 5G, 6G, 2D, v0.18, R2026a stay identifiers.
 UNIT_GLUED_RE = re.compile(
     r"\d+(?:\.\d+)?(?:[eE][-+]?\d+)?"
     r"(?:[kMGT]?Hz|[mun]?s|dB[mi]?|[mck]?m|M?S/s|[mk]?W|x|X)"
@@ -224,7 +224,7 @@ def flag_numbers(unit: str) -> list[str]:
             flagged.append(tok)
             continue
         if re.search(r"[A-Za-z]", tok):
-            continue  # identifier: v2, 6G, PH-02, R2026a, i.i.d
+            continue  # identifier: v0.18, 6G, PH-02, R2026a, i.i.d
         if re.fullmatch(r"(19|20)\d{2}", tok):
             continue  # a year
         flagged.append(tok)

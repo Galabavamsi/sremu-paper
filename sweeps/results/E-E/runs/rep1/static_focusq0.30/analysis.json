@@ -1,0 +1,76 @@
+{
+ "run": "static_focusq0.30",
+ "kind": "static",
+ "rate_sps": 1000000.0,
+ "sps": 4,
+ "n_run": 300000,
+ "rx_samples": 300000,
+ "complete": true,
+ "decisions": 74960,
+ "gnuradio_version": "3.10.9.2",
+ "sha256": {
+  "rx_iq": "cc290e5a0f1c3e89f2557dfcf14072084cf347c03f0f925cea47815497d52f3c",
+  "costas": "4c4ba581fb5936c83bbd5312fc1d5af86e45c552113a9daa1249afe4ea295d32",
+  "decisions": "27177be1ca99bf1b47535e9fe3a3b19f07e31340e2a9821b8f498a87d4622a51"
+ },
+ "commands": [
+  {
+   "cmd_id": "ris-schedule-3",
+   "t_applied": "0",
+   "k_req": 0,
+   "k_applied": 0,
+   "lateness_samples": 0,
+   "status": "applied"
+  }
+ ],
+ "counters_nonzero": {},
+ "manifest": {
+  "mode": "lockstep",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "nondeterministic_inputs": false,
+  "page_size": {
+   "grrx.rx0": 512
+  },
+  "git_commit": null,
+  "git_dirty": null,
+  "wall_s": 3.4473877660000056,
+  "sremu_version": "0.1.0.dev0",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+ },
+ "rx_equals_emulator_record": true,
+ "emulator_record_samples": 300000,
+ "segments": [
+  {
+   "config": "focusq:0.30",
+   "k0": 0,
+   "k1": 300000,
+   "symbols": 69960,
+   "symbol_errors": 2,
+   "ser": 2.858776443682104e-05,
+   "bler_uncoded_200bit": 0.001430615164520744,
+   "blocks": 699,
+   "worst_20ms_ser": 0.0004,
+   "mer_db": 13.318532305015495,
+   "ls_gain_db": -9.378023212001136,
+   "ls_phase_deg": -100.58753951987367,
+   "ls_snr_db": 7.560546513705758,
+   "ls_delay_samples": 0,
+   "es_n0_db": 13.581146426985383,
+   "ser_theory": 3.5776893436700874e-06,
+   "implied_loss_db": null,
+   "lag": 524275,
+   "corr_peak": 1.0000000000000004,
+   "af_pred_db": -8.009678381862225
+  }
+ ],
+ "throughput": {
+  "sremu_rtf_median": 0.39514065251377617,
+  "sremu_rtf_windows": 2,
+  "gr_rtf_steady": 0.24173767051416573,
+  "gr_wall_first_to_last_s": 1.104
+ },
+ "ok": true
+}

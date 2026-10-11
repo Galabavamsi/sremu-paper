@@ -15,13 +15,25 @@
 \newcommand{\numRepTraceRttMs}{5.2}% reported:Kumar2026TRACE
 \newcommand{\numOracleCount}{58}% test:junit:count(PH,RT,IO)
 \newcommand{\numTangCurveMaxDevDb}{0.02}% study:V-TANG-1
-\newcommand{\numTangMeasBiasDb}{\ensuremath{+0.98}}% study:V-TANG-2
+\newcommand{\numTangMeasBiasDb}{0.98}% study:V-TANG-2
 \newcommand{\numTangMeasSdDb}{0.38}% study:V-TANG-2
+\newcommand{\numTangMeasRmseDb}{1.05}% study:V-TANG-2
+\newcommand{\numTangMeasMaxDb}{1.59}% study:V-TANG-2
+\newcommand{\numTangPanelBiasMinDb}{0.79}% study:V-TANG-2
+\newcommand{\numTangPanelBiasMaxDb}{1.15}% study:V-TANG-2
 \newcommand{\numTangMeasN}{36}% study:V-TANG-2
+\newcommand{\numTangFcGHz}{27}% study:V-TANG
 \newcommand{\txtVLabOutcome}{was underpowered and did not separate the RIS model from LOS-only}% study:V-LAB
 \newcommand{\txtPacedPlatform}{an AWS c7i.8xlarge (Linux)}% benchmark:B3
 \newcommand{\numPacedLinks}{8}% benchmark:B3
 \newcommand{\numPacedMSps}{1}% benchmark:B3
+\newcommand{\txtLicence}{\sremuPlaceholder{txtLicence}}% data:availability.yaml
+\newcommand{\txtRepoUrl}{\sremuPlaceholder{txtRepoUrl}}% data:availability.yaml
+\newcommand{\txtArchiveDoi}{\sremuPlaceholder{txtArchiveDoi}}% data:availability.yaml
+\newcommand{\txtDataDoi}{\sremuPlaceholder{txtDataDoi}}% data:availability.yaml
+\newcommand{\txtPythonReq}{3.12}% data:sremu-pyproject
+\newcommand{\numSrcKloc}{41}% data:sremu-source-tree
+\newcommand{\numSrcModules}{103}% data:sremu-source-tree
 \newcommand{\numSustainWarmupS}{5}% definition:DESIGN-12.1-Sustainable
 \newcommand{\numBfourLeadMs}{2}% data:B4-timed-lead
 \newcommand{\numBtwoFfiveRtf}{\sremuPlaceholder{numBtwoFfiveRtf}}% benchmark:B2-F5-rerun
@@ -166,7 +178,7 @@
 \newcommand{\numApiSendPninetynineUs}{\sremuPlaceholder{numApiSendPninetynineUs}}% benchmark:E-F-latency
 \newcommand{\numZmqRttPfiftyUs}{\sremuPlaceholder{numZmqRttPfiftyUs}}% benchmark:E-F-latency
 \newcommand{\numApiThroughputMsps}{\sremuPlaceholder{numApiThroughputMsps}}% benchmark:E-F-latency
-\newcommand{\txtEBResult}{timed commands whose lead exceeds the latency lose no packet, tick-based ones up to 93\,\%}% experiment:E-B-arc
+\newcommand{\txtEBResult}{where a mistimed switch costs bits, commands applied on arrival lose 39--46\,\% of the packets at $J=1$\,ms, timestamped ones whose lead exceeds the latency none}% experiment:E-B-arc
 \newcommand{\txtEAResult}{loses half its benefit after 0.126\,s, a time set by $\lambda/v$}% experiment:E-A
 \newcommand{\numCiPct}{95}% definition:DESIGN-10.9/11-CI-95
 \newcommand{\numCfoGateFactor}{1.5}% definition:DESIGN-10.10-V-CFO-4
@@ -231,9 +243,17 @@
 \newcommand{\numLabDiagRateHi}{0.60}% study:V-LAB-diagnostic
 \newcommand{\numLabDiagDecoys}{200}% study:V-LAB-diagnostic
 \newcommand{\numLabDiagGeomRate}{0.63}% study:V-LAB-diagnostic
-\newcommand{\txtLabLockCommit}{\sremuPlaceholder{txtLabLockCommit}}% study:V-LAB-lock
-\newcommand{\txtLabLockDate}{\sremuPlaceholder{txtLabLockDate}}% study:V-LAB-lock
-\newcommand{\txtLabDepositDoi}{\sremuPlaceholder{txtLabDepositDoi}}% study:V-LAB-deposit
+\newcommand{\txtLabLockCommit}{101ee87}% data:V-LAB-provenance
+\newcommand{\txtLabLockDate}{11 Oct 2026, 00:22:55 UTC}% data:V-LAB-provenance
+\newcommand{\txtLabCodeCommit}{7a63287}% data:V-LAB-provenance
+\newcommand{\txtLabCodePushTime}{00:30:30 UTC}% data:V-LAB-provenance
+\newcommand{\txtLabResultCommit}{2333b60}% data:V-LAB-provenance
+\newcommand{\txtLabResultPushTime}{00:31:40 UTC}% data:V-LAB-provenance
+\newcommand{\txtLabRunTime}{00:30:44 UTC}% study:V-LAB
+\newcommand{\numLabSpearmanLo}{\ensuremath{-0.76}}% study:V-LAB
+\newcommand{\numLabSpearmanHi}{0.34}% study:V-LAB
+\newcommand{\numLabDecoyDeltaMtwoDb}{\ensuremath{-1.16}}% study:V-LAB
+\newcommand{\numLabDecoyDeltaMzeroDb}{\ensuremath{-2.13}}% study:V-LAB
 \newcommand{\numCfoSweepPoints}{29}% study:V-CFO-1
 \newcommand{\numCfoSweepMaxHz}{1400}% study:V-CFO-1
 \newcommand{\numCfoBurstSamples}{2389}% study:V-CFO-1
@@ -357,8 +377,19 @@
 \newcommand{\numEaRatio}{0.429}% experiment:E-A
 \newcommand{\numEaRatioLo}{0.428}% experiment:E-A
 \newcommand{\numEaRatioHi}{0.430}% experiment:E-A
-\newcommand{\numEaRatioPred}{0.42}% experiment:E-A
-\newcommand{\numEaTauOverLambdaV}{0.42}% experiment:E-A
+\newcommand{\numEaRatioPred}{0.417}% experiment:E-A
+\newcommand{\numEaHaOneLoS}{0.1}% experiment:E-A-plan
+\newcommand{\numEaHaOneHiS}{1}% experiment:E-A-plan
+\newcommand{\numEaHaTwoLo}{0.30}% experiment:E-A-plan
+\newcommand{\numEaHaTwoHi}{0.55}% experiment:E-A-plan
+\newcommand{\txtEaPlanSha}{5b59f8f2}% experiment:E-A-plan
+\newcommand{\txtEaPlanCommit}{71fa3f3}% data:E-A-plan
+\newcommand{\numEaRatioOffsetPct}{3}% experiment:E-A
+\newcommand{\numEaTauOverLambdaV}{0.421}% experiment:E-A
+\newcommand{\numEaTauOverLambdaVTwo}{0.433}% experiment:E-A
+\newcommand{\numClarkeFieldHalf}{0.24}% experiment:E-A-Clarke-reference
+\newcommand{\numClarkeEnvHalf}{0.18}% experiment:E-A-Clarke-reference
+\newcommand{\numCoherenceRuleLambdaV}{0.42}% experiment:E-A-Clarke-reference
 \newcommand{\numEaTauBanditMinS}{0.3}% experiment:E-A
 \newcommand{\numEaBanditMinDb}{0.38}% experiment:E-A
 \newcommand{\numEaBanditMaxDb}{0.39}% experiment:E-A
@@ -366,6 +397,7 @@
 \newcommand{\numVaOneDurS}{1000}% experiment:VA-1
 \newcommand{\numVaOneMaxDiffDb}{0.002}% experiment:VA-1
 \newcommand{\numVaOneTolDb}{0.02}% experiment:VA-1
+\newcommand{\numVaOneLeftMaxDb}{0.09}% experiment:VA-1
 \newcommand{\numEcOneBitMin}{2.9}% experiment:E-C
 \newcommand{\numEcOneBitMax}{3.3}% experiment:E-C
 \newcommand{\numEcOneBitEta}{3.92}% experiment:E-C
@@ -386,6 +418,31 @@
 \newcommand{\numFmFourRaySufficient}{23}% experiment:E-D
 \newcommand{\numFmGapMinDb}{17.5}% experiment:E-D
 \newcommand{\numFmGapMaxDb}{41.3}% experiment:E-D
+\newcommand{\txtEeGrVersion}{3.10.9.2}% experiment:E-E
+\newcommand{\numEeSps}{4}% experiment:E-E
+\newcommand{\numEeRateMsps}{1}% experiment:E-E
+\newcommand{\numEeCells}{256}% experiment:E-E
+\newcommand{\numEeFcGHz}{3.5}% experiment:E-E
+\newcommand{\numEeDistM}{5}% experiment:E-E
+\newcommand{\numEeWallDb}{40}% experiment:E-E
+\newcommand{\numEeStaticS}{0.3}% experiment:E-E
+\newcommand{\numEeSegmentS}{0.4}% experiment:E-E
+\newcommand{\numEeConfigs}{10}% experiment:E-E
+\newcommand{\numEeAfMaxDiffDb}{1.0}% experiment:E-E
+\newcommand{\numEeLossMinDb}{0.55}% experiment:E-E
+\newcommand{\numEeLossMaxDb}{0.56}% experiment:E-E
+\newcommand{\numEeCpOffsetMax}{0}% experiment:E-E
+\newcommand{\numEeRuns}{11}% experiment:E-E
+\newcommand{\txtEeReps}{two}% experiment:E-E
+\newcommand{\txtEeLaptopCpu}{AMD Ryzen 9 8945H}% experiment:E-E
+\newcommand{\txtEeLaptopSweeps}{four}% experiment:E-E
+\newcommand{\numEeLaptopRtfLoMin}{0.60}% experiment:E-E
+\newcommand{\numEeLaptopRtfLoMax}{1.56}% experiment:E-E
+\newcommand{\numEeLaptopRtfHiMin}{0.39}% experiment:E-E
+\newcommand{\numEeLaptopRtfHiMax}{0.50}% experiment:E-E
+\newcommand{\numEeLaptopRateHiMsps}{5.76}% experiment:E-E
+\newcommand{\numEeAwsRtfLo}{\sremuPlaceholder{numEeAwsRtfLo}}% experiment:E-E
+\newcommand{\txtEeAwsInstance}{\sremuPlaceholder{txtEeAwsInstance}}% experiment:E-E
 \newcommand{\numPageTargetMs}{0.5}% code:sremu.timebase:float(Fraction(DEFAULT_PAGE_TARGET_S) * 1000)
 \newcommand{\numPageMin}{64}% code:sremu.timebase:PAGE_MIN
 \newcommand{\numPageMax}{16384}% code:sremu.timebase:PAGE_MAX

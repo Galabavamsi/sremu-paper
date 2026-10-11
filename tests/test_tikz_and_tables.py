@@ -135,8 +135,8 @@ def test_table3_v1_column_must_cover_every_row(monkeypatch: pytest.MonkeyPatch) 
     pytest.importorskip("sremu")
     import gen_tables
 
-    monkeypatch.setitem(gen_tables.V1_COLUMN, "Device.extra", "none")
-    with pytest.raises(ValueError, match="v1 column keys"):
+    monkeypatch.setitem(gen_tables.WRAPPER_COLUMN, "Device.extra", "none")
+    with pytest.raises(ValueError, match="wrapper column keys"):
         gen_tables.table3_rows()
 
 

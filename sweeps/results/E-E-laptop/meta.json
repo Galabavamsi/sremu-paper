@@ -1,0 +1,344 @@
+{
+  "experiment": "E-E",
+  "data_classes": [
+    "MEAS"
+  ],
+  "description": "Lockstep real-time factor of the GNU Radio + sremu loop (virtual seconds per wall second) on one host: single runs per rate, one or more sweeps",
+  "assumptions": [
+    "lockstep: virtual time follows the sample exchange; the real-time factor is not a real-time claim",
+    "single run per rate and sweep; host load not controlled"
+  ],
+  "inputs": [
+    {
+      "path": "runs/sweep1/rate_1.92e+06/analysis.json",
+      "sha256": "c73b68cec213a4b61910cdc95f686054d8351abca820ebd7cfcc718bd0c45c36",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1.92e+06/events.jsonl",
+      "sha256": "3b4719733a028915b7cbd36125ad569dc3157b2128c97b3bde13e9a9ffd47697",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1.92e+06/manifest.json",
+      "sha256": "eae91e8d049c8905b41be0f181adced4c66d235c5671320cab0a180e857de620",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1.92e+06/metrics.jsonl",
+      "sha256": "da597875e0fdbd59c0d594d48110172043eca262338ffe35a7070e13646b4547",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1.92e+06/run.json",
+      "sha256": "150f8b7fa13460167df91e7c984e3e2a5f386557510c79e8e0d24adee58b6e5f",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1e+06/analysis.json",
+      "sha256": "f5e50f80b1bccfa8d2a427266eccc4b2e5935cc1e91f8a631f45b2d0cff3e399",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1e+06/events.jsonl",
+      "sha256": "4b63f6cc19355b11ef41c8654ef2560822e60fd3aca644a600bb0a7cffb7b70c",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1e+06/manifest.json",
+      "sha256": "5604fbff0f8abb791db3c6a3deda14b256d53f4ef501087a280e3b0f5c37e37c",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1e+06/metrics.jsonl",
+      "sha256": "e72379881bbaaedcc85943fc7e27cedbc25d751ba150780317f3c1628c6958ac",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_1e+06/run.json",
+      "sha256": "819f45440235d0a762196dae5fd40bf5ef9a8cb3224581661adc8f17b9b9ea43",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_3.84e+06/analysis.json",
+      "sha256": "84f539f56c05e30cab93917c2419c83b8e0109335af2a831d34425022aaaa636",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_3.84e+06/events.jsonl",
+      "sha256": "85579c726db4c7c8c4c74561cc2db5b0fdf92a169cb9e2f7c35cfda0a57a2c02",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_3.84e+06/manifest.json",
+      "sha256": "188a8f83eb2e3d7284f0a4ee99ea8c9e3c3ab525f1d32f335f6d542936157c3b",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_3.84e+06/metrics.jsonl",
+      "sha256": "143fa2571a8702bb8ab0aa5a73abd9328ac87eed881d3bd1625357b3bacd04a9",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_3.84e+06/run.json",
+      "sha256": "57cecaa82a6522adfb5fb66286f3ed869d2659072e3beeffced93d299527d93a",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_5.76e+06/analysis.json",
+      "sha256": "1e872a66be0b70b839201cee581b35f6a692bab4e71da5140b8b071b85d9ada4",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_5.76e+06/events.jsonl",
+      "sha256": "0345d47889eacc4b886ffa31e2cdfc2c92708563e241f83763dc17b1c4fb70d5",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_5.76e+06/manifest.json",
+      "sha256": "0272a77c875ebbb47dfa87be943d7ab465d175b01f49571b26408652e4bba620",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_5.76e+06/metrics.jsonl",
+      "sha256": "becf18908550f24323928344762886dcbbeb230f3a7985271ade85ce515a153c",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep1/rate_5.76e+06/run.json",
+      "sha256": "91cb0e2306ae9d48f6803aa2c2af649c2e7937167043c56449c95ba7fed1fb63",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1.92e+06/analysis.json",
+      "sha256": "47bb36f139e2cb0777f179c905eb123d1d99d3dcfc8c5aebd0cd1f6325318bbd",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1.92e+06/events.jsonl",
+      "sha256": "877f8b4b3762b4aee28ec9fc44a0c10fc400d5305d6f605dff55ad0fe8d1a858",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1.92e+06/manifest.json",
+      "sha256": "c862bc510bd9db98502f3a484e777f63012a08123b6dd531ed62c7ad2f5573cd",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1.92e+06/metrics.jsonl",
+      "sha256": "45d6efd7625f213b4b365cbcdb479ac5d0b0b97a219cf9bfde00985cbb13a8bb",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1.92e+06/run.json",
+      "sha256": "c494af0be221b243fb8400c536fd5d9aa4b569b7fa06fcc9262fb9b0ae68f768",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1e+06/analysis.json",
+      "sha256": "cd7abb975f0434c23cae585c34533be1adf9597ec2cc0611a85591d2c3718ad4",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1e+06/events.jsonl",
+      "sha256": "6541e90f397c64289edd8504cd57bbe7c43d26ae7a316aaa362dffced96905a8",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1e+06/manifest.json",
+      "sha256": "89f4923afd5b23184b0ace12593e0174226743f66ca65dc9c36ce8d78cd18144",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1e+06/metrics.jsonl",
+      "sha256": "10e9b6d9a907b6545cab5bb8074b75073e43039fe5aefc821a7a3bf6483d0390",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_1e+06/run.json",
+      "sha256": "76ed10d8f442eaa063d594c6d7feb9623695b20c5efc67b609b980f0b018b3c9",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_3.84e+06/analysis.json",
+      "sha256": "a09d8c5e3a3c3834ddc5ef803366db10b1b5b20133ec8285647c61bb128efb1e",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_3.84e+06/events.jsonl",
+      "sha256": "d75363afb6b5b3025e7a449111d541722816a8c2a296eecd45a4ab89d9b4eb65",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_3.84e+06/manifest.json",
+      "sha256": "95c63f0f3f3f161ba8ed06f1b6aca94a8f635ffa23062255e26ea83f2173b2cb",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_3.84e+06/metrics.jsonl",
+      "sha256": "2cc02bddc06854c10f674412bad54329236d193264ac1fee2db60364f489666b",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_3.84e+06/run.json",
+      "sha256": "17893b3691a528536b3dcde3e2bdffaca2ce04e5a04f278459fa876dd6b69d3d",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_5.76e+06/analysis.json",
+      "sha256": "07b2f75f0fac4f1c4e8b0b70bc564c0fd7311d31fe9a229c1da1806f92474d72",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_5.76e+06/events.jsonl",
+      "sha256": "c3e5a01798b6b104ad932f4e58c65a2320c9aa76350c3ce8c42a20b31547db47",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_5.76e+06/manifest.json",
+      "sha256": "3a22bf5e8fc3ff561974315ea9d46391ca0f7eec7476ffc231f77e8bb2356302",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_5.76e+06/metrics.jsonl",
+      "sha256": "20b3bb8e7e193dc582789a3d8c56a547bb77491406ef2f24b8c7450828932e66",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep2/rate_5.76e+06/run.json",
+      "sha256": "81da365bdb558973088bf9a4995b78bc4770828d2665194be0f8c5b7f6edfa1a",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1.92e+06/analysis.json",
+      "sha256": "f004034c6302d1981006a2d38460a6f74cc5cc3b7b8165361c4417822e59b72c",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1.92e+06/events.jsonl",
+      "sha256": "15906fac165d00a5c55b7894254551c0dd59e27ab6ad832bae3e93aba75161e5",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1.92e+06/manifest.json",
+      "sha256": "f7bd793325d031b61132af35511ccd88aac1fae3d9e4867a049bc9e7ba6a7931",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1.92e+06/metrics.jsonl",
+      "sha256": "6fea897e7b7fa73c37931cd0722062cb94ad29178d6bc0e4d162ab0c6fbc7244",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1.92e+06/run.json",
+      "sha256": "75dd89352eb94cbb07bb8234e9d9552bafa87718793605634735b0ffb167b9a2",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1e+06/analysis.json",
+      "sha256": "1aa800f1cb2d1f74c06db56af868387b214cd9eb355902d6b940953d61e44193",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1e+06/events.jsonl",
+      "sha256": "e61e82eca7b4ccdc9e5ca395f1526ffa4158edb67976dd02e39901183978558c",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1e+06/manifest.json",
+      "sha256": "c5a02ca56903466ec33854232df8f1b15ddbf2afa0982c5cf936bbbefd9491a7",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1e+06/metrics.jsonl",
+      "sha256": "e85a908bb1f75700f293c88950e6592b9df8531141cd2eb26e8e49243736db45",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_1e+06/run.json",
+      "sha256": "56544f7c59a6b359f49b79c09b5e94ed9a321fc09447fb0b72c5f60e854b12a5",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_3.84e+06/analysis.json",
+      "sha256": "4904e0e62fc2f4141d346431f2008193f9637fc5fe7414e974979e5b87333245",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_3.84e+06/events.jsonl",
+      "sha256": "811ff1c22e302fc85f8d298e09703586f3cb2e9347270a7c0535d29bc601317e",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_3.84e+06/manifest.json",
+      "sha256": "8b813bd5b8d4cbe9c6ed2dc9a818aa04b62ba14a55f6156860d4fca2004add46",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_3.84e+06/metrics.jsonl",
+      "sha256": "4f2721a564d7a5ed9fe2ee67ff45fde5d8a9865221bea7c60168737863f1fb3a",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_3.84e+06/run.json",
+      "sha256": "c6e7191bc34e052c8b2fa0d3ad28d3a4cf24f79e3bc36957361dffa676a7a535",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_5.76e+06/analysis.json",
+      "sha256": "f753ca8d4df3b02ce487ffa7f716e0b58c45fd90427274fd6438922fa8c16204",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_5.76e+06/events.jsonl",
+      "sha256": "4977b31d693aa5f55a350f10ce33875f42c94dc3d56514ad87daba1efe2e4bf1",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_5.76e+06/manifest.json",
+      "sha256": "a6314130260d5e75d84b5ff86eb3bb556c900a9e302c8513f4386ee04ca6f1e4",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_5.76e+06/metrics.jsonl",
+      "sha256": "2a28ffa54f5ef43977d50338c659637bf1d4c5cecbe06df3101555362410d471",
+      "data_class": "MEAS"
+    },
+    {
+      "path": "runs/sweep3/rate_5.76e+06/run.json",
+      "sha256": "c158cb626f66d3d3deb1e860cc1900df53628c5c20b7d6ce6f1fa06d4e5d3f20",
+      "data_class": "MEAS"
+    }
+  ],
+  "files": {
+    "summary.json": "throughput rows per sweep and host"
+  },
+  "code": {
+    "files": {
+      "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+      "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+      "experiments/compare_regen.py": "7b1a693c58619c578cec1adda786ae9f5d64eff386f6cc4bbb801cb348b47f6d",
+      "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+      "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+      "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+      "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
+      "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+      "experiments/ee_gnuradio.py": "2e3473ac5c6088db107402a8bb79009d078ef763ac37e0cb8cce6e37cea56236",
+      "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+      "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+      "experiments/install_regen.py": "8cacb2f4fa22807ee71f7c84392b4649019b6ba01871012aa3ae0ca95d05e6a3",
+      "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+      "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
+      "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+      "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+    },
+    "src_sremu_tree_sha256": "1348c650e68a5ba472a4d1640829194799235d3e35925c8b5e5565bb8a44b0dc"
+  },
+  "written_utc": "2026-10-11T16:29:51.641998Z",
+  "roots": [
+    "/home/galaba_vamsi/trackG/ee_runs/20261011T162616Z_ee_tput_laptop",
+    "/home/galaba_vamsi/trackG/ee_runs/20261011T162745Z_ee_tput_laptop",
+    "/home/galaba_vamsi/trackG/ee_runs/20261011T162823Z_ee_tput_laptop"
+  ]
+}

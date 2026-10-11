@@ -4,8 +4,9 @@
 % paper/sweeps/results/bench/{B1,B2,B3,B4,B6} (byte copies of the AWS and laptop runs; MEAS;
 % provenance in each meta.json; analysis in research/analysis/bench_findings.md). No number is
 % compared across instance types or with the laptop (B3 and B4: two instances of one type,
-% stated where they are compared). F5 (native ZMQ transport) results are pending a rerun after a
-% transport fix: their macros stay placeholders. B2 aggregate throughput is recomputed as
+% stated where they are compared). F5 (native ZMQ data plane) results await the rerun at the
+% pinned commit (the B2 time-outs were a benchmark configuration error, fixed in the
+% benchmark): their macros stay placeholders until then (numbers.yaml states the plan). B2 aggregate throughput is recomputed as
 % n_rx x f_s x RTF (the run's aggregate column counts samples from before the metric restart).
 \section{Wall-Clock Behaviour and Scalability}\label{sec:wallclock}
 
@@ -30,7 +31,9 @@ samples between the requested and the applied switch sample.
 B2) ran on an AWS \txtHostServer{} instance and the paced and control-loop benchmarks (B3,
 B4) on two AWS \txtHostPaced{} instances, with the engine pinned to \numPacedEngineCpus{}
 logical CPUs and the rest of the host idle apart from the B4 command client; the cross-tool
-context (B6) comes from a laptop. All AWS runs used one emulator commit. B2 packed up to \numBtwoSlots{} points onto the server at a time, each
+context (B6) comes from a laptop. The AWS runs B1--B4 used one emulator commit; B1 and B2
+recorded a dirty flag, although their uploaded file tree equals that commit's
+(Appendix~\ref{app:provenance}). B2 packed up to \numBtwoSlots{} points onto the server at a time, each
 pinned to \numBtwoSlotCpus{} logical CPUs of whole cores in one NUMA node. A B3 point runs up
 to \numBthreeReps{} repetitions of \numBthreeMeasureS~s, each with at least
 \numBthreeMinPages{} pages, and counts as Sustainable when every repetition is; an
@@ -48,10 +51,11 @@ pair, so a scene with $L$ links has $n_{\mathrm{tx}}n_{\mathrm{rx}}=L$; for exam
 \claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran:
 \numBtwoOk{} completed, \numBtwoBelowFloor{} of the heaviest mobility points fell below the
 pilot floor and were not measured, and \numBtwoFailed{} failed. Every failure was a point
-with the native ZMQ data plane (feature set F5): three receive time-outs caused by a transport
-stall that is being corrected, and one benchmark error on a point below the floor. F5 is
+with the native ZMQ data plane (feature set F5): three receive time-outs came from an error
+of the benchmark, whose served run ended before the clients' streams, and one benchmark error
+hit a point below the floor. Both are fixed in the benchmark, not in the emulator. F5 is
 therefore left out of Fig.~\ref{fig:F7}, and its RTF at the base point (\numBtwoFfiveRtf)
-awaits the rerun. One
+comes from the rerun at the pinned commit. One
 link at \numBtwoBaseMsps~MS/s through one surface of \numBtwoBaseN{} elements, with a static
 geometry and thermal noise (F1), runs at RTF \numBtwoBaseRtf. In static scenes the element
 count barely matters: from $N=\numBtwoNmin$ to \numBtwoNmax{} the single-link RTF stays within
@@ -85,7 +89,7 @@ with mobility (F3, dashed); open markers: isolation reference points run alone; 
 $\mathrm{RTF}=1$. (b) RTF versus $L$ for the cumulative feature sets F0--F4 at
 $N=\numBtwoBaseN$. (c) Aggregate received throughput, $n_{\mathrm{rx}}f_s\,\mathrm{RTF}$ with
 $n_{\mathrm{rx}}$ receivers among the $L$ links, for four sample rates. Feature set F5 (native
-ZMQ transport) is pending a rerun.}{fig:F7}
+ZMQ data plane) awaits its rerun at the pinned commit.}{fig:F7}
 \end{figure*}
 
 \subsection{Paced operation}

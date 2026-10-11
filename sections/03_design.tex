@@ -38,6 +38,15 @@ its sample. A replay tool and a static HTML report read run directories.
 % record/manifest.py, record/eventlog.py, record/sigmf.py, record/replay.py,
 % record/report.py; metrics/rt.py RTF_WINDOW_S.
 
+\claim{C-IMPL}\sremu{} is a Python package (Python \txtPythonReq{} or later; \numSrcModules{}
+modules with about \numSrcKloc{} thousand lines). It builds on NumPy and SciPy, with a NumPy
+reference backend and a compiled numba backend for the rendering path, pyzmq for the
+sockets~\cite{ZeroMQ} and pydantic for message and scenario validation; Gymnasium and SigMF
+are optional~\cite{Towers2024Gymnasium,SigMF}. It runs on Windows and Linux; its test
+record is summarized in Section~\ref{sec:vv}.
+% pyproject.toml (requires-python, dependencies; DESIGN 2.4); the size macros are counted by
+% tools/gen_results.py over src/sremu/**/*.py of the checkout.
+
 \begin{figure}[t]
 \centering
 \sremufigure{F1}{\columnwidth}{Architecture of \sremu{}. Applications and controllers are
@@ -204,7 +213,7 @@ per-stream sequence number whose gaps raise a sequence error, the absolute index
 earliest sample, the sample count (at most $2^{\numFrameMaxSamplesExp}$), the channel count,
 the sample format (\texttt{cf32\_le} or \texttt{sc16\_le}) and the sender's monotonic clock,
 which feeds latency metrics and never the data plane. Malformed frames are dropped and
-counted, and no client input makes the engine raise (IO-01); TX sockets block at their
+counted, and no input of the fuzzed corpus made the engine raise (IO-01); TX sockets block at their
 high-water mark, which gives lockstep backpressure.
 % transport/framing.py, transport/zmq_native.py.
 
@@ -227,9 +236,11 @@ per-client rate limit (\numMaxCmdRateKHz~kHz by default) are refused and counted
 engine takes the broker role of the srsRAN ZMQ setup~\cite{srsRANZMQ}: it requests TX samples
 from the peer and answers its receive requests. Timing is implicit in sample counts, so this
 mode is lockstep. Its two request formats were taken from the srsRAN 4G and GNU Radio sources
-and are tested against stub peers (IO-08); no srsRAN or GNU Radio binary has been run against
-it yet, so we call it an srsRAN-style raw-IQ mode.
-% transport/rawreqrep.py (srsran_dummy, gnuradio_count).
+and are tested against stub peers (IO-08); unmodified GNU Radio \txtEeGrVersion{} runs
+against it (Section~\ref{sec:cases-ee}). No srsRAN binary has been run, so we call it an
+srsRAN-style raw-IQ mode.
+% transport/rawreqrep.py (srsran_dummy, gnuradio_count); examples/gnuradio_zmq;
+% tests/integration/test_gnuradio_raw.py (Linux, gated on a GNU Radio interpreter).
 
 \subsection{State library and ETSI GS RIS 008 alignment}\label{sec:design-states}
 % physics/response.py (ResponseTable, Provenance, validators, from_csv, from_matlab_scurve,
@@ -263,6 +274,8 @@ alphabets; the on--off alphabet of~\cite{Mishra2025WCL}; and the phase-dependent
 model of~\cite{Abeywickrama2020Practical}. A table can draw perturbed copies from its stated
 uncertainty for Monte Carlo studies.
 
+\input{sections/tables/table6_standards}
+% Placed here, at its first citation (MINOR-2); Section VIII-A discusses it.
 \claim{C-CAPS}Panel capabilities are named after the parameters of GS RIS
 008~\cite{ETSI_GS_RIS008} where such a parameter exists: number of elements, layout, control granularity (element, column, tile or
 groups), state labels, source of $\Gamma$ (measured with the data hash, or analytic with the

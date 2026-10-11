@@ -1,0 +1,19 @@
+# availability.yaml -- code and data availability facts printed in the "Code and Data
+# Availability" section (macros \txtLicence, \txtRepoUrl, \txtArchiveDoi, \txtDataDoi).
+#
+# tools/gen_results.py reads this file. A field whose value is PENDING stays a pipeline
+# placeholder: draft builds print ??, final builds refuse (numbers.tex must hold no
+# placeholder). Fill a field only after the decision it records has been made:
+#   licence      code licence of sremu and of the paper artifact (human gate H-2: six authors
+#                and IIT Bhilai), e.g. "Apache-2.0"
+#   repo_url     public URL of the sremu repository (H-2, H-7 name check)
+#   archive_doi  DOI of the archived release (Zenodo or similar) of the exact versions used,
+#                together with the analysis plans and lock records of Sections V-D and VII-B
+#   data_doi     DOI of the authors' own data files (CC BY 4.0 proposed; the laboratory map
+#                needs the laboratory's permission, human gate H-1)
+# Values are plain text; a URL is printed with \url, a DOI as written.
+
+licence: PENDING
+repo_url: PENDING
+archive_doi: PENDING
+data_doi: PENDING

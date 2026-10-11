@@ -33,12 +33,24 @@ def _main() -> str:
     return strip_tex_comments((PAPER_ROOT / "main.tex").read_text(encoding="utf-8"))
 
 
-def test_title_is_the_design_13_1_recommended_title() -> None:
-    m = re.search(r"\*\*Title \(recommended\):\*\* \*([^*]+)\*", _design_section("### 13.1"))
-    assert m is not None
+# Author decision of 2026-10-11 (title T1, research/analysis/revision_plan.md PART 9) replaces
+# the DESIGN 13.1 recommended title, whose two named evaluations run on the coefficient path and
+# whose "Open" waits for the release approval (human gate H-2).
+TITLE_T1 = ("Timed RIS Control in the Loop: A Sample-Accurate IQ-Level Emulator with "
+            "Characterized Timing")
+
+
+def test_title_is_the_author_decision_t1() -> None:
+    assert re.search(r"\*\*Title \(recommended\):\*\*", _design_section("### 13.1"))
     title = re.search(r"\\title\{(.*?)\}\n", _main(), re.S)
     assert title is not None
-    assert _norm(title.group(1).replace("\\\\", " ")) == _norm(m.group(1))
+    text = title.group(1).replace("\\\\", " ")
+    assert _norm(text) == _norm(TITLE_T1)
+    gates = (PAPER_ROOT / "human_gates.yaml").read_text(encoding="utf-8")
+    h2_open = re.search(r"H-2:.*?status: (\w+)", gates, re.S)
+    assert h2_open is not None
+    if h2_open.group(1) != "closed":  # "Open" only after the licence and release approval
+        assert "open" not in _norm(text).split()
 
 
 def test_keywords_keep_smart_radio_environment() -> None:

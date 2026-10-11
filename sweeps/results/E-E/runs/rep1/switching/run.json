@@ -1,0 +1,111 @@
+{
+ "kind": "switching",
+ "configs": [
+  "uniform",
+  "focus",
+  "random",
+  "focus"
+ ],
+ "duration_s": "1.65",
+ "segment_s": "0.4",
+ "rate_sps": 1000000.0,
+ "n_run": 1650000,
+ "tx_stream": "gr.tx0",
+ "rx_stream": "grrx.rx0",
+ "serve_cmd": [
+  "/home/galaba_vamsi/venv_sremu_invB/bin/python",
+  "-m",
+  "sremu.commands.serve",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/scene.yaml",
+  "--serve",
+  "tcp://127.0.0.1:42639",
+  "--pub",
+  "none",
+  "--tx",
+  "tcp://127.0.0.1:46637",
+  "--out",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/rec",
+  "--exit-when-done",
+  "--raw-peer",
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:58555,rx_port=tcp://127.0.0.1:58211,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+ ],
+ "gr_cmd": [
+  "/usr/bin/python3",
+  "/home/galaba_vamsi/trackG/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
+  "--tx",
+  "tcp://127.0.0.1:58555",
+  "--rx",
+  "tcp://127.0.0.1:58211",
+  "--n",
+  "1650000",
+  "--out",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/gr",
+  "--timeout",
+  "900.0"
+ ],
+ "request_items": null,
+ "af_pred_db": {
+  "random": -23.714951583859033,
+  "focus": 0.0,
+  "uniform": -8.323217586916435
+ },
+ "python": "3.12.3",
+ "numpy": "2.5.4",
+ "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+ "t_start_unix": 1791735841.2935367,
+ "commands_sent": [
+  {
+   "config": "focus",
+   "at": "0.4",
+   "reply": {
+    "v": 1,
+    "id": "ris-schedule-3",
+    "ok": true,
+    "status": "scheduled",
+    "seq": 1,
+    "t_req": "2/5",
+    "k_req": {
+     "grrx.rx0": 400000
+    },
+    "t_wall_recv_ns": 155283368844
+   }
+  },
+  {
+   "config": "random",
+   "at": "0.8",
+   "reply": {
+    "v": 1,
+    "id": "ris-schedule-4",
+    "ok": true,
+    "status": "scheduled",
+    "seq": 2,
+    "t_req": "4/5",
+    "k_req": {
+     "grrx.rx0": 800000
+    },
+    "t_wall_recv_ns": 155296631424
+   }
+  },
+  {
+   "config": "focus",
+   "at": "1.2",
+   "reply": {
+    "v": 1,
+    "id": "ris-schedule-5",
+    "ok": true,
+    "status": "scheduled",
+    "seq": 3,
+    "t_req": "6/5",
+    "k_req": {
+     "grrx.rx0": 1200000
+    },
+    "t_wall_recv_ns": 155298372280
+   }
+  }
+ ],
+ "t_resume_wall_s": 3.5580990340000085,
+ "gr_exit": 0,
+ "t_gr_done_wall_s": 12.821087154999987,
+ "serve_exit": 0,
+ "wall_s": 12.821225864000013
+}

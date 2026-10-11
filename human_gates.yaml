@@ -4,12 +4,16 @@
 # refused in final builds (tools/check_claims.py).
 # Lead amendment A1: the generative-AI disclosure is NOT part of H-8 for now (deferred until
 # the author consults Dr. Kherani; IEEE requires it in the acknowledgments at submission).
+# Revision of 2026-10-11: the disclosure is a planned-content stub in the acknowledgment
+# (sections/back_matter.tex), which a final build refuses until the authors write it; arXiv's
+# moderation policy asks authors to report significant use of text-generating tools before
+# posting.
 
 gates:
   H-1:
-    title: Lab answers (Tx position/height/antenna, tile layout and pitch, sigma1/sigma2 origin and |Gamma|, Tx power and cables), permission to publish the Fig. 4(b) CSV, and which v1 commit the WCL letter used
+    title: Lab answers (Tx position/height/antenna, tile layout and pitch, sigma1/sigma2 origin and |Gamma|, Tx power and cables), permission to publish the Fig. 4(b) CSV, and which software version the WCL letter used
     who: Author / lab
-    blocks: V-LAB "validation" wording and the description of the lab data set; publication of the data file (DESIGN D24 removed the lineage sentence it used to block; the single transparency sentence needs no lab answer)
+    blocks: V-LAB "validation" wording and the description of the lab data set; publication of the data file (the single transparency sentence, claim C-LINEAGE, needs no lab answer)
     status: open
   H-2:
     title: Licence (MIT vs Apache-2.0) and arXiv licence
@@ -29,12 +33,14 @@ gates:
   H-5:
     title: AWS launches
     who: User, per instance
-    blocks: B3/B4/B5 numbers (paced-mode headline)
-    status: open
+    blocks: B3/B4 numbers (paced-mode headline, served-command latency)
+    status: closed
+    closed_by: "Galaba Vamsi (corresponding author), 2026-10-10: AWS launches authorized in the working session ('i approve the aws, no problem at all, use as much as needed'; recorded in the author's project notes, 13 Paper Pipeline and arXiv, 2026-10-10)"
+    closure_record: "B3 ran 2026-10-11 on c7i.8xlarge i-0b68f352c3d082a30 (job 20261011T074321Z_b3_e4cff7) and B4 on c7i.8xlarge i-033f4e2504e465715 (job 20261011T074328Z_b4_72b790); B1/B2 on c7i.48xlarge i-0dce85a304ce25f0a (job 20261011T083630Z_b1b2_3c0c30). Other launches under the same authorization (research/aws/launches.jsonl): 20261010T232822Z_ea_iq_ef_18ffd1 (c7i.8xlarge i-0b2a8a362406d05fe), 20261011T060442Z_eb_arc_d41a75 (c7i.16xlarge i-0c71d7b6d144377ea), 20261011T060455Z_validation_42224b (c7i.16xlarge i-089cb84a9e2c80bf1), 20261011T060502Z_linuxcheck_62562d (c7i.8xlarge i-0f3299b64a1f42438), 20261011T083731Z_validation2_9328a8 (c7i.4xlarge i-0574a95b57c505dd2), 20261011T110153Z_b2f45stress_9d21ce (c7i.48xlarge i-065695d144b1e917c). Recorded 2026-10-11 by the revision (Track W)."
   H-6:
-    title: Zenodo/OSF deposit of the V-LAB protocol and E-A hypotheses before unblinding
+    title: Retrospective deposit of the V-LAB plan and the E-A hypotheses (optional); wording "pre-specified analysis plan, hash-locked before unblinding"
     who: User account
-    blocks: The word "pre-registered" and the pre-registration sentence
+    blocks: Any statement that names a public deposit of the analysis plans (none in the current text, which states that no public deposit was made before unblinding and quotes GitHub's server-side push log instead)
     status: open
   H-7:
     title: Name availability of "sremu" on GitHub (PyPI checked free on 10 Oct 2026, amendment A2)

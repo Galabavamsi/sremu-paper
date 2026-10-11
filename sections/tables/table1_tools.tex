@@ -6,9 +6,9 @@
 % numbers.yaml (one source for both); their row must cite the macro's keys (check_claims.py).
 \begin{table*}[t]
 \caption{RIS simulators, ray tracers, controller frameworks and IQ-level emulators,
-as of 10 Oct 2026. \emph{nv}: not verified from a primary source either way;
-\emph{no evid.}: a primary source was read and does not mention the feature;
-\emph{no}: the source states the feature is absent; ---: not applicable.
+as of 10 Oct 2026. ``nv'': not verified from a primary source either way;
+``no evid.'': a primary source was read and does not mention the feature;
+``no'': the source states the feature is absent; ---: not applicable.
 Coef.: channel coefficients; TS: time-series coefficients; IQ: complex-baseband samples;
 DES: discrete-event simulation; PO: physical optics.}
 \label{tab:tools}
@@ -73,9 +73,10 @@ TRACE (arXiv v1, Aug 2026)~\cite{Kumar2026TRACE} &
 \sremu{} (this work) &
   IQ + SDR-style API (UHD-shaped) & Lockstep: sample-exact; paced: measured
   (Section~\ref{sec:wallclock}) & Area-tied PO kernel; per-state tables
-  $\Gamma(s,f,\theta_i,\theta_s)$ & Yes (state, frequency and both angles, with
-  provenance) & Analytic trajectories, geometric Doppler & Yes (timestamped, applied and
-  logged per receiver) & Licence pending (H-2) \\
+  $\Gamma(s,f,\theta_i,\theta_s)$ & Import path tested (state, frequency, both angles,
+  provenance); used here with reported and assumed states & Analytic trajectories,
+  geometric Doppler & Yes (timestamped, applied and logged per receiver) & To be released
+  (see Code and Data Availability) \\
 \bottomrule
 \end{tabular}
 \end{table*}

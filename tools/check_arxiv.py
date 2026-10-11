@@ -8,9 +8,13 @@ Checks
   * submission file names use arXiv-safe characters only;
   * raster images are below 34 megapixels;
   * --post-build: main.bbl and main.pdf exist (the .bbl is uploaded to arXiv).
-No generative-AI disclosure section is required (lead amendment A1).
+The generative-AI disclosure is a stub in the acknowledgment, which a final build refuses.
 
-Usage: python tools/check_arxiv.py [--paper-root DIR] [--post-build]
+--emit-plain PATH writes the abstract as the plain text to paste into the arXiv metadata form
+(MINOR-13): every macro expanded with its current value from generated/numbers.tex (a value
+still missing prints as ??), math and spacing commands turned into plain ASCII.
+
+Usage: python tools/check_arxiv.py [--paper-root DIR] [--post-build] [--emit-plain PATH]
 """
 
 from __future__ import annotations
@@ -177,6 +181,28 @@ def check_post_build(paper_root: Path, rep: Report) -> None:
         rep.error("main.pdf missing")
 
 
+_NEWCOMMAND_RE = re.compile(r"^\\newcommand\{\\([A-Za-z]+)\}\{(.*)\}%", re.M)
+
+
+def abstract_plain(paper_root: Path) -> str:
+    """The abstract as arXiv plain text, macros expanded with their current values."""
+    values = {m.group(1): m.group(2) for m in _NEWCOMMAND_RE.finditer(
+        read_text(paper_root / "generated" / "numbers.tex"))}
+    s = abstract_source(paper_root)
+    for _ in range(3):  # values may contain macros of their own (none today)
+        s = re.sub(r"\\([A-Za-z]+)(?:\{\})?",
+                   lambda m: values.get(m.group(1), m.group(0)), s)
+    s = re.sub(r"\\sremuPlaceholder\{[^}]*\}", "??", s)
+    for tex, plain in ((r"\lambda", "lambda"), (r"$\mu$", "u"), (r"\mu", "u"),
+                       (r"\,", " "), (r"\%", "%"), ("~", " "), ("---", "-"), ("--", "-")):
+        s = s.replace(tex, plain)
+    s = re.sub(r"\\(?:ensuremath|emph|textbf|textit|mathrm|text)(?![A-Za-z])", "", s)
+    s = s.replace("$", "").replace("{", "").replace("}", "")
+    if "\\" in s:
+        raise ValueError(f"unconverted TeX in the plain abstract: {s[s.index(chr(92)):][:40]!r}")
+    return " ".join(s.split())
+
+
 def check_arxiv(paper_root: Path = PAPER_ROOT, post_build: bool = False) -> Report:
     rep = Report("check_arxiv")
     check_abstract(paper_root, rep)
@@ -191,8 +217,25 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="arXiv/IEEE submission checks (offline).")
     ap.add_argument("--paper-root", type=Path, default=PAPER_ROOT)
     ap.add_argument("--post-build", action="store_true", help="also require main.bbl/main.pdf")
+    ap.add_argument("--emit-plain", type=Path, default=None,
+                    help="write the plain-text abstract for the arXiv form to this file")
     args = ap.parse_args(argv)
-    return check_arxiv(args.paper_root, args.post_build).emit()
+    rep = check_arxiv(args.paper_root, args.post_build)
+    if args.emit_plain is not None:
+        try:
+            plain = abstract_plain(args.paper_root)
+        except (OSError, ValueError) as exc:
+            rep.error(f"emit-plain: {exc}")
+        else:
+            args.emit_plain.write_text(plain + "\n", encoding="utf-8", newline="\n")
+            n = len(plain)
+            rep.note(f"plain abstract: {n} characters, {len(plain.split())} words -> "
+                     f"{args.emit_plain}")
+            if n > ABSTRACT_MAX_CHARS or len(plain.split()) > ABSTRACT_MAX_WORDS:
+                rep.error("plain abstract exceeds the arXiv limits")
+            if "??" in plain:
+                rep.warn("plain abstract still holds placeholders (??)")
+    return rep.emit()
 
 
 if __name__ == "__main__":

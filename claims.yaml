@@ -24,8 +24,8 @@
 # each capability claim there names the tests that exercise it. Module paths are in the TeX
 # comments next to the claims. Sections V and VII (WP12 stage C draft) describe the committed
 # study and experiment results; their numbers come from tools/gen_results.py.
-# DESIGN D24 (fresh-attempt framing): no claim compares sremu with an earlier simulator; the
-# single transparency sentence is C-LINEAGE.
+# The paper presents sremu as a new emulator: no claim compares it with an earlier simulator;
+# the single transparency sentence is C-LINEAGE.
 
 claims:
   # ================================================================ abstract, I, II
@@ -50,13 +50,13 @@ claims:
       - fig:F8
     gates: []
   C-OPEN:
-    text: "sremu is open source (title: 'An Open ... Emulator'; abstract: 'open-source')."
-    where: [main.tex, sections/abstract.tex]
+    text: "Code and data availability (conditional): sremu and the paper pipeline will be released under an open-source licence once all authors and IIT Bhilai approve; until then available on request. Licence, repository URL, archive DOI and data DOI are availability.yaml macros that stay placeholders while pending, so a final build refuses until they are filled. The words 'Open'/'open-source' are not in the title or the abstract (title T1, author decision 2026-10-11)."
+    where: [sections/back_matter.tex]
     evidence: [spec:DESIGN-2.1]
     gates: [H-2]
   C-SOFTWARE-ONLY:
     text: "sremu is software-only: it needs no radio hardware; external applications exchange samples with it over sockets or in process (DESIGN 1.1)."
-    where: [sections/abstract.tex, sections/01_introduction.tex, sections/10_conclusion.tex]
+    where: [sections/abstract.tex, sections/01_introduction.tex]
     evidence: [test:IO-02, test:IO-07, spec:DESIGN-1.1]
     gates: []
     banned_word_uses:
@@ -76,7 +76,7 @@ claims:
     gates: []
   C-LOCKSTEP-EXACT:
     text: "Lockstep runs are sample-exact and deterministic, including with controllers in the loop; RX samples are bitwise identical under client chunking, event/barrier cuts and across process boundaries."
-    where: [sections/abstract.tex, sections/10_conclusion.tex]
+    where: [sections/10_conclusion.tex]
     evidence: [test:RT-03, test:RT-08, test:RT-16, test:IO-02]
     gates: []
   C-CONTRIB-1:
@@ -85,27 +85,27 @@ claims:
     evidence: [test:RT-05, test:RT-06, test:RT-08, test:RT-18, test:IO-02, test:IO-03, test:IO-05, fig:F1, fig:F2, cite:ETSI_GS_RIS008]
     gates: []
   C-CONTRIB-2:
-    text: "A verified physical model with a stated validity domain: area-tied kernel equal to three published forms, model card, CI oracle count, MATLAB code-to-code, Tang curves, pre-registered consistency check against a laboratory measurement collected by the authors (null result and measurement-design lesson), CFO and BER checks against the CRB and theory."
-    where: [sections/01_introduction.tex, sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5]
-    gates: [H-6]
+    text: "A verified physical model with stated validity and accuracy: area-tied kernel equal to three published forms, model card, CI oracle count, MATLAB code-to-code, Tang curves (implementation check) and Tang chamber measurements (accuracy, measured minus emulator), a consistency check against a laboratory measurement collected by the authors under a pre-specified plan hash-locked before unblinding (null result and measurement-design lesson), CFO and BER checks against the CRB and theory."
+    where: [sections/01_introduction.tex]
+    evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5, cite:Tang2022mmWave]
+    gates: []
   C-CONTRIB-3:
-    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling and cost-model fit on AWS Linux servers (the laptop contributes the B6 cross-tool context, no scaling run)."
-    where: [sections/01_introduction.tex, sections/abstract.tex]
+    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling over links, elements, surfaces, rates and feature sets on AWS Linux servers (the laptop contributes the B6 cross-tool context, no scaling run), and the latency of commands served over the control socket. The fitted cost model is not a contribution (MINOR-10); Section VI reports it as indicative."
+    where: [sections/01_introduction.tex]
     evidence: [test:RT-18, fig:F7, fig:F8]
     gates: [H-5]
   C-CONTRIB-4:
-    text: "Case studies of timed control: intra-frame reconfiguration timing (E-B, the study that requires the sample level), signaling-delay time scale in a blocked corridor (E-A, batch path with an IQ consistency subset), non-ideality ablation (E-C), FM dimensioning (E-D)."
-    where: [sections/01_introduction.tex, sections/abstract.tex]
-    evidence: [test:VA-5, test:VA-1, fig:F9, fig:F10, fig:F11, fig:F12]
-    gates: [H-6]
+    text: "Case studies of timed control: at the sample level, in lockstep with an in-process controller and a modelled latency, intra-frame reconfiguration and timed vs asap vs timer-latched commands (E-B); on the coefficient path, which agrees with the sample level within the VA-1 tolerance, the signaling-delay time scale in a blocked corridor (E-A) and a non-ideality ablation (E-C); FM dimensioning (E-D)."
+    where: [sections/01_introduction.tex]
+    evidence: [test:VA-5, test:VA-1, test:E-B, fig:F9, fig:F10, fig:F11, fig:F12]
+    gates: []
   C-SCOPE:
     text: "Scope box: not a UHD drop-in, not hard real time, not a ray tracer, no mutual-coupling physics (tables only), scalar co-polar, single-bounce RIS paths, order-1 walls; paced timing measured per platform."
     where: [sections/01_introduction.tex]
     evidence: [spec:DESIGN-1.5, cite:ETSI_GR_RIS003_v121]
     gates: []
   C-LINEAGE:
-    text: "An earlier in-house simulator by the authors was used in [Mishra & Kherani WCL 2025, NCC 2025]; sremu is an independent new implementation. (DESIGN D24: the single allowed transparency sentence; no comparison with that simulator is made anywhere in the paper.)"
+    text: "An earlier in-house simulator by the authors was used in [Mishra & Kherani WCL 2025, NCC 2025]; sremu is an independent new implementation. (The single transparency sentence; no comparison with that simulator is made anywhere in the paper.)"
     where: [sections/02_related_work.tex]
     evidence: [cite:Mishra2025WCL, cite:Mishra2025NCC, spec:DESIGN-D24]
     gates: []
@@ -115,32 +115,42 @@ claims:
     evidence: [cite:Kumar2026TRACE]
     gates: [H-4]
   C-ABS-TANG:
-    text: "The kernel reproduces published RIS path-loss model curves within \\numTangCurveMaxDevDb dB."
-    where: [sections/abstract.tex]
-    evidence: [test:V-TANG-1, fig:F3, cite:Tang2022mmWave]
+    text: "Tang et al. (MAJOR-9, author decision D-12 of 2026-10-11, reversing DESIGN 10.8): the kernel reproduces the published model curves within the stated bound (implementation check); against the digitized chamber measurements of one 27 GHz surface in specular geometries the emulator's received power is low by the stated mean (measured minus emulator; SD, RMSE, largest difference and per-geometry range as generated), every measured point lies above it (checked by gen_results), and the published model shows nearly the same offset; caveats: model class shared with Tang's model, digitized data, reported link budget, no stated measurement uncertainty."
+    where: [sections/abstract.tex, sections/05_verification_validation.tex, sections/10_conclusion.tex, generated/tables/tableA_tang.tex]
+    evidence: [test:V-TANG-1, fig:F3, cite:Tang2022mmWave, table:tab:tang]
     gates: []
   C-ABS-LAB:
-    text: "Pre-registered comparison with a digitized 3.5 GHz laboratory measurement collected by the authors (outcome phrase from the protocol's decision rules and power label: underpowered, null result)."
-    where: [sections/abstract.tex, sections/10_conclusion.tex]
+    text: "Blinded comparison with a digitized 3.5 GHz laboratory measurement collected by the authors, analysed under a pre-specified plan hash-locked before unblinding (outcome phrase from the protocol's decision rules and power label: underpowered, null result). Not in the abstract (length); stated in the introduction and the conclusion."
+    where: [sections/10_conclusion.tex]
     evidence: [test:V-LAB, fig:F4, spec:DESIGN-10.9]
-    gates: [H-6]
+    gates: []
     banned_word_uses:
       - {word: only, context: "from LOS-only"}
   C-ABS-PACED:
-    text: "Wall-clock-paced runs on the named platform sustain N links at Y MS/s with a deadline-miss rate below 1e-3 (Sustainable, DESIGN 12.1)."
-    where: [sections/abstract.tex, sections/10_conclusion.tex]
+    text: "Headless wall-clock-paced runs with the stated page size on the named platform sustain N links at Y MS/s with a deadline-miss rate below 1e-3 (Sustainable, DESIGN 12.1)."
+    where: [sections/abstract.tex]
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-ABS-EB:
-    text: "E-B headline for the 0.5 ms guard slice, which the abstract and the conclusion name (geometry modelled on the lab arrangement, SIM nominal geometry; AWS run, sweeps/results/E-B-arc): timed commands whose lead exceeds the latency lose no packet (checked on every row of the slice: both alphabets, both LOS cases, both Es/N0); tick-based untimed semantics lose up to the stated fraction (largest PER of the slice, in the F9b cases: LOS present at the pre-declared 15 dB sensitivity, LOS blocked at 25 dB). Conclusion qualifier: the difference appears where a switch costs bits; with the LOS present at 25 dB no semantics lost more than the stated small fraction. Not claimed for the 0.1 and 1 ms guards, where some 15 dB rows lose one packet in 2000 to noise."
-    where: [sections/abstract.tex, sections/10_conclusion.tex]
+    text: "E-B headline (timed vs asap; MAJOR-3) for the 0.5 ms guard slice of the arc run (geometry modelled on the lab arrangement, SIM nominal geometry; AWS run, sweeps/results/E-B-arc), at the sample level in lockstep with an in-process controller and a modelled latency of 0.2 ms + U[0, J]: where a mistimed switch costs bits (the F9b cases: LOS present at the pre-declared 15 dB sensitivity, LOS blocked at 25 dB), commands applied on arrival lose the stated range at J = 1 ms, while timed commands whose lead exceeds the latency lose none (checked on every row of the slice). With the LOS present at 25 dB no semantics loses more than a small fraction (body text)."
+    where: [sections/abstract.tex]
     evidence: [fig:F9, test:VA-5, test:E-B, pytest:tests/unit/test_eb_arc.py, pytest:tests/runtime/test_eb_arc_va5.py]
     gates: []
   C-ABS-EA:
-    text: "E-A headline (position-driven binary control under signaling delay)."
-    where: [sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [fig:F10, test:VA-1]
-    gates: [H-6]
+    text: "E-A headline on the coefficient path (position-driven binary control under signaling delay), which agrees with sample-level runs within the VA-1 difference."
+    where: [sections/abstract.tex]
+    evidence: [fig:F10, test:VA-1, test:E-A]
+    gates: []
+  C-NEXT-VALIDATION:
+    text: "Next validation step (author decision 2026-10-11: deferred to arXiv v2): the open sub-6 GHz data set of Rossanese et al. 2024; it needs a new analysis plan locked before the emulator is run on the data because of the configuration-independent floor, the cells' seven phase states plus an absorbing state (WiNTECH 2022, Table 1) and the descriptive structure already seen (pre-specified, not blind)."
+    where: [sections/09_future_work.tex, sections/10_conclusion.tex]
+    evidence: [cite:Rossanese2024OpenMeas, cite:Rossanese2022WiNTECH]
+    gates: []
+  C-ACK:
+    text: "Acknowledgment: the AWS runs (marked AWS in the provenance table) used Amazon Web Services EC2 instances; laboratory, funding and the generative-AI disclosure are a planned-content stub for the authors (a final build refuses it)."
+    where: [sections/back_matter.tex]
+    evidence: [table:tab:provenance]
+    gates: []
 
   # ================================================================ III Design
   C-ARCH:
@@ -157,6 +167,11 @@ claims:
     text: "Each run directory holds the manifest (versions, git commit and dirty flag, platform, seeds and RNG scheme, input hashes and data classes, mode, backend, per-link interpolation/filter choices, counters), the resolved scenario, an append-only flushed event log, a metrics log per window and optional SigMF recordings with command annotations; replay and a static HTML report read run directories."
     where: [sections/03_design.tex]
     evidence: [test:IO-05, test:RT-16, pytest:tests/unit/test_manifest.py, pytest:tests/io/test_io_eventlog.py, pytest:tests/io/test_io_report.py, cite:SigMF]
+    gates: []
+  C-IMPL:
+    text: "Implementation facts read by gen_results from the sremu checkout: Python >= the pyproject requires-python version; number of modules and thousands of lines in src/sremu; NumPy/SciPy, NumPy reference and numba backends, pyzmq, pydantic; Gymnasium and SigMF optional (DESIGN 2.4); runs on Windows (test record, laptop) and Linux (AWS runs)."
+    where: [sections/03_design.tex]
+    evidence: [spec:DESIGN-2.4, cite:ZeroMQ, cite:Towers2024Gymnasium, cite:SigMF, test:IO-02]
     gates: []
   C-TIMEBASE:
     text: "Exact rational rates and times; to_ticks = floor(t f + 1/2) (UHD rounding, error <= 1/(2f)); count = ceil(t1 f) - ceil(t0 f) for any mix of rates; API floats via their shortest decimal; wall time never enters data-plane arithmetic."
@@ -244,9 +259,9 @@ claims:
     evidence: [test:IO-04]
     gates: []
   C-RAW:
-    text: "srsRAN-style raw REQ/REP mode (lockstep): request formats pinned from srsRAN 4G and GNU Radio sources, tested against stub peers; no real srsRAN/GNU Radio binary run yet."
+    text: "srsRAN-style raw REQ/REP mode (lockstep): request formats pinned from srsRAN 4G and GNU Radio sources, tested against stub peers; unmodified GNU Radio 3.10.9.2 runs against it (E-E); no srsRAN binary has been run."
     where: [sections/03_design.tex]
-    evidence: [test:IO-08, cite:srsRANZMQ]
+    evidence: [test:IO-08, cite:srsRANZMQ, pytest:tests/integration/test_gnuradio_raw.py]
     gates: []
   C-TABLES:
     text: "Response tables Gamma(s,f,theta_i,theta_s) on one angle grid with mandatory provenance fields (source kind, description, reference, reference plane, polarization, cell pattern flag, sigmas, raw hash, licence, creation record, transformations)."
@@ -357,16 +372,11 @@ claims:
     where: [sections/08_discussion.tex, sections/tables/table6_standards.tex]
     evidence: [table:tab:standards, cite:ETSI_GR_RIS002_v121, cite:ETSI_GR_RIS003_v121, cite:ETSI_GS_RIS008, test:PH-02, test:PH-05, test:PH-23, test:PH-26, test:PH-30, test:PH-31, test:RT-05, test:RT-06, test:RT-08, test:RT-12, test:RT-17, test:IO-03, test:G2, test:G3, fig:F9]
     gates: []
-  C-TSDSI:
-    text: "The text of TSDSI STD 5003 was not accessed; no alignment is claimed."
-    where: [sections/08_discussion.tex]
-    evidence: [cite:TSDSI_STD5003, spec:DESIGN-8.9]
-    gates: []
   C-CONTROLLER-API:
-    text: "Controller protocol (name, period, min latency, observation spec, latency model; setup with capabilities and keyed generator; decide) runs in process or remotely with identical RX; built-ins as listed (incl. a reading of the WCL heuristic and a UCB1 bandit); keyed randomness."
+    text: "Controller protocol (name, period, min latency, observation spec, latency model; setup with capabilities and keyed generator; decide) runs in process or remotely with identical RX; built-ins as listed (incl. a reading of the WCL heuristic and a UCB1 bandit); keyed randomness. Gate H-3: the sentence makes a statement about the WCL letter (our reading of its heuristic)."
     where: [sections/08_discussion.tex]
     evidence: [test:RT-08, test:VA-3, pytest:tests/unit/test_wp9_controllers.py, pytest:tests/unit/test_wp9_rng_reproducibility.py, cite:Mishra2025WCL, cite:Auer2002UCB]
-    gates: []
+    gates: [H-3]
   C-RISENV:
     text: "RisEnv: Gymnasium reset/step (subclass when installed, duck-typed otherwise), state or codebook actions after a latency, pilot-tone power reward, keyed samplers; batch path only in this release (IQ backends not connected)."
     where: [sections/08_discussion.tex]
@@ -395,19 +405,19 @@ claims:
     evidence: [pytest:tests/oracles/test_oracle_isolation.py, pytest:tests/unit/test_layering.py::test_oracle_isolation, pytest:tests/unit/test_layering.py::test_oracle_isolation_teeth, pytest:tests/oracles/test_oracles_pm_checks.py]
     gates: []
   C-TEETH:
-    text: "Several guards have a negative-control twin that runs a deliberately wrong variant (kernel without j, too-short fractional-delay filter, replay with a dropped command) and must reject it. DESIGN D24: the teeth tests that reproduce earlier code (kernel without the area tie, block-constant Doppler, next-tick semantics) stay in the suite but are not featured in the paper."
+    text: "Several guards have a negative-control twin that runs a deliberately wrong variant (kernel without j, too-short fractional-delay filter, replay with a dropped command) and must reject it. The teeth tests of other guards stay in the suite but are not featured in the paper."
     where: [sections/appendix.tex]
     evidence: [test:PH-05, test:PH-20, test:RT-16]
     gates: []
   C-REPRO:
-    text: "Two repositories; tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates of that commit, current figures, pipeline macros and supported claims; code constants read from the locked code; manifests and bitwise replay."
+    text: "Two repositories; tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates of that commit, current figures, pipeline macros and supported claims; code constants read from the locked code; manifests and bitwise replay; the results record their own commit, tree state and host (provenance table); neither repository is public yet (availability section)."
     where: [sections/appendix.tex]
-    evidence: [spec:DESIGN-13.5, test:RT-16]
+    evidence: [spec:DESIGN-13.5, test:RT-16, table:tab:provenance]
     gates: []
   C-PROVENANCE:
-    text: "Data classes MEAS (measured data), DIG, REPORTED, ASSUMED, SIM-sremu, ANALYTIC, MATLAB on every input and figure; manifests list input hashes and classes; private data read from a private location with skipping tests; the laboratory measurement collected by the authors enters as a digitized map (DIG)."
-    where: [sections/appendix.tex]
-    evidence: [pytest:tests/unit/test_manifest.py, spec:DESIGN-3.6, spec:DESIGN-10.1]
+    text: "Data classes MEAS (measured data), DIG, REPORTED, ASSUMED, ENG (engineering choice), SIM-sremu, ANALYTIC, MATLAB on every input and figure; manifests list input hashes and classes; private data read from a private location with skipping tests; the laboratory measurement collected by the authors enters as a digitized map (DIG); process records (GitHub push log, data class PROVENANCE in its meta.json) carry no physical quantity; the provenance table (generated from the result files' records) lists commit, tree state, host and date of every result."
+    where: [sections/appendix.tex, generated/tables/tableA_provenance.tex]
+    evidence: [pytest:tests/unit/test_manifest.py, spec:DESIGN-3.6, spec:DESIGN-10.1, table:tab:provenance]
     gates: []
 
   # ================================================================ V Verification and validation
@@ -431,21 +441,21 @@ claims:
     where: [sections/05_verification_validation.tex, sections/appendix.tex]
     evidence: [test:V-LAB, fig:F4, spec:DESIGN-10.9]
     gates: [H-1]
-  C-LAB-PREREG:
-    text: "The analysis plan (prior, models M0-M3, split, decision rules C1-C3) was fixed and hash-locked before any model-data comparison; the loader refuses data unless the hash matches; commit, date and deposit DOI are pipeline placeholders until H-6."
+  C-LAB-PRESPEC:
+    text: "The analysis plan (prior, models M0-M3, split, decision rules C1-C3) was fixed and hash-locked before any model-data comparison (after a descriptive inspection of the digitized map); the loader refuses data unless the hash matches. Facts from GitHub's server-side push log (sweeps/results/V-LAB-provenance, checked by gen_results): lock commit 101ee87 pushed 2026-10-11 00:22:55 UTC; two commits followed (content read from the sremu repository objects, not from GitHub's records): 2ef1401 adds a --columns option to validation/ants_fig4b/run.py (column names of the measured CSV), and 7a63287 (pushed 00:30:30 UTC) changes only the V-LAB smoke test; unblinded run started 00:30:44 UTC from a clean tree of 7a63287 (V-LAB record); result commit 2333b60 pushed 00:31:40 UTC. No public registry deposit before unblinding (stated); a retrospective deposit remains possible. Wording: pre-specified, hash-locked; never pre-registered."
     where: [sections/05_verification_validation.tex]
     evidence: [test:V-LAB, spec:DESIGN-10.9]
-    gates: [H-6]
+    gates: []
   C-LAB-POWER:
     text: "Before unblinding, the decoy power analysis (500 decoys from M2) gave a C2 detection rate of 0, below the 0.5 threshold: labelled underpowered. The decoy counts of C1 and C3 are reported with it (protocol paper_wording)."
     where: [sections/05_verification_validation.tex]
     evidence: [test:V-LAB, fig:F4]
-    gates: [H-6]
+    gates: []
   C-LAB-RESULT:
-    text: "Unblinded outcome: C1, C2, C3 fail (also in every sensitivity run); median test RMSE of M0, M0n, M2 and bias as generated; null result, underpowered, not evidence for or against the model; one colour-scale-pinned cell is an outlier."
+    text: "Unblinded outcome: C1, C2, C3 fail (also in every sensitivity run); median test RMSE of M0, M0n, M2 and bias as generated; Spearman rho with its 95 % (Fieller) interval; descriptive, outside the decision rules: the observed RMSE gain lies close to the median of the decoys drawn from M2 and above that of the decoys drawn from M0; null result, underpowered, not evidence for or against the model; one colour-scale-pinned cell is an outlier."
     where: [sections/05_verification_validation.tex, generated/tables/table5_lab.tex]
     evidence: [test:V-LAB, fig:F4, table:tab:lab]
-    gates: [H-6]
+    gates: []
     banned_word_uses:
       - {word: only, context: "from LOS-only"}
   C-LAB-LESSON:
@@ -459,7 +469,7 @@ claims:
     evidence: [test:V-CFO-1, test:V-CFO-3, test:G4, fig:F5]
     gates: []
   C-CFO-LESSON:
-    text: "Generic design lesson (D24, no simulator named): delivering a whole number of samples per tick scales every frequency estimate by the ratio of needed to delivered samples (11.76/11 here); reproduced by re-timing sremu's own output; exact rational counts remove it."
+    text: "Generic design lesson (no simulator named): delivering a whole number of samples per tick scales every frequency estimate by the ratio of needed to delivered samples (11.76/11 here); reproduced by re-timing sremu's own output; exact rational counts remove it."
     where: [sections/05_verification_validation.tex]
     evidence: [test:V-CFO-2, test:RT-01, fig:F5, spec:DESIGN-D24]
     gates: []
@@ -490,14 +500,14 @@ claims:
     evidence: [spec:DESIGN-12.1, spec:DESIGN-4.10, test:RT-18]
     gates: []
   C-WC-HOSTS:
-    text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge, B3/B4 on AWS c7i.8xlarge with the engine pinned to 16 logical CPUs and nothing else running, B6 on the laptop; one emulator commit for the AWS runs; B2 packed 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; B3 is headless; benchmark scenes carry no physical result (Table VII); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX)."
+    text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge, B3/B4 on AWS c7i.8xlarge with the engine pinned to 16 logical CPUs and nothing else running, B6 on the laptop; B1-B4 at one emulator commit (309c633), B3/B4 from a clean tree, B1/B2 with a recorded dirty flag although their uploaded bundle is byte-identical to the commit's tree (bench meta.json dirty_note; provenance table); B2 packed 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; B3 is headless; benchmark scenes carry no physical result (Table VII); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX)."
     where: [sections/06_wallclock.tex, generated/tables/table7_platforms.tex]
-    evidence: [table:tab:platforms, spec:DESIGN-12.3]
+    evidence: [table:tab:platforms, table:tab:provenance, spec:DESIGN-12.3]
     gates: []
   C-WC-LOCKSTEP:
-    text: "B2 lockstep (packed): points planned/run/ok/below floor/failed as generated, every failure an F5 (native ZMQ) point, F5 excluded and pending rerun; base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; static limit 8 links at RTF >= 1 for every N at 1 MS/s; a single link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
+    text: "B2 lockstep (packed): points planned/run/ok/below floor/failed as generated, every failure an F5 (native ZMQ) point: three receive time-outs from a benchmark configuration error (served run shorter than the clients' streams) and one benchmark error below the floor, both fixed in the benchmark (sremu 60d0e6d), not in the emulator; F5 excluded and its base-point RTF from the rerun at the pinned commit (placeholder until then); base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; static limit 8 links at RTF >= 1 for every N at 1 MS/s; a single link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
     where: [sections/06_wallclock.tex]
-    evidence: [fig:F7, spec:DESIGN-12.2]
+    evidence: [fig:F7, spec:DESIGN-12.2, pytest:tests/bench/test_bench_zmq_point.py]
     gates: []
   C-WC-ISOLATION:
     text: "Isolation check: the six reference points rerun alone were up to 16 % faster (ratio 0.99-1.16), so packed RTFs are conservative; at 16 links the packed RTF is 0.90-0.94 over N while the base configuration alone (B1) reached 1.07; the limit is 8 links packed and between 8 and 16 alone."
@@ -521,7 +531,7 @@ claims:
     gates: []
   C-WC-PACEDCMD:
     text: "B4 paced, served over the control socket: no repetition Sustainable; 1 ms-slack miss rates at 10 and 100 commands/s as generated vs at most ~1e-3 headless (B3, same links and pages); asap visible latency median and p99 as generated; the paced schedule adds at most one page; the floor is the engine work on the page with a configuration change; the spread is consistent with the GIL hand-over between the control thread and the paced loop (most of the latency from the implementation: configuration change and serving thread, not the paced schedule; rare outliers up to 76 ms); B3 comparison is across two instances of the same type; timed commands with a 2 ms lead below the command latency were late and applied on arrival (rule: lead > latency + clock-estimate error); >= 1 kHz engine-bound (achieved rate; page latencies up to 29 s; a repetition up to 18 % longer than its virtual time since the engine catches up after the client stops; timed-command backlog)."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/10_conclusion.tex]
     evidence: [fig:F8, test:RT-06, spec:DESIGN-4.10]
     gates: [H-5]
   C-WC-COSTMODEL:
@@ -547,9 +557,9 @@ claims:
   # paper/sweeps/results/E-B-arc/meta.json sremu.commit_verified); lab-like SIM geometry as
   # the supporting row. Every number is a gen_results.py macro read from those results.
   C-EB-WHY:
-    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; E-B measures how the two interact."
+    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; GR RIS 004 sizes the RIS-controller delay budget by the 5G NR frame structure (cl. 4.4); E-B runs at the sample level in lockstep with an in-process controller (modelled latency) and measures how the two interact; its three lessons (equalizer trained before a mid-packet switch; a long linear transition spreads but does not remove the damage; with a strong LOS QPSK tolerates the wrong configuration) are the E-B1 and E-B2 results below."
     where: [sections/07_case_studies.tex]
-    evidence: [cite:ETSI_GS_RIS008, test:E-B, fig:F9]
+    evidence: [cite:ETSI_GS_RIS008, cite:ETSI_GR_RIS004, test:E-B, test:VA-5, fig:F9]
     gates: []
   C-EB-SETUP:
     text: "E-B setup. Primary geometry modelled on the lab arrangement (SIM, nominal geometry: every distance or angle known only within a range takes the middle of that range; not the measured geometry; no measurement compared): six tiles of 5 x 8 cells on an arc around the Tx acting as one surface, joint exact optimum per receiver over all cells, one command per tile for the same time. Lab-like SIM geometry (one panel of three tiles) as the supporting case. Receiver positions (1.2 m from the Tx at two angles) are an engineering choice [ENG]. Assumptions for both: |Gamma| = 1 (ASSUMED), complex-linear transition [ENG], the LOS-blocked occluder removes the LOS only (idealized on the arc, where a real plate would also shadow RIS rays). QPSK packets, one-shot preamble equalizer, Es/N0 at RX1."
@@ -562,33 +572,43 @@ claims:
     evidence: [test:VA-5, test:RT-05, pytest:tests/runtime/test_eb_arc_va5.py, fig:F9]
     gates: []
   C-EB-TIMING:
-    text: "E-B2 on the arc, 0.5 ms guard, cases fixed before the run (eb_plan.json): LOS present at Es/N0 25 dB: no semantics loses more than the stated (small) fraction. LOS present at the pre-declared 15 dB sensitivity and LOS blocked at 25 dB (F9b): tick-based untimed semantics lose the stated large range at every jitter, also without jitter (the two cases show the same pattern); late timed commands apply on arrival; timed commands lose no packet while the lead exceeds the worst latency (2 ms lead: none up to J = 1 ms, losses at J = 3 ms; 0.5 ms lead: losses at J = 1 ms; 5 ms lead: none at any J); asap commands lose none while the worst latency fits in the guard and fail beyond it. Requirement stated as: a timed command loses no packet when its lead exceeds the worst latency; an untimed one loses none while the worst latency fits in the guard (sufficient conditions, as measured). gen_results.py checks the lead and guard rules on every row of the two cases."
-    where: [sections/07_case_studies.tex]
-    evidence: [test:E-B, test:RT-07, pytest:tests/runtime/test_eb_arc_va5.py::test_eb2_point_arc_tick_based, fig:F9]
+    text: "E-B2 on the arc, 0.5 ms guard, cases fixed before the run (eb_plan.json), lockstep with a modelled latency of 0.2 ms + U[0, J]: LOS present at Es/N0 25 dB: no semantics loses more than the stated (small) fraction. LOS present at the pre-declared 15 dB sensitivity and LOS blocked at 25 dB (F9b): asap commands (applied on arrival, as untimed UHD commands) lose none while the worst latency fits in the guard and the stated fractions at J = 1 ms; timed commands lose no packet while the lead exceeds the worst latency (2 ms lead: none up to J = 1 ms, losses at J = 3 ms; 0.5 ms lead: losses at J = 1 ms; 5 ms lead: none at any J); late timed commands apply on arrival. These two rules are the designed behaviour of the command semantics, verified on IQ samples, not a finding; the experiment adds the cost of a mistimed switch and how fast the loss grows. gen_results checks the lead and guard rules on every row of the two cases. Conclusion: untimed commands lost packets whenever the worst latency exceeded the guard."
+    where: [sections/07_case_studies.tex, sections/10_conclusion.tex]
+    evidence: [test:E-B, test:RT-07, fig:F9, cite:UHDManual]
     gates: []
+  C-EB-TICK:
+    text: "Secondary E-B2 semantics (MAJOR-3): a controller that latches commands on its own free-running 2 ms timer, not aligned with the packets (one pending command per panel); published RIS + 5G NR experiments switch the surface on such a timer without coordination with the base station [Yashvanth 2026, Kiran 2026]; analogy in the effect (switch at an arbitrary point of a packet), periods of seconds there vs of the order of a packet here; in both F9b cases it loses the stated range at every jitter, also without jitter. No lineage remark."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:E-B, pytest:tests/runtime/test_eb_arc_va5.py::test_eb2_point_arc_tick_based, fig:F9, cite:Yashvanth2026Random, cite:Kiran2026Random]
+    gates: []
+  C-EB-SERVED:
+    text: "Bridge to the served path (MAJOR-3): E-B is lockstep with a modelled latency; over the served control socket in paced mode (B4) the visible asap latency has the stated median and p99 ranges and rare outliers, and with the 2 ms lead used there the stated per-repetition fraction of timed commands was late at 10 commands/s; a timed command there is on time when its lead exceeds the command latency plus the client's virtual-time error (the rule of Section VI; no computed needed-lead macro, R2-F2; the earlier 'p99 + one page' rule was dropped because B4 repetition 2 at 10 commands/s had 1.2 % late with a 2 ms lead, below its 5.6 ms asap p99); the J <= 1 ms regime of F9 is not yet reachable through the served path. Numbers are B4 macros and change with the transport rerun."
+    where: [sections/07_case_studies.tex]
+    evidence: [fig:F8, fig:F9, test:RT-06]
+    gates: [H-5]
   C-EB-LABLIKE:
     text: "Supporting lab-like SIM geometry (F9c,d), LOS blocked at 25 dB: channel change and bit errors after the switch; timed commands with a 2 ms lead lose no packet up to J = 1 ms and the stated fraction at J = 3 ms; asap and tick-based losses as generated; LOS present: no packet lost at 25 dB (checked); no 15 dB run in this geometry."
     where: [sections/07_case_studies.tex]
     evidence: [test:E-B, test:VA-5, fig:F9]
     gates: []
   C-EA-SETUP:
-    text: "E-A setup: corridor, 1-D RWP, on-off RIS line, LOS partition; under the area-tied kernel the unblocked-corridor optimum gain is as generated; controllers; batch path; pre-registered hypotheses with one disclosed amendment."
+    text: "E-A setup: corridor, 1-D RWP, on-off RIS line, AP 0.5 m off the user line (keeps the LOS power finite on the line), LOS partition; controllers incl. our reading of the WCL heuristic; batch path; hypotheses H-A1..H-A3 and their ranges in the emulator's DESIGN.md before the sweep (sremu 2a016a6, the initial push in GitHub's push log, 2026-10-10 16:12:17 UTC; E-A sweep runs 17:47-18:14 UTC, aggregate 18:39 UTC); the plan file with the decision rules and the evaluation rule (SHA-256 of preregistration/E-A.md with LF line ends 5b59f8f2..., computed by gen_results over the LF-normalized text) written before the sweep by the authors' record but committed and pushed to the paper repository only afterwards (commit 71fa3f3, 21:52 UTC per the paper repository's remote-tracking reflog; its blob equals the current E-A.md except that it stores CRLF line ends, raw SHA-256 33dc0c6f...), so no third party dates those parts; one disclosed amendment (midpoint rule), made after a short IQ smoke run in which the start-of-step rule read +0.095 dB (E-A.md section 7). No statement about the original study's corridor or kernel. Gate H-3: the setup names our reading of the letter's heuristic."
     where: [sections/07_case_studies.tex]
     evidence: [test:E-A, test:W2, cite:Mishra2025WCL, fig:F10]
-    gates: [H-6]
+    gates: [H-3]
   C-EA-RESULT:
-    text: "E-A: optimum gain (mean of per-batch dB) and tau_half with CIs; H-A1, H-A2, H-A3 supported; time scale set by lambda/v, not the mobility period."
+    text: "E-A: optimum gain (mean of per-batch dB) and tau_half with CIs at both carriers; in units of lambda/v the half-lives are the stated constants: the time scale is the classical lambda/v (Doppler) scaling [Clarke 1968, Jakes 1974], consistent with known channel-aging effects on RIS [Papazafeiropoulos 2023, Zhang 2022]; the constant is geometry- and metric-specific (Clarke field/envelope half-correlation times 0.24/0.18 lambda/v; the 0.42 rule of thumb is a geometric mean of 1/f_D and the envelope half time, not a correlation level); the tau ratio lies 3 % above the wavelength ratio 0.417 (corridor fixed in metres); H-A1/H-A2 supported but their pre-set ranges were wide (weak test); what E-A adds: the constant, the retention metric, the negative bandit/URAP result (H-A3 supported); our reading of the WCL heuristic reaches the stated gain at the shortest delay (gate H-3). Conclusion: reports younger than a fraction of lambda/v."
     where: [sections/07_case_studies.tex, sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [test:E-A, fig:F10]
-    gates: [H-6]
+    evidence: [test:E-A, fig:F10, cite:Clarke1968, cite:Jakes1974, cite:Papazafeiropoulos2023Aging, cite:Zhang2022OutdatedCSI]
+    gates: [H-3]
   C-VA1:
-    text: "VA-1 (consistency check, not a finding): IQ path through the served engine with external controller and RX application agrees with the batch path within the stated difference (limit 0.02 dB)."
+    text: "VA-1 (consistency check, not a finding): IQ path through the served engine with external controller and RX application agrees with the batch evaluation of E-A (vectorized, midpoint rule) within the stated difference (limit 0.02 dB); the engine's batch path (run_batch, start-of-step rule, 5 ms grid) reads up to the stated amount higher in the same runs (va1.csv diff_iq_minus_run_batch_db, checked by gen_results)."
     where: [sections/07_case_studies.tex]
     evidence: [test:VA-1, fig:F10]
     gates: []
   C-EC:
-    text: "E-C ablation (short analytic result, exact optimum): losses per alphabet and geometry as generated; lab states nearly antipodal (|d|, |m|); unequal amplitudes and ideal-design deployment cost more."
-    where: [sections/07_case_studies.tex, generated/tables/table8_ablation.tex]
+    text: "E-C ablation (short analytic result, exact optimum, batch path): losses per alphabet and geometry as generated; lab states nearly antipodal (|d|, |m|; magnitudes ASSUMED unit); unequal amplitudes and ideal-design deployment cost more (conclusion: designing for the true states recovers up to the stated penalty in the geometries studied)."
+    where: [sections/07_case_studies.tex, generated/tables/table8_ablation.tex, sections/10_conclusion.tex]
     evidence: [test:PH-24, test:PH-25, test:PH-29, fig:F11, table:tab:ablation, cite:WuZhang2020Discrete, cite:Abeywickrama2020Practical]
     gates: []
   C-ED:
@@ -597,7 +617,27 @@ claims:
     evidence: [test:PH-10, test:PH-11, test:V-FM, fig:F12]
     gates: []
   C-EE:
-    text: "External-process runs so far: V-CFO-3 (two processes, native ZMQ) and VA-1 (external controller and RX app); no srsRAN or GNU Radio binary run yet."
+    text: "External-process runs: V-CFO-3 (two processes, native ZMQ), VA-1 (external controller and RX app) and E-E: unmodified GNU Radio 3.10.9.2 (Ubuntu package; stock gr-zeromq REQ/REP blocks and a DQPSK modem built from stock blocks, separate process) as the raw REQ/REP peer through a SIM RIS scene."
     where: [sections/07_case_studies.tex]
-    evidence: [test:V-CFO-3, test:IO-02, test:IO-08]
+    evidence: [test:V-CFO-3, test:IO-02, test:IO-08, pytest:tests/integration/test_gnuradio_raw.py]
+    gates: []
+  C-EE-LINK:
+    text: "E-E static sweep (one fresh run and modem per RIS configuration): no symbol error with focusing; SER and uncoded 200-bit block error rate (windows of the decision stream, no coding/CRC) do not decrease as the configuration gain falls; random loses every block; gains relative to focusing within the stated dB of an isotropic array-factor prediction (internal consistency check, not a measurement); implementation loss vs coherent DQPSK theory quoted only for rows with >= 100 symbol errors and the link up, larger once the link is lost. gen_results checks each statement against sweeps/results/E-E."
+    where: [sections/07_case_studies.tex]
+    evidence: [table:tab:ee, pytest:tests/integration/test_gnuradio_raw.py, pytest:tests/integration/test_gnuradio_analysis.py]
+    gates: []
+  C-EE-TIMING:
+    text: "E-E switching run: three RIS switches scheduled over the control socket before virtual time started, applied with zero lateness; ML change point of the IQ GNU Radio received at k_applied (offset 0) for each; every run: GNU Radio received every sample, bitwise equal to the emulator's own RX record, all counters zero; two independent repetitions of all runs bitwise identical (sha256 of received IQ and decisions)."
+    where: [sections/07_case_studies.tex]
+    evidence: [pytest:tests/integration/test_gnuradio_raw.py::test_gnuradio_dqpsk_switching_run_through_raw_mode, pytest:tests/integration/test_gnuradio_raw.py::test_gnuradio_static_runs_are_bitwise_reproducible, pytest:tests/io/test_io08_raw_exit_when_done.py, test:IO-03]
+    gates: []
+  C-EE-SPEED:
+    text: "E-E runs are lockstep (virtual time; the sample exchange paces the emulator); lockstep RTF range of the GNU Radio + sremu loop over every laptop sweep of single runs in the result files (three dedicated sweeps plus the throughput runs of the E-E result run while E-E comes from the laptop; CPU named, WSL2, host load not controlled) at 1 MS/s and at the highest rate run (5.76 MS/s); AWS value pending the pinned regeneration (placeholder)."
+    where: [sections/07_case_studies.tex]
+    evidence: [spec:DESIGN-11-E-E, spec:DESIGN-12.1, pytest:tests/integration/test_gnuradio_raw.py]
+    gates: []
+  C-EE-NOTRUN:
+    text: "srsRAN and OpenAirInterface analysed, not run: srsRAN 4G pads TX only to the end of the RX block it reads, lockstep needs TX one FD look-ahead ahead, so a lockstep srsRAN pair stalls without a per-peer TX delay >= look-ahead and partial RX replies; srsRAN 4G not packaged for Ubuntu 24.04; OAI rfsimulator uses its own TCP framing (new transport). Future work."
+    where: [sections/07_case_studies.tex]
+    evidence: [cite:OAIrfsim, cite:srsRANZMQ, spec:DESIGN-8.4]
     gates: []

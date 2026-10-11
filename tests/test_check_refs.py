@@ -27,8 +27,10 @@ def test_real_bibliography_passes() -> None:
     entries = parse_bib((PAPER_ROOT / "refs.bib").read_text(encoding="utf-8"))
     # 101 entries of stage A plus 4 verified for Sections III-IV and VIII (stage C): Philox,
     # UCB1, Gymnasium, ZeroMQ (rows with origin "new" in refs_verification.md), plus the
-    # Sionna v0.18.0 release notes (Section II, Table I; origin "new", 2026-10-11)
-    assert len(entries) == 106
+    # Sionna v0.18.0 release notes (Section II, Table I; origin "new", 2026-10-11), plus 7 for the
+    # revision of 2026-10-11 (Clarke 1968, Jakes, two channel-aging papers, the two RIS timer
+    # papers of the E-B tick case and Rossanese et al.'s WiNTECH 2022 paper; origin "new")
+    assert len(entries) == 113
     rows = parse_verification_rows((PAPER_ROOT / "refs_verification.md").read_text("utf-8"))
     assert set(rows) == {e.key for e in entries}
 

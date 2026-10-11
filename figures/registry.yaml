@@ -14,9 +14,8 @@
 #   sweep        sweep spec under paper/sweeps/ (WP11 data side) or null
 #   inputs       data files whose sha256 enters the content key
 #   evidence     spec ids the figure shows (tests, studies, benchmarks, experiments)
-#   data_classes subset of {MEAS, DIG, REPORTED, ASSUMED, SIM-sremu, ANALYTIC, MATLAB}
-#                (build_paper.py also knows SIM-legacy-v1/-v2; DESIGN D24: no paper figure
-#                uses them); empty for diagrams
+#   data_classes subset of {MEAS, DIG, REPORTED, ASSUMED, ENG, SIM-sremu, ANALYTIC, MATLAB}
+#                (ENG: an engineering choice, e.g. receiver positions); empty for diagrams
 #   outputs      files the script writes (PDF under figures/out, data + meta under figures/data)
 #   owner        work package that writes the script
 #   status       pending | ready

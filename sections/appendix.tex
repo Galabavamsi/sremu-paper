@@ -1,10 +1,9 @@
-% Appendices (WP12 draft, stage C). Lead amendment A1: no generative-AI disclosure section here;
-% the decision is deferred until the author consults Dr. Kherani (IEEE requires the disclosure
-% in the acknowledgments at journal submission).
+% Appendices (WP12 draft, stage C). The generative-AI disclosure is a pending placeholder in the
+% acknowledgment (sections/back_matter.tex) for the authors to write before posting.
 % Checked against sremu commit 2a016a6: tests/oracles (closed forms; import isolation in
 % tests/oracles/test_oracle_isolation.py and tests/unit/test_layering.py), tests/golden
-% (MATLAB R2026a goldens G1-G8), the negative-control twins of some guards (internal; DESIGN
-% D24: not featured in the paper), tools/tasks.py paper-junit (junit + {sremu_commit, sremu_dirty} sidecar),
+% (MATLAB R2026a goldens G1-G8), the negative-control twins of some guards (internal; not
+% featured in the paper), tools/tasks.py paper-junit (junit + {sremu_commit, sremu_dirty} sidecar),
 % paper/tools/build_paper.py (final-mode refusals), record/manifest.py, contracts.DataClass.
 \section{Oracle Details}\label{app:oracles}
 \claim{C-ORACLES}The tests of \sremu{} form four tiers. Analytic oracles (identifiers PH,
@@ -31,7 +30,8 @@ draw random rational rates, times and periods. The interface oracles feed malfor
 and messages, check the size and element limits and the loopback rule, and check the
 structure of the SigMF recordings. The statistical oracles test the stationary distribution
 of the random-waypoint model, the autocorrelation and level-crossing rate of the diffuse term
-against Clarke's model, and the Monte Carlo losses of quantization and failures.
+against Clarke's model~\cite{Clarke1968}, and the Monte Carlo losses of quantization and
+failures.
 
 \claim{C-TEETH}Several guards have a negative-control twin: a test that runs a deliberately
 wrong variant and must reject it, for example a kernel without the factor $j$, a
@@ -56,17 +56,30 @@ current when its stored content key, a hash of the emulator commit, the sweep sp
 the input files and the figure script, matches. The constants and defaults quoted in
 Sections~\ref{sec:design} and~\ref{sec:model} are read from the locked code at build time,
 so the text cannot drift from the code. Every run directory carries the manifest of
-Section~\ref{sec:design-arch}, and a replay reproduces its received samples bit for bit.
+Section~\ref{sec:design-arch}, and a replay reproduces its received samples bit for bit. The
+build checks the lock commit, the test record and the figure content keys; the results
+themselves record the commit, tree state and host they were produced on, and
+Table~\ref{tab:provenance} lists them. Neither repository is public yet; the section Code and
+Data Availability states the conditions of their release.
 
 \section{Data Provenance}\label{app:provenance}
 \claim{C-PROVENANCE}Every input and every figure carries data classes: MEAS (measured
 data), DIG (digitized from a figure, with its digitization uncertainty), REPORTED
 (quoted from a publication), ASSUMED (chosen where no data exist, such as the amplitudes of
-the laboratory states), SIM-sremu (outputs of this emulator), ANALYTIC (closed forms) and
-MATLAB (code-to-code references). Run manifests list the hash and data class of every input, and every figure
-caption names the classes it shows. Input files are copied into the repositories with their
-hashes and provenance; data not yet cleared for publication are read from a private location,
-and the tests that need them are skipped when it is absent. Response tables keep their own
-provenance (Section~\ref{sec:design-states}). The laboratory measurement of
-Section~\ref{sec:vv-lab} is a measurement collected by the authors and enters as a digitized
-map (DIG).
+the laboratory states), ENG (an engineering choice made for a study, such as receiver
+positions or the transition shape), SIM-sremu (outputs of this emulator), ANALYTIC (closed
+forms) and MATLAB (code-to-code references). Run manifests list the hash and data class of
+every input, and every figure caption names the classes it shows. Input files are copied into
+the repositories with their hashes and provenance; data not yet cleared for publication are
+read from a private location, and the tests that need them are skipped when it is absent.
+Response tables keep their own provenance (Section~\ref{sec:design-states}). The laboratory
+measurement of Section~\ref{sec:vv-lab} is a measurement collected by the authors and enters
+as a digitized map (DIG). Process records carry no physical quantity: GitHub's push log of
+the emulator repository, quoted in Section~\ref{sec:vv-lab}, is kept as an exported copy with
+its hash. Table~\ref{tab:provenance} lists the producing commit, tree state, host and date of
+every result. \label{app:tang}The digitized measurements of Tang et al.\ enter as DIG with the
+reported link budget (REPORTED); Table~\ref{tab:tang} breaks their comparison with the
+emulator (Section~\ref{sec:vv-tang}) down by geometry.
+
+\input{generated/tables/tableA_provenance}
+\input{generated/tables/tableA_tang}

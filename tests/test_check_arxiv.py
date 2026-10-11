@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import struct
 import zlib
 from pathlib import Path
@@ -49,9 +50,13 @@ def test_placeholder_budget_is_counted() -> None:
 
 
 def test_abstract_over_budget_fails(paper_copy: Path) -> None:
+    # Blow up the budget of a result phrase the abstract prints (txtEAResult).
     ny = paper_copy / "numbers.yaml"
-    ny.write_text(ny.read_text(encoding="utf-8").replace("max_chars: 84", "max_chars: 900"),
-                  encoding="utf-8")
+    text = ny.read_text(encoding="utf-8")
+    new, n = re.subn(r"(- macro: txtEAResult\b.*?max_chars: )\d+", r"\g<1>900", text, count=1,
+                     flags=re.S)
+    assert n == 1
+    ny.write_text(new, encoding="utf-8")
     errs = check_arxiv(paper_copy).errors
     assert any("characters" in e for e in errs)
     assert any("words" in e for e in errs)

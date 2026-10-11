@@ -1,0 +1,337 @@
+{
+  "experiment": "E-E (throughput only)",
+  "checks": {
+    "all_ok": true,
+    "problems": []
+  },
+  "sweeps": [
+    {
+      "sweep": 1,
+      "root": "/home/galaba_vamsi/trackG/ee_runs/20261011T162616Z_ee_tput_laptop",
+      "throughput": [
+        {
+          "rate_sps": 1000000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.5998538851912295,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.5771064060803476,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 512
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 1920000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.42832932826850467,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.39736127505798535,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 1024
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 3840000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.30350737892147506,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.30286497820318425,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 5760000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.43603784600949347,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.4341932841932842,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        }
+      ],
+      "host": {
+        "sremu_version": "0.1.0.dev0",
+        "contract_version": "1.1",
+        "versions": {
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "numba": "0.68.0",
+          "pydantic": "2.14.0",
+          "pyzmq": "27.2.0",
+          "torch": null
+        },
+        "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+        "logical_cpus": 16,
+        "power_plan_or_governor": null,
+        "gpu": [],
+        "aws_instance": null
+      },
+      "git": {
+        "commit": null,
+        "dirty": null,
+        "dirty_patch_sha256": null,
+        "dirty_patch_path": null,
+        "reason": "git not found",
+        "code": {
+          "files": {
+            "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+            "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+            "experiments/compare_regen.py": "7b1a693c58619c578cec1adda786ae9f5d64eff386f6cc4bbb801cb348b47f6d",
+            "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+            "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+            "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+            "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
+            "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+            "experiments/ee_gnuradio.py": "38e6a8aba37eec20665e6aa2bbd9da43ec0bcac53949d60325d6c89118322f61",
+            "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+            "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+            "experiments/install_regen.py": "8cacb2f4fa22807ee71f7c84392b4649019b6ba01871012aa3ae0ca95d05e6a3",
+            "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+            "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
+            "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+            "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+            "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+          },
+          "src_sremu_tree_sha256": "6a5b4b8bb5a7241cb9cbdac8b215ef5e4ce9a7ba0b2fd13d9adc2f69ffc65588"
+        }
+      },
+      "note": "laptop throughput only (no other Track G job running; other tracks' load on the host not controlled); WSL2 Ubuntu 24.04, AMD Ryzen 9 8945H, GNU Radio 3.10.9.2; sremu working tree synced 20261011T162135Z (HEAD ecab7da + uncommitted edits; git not run); sweep 1 of 3, sweep 1 is the paper value (chosen before running)"
+    },
+    {
+      "sweep": 2,
+      "root": "/home/galaba_vamsi/trackG/ee_runs/20261011T162745Z_ee_tput_laptop",
+      "throughput": [
+        {
+          "rate_sps": 1000000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 1.2612708582825847,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 1.2071073619631902,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 512
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 1920000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 1.2715501686813022,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 1.124401690391459,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 1024
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 3840000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.589391222050361,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.5788264920865048,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 5760000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.3940324836360378,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.41226580701527304,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        }
+      ],
+      "host": {
+        "sremu_version": "0.1.0.dev0",
+        "contract_version": "1.1",
+        "versions": {
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "numba": "0.68.0",
+          "pydantic": "2.14.0",
+          "pyzmq": "27.2.0",
+          "torch": null
+        },
+        "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+        "logical_cpus": 16,
+        "power_plan_or_governor": null,
+        "gpu": [],
+        "aws_instance": null
+      },
+      "git": {
+        "commit": null,
+        "dirty": null,
+        "dirty_patch_sha256": null,
+        "dirty_patch_path": null,
+        "reason": "git not found",
+        "code": {
+          "files": {
+            "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+            "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+            "experiments/compare_regen.py": "7b1a693c58619c578cec1adda786ae9f5d64eff386f6cc4bbb801cb348b47f6d",
+            "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+            "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+            "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+            "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
+            "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+            "experiments/ee_gnuradio.py": "38e6a8aba37eec20665e6aa2bbd9da43ec0bcac53949d60325d6c89118322f61",
+            "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+            "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+            "experiments/install_regen.py": "8cacb2f4fa22807ee71f7c84392b4649019b6ba01871012aa3ae0ca95d05e6a3",
+            "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+            "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
+            "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+            "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+            "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+          },
+          "src_sremu_tree_sha256": "6a5b4b8bb5a7241cb9cbdac8b215ef5e4ce9a7ba0b2fd13d9adc2f69ffc65588"
+        }
+      },
+      "note": "laptop throughput only (no other Track G job running; other tracks' load on the host not controlled); WSL2 Ubuntu 24.04, AMD Ryzen 9 8945H, GNU Radio 3.10.9.2; sremu working tree synced 20261011T162135Z (HEAD ecab7da + uncommitted edits; git not run); sweep 2 of 3, sweep 1 is the paper value (chosen before running)"
+    },
+    {
+      "sweep": 3,
+      "root": "/home/galaba_vamsi/trackG/ee_runs/20261011T162823Z_ee_tput_laptop",
+      "throughput": [
+        {
+          "rate_sps": 1000000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 1.2750657525907296,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 1.2008259202453988,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 512
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 1920000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 1.2280421308343559,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 1.124401690391459,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 1024
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 3840000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.6160830602196055,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.6028829562883435,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        },
+        {
+          "rate_sps": 5760000.0,
+          "duration_s": 2.0,
+          "sremu_rtf_median": 0.44130652946328985,
+          "sremu_rtf_windows": 19,
+          "gr_rtf_steady": 0.4125271828991259,
+          "ser": 0.0,
+          "page_size": {
+            "grrx.rx0": 2048
+          },
+          "ok": true
+        }
+      ],
+      "host": {
+        "sremu_version": "0.1.0.dev0",
+        "contract_version": "1.1",
+        "versions": {
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "numba": "0.68.0",
+          "pydantic": "2.14.0",
+          "pyzmq": "27.2.0",
+          "torch": null
+        },
+        "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+        "logical_cpus": 16,
+        "power_plan_or_governor": null,
+        "gpu": [],
+        "aws_instance": null
+      },
+      "git": {
+        "commit": null,
+        "dirty": null,
+        "dirty_patch_sha256": null,
+        "dirty_patch_path": null,
+        "reason": "git not found",
+        "code": {
+          "files": {
+            "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+            "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+            "experiments/compare_regen.py": "7b1a693c58619c578cec1adda786ae9f5d64eff386f6cc4bbb801cb348b47f6d",
+            "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+            "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+            "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+            "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
+            "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+            "experiments/ee_gnuradio.py": "38e6a8aba37eec20665e6aa2bbd9da43ec0bcac53949d60325d6c89118322f61",
+            "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+            "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+            "experiments/install_regen.py": "8cacb2f4fa22807ee71f7c84392b4649019b6ba01871012aa3ae0ca95d05e6a3",
+            "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+            "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
+            "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+            "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+            "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+          },
+          "src_sremu_tree_sha256": "6a5b4b8bb5a7241cb9cbdac8b215ef5e4ce9a7ba0b2fd13d9adc2f69ffc65588"
+        }
+      },
+      "note": "laptop throughput only (no other Track G job running; other tracks' load on the host not controlled); WSL2 Ubuntu 24.04, AMD Ryzen 9 8945H, GNU Radio 3.10.9.2; sremu working tree synced 20261011T162135Z (HEAD ecab7da + uncommitted edits; git not run); sweep 3 of 3, sweep 1 is the paper value (chosen before running)"
+    }
+  ],
+  "host": {
+    "sremu_version": "0.1.0.dev0",
+    "contract_version": "1.1",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+    "logical_cpus": 16,
+    "power_plan_or_governor": null,
+    "gpu": [],
+    "aws_instance": null
+  }
+}

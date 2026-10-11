@@ -1,0 +1,107 @@
+{
+  "manifest_version": "1.0",
+  "sremu_version": "0.1.0.dev0",
+  "git_commit": null,
+  "git_dirty": null,
+  "dirty_patch_sha256": null,
+  "contract_version": "1.1",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "pydantic": "2.14.0",
+    "pyzmq": "27.2.0",
+    "torch": null
+  },
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "logical_cpus": 16,
+  "power_plan_or_governor": null,
+  "gpu": [],
+  "aws_instance": null,
+  "scenario_name": "gr_ris_ber",
+  "scenario_sha256": "7162e17196b8466da6f442ae68b168078e9d9760ae7a8245f94090e131109463",
+  "inputs": [
+    {
+      "path": "data/states/ideal_antipodal.yaml",
+      "sha256": "25d6aa27f60ac568b554ab415295e62db323c8548cb4bc934dc2aa212db5605c",
+      "data_class": "ANALYTIC"
+    }
+  ],
+  "assumptions": [
+    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:50485', 'pub': None, 'tx': 'tcp://127.0.0.1:54751'}"
+  ],
+  "seed": 7,
+  "rng_scheme": "philox4x32-10/blake2b-v1",
+  "mode": "lockstep",
+  "coupling": "barrier",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "numba_disable_svml": true,
+  "page_size": {
+    "grrx.rx0": 512
+  },
+  "links": {},
+  "verify_interp_max_rel": null,
+  "richardson_db": null,
+  "counters": {
+    "late_samples": 0,
+    "underflow_slip_samples": 0,
+    "overflow_pages": 0,
+    "bad_packets": 0,
+    "schema_errors": 0,
+    "seq_errors": 0,
+    "rec_dropped": 0,
+    "stall_zero_samples": 0,
+    "late_commands": 0,
+    "rejected_commands": 0,
+    "rate_limited_commands": 0,
+    "deadline_misses": 0,
+    "transport.late_samples": 0,
+    "transport.underflow_slip_samples": 0,
+    "transport.overflow_pages": 0,
+    "transport.bad_packets": 0,
+    "transport.schema_errors": 0,
+    "transport.seq_errors": 0,
+    "transport.rec_dropped": 0,
+    "transport.stall_zero_samples": 0,
+    "transport.late_commands": 0,
+    "transport.rejected_commands": 0,
+    "transport.rate_limited_commands": 0,
+    "transport.deadline_misses": 0,
+    "transport.too_large_messages": 0,
+    "transport.rx_egress_dropped_samples": 0,
+    "transport.frames_in": 0,
+    "transport.frames_out": 0,
+    "transport.internal_errors": 0
+  },
+  "nondeterministic_inputs": false,
+  "oracle_csi_used": false,
+  "argv": [
+    "/home/galaba_vamsi/trackG/sremu/src/sremu/commands/serve.py",
+    "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep2/static_uniform/scene.yaml",
+    "--serve",
+    "tcp://127.0.0.1:50485",
+    "--pub",
+    "none",
+    "--tx",
+    "tcp://127.0.0.1:54751",
+    "--out",
+    "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep2/static_uniform/rec",
+    "--exit-when-done",
+    "--raw-peer",
+    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:45927,rx_port=tcp://127.0.0.1:58159,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+  ],
+  "t_start_utc": "2026-10-11T16:25:03.022284Z",
+  "t_end_utc": "2026-10-11T16:25:05.208251Z",
+  "wall_s": 2.2092910739999922,
+  "host_load_samples": [
+    {
+      "t_utc": "2026-10-11T16:25:05.207851Z",
+      "cpu_busy_fraction": 0.07469468900880431,
+      "loadavg_1min": 3.37744140625
+    }
+  ]
+}

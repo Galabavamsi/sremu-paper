@@ -1,0 +1,34 @@
+{
+  "record": "V-LAB-provenance",
+  "description": "GitHub's server-side records of the pushes to the (then private) sremu repository on 10-11 Oct 2026: the repository-activity export (GET /repos/{owner}/{repo}/activity: before/after commit, ref, timestamp, pusher) and the events export (GET /repos/{owner}/{repo}/events, PushEvent records). They are the third-party timestamps of the V-LAB analysis-plan lock (Section V-D) and of the commits that followed it.",
+  "data_classes": ["PROVENANCE"],
+  "data_class_note": "PROVENANCE: a server-side process record kept by a third party (GitHub). It is not a measurement of the physical world (MEAS), not an emulator output (SIM-sremu), not a value chosen for a study (ENG) and not a number quoted from a publication (REPORTED). It carries no physical quantity and enters no figure; the paper quotes commit ids and push times from it as dataset facts (numbers.yaml source type data, id V-LAB-provenance), which tools/gen_results.py checks against these files.",
+  "source": {
+    "exported": "2026-10-11, 14:26 UTC per the file names, through the GitHub REST API (the repository was private, so the export needed the owner's access)",
+    "original_location": "research/archive/provenance/ (authors' archive; byte copies here)",
+    "activity_endpoint": "https://docs.github.com/en/rest/repos/repos#list-repository-activities",
+    "events_endpoint": "https://docs.github.com/en/rest/activity/events (retention: events of the past 30 days, at most 300)"
+  },
+  "files": [
+    {
+      "path": "sremu_activity_20261011T1426Z.json",
+      "sha256": "1e28688b3d9470878aee1c36b575d3444fe37424ec056e665ba35587a49c8dc2",
+      "content": "15 activity records (14 pushes and the branch creation) of refs/heads/master, 2026-10-10T16:12:17Z to 2026-10-11T12:05:12Z"
+    },
+    {
+      "path": "sremu_events_20261011T1426Z.json",
+      "sha256": "2334595b67c8cda7187ded150ac5dd0a5e5b2ef784cc07838155066e790ca059",
+      "content": "13 events (11 PushEvent, CreateEvent, WatchEvent); timestamps agree with the activity records within 1 s"
+    }
+  ],
+  "facts_quoted": {
+    "lock_commit": "101ee87 (protocol digest d8623254... committed in the emulator; pushed 2026-10-11T00:22:55Z, activity record)",
+    "intermediate_commit": "2ef1401 (pushed 2026-10-11T00:26:33Z). Its content is not in these records; read from the sremu repository's own objects (not a third-party record): validation/ants_fig4b/run.py gains a --columns option (JSON column map for the measured CSV, passed to protocol_lock.load_measured), no other file changed",
+    "analysis_code_commit": "7a63287 (pushed 2026-10-11T00:30:30Z); the unblinded V-LAB run recorded this commit, clean tree. From the repository objects: relative to 2ef1401 it changes only tests/integration/test_vlab_smoke.py (the 'locked' flag mirrors the committed lock constant); the paper calls the two post-lock commits 'an option of the run script that names the columns of the measured file, and a test change'",
+    "unblinded_run": "validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded (run directory time 00:30:44Z; from the V-LAB record, not from these files)",
+    "result_commit": "2333b60 (pushed 2026-10-11T00:31:40Z)"
+  },
+  "not_done": "No public deposit (Zenodo, OSF) of the analysis plan was made before unblinding. A deposit can still be made as a retrospective record; the paper says so.",
+  "personal_data": "Each record names the pushing GitHub account (the corresponding author's public profile fields as returned by the API).",
+  "written_utc": "2026-10-11T21:30:00Z"
+}

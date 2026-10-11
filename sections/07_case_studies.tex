@@ -3,21 +3,30 @@
 % validation/fm (or a definition macro); figures F9-F12 come from figures/src/*.py.
 % E-B: primary geometry modelled on the lab arrangement (SIM, nominal geometry; AWS run in
 % paper/sweeps/results/E-B-arc), lab-like geometry as the supporting row. Geometries are SIM
-% and labelled; A0 values are "under the area-tied kernel"; E-D is "model-based dimensioning, not
-% validated". D24: the tick-based baseline is a generic semantics, not an earlier simulator.
+% and labelled; E-D is "model-based dimensioning, not validated". E-B headline = timed vs asap
+% (MAJOR-3); the tick-based case models a controller that latches commands on its own
+% free-running timer (uncoordinated timer switching, as in the cited RIS + 5G NR experiments).
 \section{Case Studies}\label{sec:cases}
 
-The four studies below use the semantics of Section~\ref{sec:design}. Their geometries are
+The studies below use the semantics of Section~\ref{sec:design}. Their geometries are
 simulated (SIM) and labelled, and every assumed input is named. E-B depends on when a
-command takes effect within the sample stream. E-A depends on how old the information behind
-a command is; it runs on the batch path, with a consistency check at the sample level. E-C
-and E-D are short analyses on the batch path.
+command takes effect within the sample stream and runs at the sample level. E-A depends on how
+old the information behind a command is; it runs on the batch path, with a consistency check
+at the sample level. E-C and E-D are short analyses on the batch path, and the last
+subsection describes runs with external applications.
 
 \subsection{Intra-frame RIS reconfiguration}\label{sec:cases-eb}
 \claim{C-EB-WHY}A tool that works with one channel coefficient per block cannot place a
 reconfiguration inside a packet and observe the symbols on either side of it. ETSI GS RIS
 008 lists reconfiguration time and modulated-signal quality among the parameters of a RIS
-test~\cite{ETSI_GS_RIS008}; this study measures how the two interact.
+test~\cite{ETSI_GS_RIS008}, and ETSI GR RIS 004 sizes the delay budget of a RIS controller
+by the frame structure of 5G NR~\cite{ETSI_GR_RIS004}; this study measures how a switch inside
+a packet and the timing of the command behind it interact. It runs at the sample level, in
+lockstep with an in-process controller, so the command latency is modelled rather than
+measured. Three lessons stand out: an equalizer trained before a switch inside a packet sees
+an error as large as the signal after it; a long linear transition spreads the damage but
+does not remove it; and with a strong line of sight QPSK tolerates the wrong configuration,
+so the timing of a command matters where the RIS path dominates or the margin is small.
 
 \claim{C-EB-SETUP}The primary geometry is modelled on the laboratory arrangement of
 Section~\ref{sec:vv-lab}. It is simulated (SIM) with nominal dimensions: each uncertain distance
@@ -60,31 +69,52 @@ payload bits.
 \claim{C-EB-TIMING}In the timing experiment (E-B2) \numEbPackets{} packets alternate between
 the two receivers; the slice shown uses guard intervals of \numEbGuardMs~ms. A controller
 sends one message per guard, with one command per tile on the arc, and the message arrives
-after \numEbLatencyMs~ms plus a uniform jitter of up to $J$. Timed commands carry a switch time at the guard centre and are issued
-\numEbLeadsMs~ms ahead; a timed command that arrives late applies on arrival. Commands
-without a time apply on arrival (asap). Tick-based untimed
-semantics apply each command at the next tick of a \numEbTickMs~ms grid and keep one pending
-command per panel. The arc run fixed its cases before any point ran: the line of sight
-present at $E_s/N_0=\numEbEsnoDb$~dB, the same at \numEbArcEsnoLowDb~dB as a sensitivity,
-and the line of sight blocked. With the line of sight present at \numEbEsnoDb~dB, QPSK
-tolerates the wrong configuration: in this slice no semantics loses more than
-\numEbArcLosHighPerMaxPct~\% of the packets, although the EVM of the affected packets rises.
-Fig.~\ref{fig:F9}(b) shows the other two cases, in which a switch at the wrong time costs
-bits. The two cases show the same pattern. Each pair of values below gives the line of sight present
-at \numEbArcEsnoLowDb~dB, then the line of sight blocked. Tick-based semantics lose
-\numEbArcTickPerMinPct--\numEbArcTickPerMaxPct~\% of the packets at every jitter, also
-without jitter, because the tick grid is not aligned with the guards. Timed commands with a
-lead of \numEbLeadMidMs~ms lose no packet up to $J=\numEbJitterOneMs$~ms (Clopper--Pearson
-upper limit \numEbPerUpperPct~\%). At $J=\numEbJitterMaxMs$~ms the latency can exceed this
-lead, and they lose \numEbArcTimedTwoPerThreeLosPct~\% and \numEbArcTimedTwoPerThreeBlkPct~\%.
-With a lead of \numEbLeadMinMs~ms they fail already at $J=\numEbJitterOneMs$~ms
-(\numEbArcTimedHalfPerOneLosPct~\% and \numEbArcTimedHalfPerOneBlkPct~\%); with
-\numEbLeadMaxMs~ms they lose no packet at any jitter. Asap commands lose no packet while the
+after a modelled latency of \numEbLatencyMs~ms plus a uniform jitter of up to $J$. Timed
+commands carry a switch time at the guard centre and are issued \numEbLeadsMs~ms ahead; a
+timed command that arrives late applies on arrival. Commands without a time apply on arrival
+(asap), as untimed UHD commands do~\cite{UHDManual}. The arc run fixed its cases before any
+point ran: the line of sight present at $E_s/N_0=\numEbEsnoDb$~dB, the same at
+\numEbArcEsnoLowDb~dB as a sensitivity, and the line of sight blocked. With the line of sight
+present at \numEbEsnoDb~dB, QPSK tolerates the wrong configuration: in this slice no
+semantics loses more than \numEbArcLosHighPerMaxPct~\% of the packets, although the EVM of the
+affected packets rises. Fig.~\ref{fig:F9}(b) shows the other two cases, in which a switch at
+the wrong time costs bits; each pair of values below gives the line of sight present at
+\numEbArcEsnoLowDb~dB, then the line of sight blocked. Asap commands lose no packet while the
 worst latency fits in the guard ($J\le\numEbArcAsapJitterOkMs$~ms), and they lose
 \numEbArcAsapPerOneLosPct~\% and \numEbArcAsapPerOneBlkPct~\% at $J=\numEbJitterOneMs$~ms.
-When a switch costs bits, the timing requirement is therefore simple to state and to test: a
-timed command loses no packet when its lead exceeds the worst latency, and a command without a
-time loses none while the worst latency fits in the guard.
+Timed commands with a lead of \numEbLeadMidMs~ms lose no packet up to $J=\numEbJitterOneMs$~ms
+(Clopper--Pearson upper limit \numEbPerUpperPct~\%). At $J=\numEbJitterMaxMs$~ms the latency
+can exceed this lead, and they lose \numEbArcTimedTwoPerThreeLosPct~\% and
+\numEbArcTimedTwoPerThreeBlkPct~\%. With a lead of \numEbLeadMinMs~ms they fail already at
+$J=\numEbJitterOneMs$~ms (\numEbArcTimedHalfPerOneLosPct~\% and
+\numEbArcTimedHalfPerOneBlkPct~\%); with \numEbLeadMaxMs~ms they lose no packet at any jitter.
+That a timed command loses no packet when its lead exceeds the worst latency, and a command
+without a time none while the worst latency fits in the guard, is the designed behaviour of
+the command semantics, which E-B2 verifies on IQ samples. What the experiment adds is how much
+a mistimed switch costs (E-B1) and how fast the loss grows once the latency leaves the guard
+or exceeds the lead.
+
+\claim{C-EB-TICK}A third semantics models a controller that latches commands on its own
+free-running timer: each command applies at the next tick of a \numEbTickMs~ms clock that
+starts at $t=0$, is not aligned with the packets and keeps one pending command per panel.
+Published RIS experiments with a 5G NR testbed switch the surface on such a timer, without
+coordination with the base station~\cite{Yashvanth2026Random,Kiran2026Random}. The analogy
+lies in the effect, a switch at an arbitrary point of a packet; there the switching period is
+seconds, whereas here it is comparable to a packet. In both cases of Fig.~\ref{fig:F9}(b) the
+tick-based semantics lose \numEbArcTickPerMinPct--\numEbArcTickPerMaxPct~\% of the packets at
+every jitter, also without jitter: with a timer period of the order of a packet, alignment
+with the frame decides, not the speed of the controller.
+
+\claim{C-EB-SERVED}These runs are lockstep with a modelled latency. Served over the control
+socket in paced mode (Section~\ref{sec:wallclock}), an asap command became visible after a
+median of \numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms, with p99
+\numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms and rare outliers of up to
+\numBfourVisMaxMs~ms, and with the \numBfourLeadMs~ms lead used there
+\numBfourLateRepMinPct{} to \numBfourLateRepMaxPct~\% of the timed commands per repetition
+were late at \numBfourRateLowHz~commands/s. On that path a timed command is on time when its
+lead exceeds the command latency plus the error of the client's estimate of virtual time
+(Section~\ref{sec:wallclock}), and the regime $J\le\numEbJitterOneMs$~ms of Fig.~\ref{fig:F9}
+is not yet reachable through the served path.
 
 \claim{C-EB-LABLIKE}The lab-like geometry supports this picture (Fig.~\ref{fig:F9}(c),
 (d)). With the line of sight blocked, the switch changes the channel of RX1 by
@@ -105,7 +135,8 @@ few symbols, when the RIS switches a quarter into the packet: a step and two lin
 transitions with the line of sight blocked, a step with it present, and no switch.
 (b), (d) Packet error rate versus the jitter $J$ of the command latency at a guard of
 \numEbGuardMs~ms, for timed commands with a lead of \numEbLeadMidMs~ms, asap commands and
-tick-based untimed semantics, with Clopper--Pearson \numCiPct\,\% intervals. Filled markers:
+tick-based semantics (commands latched on a free-running \numEbTickMs~ms timer), with
+Clopper--Pearson \numCiPct\,\% intervals. Filled markers:
 line of sight blocked, $E_s/N_0=\numEbEsnoDb$~dB. Open markers, in (b): line of sight
 present, $E_s/N_0=\numEbArcEsnoLowDb$~dB. Data classes: SIM-sremu (emulator runs), ASSUMED
 (unit amplitudes of the two states).}{fig:F9}
@@ -115,20 +146,22 @@ present, $E_s/N_0=\numEbArcEsnoLowDb$~dB. Data classes: SIM-sremu (emulator runs
 \claim{C-EA-SETUP}A user walks a corridor of \numEaLengthM~m as a one-dimensional random
 waypoint at \numEaSpeed~m/s. A line of on--off cells runs parallel to it at
 \numEaHeightM~m (\numEaCellsOne{} cells at \numEaFcOneGHz~GHz, \numEaCellsTwo{} at
-\numEaFcTwoGHz~GHz). The access point sits \numEaApOffsetM~m off the user line, a documented
-deviation that keeps the mean line-of-sight power finite. A partition attenuates the line of
-sight, not the RIS hops, by \numEaLossDb~dB, which gives the RIS room to help; in the
-unblocked corridor of the original study~\cite{Mishra2025WCL} the exact optimum gains
-\numEaGainAzero~dB under the area-tied kernel. Position-driven
+\numEaFcTwoGHz~GHz). The access point sits \numEaApOffsetM~m off the user line, which keeps
+the line-of-sight power finite everywhere on the line. A partition attenuates the line of
+sight, not the RIS hops, by \numEaLossDb~dB, which gives the RIS room to help. Position-driven
 controllers act on position reports that are $\tau_{\mathrm{SUI}}$ old: the exact optimum and
 our reading of the heuristic of~\cite{Mishra2025WCL}. Two controllers need no position: uniform
 random activation (URAP) and a bandit that probes a codebook of exact optima and receives a
 power report once per $\tau_{\mathrm{SUI}}$. Each point runs
 on the batch path for \numEaBatches{} batches of \numEaPeriods{} mean movement periods. The
-hypotheses, the evaluation rule and the decision rules were written before the sweep
-(\texttt{paper/preregistration/E-A.md}). One amendment, made before the full sweep, changed
-the evaluation of each time step from its start to its midpoint; a short pipeline test seen
-before the amendment is disclosed there.
+hypotheses and their ranges were in the emulator's design document before the sweep: GitHub's
+push log (Section~\ref{sec:vv-lab}) records it in the initial push of the emulator repository.
+The plan that adds the decision rules and the evaluation rule (SHA-256 \txtEaPlanSha\ldots{}
+with LF line ends) was written before the sweep by the authors' record, but committed to the
+paper repository after it (commit \txtEaPlanCommit), so no third party dates those parts. One
+amendment, made before the full sweep after a short IQ run showed that evaluating each time
+step at its start overestimates the power, moved the evaluation to the step's midpoint; the
+plan discloses it and a short pipeline test seen before it.
 
 \claim{C-EA-RESULT}With instantaneous position knowledge the exact optimum gains
 \numEaGainOpt~dB over RIS absent at \numEaFcOneGHz~GHz (\numCiPct\,\% interval
@@ -138,23 +171,38 @@ We measure the decay by the retention $\rho(\tau)=(P(\tau)-P_{\mathrm{stale}})/(
 P_{\mathrm{stale}})$ in linear power, where $P_{\mathrm{stale}}$ uses a configuration optimal
 for an unrelated position. Half the benefit is lost at
 $\tau_{1/2}=\numEaTauHalf$~s (\numCiPct\,\% interval \numEaTauHalfLo--\numEaTauHalfHi~s),
-\numEaPeriodOverTau{} times shorter than the mean movement period. The interval lies inside the
-range fixed before the sweep, so hypothesis H-A1 is supported. At \numEaFcTwoGHz~GHz, $\tau_{1/2}=\numEaTauHalfTwo$~s; the ratio of the two,
-\numEaRatio{} (\numEaRatioLo--\numEaRatioHi), is close to the ratio of the wavelengths,
-\numEaRatioPred, and its interval lies inside the range fixed before the sweep, so H-A2 is
-supported: the time scale is set by $\lambda/v$
-($\tau_{1/2}\approx\numEaTauOverLambdaV\,\lambda/v$ here), not by the mobility period. The
-bandit beats URAP at every delay from \numEaTauBanditMinS~s by \numEaBanditMinDb--%
+\numEaPeriodOverTau{} times shorter than the mean movement period, and at \numEaFcTwoGHz~GHz
+at $\tau_{1/2}=\numEaTauHalfTwo$~s. In units of $\lambda/v$ the two half-lives are
+\numEaTauOverLambdaV{} and \numEaTauOverLambdaVTwo: the time scale is $\lambda/v$, the
+classical Doppler scaling of channel decorrelation for a moving
+terminal~\cite{Clarke1968,Jakes1974}, not the mobility period, and outdated channel knowledge
+is known to erode RIS gains under
+mobility~\cite{Papazafeiropoulos2023Aging,Zhang2022OutdatedCSI}. The constant belongs to this
+geometry and metric. For isotropic scattering the field and envelope correlations fall to one
+half after \numClarkeFieldHalf{} and \numClarkeEnvHalf{} $\lambda/v$~\cite{Clarke1968}. The
+rule-of-thumb coherence time $\sqrt{9/(16\pi)}/f_D=\numCoherenceRuleLambdaV\,\lambda/v$ lies
+close to the E-A constant, but it is the geometric mean of $1/f_D$ and the envelope
+half-correlation time, not a correlation level. The ratio of the two half-lives, \numEaRatio{}
+(\numEaRatioLo--\numEaRatioHi), lies \numEaRatioOffsetPct~\% above the wavelength ratio
+\numEaRatioPred; the corridor is the same in metres at both carriers, so it is not the same
+geometry in wavelengths and exact scaling is not expected. Both intervals lie inside the ranges
+fixed before the sweep, so H-A1 and H-A2 are supported, but the ranges were wide
+(\numEaHaOneLoS--\numEaHaOneHiS~s for H-A1, \numEaHaTwoLo--\numEaHaTwoHi{} for H-A2), so the
+support is a weak test. What E-A adds to the classical scaling is the constant for this
+geometry, the retention metric and the result for controllers without positions: the bandit
+beats URAP at every delay from \numEaTauBanditMinS~s by \numEaBanditMinDb--%
 \numEaBanditMaxDb~dB (H-A3 supported), but it stays near the stale level
-(\numEaGainBandit~dB against \numEaGainStale~dB), and URAP gains \numEaGainUrap~dB. A
+(\numEaGainBandit~dB against \numEaGainStale~dB), and URAP gains \numEaGainUrap~dB. Our reading
+of the heuristic of~\cite{Mishra2025WCL} reaches \numEaGainWclFast~dB at the shortest delay. A
 position-driven controller pays for its signaling link when its position reports arrive
 before the user has moved a fraction of a wavelength.
 
 \claim{C-VA1}As a consistency check, not a finding, \numVaOneRows{} runs of
 \numVaOneDurS~s went through the served engine with an external controller process in
-barrier mode and an external receiver application. They agree with the batch path within
-\numVaOneMaxDiffDb~dB, inside the pre-set limit of \numVaOneTolDb~dB (VA-1,
-Fig.~\ref{fig:F10}(c)).
+barrier mode and an external receiver application. They agree with the batch evaluation of
+E-A within \numVaOneMaxDiffDb~dB, inside the pre-specified limit of \numVaOneTolDb~dB (VA-1,
+Fig.~\ref{fig:F10}(c)); the engine's batch path, which evaluates each step at its start, reads
+up to \numVaOneLeftMaxDb~dB higher than these runs.
 
 \begin{figure*}[t]
 \centering
@@ -177,7 +225,8 @@ results agree with prior work on discrete and phase-dependent
 states~\cite{WuZhang2020Discrete,Abeywickrama2020Practical}. One-bit control costs
 \numEcOneBitMin--\numEcOneBitMax~dB, less than the large-$N$ closed-form loss of
 \numEcOneBitEta~dB, because a finite panel in a fixed geometry is not a random phase
-ensemble. The laboratory states are nearly antipodal: in $\Gamma=m+ds$ the steerable part
+ensemble. The laboratory states, with magnitudes ASSUMED to be unit
+(Section~\ref{sec:cases-eb}), are nearly antipodal: in $\Gamma=m+ds$ the steerable part
 $|d|$ is \numEcAbsD~dB and the mirror part $|m|$ is \numEcAbsM~dB, so they behave like ideal
 one-bit states (within \numEcLabVsOneBitMaxDb~dB). Unequal amplitudes cost more, up to
 \numEcHalfMaxDb~dB when one state reflects at half amplitude, and an efficiency of one half
@@ -219,7 +268,51 @@ ANALYTIC (panel aperture), ASSUMED (ground constants).}{fig:F12}
 \end{figure}
 
 \subsection{Integration with external IQ applications}\label{sec:cases-ee}
+% E-E: sremu examples/gnuradio_zmq, experiments/ee_gnuradio.py; results in sweeps/results/E-E
+% (laptop WSL2 run of a working tree, to be repeated at the pinned commit) and E-E-laptop.
 \claim{C-EE}Two of the studies above already ran with external processes: the frequency-offset
 sweep between two processes over the native data plane (V-CFO-3) and the consistency runs of
-E-A with an external controller and receiver (VA-1). No srsRAN or GNU Radio binary has yet
-been run against the raw request--reply mode (Section~\ref{sec:design-if}).
+E-A with an external controller and receiver (VA-1). The raw request--reply mode
+(Section~\ref{sec:design-if}) ran with unmodified GNU Radio \txtEeGrVersion{} (Ubuntu package)
+as the peer, in a separate process that knows nothing of the emulator: its stock ZMQ request
+and reply blocks and a DQPSK modem built from stock blocks, with \numEeSps{} samples per
+symbol and blind timing and carrier recovery. In the scene (SIM), transmitter and receiver stand
+\numEeDistM~m from an ideal 1-bit RIS of \numEeCells{} cells at \numEeFcGHz~GHz, a partition
+attenuates the direct path by \numEeWallDb~dB, and the sample rate is \numEeRateMsps~MS/s.
+
+\input{generated/tables/table_ee_gnuradio}
+
+\claim{C-EE-LINK}Each of \numEeConfigs{} RIS configurations ran for \numEeStaticS~s of virtual
+time as a fresh run with a fresh modem (Table~\ref{tab:ee}). GNU Radio makes no symbol error
+with focusing; its symbol error rate (SER) and its error rate of uncoded 200-bit blocks do not
+decrease as the gain of the configuration falls, and the random configuration loses every
+block. The gains relative to focusing lie within \numEeAfMaxDiffDb~dB of an isotropic
+array-factor prediction, an internal consistency check of the emulator, not a measured RIS
+gain. Where at least one hundred symbol errors were counted with the link up, the SER implies
+an implementation loss of \numEeLossMinDb--\numEeLossMaxDb~dB against coherent DQPSK theory at
+the estimated $E_s/N_0$; with the link lost, the implied loss is larger.
+
+\claim{C-EE-TIMING}A further run switched the RIS three times, \numEeSegmentS~s apart, by
+commands scheduled over the control socket before virtual time started. Each switch was
+applied with zero lateness, and the maximum-likelihood change point of the IQ that GNU Radio
+received lies at the logged switch sample (largest offset \numEeCpOffsetMax{} samples). In
+every run GNU Radio received every sample, bit for bit the receive stream that the emulator
+recorded itself, and every engine and transport counter stayed zero. Across \txtEeReps{}
+independent repetitions of all \numEeRuns{} runs, the SHA-256 digests of the received IQ and
+of GNU Radio's decisions are identical.
+
+\claim{C-EE-SPEED}These runs are lockstep, so their time is virtual: the sample exchange with
+GNU Radio paces the emulator, and the wall-clock speed changes how long a run takes, not its
+samples. In \txtEeLaptopSweeps{} sweeps of single runs on a laptop (\txtEeLaptopCpu{}, WSL2,
+host load not controlled), the loop advanced at an RTF of
+\numEeLaptopRtfLoMin--\numEeLaptopRtfLoMax{} at \numEeRateMsps~MS/s and
+\numEeLaptopRtfHiMin--\numEeLaptopRtfHiMax{} at \numEeLaptopRateHiMsps~MS/s; on an AWS
+\txtEeAwsInstance{} instance it reached \numEeAwsRtfLo{} at \numEeRateMsps~MS/s.
+
+\claim{C-EE-NOTRUN}srsRAN and OpenAirInterface were analysed but not run. srsRAN~4G pads its
+transmit stream to the end of the receive block it is about to read and no further, while
+lockstep needs the transmit stream one fractional-delay look-ahead beyond the received
+samples; a lockstep srsRAN pair therefore needs a per-peer transmit delay and partial receive
+replies, and srsRAN~4G has no package for the Ubuntu release used here. The OpenAirInterface
+RF simulator would need a new transport for its own TCP framing~\cite{OAIrfsim}. Both are
+future work.

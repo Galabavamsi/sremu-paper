@@ -74,8 +74,7 @@ from paper_common import (
 )
 
 DATA_CLASSES = {
-    "MEAS", "DIG", "REPORTED", "ASSUMED", "SIM-sremu", "SIM-legacy-v1", "SIM-legacy-v2",
-    "ANALYTIC", "MATLAB",
+    "MEAS", "DIG", "REPORTED", "ASSUMED", "ENG", "SIM-sremu", "ANALYTIC", "MATLAB",
 }
 REGISTRY_FIELDS = ("title", "width", "source", "script", "sweep", "inputs", "evidence",
                    "data_classes", "outputs", "owner", "status")

@@ -1,0 +1,76 @@
+{
+ "run": "static_focusq0.35",
+ "kind": "static",
+ "rate_sps": 1000000.0,
+ "sps": 4,
+ "n_run": 300000,
+ "rx_samples": 300000,
+ "complete": true,
+ "decisions": 74960,
+ "gnuradio_version": "3.10.9.2",
+ "sha256": {
+  "rx_iq": "e9c79c92fb0a0b9c120e0cc65f53902f8caa44a32b1040ec8a8ec3269133bc61",
+  "costas": "17564f5732139e25077a396fe4bed7a6143770d5ee4676c16d7280130ef8908f",
+  "decisions": "7a5c095f9b1cdc15068129ff5b76299ad09f22914ef1b1368dc284c3c334363e"
+ },
+ "commands": [
+  {
+   "cmd_id": "ris-schedule-3",
+   "t_applied": "0",
+   "k_req": 0,
+   "k_applied": 0,
+   "lateness_samples": 0,
+   "status": "applied"
+  }
+ ],
+ "counters_nonzero": {},
+ "manifest": {
+  "mode": "lockstep",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "nondeterministic_inputs": false,
+  "page_size": {
+   "grrx.rx0": 512
+  },
+  "git_commit": null,
+  "git_dirty": null,
+  "wall_s": 1.251567319000003,
+  "sremu_version": "0.1.0.dev0",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+ },
+ "rx_equals_emulator_record": true,
+ "emulator_record_samples": 300000,
+ "segments": [
+  {
+   "config": "focusq:0.35",
+   "k0": 0,
+   "k1": 300000,
+   "symbols": 69960,
+   "symbol_errors": 158,
+   "ser": 0.002258433390508862,
+   "bler_uncoded_200bit": 0.10872675250357654,
+   "blocks": 699,
+   "worst_20ms_ser": 0.0036,
+   "mer_db": 10.679511273557917,
+   "ls_gain_db": -12.156549292760644,
+   "ls_phase_deg": -111.80952112152674,
+   "ls_snr_db": 4.783482465935749,
+   "ls_delay_samples": 0,
+   "es_n0_db": 10.804082379215373,
+   "ser_theory": 0.0010442588612123993,
+   "implied_loss_db": 0.5507673957545478,
+   "lag": 524275,
+   "corr_peak": 0.9975585937500003,
+   "af_pred_db": -10.951999822099388
+  }
+ ],
+ "throughput": {
+  "sremu_rtf_median": 1.5324042053516786,
+  "sremu_rtf_windows": 2,
+  "gr_rtf_steady": 0.9471050000000002,
+  "gr_wall_first_to_last_s": 0.251
+ },
+ "ok": true
+}

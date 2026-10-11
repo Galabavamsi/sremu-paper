@@ -122,21 +122,54 @@ macros:
     max_chars: 5
   - macro: numTangMeasBiasDb
     kind: number
-    description: Bias of digitized Tang chamber measurements relative to the published model
+    description: "Mean of measured minus emulator over the V-TANG points (digitized Tang chamber measurements minus sremu, dB; printed without sign: the text says the emulator lies below the measurements, and gen_results checks that every residual is positive). Accuracy framing by author decision D-12 (2026-10-11), reversing DESIGN 10.8"
     unit: dB
     source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
   - macro: numTangMeasSdDb
     kind: number
-    description: SD of the same residuals
+    description: Sample SD (ddof 1) of measured minus emulator
     unit: dB
     source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
+  - macro: numTangMeasRmseDb
+    kind: number
+    description: RMSE of measured minus emulator over the V-TANG points
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
+  - macro: numTangMeasMaxDb
+    kind: number
+    description: Largest |measured minus emulator| over the V-TANG points
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
+  - macro: numTangPanelBiasMinDb
+    kind: number
+    description: Smallest per-geometry mean of measured minus emulator (four geometries of nine links)
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
+  - macro: numTangPanelBiasMaxDb
+    kind: number
+    description: Largest per-geometry mean of measured minus emulator
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
   - macro: numTangMeasN
     kind: number
     description: Number of digitized measurement points used in V-TANG-2
     source: {type: study, id: "V-TANG-2"}
+    max_chars: 2
+  - macro: numTangFcGHz
+    kind: number
+    description: Carrier frequency of the Tang surface in V-TANG (read from the run's resolved scenario)
+    unit: GHz
+    source: {type: study, id: "V-TANG"}
+    max_chars: 2
   - macro: txtVLabOutcome
     kind: text
-    description: Verb phrase completing "a pre-registered comparison with digitized lab data ..." (C1-C3 outcome and power label)
+    description: Verb phrase completing "a blinded comparison with a digitized laboratory map, analysed under a plan hash-locked before unblinding, ..." (C1-C3 outcome and power label)
     source: {type: study, id: "V-LAB"}
     max_chars: 72
   # ------------------------------------------------------------------ wall-clock behaviour
@@ -161,6 +194,44 @@ macros:
   # Filled by tools/gen_results.py through tools/bench_results.py from
   # paper/sweeps/results/bench/{B1,B2,B3,B4,B6} (MEAS; provenance in each meta.json). F5
   # (native ZMQ) macros stay placeholders until F5 is rerun after the transport fix.
+  # Code and data availability (BLOCKER-3): read by tools/gen_results.py from availability.yaml;
+  # a PENDING field stays a placeholder, so a final build refuses until it is filled (H-2).
+  - macro: txtLicence
+    kind: text
+    description: "Code licence of sremu and of the paper artifact (availability.yaml; H-2)"
+    source: {type: data, id: "availability.yaml"}
+    max_chars: 20
+  - macro: txtRepoUrl
+    kind: text
+    description: "Public URL of the sremu repository (availability.yaml; H-2, H-7)"
+    source: {type: data, id: "availability.yaml"}
+    max_chars: 60
+  - macro: txtArchiveDoi
+    kind: text
+    description: "DOI of the archived release of the versions used (availability.yaml)"
+    source: {type: data, id: "availability.yaml"}
+    max_chars: 40
+  - macro: txtDataDoi
+    kind: text
+    description: "DOI of the authors' own data files (availability.yaml; H-1 for the laboratory map)"
+    source: {type: data, id: "availability.yaml"}
+    max_chars: 40
+  # Implementation facts (MINOR-11), read by tools/gen_results.py from the sremu checkout.
+  - macro: txtPythonReq
+    kind: text
+    description: "Lowest Python version sremu supports (pyproject.toml requires-python)"
+    source: {type: data, id: "sremu-pyproject"}
+    max_chars: 5
+  - macro: numSrcKloc
+    kind: number
+    description: "Thousands of lines of Python in src/sremu (all lines, rounded)"
+    source: {type: data, id: "sremu-source-tree"}
+    max_chars: 3
+  - macro: numSrcModules
+    kind: number
+    description: "Python modules in src/sremu"
+    source: {type: data, id: "sremu-source-tree"}
+    max_chars: 3
   - macro: numSustainWarmupS
     kind: number
     description: Warm-up before the measured window in the definition of "Sustainable"
@@ -177,7 +248,7 @@ macros:
     max_chars: 1
   - macro: numBtwoFfiveRtf
     kind: number
-    description: "PENDING (AWS rerun): lockstep RTF of the base point served over the native ZMQ data plane (F5); the B2 run of 20261011 is not reported for F5 (transport stall being fixed)"
+    description: "AWAITING THE PINNED RERUN (do not type a value): lockstep RTF of the B2 base point served over the native ZMQ data plane (F5). The three F5 receive time-outs of the B2 run of 20261011 were a benchmark configuration error (served run shorter than the clients' streams; fixed in the benchmark, sremu 60d0e6d), not a transport stall. Plan: after the transport fix is committed (pinned commit C1), rerun B2's F5 points with bench/aws/job.sh b1b2 per sremu/bench/README.md, copy the run with its provenance to sweeps/results/bench/B2, add the F5 code path to tools/bench_results.py (today it skips F5) and redraw F7 with F5"
     source: {type: benchmark, id: "B2-F5-rerun"}
     max_chars: 5
   - macro: txtHostServer
@@ -935,8 +1006,12 @@ macros:
     source: {type: benchmark, id: "B6"}
     max_chars: 4
 
-  # E-F API latency (DESIGN 11 E-F): PENDING (AWS; a transport latency fix is pending and the
-  # latency will be re-measured). Placeholders until the benchmark results exist.
+  # E-F API latency (DESIGN 11 E-F): AWAITING THE PINNED RERUN. Plan: the regeneration job
+  # (sremu experiments/regenerate_paper_data.sh --collect-latency, after the transport fix, at
+  # C1) writes E-F/latency (MEAS, host recorded); then add the gen_results code for these four
+  # macros (latency.json: inproc send p50/p99, zmq round trip p50; numApiThroughputMsps = the
+  # ZMQ sustained rate, not the in-process one) and a "data plane" paragraph in Section VI.
+  # Do not type values; until then they stay placeholders and are not used in the text.
   - macro: numApiSendPfiftyUs
     kind: number
     description: "PENDING (AWS): in-process send/recv call latency p50, 1000-sample buffers"
@@ -965,14 +1040,14 @@ macros:
   # ------------------------------------------------------------------ case studies
   - macro: txtEBResult
     kind: text
-    description: "E-B headline phrase for the 0.5 ms guard slice of the arc run, which the abstract and the conclusion name next to it (RIS switches between packets; geometry modelled on the lab arrangement, SIM nominal; timed commands vs tick-based untimed semantics; gen_results checks over every row of the slice that on-time timed commands lose no packet and that the largest tick-based PER is the one of the two F9(b) cases)"
+    description: "E-B headline phrase (timed vs asap) for the 0.5 ms guard slice of the arc run, in the cases where a mistimed switch costs bits (the two F9(b) cases: LOS present at the pre-declared 15 dB sensitivity and LOS blocked at 25 dB), which the abstract names next to it (lockstep, in-process controller, modelled latency 0.2 ms + U[0, J]; geometry modelled on the lab arrangement, SIM nominal). gen_results checks the asap guard rule and the timed lead rule on every row of the two cases and that on-time timed commands lose no packet on every row of the slice"
     source: {type: experiment, id: "E-B-arc"}
-    max_chars: 89
+    max_chars: 156
   - macro: txtEAResult
     kind: text
     description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
     source: {type: experiment, id: "E-A"}
-    max_chars: 84
+    max_chars: 60
 
   # ================================================================== Sections V and VII
   # Filled by tools/gen_results.py from committed result files (study/experiment/test/
@@ -1333,21 +1408,73 @@ macros:
     description: "Decoy C2 detection rate with every geometric quantity known exactly"
     source: {type: study, id: "V-LAB-diagnostic"}
     max_chars: 4
+  # V-LAB lock facts: dataset facts from GitHub's server-side push log of the sremu repository
+  # (sweeps/results/V-LAB-provenance/sremu_activity_20261011T1426Z.json, data class PROVENANCE);
+  # tools/gen_results.py checks every value below against that file. No public deposit was
+  # made before unblinding (the text says so), so there is no deposit macro.
   - macro: txtLabLockCommit
     kind: text
-    description: "Commit that locked the V-LAB protocol hash (PENDING lead input; H-6)"
-    source: {type: study, id: "V-LAB-lock"}
-    max_chars: 12
+    description: "Emulator commit that holds the V-LAB protocol hash (lock commit)"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "101ee87"
+    max_chars: 7
   - macro: txtLabLockDate
     kind: text
-    description: "Date of that commit (PENDING lead input; H-6)"
-    source: {type: study, id: "V-LAB-lock"}
-    max_chars: 12
-  - macro: txtLabDepositDoi
+    description: "Time of GitHub's server-side record of the push of the lock commit"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "11 Oct 2026, 00:22:55 UTC"
+    max_chars: 25
+  - macro: txtLabCodeCommit
     kind: text
-    description: "DOI of the Zenodo/OSF deposit of the protocol (PENDING, human gate H-6)"
-    source: {type: study, id: "V-LAB-deposit"}
-    max_chars: 30
+    description: "Emulator commit of the V-LAB analysis code (the unblinded run records it, clean tree)"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "7a63287"
+    max_chars: 7
+  - macro: txtLabCodePushTime
+    kind: text
+    description: "Time of GitHub's record of the push of the analysis-code commit"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "00:30:30 UTC"
+    max_chars: 12
+  - macro: txtLabResultCommit
+    kind: text
+    description: "Emulator commit that holds the unblinded V-LAB result"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "2333b60"
+    max_chars: 7
+  - macro: txtLabResultPushTime
+    kind: text
+    description: "Time of GitHub's record of the push of the result commit"
+    source: {type: data, id: "V-LAB-provenance"}
+    value: "00:31:40 UTC"
+    max_chars: 12
+  - macro: txtLabRunTime
+    kind: text
+    description: "Start time of the unblinded V-LAB run (its run directory name)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 12
+  - macro: numLabSpearmanLo
+    kind: number
+    description: "Lower limit of the 95 % (Fieller) interval of the C2 Spearman rho"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabSpearmanHi
+    kind: number
+    description: "Upper limit of the 95 % (Fieller) interval of the C2 Spearman rho"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabDecoyDeltaMtwoDb
+    kind: number
+    description: "Median over the power-analysis decoys drawn from M2 (primary sigma_rep) of their median Delta RMSE; descriptive, outside the protocol's decision rules"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabDecoyDeltaMzeroDb
+    kind: number
+    description: "Median over the decoys drawn from M0 (primary sigma_rep) of their median Delta RMSE; descriptive"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
   - macro: numCfoSweepPoints
     kind: number
     description: "CFO values of the noise-free sweep"
@@ -2054,14 +2181,73 @@ macros:
     max_chars: 6
   - macro: numEaRatioPred
     kind: number
-    description: "Predicted ratio (wavelength ratio)"
+    description: "Predicted ratio (wavelength ratio), three decimals"
     source: {type: experiment, id: "E-A"}
     max_chars: 5
+  - macro: numEaHaOneLoS
+    kind: number
+    description: "Lower end of the range fixed for H-A1 before the sweep (read from paper/preregistration/E-A.md)"
+    unit: s
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 4
+  - macro: numEaHaOneHiS
+    kind: number
+    description: "Upper end of the range fixed for H-A1 before the sweep"
+    unit: s
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 4
+  - macro: numEaHaTwoLo
+    kind: number
+    description: "Lower end of the range fixed for H-A2 before the sweep"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 4
+  - macro: numEaHaTwoHi
+    kind: number
+    description: "Upper end of the range fixed for H-A2 before the sweep"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 4
+  - macro: txtEaPlanSha
+    kind: text
+    description: "First 8 hex digits of the SHA-256 of paper/preregistration/E-A.md with LF line ends (computed over the LF-normalized text, so the value does not depend on the checkout; the blob committed in 71fa3f3 stores CRLF line ends, whose raw SHA-256 begins 33dc0c6f; the text is otherwise identical)"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 8
+  - macro: txtEaPlanCommit
+    kind: text
+    description: "Paper-repository commit that added the E-A plan file (authors' git log; pushed 2026-10-10 21:52 UTC, AFTER the E-A sweep of 17:47-18:14 UTC, so the text does not use it as a precedence timestamp; not machine-checked by the pipeline, which runs no git)"
+    source: {type: data, id: "E-A-plan"}
+    value: "71fa3f3"
+    max_chars: 7
+  - macro: numEaRatioOffsetPct
+    kind: number
+    description: "Offset of the measured tau_half ratio above the wavelength ratio, in percent"
+    unit: "%"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 2
   - macro: numEaTauOverLambdaV
     kind: number
-    description: "tau_half / (lambda / v) at the lower carrier"
+    description: "tau_half / (lambda / v) at the lower carrier, three decimals"
     source: {type: experiment, id: "E-A"}
     max_chars: 5
+  - macro: numEaTauOverLambdaVTwo
+    kind: number
+    description: "tau_half / (lambda / v) at the higher carrier, three decimals"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numClarkeFieldHalf
+    kind: number
+    description: "Delay, in units of lambda/v, at which the field autocorrelation J0(2 pi v tau / lambda) of Clarke's isotropic model falls to one half (ANALYTIC; computed by tools/gen_results.py)"
+    source: {type: experiment, id: "E-A-Clarke-reference"}
+    max_chars: 4
+  - macro: numClarkeEnvHalf
+    kind: number
+    description: "Delay, in units of lambda/v, at which the envelope correlation (about J0 squared) of Clarke's model falls to one half (ANALYTIC; computed)"
+    source: {type: experiment, id: "E-A-Clarke-reference"}
+    max_chars: 4
+  - macro: numCoherenceRuleLambdaV
+    kind: number
+    description: "The rule-of-thumb coherence time sqrt(9/(16 pi))/f_D in units of lambda/v (ANALYTIC; computed)"
+    source: {type: experiment, id: "E-A-Clarke-reference"}
+    max_chars: 4
   - macro: numEaTauBanditMinS
     kind: number
     description: "Smallest tau_SUI of the H-A3 comparison"
@@ -2099,7 +2285,13 @@ macros:
     max_chars: 6
   - macro: numVaOneTolDb
     kind: number
-    description: "VA-1 acceptance limit (pre-registered)"
+    description: "VA-1 acceptance limit (pre-specified)"
+    unit: "dB"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 5
+  - macro: numVaOneLeftMaxDb
+    kind: number
+    description: "Max |IQ - engine batch path (run_batch: each 5 ms step evaluated at its start)| over the VA-1 rows; the start-of-step bias that Amendment 1 of the E-A plan removed (E-A uses the midpoint)"
     unit: "dB"
     source: {type: experiment, id: "VA-1"}
     max_chars: 5
@@ -2218,6 +2410,149 @@ macros:
     unit: "dB"
     source: {type: experiment, id: "E-D"}
     max_chars: 5
+
+  # ------------------------------------------------------------------ E-E (GNU Radio through the raw REQ/REP mode)
+  # Section VII 'Integration with external IQ applications' and Table tab:ee, filled by
+  # tools/gen_results.py (ee_values) from sweeps/results/E-E (results: SIM-sremu; the current files
+  # come from a laptop WSL2 run of a working tree and are repeated at the pinned commit) and
+  # sweeps/results/E-E-laptop (laptop throughput, MEAS, frozen; the laptop range also counts the
+  # throughput runs of sweeps/results/E-E while E-E comes from the laptop). The AWS macros are filled only when
+  # sweeps/results/E-E comes from an AWS host; until then they stay placeholders.
+  - macro: txtEeGrVersion
+    kind: text
+    description: "GNU Radio version of the E-E peer (Ubuntu 24.04 package), as the modem recorded it"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 10
+  - macro: numEeSps
+    kind: number
+    description: "Samples per symbol of the GNU Radio DQPSK modem"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 2
+  - macro: numEeRateMsps
+    kind: number
+    description: "Sample rate of the E-E result runs"
+    unit: "MS/s"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeCells
+    kind: number
+    description: "Cells of the ideal 1-bit RIS of the E-E scene"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeFcGHz
+    kind: number
+    description: "Carrier frequency of the E-E scene"
+    unit: "GHz"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeDistM
+    kind: number
+    description: "Distance of the E-E transmitter and receiver from the RIS centre"
+    unit: "m"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 2
+  - macro: numEeWallDb
+    kind: number
+    description: "Loss of the partition on the direct path of the E-E scene"
+    unit: "dB"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 3
+  - macro: numEeStaticS
+    kind: number
+    description: "Virtual time of each static E-E run"
+    unit: "s"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeSegmentS
+    kind: number
+    description: "Virtual time per RIS configuration in the E-E switching run"
+    unit: "s"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeConfigs
+    kind: number
+    description: "Static RIS configurations of E-E (rows of Table tab:ee)"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 2
+  - macro: numEeAfMaxDiffDb
+    kind: number
+    description: "Max |gain relative to focusing - array-factor prediction| over the static configurations (rounded up)"
+    unit: "dB"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeLossMinDb
+    kind: number
+    description: "Smallest implementation loss implied by the SER against coherent DQPSK theory, rows with >= 100 symbol errors and SER < 0.1"
+    unit: "dB"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 5
+  - macro: numEeLossMaxDb
+    kind: number
+    description: "Largest implementation loss of the same rows"
+    unit: "dB"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 5
+  - macro: numEeCpOffsetMax
+    kind: number
+    description: "Largest |ML change point - k_applied| over the three switches of the switching run"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 3
+  - macro: numEeRuns
+    kind: number
+    description: "Runs per E-E repetition (static configurations + switching run)"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 3
+  - macro: txtEeReps
+    kind: text
+    description: "Independent E-E repetitions compared bitwise (in words)"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 5
+  - macro: txtEeLaptopCpu
+    kind: text
+    description: "CPU of the laptop of the E-E throughput runs (WSL2)"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 24
+  - macro: txtEeLaptopSweeps
+    kind: text
+    description: "Number of laptop throughput sweeps (single run per rate each), in words"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 5
+  - macro: numEeLaptopRtfLoMin
+    kind: number
+    description: "Smallest lockstep RTF of the GNU Radio + sremu loop on the laptop at the E-E rate over the sweeps (median of 0.1 s windows after the first)"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeLaptopRtfLoMax
+    kind: number
+    description: "Largest laptop RTF at the E-E rate over the sweeps"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeLaptopRtfHiMin
+    kind: number
+    description: "Smallest laptop RTF at the highest throughput rate over the sweeps"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeLaptopRtfHiMax
+    kind: number
+    description: "Largest laptop RTF at the highest throughput rate over the sweeps"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: numEeLaptopRateHiMsps
+    kind: number
+    description: "Highest throughput rate of the laptop sweeps"
+    unit: "MS/s"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 5
+  - macro: numEeAwsRtfLo
+    kind: number
+    description: "PENDING (AWS pinned regeneration): lockstep RTF of the GNU Radio + sremu loop at the E-E rate on the AWS host"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 4
+  - macro: txtEeAwsInstance
+    kind: text
+    description: "PENDING (AWS pinned regeneration): AWS instance type of the E-E run"
+    source: {type: experiment, id: "E-E"}
+    max_chars: 14
 
   # ------------------------------------------------------------------ sremu code (read at build time)
   # Constants and defaults of the committed sremu code, read from the installed (final build:

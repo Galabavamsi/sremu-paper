@@ -3,8 +3,8 @@
 % definition macro); figures F3-F6 come from figures/src/*.py. Honesty rules (DESIGN 1.6):
 % verification != validation; MATLAB is code-to-code; digitized data are DIG; the lab study
 % is a "consistency check under geometric uncertainty" (no lab geometry supplied, H-1).
-% D24: no comparison with any earlier simulator; the tick-truncation pitfall is a generic
-% design lesson only.
+% The tick-truncation pitfall is a generic design lesson. Tang et al. (V-C) is reported as
+% accuracy, measured minus emulator (author decision D-12 of 2026-10-11, reversing DESIGN 10.8).
 \section{Verification and Validation}\label{sec:vv}
 
 This section keeps two questions apart. \emph{Verification} asks whether the code computes
@@ -26,7 +26,8 @@ tier adds \numStatIds{} identifiers and the code-to-code tier \numGoldenIds{}. I
 identifier: they test fallback behaviour for modules that are now present, and a
 processor-affinity call that this platform lacks. An identifier counts as passed when at
 least one of its implementation tests passed and none failed or was skipped. Tests of the
-rendering path count once per backend.
+rendering path count once per backend. Appendix~\ref{app:provenance} lists the commit and
+date of this record with those of every other result; the record does not state its host.
 
 The analytic tier spans the whole emulator. On the physics side it checks the Friis
 equation, the equality of K1 with three published forms, image theory, the $N^2$ law of a
@@ -64,12 +65,22 @@ why the default switches to patches for larger cells.
 \claim{C-ABS-TANG}Tang et al.\ measured the path loss of millimeter-wave surfaces in an
 anechoic chamber and fitted a model to it~\cite{Tang2022mmWave}. We extracted the model curves
 and the measured points of their Fig.~10 from the vector graphics of the
-paper~\cite{Tang2022mmWave} (DIG) and ran the same links through the emulator with the default cell model and the published link
-budget. The kernel reproduces Tang et al.'s published model curves within
-\numTangCurveMaxDevDb~dB. Their digitized chamber measurements lie \numTangMeasBiasDb~dB
-(SD \numTangMeasSdDb~dB, $n=\numTangMeasN$) above that published model
-(Fig.~\ref{fig:F3}(b)). The second statement describes their data and their model. It is not
-an accuracy figure of \sremu{}.
+paper~\cite{Tang2022mmWave} (DIG) and ran the same \numTangMeasN{} links, four geometries
+of nine receiver distances, through the emulator with the default cell model, the reported
+unit-cell state and the reported link budget (REPORTED). The emulator reproduces the
+published model curves within \numTangCurveMaxDevDb~dB; since K1 equals that model for one
+point per cell (Section~\ref{sec:model-k1}), this checks the implementation. Against the
+chamber measurements, the emulator's received power is low by \numTangMeasBiasDb~dB on
+average (SD \numTangMeasSdDb~dB, RMSE \numTangMeasRmseDb~dB, largest difference
+\numTangMeasMaxDb~dB; per geometry \numTangPanelBiasMinDb--\numTangPanelBiasMaxDb~dB,
+Appendix~\ref{app:tang}), and every measured point lies above it (Fig.~\ref{fig:F3}(b)). This is
+the accuracy of the model class that the emulator shares with Tang et al.'s model, against
+third-party measurements of one \numTangFcGHz~GHz surface in one state and in specular
+geometries: it tests the absolute level and its dependence on distance and angle, not
+reconfiguration or near-field structure. The points are digitized, the source states no
+measurement uncertainty, their distances were snapped to the nominal grid of receiver
+distances, and the points of one geometry are not independent. We do not fit
+away the constant part of the error, which may come from the reported link-budget terms.
 
 \begin{figure*}[t]
 \centering
@@ -92,7 +103,7 @@ the precision a model needs. The distance from the transmitter to the tiles, the
 of the tiles, the cell type and the measurement positions are known within ranges, the
 positions to about $\pm\numLabPriorPosCm$~cm.
 
-\claim{C-LAB-PREREG}We therefore wrote the analysis plan before any comparison of model and
+\claim{C-LAB-PRESPEC}We therefore wrote the analysis plan before any comparison of model and
 data. The plan draws \numLabDraws{} geometries from a prior over the unknown quantities and
 predicts the map with five models, each with a fitted offset: line of sight alone (M0),
 a log-distance fit that also fits its exponent (M0n), a uniform mirror (M1), the laboratory configuration (M2) and M2 with
@@ -104,11 +115,19 @@ gains, C1 tests the level of the held-out rings, not absolute power. C2 (the RIS
 explains spatial structure) needs a median RMSE gain of M2 over M0 of at least
 \numLabCtwoMinDb~dB, a paired-bootstrap interval that excludes zero in at least
 \numLabCtwoCiFracPct~\% of the draws, and a Spearman correlation of at least
-\numLabCtwoRhoMin{} whose interval excludes zero. C3 is C2 with M1 in place of M0. The protocol files were hashed and the
-hash committed in the code; the loader refuses the measured data unless the hash matches.
-The analysis plan was fixed and time-stamped (commit \txtLabLockCommit, \txtLabLockDate;
-deposited at \txtLabDepositDoi) after descriptive inspection of the digitized map but before
-any model--data comparison.
+\numLabCtwoRhoMin{} whose interval excludes zero. C3 is C2 with M1 in place of M0. The protocol
+files were hashed, and the data loader refuses the measured map unless the hash matches. The
+hash was committed to the emulator repository (commit \txtLabLockCommit) and pushed to its
+private GitHub repository on \txtLabLockDate, after a descriptive inspection of the
+digitized map but before any comparison of model and data. GitHub's server-side push log,
+exported later, records that push (Appendix~\ref{app:provenance}). Two commits followed: an
+option of the run script that names the columns of the measured file, and a test change
+(commit \txtLabCodeCommit), pushed at \txtLabCodePushTime; the unblinded run started at
+\txtLabRunTime{} from a clean tree of that commit, and its result
+(commit \txtLabResultCommit) was pushed at \txtLabResultPushTime. No public registry deposit
+(Zenodo or OSF) was made before unblinding; the plan, its hash and the lock records can still
+be deposited, as a retrospective record. The plan is therefore pre-specified and hash-locked,
+with a timestamp from the repository host, not from a public registry.
 
 \claim{C-LAB-POWER}The plan also asked whether the test could succeed at all. Before
 unblinding, it ran the full analysis on \numLabDecoys{} synthetic maps drawn from M2 itself.
@@ -123,8 +142,11 @@ median test RMSE is \numLabRmseMzero~dB for M0, \numLabRmseMzeroN~dB for M0n and
 \numLabRmseMtwoLo--\numLabRmseMtwoHi~dB), with a
 median M2 bias of \numLabBiasMtwo~dB. The RMSE gain of M2 over M0 is \numLabDeltaRmse~dB, its
 bootstrap interval excludes zero in \numLabCiExcludesPct~\% of the draws, and the Spearman
-correlation is \numLabSpearman{}. C1, C2 and C3 all fail, also in every pre-set sensitivity
-run. The digitized map does not discriminate the RIS model from LOS-only at the available
+correlation is \numLabSpearman{} (\numCiPct\,\% interval \numLabSpearmanLo{} to
+\numLabSpearmanHi). C1, C2 and C3 all fail, also in every pre-set sensitivity run. For
+orientation, outside the decision rules: the observed RMSE gain lies close to the median
+of the decoys drawn from M2 (\numLabDecoyDeltaMtwoDb~dB) and above that of decoys drawn from
+M0 (\numLabDecoyDeltaMzeroDb~dB). The digitized map does not discriminate the RIS model from LOS-only at the available
 geometric knowledge. The comparison is underpowered, so this outcome is not evidence for or
 against the model. One cell, pinned to the edge of the colour scale, has a residual of
 \numLabResidualOutlierDb~dB.
@@ -154,7 +176,7 @@ geometry.
 prediction of the laboratory-configuration model M2 over the prior draws. (c) Measured minus
 predicted; the colour scale is clipped and the outlier is marked. Test-ring cells are
 outlined. (d) RMSE gain of M2 over the line-of-sight model M0 on the test rings over the prior
-draws, with the pre-registered C2 threshold. Data classes: DIG (measured), SIM-sremu
+draws, with the pre-specified C2 threshold. Data classes: DIG (measured), SIM-sremu
 (predictions), ASSUMED (geometry and reflection-coefficient prior, decision rules).}{fig:F4}
 \end{figure*}
 

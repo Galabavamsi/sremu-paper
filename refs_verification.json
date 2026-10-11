@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-10T07:37:30Z",
+ "generated_utc": "2026-10-11T16:01:31Z",
  "bib": "refs.bib",
  "title_min_ratio": 0.9,
  "results": {
@@ -1246,6 +1246,99 @@
     {
      "method": "http",
      "http": 200
+    }
+   ],
+   "verdict": "match"
+  },
+  "Clarke1968": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "A Statistical Theory of Mobile-Radio Reception",
+     "year": 1968,
+     "container": "Bell System Technical Journal",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Jakes1974": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Microwave Mobile Communications",
+     "year": 1994,
+     "container": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Papazafeiropoulos2023Aging": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Impact of Channel Aging on Reconfigurable Intelligent Surface Aided Massive MIMO Systems With Statistical CSI",
+     "year": 2023,
+     "container": "IEEE Transactions on Vehicular Technology",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Zhang2022OutdatedCSI": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Reconfigurable Intelligent Surfaces With Outdated Channel State Information: Centralized vs. Distributed Deployments",
+     "year": 2022,
+     "container": "IEEE Transactions on Communications",
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Yashvanth2026Random": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Practical RIS Gain without the Pain: Randomization and Opportunistic Scheduling in 5G NR",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2602.12437v1",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Kiran2026Random": {
+   "checks": [
+    {
+     "method": "arxiv",
+     "http": 200,
+     "title": "Practical RIS Gain without the Pain via Randomization and Opportunistic Scheduling in 5G NR Wireless Systems: Theory and Experiments",
+     "year": 2026,
+     "version_id": "http://arxiv.org/abs/2605.19787v2",
+     "linked_doi": null,
+     "title_ratio": 1.0
+    }
+   ],
+   "verdict": "match"
+  },
+  "Rossanese2022WiNTECH": {
+   "checks": [
+    {
+     "method": "crossref",
+     "http": 200,
+     "title": "Designing, building, and characterizing RF switch-based reconfigurable intelligent surfaces",
+     "year": 2022,
+     "container": "Proceedings of the 16th ACM Workshop on Wireless Network Testbeds, Experimental evaluation &amp; CHaracterization",
+     "title_ratio": 1.0
     }
    ],
    "verdict": "match"

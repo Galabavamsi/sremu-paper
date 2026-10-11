@@ -1,0 +1,187 @@
+{
+ "run": "switching",
+ "kind": "switching",
+ "rate_sps": 1000000.0,
+ "sps": 4,
+ "n_run": 1650000,
+ "rx_samples": 1650000,
+ "complete": true,
+ "decisions": 412460,
+ "gnuradio_version": "3.10.9.2",
+ "sha256": {
+  "rx_iq": "95a191e5fd3fee65a0cee1d14992ccda585d3ac91ac44a753a3b2295d95b4586",
+  "costas": "93ee557bf138bfb7a7892715fc5311248dc87d5cc76284da19ffcffc9224a91d",
+  "decisions": "4ea5b5b23480539d1daade50ffb4199e93ef4439b08fee6cc057fa595ef1a3d6"
+ },
+ "commands": [
+  {
+   "cmd_id": "ris-schedule-3",
+   "t_applied": "2/5",
+   "k_req": 400000,
+   "k_applied": 400000,
+   "lateness_samples": 0,
+   "status": "applied"
+  },
+  {
+   "cmd_id": "ris-schedule-4",
+   "t_applied": "4/5",
+   "k_req": 800000,
+   "k_applied": 800000,
+   "lateness_samples": 0,
+   "status": "applied"
+  },
+  {
+   "cmd_id": "ris-schedule-5",
+   "t_applied": "6/5",
+   "k_req": 1200000,
+   "k_applied": 1200000,
+   "lateness_samples": 0,
+   "status": "applied"
+  }
+ ],
+ "counters_nonzero": {},
+ "manifest": {
+  "mode": "lockstep",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "nondeterministic_inputs": false,
+  "page_size": {
+   "grrx.rx0": 512
+  },
+  "git_commit": null,
+  "git_dirty": null,
+  "wall_s": 2.410049952999998,
+  "sremu_version": "0.1.0.dev0",
+  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+ },
+ "rx_equals_emulator_record": true,
+ "emulator_record_samples": 1650000,
+ "segments": [
+  {
+   "config": "uniform",
+   "k0": 0,
+   "k1": 400000,
+   "symbols": 92500,
+   "symbol_errors": 4,
+   "ser": 4.324324324324324e-05,
+   "bler_uncoded_200bit": 0.002162162162162162,
+   "blocks": 925,
+   "worst_20ms_ser": 0.0004,
+   "mer_db": 13.067907563974043,
+   "ls_gain_db": -9.636222371739864,
+   "ls_phase_deg": -114.678665576792,
+   "ls_snr_db": 7.301809187066715,
+   "ls_delay_samples": 0,
+   "es_n0_db": 13.322409100346338,
+   "ser_theory": 7.11272215025982e-06,
+   "implied_loss_db": null,
+   "lag": 524275,
+   "corr_peak": 1.0,
+   "af_pred_db": -8.323217586916435
+  },
+  {
+   "config": "focus",
+   "k0": 400000,
+   "k1": 800000,
+   "symbols": 90000,
+   "symbol_errors": 0,
+   "ser": 0.0,
+   "bler_uncoded_200bit": 0.0,
+   "blocks": 900,
+   "worst_20ms_ser": 0.0,
+   "mer_db": 20.834791123899738,
+   "ls_gain_db": -1.5862335199444586,
+   "ls_phase_deg": -98.25744913612688,
+   "ls_snr_db": 15.35466496638347,
+   "ls_delay_samples": 0,
+   "es_n0_db": 21.375264879663096,
+   "ser_theory": 0.0,
+   "implied_loss_db": null,
+   "lag": 524275,
+   "corr_peak": 1.0000000000000004,
+   "af_pred_db": 0.0
+  },
+  {
+   "config": "random",
+   "k0": 800000,
+   "k1": 1200000,
+   "symbols": 90000,
+   "symbol_errors": 52528,
+   "ser": 0.5836444444444444,
+   "bler_uncoded_200bit": 1.0,
+   "blocks": 900,
+   "worst_20ms_ser": 0.618,
+   "mer_db": 4.190630325243348,
+   "ls_gain_db": -24.35747409522901,
+   "ls_phase_deg": -176.49620904759237,
+   "ls_snr_db": -7.41935135955314,
+   "ls_delay_samples": 0,
+   "es_n0_db": -1.3987514462735158,
+   "ser_theory": 0.5331836293725942,
+   "implied_loss_db": 1.249682626616531,
+   "lag": 524275,
+   "corr_peak": 0.3434677699375896,
+   "af_pred_db": -23.714951583859033
+  },
+  {
+   "config": "focus",
+   "k0": 1200000,
+   "k1": 1650000,
+   "symbols": 104960,
+   "symbol_errors": 0,
+   "ser": 0.0,
+   "bler_uncoded_200bit": 0.0,
+   "blocks": 1049,
+   "worst_20ms_ser": 0.0,
+   "mer_db": 20.838498745780292,
+   "ls_gain_db": -1.583985728749767,
+   "ls_phase_deg": -98.26266409476035,
+   "ls_snr_db": 15.331185857081074,
+   "ls_delay_samples": 0,
+   "es_n0_db": 21.3517857703607,
+   "ser_theory": 0.0,
+   "implied_loss_db": null,
+   "lag": 524275,
+   "corr_peak": 1.0000000000000004,
+   "af_pred_db": 0.0
+  }
+ ],
+ "change_points": [
+  {
+   "k_applied": 400000,
+   "ml_change_point": 400000,
+   "offset": 0,
+   "window": [
+    380000,
+    420000
+   ]
+  },
+  {
+   "k_applied": 800000,
+   "ml_change_point": 800000,
+   "offset": 0,
+   "window": [
+    780000,
+    820000
+   ]
+  },
+  {
+   "k_applied": 1200000,
+   "ml_change_point": 1200000,
+   "offset": 0,
+   "window": [
+    1180000,
+    1220000
+   ]
+  }
+ ],
+ "throughput": {
+  "sremu_rtf_median": 1.462194978085499,
+  "sremu_rtf_windows": 15,
+  "gr_rtf_steady": 1.3469475890985325,
+  "gr_wall_first_to_last_s": 1.3559999999999999
+ },
+ "ok": true
+}

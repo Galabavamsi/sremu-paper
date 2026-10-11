@@ -1,0 +1,28 @@
+% Back matter (BLOCKER-3, MINOR-11). Code and data availability: conditional statement; the
+% macros come from availability.yaml through tools/gen_results.py and stay placeholders while
+% PENDING, so a final build refuses until the release is approved (human gate H-2) and the
+% fields are filled. When the code is public, the first sentence becomes "... are available at
+% \txtRepoUrl{} under the \txtLicence{} licence (archived at \txtArchiveDoi)".
+% Acknowledgment: laboratory, funding and the generative-AI disclosure (IEEE: in the
+% acknowledgments; arXiv: report significant use) are a planned-content stub that the authors
+% write; a final build refuses it.
+\section*{Code and Data Availability}
+\claim{C-OPEN}The emulator \sremu{} and the pipeline that builds this paper from recorded
+results (sweep specifications, result files with their provenance, figure scripts) will be
+released under an open-source licence (\txtLicence) at \txtRepoUrl{} once all authors and
+IIT Bhilai have approved the release; until then they are available from the corresponding
+author on request. The exact versions used here, the analysis plans of
+Sections~\ref{sec:vv-lab} and~\ref{sec:cases-ea} and their lock records will be archived
+with the release (\txtArchiveDoi). The authors' own data files will be released as well
+(\txtDataDoi); the digitized laboratory map of Section~\ref{sec:vv-lab} will be released if
+the laboratory permits it. Third-party values, such as the curves and points
+of~\cite{Tang2022mmWave}, were digitized from published figures and are kept in the emulator
+repository with their source and digitization record.
+
+\section*{Acknowledgment}
+\claim{C-ACK}The benchmark and case-study runs marked AWS in
+Appendix~\ref{app:provenance} used Amazon Web Services EC2 instances. \sremustub{Pending author
+input: the laboratory where the measurement of Section~\ref{sec:vv-lab} was collected, any
+funding, and the use of generative AI (which assistant, for which sections and code, and how
+its output was checked; IEEE requires this disclosure in the acknowledgments, and arXiv asks
+authors to report significant use of text-generating tools).}

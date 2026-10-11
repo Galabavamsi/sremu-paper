@@ -1,0 +1,74 @@
+{
+ "kind": "static",
+ "configs": [
+  "focusq:0.25"
+ ],
+ "duration_s": "0.3",
+ "segment_s": null,
+ "rate_sps": 1000000.0,
+ "n_run": 300000,
+ "tx_stream": "gr.tx0",
+ "rx_stream": "grrx.rx0",
+ "serve_cmd": [
+  "/home/galaba_vamsi/venv_sremu_invB/bin/python",
+  "-m",
+  "sremu.commands.serve",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep2/static_focusq0.25/scene.yaml",
+  "--serve",
+  "tcp://127.0.0.1:45271",
+  "--pub",
+  "none",
+  "--tx",
+  "tcp://127.0.0.1:34201",
+  "--out",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep2/static_focusq0.25/rec",
+  "--exit-when-done",
+  "--raw-peer",
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:37887,rx_port=tcp://127.0.0.1:40109,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+ ],
+ "gr_cmd": [
+  "/usr/bin/python3",
+  "/home/galaba_vamsi/trackG/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
+  "--tx",
+  "tcp://127.0.0.1:37887",
+  "--rx",
+  "tcp://127.0.0.1:40109",
+  "--n",
+  "300000",
+  "--out",
+  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep2/static_focusq0.25/gr",
+  "--timeout",
+  "900.0"
+ ],
+ "request_items": null,
+ "af_pred_db": {
+  "focusq:0.25": -6.195668486274803
+ },
+ "python": "3.12.3",
+ "numpy": "2.5.4",
+ "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+ "t_start_unix": 1791735875.3021388,
+ "commands_sent": [
+  {
+   "config": "focusq:0.25",
+   "at": "0",
+   "reply": {
+    "v": 1,
+    "id": "ris-schedule-3",
+    "ok": true,
+    "status": "scheduled",
+    "seq": 1,
+    "t_req": "0",
+    "k_req": {
+     "grrx.rx0": 0
+    },
+    "t_wall_recv_ns": 186670409655
+   }
+  }
+ ],
+ "t_resume_wall_s": 0.9215154329999962,
+ "gr_exit": 0,
+ "t_gr_done_wall_s": 4.748212591999987,
+ "serve_exit": 0,
+ "wall_s": 4.748551789999993
+}

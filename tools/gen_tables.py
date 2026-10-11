@@ -3,18 +3,17 @@
 Table III (API mapping): rows and the sremu / UHD columns come from
 ``sremu.api.metadata.table_iii()`` (the ``Table III:`` block of that module's docstring,
 DESIGN 8.1: "generated from api/metadata.py docstrings"); the third column maps each row to
-the compatibility wrappers of ``sremu.compat`` (DESIGN 8.2). That column is written
+the convenience wrappers of ``sremu.compat`` (DESIGN 8.2). That column is written
 here, keyed by the leading call of each sremu cell, and checked against the code:
 
 * every key must match exactly one row of ``table_iii()`` and every row must have a key, so
   a renamed or added API call stops the build;
 * ``Send_to_sim`` / ``Receive_from_sim`` must have the parameters the table names, and the
-  deprecated v1 spellings ``send_to_simulator`` / ``recieve_from_simulator`` must exist.
+  alternative spellings ``send_to_simulator`` / ``recieve_from_simulator`` must exist.
 
 The srsRAN and GNU Radio columns of ``table_iii()`` are not printed (lead instruction for the
 paper: sremu vs UHD vs the wrappers); the raw REQ/REP mode is described in the text instead.
-DESIGN D24: the printed caption names no earlier simulator; the internal names below (V1_*)
-are kept for the tests that exercise them.
+The printed caption calls them convenience wrappers for simple scripts.
 
 Usage: python tools/gen_tables.py [--out DIR]   (writes DIR/table3_api.tex; ASCII only)
 """
@@ -28,8 +27,8 @@ from pathlib import Path
 
 PAPER_ROOT = Path(__file__).resolve().parents[1]
 
-# v1 / ANTS wrapper column, keyed by the leading call of the sremu cell (sremu.compat).
-V1_COLUMN: dict[str, str] = {
+# Wrapper column, keyed by the leading call of the sremu cell (sremu.compat).
+WRAPPER_COLUMN: dict[str, str] = {
     "TxStreamer.send": "``Send_to_sim(node, samples, fc, fs, gain, start_time)``: one burst "
                        "(start and end of burst)",
     "RxStreamer.recv": "``Receive_from_sim(node, nsamps, fc, fs, gain, start_time)``: "
@@ -44,11 +43,11 @@ V1_COLUMN: dict[str, str] = {
     "TxStreamer.idle_until": "none",
     "Device.ris": "none",
 }
-V1_SIGNATURES: dict[str, tuple[str, ...]] = {
+WRAPPER_SIGNATURES: dict[str, tuple[str, ...]] = {
     "Send_to_sim": ("node", "samples", "fc", "fs", "gain", "start_time"),
     "Receive_from_sim": ("node", "nsamps", "fc", "fs", "gain", "start_time"),
 }
-V1_DEPRECATED = ("send_to_simulator", "recieve_from_simulator")
+WRAPPER_ALIASES = ("send_to_simulator", "recieve_from_simulator")
 
 _TEX = {"\\": r"\textbackslash{}", "_": r"\_", "%": r"\%", "&": r"\&", "#": r"\#",
         "$": r"\$", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}", "^": r"\textasciicircum{}",
@@ -84,11 +83,11 @@ def row_key(sremu_cell: str) -> str:
 def check_compat() -> None:
     import sremu.compat as compat
 
-    for fn, want in V1_SIGNATURES.items():
+    for fn, want in WRAPPER_SIGNATURES.items():
         params = tuple(inspect.signature(getattr(compat, fn)).parameters)[: len(want)]
         if params != want:
             raise ValueError(f"sremu.compat.{fn} parameters {params} != {want}")
-    for fn in V1_DEPRECATED:
+    for fn in WRAPPER_ALIASES:
         if not callable(getattr(compat, fn, None)):
             raise ValueError(f"sremu.compat.{fn} is missing")
 
@@ -100,10 +99,11 @@ def table3_rows() -> list[tuple[str, str, str]]:
     keys = [row_key(r.sremu) for r in rows]
     if len(set(keys)) != len(keys):
         raise ValueError(f"duplicate Table III keys {keys}")
-    if set(keys) != set(V1_COLUMN):
-        raise ValueError(f"v1 column keys {sorted(V1_COLUMN)} != Table III rows {sorted(keys)}")
+    if set(keys) != set(WRAPPER_COLUMN):
+        raise ValueError(f"wrapper column keys {sorted(WRAPPER_COLUMN)} != Table III rows "
+                         f"{sorted(keys)}")
     check_compat()
-    return [(r.sremu, r.uhd, V1_COLUMN[k]) for r, k in zip(rows, keys, strict=True)]
+    return [(r.sremu, r.uhd, WRAPPER_COLUMN[k]) for r, k in zip(rows, keys, strict=True)]
 
 
 def render_table3(rows: list[tuple[str, str, str]]) -> str:
@@ -112,7 +112,7 @@ def render_table3(rows: list[tuple[str, str, str]]) -> str:
         "% sremu.compat signatures. Do not edit; edit the sremu docstring or gen_tables.py.",
         r"\begin{table*}[t]",
         r"\caption{Python interface of \sremu{} (UHD-shaped, not UHD-compatible), its UHD"
-        r" counterpart~\cite{UHDManual} and the two one-call compatibility wrappers for simple"
+        r" counterpart~\cite{UHDManual} and the two one-call convenience wrappers for simple"
         r" scripts. Generated from the \texttt{sremu.api.metadata} docstring.}",
         r"\label{tab:api}",
         r"\centering",

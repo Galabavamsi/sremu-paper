@@ -4,6 +4,7 @@ and every sentence or table row that uses it must cite them (check_claims.py rul
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import pytest
@@ -52,7 +53,8 @@ def test_paper_reported_macros_use_the_reported_type() -> None:
     """The third-party numbers of Section II and Table I are `reported`, not `data`."""
     spec = load_numbers_spec(PAPER_ROOT / "numbers.yaml")
     rep = {m.macro for m in spec if m.source_type == "reported"}
-    named = {m.macro for m in spec if m.macro.startswith(("numRep", "txtRep"))}
+    # numRep*/txtRep* followed by a capital letter (txtRepoUrl is an availability macro)
+    named = {m.macro for m in spec if re.match(r"(num|txt)Rep[A-Z]", m.macro)}
     assert named
     assert named == rep
     assert all(m.cite and m.value is not None for m in spec if m.source_type == "reported")
