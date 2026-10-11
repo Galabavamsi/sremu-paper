@@ -95,7 +95,7 @@ def test_author_block_order_and_corresponding_author() -> None:
     assert names == ["Galaba Vamsi", "Shubhika Mishra", "Anurag Jaiswal", "Smriti Kumar",
                      "Mansi Ambwani", "Arzad Alam Kherani"]
     thanks = [" ".join(t.split()) for t in re.findall(r"\\thanks\{([^{}]*)\}", _main())]
-    assert "Corresponding author: Galaba Vamsi (e-mail: galabavamsi@iitbhilai.ac.in)." in thanks
+    assert "Corresponding author: Galaba Vamsi (e-mail: galabav@iitbhilai.ac.in)." in thanks
     assert any("Department of Electrical Engineering, Indian Institute of Technology Bhilai"
                in t for t in thanks)
     # the claim-checker drops \thanks, so affiliation text never trips the number rule
