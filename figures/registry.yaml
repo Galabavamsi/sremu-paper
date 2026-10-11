@@ -122,29 +122,44 @@ figures:
     owner: WP12
     status: ready
   F7:
-    title: "(a) Lockstep RTF vs links (log-log) for N and feature sets with the RTF = 1 line; (b) aggregate MS/s; laptop vs c6i"
+    title: "Lockstep scalability on one AWS c7i.48xlarge (B2): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates"
     width: double
     source: script
-    script: null
+    script: figures/src/f07_lockstep.py
     sweep: null
-    inputs: []
+    inputs:
+      - figures/src/figcommon.py
+      - sweeps/results/bench/B2/run/points.csv
+      - sweeps/results/bench/B2/run/isolation.csv
+      - sweeps/results/bench/B2/run/summary.json
+      - sweeps/results/bench/B2/meta.json
     evidence: [B2]
     data_classes: [MEAS]
     outputs: [figures/out/F7.pdf, figures/data/F7.csv, figures/data/F7.meta.json]
-    owner: WP11
-    status: pending
+    owner: WP12
+    status: ready
+    notes: "B2 run 20261011T084048Z_b2_server (c7i.48xlarge, sremu 309c633; the job's dirty flag only meant unshipped local edits, the bundle equals git archive 309c633); 11 points packed, isolation check as open markers; aggregate throughput recomputed as n_rx x f_s x RTF (the run's aggregate column counts pre-restart samples); F5 (native ZMQ) not drawn, pending rerun after the transport fix"
   F8:
-    title: "Paced mode: miss rate vs slack; page-latency CCDF with stage breakdown; command lateness"
+    title: "Paced mode and control loop on AWS c7i.8xlarge (B3, B4): (a) deadline-miss rate vs slack = page-latency CCDF, headless runs and served runs with commands; (b) largest Sustainable link count per configuration; (c) visible command latency vs command rate, timed and asap; (d) late timed commands and pages missing the 1 ms deadline vs command rate"
     width: double
     source: script
-    script: null
+    script: figures/src/f08_paced.py
     sweep: null
-    inputs: []
+    inputs:
+      - figures/src/figcommon.py
+      - sweeps/results/bench/B3/run/points.csv
+      - sweeps/results/bench/B3/run/latency_hist.json
+      - sweeps/results/bench/B3/run/summary.json
+      - sweeps/results/bench/B3/meta.json
+      - sweeps/results/bench/B4/paced/paced.json
+      - sweeps/results/bench/B4/paced/summary.json
+      - sweeps/results/bench/B4/meta.json
     evidence: [B3, B4]
     data_classes: [MEAS]
     outputs: [figures/out/F8.pdf, figures/data/F8.csv, figures/data/F8.meta.json]
-    owner: WP11
-    status: pending
+    owner: WP12
+    status: ready
+    notes: "B3 run 20261011T074437Z_b3_server and B4 run 20261011T074639Z_b4_paced (c7i.8xlarge, sremu 309c633 clean); no stage breakdown was recorded, so (a) shows total page latency; zero slack is missed by construction (computation starts at the release)"
   F9:
     title: "E-B: (a), (c) per-symbol EVM around an intra-frame switch; (b), (d) PER vs latency jitter for timed (2 ms lead) / asap / tick-based command semantics at a 0.5 ms guard. Top row (primary): geometry modelled on the lab arrangement (SIM, nominal geometry), LOS present at Es/N0 15 dB and LOS blocked at 25 dB; bottom row (supporting): lab-like SIM geometry, LOS blocked"
     width: double

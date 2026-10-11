@@ -1,0 +1,121 @@
+{
+  "paced": {
+    "timed@10Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 10.015075976929834,
+      "wall_over_virtual_max": 1.003428241907692,
+      "lateness_p99_samples_median": 1688.0,
+      "lateness_max_samples_worst": 7813,
+      "visible_latency_p99_us_worst": 5597.6630000000005,
+      "late_applied_total": 638,
+      "sustainable_reps": 0,
+      "commands_total": 1785,
+      "commands_per_virtual_s_median": 9.916666666666666,
+      "engine_bound_reps": 0
+    },
+    "asap@10Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 10.015055502352782,
+      "wall_over_virtual_max": 1.0033447300615377,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 5154.321,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 1785,
+      "commands_per_virtual_s_median": 9.916666666666666,
+      "engine_bound_reps": 0
+    },
+    "timed@100Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 100.01068645350868,
+      "wall_over_virtual_max": 1.0035044706000007,
+      "lateness_p99_samples_median": 3090.0,
+      "lateness_max_samples_worst": 6485,
+      "visible_latency_p99_us_worst": 5519.125,
+      "late_applied_total": 14676,
+      "sustainable_reps": 0,
+      "commands_total": 17850,
+      "commands_per_virtual_s_median": 99.16666666666667,
+      "engine_bound_reps": 0
+    },
+    "asap@100Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 100.01096735463481,
+      "wall_over_virtual_max": 1.0034581652615386,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 5046.52,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 17850,
+      "commands_per_virtual_s_median": 99.16666666666667,
+      "engine_bound_reps": 0
+    },
+    "timed@1000Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 295.2049440479387,
+      "wall_over_virtual_max": 1.114004915892306,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 9859730.519,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 53266,
+      "commands_per_virtual_s_median": 292.45,
+      "engine_bound_reps": 3
+    },
+    "asap@1000Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 427.56555979875276,
+      "wall_over_virtual_max": 1.1799377763230776,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 5988.198,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 69759,
+      "commands_per_virtual_s_median": 385.31666666666666,
+      "engine_bound_reps": 3
+    },
+    "timed@10000Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 290.8524170265557,
+      "wall_over_virtual_max": 1.0814108305384602,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 7285539.366,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 51781,
+      "commands_per_virtual_s_median": 287.1666666666667,
+      "engine_bound_reps": 3
+    },
+    "asap@10000Hz": {
+      "reps": 3,
+      "achieved_rate_hz_median": 420.12203745221296,
+      "wall_over_virtual_max": 1.1809592612769217,
+      "lateness_p99_samples_median": 0.0,
+      "lateness_max_samples_worst": 0,
+      "visible_latency_p99_us_worst": 6265.532,
+      "late_applied_total": 0,
+      "sustainable_reps": 0,
+      "commands_total": 70230,
+      "commands_per_virtual_s_median": 397.55,
+      "engine_bound_reps": 3
+    }
+  },
+  "paced_all_reps_sustainable": false,
+  "paced_dropped": 0,
+  "paced_failed": [],
+  "protocol_12_3": {
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "reps": 3,
+    "min_pages_per_rep": 117189,
+    "meets_12_3": true
+  },
+  "suite": "b4",
+  "part": "paced",
+  "interrupted": null
+}

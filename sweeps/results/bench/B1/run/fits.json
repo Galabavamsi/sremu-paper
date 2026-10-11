@@ -1,0 +1,244 @@
+{
+  "snapshot": {
+    "numba_cpu": {
+      "exponent_alpha_vs_RQ": 0.7645709068895633,
+      "loglog_fit_points": 20,
+      "a_s": 2.0897568947212815e-05,
+      "b_s_per_element": 9.144744450950386e-09,
+      "b_ns_per_element": 9.144744450950386,
+      "rel_rms_linear_fit": 0.5021890537164632,
+      "RQ_range": [
+        40.0,
+        16777216.0
+      ]
+    },
+    "numpy_ref": {
+      "exponent_alpha_vs_RQ": 1.0569546949885504,
+      "loglog_fit_points": 17,
+      "a_s": 3.850989057922718e-05,
+      "b_s_per_element": 7.0062259501059e-08,
+      "b_ns_per_element": 70.062259501059,
+      "rel_rms_linear_fit": 0.24599117795364933,
+      "RQ_range": [
+        40.0,
+        1048576.0
+      ]
+    }
+  },
+  "render": {
+    "numba_cpu": {
+      "c0": -13.568883107199653,
+      "exp_L": 0.8440515224608961,
+      "exp_P": 0.1590982962269376,
+      "exp_T_eff": 0.07103474044573066,
+      "exp_S": 0.4116531508815829,
+      "rms_log_residual": 0.1769712934373556,
+      "n_points": 96,
+      "ns_per_L_T_S_median": 0.9501060247421265,
+      "ns_per_L_P_S_median": 3.8695735931396484,
+      "exp_LTS_combined": 0.5008998844939258,
+      "exp_LTS_combined_P": 16,
+      "fd_only": {
+        "c0": -13.761564885690984,
+        "exp_L": 0.8474942301511699,
+        "exp_P": 0.14345422108430766,
+        "exp_T_FD": 0.13621249654120948,
+        "exp_S": 0.414141068134526,
+        "rms_log_residual": 0.14861205455414514,
+        "n_points": 72
+      }
+    },
+    "numpy_ref": {
+      "c0": -14.348933936762466,
+      "exp_L": 0.9687358301761413,
+      "exp_P": 0.3971448862206368,
+      "exp_T_eff": 0.49433123215614505,
+      "exp_S": 0.7027699780580638,
+      "rms_log_residual": 0.27260525216787235,
+      "n_points": 68,
+      "ns_per_L_T_S_median": 24.766586303710938,
+      "ns_per_L_P_S_median": 82.24935913085938,
+      "exp_LTS_combined": 0.49598381104502115,
+      "exp_LTS_combined_P": 16,
+      "fd_only": {
+        "c0": -14.632184761726284,
+        "exp_L": 0.9780965845483862,
+        "exp_P": 0.27562104114739805,
+        "exp_T_FD": 0.6067560562994662,
+        "exp_S": 0.7142416813403875,
+        "rms_log_residual": 0.12290138552459329,
+        "n_points": 51
+      }
+    }
+  },
+  "gemv_C": {
+    "numba_cpu": {
+      "a_s": 1.4412629269848734e-06,
+      "b_s_per_unit": 2.053779718985797e-09,
+      "loglog_slope": 0.7872496456490081,
+      "x": "RN"
+    },
+    "numpy_ref": {
+      "a_s": 5.863020641521798e-06,
+      "b_s_per_unit": 7.677855427758449e-09,
+      "loglog_slope": 0.786920843830859,
+      "x": "RN"
+    }
+  },
+  "gemv_B": {
+    "numba_cpu": {
+      "a_s": 1.6895861822614487e-06,
+      "b_s_per_unit": 2.1166370407277786e-09,
+      "loglog_slope": 0.774133472732977,
+      "x": "RN"
+    },
+    "numpy_ref": {
+      "a_s": 9.083086125758387e-06,
+      "b_s_per_unit": 1.080789797460023e-08,
+      "loglog_slope": 0.8284923067390941,
+      "x": "RN"
+    }
+  },
+  "noise": {
+    "numba_cpu": {
+      "a_s": 1.2584590173757646e-05,
+      "b_s_per_unit": 2.691694769167896e-09,
+      "loglog_slope": 0.6486485111287258,
+      "x": "n"
+    },
+    "numpy_ref": {
+      "a_s": 7.189949714515254e-05,
+      "b_s_per_unit": 7.194567209617505e-08,
+      "loglog_slope": 0.886619173069062,
+      "x": "n"
+    }
+  },
+  "min_based": {
+    "note": "same fits on per-call minima (engine: best repetition): a lower bound that intermittent background load cannot inflate; the median-based fits are primary",
+    "snapshot": {
+      "numba_cpu": {
+        "exponent_alpha_vs_RQ": 0.7668617494235032,
+        "loglog_fit_points": 20,
+        "a_s": 1.9763032438775143e-05,
+        "b_s_per_element": 8.972718714665345e-09,
+        "b_ns_per_element": 8.972718714665344,
+        "rel_rms_linear_fit": 0.5013315470748709,
+        "RQ_range": [
+          40.0,
+          16777216.0
+        ]
+      },
+      "numpy_ref": {
+        "exponent_alpha_vs_RQ": 1.0623237381258104,
+        "loglog_fit_points": 17,
+        "a_s": 3.6431088237499295e-05,
+        "b_s_per_element": 6.872695778897933e-08,
+        "b_ns_per_element": 68.72695778897933,
+        "rel_rms_linear_fit": 0.24988612060892992,
+        "RQ_range": [
+          40.0,
+          1048576.0
+        ]
+      }
+    },
+    "render": {
+      "numba_cpu": {
+        "c0": -13.712129387922744,
+        "exp_L": 0.8543573843400851,
+        "exp_P": 0.15861231140179488,
+        "exp_T_eff": 0.06808823503245015,
+        "exp_S": 0.42180353388930025,
+        "rms_log_residual": 0.18111143944882355,
+        "n_points": 96,
+        "ns_per_L_T_S_median": 0.9296536445617677,
+        "ns_per_L_P_S_median": 3.7269411087036137,
+        "exp_LTS_combined": 0.5088924137625591,
+        "exp_LTS_combined_P": 16,
+        "fd_only": {
+          "c0": -13.908049742798209,
+          "exp_L": 0.8580310252869491,
+          "exp_P": 0.14368658915946958,
+          "exp_T_FD": 0.13335825390267558,
+          "exp_S": 0.42448766425955625,
+          "rms_log_residual": 0.15179018129615093,
+          "n_points": 72
+        }
+      },
+      "numpy_ref": {
+        "c0": -14.387988784602898,
+        "exp_L": 0.9761331593590943,
+        "exp_P": 0.40037645600161564,
+        "exp_T_eff": 0.5007878923089735,
+        "exp_S": 0.7003955704375782,
+        "rms_log_residual": 0.2777768740194728,
+        "n_points": 68,
+        "ns_per_L_T_S_median": 24.1427001953125,
+        "ns_per_L_P_S_median": 80.62947463989258,
+        "exp_LTS_combined": 0.4965120066513466,
+        "exp_LTS_combined_P": 16,
+        "fd_only": {
+          "c0": -14.680305058842768,
+          "exp_L": 0.9847426719214156,
+          "exp_P": 0.276618160035689,
+          "exp_T_FD": 0.6120770991511946,
+          "exp_S": 0.7140926347975178,
+          "rms_log_residual": 0.12498024563424354,
+          "n_points": 51
+        }
+      }
+    },
+    "noise": {
+      "numba_cpu": {
+        "a_s": 1.194529660812098e-05,
+        "b_s_per_unit": 2.6509662289916544e-09,
+        "loglog_slope": 0.6541097667766452,
+        "x": "n"
+      },
+      "numpy_ref": {
+        "a_s": 6.92779595577978e-05,
+        "b_s_per_unit": 7.000155017208487e-08,
+        "loglog_slope": 0.8913401499547683,
+        "x": "n"
+      }
+    },
+    "engine_cost_model": {
+      "model": "T_page = a + b*(R*Q)*P/(f_s*T_u) + c*L*T_FD*G*P + d*n_rx*P + e*n_paths*P",
+      "note": "G = mean FD groups per link; T_FD = taps (1 for integer delay); n_paths = LOS + RIS tile paths over all links; static scenes have no snapshot term",
+      "a_s": 6.497305145847469e-05,
+      "b_ns_per_row_point": 375.9507770243413,
+      "c_ns_per_link_tap_sample": 0.18822493816334412,
+      "d_ns_per_rx_sample": 0.0,
+      "e_ns_per_path_sample": 10.94531779898419,
+      "rel_rms": 0.3891919923407157,
+      "rel_max_abs": 0.6887946024066874,
+      "n_points": 20
+    }
+  },
+  "engine_cost_model": {
+    "model": "T_page = a + b*(R*Q)*P/(f_s*T_u) + c*L*T_FD*G*P + d*n_rx*P + e*n_paths*P",
+    "note": "G = mean FD groups per link; T_FD = taps (1 for integer delay); n_paths = LOS + RIS tile paths over all links; static scenes have no snapshot term",
+    "a_s": 6.540018125289963e-05,
+    "b_ns_per_row_point": 377.21630684128445,
+    "c_ns_per_link_tap_sample": 0.1949534573633442,
+    "d_ns_per_rx_sample": 0.0,
+    "e_ns_per_path_sample": 10.820691814613102,
+    "rel_rms": 0.3879751171730487,
+    "rel_max_abs": 0.6889065038799121,
+    "n_points": 20
+  },
+  "engine_cost_model_extended": {
+    "model": "section 7.4 form + f*L + g*P/(f_s*T_u) + h*L*P/(f_s*T_u) (diagnostic; the section 7.4 fit is the reported one)",
+    "a_s": 3.8269748395501484e-05,
+    "b_ns_per_row_point": 5.13559379103423,
+    "c_ns_per_link_tap_sample": 0.0,
+    "d_ns_per_rx_sample": 27.460056923003506,
+    "e_ns_per_path_sample": 3.627785844116983,
+    "f_us_per_link_page": 20.03520065650367,
+    "g_us_per_snapshot": 607.7587747651378,
+    "h_us_per_link_snapshot": 496.06896150487074,
+    "rel_rms": 0.12365998130183159,
+    "rel_max_abs": 0.27217283940179327,
+    "n_points": 20,
+    "n_coefficients": 8
+  }
+}

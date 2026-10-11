@@ -1,0 +1,19 @@
+{
+  "suite": "b1",
+  "sha256": "2eb54fa37b0171030fbbfe0dc5c1f894fbb35b7ebc4d5c14ebbe91f24ccb1d5e",
+  "section_quiet": {
+    "wait_s": 0.0,
+    "max_busy": 0.3
+  },
+  "quick": false,
+  "skip_engine": false,
+  "numba_threads": 16,
+  "kernels": [
+    "snapshot_k1",
+    "gemv_C",
+    "gemv_B",
+    "scene_snapshot",
+    "render",
+    "noise"
+  ]
+}

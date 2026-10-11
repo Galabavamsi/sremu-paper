@@ -1,0 +1,77 @@
+{
+  "suite": "b3",
+  "plan": "server",
+  "protocol_12_3": {
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "reps": 3,
+    "min_pages_per_rep": 46876,
+    "meets_12_3": true
+  },
+  "largest_sustainable": {
+    "fs1e6_page5e-4_N240_R1_F1": {
+      "L": 1,
+      "median_of_median_latency_us": 80.999,
+      "worst_p99_latency_us": 371.999,
+      "worst_miss_rate_1ms": 0.00015359803394516551,
+      "min_pages_per_rep": 117189,
+      "reps": 3
+    },
+    "fs1e6_page1e-3_N240_R1_F1": {
+      "L": 8,
+      "median_of_median_latency_us": 399.999,
+      "worst_p99_latency_us": 903.999,
+      "worst_miss_rate_1ms": 0.0001706630258554484,
+      "min_pages_per_rep": 58595,
+      "reps": 3
+    },
+    "fs1e6_page2.5e-4_N240_R1_F1": {
+      "L": 2,
+      "median_of_median_latency_us": 110.999,
+      "worst_p99_latency_us": 575.999,
+      "worst_miss_rate_1ms": 0.0007765300201385808,
+      "min_pages_per_rep": 234376,
+      "reps": 3
+    },
+    "fs5.76e6_page5e-4_N240_R1_F1": {
+      "L": 2,
+      "median_of_median_latency_us": 185.999,
+      "worst_p99_latency_us": 475.999,
+      "worst_miss_rate_1ms": 0.0,
+      "min_pages_per_rep": 168751,
+      "reps": 3
+    },
+    "fs23.04e6_page1e-3_N240_R1_F1": {
+      "L": 1,
+      "median_of_median_latency_us": 615.999,
+      "worst_p99_latency_us": 679.999,
+      "worst_miss_rate_1ms": 0.0004266616099364748,
+      "min_pages_per_rep": 84376,
+      "reps": 3
+    },
+    "fs1e6_page5e-4_N4096_R1_F1": {
+      "L": 1,
+      "median_of_median_latency_us": 79.999,
+      "worst_p99_latency_us": 371.999,
+      "worst_miss_rate_1ms": 0.00028159639556613676,
+      "min_pages_per_rep": 117189,
+      "reps": 3
+    },
+    "fs1e6_page5e-4_N240_R1_F3": null,
+    "fs1e6_page5e-4_N240_R4_F1": {
+      "L": 4,
+      "median_of_median_latency_us": 197.999,
+      "worst_p99_latency_us": 679.999,
+      "worst_miss_rate_1ms": 9.386546518871225e-05,
+      "min_pages_per_rep": 117189,
+      "reps": 3
+    },
+    "fs1e5_page1e-3_N240_R1_F1": null
+  },
+  "points": 54,
+  "points_failed": 0,
+  "failed": [],
+  "dropped": 49,
+  "wall_s": 3548.606008194,
+  "interrupted": null
+}

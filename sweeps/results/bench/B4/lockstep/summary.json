@@ -1,0 +1,31 @@
+{
+  "lockstep_points": 12,
+  "lockstep_all_lateness_zero": true,
+  "lockstep_check_ok": false,
+  "lockstep_check_problems": {
+    "inproc@10000Hz": [
+      "statuses other than applied: {'scheduled': 1}"
+    ],
+    "remote@10000Hz": [
+      "statuses other than applied: {'scheduled': 1}"
+    ]
+  },
+  "lockstep_commands_total": 22800,
+  "lockstep_rtf": {
+    "none@10Hz": 2.704253363606954,
+    "inproc@10Hz": 2.3810314949756437,
+    "remote@10Hz": 1.4671218732404385,
+    "none@100Hz": 2.6810977395963898,
+    "inproc@100Hz": 1.9167207986155976,
+    "remote@100Hz": 0.4132851728071266,
+    "none@1000Hz": 2.713601634308916,
+    "inproc@1000Hz": 0.5789841880367781,
+    "remote@1000Hz": 0.1275446232644211,
+    "none@10000Hz": 2.708573887987474,
+    "inproc@10000Hz": 0.07774757667287657,
+    "remote@10000Hz": 0.020855517459788205
+  },
+  "suite": "b4",
+  "part": "lockstep",
+  "interrupted": null
+}

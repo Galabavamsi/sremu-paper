@@ -1,0 +1,42 @@
+{
+ "job": "b3",
+ "deadline_min": 180.0,
+ "cpu_plan": {
+  "engine": "1-8,17-24",
+  "clients": "9-10,25-26",
+  "reserved": "0,16"
+ },
+ "results": [
+  {
+   "step": "b3",
+   "cmd": [
+    "taskset",
+    "-c",
+    "1-8,17-24",
+    "/opt/venv/bin/python",
+    "-m",
+    "bench.b3_paced",
+    "--plan",
+    "server",
+    "--budget-min",
+    "172",
+    "--out",
+    "/opt/job/out/runs"
+   ],
+   "cpus": "1-8,17-24",
+   "env": {
+    "NUMBA_NUM_THREADS": "16",
+    "SREMU_CPUS": "1-8,17-24",
+    "SREMU_CLIENT_CPUS": "9-10,25-26"
+   },
+   "budget_min": 171.999999666214,
+   "timeout_s": 10709.99997997284,
+   "rc": 0,
+   "wall_s": 3552.2062520980835,
+   "log": "b3.log",
+   "interrupted_by": null
+  }
+ ],
+ "wall_s": 3552.20672249794,
+ "rc": 0
+}

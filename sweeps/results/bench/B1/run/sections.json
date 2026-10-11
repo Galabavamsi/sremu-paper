@@ -1,0 +1,104 @@
+{
+  "snapshot_k1": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.0006822250000056,
+      "last_busy_fraction": 7.81188969611749e-05,
+      "met": true
+    },
+    "background_busy": {
+      "n": 9,
+      "mean": 0.00010752595119801377,
+      "max": 0.0005043850091562413
+    },
+    "wall_s": 16.84341173,
+    "rows": 57
+  },
+  "gemv": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.000623077,
+      "last_busy_fraction": 2.603895427559629e-05,
+      "met": true
+    },
+    "background_busy": {
+      "n": 5,
+      "mean": 2.772082262563749e-05,
+      "max": 0.00011118498648611834
+    },
+    "wall_s": 8.799055525,
+    "rows": 60
+  },
+  "scene_snapshot": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.00068296500001,
+      "last_busy_fraction": 2.603624244948969e-05,
+      "met": true
+    },
+    "background_busy": {
+      "n": 4,
+      "mean": 1.5619513852740822e-05,
+      "max": 3.469420845039501e-05
+    },
+    "wall_s": 5.671502668000002,
+    "rows": 14
+  },
+  "render": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.0005716000000007,
+      "last_busy_fraction": 0.0,
+      "met": true
+    },
+    "background_busy": {
+      "n": 28,
+      "mean": 3.4073225274209914e-05,
+      "max": 0.00011661477493664363
+    },
+    "wall_s": 53.723640176,
+    "rows": 200
+  },
+  "noise": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.0005809509999892,
+      "last_busy_fraction": 0.0001301913813305559,
+      "met": true
+    },
+    "background_busy": {
+      "n": 2,
+      "mean": 2.3874137529668327e-05,
+      "max": 3.351050332861538e-05
+    },
+    "wall_s": 2.5096459739999943,
+    "rows": 10
+  },
+  "engine_cost_points": {
+    "gate": {
+      "max_busy": 0.3,
+      "window_s": 2.0,
+      "timeout_s": 0.0,
+      "waited_s": 2.000528287999998,
+      "last_busy_fraction": 0.0,
+      "met": true
+    },
+    "background_busy": {
+      "n": 39,
+      "mean": 4.064037454603049e-05,
+      "max": 0.00043610816199324276
+    },
+    "wall_s": 75.34847334600002,
+    "rows": 20
+  }
+}

@@ -1,19 +1,229 @@
-% Section VI -- Wall-clock behaviour and scalability (SKELETON; numbers from B1-B6 only).
+% Section VI -- Wall-clock behaviour and scalability (WP12 draft, stage C; DESIGN 12).
+% Every number is a macro of numbers.yaml filled by tools/gen_results.py (via
+% tools/bench_results.py) from the committed benchmark results in
+% paper/sweeps/results/bench/{B1,B2,B3,B4,B6} (byte copies of the AWS and laptop runs; MEAS;
+% provenance in each meta.json; analysis in research/analysis/bench_findings.md). No number is
+% compared across instance types or with the laptop (B3 and B4: two instances of one type,
+% stated where they are compared). F5 (native ZMQ transport) results are pending a rerun after a
+% transport fix: their macros stay placeholders. B2 aggregate throughput is recomputed as
+% n_rx x f_s x RTF (the run's aggregate column counts samples from before the metric restart).
 \section{Wall-Clock Behaviour and Scalability}\label{sec:wallclock}
 
-\sremustub{Definitions of lockstep and paced operation, RTF (minimum over streams),
-aggregate throughput, utilization, page latency, deadline misses, command latency and
-Sustainable, as in DESIGN section 12.1; paced numbers from Linux hosts; no cross-machine
-speed-ups.}
+\claim{C-WC-DEFS}Lockstep runs advance virtual time as fast as the inputs and the host allow
+and never drop a sample; paced runs release page $j$ of a rate group at the wall time $R_j$ of
+Section~\ref{sec:design-time}. The metrics are defined as follows. The real-time
+factor (RTF) is the virtual time advanced, taken as the minimum over the received streams of
+samples produced divided by the sample rate, per unit of wall time; a run with RTF${}\geq1$
+keeps up with the wall clock. Aggregate throughput is the number of received samples, summed
+over streams, per second of wall time. The latency of a paced page is the time from $R_j$ to
+its delivery, and the page misses its deadline at slack $s$ when this latency exceeds $s$, so
+the miss rate at slack $s$ is the complementary distribution of the page latency at $s$.
+Because a page is computed from its release on, every page misses a deadline of zero slack. A
+configuration is \emph{Sustainable} when, over at least \numSustainMinDurationS~s after a
+warm-up of \numSustainWarmupS~s, fewer than a fraction \numSustainMissRate{} of its pages miss
+the deadline at \numSustainSlackMs~ms slack, no input sample arrives late and no output page
+overflows. The visible latency of a command is the wall time from its receipt at the emulator
+to the delivery of the page that holds its switch sample; its lateness is the distance in
+samples between the requested and the applied switch sample.
+
+\claim{C-WC-HOSTS}Table~\ref{tab:platforms} lists the hosts. The lockstep benchmarks (B1,
+B2) ran on an AWS \txtHostServer{} instance and the paced and control-loop benchmarks (B3,
+B4) on two AWS \txtHostPaced{} instances, with the engine pinned to \numPacedEngineCpus{}
+logical CPUs and the rest of the host idle apart from the B4 command client; the cross-tool
+context (B6) comes from a laptop. All AWS runs used one emulator commit. B2 packed up to \numBtwoSlots{} points onto the server at a time, each
+pinned to \numBtwoSlotCpus{} logical CPUs of whole cores in one NUMA node. A B3 point runs up
+to \numBthreeReps{} repetitions of \numBthreeMeasureS~s, each with at least
+\numBthreeMinPages{} pages, and counts as Sustainable when every repetition is; an
+unsustainable repetition ends the point. The paced runs of B3 are headless: the transmit
+streams are generated in the emulator process and the received pages stay there, so client
+and transport costs are excluded. The benchmark scenes have one
+carrier, line-of-sight and single-bounce surface paths, and a non-zero surface path on every
+link; they load the engine and carry no physical result. A link is a transmitter--receiver
+pair, so a scene with $L$ links has $n_{\mathrm{tx}}n_{\mathrm{rx}}=L$; for example,
+\numBtwoMaxLinks{} links are \numBtwoLimTx{} transmitters and \numBtwoLimRx{} receivers.
+
+\input{generated/tables/table7_platforms}
+
+\subsection{Lockstep scaling}
+\claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran:
+\numBtwoOk{} completed, \numBtwoBelowFloor{} of the heaviest mobility points fell below the
+pilot floor and were not measured, and \numBtwoFailed{} failed. Every failure was a point
+with the native ZMQ data plane (feature set F5): three receive time-outs caused by a transport
+stall that is being corrected, and one benchmark error on a point below the floor. F5 is
+therefore left out of Fig.~\ref{fig:F7}, and its RTF at the base point (\numBtwoFfiveRtf)
+awaits the rerun. One
+link at \numBtwoBaseMsps~MS/s through one surface of \numBtwoBaseN{} elements, with a static
+geometry and thermal noise (F1), runs at RTF \numBtwoBaseRtf. In static scenes the element
+count barely matters: from $N=\numBtwoNmin$ to \numBtwoNmax{} the single-link RTF stays within
+\numBtwoNspreadPct~\%, because the geometry snapshot is computed once
+(Fig.~\ref{fig:F7}(a)). With mobility (F3) the snapshot is recomputed on the automatic
+snapshot grid and $N$ matters: the single-link RTF falls from \numBtwoFthreeRtfSmall{} at
+$N=\numBtwoNmin$ to \numBtwoFthreeRtfLarge{} at $N=\numBtwoNmax$. A static scene keeps
+RTF${}\geq1$ up to \numBtwoMaxLinks{} links at \numBtwoBaseMsps~MS/s for every $N$, and a single
+link keeps up at \numBtwoTopMsps~MS/s (RTF \numBtwoTopRtf). At one link, the cumulative feature
+sets of Fig.~\ref{fig:F7}(b) reach RTF \numBtwoRtfFzero{} without noise (F0),
+\numBtwoBaseRtf{} with noise, \numBtwoRtfFtwo{} with oscillator impairments (F2),
+\numBtwoRtfFthree{} with mobility (F3) and \numBtwoRtfFfour{} with recording (F4). With noise
+(F1), aggregate throughput peaks at \numBtwoAggMaxMsps~MS/s, with \numBtwoAggMaxRx{} receivers at
+\numBtwoAggMaxRate~MS/s and an RTF below one (Fig.~\ref{fig:F7}(c)).
+
+\claim{C-WC-ISOLATION}Concurrent points share the last-level cache, memory bandwidth and the
+power budget of the host. Rerun alone, the \numBtwoIsoPoints{} reference points of the
+isolation check were up to \numBtwoIsoMaxPct~\% faster (ratio \numBtwoIsoMin--\numBtwoIsoMax),
+so the packed values in Fig.~\ref{fig:F7} are conservative. The link limit lies within this
+margin: at \numBtwoLsixteen{} links the packed RTF is \numBtwoLsixteenMin--\numBtwoLsixteenMax{}
+over $N$, while the same base configuration measured alone in B1 reached \numBoneLsixteenRtf.
+We therefore state the limit as \numBtwoMaxLinks{} links packed and between \numBtwoMaxLinks{}
+and \numBtwoLsixteen{} links alone.
+
 \begin{figure*}[t]
 \centering
-\sremufigure{F7}{\textwidth}{(a) Lockstep RTF versus number of links for several element
-counts and feature sets. (b) Aggregate throughput (MEAS).}{fig:F7}
+\sremufigure{F7}{\textwidth}{Lockstep scaling on one AWS \txtHostServer{} instance (B2;
+MEAS), up to \numBtwoSlots{} points running concurrently. (a) RTF versus the number of links $L$ at
+\numBtwoBaseMsps~MS/s with one surface, for every element count $N$, static (F1, solid) and
+with mobility (F3, dashed); open markers: isolation reference points run alone; dotted:
+$\mathrm{RTF}=1$. (b) RTF versus $L$ for the cumulative feature sets F0--F4 at
+$N=\numBtwoBaseN$. (c) Aggregate received throughput, $n_{\mathrm{rx}}f_s\,\mathrm{RTF}$ with
+$n_{\mathrm{rx}}$ receivers among the $L$ links, for four sample rates. Feature set F5 (native
+ZMQ transport) is pending a rerun.}{fig:F7}
 \end{figure*}
+
+\subsection{Paced operation}
+\claim{C-WC-PACED}Fig.~\ref{fig:F8}(b) gives the largest Sustainable configuration of each B3
+series. At \numBtwoBaseMsps~MS/s with one surface of \numBtwoBaseN{} elements and noise, the
+emulator sustains \numBthreeOneLinks{} links with pages of \numBthreeOnePageUs~$\mu$s, with a
+worst p99 page latency of \numBthreeOnePninetynineUs~$\mu$s and a worst miss rate of
+\numBthreeOneMiss{} at \numSustainSlackMs~ms slack. With pages of \numBthreeHalfPageUs~$\mu$s it
+sustains one link (p99 \numBthreeHalfPninetynineUs~$\mu$s), and with pages of
+\numBthreeQuarterPageUs~$\mu$s \numBthreeQuarterLinks{} links. A single link at
+\numBthreeTopMsps~MS/s (pages of \numBthreeTopPageUs~$\mu$s) is Sustainable with p99
+\numBthreeTopPninetynineUs~$\mu$s and miss rate \numBthreeTopMiss; at
+\numBthreeMidMsps~MS/s (pages of \numBthreeMidPageUs~$\mu$s) the limit is \numBthreeMidLinks{}
+links. With pages of \numBthreeHalfPageUs~$\mu$s, four surfaces sustain
+\numBthreeFourRisLinks{} links, more than one surface does, and $N=\numBthreeBigN$ one link:
+at such pages the limit is not set by the computation alone.
+
+\claim{C-WC-SHORTPAGES}At short pages the limit is set by rare stalls, not by the mean load.
+Two links with \numBthreeHalfPageUs~$\mu$s pages keep the engine busy for a median fraction
+\numBthreeTwoLinkUtil{} of each page, yet one of the three repetitions missed
+\numBthreeTwoLinkMissMax{} of the deadlines (the other two at most
+\numBthreeTwoLinkMissOther): a few stalls of up to \numBthreeStallMaxMs~ms each delay dozens of
+short pages. With mobility (F3), no configuration is Sustainable at
+\numBthreeHalfPageUs~$\mu$s pages; one link misses \numBthreeFthreeMissPct~\% of the deadlines.
+The geometry snapshot is recomputed every \numBthreeFthreeTuMs~ms, and the page that holds the
+recomputation takes up to \numBthreeFthreeUtilMs~ms (p99) although the mean load stays below
+the wall clock. The fraction of pages that hold a snapshot, \numBthreeFthreeSnapPct~\%, is close
+to the miss rate: the snapshot work is not spread over pages. At \numBthreeLowMsps~MS/s a page
+holds \numBthreeLowPage{} samples (\numBthreeLowPageMs~ms) and the engine works for
+\numBthreeLowUtilPct~\% of it (median), yet \numBthreeLowMissPages{} pages had latencies of
+\numSustainSlackMs~ms to \numBthreeLowMaxMs~ms. The resulting miss rate,
+\numBthreeLowMiss{}, misses the threshold in the single repetition run. These delays are not
+explained by per-page cost or by timer resolution, since the engine spins rather than
+sleeps before releases closer than \numPacedSpinMs~ms; the runs record no stage breakdown that
+would identify them.
+
 \begin{figure*}[t]
 \centering
-\sremufigure{F8}{\textwidth}{Paced mode: deadline-miss rate versus slack, page-latency
-CCDF with stage breakdown, and command lateness (MEAS).}{fig:F8}
+\sremufigure{F8}{\textwidth}{Paced operation and control loop on AWS \txtHostPaced{}
+instances (B3, B4; MEAS). (a) Deadline-miss rate versus slack, i.e.\ the complementary
+distribution of the page latency, pooled over the repetitions of headless points (solid:
+largest Sustainable point of a series; dashed: the unsustainable point that ended a series)
+and, as crosses, the reported percentiles of the served runs with \numBfourLinks{} links and
+\numBfourRateLowHz~commands/s; dotted: the \numSustainSlackMs~ms slack and the
+\numSustainMissRate{} threshold of the Sustainable rule. (b) Largest Sustainable number of links
+per configuration (page target; ``none'': not even one link). (c) Visible command latency
+versus requested command rate, timed (\numBfourLeadMs~ms lead) and asap: median of the
+per-repetition medians and worst p99. (d) Fraction of timed commands applied late and of pages
+missing the \numSustainSlackMs~ms deadline (lines: medians; markers: repetitions). Shaded: the
+engine limits the command rate.}{fig:F8}
 \end{figure*}
-\sremustub{Complexity fit of the cost model (DESIGN section 7.4); Table VII platforms and
-software versions; cross-tool context with stated scope caveats (B6).}
+
+\subsection{Control loop}
+\claim{C-WC-LOCKCMD}In lockstep, controllers issued \numBfourLockCommands{} commands at rates
+from \numBfourRateMinHz~Hz to \numBfourRateMaxKHz~kHz, in process and from a separate process
+over the control socket, and every lateness value is zero, as the barrier semantics require. At
+the highest rate the last command of a run switches after the end of the run and is never
+applied; the benchmark's original check counted it as a failure, and the corrected check,
+recomputed offline from the same records, passes. The loop costs wall time instead: at
+\numBfourRateMidHz~Hz and above, each in-process command (barrier, decision and configuration
+change) costs \numBfourCmdCostMinMs--\numBfourCmdCostMaxMs~ms of engine time, from the RTF with
+and without the loop, so at \numBfourRateMaxKHz~kHz the RTF drops from \numBfourRtfNone{} to
+\numBfourRtfInproc{} in process and to \numBfourRtfRemote{} over the socket.
+
+\claim{C-WC-PACEDCMD}In paced mode with asynchronous commands from an external process, served
+over the control socket (B4, \numBfourLinks{} links, pages of \numBfourPageMs~ms), no repetition
+was Sustainable (Fig.~\ref{fig:F8}(d)). At \numBfourRateLowHz~commands/s,
+\numBfourMissLowMinPct--\numBfourMissLowMaxPct~\% of the pages missed the
+\numSustainSlackMs~ms deadline, and at \numBfourRateMidHz~commands/s
+\numBfourMissMidMinPct--\numBfourMissMidMaxPct~\%; the same two links and pages without the
+control socket (B3, on another instance of the same type) missed at most
+\numBthreeTwoLinkMissMax{}, the marginal point discussed above. A configuration change costs
+the engine about as much time as the slack (see the lockstep cost above), so the page that
+holds it, and
+often the next, miss their deadlines; at the lower rate this explains a part of the misses,
+so the served process also misses deadlines between commands. An asap command became visible
+after a median of \numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms, with p99
+\numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms (Fig.~\ref{fig:F8}(c)) and rare
+outliers of up to \numBfourVisMaxMs~ms. The paced schedule accounts for at most one page of
+this, because an asap command takes effect at the
+earliest uncomputed sample and the page holding it is released at most one page later. The
+floor of about \numBfourVisMinMs~ms matches the engine's work on the page with the configuration
+change, and the spread is consistent with the hand-over between the control-socket thread and
+the paced loop, which share one Python interpreter. Most of the latency thus comes from the
+implementation (the configuration change and the serving thread), not from the paced schedule.
+Timed commands were sent with a lead of
+\numBfourLeadMs~ms over the client's
+estimate of virtual time, less than the command latency: \numBfourLateLow{} of
+\numBfourCmdsLow{} timed commands at \numBfourRateLowHz~commands/s (from
+\numBfourLateRepMinPct{} to \numBfourLateRepMaxPct~\% per repetition, depending on the error
+of the client's clock estimate) and \numBfourLateMid{} of \numBfourCmdsMid{} at
+\numBfourRateMidHz~commands/s arrived after their switch sample had been computed and were
+applied on arrival, as designed. A timed command arrives in time when its lead exceeds the
+command latency plus the error of the client's estimate of virtual time, and is late
+otherwise. At
+\numBfourRateHighKHz~kHz and above the engine is the bottleneck: the request-reply client
+achieved \numBfourAchievedMin--\numBfourAchievedMax{} commands/s, page latencies grew to as
+much as \numBfourPageLatMaxS~s, and a repetition took up to \numBfourLagPct~\% longer than its
+virtual duration because the engine caught up after the client had stopped. Timed commands then
+lay in the virtual future of the lagging engine, and some became visible as late as
+\numBfourTimedVisMaxS~s after their receipt.
+
+\subsection{Cost model}
+\claim{C-WC-COSTMODEL}B1 fits a page cost model, a constant plus linear terms
+for snapshots, fractional-delay filtering, receivers and paths, to \numBonePoints{} engine
+points measured on an otherwise idle server. The fit is indicative: its relative RMS error
+is \numBoneRelRmsPct~\% and its largest error \numBoneRelMaxPct~\%. The constant term,
+\numBoneFixedUs~$\mu$s per page, is \numBoneFixedSharePct~\% of the single-link page cost of
+\numBoneBasePageUs~$\mu$s, so short pages pay mostly fixed cost. The largest errors are
+underestimates of mobility points. There, a snapshot costs about \numBoneSnapMs~ms plus
+\numBoneSnapLinkMs~ms per link, with little dependence on the number of surface rows and
+quadrature points $RQ$ at the sizes of these points; a diagnostic fit with these terms reaches
+\numBoneExtRelRmsPct~\%, but with \numBoneExtCoeffs{} coefficients for \numBonePoints{} points it
+is not used for prediction, and at the larger element counts of B2 the snapshot cost does grow
+with $N$ (Fig.~\ref{fig:F7}(a)).
+The kernel itself scales as expected: the snapshot time grows as
+$(RQ)^{\numBoneSnapExpNumpy}$ on the NumPy reference backend for $RQ$ from \numBoneRqMin{} to
+\numBoneRqMax, and as $(RQ)^{\numBoneSnapExpNumba}$ with numba up to \numBoneRqMaxNumba, where
+fixed costs dominate the small sizes.
+
+\subsection{Cross-tool context}
+\claim{C-WC-CROSSTOOL}For context, B6 times one evaluation of the same near-field surface sum
+on the laptop for $N=\numBsixNmin$ to \numBsixNmax{} elements with \sremu{} and with MATLAB
+\txtBsixMatlab{}; where both compute the same model the results agree to
+\numBsixAgreeDb~dB. \sremu{} takes \numBsixFullMinUs--\numBsixFullMaxUs~$\mu$s for new
+positions and \numBsixCombMinUs--\numBsixCombMaxUs~$\mu$s for a configuration change with the
+geometry cached; a vectorized MATLAB script takes \numBsixVecMinUs--\numBsixVecMaxUs~$\mu$s, a
+per-element MATLAB loop \numBsixLoopMinUs--\numBsixLoopMaxUs~$\mu$s, and the toolbox's
+far-field \texttt{phased.RISReflector}, a different model,
+\numBsixRisrMinUs--\numBsixRisrMaxUs~$\mu$s. These numbers are not a ranking: the calls do
+different work (the \sremu{} times include Python dispatch and the line-of-sight path; the
+MATLAB times exclude its start-up), they come from one machine whose other processes were busy
+for \numBsixBusyPct~\% of the time during the \sremu{} timings, and a streaming emulator's cost
+is per page, not per call.
+
+\claim{C-WC-LIMITS}\emph{Limitations.} The numbers hold for the stated hosts, commit and
+benchmark scenes; another host needs its own runs. B3 and B4 used one instance each with
+\numBthreeReps{} repetitions per point. Paced timing was measured headless (B3) or with the
+control socket alone (B4); the native data plane (F5) awaits its rerun. Packed lockstep values
+are conservative by up to \numBtwoIsoMaxPct~\%, the cost model is indicative, and the laptop of
+B6 was not idle. Paced mode is soft real time and its results are measured, not guaranteed.

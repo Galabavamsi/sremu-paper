@@ -1,0 +1,140 @@
+{
+  "benchmark": "B3",
+  "description": "Paced sustainable links and page-latency histograms per series (f_s, page target, N, R, F), server plan of 9 series on a quiet Linux host; headless paced runs (in-process TX generators, RX kept in the engine, no transport); copied unchanged",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "paced timing on the stated Linux host (DESIGN 12.3: paced numbers only from Linux)"
+  },
+  "run": {
+    "run_id": "20261011T074437Z_b3_server",
+    "job": "20261011T074321Z_b3_e4cff7",
+    "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T074321Z_b3_e4cff7\\out\\runs\\20261011T074437Z_b3_server",
+    "t_start_utc": "2026-10-11T07:44:37.676390Z",
+    "t_end_utc": "2026-10-11T08:43:49.287267Z",
+    "wall_s": 3548.606008194,
+    "argv": [
+      "/opt/job/sremu/bench/b3_paced.py",
+      "--plan",
+      "server",
+      "--budget-min",
+      "172",
+      "--out",
+      "/opt/job/out/runs"
+    ],
+    "protocol": {
+      "warmup_s": 5.0,
+      "measure_s": 60.0,
+      "reps": 3,
+      "min_pages_per_rep": 46876,
+      "meets_12_3": true
+    },
+    "sustainable_rule": "miss rate < 1e-3 at 1 ms slack, late_samples == 0, overflow_pages == 0 over the measured window, every repetition (DESIGN 12.1)",
+    "series_without_sustainable_point": [
+      "fs1e6_page5e-4_N240_R1_F3",
+      "fs1e5_page1e-3_N240_R1_F1"
+    ],
+    "dropped_points": 49
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.8xlarge",
+    "instance_id": "i-0b68f352c3d082a30",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws, #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 32,
+      "threads_per_core": 2,
+      "cores_per_socket": 16,
+      "sockets": 1,
+      "numa_nodes": 1,
+      "l3": "105 MiB (1 instance)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       64765940 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "cpu_plan": {
+      "engine": "1-8,17-24",
+      "clients": "9-10,25-26",
+      "reserved": "0,16"
+    },
+    "pinning": {
+      "affinity": "1-8,17-24",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": "16",
+        "SREMU_CPUS": "1-8,17-24",
+        "SREMU_CLIENT_CPUS": "9-10,25-26",
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 1825.0,
+      "min": 0.0,
+      "max": 0.007755779475601909,
+      "mean": 0.0002219980082324873,
+      "p50": 0.00018338139625162508,
+      "p90": 0.00047520652950078235,
+      "p99": 0.00104061826627469
+    },
+    "job_results_tgz_sha256": "88d80a78f2f652f9474f2e7a0493459124a8d8c23c6c7acbe137f0e922fa0e47",
+    "launch": {
+      "run_id": "20261011T074321Z_b3_e4cff7",
+      "git_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "git_dirty": "0",
+      "instance_id": "i-0b68f352c3d082a30",
+      "type": "c7i.8xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "15d2af697663b0b7e898d2bb26aafef92a13269d8f077d3110615d78226c9a35",
+      "results_key": "sremu/jobs/20261011T074321Z_b3_e4cff7/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=0; bash bench/aws/job.sh b3 --deadline-min 180",
+      "maxmin": 210
+    }
+  },
+  "sremu": {
+    "commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+    "dirty_flag_recorded": false,
+    "commit_source": "SREMU_GIT_COMMIT / SREMU_GIT_DIRTY=0 exported by the AWS job script (host/job_stdout.txt); manifests record git_dirty false"
+  },
+  "caveats": [
+    "miss_rate_0ms = 1.0 everywhere by construction: a page is released for computation at R_j, so it can never be delivered by R_j + 0; the miss rate at slack s is the CCDF of the page latency (bench_findings.md a). Not an error.",
+    "Headless: client and transport costs are not included.",
+    "L is doubled while Sustainable; the first unsustainable repetition ends the point and the series (the 0.1 MS/s and F3 series have one repetition each).",
+    "Page latency histograms are log-linear (1 us resolution, 1/64 relative bucket width)."
+  ],
+  "used_by": [
+    "figures/src/f08_paced.py (F8 a, b)",
+    "tools/bench_results.py"
+  ],
+  "files": {
+    "host/job_host_prep.txt": "d1bda6de01940785f3b38c48139f72f105844047eb81d0fe4998b4fc5debe175",
+    "host/job_stdout.txt": "c8ff852a2b1f84d7d899758ea8c345f8066db5d4eae885df69c6a3e7a596bc86",
+    "host/lscpu.txt": "02fd2043eb0ab35f498ce55199ec586db7a63df0fbd7584117500ce1568c5bda",
+    "host/meminfo.txt": "454b9daae238cdd3d0a141ec5feeb545ae13f54c59b1d7ecbc27ce3a355d7002",
+    "host/status.json": "adebe80ab2245e848ac774ad2bce87bec9e09f77f235a9a4fa1e111c3fd23481",
+    "host/sysinfo.json": "be0d6f328ed2e8107f76fc095017f93244049cc30276a8b8da47c0868d95e69e",
+    "run/dropped.csv": "31678a4158c427b5937ea28bebad2506a8cc4fd7c1bfdb092748039ae8e23f12",
+    "run/dropped_series.csv": "46ef60883b137627468e77250864e06036fa1e5dd7a2d0840b7b884800beee7a",
+    "run/latency_hist.json": "fe383ecfd1de2462952225465b1a75ef5183ccd096d5293e2ef9119dffe2d6cc",
+    "run/manifest.json": "e73f29ad778b1d8269e76acb938c9e7e59e69e8f7ea9357d37f1ee112a54f718",
+    "run/meta.json": "9032409ae44922700202d05f0952aa0b3fb9ba1300487bd600457b24162fb871",
+    "run/points.csv": "0780193b27bc99f1644e68cc4612cbd05889ce5fcfe513aea322083104d4663c",
+    "run/spec.json": "a51dad087d51f78ee208fb11f4c12037f55d89bfb31ef3148983e2df134c1a8a",
+    "run/summary.json": "97cc2df931fd0950e347162fd8e3871d9d78b9df4807e643beda5c8ca0e3d8fb"
+  },
+  "written_utc": "2026-10-11T10:33:19Z"
+}

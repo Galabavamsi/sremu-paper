@@ -1,0 +1,5 @@
+tool,quantity,value,hardware,data_class
+ACHEM (arXiv 2604.04742),end-to-end latency,82-167 us,as reported by the authors,REPORTED
+Colosseum + RIS (Tsampazi 2025),channel snapshot period,1 ms,Colosseum FPGA channel emulator,REPORTED
+ORIX / GoSimRIS,control loop,10 ms-1 s,as reported,REPORTED
+TRACE (arXiv 2608.11798),control round trip (UDP),5.2 ms,as reported,REPORTED

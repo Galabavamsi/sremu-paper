@@ -1,0 +1,582 @@
+{
+  "manifest_version": "1.0",
+  "sremu_version": "0.1.0.dev0",
+  "git_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+  "git_dirty": true,
+  "dirty_patch_sha256": null,
+  "contract_version": "1.1",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "pydantic": "2.14.0",
+    "pyzmq": "27.2.0",
+    "torch": null
+  },
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "logical_cpus": 192,
+  "power_plan_or_governor": null,
+  "gpu": [],
+  "aws_instance": {
+    "type": "c7i.48xlarge",
+    "id": "i-0dce85a304ce25f0a"
+  },
+  "scenario_name": "bench-b1",
+  "scenario_sha256": "2eb54fa37b0171030fbbfe0dc5c1f894fbb35b7ebc4d5c14ebbe91f24ccb1d5e",
+  "inputs": [],
+  "assumptions": [
+    "git_commit/git_dirty from $SREMU_GIT_COMMIT/$SREMU_GIT_DIRTY (job bundle without .git; set by the launch command)"
+  ],
+  "seed": 0,
+  "rng_scheme": "philox4x32-10/blake2b-v1",
+  "mode": "lockstep",
+  "coupling": "barrier",
+  "backend": "numba_cpu",
+  "threads": 16,
+  "deterministic": true,
+  "numba_disable_svml": true,
+  "page_size": {},
+  "links": {},
+  "verify_interp_max_rel": null,
+  "richardson_db": null,
+  "counters": {
+    "late_samples": 0,
+    "underflow_slip_samples": 0,
+    "overflow_pages": 0,
+    "bad_packets": 0,
+    "schema_errors": 0,
+    "seq_errors": 0,
+    "rec_dropped": 0,
+    "stall_zero_samples": 0,
+    "late_commands": 0,
+    "rejected_commands": 0,
+    "rate_limited_commands": 0,
+    "deadline_misses": 0
+  },
+  "nondeterministic_inputs": false,
+  "oracle_csi_used": false,
+  "argv": [
+    "/opt/job/sremu/bench/b1_kernels.py",
+    "--tag",
+    "slot16",
+    "--out",
+    "/opt/job/out/runs"
+  ],
+  "t_start_utc": "2026-10-11T08:37:49.569727Z",
+  "t_end_utc": "2026-10-11T08:40:47.558353Z",
+  "wall_s": 177.997357347,
+  "host_load_samples": [
+    {
+      "t_utc": "2026-10-11T08:37:52.570752Z",
+      "cpu_busy_fraction": 1.735990556211374e-05,
+      "loadavg_1min": 0.73046875
+    },
+    {
+      "t_utc": "2026-10-11T08:37:52.570945Z",
+      "cpu_busy_fraction": 1.7356591165495098e-05,
+      "loadavg_1min": 0.73046875
+    },
+    {
+      "t_utc": "2026-10-11T08:37:54.571622Z",
+      "cpu_busy_fraction": 7.810872734846907e-05,
+      "loadavg_1min": 0.73046875
+    },
+    {
+      "t_utc": "2026-10-11T08:37:54.571986Z",
+      "cpu_busy_fraction": 7.81188969611749e-05,
+      "loadavg_1min": 0.73046875
+    },
+    {
+      "t_utc": "2026-10-11T08:37:56.572186Z",
+      "cpu_busy_fraction": 0.009555300978962716,
+      "loadavg_1min": 0.75244140625
+    },
+    {
+      "t_utc": "2026-10-11T08:37:58.572769Z",
+      "cpu_busy_fraction": 0.005207112916243589,
+      "loadavg_1min": 0.75244140625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:00.578530Z",
+      "cpu_busy_fraction": 0.0057126535275635534,
+      "loadavg_1min": 0.7724609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:02.579215Z",
+      "cpu_busy_fraction": 0.01579906298802707,
+      "loadavg_1min": 0.7724609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:04.579832Z",
+      "cpu_busy_fraction": 0.015308513407966675,
+      "loadavg_1min": 0.7724609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:06.580389Z",
+      "cpu_busy_fraction": 0.015806880029165908,
+      "loadavg_1min": 0.87109375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:08.581183Z",
+      "cpu_busy_fraction": 0.03374472738634588,
+      "loadavg_1min": 0.87109375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:10.581983Z",
+      "cpu_busy_fraction": 0.015385816932208685,
+      "loadavg_1min": 0.8818359375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:11.415344Z",
+      "cpu_busy_fraction": 0.050193774221777725,
+      "loadavg_1min": 0.8818359375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:12.582429Z",
+      "cpu_busy_fraction": 4.462293618920125e-05,
+      "loadavg_1min": 0.8818359375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:13.416038Z",
+      "cpu_busy_fraction": 2.603895427559629e-05,
+      "loadavg_1min": 0.8818359375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:14.583130Z",
+      "cpu_busy_fraction": 0.0031504673627203374,
+      "loadavg_1min": 0.8818359375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:16.583531Z",
+      "cpu_busy_fraction": 0.005207384070612128,
+      "loadavg_1min": 0.8916015625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:18.584003Z",
+      "cpu_busy_fraction": 0.005233284732347428,
+      "loadavg_1min": 0.8916015625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:20.584401Z",
+      "cpu_busy_fraction": 0.005207384070612128,
+      "loadavg_1min": 0.900390625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:22.215066Z",
+      "cpu_busy_fraction": 0.0052066696479908005,
+      "loadavg_1min": 0.900390625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:22.584853Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 0.900390625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:24.215794Z",
+      "cpu_busy_fraction": 2.603624244948969e-05,
+      "loadavg_1min": 0.900390625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:24.585403Z",
+      "cpu_busy_fraction": 0.0009893256964332204,
+      "loadavg_1min": 0.900390625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:26.586844Z",
+      "cpu_busy_fraction": 0.005205351100931758,
+      "loadavg_1min": 0.90869140625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:28.663435Z",
+      "cpu_busy_fraction": 0.005242762708000912,
+      "loadavg_1min": 0.90869140625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:29.887283Z",
+      "cpu_busy_fraction": 0.01800142336835936,
+      "loadavg_1min": 0.90869140625
+    },
+    {
+      "t_utc": "2026-10-11T08:38:30.663823Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 0.83544921875
+    },
+    {
+      "t_utc": "2026-10-11T08:38:31.887876Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 0.83544921875
+    },
+    {
+      "t_utc": "2026-10-11T08:38:32.689888Z",
+      "cpu_busy_fraction": 0.002067130048319165,
+      "loadavg_1min": 0.83544921875
+    },
+    {
+      "t_utc": "2026-10-11T08:38:34.690421Z",
+      "cpu_busy_fraction": 0.005232347303527949,
+      "loadavg_1min": 0.83544921875
+    },
+    {
+      "t_utc": "2026-10-11T08:38:36.690953Z",
+      "cpu_busy_fraction": 0.0051813471502590676,
+      "loadavg_1min": 0.8486328125
+    },
+    {
+      "t_utc": "2026-10-11T08:38:38.691481Z",
+      "cpu_busy_fraction": 0.0052330122363967715,
+      "loadavg_1min": 0.8486328125
+    },
+    {
+      "t_utc": "2026-10-11T08:38:40.694952Z",
+      "cpu_busy_fraction": 0.018769822700566735,
+      "loadavg_1min": 0.86083984375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:42.695682Z",
+      "cpu_busy_fraction": 0.02296157450796626,
+      "loadavg_1min": 0.86083984375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:44.697993Z",
+      "cpu_busy_fraction": 0.029340616465079985,
+      "loadavg_1min": 0.86083984375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:46.698519Z",
+      "cpu_busy_fraction": 0.03429240984246843,
+      "loadavg_1min": 0.8720703125
+    },
+    {
+      "t_utc": "2026-10-11T08:38:48.699126Z",
+      "cpu_busy_fraction": 0.03663299312643199,
+      "loadavg_1min": 0.8720703125
+    },
+    {
+      "t_utc": "2026-10-11T08:38:50.701861Z",
+      "cpu_busy_fraction": 0.040671971706454466,
+      "loadavg_1min": 2.08349609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:52.702327Z",
+      "cpu_busy_fraction": 0.025828624990236155,
+      "loadavg_1min": 2.08349609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:54.703915Z",
+      "cpu_busy_fraction": 0.031019048610388258,
+      "loadavg_1min": 2.08349609375
+    },
+    {
+      "t_utc": "2026-10-11T08:38:56.704517Z",
+      "cpu_busy_fraction": 0.027466090442841894,
+      "loadavg_1min": 1.99658203125
+    },
+    {
+      "t_utc": "2026-10-11T08:38:58.705967Z",
+      "cpu_busy_fraction": 0.05306164936112629,
+      "loadavg_1min": 1.99658203125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:00.706653Z",
+      "cpu_busy_fraction": 0.04454453151440994,
+      "loadavg_1min": 1.91650390625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:02.707957Z",
+      "cpu_busy_fraction": 0.056784468849216674,
+      "loadavg_1min": 1.91650390625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:04.708466Z",
+      "cpu_busy_fraction": 0.05650011716614159,
+      "loadavg_1min": 1.91650390625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:06.708994Z",
+      "cpu_busy_fraction": 0.030955480343660507,
+      "loadavg_1min": 3.04443359375
+    },
+    {
+      "t_utc": "2026-10-11T08:39:08.709457Z",
+      "cpu_busy_fraction": 0.0373109068659359,
+      "loadavg_1min": 3.04443359375
+    },
+    {
+      "t_utc": "2026-10-11T08:39:10.709922Z",
+      "cpu_busy_fraction": 0.0533538173106968,
+      "loadavg_1min": 4.08203125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:12.711891Z",
+      "cpu_busy_fraction": 0.05497879426534488,
+      "loadavg_1min": 4.08203125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:14.712399Z",
+      "cpu_busy_fraction": 0.05569442274644587,
+      "loadavg_1min": 4.08203125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:16.712914Z",
+      "cpu_busy_fraction": 0.06379211581523721,
+      "loadavg_1min": 5.03662109375
+    },
+    {
+      "t_utc": "2026-10-11T08:39:18.713824Z",
+      "cpu_busy_fraction": 0.04873350167911905,
+      "loadavg_1min": 5.03662109375
+    },
+    {
+      "t_utc": "2026-10-11T08:39:20.714953Z",
+      "cpu_busy_fraction": 0.050262897600083296,
+      "loadavg_1min": 4.712890625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:22.716969Z",
+      "cpu_busy_fraction": 0.045376489566529635,
+      "loadavg_1min": 4.712890625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:24.735894Z",
+      "cpu_busy_fraction": 0.06081325145776356,
+      "loadavg_1min": 4.712890625
+    },
+    {
+      "t_utc": "2026-10-11T08:39:25.611477Z",
+      "cpu_busy_fraction": 0.07335356059253971,
+      "loadavg_1min": 5.6171875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:26.736287Z",
+      "cpu_busy_fraction": 0.0002778163633838033,
+      "loadavg_1min": 5.6171875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:27.612134Z",
+      "cpu_busy_fraction": 0.0001301913813305559,
+      "loadavg_1min": 5.6171875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:28.736865Z",
+      "cpu_busy_fraction": 0.016480941470526974,
+      "loadavg_1min": 5.6171875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:30.121771Z",
+      "cpu_busy_fraction": 0.03990371958328632,
+      "loadavg_1min": 5.6171875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:30.737254Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 5.1669921875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:32.122323Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 5.1669921875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:32.738446Z",
+      "cpu_busy_fraction": 0.022907122032486463,
+      "loadavg_1min": 5.1669921875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:34.739924Z",
+      "cpu_busy_fraction": 0.08283453911414147,
+      "loadavg_1min": 5.1669921875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:36.740334Z",
+      "cpu_busy_fraction": 0.08337673159045933,
+      "loadavg_1min": 6.03466796875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:38.740770Z",
+      "cpu_busy_fraction": 0.08199880217691326,
+      "loadavg_1min": 6.03466796875
+    },
+    {
+      "t_utc": "2026-10-11T08:39:40.741868Z",
+      "cpu_busy_fraction": 0.08337454772626701,
+      "loadavg_1min": 6.8330078125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:42.742222Z",
+      "cpu_busy_fraction": 0.08332899328159991,
+      "loadavg_1min": 6.8330078125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:44.742627Z",
+      "cpu_busy_fraction": 0.08335503359200042,
+      "loadavg_1min": 6.8330078125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:46.743851Z",
+      "cpu_busy_fraction": 0.07962413452027696,
+      "loadavg_1min": 7.5673828125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:48.744252Z",
+      "cpu_busy_fraction": 0.0818946436476317,
+      "loadavg_1min": 7.5673828125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:50.744647Z",
+      "cpu_busy_fraction": 0.08239154210718191,
+      "loadavg_1min": 8.24267578125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:52.745873Z",
+      "cpu_busy_fraction": 0.08323573045990473,
+      "loadavg_1min": 8.24267578125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:54.746271Z",
+      "cpu_busy_fraction": 0.07533854166666666,
+      "loadavg_1min": 8.24267578125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:56.746681Z",
+      "cpu_busy_fraction": 0.08317058563133088,
+      "loadavg_1min": 8.8642578125
+    },
+    {
+      "t_utc": "2026-10-11T08:39:58.747840Z",
+      "cpu_busy_fraction": 0.08311208287781768,
+      "loadavg_1min": 8.8642578125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:00.748477Z",
+      "cpu_busy_fraction": 0.08370858169135063,
+      "loadavg_1min": 9.43603515625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:02.749851Z",
+      "cpu_busy_fraction": 0.0833658676244762,
+      "loadavg_1min": 9.43603515625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:04.750469Z",
+      "cpu_busy_fraction": 0.04339445717857887,
+      "loadavg_1min": 9.43603515625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:06.750958Z",
+      "cpu_busy_fraction": 0.06697567835008593,
+      "loadavg_1min": 9.9619140625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:08.752059Z",
+      "cpu_busy_fraction": 0.0834005778691725,
+      "loadavg_1min": 9.9619140625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:10.752447Z",
+      "cpu_busy_fraction": 0.08322699929689331,
+      "loadavg_1min": 10.44580078125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:12.752898Z",
+      "cpu_busy_fraction": 0.083331163250957,
+      "loadavg_1min": 10.44580078125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:14.753943Z",
+      "cpu_busy_fraction": 0.08236366002863464,
+      "loadavg_1min": 10.44580078125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:16.754384Z",
+      "cpu_busy_fraction": 0.08288414967580658,
+      "loadavg_1min": 10.890625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:18.754914Z",
+      "cpu_busy_fraction": 0.08297966516520426,
+      "loadavg_1min": 10.890625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:20.755906Z",
+      "cpu_busy_fraction": 0.08278878446278409,
+      "loadavg_1min": 11.2998046875
+    },
+    {
+      "t_utc": "2026-10-11T08:40:22.756402Z",
+      "cpu_busy_fraction": 0.08282775680249968,
+      "loadavg_1min": 11.2998046875
+    },
+    {
+      "t_utc": "2026-10-11T08:40:24.756957Z",
+      "cpu_busy_fraction": 0.08295794818383023,
+      "loadavg_1min": 11.2998046875
+    },
+    {
+      "t_utc": "2026-10-11T08:40:26.757915Z",
+      "cpu_busy_fraction": 0.08281481867173467,
+      "loadavg_1min": 11.67626953125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:28.759489Z",
+      "cpu_busy_fraction": 0.025584966554748706,
+      "loadavg_1min": 11.67626953125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:30.760926Z",
+      "cpu_busy_fraction": 0.03310861813165361,
+      "loadavg_1min": 10.8212890625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:32.761382Z",
+      "cpu_busy_fraction": 0.0831445459990105,
+      "loadavg_1min": 10.8212890625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:34.761850Z",
+      "cpu_busy_fraction": 0.0831185063666901,
+      "loadavg_1min": 10.8212890625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:36.762895Z",
+      "cpu_busy_fraction": 0.08304696449026346,
+      "loadavg_1min": 11.236328125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:38.763304Z",
+      "cpu_busy_fraction": 0.08280818707358992,
+      "loadavg_1min": 11.236328125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:40.763717Z",
+      "cpu_busy_fraction": 0.08259771372028227,
+      "loadavg_1min": 11.6181640625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:42.764865Z",
+      "cpu_busy_fraction": 0.08337020744943908,
+      "loadavg_1min": 11.6181640625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:44.765304Z",
+      "cpu_busy_fraction": 0.08335286305757363,
+      "loadavg_1min": 11.6181640625
+    },
+    {
+      "t_utc": "2026-10-11T08:40:46.765688Z",
+      "cpu_busy_fraction": 0.08158429248476642,
+      "loadavg_1min": 11.96923828125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:47.470790Z",
+      "cpu_busy_fraction": 0.07621861152141803,
+      "loadavg_1min": 11.96923828125
+    },
+    {
+      "t_utc": "2026-10-11T08:40:47.554888Z",
+      "cpu_busy_fraction": 0.0049597024178549285,
+      "loadavg_1min": 11.96923828125
+    }
+  ]
+}

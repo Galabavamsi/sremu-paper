@@ -1,0 +1,90 @@
+{
+  "benchmark": "B6",
+  "description": "Cross-tool context: time per RIS channel evaluation of the same near-field K1 sum (N = 256, 1024, 4096) with sremu (numba, NumPy) and MATLAB R2026a (hand loop, vectorized, toolbox primitives) plus phased.RISReflector (a different, far-field model); copied unchanged",
+  "data_classes": [
+    "MEAS",
+    "REPORTED"
+  ],
+  "data_class_notes": {
+    "MEAS": "laptop timings (Windows, not quiet: other processes 28 % busy on average during the sremu section)",
+    "REPORTED": "literature rows of run/context_table.csv and run/literature.csv (not used as paper numbers)"
+  },
+  "run": {
+    "run_id": "20261011T031205Z_b6_laptop",
+    "source_dir": "D:\\projects\\ris\\sremu\\runs\\bench\\20261011T031205Z_b6_laptop",
+    "t_start_utc": "2026-10-11T03:12:06.312741Z",
+    "t_end_utc": "2026-10-11T03:13:22.808601Z",
+    "argv": [
+      "D:\\projects\\ris\\sremu\\bench\\b6_crosstool.py",
+      "--wait-quiet-min",
+      "10",
+      "--tag",
+      "laptop"
+    ],
+    "protocol": "median of repeated calls per method and N (sremu: n_calls in run/times.csv; MATLAB: timeit in one session, start-up excluded); quiet gate max 20 % busy over 3 s met before the run"
+  },
+  "choice": "the later of two laptop runs: 20261011T024620Z recorded the load as one number (mean 0.91, MATLAB counted as background), had no per-section load and an 82 ms RISReflector outlier at N = 4096 (~178x this run's 0.46 ms); this run has per-section load (run/sections.json) and the same spec hash",
+  "host": {
+    "kind": "laptop",
+    "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
+    "logical_cpus": 16,
+    "cores_note": "8 cores / 16 threads (DESIGN 12.4; the manifest records logical CPUs only)",
+    "os": "Windows 11 (Windows-11-10.0.26200-SP0)",
+    "power_plan": "Balanced",
+    "versions": {
+      "python": "3.12.4",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "matlab_release": "R2026a (run/matlab_raw.csv)",
+    "background_load": {
+      "n": 34.0,
+      "min": 0.1821113406271571,
+      "max": 0.7632575757575758,
+      "mean": 0.34413724263498674,
+      "p50": 0.29296875,
+      "p90": 0.5549242424242424,
+      "p99": 0.7632575757575758
+    },
+    "quiet_gate": {
+      "max_busy": 0.2,
+      "window_s": 3.0,
+      "timeout_s": 600.0,
+      "waited_s": 60.011340299999574,
+      "last_busy_fraction": 0.19303385416666666,
+      "met": true
+    }
+  },
+  "sremu": {
+    "commit": "f518ed160b1e72eb29001f3d07829824c1331c2f",
+    "dirty_flag_recorded": true,
+    "dirty_patch_sha256": "8a74ecfc2e67f457f7b546268f64d1d2e69eed792c10241a61777f19776c124a",
+    "dirty_note": "working tree with uncommitted changes; the patch (sha256 in dirty_patch_sha256) is kept in the authors' archive and not published (it contains internal development notes); B6 is to be re-run at the pinned commit"
+  },
+  "caveats": [
+    "Different work per call: the sremu times include Python dispatch and the LOS path; MATLAB times exclude start-up; RISReflector is a different model.",
+    "One machine, Windows, with background load: context, not a ranking.",
+    "Same-model agreement sremu vs MATLAB: 7.8e-14 dB."
+  ],
+  "used_by": [
+    "tools/bench_results.py (Section VI cross-tool paragraph)"
+  ],
+  "files": {
+    "run/context_table.csv": "58cfaff68739b3276d3b17648a43e3a228b51a6d463df53c6dec9b1dad901bfe",
+    "run/literature.csv": "4991d2847b4188f459fbead2c6244ecf1026da0767ec94af1236e5ea14ab0b13",
+    "run/manifest.json": "e50109ec79d52740bf735fb522caf62038f1b83f76d27ea770e8744625fcdf91",
+    "run/matlab_console.log": "f78093d2a39cb28ba9e25c3fcd70558fe709ef1f65bc46a4f7c535f1f31600b0",
+    "run/matlab_raw.csv": "4333ac535995e0386905e67f5e9d6ed4ccf945807746e5c1568f30dbf7ae0b49",
+    "run/meta.json": "1b5f36845bdea9928a8fdb8e2b30e974380a8ab40be6c1c0e1881aed617e86a0",
+    "run/scene.json": "ddb67d95a71e7e047636def9857283e1d9cebcecae76f18846d626c4d14e9b16",
+    "run/sections.json": "a38dd4bb5146f8e62e714bbf0ea1fa83cb008469232c1680667009b580966c4b",
+    "run/spec.json": "4c518101e7a12206792f900994513c10fafc096bc763f4d206220eaeaae17f5c",
+    "run/summary.json": "312933f9831f1da806a8a083fa14dd6e83eaa7f4a471731cd26cc97a8f210c3d",
+    "run/times.csv": "32b2a2962f0514806bac11958213c0f06d57755c007e129adb2b0ba30382e1ab"
+  },
+  "written_utc": "2026-10-11T10:33:19Z"
+}

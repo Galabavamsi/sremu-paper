@@ -1,0 +1,1 @@
+{"point": {"L": 4, "N": 4096, "R": 1, "fs": "1e6", "F": "F5", "T": null, "slices": ["G-anchor"], "tier": 3}, "settings": {"reps": 3, "target_pages": 10000, "rep_wall_target_s": 6.0, "min_virtual_s": "0.3", "warmup_s": "0.05", "point_wall_cap_s": 150.0, "rtf_floor": 0.005, "warm_wall_max_s": 20.0, "pilot_wall_max_s": 10.0}}

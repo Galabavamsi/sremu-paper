@@ -90,7 +90,7 @@ claims:
     evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5]
     gates: [H-6]
   C-CONTRIB-3:
-    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling, cost-model fit on a laptop and a Linux server."
+    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling and cost-model fit on AWS Linux servers (the laptop contributes the B6 cross-tool context, no scaling run)."
     where: [sections/01_introduction.tex, sections/abstract.tex]
     evidence: [test:RT-18, fig:F7, fig:F8]
     gates: [H-5]
@@ -477,6 +477,67 @@ claims:
     text: "Rendered LOS Doppler equals the closed form within the stated deviation; the RIS contribution follows an independent per-cell K1 sum where the reference RIS amplitude exceeds 10 % of its maximum (away from pattern nulls); interpolation error at auto T_u far below eps_rel, growing as T_u^2; verify_interp follows it but reads low (up to the stated percentage)."
     where: [sections/05_verification_validation.tex]
     evidence: [test:PH-17, test:PH-18, test:PH-19, fig:F6]
+    gates: []
+
+  # ================================================================ VI Wall-clock behaviour
+  # Benchmarks B1-B4 (AWS, sremu 309c633) and B6 (laptop), copied with provenance in
+  # paper/sweeps/results/bench; every number is a bench_results.py macro (MEAS). Analysis and
+  # the two corrections (B2 aggregate recomputed; B4 lockstep check recomputed offline) are in
+  # research/analysis/bench_findings.md. F5 (native ZMQ) is pending a rerun: placeholder only.
+  C-WC-DEFS:
+    text: "Definitions as in DESIGN 12.1: lockstep vs paced (release R_j); RTF = min over received streams of samples/f_s per wall second; aggregate throughput = received samples summed over streams per wall second; page latency = delivery - R_j; miss at slack s when latency > s, so the miss rate is the latency CCDF and zero slack is missed by construction (computation starts at R_j); Sustainable = >= 60 s after a 5 s warm-up, miss rate < 1e-3 at 1 ms slack, no late input samples, no overflowing pages; visible latency and lateness of commands."
+    where: [sections/06_wallclock.tex]
+    evidence: [spec:DESIGN-12.1, spec:DESIGN-4.10, test:RT-18]
+    gates: []
+  C-WC-HOSTS:
+    text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge, B3/B4 on AWS c7i.8xlarge with the engine pinned to 16 logical CPUs and nothing else running, B6 on the laptop; one emulator commit for the AWS runs; B2 packed 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; B3 is headless; benchmark scenes carry no physical result (Table VII); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX)."
+    where: [sections/06_wallclock.tex, generated/tables/table7_platforms.tex]
+    evidence: [table:tab:platforms, spec:DESIGN-12.3]
+    gates: []
+  C-WC-LOCKSTEP:
+    text: "B2 lockstep (packed): points planned/run/ok/below floor/failed as generated, every failure an F5 (native ZMQ) point, F5 excluded and pending rerun; base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; static limit 8 links at RTF >= 1 for every N at 1 MS/s; a single link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
+    where: [sections/06_wallclock.tex]
+    evidence: [fig:F7, spec:DESIGN-12.2]
+    gates: []
+  C-WC-ISOLATION:
+    text: "Isolation check: the six reference points rerun alone were up to 16 % faster (ratio 0.99-1.16), so packed RTFs are conservative; at 16 links the packed RTF is 0.90-0.94 over N while the base configuration alone (B1) reached 1.07; the limit is 8 links packed and between 8 and 16 alone."
+    where: [sections/06_wallclock.tex]
+    evidence: [fig:F7]
+    gates: []
+  C-WC-PACED:
+    text: "B3 paced (headless, AWS c7i.8xlarge): largest Sustainable configuration per series as generated (8 links at 1 MS/s with 1.024 ms pages, worst p99 and miss rate as generated; one link at 0.512 ms pages; 2 links at 0.256 ms pages; a single link at 23.04 MS/s; 2 links at 5.76 MS/s (0.356 ms pages); at 0.512 ms pages 4 links with four surfaces, more than with one, and one link at N = 4096)."
+    where: [sections/06_wallclock.tex, sections/abstract.tex, sections/10_conclusion.tex]
+    evidence: [fig:F8, spec:DESIGN-12.1]
+    gates: [H-5]
+  C-WC-SHORTPAGES:
+    text: "Short pages: the two-link 0.512 ms point failed in one of three repetitions through a few stalls of up to 11 ms although its median utilization is 0.27; mobility (F3) misses the deadline on the pages that hold a snapshot recomputation (miss rate equal to the snapshot-page share P/(f_s T_u)); at 0.1 MS/s 58 pages above 1 ms (1-4 ms) fail the threshold in the single repetition, not explained by per-page cost or timers (the engine spins before releases closer than 1.5 ms); cause not identified."
+    where: [sections/06_wallclock.tex]
+    evidence: [fig:F8]
+    gates: [H-5]
+  C-WC-LOCKCMD:
+    text: "B4 lockstep: 22,800 commands at 10 Hz-10 kHz, in process and remote, all lateness values zero; at 10 kHz one command per run switches after the end of the run and stays scheduled (benign); the original check counted it, the corrected check recomputed offline passes; per-command engine cost 1.25-1.49 ms from RTF with and without the loop; RTF at 10 kHz none/in-process/remote as generated."
+    where: [sections/06_wallclock.tex]
+    evidence: [test:RT-08, pytest:tests/bench/test_bench_b4_checks.py, pytest:tests/bench/test_bench_suites.py::test_b4_lockstep_check_rejects_vacuous_zero_lateness]
+    gates: []
+  C-WC-PACEDCMD:
+    text: "B4 paced, served over the control socket: no repetition Sustainable; 1 ms-slack miss rates at 10 and 100 commands/s as generated vs at most ~1e-3 headless (B3, same links and pages); asap visible latency median and p99 as generated; the paced schedule adds at most one page; the floor is the engine work on the page with a configuration change; the spread is consistent with the GIL hand-over between the control thread and the paced loop (most of the latency from the implementation: configuration change and serving thread, not the paced schedule; rare outliers up to 76 ms); B3 comparison is across two instances of the same type; timed commands with a 2 ms lead below the command latency were late and applied on arrival (rule: lead > latency + clock-estimate error); >= 1 kHz engine-bound (achieved rate; page latencies up to 29 s; a repetition up to 18 % longer than its virtual time since the engine catches up after the client stops; timed-command backlog)."
+    where: [sections/06_wallclock.tex]
+    evidence: [fig:F8, test:RT-06, spec:DESIGN-4.10]
+    gates: [H-5]
+  C-WC-COSTMODEL:
+    text: "B1 cost model (DESIGN 7.4 form, 20 engine points): indicative, relative RMS 39 %, max 69 %; constant term 65 us = 76 % of the 86 us single-link page; largest errors are mobility underestimates, where a snapshot costs ~0.61 ms + 0.50 ms per link with little RQ dependence at the B1 sizes (8-coefficient diagnostic fit, 12 %, not used for prediction); at the larger N of B2 the snapshot cost grows with N (same snapshot period for N >= 900, F3 RTF still falls); snapshot kernel exponents 1.06 (NumPy, RQ 40 to 1e6) and 0.76 (numba, to 1.7e7)."
+    where: [sections/06_wallclock.tex]
+    evidence: [spec:DESIGN-7.4, spec:DESIGN-12.2]
+    gates: []
+  C-WC-CROSSTOOL:
+    text: "B6 context on the laptop (not a ranking): same near-field sum, sremu vs MATLAB R2026a agree to 7.8e-14 dB; per-evaluation times for sremu (new positions, configuration change), vectorized MATLAB, per-element MATLAB loop and phased.RISReflector (different model) as generated; different work per call, one loaded machine, per-call time not the cost of a streaming emulator."
+    where: [sections/06_wallclock.tex]
+    evidence: [spec:DESIGN-12.2, test:G1]
+    gates: []
+  C-WC-LIMITS:
+    text: "Limitations of Section VI: stated hosts, commit and scenes only; one instance per benchmark, 3 repetitions; paced timing headless or with the control socket alone; F5 pending; packed values conservative by up to 16 %; indicative cost model; B6 laptop not idle; paced mode is soft real time."
+    where: [sections/06_wallclock.tex]
+    evidence: [spec:DESIGN-12.3]
     gates: []
 
   # ================================================================ VII Case studies

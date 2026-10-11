@@ -1,0 +1,80 @@
+{
+  "figure": "F7",
+  "title": "Lockstep scalability on one AWS c7i.48xlarge (B2): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates",
+  "content_key": "5f952f497415cd2ec2e3031600ec33d6c8beab47e11743dda42cce0a306d446b",
+  "sremu_commit": "e460da6873324f59616a3c014c066da9bfec3728",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_classes_in_rows": [
+    "MEAS"
+  ],
+  "inputs": [
+    {
+      "path": "sweeps/results/bench/B2/run/points.csv",
+      "data_class": "MEAS",
+      "run_id": "20261011T084048Z_b2_server",
+      "host": "c7i.48xlarge",
+      "sremu_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "sha256": "93db1b3fd9b030aa64acc8b6467b8c9543994a6c0145ce24dadb80c8ebf84f09"
+    },
+    {
+      "path": "sweeps/results/bench/B2/run/isolation.csv",
+      "data_class": "MEAS",
+      "sha256": "5495e27eb7753f466b6ee0f7c3af861d4184e847d1e3163151afd4792828b8af"
+    },
+    {
+      "path": "sweeps/results/bench/B2/run/summary.json",
+      "data_class": "MEAS",
+      "sha256": "9ef69b3b2c46f342937f0788301818a1a48e7770f2189cee6a27070e549d172a"
+    },
+    {
+      "path": "sweeps/results/bench/B2/meta.json",
+      "data_class": "MEAS",
+      "sha256": "fb90e0643bad266a81e4bf81df4aa033bc5f82866fdb4f43405fdf0f8cf9fc10"
+    }
+  ],
+  "assumptions": [
+    "SIM benchmark scenes (LOS and RIS paths, one carrier at 3.5 GHz, non-zero RIS path asserted per scene); the workload is not a physics result",
+    "11 points ran concurrently (16 vCPUs each); isolation reference points rerun alone were 0.99-1.16x faster (open markers)",
+    "aggregate throughput = n_rx * f_s * RTF (one rate group per scene)",
+    "F5 (native ZMQ) omitted: pending rerun after the transport fix",
+    "points below the pilot floor (9 heavy F3 points) and failed points are not drawn"
+  ],
+  "profile": "full",
+  "script": "figures/src/f07_lockstep.py",
+  "script_sha256": "bb2cd28f25dd741ae381e1961a80efcc292873aee5c5613058d23aa0c635fb35",
+  "outputs": {
+    "figures/out/F7.pdf": "616b90261b0046392a6db29078b4a91bed8c06956ed2f6b71f5de25ade04c6c2",
+    "figures/data/F7.csv": "ddaa75105555fffe77211354ea5cc03184ac85b70dd02c52287c3785e66928bb"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T11:27:58Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1572,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  },
+  "failed_point_ids": [
+    "L1_N240_R1_fs1e6_F5",
+    "L1_N240_R1_fs5.76e6_F5",
+    "L4_N4096_R1_fs1e6_F5",
+    "L128_N240_R2_fs23.04e6_F5"
+  ],
+  "isolation_ratio": {
+    "n": 6,
+    "min": 0.9945952911696468,
+    "max": 1.1602042485924047
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "suite": "b3",
+  "sha256": "ee6b1360c3959487590656f306b1cd865975d94c7270a1a0f351e7332d3747e5",
+  "plan": "server",
+  "threads": null,
+  "series": [
+    "fs1e6_page5e-4_N240_R1_F1",
+    "fs1e6_page1e-3_N240_R1_F1",
+    "fs1e6_page2.5e-4_N240_R1_F1",
+    "fs5.76e6_page5e-4_N240_R1_F1",
+    "fs23.04e6_page1e-3_N240_R1_F1",
+    "fs1e6_page5e-4_N4096_R1_F1",
+    "fs1e6_page5e-4_N240_R1_F3",
+    "fs1e6_page5e-4_N240_R4_F1",
+    "fs1e5_page1e-3_N240_R1_F1"
+  ],
+  "links": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "reps": 3,
+  "warmup_s": "5",
+  "measure_s": "60",
+  "budget_min": 172.0,
+  "sustainable": "miss rate < 1e-3 at 1 ms slack, late_samples == 0, overflow_pages == 0, every rep"
+}

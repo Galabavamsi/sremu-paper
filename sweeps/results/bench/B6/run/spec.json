@@ -1,0 +1,34 @@
+{
+  "suite": "b6",
+  "sha256": "58de2003ef2ab47b3a4312955a1d0c9b2763a16605c2178c8327ca35f7b3bccd",
+  "threads": null,
+  "sizes": [
+    256,
+    1024,
+    4096
+  ],
+  "scene": {
+    "fc_hz": 3500000000.0,
+    "tx_m": [
+      4.330127018922194,
+      -2.4999999999999996,
+      0.0
+    ],
+    "rx_m": [
+      4.698463103929543,
+      1.7101007166283435,
+      0.0
+    ]
+  },
+  "matlab": true,
+  "scope": {
+    "sremu_numba_cpu_snapshot+combine": "near-field per-cell K1 sum + LOS for new positions (sremu API, numba backend)",
+    "sremu_numba_cpu_combine_only": "configuration change, geometry cached (numba backend)",
+    "sremu_numpy_ref_snapshot+combine": "same as numba, NumPy reference backend",
+    "sremu_numpy_ref_combine_only": "configuration change, geometry cached (NumPy backend)",
+    "matlab_hand_loop": "same K1 sum + LOS as an explicit per-element for-loop (MATLAB script)",
+    "matlab_hand_vec": "same K1 sum + LOS, vectorized MATLAB (no toolbox calls)",
+    "matlab_toolbox_golden_util_k1": "same K1 sum from toolbox primitives (rangeangle, CosineAntennaElement, fspl) plus an independent hand evaluation and LOS (does more work than one evaluation)",
+    "matlab_risreflector_step": "phased.RISReflector step: far-field plane wave, isotropic unit cells, no cell area (a different model; tool context only)"
+  }
+}

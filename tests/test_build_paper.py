@@ -207,7 +207,7 @@ def test_final_refuses_placeholders_even_with_green_gates(paper_copy: Path, tmp_
     assert not any("not green" in e for e in errs)
     assert any("pipeline numbers are still placeholders" in e for e in errs)
     assert any("section stubs" in e for e in errs)
-    assert any("figure F7: pending" in e for e in errs)  # B2 benchmark figure (AWS)
+    assert any(e.startswith("figure F7: ") for e in errs)  # B2 figure: not current here
     assert any(e.startswith("figure F3: ") for e in errs)  # not current at this commit
     assert any("final build refused" in e for e in errs)
     assert not any("latexmk" in c[0] for c in rec.calls)

@@ -1,0 +1,160 @@
+panel,series,data_class,x_name,x,y_name,y,y_lo,y_hi,note
+a,RTF F1 N=40,MEAS,L,1,rtf_median,5.0255624152541225,,,L1_N40_R1_fs1e6_F1; packed (concurrent points at start 0); rtf_min_worst=4.290337246678646
+a,RTF F1 N=40,MEAS,L,2,rtf_median,2.8451166854536427,,,L2_N40_R1_fs1e6_F1; packed (concurrent points at start 9); rtf_min_worst=2.64371911425575
+a,RTF F1 N=40,MEAS,L,4,rtf_median,2.340534818862006,,,L4_N40_R1_fs1e6_F1; packed (concurrent points at start 9); rtf_min_worst=2.1563524590870933
+a,RTF F1 N=40,MEAS,L,8,rtf_median,1.279431855490251,,,L8_N40_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=1.2263376164114779
+a,RTF F1 N=40,MEAS,L,16,rtf_median,0.9425027981219117,,,L16_N40_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.9200875021616306
+a,RTF F1 N=40,MEAS,L,32,rtf_median,0.4791294562842016,,,L32_N40_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.4485679964623416
+a,RTF F1 N=40,MEAS,L,64,rtf_median,0.31324186920615343,,,L64_N40_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.30675865139767705
+a,RTF F1 N=40,MEAS,L,128,rtf_median,0.15297446437760298,,,L128_N40_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.14991856131408224
+a,RTF F1 N=240,MEAS,L,1,rtf_median,5.141615196035678,,,L1_N240_R1_fs1e6_F1; packed (concurrent points at start 0); rtf_min_worst=4.30843685860839
+a,RTF F1 N=240,MEAS,L,2,rtf_median,2.8368280622702065,,,L2_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.650083785048948
+a,RTF F1 N=240,MEAS,L,4,rtf_median,2.3363848746663307,,,L4_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.1752778884873374
+a,RTF F1 N=240,MEAS,L,8,rtf_median,1.2651430384816262,,,L8_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=1.2013970469588502
+a,RTF F1 N=240,MEAS,L,16,rtf_median,0.9058811612682469,,,L16_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.8833859831379284
+a,RTF F1 N=240,MEAS,L,32,rtf_median,0.48290133632875337,,,L32_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.46988542821194745
+a,RTF F1 N=240,MEAS,L,64,rtf_median,0.3062596612279436,,,L64_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.2987453254982831
+a,RTF F1 N=240,MEAS,L,128,rtf_median,0.15974675549162767,,,L128_N240_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.1553181199172747
+a,RTF F1 N=900,MEAS,L,1,rtf_median,5.106329044820451,,,L1_N900_R1_fs1e6_F1; packed (concurrent points at start 0); rtf_min_worst=4.279206773710454
+a,RTF F1 N=900,MEAS,L,2,rtf_median,2.8438362410871085,,,L2_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.627489950704873
+a,RTF F1 N=900,MEAS,L,4,rtf_median,2.2982760624522314,,,L4_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.1466093853969683
+a,RTF F1 N=900,MEAS,L,8,rtf_median,1.2536226999638334,,,L8_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=1.2043565430101615
+a,RTF F1 N=900,MEAS,L,16,rtf_median,0.9244799153520765,,,L16_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.9026949135190742
+a,RTF F1 N=900,MEAS,L,32,rtf_median,0.49248545204980354,,,L32_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.4762637278197374
+a,RTF F1 N=900,MEAS,L,64,rtf_median,0.3095240512114761,,,L64_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.30143337205214854
+a,RTF F1 N=900,MEAS,L,128,rtf_median,0.1612168297728917,,,L128_N900_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.1558991363268915
+a,RTF F1 N=4096,MEAS,L,1,rtf_median,5.134652398122856,,,L1_N4096_R1_fs1e6_F1; packed (concurrent points at start 0); rtf_min_worst=4.29930155266696
+a,RTF F1 N=4096,MEAS,L,2,rtf_median,2.843618989245516,,,L2_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.622843498075882
+a,RTF F1 N=4096,MEAS,L,4,rtf_median,2.2601031599367474,,,L4_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.056606277988098
+a,RTF F1 N=4096,MEAS,L,8,rtf_median,1.272548559460093,,,L8_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=1.2205944456068571
+a,RTF F1 N=4096,MEAS,L,16,rtf_median,0.8974127537551184,,,L16_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.8683321253675693
+a,RTF F1 N=4096,MEAS,L,32,rtf_median,0.4765351826400006,,,L32_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.4574694035084811
+a,RTF F1 N=4096,MEAS,L,64,rtf_median,0.3171519390793121,,,L64_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.30497908891053244
+a,RTF F1 N=4096,MEAS,L,128,rtf_median,0.15444577426028389,,,L128_N4096_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.15190811894543038
+a,RTF F1 N=16384,MEAS,L,1,rtf_median,5.100786256313991,,,L1_N16384_R1_fs1e6_F1; packed (concurrent points at start 0); rtf_min_worst=4.291451158929989
+a,RTF F1 N=16384,MEAS,L,2,rtf_median,2.837761893553379,,,L2_N16384_R1_fs1e6_F1; packed (concurrent points at start 9); rtf_min_worst=2.5864090154976336
+a,RTF F1 N=16384,MEAS,L,4,rtf_median,2.276491760262528,,,L4_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=2.1643998942647364
+a,RTF F1 N=16384,MEAS,L,8,rtf_median,1.2670814852881815,,,L8_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=1.2196799754893113
+a,RTF F1 N=16384,MEAS,L,16,rtf_median,0.9335240140489536,,,L16_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.9029219493319208
+a,RTF F1 N=16384,MEAS,L,32,rtf_median,0.4771259427383607,,,L32_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.4569523931186296
+a,RTF F1 N=16384,MEAS,L,64,rtf_median,0.3114585124613306,,,L64_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.304380656452222
+a,RTF F1 N=16384,MEAS,L,128,rtf_median,0.15911343945513143,,,L128_N16384_R1_fs1e6_F1; packed (concurrent points at start 10); rtf_min_worst=0.1551689719580325
+a,RTF F3 N=40,MEAS,L,1,rtf_median,2.131167932627801,,,L1_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=1.9415090122518537
+a,RTF F3 N=40,MEAS,L,2,rtf_median,1.3436080894896711,,,L2_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=1.2457204364411447
+a,RTF F3 N=40,MEAS,L,4,rtf_median,0.9285839344647027,,,L4_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.8754904070458697
+a,RTF F3 N=40,MEAS,L,8,rtf_median,0.48211608654235116,,,L8_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.12379046073878583
+a,RTF F3 N=40,MEAS,L,16,rtf_median,0.342939615256514,,,L16_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.26693961206408273
+a,RTF F3 N=40,MEAS,L,32,rtf_median,0.17637183383685884,,,L32_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.17009488166351952
+a,RTF F3 N=40,MEAS,L,64,rtf_median,0.11284882039439367,,,L64_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.10798859252135995
+a,RTF F3 N=40,MEAS,L,128,rtf_median,0.060180033001172785,,,L128_N40_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.05921230851278259
+a,RTF F3 N=240,MEAS,L,1,rtf_median,1.5552752315732599,,,L1_N240_R1_fs1e6_F3; packed (concurrent points at start 7); rtf_min_worst=1.343509432040792
+a,RTF F3 N=240,MEAS,L,2,rtf_median,0.9525413285538664,,,L2_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.8832050366145012
+a,RTF F3 N=240,MEAS,L,4,rtf_median,0.5778113645018993,,,L4_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.5552419980605398
+a,RTF F3 N=240,MEAS,L,8,rtf_median,0.3173858775137079,,,L8_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.21146872326090335
+a,RTF F3 N=240,MEAS,L,16,rtf_median,0.2062864262381859,,,L16_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.15453981101848857
+a,RTF F3 N=240,MEAS,L,32,rtf_median,0.11235667625007954,,,L32_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.10762067487440048
+a,RTF F3 N=240,MEAS,L,64,rtf_median,0.06952420134758051,,,L64_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.06704222703208189
+a,RTF F3 N=240,MEAS,L,128,rtf_median,0.036146707559807804,,,L128_N240_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.03112462062266063
+a,RTF F3 N=900,MEAS,L,1,rtf_median,0.974889266117382,,,L1_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.8956432491006533
+a,RTF F3 N=900,MEAS,L,2,rtf_median,0.5999880958722252,,,L2_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.5682082882940667
+a,RTF F3 N=900,MEAS,L,4,rtf_median,0.3546469815536347,,,L4_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.344489302463454
+a,RTF F3 N=900,MEAS,L,8,rtf_median,0.19460131190399133,,,L8_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.19128236988098563
+a,RTF F3 N=900,MEAS,L,16,rtf_median,0.12199892857165091,,,L16_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.11424586898248101
+a,RTF F3 N=900,MEAS,L,32,rtf_median,0.0648307422211185,,,L32_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.06316483224339921
+a,RTF F3 N=900,MEAS,L,64,rtf_median,0.03928673276326164,,,L64_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.038817151011304285
+a,RTF F3 N=900,MEAS,L,128,rtf_median,0.021081907623441053,,,L128_N900_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.02086884813908956
+a,RTF F3 N=4096,MEAS,L,1,rtf_median,0.7837768216596429,,,L1_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.7322290928091588
+a,RTF F3 N=4096,MEAS,L,2,rtf_median,0.47482511234911146,,,L2_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.44575140738206226
+a,RTF F3 N=4096,MEAS,L,4,rtf_median,0.2842519043484505,,,L4_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.14331751824041825
+a,RTF F3 N=4096,MEAS,L,8,rtf_median,0.15785432529635599,,,L8_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.15605421754851492
+a,RTF F3 N=4096,MEAS,L,16,rtf_median,0.09158163799828432,,,L16_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.0894378188684632
+a,RTF F3 N=4096,MEAS,L,32,rtf_median,0.054832862889557715,,,L32_N4096_R1_fs1e6_F3; packed (concurrent points at start 9); rtf_min_worst=0.05383405200509715
+a,RTF F3 N=4096,MEAS,L,64,rtf_median,0.03603188875572464,,,L64_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.03565273056191595
+a,RTF F3 N=4096,MEAS,L,128,rtf_median,0.017943331329753034,,,L128_N4096_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.01779382945688857
+a,RTF F3 N=16384,MEAS,L,1,rtf_median,0.54148282120532,,,L1_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.5147124797558434
+a,RTF F3 N=16384,MEAS,L,2,rtf_median,0.3160688273900456,,,L2_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.2976428563900333
+a,RTF F3 N=16384,MEAS,L,4,rtf_median,0.17566674901935223,,,L4_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.129271206298269
+a,RTF F3 N=16384,MEAS,L,8,rtf_median,0.1020441047189694,,,L8_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.10086161386661202
+a,RTF F3 N=16384,MEAS,L,16,rtf_median,0.08760685068648905,,,L16_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.08535915606686198
+a,RTF F3 N=16384,MEAS,L,32,rtf_median,0.04682918245656127,,,L32_N16384_R1_fs1e6_F3; packed (concurrent points at start 9); rtf_min_worst=0.046155855886324954
+a,RTF F3 N=16384,MEAS,L,64,rtf_median,0.02580427934182441,,,L64_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.024918193719527953
+a,RTF F3 N=16384,MEAS,L,128,rtf_median,0.011212614567134987,,,L128_N16384_R1_fs1e6_F3; packed (concurrent points at start 10); rtf_min_worst=0.011148531338641942
+a,RTF F1 N=240 alone (isolation check),MEAS,L,1,rtf_isolated,5.8402918157471015,,,L1_N240_R1_fs1e6_F1; ratio isolated/packed 1.1358866023754794
+a,RTF F1 N=240 alone (isolation check),MEAS,L,8,rtf_isolated,1.4678243283234869,,,L8_N240_R1_fs1e6_F1; ratio isolated/packed 1.1602042485924047
+a,RTF F1 N=240 alone (isolation check),MEAS,L,64,rtf_isolated,0.3518214501462031,,,L64_N240_R1_fs1e6_F1; ratio isolated/packed 1.1487684951246278
+a,RTF F3 N=4096 alone (isolation check),MEAS,L,8,rtf_isolated,0.17453056646734366,,,L8_N4096_R1_fs1e6_F3; ratio isolated/packed 1.1056432323896077
+a,RTF F1 N=240 alone (isolation check),MEAS,L,128,rtf_isolated,0.1771276687877334,,,L128_N240_R1_fs1e6_F1; ratio isolated/packed 1.108802918986462
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,1,rtf_median,6.949656385098876,,,L1_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,2,rtf_median,4.140799575619804,,,L2_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,4,rtf_median,2.713693106783357,,,L4_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,8,rtf_median,1.5235864816313736,,,L8_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,16,rtf_median,0.9385084410102658,,,L16_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,32,rtf_median,0.5066798219671088,,,L32_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,64,rtf_median,0.3361714659516744,,,L64_N240_R1_fs1e6_F0
+b,RTF F0 N=240 R=1 1 MS/s,MEAS,L,128,rtf_median,0.1645212024758104,,,L128_N240_R1_fs1e6_F0
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,1,rtf_median,5.141615196035678,,,L1_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,2,rtf_median,2.8368280622702065,,,L2_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,4,rtf_median,2.3363848746663307,,,L4_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,8,rtf_median,1.2651430384816262,,,L8_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,16,rtf_median,0.9058811612682469,,,L16_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,32,rtf_median,0.48290133632875337,,,L32_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,64,rtf_median,0.3062596612279436,,,L64_N240_R1_fs1e6_F1
+b,RTF F1 N=240 R=1 1 MS/s,MEAS,L,128,rtf_median,0.15974675549162767,,,L128_N240_R1_fs1e6_F1
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,1,rtf_median,4.169356464829623,,,L1_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,2,rtf_median,2.3326093153961227,,,L2_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,4,rtf_median,1.9948083771722214,,,L4_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,8,rtf_median,1.0007804314498412,,,L8_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,16,rtf_median,0.7500228936716143,,,L16_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,32,rtf_median,0.3858042993591058,,,L32_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,64,rtf_median,0.2628807361914886,,,L64_N240_R1_fs1e6_F2
+b,RTF F2 N=240 R=1 1 MS/s,MEAS,L,128,rtf_median,0.1400374191808872,,,L128_N240_R1_fs1e6_F2
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,1,rtf_median,1.5552752315732599,,,L1_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,2,rtf_median,0.9525413285538664,,,L2_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,4,rtf_median,0.5778113645018993,,,L4_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,8,rtf_median,0.3173858775137079,,,L8_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,16,rtf_median,0.2062864262381859,,,L16_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,32,rtf_median,0.11235667625007954,,,L32_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,64,rtf_median,0.06952420134758051,,,L64_N240_R1_fs1e6_F3
+b,RTF F3 N=240 R=1 1 MS/s,MEAS,L,128,rtf_median,0.036146707559807804,,,L128_N240_R1_fs1e6_F3
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,1,rtf_median,1.4624433169431112,,,L1_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,2,rtf_median,0.912441854068118,,,L2_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,4,rtf_median,0.5589400704624984,,,L4_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,8,rtf_median,0.30295591625788687,,,L8_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,16,rtf_median,0.20495594175600107,,,L16_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,32,rtf_median,0.10850281485472345,,,L32_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,64,rtf_median,0.06979421646283354,,,L64_N240_R1_fs1e6_F4
+b,RTF F4 N=240 R=1 1 MS/s,MEAS,L,128,rtf_median,0.035814766122246725,,,L128_N240_R1_fs1e6_F4
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,1,aggregate_msps,1.2721625272545414,,,L1_N240_R1_fs1e5_F1; n_rx=1 x f_s x RTF=12.721625272545415 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,2,aggregate_msps,1.5657480786399518,,,L2_N240_R1_fs1e5_F1; n_rx=2 x f_s x RTF=7.828740393199759 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,4,aggregate_msps,1.1822456179352665,,,L4_N240_R1_fs1e5_F1; n_rx=2 x f_s x RTF=5.911228089676333 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,8,aggregate_msps,1.3164062488490282,,,L8_N240_R1_fs1e5_F1; n_rx=4 x f_s x RTF=3.2910156221225706 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,16,aggregate_msps,0.9605155395466364,,,L16_N240_R1_fs1e5_F1; n_rx=4 x f_s x RTF=2.401288848866591 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,32,aggregate_msps,0.9916460310195595,,,L32_N240_R1_fs1e5_F1; n_rx=8 x f_s x RTF=1.2395575387744493 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,64,aggregate_msps,0.6457357266546936,,,L64_N240_R1_fs1e5_F1; n_rx=8 x f_s x RTF=0.807169658318367 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e5 N=240 R=1 F1,MEAS,L,128,aggregate_msps,0.6452402882968946,,,L128_N240_R1_fs1e5_F1; n_rx=16 x f_s x RTF=0.40327518018555913 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,1,aggregate_msps,5.141615196035678,,,L1_N240_R1_fs1e6_F1; n_rx=1 x f_s x RTF=5.141615196035678 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,2,aggregate_msps,5.673656124540413,,,L2_N240_R1_fs1e6_F1; n_rx=2 x f_s x RTF=2.8368280622702065 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,4,aggregate_msps,4.672769749332661,,,L4_N240_R1_fs1e6_F1; n_rx=2 x f_s x RTF=2.3363848746663307 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,8,aggregate_msps,5.060572153926505,,,L8_N240_R1_fs1e6_F1; n_rx=4 x f_s x RTF=1.2651430384816262 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,16,aggregate_msps,3.6235246450729877,,,L16_N240_R1_fs1e6_F1; n_rx=4 x f_s x RTF=0.9058811612682469 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,32,aggregate_msps,3.863210690630027,,,L32_N240_R1_fs1e6_F1; n_rx=8 x f_s x RTF=0.48290133632875337 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,64,aggregate_msps,2.450077289823549,,,L64_N240_R1_fs1e6_F1; n_rx=8 x f_s x RTF=0.3062596612279436 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=1e6 N=240 R=1 F1,MEAS,L,128,aggregate_msps,2.5559480878660428,,,L128_N240_R1_fs1e6_F1; n_rx=16 x f_s x RTF=0.15974675549162767 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,1,aggregate_msps,15.463699160649208,,,L1_N240_R1_fs5.76e6_F1; n_rx=1 x f_s x RTF=2.6846699931682654 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,2,aggregate_msps,18.622850143466184,,,L2_N240_R1_fs5.76e6_F1; n_rx=2 x f_s x RTF=1.6165668527314399 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,4,aggregate_msps,13.155290150317457,,,L4_N240_R1_fs5.76e6_F1; n_rx=2 x f_s x RTF=1.1419522699928348 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,8,aggregate_msps,14.750392661592644,,,L8_N240_R1_fs5.76e6_F1; n_rx=4 x f_s x RTF=0.6402080148260696 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,16,aggregate_msps,10.035697364036897,,,L16_N240_R1_fs5.76e6_F1; n_rx=4 x f_s x RTF=0.4355771425363237 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,32,aggregate_msps,11.231190329176993,,,L32_N240_R1_fs5.76e6_F1; n_rx=8 x f_s x RTF=0.24373242901859793 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,64,aggregate_msps,6.656450310576665,,,L64_N240_R1_fs5.76e6_F1; n_rx=8 x f_s x RTF=0.14445421680938944 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=5.76e6 N=240 R=1 F1,MEAS,L,128,aggregate_msps,6.913027477939835,,,L128_N240_R1_fs5.76e6_F1; n_rx=16 x f_s x RTF=0.07501114884917355 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,1,aggregate_msps,26.723498745053146,,,L1_N240_R1_fs23.04e6_F1; n_rx=1 x f_s x RTF=1.159874077476265 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,2,aggregate_msps,32.33613726682059,,,L2_N240_R1_fs23.04e6_F1; n_rx=2 x f_s x RTF=0.7017390899917664 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,4,aggregate_msps,20.559435884432148,,,L4_N240_R1_fs23.04e6_F1; n_rx=2 x f_s x RTF=0.44616831346423935 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,8,aggregate_msps,25.118549603151838,,,L8_N240_R1_fs23.04e6_F1; n_rx=4 x f_s x RTF=0.27255370663142187 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,16,aggregate_msps,14.893718036716033,,,L16_N240_R1_fs23.04e6_F1; n_rx=4 x f_s x RTF=0.16160718355811668 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,32,aggregate_msps,16.70244151383847,,,L32_N240_R1_fs23.04e6_F1; n_rx=8 x f_s x RTF=0.09061654467143267 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,64,aggregate_msps,9.444295679025897,,,L64_N240_R1_fs23.04e6_F1; n_rx=8 x f_s x RTF=0.051238583328048495 (points.csv aggregate_msps_median not used)
+c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,128,aggregate_msps,10.919072027943876,,,L128_N240_R1_fs23.04e6_F1; n_rx=16 x f_s x RTF=0.029619878548024836 (points.csv aggregate_msps_median not used)
+a,RTF = 1 reference,MEAS,,,rtf,1.0,,,
+a,"max L with RTF >= 1 (F1, 1 MS/s, every N; summary)",MEAS,,,links,8.0,,,"{""N40"": 8, ""N240"": 8, ""N900"": 8, ""N4096"": 8, ""N16384"": 8}"

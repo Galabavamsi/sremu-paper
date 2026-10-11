@@ -18,7 +18,9 @@ Checks (both modes unless noted)
      allowed; numbers glued to units (5.2ms, 3x, 1e-3) are numbers. Inside math, decimals,
      integers >= 2 after a relation (N = 1024) and integers with a unit are flagged.
   6. Every \\claim{ID} marker names a claim in claims.yaml.
-Planned-content stubs (\\sremustub{...}) are excluded from 3-5; a final build refuses
+  7. REPORTED numbers (numbers.yaml source type `reported`): every `cite` key is in refs.bib,
+     and every text unit that uses the macro cites all of its keys.
+Planned-content stubs (\\sremustub{...}) are excluded from 3-5 and 7; a final build refuses
 them anyway.
 
 Usage: python tools/check_claims.py [--mode draft|final] [--junit FILE ...] [--paper-root DIR]
@@ -437,6 +439,64 @@ def check_macro_values(paper_root: Path, claims: list[Claim], mode: str, rep: Re
             check_tex_string(f"numbers:{m.macro}", value, claims, mode, rep, numbers=False)
 
 
+_CITE_CMD_RE = re.compile(r"\\cite[a-zA-Z]*\*?(?:\[[^\]]*\])*\{([^}]*)\}")
+_CITE_GROUP_RE = re.compile(r"SREMUCITEGROUP(\d+)Z")
+
+
+def units_with_cites(raw: str) -> list[tuple[str, set[str]]]:
+    """Text units of ``raw`` (as split_units sees them) with the BibTeX keys each one cites.
+
+    Each \\cite becomes a numbered marker before prepare(), so the keys survive the markup
+    removal and land in the unit of the citation; comments and stubs drop out as usual."""
+    groups: list[list[str]] = []
+
+    def mark(m: re.Match[str]) -> str:
+        groups.append([k.strip() for k in m.group(1).split(",") if k.strip()])
+        return f" SREMUCITEGROUP{len(groups) - 1}Z "
+
+    marked = _CITE_CMD_RE.sub(mark, strip_tex_comments(raw))
+    out = []
+    for unit in split_units(prepare(marked)):
+        keys = {k for g in _CITE_GROUP_RE.findall(unit) for k in groups[int(g)]}
+        out.append((unit, keys))
+    return out
+
+
+def check_reported_numbers(
+    files: list[Path], paper_root: Path, bib_keys: set[str], rep: Report
+) -> None:
+    """Rule 7 for third-party numbers: a `reported` macro is a literature value, so every
+    sentence or table row that uses it must cite the record(s) its `cite` list names."""
+    try:
+        spec = load_numbers_spec(paper_root / "numbers.yaml")
+    except (OSError, ValueError, KeyError) as exc:
+        rep.error(f"cannot load numbers.yaml: {exc}")
+        return
+    reported = {m.macro: m for m in spec if m.source_type == "reported"}
+    for m in reported.values():
+        for key in m.cite:
+            if key not in bib_keys:
+                rep.error(f"numbers:{m.macro}: cite key {key} not in refs.bib")
+    used: set[str] = set()
+    for f in files:
+        rel = f.relative_to(paper_root).as_posix()
+        for unit, keys in units_with_cites(read_text(f)):
+            for name in dict.fromkeys(re.findall(r"\\([A-Za-z]+)", unit)):
+                m = reported.get(name)
+                if m is None:
+                    continue
+                used.add(name)
+                missing = [k for k in m.cite if k not in keys]
+                if missing:
+                    text = _CITE_GROUP_RE.sub("\\\\cite", unit)
+                    snippet = text[:90] + ("..." if len(text) > 90 else "")
+                    rep.error(f"{rel}: reported number \\{name} without citing "
+                              f"{', '.join(missing)} in the same sentence: {snippet}")
+    unused = sorted(set(reported) - used)
+    if unused:
+        rep.note(f"reported macros not used in the text: {unused}")
+
+
 # --------------------------------------------------------------------------- driver
 def default_junit(paper_root: Path) -> list[Path]:
     return sorted((paper_root / "generated" / "junit").glob("*.xml"))
@@ -487,6 +547,7 @@ def check_claims(
     gen_tables = sorted((paper_root / "generated" / "tables").glob("*.tex"))
     check_text(gen_tables, paper_root, claims, mode, rep, numbers=False)
     check_macro_values(paper_root, claims, mode, rep)
+    check_reported_numbers(text_files + gen_tables, paper_root, bib_keys, rep)
     return rep
 
 

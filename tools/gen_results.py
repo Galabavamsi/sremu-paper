@@ -18,8 +18,9 @@ table4_vv.tex``, ``table5_lab.tex``, ``table8_ablation.tex``. Every value fits t
 Rounding: decimals are rounded half-even on the exact decimal value of the source
 (``Decimal(repr(x))``); the Tang bias is the exact mean of the two-decimal digitized values
 (197/200 = 0.985 -> 0.98); the Tang curve deviation is a bound (max rounded UP to 0.01 dB).
-Macros of PENDING studies (B1-B6, E-F latency) and of the V-LAB lock and
-deposit (human gate H-6) are deliberately absent: they stay placeholders.
+Section VI values and Table VII come from ``sweeps/results/bench`` through
+``tools/bench_results.py``. Macros of PENDING results (F5 native-ZMQ rerun, E-F latency) and of
+the V-LAB lock and deposit (human gate H-6) are deliberately absent: they stay placeholders.
 
 Usage: python tools/gen_results.py [--paper-root DIR] [--check]
 """
@@ -100,6 +101,12 @@ def sci(x: float, sig: int = 2) -> str:
 
 def pct(x: float, nd: int = 0) -> str:
     return dec(100.0 * x, nd)
+
+
+def prose_count(n: int) -> str:
+    """A count in running text (IEEE style): zero to nine spelled out, numerals above."""
+    words = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+    return words[n] if 0 <= n <= 9 else integer(n)
 
 
 # --------------------------------------------------------------------------- inputs
@@ -209,9 +216,13 @@ def render_table4(js: dict[str, Any]) -> str:
         r" backend. Tolerances and oracles of every identifier are fixed in the specification;"
         r" Appendix~\ref{app:oracles} describes the oracle families. PH-12, a regression value"
         r" of the experimental P.526 module that lies outside every gate, is not counted; "
+        # "missing" is the expected status: the PH-12 tests (sremu tests/experimental, marker
+        # `experimental`) are deselected by the paper-junit markers (CI + nightly, D21);
+        # tests/test_gen_results_text.py checks that this sentence still holds in sremu.
         + {"passed": "its implementation tests passed.",
-           "missing": "this record has no implementation test of it."}.get(
-               js["ph12_status"], f"its status is {js['ph12_status']}.") + "}",
+           "missing": "its implementation tests run in the experimental test tier, outside"
+                      " the continuous-integration and nightly runs that this record covers."
+           }.get(js["ph12_status"], f"its status is {js['ph12_status']}.") + "}",
         r"\label{tab:vv}",
         r"\centering",
         r"\footnotesize",
@@ -562,19 +573,31 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
         if arc_meta["geometry_label"] not in read_json(arc / name)["assumptions"]:
             raise SystemExit(f"gen_results: E-B arc {name} lacks the geometry label")
     arc_scen = read_yaml(arc_path)
-    # The run's manifests carry no git commit; the commit comes from the job's export and is
-    # tied to the run by the code hashes (meta.json "commit_verified": the tree of the commit,
-    # rebuilt read-only from its git objects, hashes to the run's src/sremu tree hash).
+    # Either the run records its commit (git_state.json and every point manifest, as a
+    # regeneration job does: experiments/finalize.py --eb-arc) or, for the first AWS run whose
+    # manifests carry no git commit, the commit comes from the job's export and is tied to the
+    # run by the code hashes (meta.json "commit_verified": the tree of the commit, rebuilt
+    # read-only from its git objects, hashes to the run's src/sremu tree hash).
+    arc_gs = read_json(arc / "git_state.json")
     arc_ver = arc_meta["sremu"].get("commit_verified") or {}
-    if not (arc_ver.get("src_tree_equals_run") and arc_ver.get("src_sremu_tree_sha256_at_commit")
-            == read_json(arc / "git_state.json")["code"]["src_sremu_tree_sha256"]):
+    arc_shared = (read_json(arc / "run_manifests.json").get("shared") or {}) if (
+        arc / "run_manifests.json").is_file() else {}
+    arc_recorded = (arc_gs.get("commit") is not None and arc_gs.get("dirty") is False
+                    and arc_gs["commit"] == arc_meta["sremu"]["commit"]
+                    and (arc_shared.get("git_commit"), arc_shared.get("git_dirty"))
+                    == (arc_gs["commit"], False))
+    if not (arc_recorded or (arc_ver.get("src_tree_equals_run")
+                             and arc_ver.get("src_sremu_tree_sha256_at_commit")
+                             == arc_gs["code"]["src_sremu_tree_sha256"])):
         raise SystemExit("gen_results: the E-B arc commit is not tied to the run's code hashes")
     prov["E-B-arc"] = {
         "results": "sweeps/results/E-B-arc", "run_id": arc_meta["run"]["run_id"],
         "sremu_commit": arc_meta["sremu"]["commit"], "sremu_dirty": arc_meta["sremu"]["dirty"],
-        "commit_source": "SREMU_GIT_COMMIT export of the AWS job (host/job_stdout.txt); the "
-                         "commit's src/sremu tree hash equals the run's (meta.json "
-                         "sremu.commit_verified)",
+        "commit_source": ("recorded by the run (git_state.json and every point manifest)"
+                          if arc_recorded else
+                          "SREMU_GIT_COMMIT export of the AWS job (host/job_stdout.txt); the "
+                          "commit's src/sremu tree hash equals the run's (meta.json "
+                          "sremu.commit_verified)"),
         "aws_instance": arc_meta["host"]["instance_type"],
         "geometry_label": arc_meta["geometry_label"], "t_end_utc": arc_sum["t_end_utc"],
     }
@@ -654,7 +677,7 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     n_panels = {int(r["n_panels"]) for r in a1}
     if n_panels != {len(arc_scen["ris"])}:
         raise SystemExit("gen_results: E-B arc panel count differs from the scenario")
-    v["numEbArcPanels"] = str(n_panels.pop())
+    v["txtEbArcPanels"] = prose_count(n_panels.pop())
     grids = {(int(p["grid"]["n_u"]), int(p["grid"]["n_v"])) for p in arc_scen["ris"]}
     if len(grids) != 1:
         raise SystemExit("gen_results: E-B arc tiles differ in size")
@@ -765,7 +788,6 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     # ----- lab-like geometry (supporting): E-B1 / VA-5 and the LOS-blocked F9(d) slice
     eb1 = read_csv(sw / "E-B1" / "eb1_points.csv")
     va5 = read_json(sw / "E-B1" / "va5.json")
-    v["numVaFivePass"] = str(va5["n_pass"])
     v["numVaFiveTotal"] = str(va5["n_step_switches_inside_packet"])
     if not (va5["pass"] and va5["all_before_bitwise_identical"]
             and va5["n_pass"] == va5["n_step_switches_inside_packet"]):
@@ -774,7 +796,6 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     if not abs(float(blk["ber"]) - int(blk["bit_errors"]) / payload_bits) < 1e-12:
         raise SystemExit("gen_results: E-B payload size changed")
     v["numEbOneErrors"] = str(int(blk["bit_errors"]))
-    v["numEbOneEvmDb"] = dec(blk["evm_db"], 1)
     v["numEbBlockedChangeDb"] = dec(blk["rx1_total_change_db"], 1)
     v["numEbBlockedRotDeg"] = dec(abs(float(blk["rx1_total_rotation_deg"])), 0)
     eb2 = read_csv(sw / "E-B2" / "eb2_per.csv")
@@ -787,7 +808,6 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
         if (Fraction(lead_f9) > lat_fixed + Fraction(j)) != (p == 0.0):
             raise SystemExit(f"gen_results: lab-like timed (lead {lead_f9}) at J = {j} does "
                              "not follow the lead rule")
-    v["numEbTimedFivePer"] = dec(eb2_row(eb2, "timed", "3/1000", lead="1/200")["per"], 0)
     v["numEbTimedTwoPerThreePct"] = pct(float(eb2_row(eb2, "timed", "3/1000",
                                                       lead=lead_f9)["per"]), 0)
     v["numEbAsapPerOnePct"] = pct(float(eb2_row(eb2, "asap", "1/1000")["per"]), 0)
@@ -929,6 +949,17 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     fmeta = read_json(fm / "meta.json")
     prov["V-FM"] = {"run": FM_RUN, "sremu_commit": fmeta.get("sremu_commit"),
                     "sremu_dirty": fmeta.get("sremu_dirty")}
+
+    # ---------------------------------------------------------------- VI: B1-B6, Table VII
+    from bench_results import bench_values  # sweeps/results/bench (MEAS; F5 stays pending)
+
+    bv, bprov, btables = bench_values(paper_root)
+    clash = sorted(set(bv) & set(v))
+    if clash:
+        raise SystemExit(f"gen_results: benchmark macros computed twice: {clash}")
+    v.update(bv)
+    prov["bench"] = bprov
+    tables.update(btables)
     return {k: s for k, s in v.items() if s is not None}, prov, tables
 
 

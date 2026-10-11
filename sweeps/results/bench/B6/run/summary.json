@@ -1,0 +1,53 @@
+{
+  "suite": "b6",
+  "per_N_us": {
+    "256": {
+      "sremu_numba_cpu_snapshot+combine": 197.5,
+      "sremu_numba_cpu_combine_only": 42.2,
+      "sremu_numpy_ref_snapshot+combine": 235.30000000000004,
+      "sremu_numpy_ref_combine_only": 50.400000000000006,
+      "matlab_hand_vec": 85.75335,
+      "matlab_hand_loop": 91.25335,
+      "matlab_toolbox_golden_util_k1": 809.55335,
+      "matlab_risreflector_step": 223.45335
+    },
+    "1024": {
+      "sremu_numba_cpu_snapshot+combine": 219.0,
+      "sremu_numba_cpu_combine_only": 47.800000000000004,
+      "sremu_numpy_ref_snapshot+combine": 275.70000000000005,
+      "sremu_numpy_ref_combine_only": 58.7,
+      "matlab_hand_vec": 103.75335000000001,
+      "matlab_hand_loop": 289.17335,
+      "matlab_toolbox_golden_util_k1": 1052.85335,
+      "matlab_risreflector_step": 255.69334999999998
+    },
+    "4096": {
+      "sremu_numba_cpu_snapshot+combine": 321.5,
+      "sremu_numba_cpu_combine_only": 67.2,
+      "sremu_numpy_ref_snapshot+combine": 431.6,
+      "sremu_numpy_ref_combine_only": 102.10000000000001,
+      "matlab_hand_vec": 284.72335,
+      "matlab_hand_loop": 1110.35335,
+      "matlab_toolbox_golden_util_k1": 2071.8533500000003,
+      "matlab_risreflector_step": 461.860016666667
+    }
+  },
+  "tools_run": [
+    "MATLAB",
+    "sremu"
+  ],
+  "matlab_same_model_max_abs_h_diff_db": 7.815970093361102e-14,
+  "background_busy_by_section": {
+    "sremu": {
+      "n": 9,
+      "mean": 0.27711621695983696,
+      "max": 0.4107144350649646
+    },
+    "matlab": {
+      "n": 24,
+      "mean": 0.3760212065134941,
+      "max": 0.7632575757575758
+    }
+  },
+  "interrupted": null
+}

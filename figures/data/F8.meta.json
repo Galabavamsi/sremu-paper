@@ -1,0 +1,129 @@
+{
+  "figure": "F8",
+  "title": "Paced mode and control loop on AWS c7i.8xlarge (B3, B4): (a) deadline-miss rate vs slack = page-latency CCDF, headless runs and served runs with commands; (b) largest Sustainable link count per configuration; (c) visible command latency vs command rate, timed and asap; (d) late timed commands and pages missing the 1 ms deadline vs command rate",
+  "content_key": "db84b0e7bfbbdcaec7b972ae805ccb64b877dcc93f25b9f6c174925599b752b7",
+  "sremu_commit": "e460da6873324f59616a3c014c066da9bfec3728",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_classes_in_rows": [
+    "MEAS"
+  ],
+  "inputs": [
+    {
+      "path": "sweeps/results/bench/B3/run/points.csv",
+      "data_class": "MEAS",
+      "run_id": "20261011T074437Z_b3_server",
+      "host": "c7i.8xlarge",
+      "sremu_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "sha256": "0780193b27bc99f1644e68cc4612cbd05889ce5fcfe513aea322083104d4663c"
+    },
+    {
+      "path": "sweeps/results/bench/B3/run/latency_hist.json",
+      "data_class": "MEAS",
+      "sha256": "fe383ecfd1de2462952225465b1a75ef5183ccd096d5293e2ef9119dffe2d6cc"
+    },
+    {
+      "path": "sweeps/results/bench/B3/run/summary.json",
+      "data_class": "MEAS",
+      "sha256": "97cc2df931fd0950e347162fd8e3871d9d78b9df4807e643beda5c8ca0e3d8fb"
+    },
+    {
+      "path": "sweeps/results/bench/B3/meta.json",
+      "data_class": "MEAS",
+      "sha256": "55f6e493ab11e10cccd55332ea70ab7b81e399505a65b61f9827f85c50975964"
+    },
+    {
+      "path": "sweeps/results/bench/B4/paced/paced.json",
+      "data_class": "MEAS",
+      "run_id": "20261011T074639Z_b4_paced",
+      "host": "c7i.8xlarge",
+      "sremu_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "sha256": "663c65d6fbdf6af444ba3a756914b7d020f2cbbf3239ccd5780615127c2e1a10"
+    },
+    {
+      "path": "sweeps/results/bench/B4/paced/summary.json",
+      "data_class": "MEAS",
+      "sha256": "b397d26ebdeaac16185c11d0e3a52f9fe3fab5e5444a466e59ae011898cdff72"
+    },
+    {
+      "path": "sweeps/results/bench/B4/meta.json",
+      "data_class": "MEAS",
+      "sha256": "6204b5ba6d86ec0ababf03d3ec56bf00863e545975bcf4bd61cf7216f9d27463"
+    }
+  ],
+  "assumptions": [
+    "B3 headless paced runs: in-process TX generators, RX kept in the engine, no transport; B4: engine served over the control socket, one external command process",
+    "page latency = delivery - release; miss rate at slack s = P(latency > s); zero slack is missed by construction",
+    "CCDF pooled over the repetitions of a point (log-linear histograms, 1 us resolution); B4 served runs shown by their reported percentiles only",
+    "timed commands: at = client's estimate of virtual time + 2 ms lead",
+    "protocol: {\"warmup_s\": 5.0, \"measure_s\": 60.0, \"reps\": 3, \"min_pages_per_rep\": 46876, \"meets_12_3\": true}"
+  ],
+  "profile": "full",
+  "script": "figures/src/f08_paced.py",
+  "script_sha256": "7956551c2273c1c2b2913e7396b40f1688040b624dea892458d81aa509b7e8a2",
+  "outputs": {
+    "figures/out/F8.pdf": "2239f91051a22f5916844ab7636961e683157d8ec8a81fb1cfcf692d30835324",
+    "figures/data/F8.csv": "f82447da1c1d15ac22cb6d80110fec0b2b07419558d285f4cc07804d50194e97"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T11:28:02Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1576,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  },
+  "b4_paced_summary": {
+    "timed@10Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 10.015075976929834,
+      "engine_bound_reps": 0
+    },
+    "asap@10Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 10.015055502352782,
+      "engine_bound_reps": 0
+    },
+    "timed@100Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 100.01068645350868,
+      "engine_bound_reps": 0
+    },
+    "asap@100Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 100.01096735463481,
+      "engine_bound_reps": 0
+    },
+    "timed@1000Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 295.2049440479387,
+      "engine_bound_reps": 3
+    },
+    "asap@1000Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 427.56555979875276,
+      "engine_bound_reps": 3
+    },
+    "timed@10000Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 290.8524170265557,
+      "engine_bound_reps": 3
+    },
+    "asap@10000Hz": {
+      "sustainable_reps": 0,
+      "achieved_rate_hz_median": 420.12203745221296,
+      "engine_bound_reps": 3
+    }
+  }
+}

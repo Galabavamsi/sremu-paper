@@ -394,15 +394,22 @@ class NumberMacro:
     max_chars: int
     expr: str | None = None  # source type `code`: expression evaluated in module source_id
     fmt: str | None = None  # source type `code`: format of the value (see resolve_code_numbers)
+    cite: tuple[str, ...] = ()  # source type `reported`: BibTeX keys that report the value
 
 
 NUMBER_SOURCE_TYPES = (
     "test", "figure", "study", "benchmark", "experiment", "definition", "data", "code",
+    "reported",
 )
 # `code`: a constant or default of the committed sremu code, read by the pipeline from the
 # installed (in final builds: the pinned) sremu at build time, so the paper cannot describe a
 # value the code does not have. source = {type: code, id: <module>, expr: <expression>,
 # fmt: <format>}; see tools/resolve_code_numbers.py for the expression namespace and formats.
+# `reported`: a third-party number quoted from the literature (data class REPORTED, DESIGN 1.6
+# and 11), never an sremu result. source = {type: reported, id: <bibkey>, cite: [<bibkey>,
+# ...]} with a fixed `value`; check_claims.py requires every cite key in refs.bib and cited in
+# each sentence or table row that uses the macro.
+FIXED_VALUE_SOURCE_TYPES = ("definition", "data", "reported")
 MODULE_RE = re.compile(r"^sremu(?:\.[A-Za-z_][A-Za-z0-9_]*)*$")
 
 
@@ -422,8 +429,21 @@ def load_numbers_spec(path: Path | None = None) -> list[NumberMacro]:
         if src["type"] not in NUMBER_SOURCE_TYPES:
             raise ValueError(f"{name}: unknown source type {src['type']!r}")
         value = item.get("value")
-        if value is not None and src["type"] not in ("definition", "data"):
-            raise ValueError(f"{name}: a fixed value is allowed only for definition/data sources")
+        if value is not None and src["type"] not in FIXED_VALUE_SOURCE_TYPES:
+            raise ValueError(
+                f"{name}: a fixed value is allowed only for definition/data/reported sources")
+        cite = src.get("cite")
+        if src["type"] == "reported":
+            if value is None:
+                raise ValueError(f"{name}: a reported source needs the quoted value (value)")
+            if (not isinstance(cite, list) or not cite
+                    or not all(isinstance(k, str) and k.strip() for k in cite)):
+                raise ValueError(f"{name}: a reported source needs a list of BibTeX keys "
+                                 "(source.cite)")
+            if str(src["id"]) not in [k.strip() for k in cite]:  # id = the record checked
+                raise ValueError(f"{name}: reported source id {src['id']!r} is not in source.cite")
+        elif cite is not None:
+            raise ValueError(f"{name}: cite is allowed only for reported sources")
         expr = src.get("expr")
         if src["type"] == "code":
             if not isinstance(expr, str) or not expr.strip():
@@ -445,6 +465,7 @@ def load_numbers_spec(path: Path | None = None) -> list[NumberMacro]:
                 max_chars=int(item.get("max_chars", 8 if kind == "number" else 80)),
                 expr=None if expr is None else str(expr),
                 fmt=None if src.get("fmt") is None else str(src["fmt"]),
+                cite=tuple(k.strip() for k in cite or ()),
             )
         )
     return out

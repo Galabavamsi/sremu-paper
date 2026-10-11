@@ -1,0 +1,159 @@
+{
+  "benchmark": "B4",
+  "description": "Control loop: lockstep command lateness (in-process and remote barrier controllers, 10 Hz-10 kHz) and paced asynchronous commands (timed with a 2 ms lead, or asap) from an external process over the control socket, B2 base scene with 2 links; copied unchanged, plus the offline-recomputed lockstep summary",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "wall-clock and paced timing on the stated Linux host"
+  },
+  "runs": {
+    "lockstep": {
+      "run_id": "20261011T074442Z_b4_lockstep",
+      "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T074328Z_b4_72b790\\out\\runs\\20261011T074442Z_b4_lockstep",
+      "t_start_utc": "2026-10-11T07:44:42.509539Z",
+      "t_end_utc": "2026-10-11T07:46:38.593766Z",
+      "argv": [
+        "/opt/job/sremu/bench/b4_control.py",
+        "--part",
+        "lockstep",
+        "--out",
+        "/opt/job/out/runs"
+      ]
+    },
+    "paced": {
+      "run_id": "20261011T074639Z_b4_paced",
+      "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T074328Z_b4_72b790\\out\\runs\\20261011T074639Z_b4_paced",
+      "t_start_utc": "2026-10-11T07:46:39.107885Z",
+      "t_end_utc": "2026-10-11T08:14:24.948485Z",
+      "argv": [
+        "/opt/job/sremu/bench/b4_control.py",
+        "--part",
+        "paced",
+        "--budget-min",
+        "88",
+        "--out",
+        "/opt/job/out/runs"
+      ],
+      "protocol": {
+        "warmup_s": 5.0,
+        "measure_s": 60.0,
+        "reps": 3,
+        "min_pages_per_rep": 117189,
+        "meets_12_3": true
+      },
+      "timed_lead_s": "2e-3 (bench/b4_control.py paced_point --lead-s; not recorded in the run files)"
+    },
+    "job": "20261011T074328Z_b4_72b790"
+  },
+  "recomputed": {
+    "file": "lockstep/summary_recomputed.json",
+    "command": "python -m bench.b4_control --recompute paper/sweeps/results/bench/B4/lockstep (sremu bench, offline, no rerun)",
+    "what_changed": "lockstep_check_ok false -> true: the only 'problems' were one command per 10 kHz run left 'scheduled' because its switch lies after the end of the 1 s run (reproduced: t_req = 1.000082 s, switch sample 1,000,082 >= end 1,000,000); the corrected check accepts up to after_end_bound() = 2 such commands at 10 kHz for rows without the new scheduled_after_end field. Lateness, statuses and RTFs are unchanged. The original lockstep/summary.json is kept unchanged."
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.8xlarge",
+    "instance_id": "i-033f4e2504e465715",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws, #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 32,
+      "threads_per_core": 2,
+      "cores_per_socket": 16,
+      "sockets": 1,
+      "numa_nodes": 1,
+      "l3": "105 MiB (1 instance)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       64765944 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "cpu_plan": {
+      "engine": "1-8,17-24",
+      "clients": "9-10,25-26",
+      "reserved": "0,16"
+    },
+    "pinning": {
+      "affinity": "1-8,17-24",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": "16",
+        "SREMU_CPUS": "1-8,17-24",
+        "SREMU_CLIENT_CPUS": "9-10,25-26",
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 831.0,
+      "min": 0.0,
+      "max": 0.025493057266584726,
+      "mean": 0.002948729465753376,
+      "p50": 0.002683249422170922,
+      "p90": 0.004883660327567277,
+      "p99": 0.021378775291455245
+    },
+    "job_results_tgz_sha256": "e5f16e5fe89776d174c6145a1614a96ea1c162346d6b8af075885e91cd80caf7",
+    "launch": {
+      "run_id": "20261011T074328Z_b4_72b790",
+      "git_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "git_dirty": "0",
+      "instance_id": "i-033f4e2504e465715",
+      "type": "c7i.8xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "7c34d406b498f51e45654316fc4b6e0251dbcaef6a8d33ef63908f8e8fa42c48",
+      "results_key": "sremu/jobs/20261011T074328Z_b4_72b790/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=0; bash bench/aws/job.sh b4 --deadline-min 95",
+      "maxmin": 120
+    }
+  },
+  "sremu": {
+    "commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+    "dirty_flag_recorded": false,
+    "commit_source": "SREMU_GIT_COMMIT / SREMU_GIT_DIRTY=0 exported by the AWS job script (host/job_stdout.txt); manifests record git_dirty false"
+  },
+  "caveats": [
+    "Paced served runs: no repetition is Sustainable (1 ms-slack miss rate 4.5-5.5 % at 10 Hz, 19-21 % at 100 Hz, 100 % at >= 1 kHz); see bench_findings.md a, b.",
+    "Visible latency mixes the server's time.monotonic_ns() receive stamp with the engine's perf_counter_ns(); both are CLOCK_MONOTONIC on Linux (valid here), not on Windows.",
+    "Timed commands: the 2 ms lead is below the measured command latency, so many are late (applied on arrival, as designed).",
+    "Lockstep 'visible latency' is wall time until the engine computed the switch sample, not a real-time latency."
+  ],
+  "used_by": [
+    "figures/src/f08_paced.py (F8 c, d)",
+    "tools/bench_results.py"
+  ],
+  "files": {
+    "host/job_host_prep.txt": "0f89b8995799d16ed81a63509f284b03926abf088aeab7630992aa23b52caf6b",
+    "host/job_stdout.txt": "21baa155b6e7c8dce0fb0255e0b25c2a82a30cb81a9f1248685a60299f432752",
+    "host/lscpu.txt": "02fd2043eb0ab35f498ce55199ec586db7a63df0fbd7584117500ce1568c5bda",
+    "host/meminfo.txt": "87da6f383d9d9ae618ef4eadd3e23b1284ea738366941207a6bc95b35fde939e",
+    "host/status.json": "46c4c990eab872afed3c3a184df4c331201dbbb5803e9fbbc0fac02587a6b4ef",
+    "host/sysinfo.json": "d75e1ed211334e91b314566e222feec6531bd5e34b34460e848e18ee75b7140f",
+    "lockstep/lockstep.csv": "41563da050c3b1be2e6fe79b17c4105df6f381ca87120e564050692e4b223af6",
+    "lockstep/lockstep.json": "612195d06c11aecc647db00836ded976bbcc87d5bddd878ef00e4e89577051d0",
+    "lockstep/manifest.json": "1fa0c168cec084daf338123a90c62feb4284fe4e5ddd7476ece433b011a2e77f",
+    "lockstep/meta.json": "1380dec3e05d0f779fb8d8f2115a303d4121034fb48ae2b8b90c210b86922648",
+    "lockstep/spec.json": "9f979ade607662811f41fcd6f9b58400e80b19d1770a1b8aa08b7087c3ff4588",
+    "lockstep/summary.json": "10fd94756bb6ea1091aaca9706ea5eaa0d32c6c7b7d0bbc04340c2478b2102e4",
+    "lockstep/summary_recomputed.json": "ef9c3f5b23700402b48fd4d36d0281deae5a8843753fcabddf6297127036032e",
+    "paced/manifest.json": "c3eabb4fb99c1c5a6711befcce8e9c7c59d9f20e1dad53dbada16d885f129a5a",
+    "paced/meta.json": "8a2c0f72663ec708934634d8f5fd1319ba46f96fb605ca8026f3fccf08ef5f7d",
+    "paced/paced.csv": "792a3aa867882e3953551d8e0d7c4af82e2fab73fd7f5ec65418226567e671e7",
+    "paced/paced.json": "663c65d6fbdf6af444ba3a756914b7d020f2cbbf3239ccd5780615127c2e1a10",
+    "paced/spec.json": "ae91ab1f7713e71a5fa3222daf796b18994605fe0743f4631d60c29015c4013f",
+    "paced/summary.json": "b397d26ebdeaac16185c11d0e3a52f9fe3fab5e5444a466e59ae011898cdff72"
+  },
+  "written_utc": "2026-10-11T10:33:19Z"
+}

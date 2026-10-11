@@ -1,0 +1,159 @@
+{
+  "benchmark": "B2",
+  "description": "Lockstep RTF and RTF_min over links x element count x RIS count x sample rate x feature sets F0..F5 (server plan, 909 points in 118 series, series pruning, 11 concurrent pinned workers, isolation check); copied unchanged (worker logs only for the four failed points)",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "wall-clock RTF on the stated host; SIM-sremu benchmark scenes with an asserted non-zero RIS path"
+  },
+  "run": {
+    "run_id": "20261011T084048Z_b2_server",
+    "job": "20261011T083630Z_b1b2_3c0c30",
+    "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T083630Z_b1b2_3c0c30\\out\\runs\\20261011T084048Z_b2_server",
+    "t_start_utc": "2026-10-11T08:40:48.148962Z",
+    "t_end_utc": "2026-10-11T09:26:52.622870Z",
+    "wall_s": 2761.464905729,
+    "argv": [
+      "/opt/job/sremu/bench/b2_lockstep.py",
+      "--plan",
+      "server",
+      "--workers",
+      "auto",
+      "--cpus-per-point",
+      "16",
+      "--budget-min",
+      "182",
+      "--out",
+      "/opt/job/out/runs"
+    ],
+    "points": {
+      "points_planned": 909,
+      "points_run": 889,
+      "points_ok": 876,
+      "points_below_floor": 9,
+      "points_failed": 4,
+      "points_not_in_plan": 2952
+    },
+    "failed_point_ids": [
+      "L1_N240_R1_fs1e6_F5",
+      "L1_N240_R1_fs5.76e6_F5",
+      "L4_N4096_R1_fs1e6_F5",
+      "L128_N240_R2_fs23.04e6_F5"
+    ],
+    "protocol": "per point: warm-up, wall-limited pilot, up to 3 repetitions of up to 1e4 pages (shorter than the paced protocol; each row states its virtual time and pages); RTF = min over RX streams of samples/f_s per wall second (DESIGN 12.1)"
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.48xlarge",
+    "instance_id": "i-0dce85a304ce25f0a",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws, #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 192,
+      "threads_per_core": 2,
+      "cores_per_socket": 48,
+      "sockets": 2,
+      "numa_nodes": 2,
+      "l3": "210 MiB (2 instances)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       389910472 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "cpu_plan": {
+      "engine": "1-8,97-104",
+      "clients": "9-10,105-106",
+      "reserved": "0,96"
+    },
+    "pinning": {
+      "affinity": "0,96",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": null,
+        "SREMU_CPUS": null,
+        "SREMU_CLIENT_CPUS": null,
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 1381.0,
+      "min": 0.012293537693756166,
+      "max": 0.8853630741442237,
+      "mean": 0.515749823231271,
+      "p50": 0.61885961219267,
+      "p90": 0.774532184557385,
+      "p99": 0.8434935365024583
+    },
+    "job_results_tgz_sha256": "7e54fe45d8f30cbd5d581433396913eba08e5007c8ea8dbff55fc25a1aff99de",
+    "launch": {
+      "run_id": "20261011T083630Z_b1b2_3c0c30",
+      "git_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "git_dirty": "1",
+      "instance_id": "i-0dce85a304ce25f0a",
+      "type": "c7i.48xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "c94ab132c5ab5cadb40f43c8439dbad29ef55bd77d2f42dca53277737bea7280",
+      "results_key": "sremu/jobs/20261011T083630Z_b1b2_3c0c30/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=1; bash bench/aws/job.sh b1b2 --deadline-min 210",
+      "maxmin": 240
+    }
+  },
+  "sremu": {
+    "commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+    "dirty_flag_recorded": true,
+    "dirty_note": "the launch exported SREMU_GIT_DIRTY=1 (host/job_stdout.txt line 1; every manifest records git_dirty true). The lead verified that the uploaded bundle's file tree is byte-identical to 'git archive 309c633': the flag only meant that the local checkout had unshipped edits. The runs therefore used the code of commit 309c633.",
+    "commit_source": "SREMU_GIT_COMMIT exported by the AWS job script (bundle without .git)"
+  },
+  "caveats": [
+    "F5 (native ZMQ transport): 3 points failed with an RX recv TIMEOUT (a transport stall being fixed by another track) and 1 point crashed in the benchmark on a below-floor pilot (fixed in bench/_engine_point.py). F5 results of this run are NOT reported; F5 is to be rerun after the transport fix.",
+    "Isolation: points ran 11 at a time; six reference points rerun alone were 0.99-1.16x faster (run/isolation.csv). Packed RTFs are conservative by up to 16 %.",
+    "aggregate_msps_median in run/points.csv is overstated (~2x): the engine's RtfMeter.report() counts samples produced before reset_metrics() (sremu metrics/rt.py). The paper recomputes aggregate throughput as n_rx * f_s * RTF (exact for these single-rate-group scenes); research/analysis/bench_findings.md h.",
+    "9 below-floor points (heaviest F3, L >= 64) carry only a pilot RTF and are not reported as measured."
+  ],
+  "used_by": [
+    "figures/src/f07_lockstep.py (F7)",
+    "tools/bench_results.py"
+  ],
+  "files": {
+    "host/job_host_prep.txt": "e9b3ba3262c0a69c087321e5b9a9ae94376339a0546d96d6e3489355b85c6a13",
+    "host/job_stdout.txt": "85265ddf1c3504f00a26d8721088045494e946542576977299a3eb9d51dd569a",
+    "host/lscpu.txt": "2e97b102f375970b59281ba4768c74c5f698936dad4335a317f08d5e2465ba55",
+    "host/meminfo.txt": "012718ddc2bf407ce67d0317e95f8fbca1a092f760134e5666a73d949013cb7f",
+    "host/status.json": "d4eb52c6c3f595213a5dcefbe4a82a42f34e7537655b813470b49516d5eefa9b",
+    "host/sysinfo.json": "a4ae5d3616d8a0e781154954bc4535e31cd2cf47997fd29ed17cfce7dd9ee545",
+    "run/dropped.csv": "f45dfd1589071c240d6ab49f908d3aedc79e00cb5d41175c905985cd084af073",
+    "run/failed_workers/L128_N240_R2_fs23.04e6_F5.job.json": "3eb747003b5d17971b17037327196fb3d024bca96093d9c7c8476b1d932262d7",
+    "run/failed_workers/L128_N240_R2_fs23.04e6_F5.log": "088e3b5821b4e0aa914c01c014d26415467f7ae80285a05e0659e54c9f8bef6f",
+    "run/failed_workers/L128_N240_R2_fs23.04e6_F5.out.json": "042ebf8bc0c24f102d953adcd7d4fe26b11bee2c8a7de9d73a89709591979230",
+    "run/failed_workers/L1_N240_R1_fs1e6_F5.job.json": "bd526bfd80402edc9fcf8c70426c5e57550015deb96bb9feeb014624e790d5e9",
+    "run/failed_workers/L1_N240_R1_fs1e6_F5.log": "4be31ea4856579d1cf91c8f016e842b742d3291df75454e58d710aec4a97f01b",
+    "run/failed_workers/L1_N240_R1_fs1e6_F5.out.json": "5a5912ed224f33c506c319515a65e0cf215ee1ce53d0ea6692e33b19e50520b9",
+    "run/failed_workers/L1_N240_R1_fs5.76e6_F5.job.json": "938150b09744967a255c41191bdf5d026c075c84c04ff5c7c6fbf92fd93ba985",
+    "run/failed_workers/L1_N240_R1_fs5.76e6_F5.log": "4be31ea4856579d1cf91c8f016e842b742d3291df75454e58d710aec4a97f01b",
+    "run/failed_workers/L1_N240_R1_fs5.76e6_F5.out.json": "71cab57180f7914142106bcda8430eb0191893c8d1ed0b5222145a5a0df55f2b",
+    "run/failed_workers/L4_N4096_R1_fs1e6_F5.job.json": "a42fe0cac37edc58a3dda7a8f6420b163283277ed380fcf6db88258e4cd1db06",
+    "run/failed_workers/L4_N4096_R1_fs1e6_F5.log": "bf16162c04c2b157540d788926317024ed9601743eddc9472c12543a173b024c",
+    "run/failed_workers/L4_N4096_R1_fs1e6_F5.out.json": "526ab6b8662bfa126a7f14c86997a9cb2b35364755caf0cd9bfaae5fa74f7d71",
+    "run/isolation.csv": "5495e27eb7753f466b6ee0f7c3af861d4184e847d1e3163151afd4792828b8af",
+    "run/manifest.json": "2c76b64f929732a6fcfd9fdbb6912e4df775a130c87437e3ed964b269c4714d3",
+    "run/meta.json": "ca6d849059c82e46f7607b230adf4d7aa14a041ffd2954154926477f0a92e1ab",
+    "run/points.csv": "93db1b3fd9b030aa64acc8b6467b8c9543994a6c0145ce24dadb80c8ebf84f09",
+    "run/slots.json": "1c681831f12f06643726e3ba26750f379f2d14a1ba48860947b005dc0ff810b9",
+    "run/spec.json": "e15f71c3d7972e0a86fb405415cd3f1716015e71afa6ed3c2a24a8b82a9bb633",
+    "run/summary.json": "9ef69b3b2c46f342937f0788301818a1a48e7770f2189cee6a27070e549d172a"
+  },
+  "written_utc": "2026-10-11T10:33:19Z"
+}

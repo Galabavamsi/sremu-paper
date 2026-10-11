@@ -1,0 +1,129 @@
+{
+  "benchmark": "B1",
+  "description": "Kernel micro-benchmarks (K1 snapshot, GEMV, render with T_FD in {0, 8, 16, 32}, noise) per backend and the NNLS fit of the DESIGN 7.4 page-cost model from 20 lockstep engine points; copied unchanged from the run directory",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "wall-clock timings on the stated host; the workloads are SIM-sremu benchmark scenes (no physics result)"
+  },
+  "run": {
+    "run_id": "20261011T083749Z_b1_slot16",
+    "job": "20261011T083630Z_b1b2_3c0c30",
+    "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T083630Z_b1b2_3c0c30\\out\\runs\\20261011T083749Z_b1_slot16",
+    "t_start_utc": "2026-10-11T08:37:49.569727Z",
+    "t_end_utc": "2026-10-11T08:40:47.558353Z",
+    "wall_s": 174.98303336,
+    "argv": [
+      "/opt/job/sremu/bench/b1_kernels.py",
+      "--tag",
+      "slot16",
+      "--out",
+      "/opt/job/out/runs"
+    ],
+    "protocol": "kernel medians per size and backend after warm-up; engine points: 3 repetitions of 2000 pages (run/engine_cost_points.csv); one 16-vCPU slot (1-8,97-104), numba 16 threads, rest of the host idle"
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.48xlarge",
+    "instance_id": "i-0dce85a304ce25f0a",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws, #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 192,
+      "threads_per_core": 2,
+      "cores_per_socket": 48,
+      "sockets": 2,
+      "numa_nodes": 2,
+      "l3": "210 MiB (2 instances)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       389910472 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "cpu_plan": {
+      "engine": "1-8,97-104",
+      "clients": "9-10,105-106",
+      "reserved": "0,96"
+    },
+    "pinning": {
+      "affinity": "1-8,97-104",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": "16",
+        "SREMU_CPUS": "1-8,97-104",
+        "SREMU_CLIENT_CPUS": "9-10,105-106",
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 94.0,
+      "min": 0.0,
+      "max": 0.0005043850091562413,
+      "mean": 4.120116972357843e-05,
+      "p50": 1.119416104873594e-05,
+      "p90": 8.563898257953062e-05,
+      "p99": 0.0005043850091562413
+    },
+    "job_results_tgz_sha256": "7e54fe45d8f30cbd5d581433396913eba08e5007c8ea8dbff55fc25a1aff99de",
+    "launch": {
+      "run_id": "20261011T083630Z_b1b2_3c0c30",
+      "git_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+      "git_dirty": "1",
+      "instance_id": "i-0dce85a304ce25f0a",
+      "type": "c7i.48xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "c94ab132c5ab5cadb40f43c8439dbad29ef55bd77d2f42dca53277737bea7280",
+      "results_key": "sremu/jobs/20261011T083630Z_b1b2_3c0c30/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=1; bash bench/aws/job.sh b1b2 --deadline-min 210",
+      "maxmin": 240
+    }
+  },
+  "sremu": {
+    "commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+    "dirty_flag_recorded": true,
+    "dirty_note": "the launch exported SREMU_GIT_DIRTY=1 (host/job_stdout.txt line 1; every manifest records git_dirty true). The lead verified that the uploaded bundle's file tree is byte-identical to 'git archive 309c633': the flag only meant that the local checkout had unshipped edits. The runs therefore used the code of commit 309c633.",
+    "commit_source": "SREMU_GIT_COMMIT exported by the AWS job script (bundle without .git)"
+  },
+  "caveats": [
+    "Cost model (DESIGN 7.4 form) is indicative only: relative RMS error 0.39, max 0.69 over 20 points; the extended 8-coefficient fit is a diagnostic, not a predictor.",
+    "numpy_ref is timed only on the smaller sizes (snapshot R*Q up to 1.0e6).",
+    "Single host; nothing is compared across machines."
+  ],
+  "used_by": [
+    "paper Section VI (cost model, B1 isolated L = 16 point)",
+    "tools/bench_results.py"
+  ],
+  "files": {
+    "host/job_host_prep.txt": "e9b3ba3262c0a69c087321e5b9a9ae94376339a0546d96d6e3489355b85c6a13",
+    "host/job_stdout.txt": "85265ddf1c3504f00a26d8721088045494e946542576977299a3eb9d51dd569a",
+    "host/lscpu.txt": "2e97b102f375970b59281ba4768c74c5f698936dad4335a317f08d5e2465ba55",
+    "host/meminfo.txt": "012718ddc2bf407ce67d0317e95f8fbca1a092f760134e5666a73d949013cb7f",
+    "host/status.json": "d4eb52c6c3f595213a5dcefbe4a82a42f34e7537655b813470b49516d5eefa9b",
+    "host/sysinfo.json": "a4ae5d3616d8a0e781154954bc4535e31cd2cf47997fd29ed17cfce7dd9ee545",
+    "run/engine_cost_points.csv": "1eda65def7f34ad557238bbf446ef11c01c4df92fb8df05d72692b1af7527f13",
+    "run/fits.json": "aa2937e04491d90cf788a94ef0c4bfb92550d6e2bf946ce94ec89b91637fc594",
+    "run/kernels_gemv.csv": "029ef299d499001174ea828f71a6841d7ae246f736b51ff92975c089885054b5",
+    "run/kernels_noise.csv": "cdfee68fb0cc05a0835e435e0ec3e7bb0c19f01eaefa7261c6c0bbd39d47c2be",
+    "run/kernels_render.csv": "162f92fe93aa1a0d6128980bc388796d6ee871068c75fb7c5b5cf59a2d72dad8",
+    "run/kernels_snapshot.csv": "4b196adf6fcc823ad1a8725ca7f421f455097ce65a2097409df57b493f0d6842",
+    "run/manifest.json": "43e00fcb995db9c7fb1b961b7e4c6f10dd2e4eb5242ba61ef6c243d48534cd87",
+    "run/meta.json": "514ace96b40a6a9e394b136282824895bb3535da562c60f55afd442af7816c2a",
+    "run/sections.json": "7e1e291ee22f12107dff4ae4a13a8081a41414ed23f57ec8ad199e28531d8269",
+    "run/spec.json": "ea44c53636098ccbdc415b14e62a76ade8fabe3d8a74ee70c30c59f33e27aefb",
+    "run/summary.json": "a82c576a997aa168ecb969b9bc010f4aa10c0a6a1bd45c161cc4129e665a3b79"
+  },
+  "written_utc": "2026-10-11T10:33:19Z"
+}

@@ -1,0 +1,58 @@
+{
+  "suite": "b2",
+  "spec_sha256": "6cc045f0ef63198e8860b9e5af18dacc742ab6a9aceef35065109c271a9b2b4f",
+  "interrupted": null,
+  "data_classes": {
+    "*": "MEAS"
+  },
+  "workload_data_classes": {
+    "*": "SIM-sremu"
+  },
+  "platform_label": "AWS c7i.48xlarge (Intel(R) Xeon(R) Platinum 8488C, 192 logical CPUs, Linux)",
+  "paced": false,
+  "windows_paced_not_representative": false,
+  "caveats": [
+    "Lockstep RTF: virtual time (min over RX streams) / wall time; RTF_min over complete 100 ms virtual windows (section 12.1).",
+    "Repetitions are shorter than the paced protocol of section 12.3 (>= 60 s, >= 1e4 pages); every point states its virtual time and pages.",
+    "The full product is pruned by the plan and by series pruning (see dropped.csv).",
+    "SIM benchmark geometry; LOS and RIS paths only (no ground, walls or diffuse).",
+    "F5 RTF is measured by the RX client process (includes transport and clients).",
+    "below_floor rows carry only a pilot RTF (sizing estimate), not a measured RTF.",
+    "11 points ran concurrently, each pinned to 16 CPUs of whole cores in one NUMA node; concurrent points share L3, memory bandwidth and the power budget (see isolation.csv for the same points run alone).",
+    "Background load in meta.json includes the other concurrent points."
+  ],
+  "files": [
+    "dropped.csv",
+    "isolation.csv",
+    "points.csv",
+    "slots.json"
+  ],
+  "background_load": {
+    "n_samples": 1383,
+    "period_s": 2.0,
+    "baseline_busy_fraction": 1.735990556211374e-05,
+    "background_busy": {
+      "n": 1381.0,
+      "min": 0.012293537693756166,
+      "max": 0.8853630741442237,
+      "mean": 0.515749823231271,
+      "p50": 0.61885961219267,
+      "p90": 0.774532184557385,
+      "p99": 0.8434935365024583
+    },
+    "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
+  },
+  "quiet_gate": null,
+  "pinning": {
+    "affinity": "0,96",
+    "affinity_supported": true,
+    "env": {
+      "NUMBA_NUM_THREADS": null,
+      "SREMU_CPUS": null,
+      "SREMU_CLIENT_CPUS": null,
+      "SREMU_GOVERNOR": "unavailable"
+    },
+    "power_plan_or_governor": null
+  },
+  "created_utc": "2026-10-11T09:26:52Z"
+}

@@ -1,0 +1,20 @@
+{
+  "sremu": {
+    "wall_s": 4.2313031000085175,
+    "background_busy": {
+      "n": 9,
+      "mean": 0.27711621695983696,
+      "max": 0.4107144350649646
+    },
+    "note": "other processes only"
+  },
+  "matlab": {
+    "wall_s": 12.100593400013167,
+    "background_busy": {
+      "n": 24,
+      "mean": 0.3760212065134941,
+      "max": 0.7632575757575758
+    },
+    "note": "MATLAB's own CPU use counts as background in the matlab section"
+  }
+}

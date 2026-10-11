@@ -1,0 +1,9 @@
++ export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=1
++ SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621
++ SREMU_GIT_DIRTY=1
++ bash bench/aws/job.sh b1b2 --deadline-min 210
+[job.sh] job=b1b2 governor=unavailable out=/opt/job/out python=/opt/venv/bin/python
+[run_job] b1: taskset -c 1-8,97-104 /opt/venv/bin/python -m bench.b1_kernels --tag slot16 --out /opt/job/out/runs (timeout 8909.999984502792)
+[run_job] b2: /opt/venv/bin/python -m bench.b2_lockstep --plan server --workers auto --cpus-per-point 16 --budget-min 182 --out /opt/job/out/runs (timeout 12331.333106517792)
+[run_job] done rc=1 wall=2944s
+JOB_EXIT=1

@@ -2,6 +2,8 @@
 % (primary sources fetched 10 Oct 2026). Keep "nv" (not verified), "no evid." (primary source
 % read, feature not mentioned) and "no" (source states the feature is absent) distinct.
 % Every tool row carries its citation, so its numbers count as cited (check_claims.py).
+% Third-party quantities that Section II also quotes are the `reported` macros of
+% numbers.yaml (one source for both); their row must cite the macro's keys (check_claims.py).
 \begin{table*}[t]
 \caption{RIS simulators, ray tracers, controller frameworks and IQ-level emulators,
 as of 10 Oct 2026. \emph{nv}: not verified from a primary source either way;
@@ -27,7 +29,7 @@ QRIS (2023)~\cite{Burtakov2023QRIS,QRISPage} &
   TS (QuaDRiGa) & No & Unit-cell patterns on QuaDRiGa geometry, interacting surfaces &
   Yes (unit-cell patterns from measurement or CST) & Inherited from QuaDRiGa; QRIS-specific nv &
   no evid. & On request; licence not stated \\
-Sionna RT: v0.18--0.19 (RIS module); v1.0--2.2.0 (29 Sep 2026)~\cite{SionnaRTReleases,DegliEsposti2022Reradiation} &
+Sionna RT: v0.18--0.19 (RIS module); v1.0--2.2.0 (29 Sep 2026)~\cite{SionnaV018Release,SionnaRTReleases,DegliEsposti2022Reradiation} &
   Coef./CIR, radio maps & No & v0.18--0.19: macroscopic reradiation, per-cell profiles.
   v1.0--2.2.0: none & v0.18--0.19: partial (spatial profiles; state table nv) & nv &
   v0.18--0.19: gradient-based optimization & Yes; Python; Apache-2.0 \\
@@ -42,14 +44,14 @@ CoopeRIS (2024)~\cite{Segata2024CoopeRIS} &
   Packets (DES; SINR/MCS) & No (DES) & Far-field per-element phase sum & nv &
   Yes (SUMO vehicles) & Internal oracle controller & Yes; C++; GPL-2.0 \\
 GoSimRIS (2025; code public 31 Mar 2026)~\cite{ElGhalbzouri2025GoSimRIS} &
-  Coef.\ + SNR/rate & E2 exchange (author claim) & Configurable phases, at most 64 elements &
+  Coef.\ + SNR/rate & E2 exchange (author claim) & Configurable phases, at most \numRepGoSimRisMaxElements{} elements &
   no evid. & Position list input; model nv & Yes (FlexRIC xApp, E2SM-RIS) &
   Yes; Go; Apache-2.0 \\
 ORIX / E-GoSimRIS (2026, early access)~\cite{Kayraklik2026ORIX} &
-  Coef. & Near-RT loop, 10~ms--1~s & Quantized phase, phase-dependent amplitude &
+  Coef. & Near-RT loop, \numRepOrixLoopMinMs~ms--\numRepOrixLoopMaxS~s & Quantized phase, phase-dependent amplitude &
   Parametric fit (not a table) & 3GPP InF temporal dynamics & Yes (E2SM-RIS) & nv \\
 Colosseum + RIS scenarios (2025)~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing,Bonati2021Colosseum} &
-  IQ (FPGA FIR, 256 SDRs) & Yes (hardware) & Precomputed QuaDRiGa cascade, phases fixed
+  IQ (FPGA FIR, \numRepColosseumSdrs{} SDRs) & Yes (hardware) & Precomputed QuaDRiGa cascade, phases fixed
   offline & No & Precomputed taps & RAN xApps: yes; RIS during a run: no &
   No (facility) \\
 OAI rfsimulator (develop, accessed 10 Oct 2026)~\cite{OAIrfsim} &
@@ -64,7 +66,7 @@ ACHEM (arXiv v1, Apr 2026)~\cite{Gurses2026ACHEM} &
   Antenna patterns; no RIS & Yes (ArduPilot SITL) & Online channel reconfiguration; no RIS &
   Yes; licence nv \\
 TRACE (arXiv v1, Aug 2026)~\cite{Kumar2026TRACE} &
-  Symbols & nv; UDP control RTT 5.2~ms reported & Ideal continuous phase, unit amplitude &
+  Symbols & nv; UDP control RTT \numRepTraceRttMs~ms reported & Ideal continuous phase, unit amplitude &
   No & Channel evolution (random walk, Gauss--Markov) & Yes (UDP control plane) &
   Code ``upon acceptance'' \\
 \midrule

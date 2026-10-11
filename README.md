@@ -10,8 +10,11 @@ pipeline macros written by `tools/gen_results.py`, and the data figures F3-F6 an
 drawn by the scripts in `figures/src/`. E-B (Section VII-A, F9) is led by the lab-arc run
 (geometry modelled on the lab arrangement, SIM, nominal geometry; AWS run
 20261011T060442Z_eb_arc_d41a75 on c7i.16xlarge, aggregated results and provenance in
-`sweeps/results/E-B-arc/`); the lab-like geometry is the supporting row. PENDING (AWS):
-Section VI and F7/F8 (B1-B4) and the E-F API latency; the V-LAB lock commit, date and
+`sweeps/results/E-B-arc/`); the lab-like geometry is the supporting row. Section VI, F7/F8
+and Table VII come from the benchmark runs B1-B4 (AWS c7i.48xlarge and c7i.8xlarge, sremu
+309c633) and B6 (laptop), copied with provenance to `sweeps/results/bench/` and read by
+`tools/bench_results.py` (called from `gen_results.py`). PENDING (AWS): the F5 (native ZMQ)
+rerun after the transport fix and the E-F API latency; the V-LAB lock commit, date and
 deposit DOI wait for human gate H-6. DESIGN D24: the paper presents sremu as a new emulator
 and contains no comparison with any earlier simulator; the single transparency sentence is
 claim C-LINEAGE (Section II).
@@ -106,8 +109,10 @@ The final mode refuses unless:
   number in a cited sentence/table row; a citation does not cover a sentence about sremu
   itself. Numbers glued to units (`5.2ms`, `3x`, `1e-3`) count as numbers; in math,
   decimals, integers >= 2 after a relation (`N = 1024`) and integers with a unit are
-  flagged. A fixed `value` is allowed only for definitions (DESIGN 12.1) and
-  dataset facts. Text macros carry a `max_chars` budget; `check_arxiv.py` bounds the abstract
+  flagged. A fixed `value` is allowed only for definitions (DESIGN 12.1),
+  dataset facts and third-party numbers: source type `reported` (data class REPORTED) names
+  the BibTeX keys in `cite`, and `check_claims.py` requires each sentence or table row that
+  uses the macro to cite all of them. Text macros carry a `max_chars` budget; `check_arxiv.py` bounds the abstract
   (<= 1920 characters, <= 200 words) with every placeholder at its budget.
 - **Banned words** ("first", "only", "compliant", "digital twin", "accurately replicates",
   "no loss of functionality") need a claim with a `banned_word_uses` entry; "real-time" is

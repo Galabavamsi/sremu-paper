@@ -1,0 +1,64 @@
+{
+  "suite": "b6",
+  "spec_sha256": "58de2003ef2ab47b3a4312955a1d0c9b2763a16605c2178c8327ca35f7b3bccd",
+  "interrupted": null,
+  "data_classes": {
+    "times.csv": "MEAS",
+    "context_table.csv": "MEAS (literature rows REPORTED, column data_class)",
+    "literature.csv": "REPORTED",
+    "*": "MEAS"
+  },
+  "workload_data_classes": {
+    "times.csv": "SIM-sremu / MATLAB (column 'tool')",
+    "*": "SIM-sremu"
+  },
+  "platform_label": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics, 16 logical CPUs, Windows",
+  "paced": false,
+  "windows_paced_not_representative": false,
+  "caveats": [
+    "Different tools evaluate different models: RISReflector is far-field plane-wave with isotropic unit cells and no cell-area factor; only sremu and the MATLAB hand-loop, vectorized and toolbox K1 paths compute the same near-field K1 sum.",
+    "MATLAB times exclude MATLAB start-up (timeit inside one session); sremu times exclude numba compilation and include Python dispatch.",
+    "Literature numbers are REPORTED with their own hardware; not a speed comparison."
+  ],
+  "files": [
+    "context_table.csv",
+    "literature.csv",
+    "sections.json",
+    "times.csv"
+  ],
+  "background_load": {
+    "n_samples": 55,
+    "period_s": 0.5,
+    "baseline_busy_fraction": 0.19303385416666666,
+    "background_busy": {
+      "n": 34.0,
+      "min": 0.1821113406271571,
+      "max": 0.7632575757575758,
+      "mean": 0.34413724263498674,
+      "p50": 0.29296875,
+      "p90": 0.5549242424242424,
+      "p99": 0.7632575757575758
+    },
+    "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
+  },
+  "quiet_gate": {
+    "max_busy": 0.2,
+    "window_s": 3.0,
+    "timeout_s": 600.0,
+    "waited_s": 60.011340299999574,
+    "last_busy_fraction": 0.19303385416666666,
+    "met": true
+  },
+  "pinning": {
+    "affinity": "0-15",
+    "affinity_supported": false,
+    "env": {
+      "NUMBA_NUM_THREADS": null,
+      "SREMU_CPUS": null,
+      "SREMU_CLIENT_CPUS": null,
+      "SREMU_GOVERNOR": null
+    },
+    "power_plan_or_governor": "Balanced"
+  },
+  "created_utc": "2026-10-11T03:13:22Z"
+}

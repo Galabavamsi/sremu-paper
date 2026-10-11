@@ -1,0 +1,123 @@
+{
+  "suite": "b1",
+  "wall_s": 174.98303336,
+  "numba_threads": 16,
+  "snapshot_exponent_alpha": {
+    "numba_cpu": 0.7645709068895633,
+    "numpy_ref": 1.0569546949885504
+  },
+  "render_exponents": {
+    "numba_cpu": {
+      "exp_L": 0.8440515224608961,
+      "exp_P": 0.1590982962269376,
+      "exp_T_eff": 0.07103474044573066,
+      "exp_S": 0.4116531508815829
+    },
+    "numpy_ref": {
+      "exp_L": 0.9687358301761413,
+      "exp_P": 0.3971448862206368,
+      "exp_T_eff": 0.49433123215614505,
+      "exp_S": 0.7027699780580638
+    }
+  },
+  "render_exponents_fd_only": {
+    "numba_cpu": {
+      "c0": -13.761564885690984,
+      "exp_L": 0.8474942301511699,
+      "exp_P": 0.14345422108430766,
+      "exp_T_FD": 0.13621249654120948,
+      "exp_S": 0.414141068134526,
+      "rms_log_residual": 0.14861205455414514,
+      "n_points": 72
+    },
+    "numpy_ref": {
+      "c0": -14.632184761726284,
+      "exp_L": 0.9780965845483862,
+      "exp_P": 0.27562104114739805,
+      "exp_T_FD": 0.6067560562994662,
+      "exp_S": 0.7142416813403875,
+      "rms_log_residual": 0.12290138552459329,
+      "n_points": 51
+    }
+  },
+  "render_exp_LTS_combined": {
+    "numba_cpu": 0.5008998844939258,
+    "numpy_ref": 0.49598381104502115
+  },
+  "engine_cost_model": {
+    "model": "T_page = a + b*(R*Q)*P/(f_s*T_u) + c*L*T_FD*G*P + d*n_rx*P + e*n_paths*P",
+    "note": "G = mean FD groups per link; T_FD = taps (1 for integer delay); n_paths = LOS + RIS tile paths over all links; static scenes have no snapshot term",
+    "a_s": 6.540018125289963e-05,
+    "b_ns_per_row_point": 377.21630684128445,
+    "c_ns_per_link_tap_sample": 0.1949534573633442,
+    "d_ns_per_rx_sample": 0.0,
+    "e_ns_per_path_sample": 10.820691814613102,
+    "rel_rms": 0.3879751171730487,
+    "rel_max_abs": 0.6889065038799121,
+    "n_points": 20
+  },
+  "engine_cost_model_best_rep": {
+    "model": "T_page = a + b*(R*Q)*P/(f_s*T_u) + c*L*T_FD*G*P + d*n_rx*P + e*n_paths*P",
+    "note": "G = mean FD groups per link; T_FD = taps (1 for integer delay); n_paths = LOS + RIS tile paths over all links; static scenes have no snapshot term",
+    "a_s": 6.497305145847469e-05,
+    "b_ns_per_row_point": 375.9507770243413,
+    "c_ns_per_link_tap_sample": 0.18822493816334412,
+    "d_ns_per_rx_sample": 0.0,
+    "e_ns_per_path_sample": 10.94531779898419,
+    "rel_rms": 0.3891919923407157,
+    "rel_max_abs": 0.6887946024066874,
+    "n_points": 20
+  },
+  "engine_cost_model_extended": {
+    "model": "section 7.4 form + f*L + g*P/(f_s*T_u) + h*L*P/(f_s*T_u) (diagnostic; the section 7.4 fit is the reported one)",
+    "a_s": 3.8269748395501484e-05,
+    "b_ns_per_row_point": 5.13559379103423,
+    "c_ns_per_link_tap_sample": 0.0,
+    "d_ns_per_rx_sample": 27.460056923003506,
+    "e_ns_per_path_sample": 3.627785844116983,
+    "f_us_per_link_page": 20.03520065650367,
+    "g_us_per_snapshot": 607.7587747651378,
+    "h_us_per_link_snapshot": 496.06896150487074,
+    "rel_rms": 0.12365998130183159,
+    "rel_max_abs": 0.27217283940179327,
+    "n_points": 20,
+    "n_coefficients": 8
+  },
+  "snapshot_exponent_alpha_min_based": {
+    "numba_cpu": 0.7668617494235032,
+    "numpy_ref": 1.0623237381258104
+  },
+  "background_busy_by_section": {
+    "snapshot_k1": {
+      "n": 9,
+      "mean": 0.00010752595119801377,
+      "max": 0.0005043850091562413
+    },
+    "gemv": {
+      "n": 5,
+      "mean": 2.772082262563749e-05,
+      "max": 0.00011118498648611834
+    },
+    "scene_snapshot": {
+      "n": 4,
+      "mean": 1.5619513852740822e-05,
+      "max": 3.469420845039501e-05
+    },
+    "render": {
+      "n": 28,
+      "mean": 3.4073225274209914e-05,
+      "max": 0.00011661477493664363
+    },
+    "noise": {
+      "n": 2,
+      "mean": 2.3874137529668327e-05,
+      "max": 3.351050332861538e-05
+    },
+    "engine_cost_points": {
+      "n": 39,
+      "mean": 4.064037454603049e-05,
+      "max": 0.00043610816199324276
+    }
+  },
+  "interrupted": null
+}

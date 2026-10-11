@@ -1,0 +1,24 @@
+{
+  "suite": "b4",
+  "sha256": "d3ca6e3d58cbb37ec9f91748e81a76e3fdf94351f3aba3a151c79fe28ae505bf",
+  "threads": null,
+  "part": "lockstep",
+  "quick": false,
+  "scene": "B2 base, L=2, N=240, 1 panel, 1 MS/s, F1",
+  "links": 2,
+  "controller": "Urap(p=0.5), L_min=1e-4 s, latency L_min+U[0,L_min] (lockstep)",
+  "rates_hz": [
+    10,
+    100,
+    1000,
+    10000
+  ],
+  "modes": [
+    "none",
+    "inproc",
+    "remote"
+  ],
+  "reps": 1,
+  "warmup_s": null,
+  "measure_s": null
+}

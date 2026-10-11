@@ -1,0 +1,35 @@
+{
+  "pin": {
+    "requested": "56-63,152-159",
+    "applied": true,
+    "threads_pinned": 2,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "56-63,152-159",
+    "thread_affinities": [
+      "56-63,152-159"
+    ]
+  },
+  "numba_threads": 16,
+  "pid": 110445,
+  "thread_affinities_end": [
+    "56-63,152-159"
+  ],
+  "row": {
+    "point_id": "L128_N240_R2_fs23.04e6_F5",
+    "slices": "G-anchor",
+    "tier": 3,
+    "L": 128,
+    "n_tx": 8,
+    "n_rx": 16,
+    "N": 240,
+    "n_ris": 2,
+    "f_s": "23.04e6",
+    "features": "F5",
+    "threads": 16,
+    "threads_explicit": false,
+    "status": "failed",
+    "error": "ValueError: max() iterable argument is empty",
+    "point_wall_s": 33.245556391000264,
+    "all_threads_in_slot": true
+  }
+}

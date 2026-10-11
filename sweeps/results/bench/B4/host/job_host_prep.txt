@@ -1,0 +1,12 @@
+job=b4 date=2026-10-11T07:44:38Z root=/opt/job/sremu
+stopped unattended-upgrades.service
+stopped apt-daily.timer
+stopped apt-daily-upgrade.timer
+stopped apt-daily.service
+stopped apt-daily-upgrade.service
+stopped snapd.service
+stopped snapd.socket
+stopped fwupd-refresh.timer
+stopped motd-news.timer
+stopped man-db.timer
+governor=unavailable

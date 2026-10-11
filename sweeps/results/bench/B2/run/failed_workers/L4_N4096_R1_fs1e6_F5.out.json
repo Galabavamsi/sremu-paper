@@ -1,0 +1,35 @@
+{
+  "pin": {
+    "requested": "72-79,168-175",
+    "applied": true,
+    "threads_pinned": 2,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "72-79,168-175",
+    "thread_affinities": [
+      "72-79,168-175"
+    ]
+  },
+  "numba_threads": 16,
+  "pid": 38965,
+  "thread_affinities_end": [
+    "72-79,168-175"
+  ],
+  "row": {
+    "point_id": "L4_N4096_R1_fs1e6_F5",
+    "slices": "G-anchor",
+    "tier": 3,
+    "L": 4,
+    "n_tx": 2,
+    "n_rx": 2,
+    "N": 4096,
+    "n_ris": 1,
+    "f_s": "1e6",
+    "features": "F5",
+    "threads": 16,
+    "threads_explicit": false,
+    "status": "failed",
+    "error": "RuntimeError: ZMQ client failed (rx): recv error TIMEOUT on rx001.rx0",
+    "point_wall_s": 127.17937586900007,
+    "all_threads_in_slot": true
+  }
+}

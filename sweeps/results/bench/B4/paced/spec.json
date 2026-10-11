@@ -1,0 +1,23 @@
+{
+  "suite": "b4",
+  "sha256": "ab9992cad930bd74af0d49ad77f45a9ba23ad67519c4c770f45eb8ab1b9b2282",
+  "threads": null,
+  "part": "paced",
+  "quick": false,
+  "scene": "B2 base, L=2, N=240, 1 panel, 1 MS/s, F1",
+  "links": 2,
+  "controller": "Urap(p=0.5), L_min=1e-4 s, latency L_min+U[0,L_min] (lockstep)",
+  "rates_hz": [
+    10,
+    100,
+    1000,
+    10000
+  ],
+  "modes": [
+    "timed",
+    "asap"
+  ],
+  "reps": 3,
+  "warmup_s": "5",
+  "measure_s": "60"
+}

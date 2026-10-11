@@ -1,0 +1,69 @@
+{
+ "job": "b4",
+ "deadline_min": 95.0,
+ "cpu_plan": {
+  "engine": "1-8,17-24",
+  "clients": "9-10,25-26",
+  "reserved": "0,16"
+ },
+ "results": [
+  {
+   "step": "b4_lockstep",
+   "cmd": [
+    "taskset",
+    "-c",
+    "1-8,17-24",
+    "/opt/venv/bin/python",
+    "-m",
+    "bench.b4_control",
+    "--part",
+    "lockstep",
+    "--out",
+    "/opt/job/out/runs"
+   ],
+   "cpus": "1-8,17-24",
+   "env": {
+    "NUMBA_NUM_THREADS": "16",
+    "SREMU_CPUS": "1-8,17-24",
+    "SREMU_CLIENT_CPUS": "9-10,25-26"
+   },
+   "budget_min": null,
+   "timeout_s": 2009.9999794960022,
+   "rc": 1,
+   "wall_s": 116.64814591407776,
+   "log": "b4_lockstep.log",
+   "interrupted_by": null
+  },
+  {
+   "step": "b4_paced",
+   "cmd": [
+    "taskset",
+    "-c",
+    "1-8,17-24",
+    "/opt/venv/bin/python",
+    "-m",
+    "bench.b4_control",
+    "--part",
+    "paced",
+    "--budget-min",
+    "88",
+    "--out",
+    "/opt/job/out/runs"
+   ],
+   "cpus": "1-8,17-24",
+   "env": {
+    "NUMBA_NUM_THREADS": "16",
+    "SREMU_CPUS": "1-8,17-24",
+    "SREMU_CLIENT_CPUS": "9-10,25-26"
+   },
+   "budget_min": 88.05585716962814,
+   "timeout_s": 5493.351430177689,
+   "rc": 0,
+   "wall_s": 1666.3816645145416,
+   "log": "b4_paced.log",
+   "interrupted_by": null
+  }
+ ],
+ "wall_s": 1783.0306482315063,
+ "rc": 1
+}
