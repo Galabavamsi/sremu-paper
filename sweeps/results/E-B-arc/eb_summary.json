@@ -1,0 +1,69 @@
+{
+  "specs": {
+    "eb1": {
+      "n_points": 72,
+      "n_ok": 72,
+      "n_failed": 0,
+      "n_resumed": 0,
+      "failed": [],
+      "wall_s": 17.73456270700001
+    },
+    "eb2_lab": {
+      "n_points": 150,
+      "n_ok": 150,
+      "n_failed": 0,
+      "n_resumed": 0,
+      "failed": [],
+      "wall_s": 210.116190277
+    },
+    "eb2_ideal1": {
+      "n_points": 75,
+      "n_ok": 75,
+      "n_failed": 0,
+      "n_resumed": 0,
+      "failed": [],
+      "wall_s": 123.044923735
+    },
+    "eb2_lab_es15": {
+      "n_points": 75,
+      "n_ok": 75,
+      "n_failed": 0,
+      "n_resumed": 0,
+      "failed": [],
+      "wall_s": 123.39054124899997
+    },
+    "eb2_ideal1_es15": {
+      "n_points": 75,
+      "n_ok": 75,
+      "n_failed": 0,
+      "n_resumed": 0,
+      "failed": [],
+      "wall_s": 123.28035001499995
+    }
+  },
+  "plan": "eb_plan.json",
+  "t_start_utc": "2026-10-11T06:05:59.263726Z",
+  "va5": {
+    "n_points": 72,
+    "n_failed_points": 0,
+    "failed_points": [],
+    "n_step_switches_inside_packet": 16,
+    "n_pass": 16,
+    "all_before_bitwise_identical": true,
+    "all_panels_k_applied_equal_expected": true,
+    "linear_first_minus_applied": [
+      1
+    ],
+    "criterion": "first RX1 sample differing from the no-switch run == to_ticks(t_sw + tau_RIS->RX1) == engine k_applied (step switch while the TX is active; with several panels, the earliest over the panels whose states change, and every panel's k_applied equals its own to_ticks(t_sw + tau_panel->RX1)); every sample before it bitwise identical",
+    "geometry_labels": [
+      "modelled on the lab arrangement (SIM, nominal geometry)"
+    ],
+    "pass": true
+  },
+  "eb2_rows": 375,
+  "results": "results",
+  "n_failed": 0,
+  "ok": true,
+  "t_end_utc": "2026-10-11T06:15:57.420720Z",
+  "wall_s": 598.243795842
+}

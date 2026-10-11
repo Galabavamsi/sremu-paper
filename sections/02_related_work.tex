@@ -3,7 +3,8 @@
 % The TRACE paragraph uses the DESIGN 1.2 wording; it needs human gate H-4 (agreement of
 % Smriti Kumar and Mansi Ambwani) before posting. DESIGN D24: the paper makes no comparison
 % with any earlier simulator; the single transparency sentence at the end is the only
-% mention of the authors' earlier in-house simulator.
+% mention of the authors' earlier in-house simulator. Third-party numbers are REPORTED-class
+% macros of numbers.yaml (DESIGN 1.6 rule 7); each sentence cites the key named there.
 \section{Related Work and Gap}\label{sec:related}
 
 \subsection{Coefficient-level simulators and ray tracers}
@@ -14,7 +15,8 @@ full-wave simulation and with several interacting surfaces; its code is distribu
 request~\cite{Burtakov2023QRIS,QRISPage}. NYUSIM-RIS extends the statistical NYUSIM channel
 model~\cite{Habib2023NYUSIMRIS}, and system-level simulators evaluate RIS deployments with
 abstracted links~\cite{Hao2023ViennaRIS,Sihlbom2023SLS}. Among ray tracers, Sionna added
-RIS in version 0.18 and Sionna RT removed it in version 1.0; no release up to 2.2.0
+RIS in version \txtRepSionnaRisAddedVersion{} and Sionna RT removed it in version
+\txtRepSionnaRisRemovedVersion; no release up to \txtRepSionnaLatestVersion{}
 (29 Sep 2026) has a RIS module~\cite{SionnaRTReleases,Hoydis2023SionnaRT}. Wireless InSite
 describes engineered electromagnetic surfaces with a uniform-ray physical-optics model for
 a static configuration~\cite{RemcomEES,DeJong2022EES}. MATLAB provides rectangular RIS
@@ -30,15 +32,18 @@ CoopeRIS couples a far-field RIS gain model to vehicular network simulation and 
 oracle controller that knows the vehicle position~\cite{Segata2024CoopeRIS}. ns-3 modules
 model 5G and unmanned-aerial-vehicle links assisted by intelligent reflecting surfaces at packet level~\cite{Pagin2022IRSAF,Grieco2024IoDSimIRS}.
 GoSimRIS closes an O-RAN E2 loop between an xApp and a RIS channel simulator through an
-E2SM-RIS service model and supports at most 64 elements~\cite{ElGhalbzouri2025GoSimRIS}.
-ORIX runs a near-RT loop of 10~ms to 1~s with quantized phases and a phase-dependent
+E2SM-RIS service model and supports at most \numRepGoSimRisMaxElements{}
+elements~\cite{ElGhalbzouri2025GoSimRIS}.
+ORIX runs a near-RT loop of \numRepOrixLoopMinMs~ms to \numRepOrixLoopMaxS~s with quantized
+phases and a phase-dependent
 amplitude model, and neglects mutual coupling and reconfiguration delay~\cite{Kayraklik2026ORIX}.
 These frameworks exchange channel coefficients, signal-to-noise ratios or rates, not
 waveform samples.
 
 \subsection{IQ-level emulators}
-Colosseum emulates channels between 256 software-defined radios with a channel emulator built on
-field-programmable gate arrays (FPGAs), fed by precomputed scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
+Colosseum combines \numRepColosseumSdrs{} software-defined radios with a channel emulator
+built on field-programmable gate arrays (FPGAs) that runs precomputed
+scenarios~\cite{Bonati2021Colosseum,Polese2024ColosseumDT}.
 Tsampazi and Melodia installed RIS-cascaded channels generated with QuaDRiGa in Colosseum
 and ran srsRAN end to end; the RIS phases were optimized before the experiment and are not
 reconfigured during it~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}. The OAI
@@ -59,7 +64,7 @@ and receiver through separate control-plane and data-plane interfaces. It evalua
 (MMSE) and orthogonal-matching-pursuit (OMP) channel estimation and a differential channel-aware update (DCAR) on symbol-level
 i.i.d.\ Rayleigh channels with Gaussian random-walk and Gauss--Markov evolution, with an
 ideal continuous-phase, unit-amplitude surface, and reports a control-plane round-trip
-time of 5.2~ms over UDP~\cite{Kumar2026TRACE}. TRACE and \sremu{} are complementary: TRACE
+time of \numRepTraceRttMs~ms over UDP~\cite{Kumar2026TRACE}. TRACE and \sremu{} are complementary: TRACE
 studies estimation and tracking algorithms on symbol-level channels; \sremu{} provides a
 sample-level radio environment with timed RIS control. A TRACE-style controller could
 drive \sremu{}'s control plane.

@@ -1,8 +1,9 @@
 % Section VII -- Case studies (WP12 draft, stage C; DESIGN section 11). Every number is a
 % macro of numbers.yaml filled by tools/gen_results.py from paper/sweeps/results and sremu
 % validation/fm (or a definition macro); figures F9-F12 come from figures/src/*.py.
-% PENDING (AWS): E-B on the lab arc (F9 arc panels, txtEBArcResult). Geometries are SIM and
-% labelled; A0 values are "under the area-tied kernel"; E-D is "model-based dimensioning, not
+% E-B: primary geometry modelled on the lab arrangement (SIM, nominal geometry; AWS run in
+% paper/sweeps/results/E-B-arc), lab-like geometry as the supporting row. Geometries are SIM
+% and labelled; A0 values are "under the area-tied kernel"; E-D is "model-based dimensioning, not
 % validated". D24: the tick-based baseline is a generic semantics, not an earlier simulator.
 \section{Case Studies}\label{sec:cases}
 
@@ -16,58 +17,97 @@ and E-D are short analyses on the batch path.
 \claim{C-EB-WHY}A tool that works with one channel coefficient per block cannot place a
 reconfiguration inside a packet and observe the symbols on either side of it. ETSI GS RIS
 008 lists reconfiguration time and modulated-signal quality among the parameters of a RIS
-test~\cite{ETSI_GS_RIS008}; this study measures how the two interact. A panel of three tiles
-serves two receivers at \numEbFcGHz~GHz in a lab-like SIM geometry, not the laboratory's
-geometry. Each receiver has its own exact optimum, and the two states have unit amplitude by
-assumption. QPSK packets of \numEbPreamble{} preamble and \numEbPayload{} payload symbols, at
-\numEbSps{} samples per symbol and \numEbRateMsps~MS/s, last \numEbPacketMs~ms. The receiver
-equalizes once, from the preamble. The transmit power gives $E_s/N_0=\numEbEsnoDb$~dB at
-RX1 against the physical noise.
+test~\cite{ETSI_GS_RIS008}; this study measures how the two interact.
 
-\claim{C-EB-MECH}In the mechanism experiment (E-B1) the panel switches to the
-configuration of RX2 during a packet to RX1. In all \numVaFiveTotal{} step switches inside a
-packet, the earliest affected sample of RX1 is exactly
-$\mathrm{to\_ticks}(\tsw+\tau_{\mathrm{RIS}\to\mathrm{RX1}})$, and every earlier sample is identical bit
-for bit to the run without a switch (VA-5). Fig.~\ref{fig:F9}(a) shows the effect with the
-line of sight blocked. The switch changes the channel of RX1 by
-\numEbBlockedChangeDb~dB and \numEbBlockedRotDeg$^\circ$. Symbols before it keep their EVM of
-about \numEbRefEvmDb~dB. After it the equalizer, trained on the old channel, sees an error as
-large as the signal: \numEbOneErrors{} of \numEbOneBits{} payload bits fail when the switch
-comes a quarter into the packet. A linear transition of \numEbTransLongUs~$\mu$s spreads the
-damage over more symbols but still costs \numEbLinErrors{} bits. With the line of sight
-present the same switch changes the channel by \numEbLosChangeDb~dB and
-\numEbLosRotDeg$^\circ$, so no bit fails, but the payload EVM rises to \numEbLosEvmDb~dB.
+\claim{C-EB-SETUP}The primary geometry is modelled on the laboratory arrangement of
+Section~\ref{sec:vv-lab}. It is simulated (SIM) with nominal dimensions: each uncertain distance
+and angle takes the middle of its known range. It is therefore not
+the measured geometry of the laboratory, and no measurement is compared with these runs. The
+\numEbArcPanels{} tiles of $\numEbArcCellsU\times\numEbArcCellsV$ cells stand on an arc of
+radius \numEbArcRadiusM~m around the transmitter and act as one surface at \numEbFcGHz~GHz.
+Two receivers stand \numEbArcRxDistM~m from the transmitter, at different angles; their
+positions are an engineering choice (ENG). Each
+receiver has its own exact optimum over all cells, and a switch sends one command per tile,
+all for the same time. A lab-like SIM geometry with one panel of three tiles is a supporting
+case. Three assumptions apply to both geometries. The two states of the laboratory cells have
+unit amplitude ($|\Gamma|=1$, ASSUMED), because their magnitudes were not measured. During a
+transition the response follows the complex-linear path between the states, an engineering
+choice (ENG). When the line of sight is blocked, the occluder removes the direct path and leaves
+the RIS hops unattenuated; on the arc a real plate of that size would also shadow some RIS
+rays, so this case is an idealization. QPSK packets of \numEbPreamble{} preamble and
+\numEbPayload{} payload symbols, at \numEbSps{} samples per symbol and \numEbRateMsps~MS/s,
+last \numEbPacketMs~ms. The receiver equalizes once, from the preamble. The transmit power
+gives $E_s/N_0=\numEbEsnoDb$~dB at RX1 against the physical noise.
 
-\claim{C-EB-TIMING}In the timing experiment (E-B2) \numEbPackets{} packets alternate between the
-two receivers; the slice shown uses guard intervals of \numEbGuardMs~ms. A controller sends one command per
-guard, and the command arrives after \numEbLatencyMs~ms plus a uniform jitter of up to $J$.
-The study design makes the case with the line of sight primary and blocking a declared
-sensitivity variant. With the line of sight present, no semantics loses a packet at this SNR
-(largest packet error rate \numEbLosPerMaxPct~\%), although the EVM of the affected packets
-rises. Fig.~\ref{fig:F9}(b) therefore shows the blocked variant, where the RIS path dominates
-and the semantics differ.
-Timed commands carry a switch time at the guard centre and are issued \numEbLeadsMs~ms ahead.
-Commands without a time apply on arrival (asap). Tick-based untimed semantics apply each
-command at the next tick of a \numEbTickMs~ms grid and keep one pending command per panel.
-Timed commands lose no packet as long as the lead exceeds the latency: with a lead of
-\numEbLeadMaxMs~ms the packet error rate is zero up to $J=\numEbJitterMaxMs$~ms
-(Clopper--Pearson upper limit \numEbPerUpperPct~\%). A short lead fails when the jitter
-outgrows it (\numEbTimedHalfPerOnePct~\% at $J=\numEbJitterOneMs$~ms with a lead of \numEbLeadMinMs~ms). Asap
-commands fail when the latency outgrows the guard (\numEbAsapPerOnePct~\% at $J=\numEbJitterOneMs$~ms).
-Tick-based semantics lose \numEbTickPerZeroPct~\% of the packets even without jitter, because
-the tick grid is not aligned with the guards, and up to \numEbTickPerMaxPct~\% with it. When
-the RIS path dominates, the timing requirement is therefore simple to state and to test: a
-command must carry a time, and its lead must exceed the worst latency. A run on the as-built arc geometry of the laboratory panel is
-pending; its result will be stated as \txtEBArcResult.
+\claim{C-EB-MECH}In the mechanism experiment (E-B1) the surface switches to the
+configuration of RX2 during a packet to RX1. VA-5 checks every step switch inside a packet:
+\numVaFiveArcTotal{} on the arc and \numVaFiveTotal{} in the lab-like geometry. In all of
+them the earliest affected sample of RX1 is exactly
+$\mathrm{to\_ticks}(\tsw+\tau_{\mathrm{RIS}\to\mathrm{RX1}})$, and every earlier sample is
+identical bit for bit to the run without a switch. On the arc, the command of each tile
+takes effect at the sample set by that tile's own delay to RX1. Fig.~\ref{fig:F9}(a) shows
+the effect on the arc. With the line of sight blocked, the switch changes the channel of RX1
+by \numEbArcBlockedChangeDb~dB and \numEbArcBlockedRotDeg$^\circ$. Symbols before it keep
+their EVM of about \numEbArcRefEvmDb~dB. After it the equalizer, trained on the old channel,
+sees an error as large as the signal: \numEbArcOneErrors{} of \numEbOneBits{} payload bits
+fail when the switch comes a quarter into the packet. A linear transition of
+\numEbTransLongUs~$\mu$s spreads the damage over more symbols but still costs
+\numEbArcLinErrors{} bits. With the line of sight present, the switch changes the channel by
+\numEbArcLosChangeDb~dB and \numEbArcLosRotDeg$^\circ$. The payload EVM rises to
+\numEbArcLosEvmDb~dB, and the packet loses \numEbArcLosOneErrors{} of its \numEbOneBits{}
+payload bits.
+
+\claim{C-EB-TIMING}In the timing experiment (E-B2) \numEbPackets{} packets alternate between
+the two receivers; the slice shown uses guard intervals of \numEbGuardMs~ms. A controller
+sends one message per guard, with one command per tile on the arc, and the message arrives
+after \numEbLatencyMs~ms plus a uniform jitter of up to $J$. Timed commands carry a switch time at the guard centre and are issued
+\numEbLeadsMs~ms ahead; a timed command that arrives late applies on arrival. Commands
+without a time apply on arrival (asap). Tick-based untimed
+semantics apply each command at the next tick of a \numEbTickMs~ms grid and keep one pending
+command per panel. The arc run fixed its cases before any point ran: the line of sight
+present at $E_s/N_0=\numEbEsnoDb$~dB, the same at \numEbArcEsnoLowDb~dB as a sensitivity,
+and the line of sight blocked. With the line of sight present at \numEbEsnoDb~dB, QPSK
+tolerates the wrong configuration: in this slice no semantics loses more than
+\numEbArcLosHighPerMaxPct~\% of the packets, although the EVM of the affected packets rises.
+Fig.~\ref{fig:F9}(b) shows the other two cases, in which a switch at the wrong time costs
+bits. The two cases show the same pattern. Each pair of values below gives the line of sight present
+at \numEbArcEsnoLowDb~dB, then the line of sight blocked. Tick-based semantics lose
+\numEbArcTickPerMinPct--\numEbArcTickPerMaxPct~\% of the packets at every jitter, also
+without jitter, because the tick grid is not aligned with the guards. Timed commands with a
+lead of \numEbLeadMidMs~ms lose no packet up to $J=\numEbJitterOneMs$~ms (Clopper--Pearson
+upper limit \numEbPerUpperPct~\%). At $J=\numEbJitterMaxMs$~ms the latency can exceed this
+lead, and they lose \numEbArcTimedTwoPerThreeLosPct~\% and \numEbArcTimedTwoPerThreeBlkPct~\%.
+With a lead of \numEbLeadMinMs~ms they fail already at $J=\numEbJitterOneMs$~ms
+(\numEbArcTimedHalfPerOneLosPct~\% and \numEbArcTimedHalfPerOneBlkPct~\%); with
+\numEbLeadMaxMs~ms they lose no packet at any jitter. Asap commands lose no packet while the
+worst latency fits in the guard ($J\le\numEbArcAsapJitterOkMs$~ms), and they lose
+\numEbArcAsapPerOneLosPct~\% and \numEbArcAsapPerOneBlkPct~\% at $J=\numEbJitterOneMs$~ms.
+When a switch costs bits, the timing requirement is therefore simple to state and to test: a
+timed command loses no packet when its lead exceeds the worst latency, and a command without a
+time loses none while the worst latency fits in the guard.
+
+\claim{C-EB-LABLIKE}The lab-like geometry supports this picture (Fig.~\ref{fig:F9}(c),
+(d)). With the line of sight blocked, the switch changes the channel of RX1 by
+\numEbBlockedChangeDb~dB and \numEbBlockedRotDeg$^\circ$, and \numEbOneErrors{} payload bits
+fail for the same switch time. Timed commands with the \numEbLeadMidMs~ms lead lose no packet
+up to $J=\numEbJitterOneMs$~ms and \numEbTimedTwoPerThreePct~\% at $J=\numEbJitterMaxMs$~ms.
+Asap commands lose \numEbAsapPerOnePct~\% at $J=\numEbJitterOneMs$~ms. Tick-based semantics
+lose \numEbTickPerZeroPct~\% without jitter and up to \numEbTickPerMaxPct~\% with it. With the
+line of sight present, no semantics loses a packet at \numEbEsnoDb~dB; this geometry was not
+run at \numEbArcEsnoLowDb~dB.
 
 \begin{figure*}[t]
 \centering
-\sremufigure{F9}{\textwidth}{Intra-frame RIS reconfiguration in a lab-like SIM geometry
-(not the laboratory's), line of sight blocked. (a) EVM along one packet, as a running mean
-over a few symbols, when the RIS switches a quarter into the packet, for a step and two
-linear transitions, and without a switch. (b) Packet error rate versus the jitter of the
-command latency for timed commands with three leads, asap commands and tick-based untimed
-semantics, with Clopper--Pearson intervals. Data classes: SIM-sremu (emulator runs), ASSUMED
+\sremufigure{F9}{\textwidth}{Intra-frame RIS reconfiguration. Top row: geometry modelled on
+the laboratory arrangement (SIM, nominal geometry). Bottom row: lab-like SIM geometry
+(supporting), not the laboratory's. (a), (c) EVM along one packet, as a running mean over a
+few symbols, when the RIS switches a quarter into the packet: a step and two linear
+transitions with the line of sight blocked, a step with it present, and no switch.
+(b), (d) Packet error rate versus the jitter $J$ of the command latency at a guard of
+\numEbGuardMs~ms, for timed commands with a lead of \numEbLeadMidMs~ms, asap commands and
+tick-based untimed semantics, with Clopper--Pearson \numCiPct\,\% intervals. Filled markers:
+line of sight blocked, $E_s/N_0=\numEbEsnoDb$~dB. Open markers, in (b): line of sight
+present, $E_s/N_0=\numEbArcEsnoLowDb$~dB. Data classes: SIM-sremu (emulator runs), ASSUMED
 (unit amplitudes of the two states).}{fig:F9}
 \end{figure*}
 

@@ -1,0 +1,159 @@
+{
+  "experiment": "E-B-arc",
+  "description": "E-B (intra-frame RIS reconfiguration: E-B1 mechanism + VA-5, E-B2 timing) on scenarios/studies/lab_arc.yaml; aggregated results of one AWS run, copied unchanged from the run's results directory",
+  "data_classes": [
+    "SIM-sremu",
+    "ASSUMED"
+  ],
+  "data_class_notes": {
+    "SIM-sremu": "every result value (EVM, BER, PER, VA-5) comes from sremu runs",
+    "ASSUMED": "an input, not a result: the two lab cell states have |Gamma| = 1 (the library has no measured magnitudes)"
+  },
+  "geometry_label": "modelled on the lab arrangement (SIM, nominal geometry)",
+  "geometry_note": "nominal values (middle of the author-supplied intervals: R 1.95 m, span 46 deg, centre 22.5 deg, height 1.0 m); not a measured geometry; no measurement is compared with these runs",
+  "scenario": {
+    "path": "scenarios/studies/lab_arc.yaml",
+    "sha256": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a"
+  },
+  "assumptions": [
+    "lab state amplitudes |Gamma| = 1 ASSUMED (alphabet 'lab'); ideal 1-bit {1, -1} also run",
+    "transition path complex-linear [ENG]",
+    "six tiles act as one RIS: joint exact optimum over every cell; one command per panel at the same time",
+    "LOS blocked: one opaque plate across both LOS segments; occluders act on the LOS only, so the RIS hops are unattenuated (idealized regime 'LOS removed, RIS hops unattenuated') [ENG]",
+    "TX power set for Es/N0 = 25 dB at RX1 under its own optimum; Es/N0 = 15 dB is the pre-declared sensitivity of the LOS-present slice (eb_plan.json 'pre_declared')",
+    "free space with LOS plus the RIS; isotropic antennas in the horizontal plane [ENG]"
+  ],
+  "run": {
+    "run_id": "20261011T060442Z_eb_arc_d41a75",
+    "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261011T060442Z_eb_arc_d41a75\\out\\eb_arc",
+    "results_tgz_sha256": "f5a5a9302f53409acf30946cd106e14d18f30dc77ad804558b597d452a63d16b",
+    "t_start_utc": "2026-10-11T06:05:59.263726Z",
+    "t_end_utc": "2026-10-11T06:15:57.420720Z",
+    "wall_s": 598.243795842,
+    "points": {
+      "eb1": 72,
+      "eb2_lab": 150,
+      "eb2_ideal1": 75,
+      "eb2_lab_es15": 75,
+      "eb2_ideal1_es15": 75
+    },
+    "failed_points": 0,
+    "va5_pass": true,
+    "argv": [
+      "/opt/job/sremu/experiments/eb.py",
+      "--scenario",
+      "scenarios/studies/lab_arc.yaml",
+      "--out",
+      "/opt/job/out/eb_arc",
+      "--jobs",
+      "64"
+    ]
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.16xlarge",
+    "instance_id": "i-0c71d7b6d144377ea",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (noble; apt suites in the job log, glibc 2.39)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "logical_cpus": 64,
+    "memory": "MemTotal:       129780132 kB",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "jobs": 64,
+    "job_log_sha256": "bcc46226000e1bede12e3dd0b7cc21454a87e6df029bd383c08e7e637ba2ff2d"
+  },
+  "sremu": {
+    "commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+    "dirty": false,
+    "commit_source": "SREMU_GIT_COMMIT / SREMU_GIT_DIRTY=0 exported by the AWS job script (host/job_stdout.txt, line 1); git_state.json and every manifest record git_commit null because the job's copy (/opt/job/sremu) was not a git work tree; the run's code hashes equal those of the commit (see commit_verified)",
+    "code_hashes_run": {
+      "files": {
+        "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
+        "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+        "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
+        "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+        "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+        "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
+        "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+        "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+        "experiments/finalize.py": "90008c1e9e3c4ad7110db5c678a0dbca52277648bc88b6a2467b99aaae4217d9",
+        "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+        "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
+        "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+        "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+      },
+      "src_sremu_tree_sha256": "14b4193bd0a7321506b806d3569e295df2d9ca1ba402d546039850f77786c0d4"
+    },
+    "local_checkout_head": "309c6335d639c16b8d2f62b50c1d521114d58621",
+    "local_files_equal_run_hashes": {
+      "experiments/__init__.py": true,
+      "experiments/common.py": true,
+      "experiments/ea.py": true,
+      "experiments/ea_iq.py": true,
+      "experiments/eb.py": true,
+      "experiments/eb_aggregate.py": true,
+      "experiments/ec.py": true,
+      "experiments/ef.py": true,
+      "experiments/finalize.py": true,
+      "experiments/run_sweeps.py": true,
+      "scenarios/studies/ea_corridor.yaml": true,
+      "scenarios/studies/lab_arc.yaml": true,
+      "scenarios/lab_like_A.yaml": true
+    },
+    "local_src_sremu_tree_sha256": "1062c3793d9de6dc72f849e994d6a3bdc1dd98ee924bc042af1c9bc449e22eb0",
+    "local_src_note": "the run's src/sremu tree hash differs from the local checkout (HEAD moved after 5be649a); the experiment drivers and scenarios listed above are byte-identical. The tree of 5be649a itself is checked in commit_verified",
+    "commit_verified": {
+      "method": "read-only, no git process: the tree of commit 5be649a was rebuilt from the loose objects in sremu/.git/objects (zlib) and hashed as experiments/common.py:code_hashes() does (sorted src/sremu/**/*.py, path + NUL + bytes); each hashed file and the state library were compared blob by blob",
+      "src_sremu_tree_sha256_at_commit": "14b4193bd0a7321506b806d3569e295df2d9ca1ba402d546039850f77786c0d4",
+      "n_src_files_at_commit": 103,
+      "src_tree_equals_run": true,
+      "code_files_equal_run": "13 of 13",
+      "state_library": {
+        "path": "data/states/lab_binary_3p5ghz.yaml",
+        "sha256_at_commit": "a49e9e5f60f50000f22b40a151c12e64f683c0b2934ae44d5b57e1948e0e0368",
+        "equals_run_manifest_input": true
+      },
+      "local_smoke": "python -m experiments.eb --scenario scenarios/studies/lab_arc.yaml --smoke on the local checkout (Windows, HEAD 309c633 with uncommitted edits): the E-B1 point (lab, LOS present, step, 0.25 T_p) equals the run's row (bit errors, EVM to 7e-15 dB; every per-symbol EVM within 7e-15 dB); the 50 packets of the E-B2 smoke point equal the first 50 packets of the run's point (bit errors and timing identical; EVM to the last digit)",
+      "checked_utc": "2026-10-11T08:45:00Z",
+      "conclusion": "the run used the code of commit 5be649a: its src/sremu tree, its 13 hashed drivers and scenarios, and its lab state library; the dirty flag 0 of the job export is consistent with this for every hashed file"
+    }
+  },
+  "not_in_wp11_index": "this run is not part of sweeps/results/summary.json (the WP11 index); tools/gen_results.py reads E-B-arc directly",
+  "files": {
+    "E-B1/eb1_points.csv": "124a7c579583f265f8b2a5ddb3511330046daa989533c25522f31d495a1136e5",
+    "E-B1/eb1_traces.csv": "c60a211ed28e1ac930c8436996a31e18c51f92166b132e6f926cb1fbcf8a8b20",
+    "E-B1/manifest.json": "42de114eaa094faf0862bd992ca86d89b63f7afc9b4ef9f1f75297040dd7f12b",
+    "E-B1/meta.json": "d4b2e8486d4a2283969a32f3e893818ccbff38027082f1667b59d82de86fee89",
+    "E-B1/va5.json": "b13554e2eca1bb903b876fb809c1f9dc110e76522c6ae8f181f2fd8c1ebcba0a",
+    "E-B2/eb2_per.csv": "de35647c0bbb8dad274c5011ebf644b1d28def8007058e620a7e85bd19b1be66",
+    "E-B2/manifest.json": "c33a48493f822a4f167e121d4a0bbe0621ab98e175b3b8267f42cb45a3a0e380",
+    "E-B2/meta.json": "e8ea7b383d3a8b0288852807bf846e70ecb142a9d1a40a8ea6c75abe36cf5576",
+    "eb_plan.json": "cfdd6daabead4a2270818ae7d880553c740d53a3566bf27f7180de2dbbf741ae",
+    "eb_summary.json": "cfe8e5ab854cf9b60eadcc7551f6a0aabf19b642ebeec50b9bf818572f1533c5",
+    "git_state.json": "5ea8cc233914abed452e82ac9211c6a3bc67bc62b21385ce71ac723583d15e21",
+    "host/job_stdout.txt": "727107b059b47da3bfbe23163c49aa2244c8a085f5ab1c3be2469270828c7282",
+    "host/lscpu.txt": "e9d2bc3a1a45012b790da0ed9127832651d02c11c65fdd1af58a8b54cd22119f",
+    "host/meminfo.txt": "5dac195ac9b0f6882f6c177f73db39e6abfa05936ed650a365be332e7850897c",
+    "run_manifests.json": "dd27efb282b2589b3599060e2da4eb07322581096d4ba790b121a4aed1e184c1",
+    "sweeps/eb1/index.csv": "f05c8d2b7cf6da23d3bcd9efcb13a65cb27a3178f7fc4fd98cb8298abe75c7a1",
+    "sweeps/eb1/sweep.json": "4884b585c20e0293ed3c0a504ec2af5330f45d8e9c8a7147a0426e31b290958e",
+    "sweeps/eb2_ideal1/index.csv": "d555a0e248e2c55687353b54a37bf0c7c570d87597a1bbfc0efb786be9577bdb",
+    "sweeps/eb2_ideal1/sweep.json": "bac925ffbc86915971e43256c1dbd95bf335a283140e88c04b3c2b2eee9cb9ed",
+    "sweeps/eb2_ideal1_es15/index.csv": "166a251e516d19e1d06a95f93f9cf2c478a39148a91c0795c8f1b8b15435f070",
+    "sweeps/eb2_ideal1_es15/sweep.json": "50c40e82dc2ea6fe1d05c99d9da0e85c0ea917d398f5c48a4558c70c53212a25",
+    "sweeps/eb2_lab/index.csv": "9500228368281cb20cfe61c5a3f48214386acaa49067c978a47f5f485ca5ef68",
+    "sweeps/eb2_lab/sweep.json": "1df317e938b41cf41e97b12c610af876452f87bb71730e69051581b6c22da89f",
+    "sweeps/eb2_lab_es15/index.csv": "f37554e538164a5c4d3bbda5fe8ac6e78b2eaf95b162dc4640436a5085ba5e9d",
+    "sweeps/eb2_lab_es15/sweep.json": "6738ad5b8ca579a4299de7a1b713a54517178775679ab2bdd82519c76f84e865"
+  },
+  "written_utc": "2026-10-11T08:02:18Z"
+}

@@ -7,8 +7,11 @@ Status: **WP12 stage C draft.** Sections I-IV and VIII-X and the appendices desc
 commit 2a016a6 (claims name their tests). Sections V (Verification and validation) and VII
 (Case studies) are drafted from the committed study and experiment results; their numbers are
 pipeline macros written by `tools/gen_results.py`, and the data figures F3-F6 and F9-F12 are
-drawn by the scripts in `figures/src/`. PENDING (AWS): Section VI and F7/F8 (B1-B4), the E-F
-API latency, and the lab-arc panels of F9 (`txtEBArcResult`); the V-LAB lock commit, date and
+drawn by the scripts in `figures/src/`. E-B (Section VII-A, F9) is led by the lab-arc run
+(geometry modelled on the lab arrangement, SIM, nominal geometry; AWS run
+20261011T060442Z_eb_arc_d41a75 on c7i.16xlarge, aggregated results and provenance in
+`sweeps/results/E-B-arc/`); the lab-like geometry is the supporting row. PENDING (AWS):
+Section VI and F7/F8 (B1-B4) and the E-F API latency; the V-LAB lock commit, date and
 deposit DOI wait for human gate H-6. DESIGN D24: the paper presents sremu as a new emulator
 and contains no comparison with any earlier simulator; the single transparency sentence is
 claim C-LINEAGE (Section II).

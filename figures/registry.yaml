@@ -146,13 +146,21 @@ figures:
     owner: WP11
     status: pending
   F9:
-    title: "E-B: (a) per-symbol EVM around an intra-frame switch; (b) PER vs latency jitter for timed / asap / tick-based command semantics (lab-like SIM geometry; lab-arc panels pending)"
+    title: "E-B: (a), (c) per-symbol EVM around an intra-frame switch; (b), (d) PER vs latency jitter for timed (2 ms lead) / asap / tick-based command semantics at a 0.5 ms guard. Top row (primary): geometry modelled on the lab arrangement (SIM, nominal geometry), LOS present at Es/N0 15 dB and LOS blocked at 25 dB; bottom row (supporting): lab-like SIM geometry, LOS blocked"
     width: double
     source: script
     script: figures/src/f09_intraframe.py
     sweep: null
     inputs:
       - figures/src/figcommon.py
+      - sweeps/results/E-B-arc/meta.json
+      - sweeps/results/E-B-arc/eb_plan.json
+      - sweeps/results/E-B-arc/E-B1/eb1_traces.csv
+      - sweeps/results/E-B-arc/E-B1/eb1_points.csv
+      - sweeps/results/E-B-arc/E-B1/va5.json
+      - sweeps/results/E-B-arc/E-B1/meta.json
+      - sweeps/results/E-B-arc/E-B2/eb2_per.csv
+      - sweeps/results/E-B-arc/E-B2/meta.json
       - sweeps/eb1.yaml
       - sweeps/eb2_lab.yaml
       - sweeps/eb2_ideal1.yaml
@@ -166,8 +174,8 @@ figures:
     data_classes: [SIM-sremu, ASSUMED]
     outputs: [figures/out/F9.pdf, figures/data/F9.csv, figures/data/F9.meta.json]
     owner: WP12
-    status: pending
-    notes: "lab-like panels are generated from the committed E-B1/E-B2 results; the lab-arc panels (scenarios/studies/lab_arc.yaml) are PENDING (AWS run), so the entry stays pending"
+    status: ready
+    notes: "top row from the E-B lab-arc AWS run (sweeps/results/E-B-arc: run 20261011T060442Z_eb_arc_d41a75, c7i.16xlarge, sremu 5be649a clean per the job's SREMU_GIT_COMMIT export; the commit's src/sremu tree hash equals the run's, meta.json sremu.commit_verified); bottom row from the committed lab-like E-B1/E-B2 results"
   F10:
     title: "E-A: gain over RIS absent vs signaling delay tau_SUI (log x) for four controllers in the blocked corridor at 1 and 2.4 GHz with the half-retention delay tau_half; IQ path vs batch path (VA-1)"
     width: double

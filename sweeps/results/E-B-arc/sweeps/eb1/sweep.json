@@ -1,0 +1,72 @@
+{
+  "name": "eb1",
+  "description": "E-B1 intra-frame switch: per-symbol EVM, per-packet EVM/BER, VA-5 sample exactness; modelled on the lab arrangement (SIM, nominal geometry)",
+  "runner": "experiments.eb:run_eb1_point",
+  "spec_sha256": "c2bc8c151704f099995c2c609e803423b5262197118601c313b3f545d84953b5",
+  "spec_path": null,
+  "spec": {
+    "base": {
+      "scenario": "scenarios/studies/lab_arc.yaml"
+    },
+    "grid": {
+      "alphabet": [
+        "lab",
+        "ideal1"
+      ],
+      "los": [
+        "present",
+        "blocked"
+      ],
+      "transition": [
+        "step",
+        "linear20us",
+        "linear200us"
+      ],
+      "delta": [
+        "-0.5",
+        "0.05",
+        "0.25",
+        "0.5",
+        "0.75",
+        "1.05"
+      ]
+    },
+    "zip": {},
+    "seeds": [
+      20261010
+    ]
+  },
+  "n_points": 72,
+  "jobs": 64,
+  "environment": {
+    "sremu_version": "0.1.0.dev0",
+    "contract_version": "1.1",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "logical_cpus": 64,
+    "power_plan_or_governor": null,
+    "gpu": [],
+    "aws_instance": "type='c7i.16xlarge' id='i-0c71d7b6d144377ea'"
+  },
+  "argv": [
+    "/opt/job/sremu/experiments/eb.py",
+    "--scenario",
+    "scenarios/studies/lab_arc.yaml",
+    "--out",
+    "/opt/job/out/eb_arc",
+    "--jobs",
+    "64"
+  ],
+  "t_start_utc": "2026-10-11T06:05:59.270127Z",
+  "t_end_utc": "2026-10-11T06:06:16.997665Z",
+  "n_failed": 0
+}

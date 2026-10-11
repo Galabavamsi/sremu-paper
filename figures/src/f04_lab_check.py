@@ -32,6 +32,13 @@ DELTA_CSV = f"{RUN}/F4_delta_rmse.csv"
 TABLE_V = f"{RUN}/table_v.json"
 PROTOCOL = "../sremu/validation/ants_fig4b/protocol.json"
 RES_CLIP_DB = 5.0
+MINUS = "\N{MINUS SIGN}"  # U+2212, in STIXGeneral; tick labels use it too (axes.unicode_minus)
+
+
+def _num(v: float, fmt: str) -> str:
+    """``v`` formatted with ``fmt`` for an annotation, with a typographic minus sign."""
+    s = format(v, fmt)
+    return MINUS + s[1:] if s.startswith("-") else s
 
 
 def _edges(centres: list[float]) -> list[float]:
@@ -94,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
             ax.plot(math.radians(t), r, ".", color="white" if nm(v) < 0.45 else "black",
                     ms=1.6)
             if lab.startswith("(c)") and abs(v) > RES_CLIP_DB:
-                ax.annotate(f"{v:.1f} dB", (math.radians(t), r), xytext=(0.02, 0.80),
+                ax.annotate(f"{_num(v, '.1f')} dB", (math.radians(t), r), xytext=(0.02, 0.80),
                             textcoords="axes fraction", fontsize=fc.FONT_PT,
                             arrowprops={"arrowstyle": "-", "lw": 0.5})
         ax.set_thetamin(th_e[0])
@@ -137,10 +144,11 @@ def main(argv: list[str] | None = None) -> int:
     ax_h.axvline(c2_min, color=fc.OI["vermillion"], lw=1.0, ls="--")
     med = float(np.median(d))
     ax_h.axvline(med, color=fc.OI["blue"], lw=1.0, ls=":")
-    ax_h.text(c2_min + 0.08, counts.max() * 0.97, "C2\nneeds\n$\\geq$" f"{c2_min:g} dB",
+    ax_h.text(c2_min + 0.08, counts.max() * 0.97, "C2\nneeds\n$\\geq$" f"{_num(c2_min, 'g')} dB",
               va="top", fontsize=fc.FONT_PT, color=fc.OI["vermillion"])
     ax_h.text(0.03, 0.97, "(d)", transform=ax_h.transAxes, va="top")
-    ax_h.text(0.03, 0.80, f"median {med:.2f} dB\ndecoy C2 rate\n{round(rate * n_dec)}/{n_dec}",
+    ax_h.text(0.03, 0.80,
+              f"median {_num(med, '.2f')} dB\ndecoy C2 rate\n{round(rate * n_dec)}/{n_dec}",
               transform=ax_h.transAxes, va="top", fontsize=fc.FONT_PT)
     ax_h.set_xlim(right=c2_min + 3.6)
     ax_h.set_xlabel(r"$\Delta$RMSE = RMSE(M0) $-$ RMSE(M2) (dB)")

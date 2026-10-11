@@ -5,7 +5,8 @@ Reads ONLY committed result files and the paper's figure data, never typed numbe
 
 * the pinned test record ``generated/junit/*.xml`` (Table IV, oracle counts);
 * sremu ``validation/{tang,cfo,fm,ants_fig4b}/results/<run>`` and the V-LAB protocol;
-* ``sweeps/results/{E-A,E-A-IQ,E-B1,E-B2,E-C,E-F}`` (WP11 results);
+* ``sweeps/results/{E-A,E-A-IQ,E-B1,E-B2,E-C,E-F}`` (WP11 results) and
+  ``sweeps/results/E-B-arc`` (E-B on the lab arc, AWS run);
 * ``figures/data/F3.meta.json`` and ``F6.meta.json`` (values computed by those figure
   scripts with the installed sremu).
 
@@ -17,7 +18,7 @@ table4_vv.tex``, ``table5_lab.tex``, ``table8_ablation.tex``. Every value fits t
 Rounding: decimals are rounded half-even on the exact decimal value of the source
 (``Decimal(repr(x))``); the Tang bias is the exact mean of the two-decimal digitized values
 (197/200 = 0.985 -> 0.98); the Tang curve deviation is a bound (max rounded UP to 0.01 dB).
-Macros of PENDING studies (E-B on the lab arc, B1-B6, E-F latency) and of the V-LAB lock and
+Macros of PENDING studies (B1-B6, E-F latency) and of the V-LAB lock and
 deposit (human gate H-6) are deliberately absent: they stay placeholders.
 
 Usage: python tools/gen_results.py [--paper-root DIR] [--check]
@@ -27,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import re
@@ -515,92 +517,287 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     prov["F6"] = "figures/data/F6.meta.json"
 
     # ---------------------------------------------------------------- VII: E-B
-    eb1 = read_csv(sw / "E-B1" / "eb1_points.csv")
-    va5 = read_json(sw / "E-B1" / "va5.json")
-    v["numVaFivePass"] = str(va5["n_pass"])
-    v["numVaFiveTotal"] = str(va5["n_step_switches_inside_packet"])
-    if not (va5["pass"] and va5["all_before_bitwise_identical"]):
-        raise SystemExit("gen_results: VA-5 did not pass")
+    # Primary geometry: modelled on the lab arrangement (SIM, nominal geometry), the AWS run
+    # in sweeps/results/E-B-arc. Supporting geometry: the lab-like SIM geometry,
+    # sweeps/results/E-B1 and E-B2. The setup macros (packet, latency, guard, leads, tick,
+    # Es/N0) are read from the arc run and checked equal for the lab-like run, so one set of
+    # macros describes both. F9(b)/(d) show the 0.5 ms guard and the 2 ms lead.
+    guard_f9, lead_f9 = "1/2000", "1/500"
+    jit_all = ("0", "1/10000", "3/10000", "1/1000", "3/1000")
 
-    def eb1_row(alpha: str, los: str, trans: str, delta: str) -> dict[str, str]:
-        return next(r for r in eb1 if (r["alphabet"], r["los"], r["transition"], r["delta"])
-                    == (alpha, los, trans, delta))
+    def eb1_row(rows: list[dict[str, str]], alpha: str, los: str, trans: str,
+                delta: str) -> dict[str, str]:
+        hit = [r for r in rows if (r["alphabet"], r["los"], r["transition"], r["delta"])
+               == (alpha, los, trans, delta)]
+        if len(hit) != 1:
+            raise SystemExit(f"gen_results: {len(hit)} E-B1 rows for "
+                             f"{alpha}/{los}/{trans}/{delta}")
+        return hit[0]
 
-    blk = eb1_row("lab", "blocked", "step", "1/4")
-    pres = eb1_row("lab", "present", "step", "1/4")
-    v["numEbOneErrors"] = str(int(blk["bit_errors"]))
-    payload_bits = 512 * 2  # QPSK payload of the E-B packet (eb1.yaml): checked below
-    if not abs(float(blk["ber"]) - int(blk["bit_errors"]) / payload_bits) < 1e-12:
-        raise SystemExit("gen_results: E-B payload size changed")
-    v["numEbOneBits"] = integer(payload_bits)
-    v["numEbOneEvmDb"] = dec(blk["evm_db"], 1)
-    v["numEbRefEvmDb"] = dec(blk["ref_evm_db"], 1)
-    v["numEbBlockedChangeDb"] = dec(blk["rx1_total_change_db"], 1)
-    v["numEbBlockedRotDeg"] = dec(abs(float(blk["rx1_total_rotation_deg"])), 0)
-    v["numEbLosChangeDb"] = dec(pres["rx1_total_change_db"], 1)
-    v["numEbLosRotDeg"] = dec(abs(float(pres["rx1_total_rotation_deg"])), 0)
-    v["numEbLosEvmDb"] = dec(pres["evm_db"], 1)
-    lin = eb1_row("lab", "blocked", "linear200us", "1/4")
-    v["numEbLinErrors"] = str(int(lin["bit_errors"]))
+    def eb2_row(rows: list[dict[str, str]], sem: str, j: str, *, lead: str = "",
+                los: str = "blocked", es: str = "25.0", guard: str = guard_f9,
+                alpha: str = "lab") -> dict[str, str]:
+        hit = [r for r in rows if r["alphabet"] == alpha and r["los"] == los
+               and r["es_n0_target_db"] == es and r["guard_s"] == guard
+               and r["jitter_s"] == j and r["semantics"] == sem
+               and (sem != "timed" or r["lead_s"] == lead)]
+        if len(hit) != 1:
+            raise SystemExit(f"gen_results: {len(hit)} E-B2 rows for {alpha}/{los}/{es}/"
+                             f"{sem}/{lead}/{guard}/{j}")
+        return hit[0]
 
-    eb2 = read_csv(sw / "E-B2" / "eb2_per.csv")
+    # ----- arc run: provenance and scenario (hash-checked against the run's record)
+    arc = sw / "E-B-arc"
+    arc_meta = read_json(arc / "meta.json")
+    arc_sum = read_json(arc / "eb_summary.json")
+    arc_plan = read_json(arc / "eb_plan.json")
+    arc_code = read_json(arc / "git_state.json")["code"]["files"]
+    if not (arc_sum["ok"] and arc_sum["n_failed"] == 0):
+        raise SystemExit("gen_results: the E-B arc run has failed points")
+    arc_rel = "scenarios/studies/lab_arc.yaml"
+    arc_path = sremu_root / arc_rel
+    if hashlib.sha256(arc_path.read_bytes()).hexdigest() != arc_code[arc_rel]:
+        raise SystemExit(f"gen_results: {arc_rel} differs from the file the E-B arc run used")
+    for name in ("E-B1/meta.json", "E-B2/meta.json"):
+        if arc_meta["geometry_label"] not in read_json(arc / name)["assumptions"]:
+            raise SystemExit(f"gen_results: E-B arc {name} lacks the geometry label")
+    arc_scen = read_yaml(arc_path)
+    # The run's manifests carry no git commit; the commit comes from the job's export and is
+    # tied to the run by the code hashes (meta.json "commit_verified": the tree of the commit,
+    # rebuilt read-only from its git objects, hashes to the run's src/sremu tree hash).
+    arc_ver = arc_meta["sremu"].get("commit_verified") or {}
+    if not (arc_ver.get("src_tree_equals_run") and arc_ver.get("src_sremu_tree_sha256_at_commit")
+            == read_json(arc / "git_state.json")["code"]["src_sremu_tree_sha256"]):
+        raise SystemExit("gen_results: the E-B arc commit is not tied to the run's code hashes")
+    prov["E-B-arc"] = {
+        "results": "sweeps/results/E-B-arc", "run_id": arc_meta["run"]["run_id"],
+        "sremu_commit": arc_meta["sremu"]["commit"], "sremu_dirty": arc_meta["sremu"]["dirty"],
+        "commit_source": "SREMU_GIT_COMMIT export of the AWS job (host/job_stdout.txt); the "
+                         "commit's src/sremu tree hash equals the run's (meta.json "
+                         "sremu.commit_verified)",
+        "aws_instance": arc_meta["host"]["instance_type"],
+        "geometry_label": arc_meta["geometry_label"], "t_end_utc": arc_sum["t_end_utc"],
+    }
 
-    def per(sem: str, j: str, *, lead: str = "", los: str = "blocked", guard: str = "1/2000",
-            alpha: str = "lab") -> dict[str, str]:
-        return next(r for r in eb2 if r["alphabet"] == alpha and r["los"] == los
-                    and r["guard_s"] == guard and r["jitter_s"] == j and r["semantics"] == sem
-                    and (sem != "timed" or r["lead_s"] == lead))
-
-    v["numEbPackets"] = integer(int(per("asap", "0")["n_packets"]))
-    v["numEbPerUpperPct"] = pct(float(per("timed", "3/1000", lead="1/200")["per_ci_high"]), 2)
-    v["numEbTimedFivePer"] = dec(per("timed", "3/1000", lead="1/200")["per"], 0)
-    v["numEbTimedHalfPerOnePct"] = pct(float(per("timed", "1/1000", lead="1/2000")["per"]), 0)
-    v["numEbTimedTwoPerThreePct"] = pct(float(per("timed", "3/1000", lead="1/500")["per"]), 0)
-    v["numEbAsapPerOnePct"] = pct(float(per("asap", "1/1000")["per"]), 0)
-    v["numEbTickPerZeroPct"] = pct(float(per("tick-based", "0")["per"]), 0)
-    v["numEbTickPerMaxPct"] = pct(max(float(per("tick-based", j)["per"]) for j in
-                                      ("0", "1/10000", "3/10000", "1/1000", "3/1000")), 0)
-    los_rows = [r for r in eb2 if r["los"] == "present" and r["alphabet"] == "lab"]
-    v["numEbLosPerMaxPct"] = pct(max(float(r["per"]) for r in los_rows), 0)
-    v["numEbEsnoDb"] = dec(per("asap", "0")["es_n0_target_db"], 0)
-    v["txtEBResult"] = ("with the LOS blocked, timed commands lose no packet, tick-based ones "
-                        f"up to {v['numEbTickPerMaxPct']}\\,\\%")
-    # setup of E-B, read from the scenario and the sweep specs (not typed)
-    scen = read_yaml(sremu_root / "scenarios" / "lab_like_A.yaml")
-    traffic = scen["traffic"][0]["params"]
-    tx_stream = scen["nodes"][0]["streams"][0]
+    # ----- setup (shared; read from the arc scenario and the arc plan)
+    lab_scen = read_yaml(sremu_root / "scenarios" / "lab_like_A.yaml")
+    traffic = arc_scen["traffic"][0]["params"]
+    tx_stream = arc_scen["nodes"][0]["streams"][0]
+    lab_tx = lab_scen["nodes"][0]["streams"][0]
+    for key in ("sps", "preamble_syms", "payload_syms"):
+        if str(traffic[key]) != str(lab_scen["traffic"][0]["params"][key]):
+            raise SystemExit(f"gen_results: E-B packet {key} differs between the geometries")
+    for key in ("fc_hz", "rate_sps"):
+        if str(tx_stream[key]) != str(lab_tx[key]):
+            raise SystemExit(f"gen_results: E-B {key} differs between the geometries")
     rate = float(Fraction(str(tx_stream["rate_sps"])))
+    payload_bits = int(traffic["payload_syms"]) * 2  # QPSK
     v["numEbFcGHz"] = dec(float(tx_stream["fc_hz"]) / 1e9, 1)
     v["numEbRateMsps"] = dec(rate / 1e6, 0)
     v["numEbSps"] = str(int(traffic["sps"]))
     v["numEbPreamble"] = str(int(traffic["preamble_syms"]))
     v["numEbPayload"] = str(int(traffic["payload_syms"]))
-    if int(traffic["payload_syms"]) * 2 != payload_bits:
-        raise SystemExit("gen_results: E-B payload differs from the scenario")
+    v["numEbOneBits"] = integer(payload_bits)
     v["numEbPacketMs"] = dec(1e3 * (int(traffic["preamble_syms"]) + int(traffic["payload_syms"]))
                              * int(traffic["sps"]) / rate, 3)
-    lat = scen["controllers"][0]["latency"]["fixed_s"]
-    v["numEbLatencyMs"] = dec(1e3 * float(Fraction(str(lat))), 1)
-    v["numEbGuardMs"] = dec(1e3 * float(Fraction("1/2000")), 1)  # the F9(b) slice
-    eb2_spec = read_yaml(paper_root / "sweeps" / "eb2_lab.yaml")
-    leads = sorted({float(Fraction(x)) for x in eb2_spec["zip"]["lead_s"]})
-    lead_ms = [dec(1e3 * x, 1 if x < 1e-3 else 0) for x in leads]
-    v["numEbLeadsMs"] = ", ".join(lead_ms[:-1]) + " or " + lead_ms[-1]
-    v["numEbLeadMinMs"] = lead_ms[0]
-    v["numEbLeadMaxMs"] = lead_ms[-1]
-    jit = sorted(float(Fraction(x)) for x in eb2_spec["grid"]["jitter_s"])
-    v["numEbJitterMaxMs"] = dec(1e3 * jit[-1], 0)
-    v["numEbJitterOneMs"] = dec(1e3 * float(Fraction("1/1000")), 0)
-    if Fraction("1/1000") not in {Fraction(x) for x in eb2_spec["grid"]["jitter_s"]}:
-        raise SystemExit("gen_results: J = 1 ms not in the E-B2 sweep")
-    eb2_meta = read_json(sw / "E-B2" / "meta.json")
-    tick = next(re.search(r"next (\d+(?:\.\d+)?) ms tick", a) for a in eb2_meta["assumptions"]
-                if re.search(r"next (\d+(?:\.\d+)?) ms tick", a))
-    v["numEbTickMs"] = tick.group(1)
-    eb1_spec = read_yaml(paper_root / "sweeps" / "eb1.yaml")
+    specs = {s["name"]: s for s in arc_plan["specs"]}
+    eb1_spec = specs["eb1"]
+    if read_yaml(paper_root / "sweeps" / "eb1.yaml")["grid"]["transition"] != \
+            eb1_spec["grid"]["transition"]:
+        raise SystemExit("gen_results: E-B1 transitions differ between the geometries")
     lin_us = sorted(int(m.group(1)) for x in eb1_spec["grid"]["transition"]
                     if (m := re.fullmatch(r"linear(\d+)us", x)))
     v["numEbTransLongUs"] = str(lin_us[-1])
+    eb2_spec = specs["eb2_lab"]
+    lab_eb2_spec = read_yaml(paper_root / "sweeps" / "eb2_lab.yaml")
+    leads = sorted({Fraction(x) for x in eb2_spec["zip"]["lead_s"]})
+    jits = sorted(Fraction(x) for x in eb2_spec["grid"]["jitter_s"])
+    guards = {Fraction(x) for x in eb2_spec["grid"]["guard_s"]}
+    if (leads != sorted({Fraction(x) for x in lab_eb2_spec["zip"]["lead_s"]})
+            or jits != sorted(Fraction(x) for x in lab_eb2_spec["grid"]["jitter_s"])
+            or guards != {Fraction(x) for x in lab_eb2_spec["grid"]["guard_s"]}):
+        raise SystemExit("gen_results: E-B2 leads, jitters or guards differ between geometries")
+    if Fraction(guard_f9) not in guards or Fraction(lead_f9) not in leads:
+        raise SystemExit("gen_results: the F9 slice (guard, lead) is not in the sweep")
+    if [Fraction(j) for j in jit_all] != jits:
+        raise SystemExit("gen_results: E-B2 jitter grid changed")
+    lead_ms = [dec(1e3 * float(x), 1 if x < Fraction(1, 1000) else 0) for x in leads]
+    v["numEbLeadsMs"] = ", ".join(lead_ms[:-1]) + " or " + lead_ms[-1]
+    v["numEbLeadMinMs"] = lead_ms[0]
+    v["numEbLeadMidMs"] = dec(1e3 * float(Fraction(lead_f9)), 0)
+    v["numEbLeadMaxMs"] = lead_ms[-1]
+    v["numEbJitterMaxMs"] = dec(1e3 * float(jits[-1]), 0)
+    v["numEbJitterOneMs"] = dec(1e3 * float(Fraction("1/1000")), 0)
+    v["numEbGuardMs"] = dec(1e3 * float(Fraction(guard_f9)), 1)
+    lat: set[str] = set()
+    tick: set[str] = set()
+    for d in (arc / "E-B2", sw / "E-B2"):
+        for a in read_json(d / "meta.json")["assumptions"]:
+            if m := re.search(r"\((\d+(?:\.\d+)?) ms \+ U\[0, J\]\)", a):
+                lat.add(m.group(1))
+            if m := re.search(r"next (\d+(?:\.\d+)?) ms tick", a):
+                tick.add(m.group(1))
+    if len(lat) != 1 or len(tick) != 1:
+        raise SystemExit(f"gen_results: E-B2 latency {lat} or tick {tick} not unique")
+    v["numEbLatencyMs"] = lat.pop()
+    v["numEbTickMs"] = tick.pop()
+    lat_fixed = Fraction(v["numEbLatencyMs"]) / 1000
+
+    # ----- arc E-B1 (mechanism, VA-5)
+    a1 = read_csv(arc / "E-B1" / "eb1_points.csv")
+    ava5 = read_json(arc / "E-B1" / "va5.json")
+    if not (ava5["pass"] and ava5["all_before_bitwise_identical"]
+            and ava5["all_panels_k_applied_equal_expected"]
+            and ava5["n_pass"] == ava5["n_step_switches_inside_packet"]):
+        raise SystemExit("gen_results: VA-5 did not pass on the arc")
+    v["numVaFiveArcTotal"] = str(ava5["n_step_switches_inside_packet"])
+    n_panels = {int(r["n_panels"]) for r in a1}
+    if n_panels != {len(arc_scen["ris"])}:
+        raise SystemExit("gen_results: E-B arc panel count differs from the scenario")
+    v["numEbArcPanels"] = str(n_panels.pop())
+    grids = {(int(p["grid"]["n_u"]), int(p["grid"]["n_v"])) for p in arc_scen["ris"]}
+    if len(grids) != 1:
+        raise SystemExit("gen_results: E-B arc tiles differ in size")
+    nu, nv = grids.pop()
+    v["numEbArcCellsU"], v["numEbArcCellsV"] = str(nu), str(nv)
+    nodes = {n["id"]: n["position_m"] for n in arc_scen["nodes"]}
+    tx = nodes["ap"]
+    radii = [math.dist(tx, p["pose"]["center_m"]) for p in arc_scen["ris"]]
+    if max(radii) - min(radii) > 1e-6:
+        raise SystemExit("gen_results: the E-B arc tiles are not on one radius")
+    v["numEbArcRadiusM"] = dec(radii[0], 2)
+    rx_d = [math.dist(tx, nodes[k]) for k in ("rx1", "rx2")]
+    if abs(rx_d[0] - rx_d[1]) > 1e-6:
+        raise SystemExit("gen_results: the E-B arc receivers are not equidistant")
+    v["numEbArcRxDistM"] = dec(rx_d[0], 1)
+    for r in a1:
+        if int(r["bit_errors"]) != round(float(r["ber"]) * payload_bits):
+            raise SystemExit("gen_results: E-B arc payload size differs from the scenario")
+    ablk = eb1_row(a1, "lab", "blocked", "step", "1/4")
+    apres = eb1_row(a1, "lab", "present", "step", "1/4")
+    alin = eb1_row(a1, "lab", "blocked", "linear200us", "1/4")
+    v["numEbArcBlockedChangeDb"] = dec(ablk["rx1_total_change_db"], 1)
+    v["numEbArcBlockedRotDeg"] = dec(abs(float(ablk["rx1_total_rotation_deg"])), 0)
+    v["numEbArcRefEvmDb"] = dec(ablk["ref_evm_db"], 1)
+    v["numEbArcOneErrors"] = str(int(ablk["bit_errors"]))
+    v["numEbArcLinErrors"] = str(int(alin["bit_errors"]))
+    v["numEbArcLosChangeDb"] = dec(apres["rx1_total_change_db"], 1)
+    v["numEbArcLosRotDeg"] = dec(abs(float(apres["rx1_total_rotation_deg"])), 0)
+    v["numEbArcLosEvmDb"] = dec(apres["evm_db"], 1)
+    v["numEbArcLosOneErrors"] = str(int(apres["bit_errors"]))
+
+    # ----- arc E-B2 (timing): the two cases of F9(b) and the LOS-present slice at 25 dB
+    a2 = read_csv(arc / "E-B2" / "eb2_per.csv")
+    es_all = sorted({float(r["es_n0_target_db"]) for r in a2})
+    if (len(es_all) != 2 or "pre_declared" not in arc_plan
+            or specs["eb2_lab_es15"]["base"].get("es_n0_db") != es_all[0]):
+        raise SystemExit("gen_results: the arc Es/N0 sensitivity is not the pre-declared one")
+    es_lo, es_hi = repr(es_all[0]), repr(es_all[1])
+    v["numEbEsnoDb"] = dec(es_all[1], 0)
+    v["numEbArcEsnoLowDb"] = dec(es_all[0], 0)
+    cases = (("present", es_lo), ("blocked", es_hi))  # F9(b)
+    n_pk = {int(r["n_packets"]) for r in a2}
+    if len(n_pk) != 1:
+        raise SystemExit("gen_results: E-B2 packet counts differ between points")
+    n_packets = n_pk.pop()
+    v["numEbPackets"] = integer(n_packets)
+    zero_hi = {float(r["per_ci_high"]) for r in a2 if int(r["packet_errors"]) == 0}
+    if len(zero_hi) != 1:
+        raise SystemExit("gen_results: E-B2 Clopper-Pearson limit of PER = 0 not unique")
+    v["numEbPerUpperPct"] = pct(zero_hi.pop(), 2)
+
+    def arc_per(sem: str, j: str, case: tuple[str, str], lead: str = "") -> float:
+        r = eb2_row(a2, sem, j, lead=lead, los=case[0], es=case[1])
+        if not float(r["per_ci_low"]) <= float(r["per"]) <= float(r["per_ci_high"]):
+            raise SystemExit("gen_results: PER outside its Clopper-Pearson interval")
+        return float(r["per"])
+
+    tick_all = [arc_per("tick-based", j, c) for c in cases for j in jit_all]
+    v["numEbArcTickPerMinPct"] = pct(min(tick_all), 0)
+    v["numEbArcTickPerMaxPct"] = pct(max(tick_all), 0)
+    lat_max = {j: lat_fixed + Fraction(j) for j in jit_all}
+    for c in cases:
+        # timed: no packet lost while the lead exceeds the worst latency, losses beyond it
+        for ld in sorted({str(x) for x in leads}, key=Fraction):
+            for j in jit_all:
+                p = arc_per("timed", j, c, ld)
+                if Fraction(ld) > lat_max[j] and p != 0.0:
+                    raise SystemExit(f"gen_results: timed lead {ld} lost packets at J = {j}")
+                if Fraction(ld) < lat_max[j] and p == 0.0:
+                    raise SystemExit(f"gen_results: timed lead {ld} lost none at J = {j}")
+        # asap: no packet lost while the worst latency fits in the guard
+        for j in jit_all:
+            p = arc_per("asap", j, c)
+            if (lat_max[j] <= Fraction(guard_f9)) != (p == 0.0):
+                raise SystemExit(f"gen_results: asap at J = {j} does not follow the guard rule")
+    ok = [j for j in jit_all if lat_max[j] <= Fraction(guard_f9)]
+    v["numEbArcAsapJitterOkMs"] = dec(1e3 * float(Fraction(ok[-1])), 1)
+    los_c, blk_c = cases
+    half = str(leads[0])
+    v["numEbArcTimedTwoPerThreeLosPct"] = pct(arc_per("timed", "3/1000", los_c, lead_f9), 0)
+    v["numEbArcTimedTwoPerThreeBlkPct"] = pct(arc_per("timed", "3/1000", blk_c, lead_f9), 0)
+    v["numEbArcTimedHalfPerOneLosPct"] = pct(arc_per("timed", "1/1000", los_c, half), 0)
+    v["numEbArcTimedHalfPerOneBlkPct"] = pct(arc_per("timed", "1/1000", blk_c, half), 0)
+    v["numEbArcAsapPerOneLosPct"] = pct(arc_per("asap", "1/1000", los_c), 0)
+    v["numEbArcAsapPerOneBlkPct"] = pct(arc_per("asap", "1/1000", blk_c), 0)
+    hi_rows = [r for r in a2 if r["los"] == "present" and r["es_n0_target_db"] == es_hi
+               and r["guard_s"] == guard_f9]  # both alphabets: "no semantics loses more"
+    v["numEbArcLosHighPerMaxPct"] = pct(max(float(r["per"]) for r in hi_rows), 1)
+    # The abstract and the conclusion state txtEBResult for the whole guard slice of the run
+    # (every alphabet, LOS case and Es/N0), not only for the two F9(b) cases: check it there.
+    # At the other guards a few Es/N0 = 15 dB rows lose one packet in 2000 to noise even with
+    # timed commands on time, so the phrase is tied to the guard named next to it.
+    slice_rows = [r for r in a2 if r["guard_s"] == guard_f9]
+    for r in slice_rows:
+        if (r["semantics"] == "timed" and Fraction(r["lead_s"]) > lat_fixed
+                + Fraction(r["jitter_s"]) and int(r["packet_errors"]) != 0):
+            raise SystemExit("gen_results: txtEBResult says timed commands whose lead exceeds the "
+                             f"latency lose no packet; {r['alphabet']}/{r['los']}/"
+                             f"{r['es_n0_target_db']} lead {r['lead_s']} J {r['jitter_s']} lost "
+                             f"{r['packet_errors']}")
+    if max(float(r["per"]) for r in slice_rows if r["semantics"] == "tick-based") \
+            != max(tick_all):
+        raise SystemExit("gen_results: the largest tick-based PER of the guard slice is not in "
+                         "the F9(b) cases that txtEBResult quotes")
+    v["txtEBResult"] = ("timed commands whose lead exceeds the latency lose no packet, "
+                        f"tick-based ones up to {v['numEbArcTickPerMaxPct']}\\,\\%")
+
+    # ----- lab-like geometry (supporting): E-B1 / VA-5 and the LOS-blocked F9(d) slice
+    eb1 = read_csv(sw / "E-B1" / "eb1_points.csv")
+    va5 = read_json(sw / "E-B1" / "va5.json")
+    v["numVaFivePass"] = str(va5["n_pass"])
+    v["numVaFiveTotal"] = str(va5["n_step_switches_inside_packet"])
+    if not (va5["pass"] and va5["all_before_bitwise_identical"]
+            and va5["n_pass"] == va5["n_step_switches_inside_packet"]):
+        raise SystemExit("gen_results: VA-5 did not pass")
+    blk = eb1_row(eb1, "lab", "blocked", "step", "1/4")
+    if not abs(float(blk["ber"]) - int(blk["bit_errors"]) / payload_bits) < 1e-12:
+        raise SystemExit("gen_results: E-B payload size changed")
+    v["numEbOneErrors"] = str(int(blk["bit_errors"]))
+    v["numEbOneEvmDb"] = dec(blk["evm_db"], 1)
+    v["numEbBlockedChangeDb"] = dec(blk["rx1_total_change_db"], 1)
+    v["numEbBlockedRotDeg"] = dec(abs(float(blk["rx1_total_rotation_deg"])), 0)
+    eb2 = read_csv(sw / "E-B2" / "eb2_per.csv")
+    if {r["es_n0_target_db"] for r in eb2} != {es_hi}:
+        raise SystemExit("gen_results: the lab-like E-B2 run is not at the arc's main Es/N0")
+    if {int(r["n_packets"]) for r in eb2} != {n_packets}:
+        raise SystemExit("gen_results: lab-like E-B2 packet count differs from the arc run")
+    for j in jit_all:
+        p = float(eb2_row(eb2, "timed", j, lead=lead_f9)["per"])
+        if (Fraction(lead_f9) > lat_fixed + Fraction(j)) != (p == 0.0):
+            raise SystemExit(f"gen_results: lab-like timed (lead {lead_f9}) at J = {j} does "
+                             "not follow the lead rule")
+    v["numEbTimedFivePer"] = dec(eb2_row(eb2, "timed", "3/1000", lead="1/200")["per"], 0)
+    v["numEbTimedTwoPerThreePct"] = pct(float(eb2_row(eb2, "timed", "3/1000",
+                                                      lead=lead_f9)["per"]), 0)
+    v["numEbAsapPerOnePct"] = pct(float(eb2_row(eb2, "asap", "1/1000")["per"]), 0)
+    v["numEbTickPerZeroPct"] = pct(float(eb2_row(eb2, "tick-based", "0")["per"]), 0)
+    v["numEbTickPerMaxPct"] = pct(max(float(eb2_row(eb2, "tick-based", j)["per"])
+                                      for j in jit_all), 0)
+    los_rows = [r for r in eb2 if r["los"] == "present" and r["alphabet"] == "lab"]
+    if sum(int(r["packet_errors"]) for r in los_rows):
+        raise SystemExit("gen_results: Section VII says the lab-like LOS-present case loses "
+                         "no packet")
 
     # ---------------------------------------------------------------- VII: E-A
     gains = read_csv(sw / "E-A" / "gains.csv")

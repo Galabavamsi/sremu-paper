@@ -1,0 +1,81 @@
+{
+  "name": "eb2_ideal1",
+  "description": "E-B2 PER and EVM vs latency jitter, ideal 1-bit alphabet, LOS present, Es/N0 25 dB; modelled on the lab arrangement (SIM, nominal geometry)",
+  "runner": "experiments.eb:run_eb2_point",
+  "spec_sha256": "035d142d37b59fb38c4150ab352864bfa6811857883bb12c25b12c032b0d15a0",
+  "spec_path": null,
+  "spec": {
+    "base": {
+      "alphabet": "ideal1",
+      "los": "present",
+      "n_packets": 2000,
+      "scenario": "scenarios/studies/lab_arc.yaml"
+    },
+    "grid": {
+      "guard_s": [
+        "1e-4",
+        "5e-4",
+        "1e-3"
+      ],
+      "jitter_s": [
+        "0",
+        "1e-4",
+        "3e-4",
+        "1e-3",
+        "3e-3"
+      ]
+    },
+    "zip": {
+      "semantics": [
+        "timed",
+        "timed",
+        "timed",
+        "asap",
+        "tick-based"
+      ],
+      "lead_s": [
+        "5e-4",
+        "2e-3",
+        "5e-3",
+        "5e-4",
+        "5e-4"
+      ]
+    },
+    "seeds": [
+      20261010
+    ]
+  },
+  "n_points": 75,
+  "jobs": 64,
+  "environment": {
+    "sremu_version": "0.1.0.dev0",
+    "contract_version": "1.1",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "logical_cpus": 64,
+    "power_plan_or_governor": null,
+    "gpu": [],
+    "aws_instance": "type='c7i.16xlarge' id='i-0c71d7b6d144377ea'"
+  },
+  "argv": [
+    "/opt/job/sremu/experiments/eb.py",
+    "--scenario",
+    "scenarios/studies/lab_arc.yaml",
+    "--out",
+    "/opt/job/out/eb_arc",
+    "--jobs",
+    "64"
+  ],
+  "t_start_utc": "2026-10-11T06:09:47.119249Z",
+  "t_end_utc": "2026-10-11T06:11:50.158252Z",
+  "n_failed": 0
+}

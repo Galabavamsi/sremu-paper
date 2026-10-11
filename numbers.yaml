@@ -15,6 +15,13 @@
 #   value        fixed value (definition/data only)
 #   max_chars    length budget used by tools/check_arxiv.py to bound the abstract length
 #                while placeholders remain (default 8 for numbers, 80 for text)
+#
+# REPORTED-class numbers (data class REPORTED, DESIGN 1.6 and 11): a number quoted from a
+# third-party source, never an sremu result. Until paper_common.NUMBER_SOURCE_TYPES has a
+# `reported` type they use source type `data` with
+#   source: {type: data, id: "REPORTED:<bibkey>", class: REPORTED, cite: [<bibkey>, ...]}
+# The text must cite the same key(s) in the sentence that uses the macro. `note` records a
+# known weakness of the source link. tools/ ignores `class`, `cite` and `note` today.
 
 macros:
   # ------------------------------------------------------------------ definitions / data
@@ -44,6 +51,60 @@ macros:
     unit: GHz
     source: {type: data, id: "V-LAB-dataset"}
     value: "3.5"
+    max_chars: 3
+
+  # ------------------------------------------------------------------ REPORTED (Section II, third-party facts)
+  - macro: txtRepSionnaRisAddedVersion
+    kind: text
+    description: Sionna version that added RIS (REPORTED)
+    source: {type: data, id: "REPORTED:SionnaRTReleases", class: REPORTED, cite: [SionnaRTReleases]}
+    note: "Weak link: v0.18.0 (11 Jun 2024) is in the NVlabs/sionna release notes (research/related_work.md E2), not in the sionna-rt notes v1.0.0-v2.2.0 that SionnaRTReleases covers. A bib entry for the sionna release notes is needed."
+    value: "0.18"
+    max_chars: 4
+  - macro: txtRepSionnaRisRemovedVersion
+    kind: text
+    description: Sionna RT version that removed RIS (REPORTED)
+    source: {type: data, id: "REPORTED:SionnaRTReleases", class: REPORTED, cite: [SionnaRTReleases]}
+    value: "1.0"
+    max_chars: 3
+  - macro: txtRepSionnaLatestVersion
+    kind: text
+    description: Latest Sionna RT release checked for a RIS module (29 Sep 2026; REPORTED)
+    source: {type: data, id: "REPORTED:SionnaRTReleases", class: REPORTED, cite: [SionnaRTReleases]}
+    value: "2.2.0"
+    max_chars: 5
+  - macro: numRepGoSimRisMaxElements
+    kind: number
+    description: Largest number of RIS elements GoSimRIS supports (REPORTED)
+    source: {type: data, id: "REPORTED:ElGhalbzouri2025GoSimRIS", class: REPORTED, cite: [ElGhalbzouri2025GoSimRIS]}
+    value: "64"
+    max_chars: 2
+  - macro: numRepOrixLoopMinMs
+    kind: number
+    description: Shortest period of the ORIX near-RT control loop (REPORTED)
+    unit: ms
+    source: {type: data, id: "REPORTED:Kayraklik2026ORIX", class: REPORTED, cite: [Kayraklik2026ORIX]}
+    value: "10"
+    max_chars: 2
+  - macro: numRepOrixLoopMaxS
+    kind: number
+    description: Longest period of the ORIX near-RT control loop (REPORTED)
+    unit: s
+    source: {type: data, id: "REPORTED:Kayraklik2026ORIX", class: REPORTED, cite: [Kayraklik2026ORIX]}
+    value: "1"
+    max_chars: 1
+  - macro: numRepColosseumSdrs
+    kind: number
+    description: "Number of software-defined radios in Colosseum (REPORTED; the Bonati 2021 abstract names them together with a massive channel emulator core; it does not say that channels are emulated between all of them)"
+    source: {type: data, id: "REPORTED:Bonati2021Colosseum", class: REPORTED, cite: [Bonati2021Colosseum, Polese2024ColosseumDT]}
+    value: "256"
+    max_chars: 3
+  - macro: numRepTraceRttMs
+    kind: number
+    description: Control-plane round-trip time over UDP reported by TRACE (REPORTED)
+    unit: ms
+    source: {type: data, id: "REPORTED:Kumar2026TRACE", class: REPORTED, cite: [Kumar2026TRACE]}
+    value: "5.2"
     max_chars: 3
 
   # ------------------------------------------------------------------ verification and validation
@@ -125,9 +186,9 @@ macros:
   # ------------------------------------------------------------------ case studies
   - macro: txtEBResult
     kind: text
-    description: E-B headline phrase (RIS switches between packets; timed vs tick-based untimed semantics; lab-like SIM geometry)
-    source: {type: experiment, id: "E-B"}
-    max_chars: 84
+    description: "E-B headline phrase for the 0.5 ms guard slice of the arc run, which the abstract and the conclusion name next to it (RIS switches between packets; geometry modelled on the lab arrangement, SIM nominal; timed commands vs tick-based untimed semantics; gen_results checks over every row of the slice that on-time timed commands lose no packet and that the largest tick-based PER is the one of the two F9(b) cases)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 89
   - macro: txtEAResult
     kind: text
     description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
@@ -136,8 +197,8 @@ macros:
 
   # ================================================================== Sections V and VII
   # Filled by tools/gen_results.py from committed result files (study/experiment/test/
-  # figure sources). txtLab* lock/deposit macros, txtEBArcResult and the B3 macros above
-  # stay placeholders until their inputs exist (H-6, AWS).
+  # figure sources). txtLab* lock/deposit macros and the B3 macros above stay placeholders
+  # until their inputs exist (H-6, AWS).
   - macro: numCiPct
     kind: number
     description: "Confidence level of the reported intervals (Student-t, Clopper-Pearson, bootstrap)"
@@ -736,223 +797,338 @@ macros:
     unit: "%"
     source: {type: figure, id: "F6"}
     max_chars: 3
+  # E-B (Section VII-A, F9). Primary geometry: modelled on the lab arrangement (SIM, nominal
+  # geometry; scenarios/studies/lab_arc.yaml), the AWS run in sweeps/results/E-B-arc
+  # (experiment id E-B-arc). Supporting geometry: lab-like SIM (scenarios/lab_like_A.yaml),
+  # sweeps/results/E-B1, E-B2. Setup macros are read from the arc run; gen_results.py checks
+  # that the lab-like run used the same setup.
   - macro: numEbFcGHz
     kind: number
-    description: "Carrier of the E-B scene (scenarios/lab_like_A.yaml)"
+    description: "Carrier of both E-B scenes (lab_arc.yaml; lab_like_A.yaml checked equal)"
     unit: "GHz"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbRateMsps
     kind: number
     description: "Sample rate of the E-B waveform"
     unit: "MS/s"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   - macro: numEbSps
     kind: number
     description: "Samples per QPSK symbol"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 2
   - macro: numEbPreamble
     kind: number
     description: "Preamble symbols per packet"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   - macro: numEbPayload
     kind: number
     description: "Payload symbols per packet"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbPacketMs
     kind: number
     description: "Packet duration T_p"
     unit: "ms"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 6
   - macro: numEbEsnoDb
     kind: number
-    description: "Es/N0 at RX1 under its own optimum"
+    description: "Main Es/N0 at RX1 under its own optimum (both geometries)"
     unit: "dB"
-    source: {type: experiment, id: "E-B"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
-  - macro: numVaFivePass
+  - macro: numEbArcEsnoLowDb
     kind: number
-    description: "Step switches inside a packet that pass VA-5"
+    description: "Es/N0 of the pre-declared LOS-present sensitivity slice (arc only)"
+    unit: "dB"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcPanels
+    kind: number
+    description: "Tiles (one sremu panel each) of the arc geometry"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 2
+  - macro: numEbArcCellsU
+    kind: number
+    description: "Cells per tile along the arc (horizontal)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 2
+  - macro: numEbArcCellsV
+    kind: number
+    description: "Cells per tile across the arc (vertical)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 2
+  - macro: numEbArcRadiusM
+    kind: number
+    description: "Nominal radius of the tile arc around the Tx (tile centres)"
+    unit: "m"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbArcRxDistM
+    kind: number
+    description: "Distance of RX1 and RX2 from the Tx in the arc geometry"
+    unit: "m"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numVaFiveArcTotal
+    kind: number
+    description: "Step switches inside a packet on the arc (E-B1), all passing VA-5"
     source: {type: experiment, id: "VA-5"}
     max_chars: 3
-  - macro: numVaFiveTotal
+  - macro: numEbArcBlockedChangeDb
     kind: number
-    description: "Step switches inside a packet (E-B1)"
-    source: {type: experiment, id: "VA-5"}
-    max_chars: 3
-  - macro: numEbBlockedChangeDb
-    kind: number
-    description: "Change of RX1's channel by the switch, LOS blocked"
+    description: "Change of RX1's channel by the switch, arc, LOS blocked"
     unit: "dB"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 6
-  - macro: numEbBlockedRotDeg
+  - macro: numEbArcBlockedRotDeg
     kind: number
-    description: "|Rotation| of RX1's channel by the switch, LOS blocked"
+    description: "|Rotation| of RX1's channel by the switch, arc, LOS blocked"
     unit: "deg"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
-  - macro: numEbRefEvmDb
+  - macro: numEbArcRefEvmDb
     kind: number
-    description: "Payload EVM without a switch, LOS blocked"
+    description: "Payload EVM without a switch, arc, LOS blocked"
     unit: "dB"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 6
-  - macro: numEbOneEvmDb
+  - macro: numEbArcOneErrors
     kind: number
-    description: "Payload EVM with a step switch at T_p/4, LOS blocked"
-    unit: "dB"
-    source: {type: experiment, id: "E-B1"}
-    max_chars: 6
-  - macro: numEbOneErrors
-    kind: number
-    description: "Payload bit errors with a step switch at T_p/4, LOS blocked"
-    source: {type: experiment, id: "E-B1"}
+    description: "Payload bit errors with a step switch at T_p/4, arc, LOS blocked"
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbOneBits
     kind: number
     description: "Payload bits per packet"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 5
   - macro: numEbTransLongUs
     kind: number
-    description: "Longest linear transition of E-B1"
+    description: "Longest linear transition of E-B1 (both geometries)"
     unit: "us"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
-  - macro: numEbLinErrors
+  - macro: numEbArcLinErrors
     kind: number
-    description: "Payload bit errors with that linear transition at T_p/4, LOS blocked"
-    source: {type: experiment, id: "E-B1"}
+    description: "Payload bit errors with that linear transition at T_p/4, arc, LOS blocked"
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
-  - macro: numEbLosChangeDb
+  - macro: numEbArcLosChangeDb
     kind: number
-    description: "Change of RX1's channel by the switch, LOS present"
+    description: "Change of RX1's channel by the switch, arc, LOS present"
     unit: "dB"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 6
-  - macro: numEbLosRotDeg
+  - macro: numEbArcLosRotDeg
     kind: number
-    description: "|Rotation| of RX1's channel by the switch, LOS present"
+    description: "|Rotation| of RX1's channel by the switch, arc, LOS present"
     unit: "deg"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
-  - macro: numEbLosEvmDb
+  - macro: numEbArcLosEvmDb
     kind: number
-    description: "Payload EVM with a step switch at T_p/4, LOS present"
+    description: "Payload EVM with a step switch at T_p/4, arc, LOS present"
     unit: "dB"
-    source: {type: experiment, id: "E-B1"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 6
+  - macro: numEbArcLosOneErrors
+    kind: number
+    description: "Payload bit errors with a step switch at T_p/4, arc, LOS present"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
   - macro: numEbPackets
     kind: number
-    description: "Packets per E-B2 point"
-    source: {type: experiment, id: "E-B2"}
+    description: "Packets per E-B2 point (both geometries)"
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 5
   - macro: numEbGuardMs
     kind: number
-    description: "Guard of the F9(b) slice"
+    description: "Guard of the F9(b), (d) slice"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbLatencyMs
     kind: number
-    description: "Fixed part of the command latency"
+    description: "Fixed part of the command latency (both geometries)"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbLeadsMs
     kind: text
     description: "Leads of the timed commands"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 14
   - macro: numEbLeadMinMs
     kind: number
     description: "Shortest lead"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbLeadMidMs
+    kind: number
+    description: "Lead of the timed commands shown in F9(b), (d)"
+    unit: "ms"
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbLeadMaxMs
     kind: number
     description: "Longest lead"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbJitterMaxMs
     kind: number
     description: "Largest latency jitter J"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   - macro: numEbJitterOneMs
     kind: number
     description: "The jitter value quoted for the asap and short-lead failures"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   - macro: numEbTickMs
     kind: number
     description: "Tick of the tick-based untimed semantics"
     unit: "ms"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   - macro: numEbPerUpperPct
     kind: number
-    description: "Clopper-Pearson upper limit of PER = 0 (2000 packets)"
+    description: "Clopper-Pearson 95 % upper limit of PER = 0 (all points have the same packet count)"
     unit: "%"
-    source: {type: experiment, id: "E-B2"}
+    source: {type: experiment, id: "E-B-arc"}
     max_chars: 5
+  - macro: numEbArcLosHighPerMaxPct
+    kind: number
+    description: "Largest PER of any semantics, arc, LOS present at the main Es/N0, 0.5 ms guard (lab and ideal 1-bit alphabets)"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbArcTickPerMinPct
+    kind: number
+    description: "Smallest PER of tick-based semantics over every J, arc, both F9(b) cases"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcTickPerMaxPct
+    kind: number
+    description: "Largest PER of tick-based semantics over every J, arc, both F9(b) cases"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcTimedTwoPerThreeLosPct
+    kind: number
+    description: "PER of timed commands, 2 ms lead, J = 3 ms, arc, LOS present at the low Es/N0"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcTimedTwoPerThreeBlkPct
+    kind: number
+    description: "PER of timed commands, 2 ms lead, J = 3 ms, arc, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcTimedHalfPerOneLosPct
+    kind: number
+    description: "PER of timed commands, shortest lead, J = 1 ms, arc, LOS present at the low Es/N0"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcTimedHalfPerOneBlkPct
+    kind: number
+    description: "PER of timed commands, shortest lead, J = 1 ms, arc, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcAsapJitterOkMs
+    kind: number
+    description: "Largest J at which the worst latency still fits in the 0.5 ms guard (asap PER = 0 there, checked)"
+    unit: "ms"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcAsapPerOneLosPct
+    kind: number
+    description: "PER of asap commands at J = 1 ms, arc, LOS present at the low Es/N0"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcAsapPerOneBlkPct
+    kind: number
+    description: "PER of asap commands at J = 1 ms, arc, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  # lab-like geometry (supporting row of F9)
+  - macro: numVaFivePass
+    kind: number
+    description: "Step switches inside a packet that pass VA-5 (lab-like)"
+    source: {type: experiment, id: "VA-5"}
+    max_chars: 3
+  - macro: numVaFiveTotal
+    kind: number
+    description: "Step switches inside a packet (E-B1, lab-like)"
+    source: {type: experiment, id: "VA-5"}
+    max_chars: 3
+  - macro: numEbBlockedChangeDb
+    kind: number
+    description: "Change of RX1's channel by the switch, lab-like, LOS blocked"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbBlockedRotDeg
+    kind: number
+    description: "|Rotation| of RX1's channel by the switch, lab-like, LOS blocked"
+    unit: "deg"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 3
+  - macro: numEbOneEvmDb
+    kind: number
+    description: "Payload EVM with a step switch at T_p/4, lab-like, LOS blocked"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbOneErrors
+    kind: number
+    description: "Payload bit errors with a step switch at T_p/4, lab-like, LOS blocked"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 4
   - macro: numEbTimedFivePer
     kind: number
-    description: "PER of timed commands with the longest lead at the largest jitter"
-    source: {type: experiment, id: "E-B2"}
-    max_chars: 3
-  - macro: numEbTimedHalfPerOnePct
-    kind: number
-    description: "PER of timed commands, shortest lead, J = 1 ms, LOS blocked"
-    unit: "%"
+    description: "PER of timed commands with the longest lead at the largest jitter (lab-like, LOS blocked)"
     source: {type: experiment, id: "E-B2"}
     max_chars: 3
   - macro: numEbTimedTwoPerThreePct
     kind: number
-    description: "PER of timed commands, 2 ms lead, J = 3 ms, LOS blocked"
+    description: "PER of timed commands, 2 ms lead, J = 3 ms, lab-like, LOS blocked"
     unit: "%"
     source: {type: experiment, id: "E-B2"}
     max_chars: 3
   - macro: numEbAsapPerOnePct
     kind: number
-    description: "PER of asap commands at J = 1 ms, LOS blocked"
+    description: "PER of asap commands at J = 1 ms, lab-like, LOS blocked"
     unit: "%"
     source: {type: experiment, id: "E-B2"}
     max_chars: 3
   - macro: numEbTickPerZeroPct
     kind: number
-    description: "PER of tick-based semantics without jitter, LOS blocked"
+    description: "PER of tick-based semantics without jitter, lab-like, LOS blocked"
     unit: "%"
     source: {type: experiment, id: "E-B2"}
     max_chars: 3
   - macro: numEbTickPerMaxPct
     kind: number
-    description: "Largest PER of tick-based semantics, LOS blocked"
+    description: "Largest PER of tick-based semantics, lab-like, LOS blocked"
     unit: "%"
     source: {type: experiment, id: "E-B2"}
     max_chars: 3
-  - macro: numEbLosPerMaxPct
-    kind: number
-    description: "Largest PER of any semantics with the LOS present (lab alphabet)"
-    unit: "%"
-    source: {type: experiment, id: "E-B2"}
-    max_chars: 3
-  - macro: txtEBArcResult
-    kind: text
-    description: "E-B result on the lab-arc geometry (PENDING: AWS run)"
-    source: {type: experiment, id: "E-B-arc"}
-    max_chars: 84
   - macro: numEaLengthM
     kind: number
     description: "Corridor length l"

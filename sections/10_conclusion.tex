@@ -19,9 +19,13 @@ geometry recorded to about a millimetre. \claim{C-CRB}Frequency-offset estimates
 through the emulator are exact with noise off and reach the Cram\'er--Rao bound with its
 physical noise. \claim{C-ABS-PACED}In wall-clock-paced mode on \txtPacedPlatform{} the
 emulator sustains \numPacedLinks{} links at \numPacedMSps~MS/s with a deadline-miss rate below
-\numSustainMissRate. \claim{C-ABS-EB}In one case study, with RIS switches between
-packets, \txtEBResult. \claim{C-ABS-EA}In the other, position-driven binary control under
-signaling delay \txtEAResult. The intra-frame result depends on when a command takes effect
+\numSustainMissRate. \claim{C-ABS-EB}In one case study, in a simulated geometry modelled on
+our laboratory with RIS switches in \numEbGuardMs~ms guards between packets, \txtEBResult. The
+difference appears where a switch at the wrong time costs bits: at
+$E_s/N_0=\numEbArcEsnoLowDb$~dB or with the line of sight blocked. With the line of sight
+present at \numEbEsnoDb~dB, no semantics lost more than \numEbArcLosHighPerMaxPct~\% of the
+packets. \claim{C-ABS-EA}In the other, position-driven binary control under signaling delay
+\txtEAResult. The intra-frame result depends on when a command takes effect
 within the sample stream, which coefficient-level and block-level tools do not represent. The
 delay result runs on the coefficient path; a subset run at the sample level agrees with it within
 \numVaOneMaxDiffDb~dB.

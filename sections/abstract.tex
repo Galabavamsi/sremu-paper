@@ -6,7 +6,7 @@
 \begin{abstract}
 Controllers for reconfigurable intelligent surfaces (RIS) are usually evaluated with ideal
 element states, instantaneous reconfiguration and channel coefficients instead of
-waveforms, which hides the effect of control timing and hardware states on a live link. We
+waveforms, which hides how control timing and hardware states affect a live link. We
 present sremu, an open-source, software-only emulator that applies RIS-assisted
 propagation to complex-baseband samples exchanged with external applications through a
 software-defined-radio-style interface. RIS configurations are timestamped commands from an
@@ -16,7 +16,8 @@ published RIS path-loss model curves within \numTangCurveMaxDevDb~dB, and a pre-
 comparison with a digitized \numLabFreqGHz~GHz laboratory measurement \txtVLabOutcome.
 Lockstep runs are sample-exact and deterministic; wall-clock-paced runs on
 \txtPacedPlatform{} sustain \numPacedLinks{} links at \numPacedMSps~MS/s with a
-deadline-miss rate below \numSustainMissRate. Two studies use these semantics. For RIS
-switches between packets, \txtEBResult; position-driven binary control under signaling delay
+deadline-miss rate below \numSustainMissRate. Two studies use these semantics. In a
+simulated geometry modelled on our laboratory, with RIS switches in \numEbGuardMs~ms guards
+between packets, \txtEBResult; position-driven binary control under signaling delay
 \txtEAResult.
 \end{abstract}

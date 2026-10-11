@@ -1,0 +1,259 @@
+{
+  "experiment": "E-B",
+  "scenario": "scenarios/studies/lab_arc.yaml",
+  "scenario_path": "scenarios/studies/lab_arc.yaml",
+  "geometry_label": "modelled on the lab arrangement (SIM, nominal geometry)",
+  "smoke": false,
+  "pre_declared": "the full design below, including the Es/N0 15 dB sensitivity of the LOS-present slice (eb2_*_es15), is fixed in experiments/eb.py:sweep_specs and written here before any point runs",
+  "specs": [
+    {
+      "name": "eb1",
+      "runner": "experiments.eb:run_eb1_point",
+      "spec_sha256": "c2bc8c151704f099995c2c609e803423b5262197118601c313b3f545d84953b5",
+      "n_points": 72,
+      "base": {
+        "scenario": "scenarios/studies/lab_arc.yaml"
+      },
+      "grid": {
+        "alphabet": [
+          "lab",
+          "ideal1"
+        ],
+        "los": [
+          "present",
+          "blocked"
+        ],
+        "transition": [
+          "step",
+          "linear20us",
+          "linear200us"
+        ],
+        "delta": [
+          "-0.5",
+          "0.05",
+          "0.25",
+          "0.5",
+          "0.75",
+          "1.05"
+        ]
+      },
+      "zip": {},
+      "seeds": [
+        20261010
+      ]
+    },
+    {
+      "name": "eb2_lab",
+      "runner": "experiments.eb:run_eb2_point",
+      "spec_sha256": "853504438d587444f457efcabce59152a2a1ec993accc03b0042f9cea9a5c54d",
+      "n_points": 150,
+      "base": {
+        "alphabet": "lab",
+        "n_packets": 2000,
+        "scenario": "scenarios/studies/lab_arc.yaml"
+      },
+      "grid": {
+        "guard_s": [
+          "1e-4",
+          "5e-4",
+          "1e-3"
+        ],
+        "jitter_s": [
+          "0",
+          "1e-4",
+          "3e-4",
+          "1e-3",
+          "3e-3"
+        ]
+      },
+      "zip": {
+        "los": [
+          "present",
+          "present",
+          "present",
+          "present",
+          "present",
+          "blocked",
+          "blocked",
+          "blocked",
+          "blocked",
+          "blocked"
+        ],
+        "semantics": [
+          "timed",
+          "timed",
+          "timed",
+          "asap",
+          "tick-based",
+          "timed",
+          "timed",
+          "timed",
+          "asap",
+          "tick-based"
+        ],
+        "lead_s": [
+          "5e-4",
+          "2e-3",
+          "5e-3",
+          "5e-4",
+          "5e-4",
+          "5e-4",
+          "2e-3",
+          "5e-3",
+          "5e-4",
+          "5e-4"
+        ]
+      },
+      "seeds": [
+        20261010
+      ]
+    },
+    {
+      "name": "eb2_ideal1",
+      "runner": "experiments.eb:run_eb2_point",
+      "spec_sha256": "035d142d37b59fb38c4150ab352864bfa6811857883bb12c25b12c032b0d15a0",
+      "n_points": 75,
+      "base": {
+        "alphabet": "ideal1",
+        "los": "present",
+        "n_packets": 2000,
+        "scenario": "scenarios/studies/lab_arc.yaml"
+      },
+      "grid": {
+        "guard_s": [
+          "1e-4",
+          "5e-4",
+          "1e-3"
+        ],
+        "jitter_s": [
+          "0",
+          "1e-4",
+          "3e-4",
+          "1e-3",
+          "3e-3"
+        ]
+      },
+      "zip": {
+        "semantics": [
+          "timed",
+          "timed",
+          "timed",
+          "asap",
+          "tick-based"
+        ],
+        "lead_s": [
+          "5e-4",
+          "2e-3",
+          "5e-3",
+          "5e-4",
+          "5e-4"
+        ]
+      },
+      "seeds": [
+        20261010
+      ]
+    },
+    {
+      "name": "eb2_lab_es15",
+      "runner": "experiments.eb:run_eb2_point",
+      "spec_sha256": "c4447bae9b4e0255f8ee5f8d1acaa2f4de69c05a772e1824454daacd85c68140",
+      "n_points": 75,
+      "base": {
+        "alphabet": "lab",
+        "los": "present",
+        "n_packets": 2000,
+        "es_n0_db": 15.0,
+        "scenario": "scenarios/studies/lab_arc.yaml"
+      },
+      "grid": {
+        "guard_s": [
+          "1e-4",
+          "5e-4",
+          "1e-3"
+        ],
+        "jitter_s": [
+          "0",
+          "1e-4",
+          "3e-4",
+          "1e-3",
+          "3e-3"
+        ]
+      },
+      "zip": {
+        "semantics": [
+          "timed",
+          "timed",
+          "timed",
+          "asap",
+          "tick-based"
+        ],
+        "lead_s": [
+          "5e-4",
+          "2e-3",
+          "5e-3",
+          "5e-4",
+          "5e-4"
+        ]
+      },
+      "seeds": [
+        20261010
+      ]
+    },
+    {
+      "name": "eb2_ideal1_es15",
+      "runner": "experiments.eb:run_eb2_point",
+      "spec_sha256": "baa6bd9576f0d5b389cb83eab0bbb3be88e8842acb8198f7502665c7f77eda18",
+      "n_points": 75,
+      "base": {
+        "alphabet": "ideal1",
+        "los": "present",
+        "n_packets": 2000,
+        "es_n0_db": 15.0,
+        "scenario": "scenarios/studies/lab_arc.yaml"
+      },
+      "grid": {
+        "guard_s": [
+          "1e-4",
+          "5e-4",
+          "1e-3"
+        ],
+        "jitter_s": [
+          "0",
+          "1e-4",
+          "3e-4",
+          "1e-3",
+          "3e-3"
+        ]
+      },
+      "zip": {
+        "semantics": [
+          "timed",
+          "timed",
+          "timed",
+          "asap",
+          "tick-based"
+        ],
+        "lead_s": [
+          "5e-4",
+          "2e-3",
+          "5e-3",
+          "5e-4",
+          "5e-4"
+        ]
+      },
+      "seeds": [
+        20261010
+      ]
+    }
+  ],
+  "written_utc": "2026-10-11T06:05:59.263287Z",
+  "argv": [
+    "/opt/job/sremu/experiments/eb.py",
+    "--scenario",
+    "scenarios/studies/lab_arc.yaml",
+    "--out",
+    "/opt/job/out/eb_arc",
+    "--jobs",
+    "64"
+  ]
+}

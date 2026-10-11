@@ -1,0 +1,102 @@
+{
+  "name": "eb2_lab",
+  "description": "E-B2 PER and EVM vs latency jitter, lab alphabet, LOS present and blocked, Es/N0 25 dB; modelled on the lab arrangement (SIM, nominal geometry)",
+  "runner": "experiments.eb:run_eb2_point",
+  "spec_sha256": "853504438d587444f457efcabce59152a2a1ec993accc03b0042f9cea9a5c54d",
+  "spec_path": null,
+  "spec": {
+    "base": {
+      "alphabet": "lab",
+      "n_packets": 2000,
+      "scenario": "scenarios/studies/lab_arc.yaml"
+    },
+    "grid": {
+      "guard_s": [
+        "1e-4",
+        "5e-4",
+        "1e-3"
+      ],
+      "jitter_s": [
+        "0",
+        "1e-4",
+        "3e-4",
+        "1e-3",
+        "3e-3"
+      ]
+    },
+    "zip": {
+      "los": [
+        "present",
+        "present",
+        "present",
+        "present",
+        "present",
+        "blocked",
+        "blocked",
+        "blocked",
+        "blocked",
+        "blocked"
+      ],
+      "semantics": [
+        "timed",
+        "timed",
+        "timed",
+        "asap",
+        "tick-based",
+        "timed",
+        "timed",
+        "timed",
+        "asap",
+        "tick-based"
+      ],
+      "lead_s": [
+        "5e-4",
+        "2e-3",
+        "5e-3",
+        "5e-4",
+        "5e-4",
+        "5e-4",
+        "2e-3",
+        "5e-3",
+        "5e-4",
+        "5e-4"
+      ]
+    },
+    "seeds": [
+      20261010
+    ]
+  },
+  "n_points": 150,
+  "jobs": 64,
+  "environment": {
+    "sremu_version": "0.1.0.dev0",
+    "contract_version": "1.1",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "logical_cpus": 64,
+    "power_plan_or_governor": null,
+    "gpu": [],
+    "aws_instance": "type='c7i.16xlarge' id='i-0c71d7b6d144377ea'"
+  },
+  "argv": [
+    "/opt/job/sremu/experiments/eb.py",
+    "--scenario",
+    "scenarios/studies/lab_arc.yaml",
+    "--out",
+    "/opt/job/out/eb_arc",
+    "--jobs",
+    "64"
+  ],
+  "t_start_utc": "2026-10-11T06:06:17.003283Z",
+  "t_end_utc": "2026-10-11T06:09:47.113456Z",
+  "n_failed": 0
+}

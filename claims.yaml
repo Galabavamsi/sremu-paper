@@ -132,9 +132,9 @@ claims:
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-ABS-EB:
-    text: "E-B headline (lab-like SIM geometry, LOS blocked): with timed commands no packet is lost; with tick-based untimed semantics up to the stated fraction is lost (the lab-arc run is pending)."
+    text: "E-B headline for the 0.5 ms guard slice, which the abstract and the conclusion name (geometry modelled on the lab arrangement, SIM nominal geometry; AWS run, sweeps/results/E-B-arc): timed commands whose lead exceeds the latency lose no packet (checked on every row of the slice: both alphabets, both LOS cases, both Es/N0); tick-based untimed semantics lose up to the stated fraction (largest PER of the slice, in the F9b cases: LOS present at the pre-declared 15 dB sensitivity, LOS blocked at 25 dB). Conclusion qualifier: the difference appears where a switch costs bits; with the LOS present at 25 dB no semantics lost more than the stated small fraction. Not claimed for the 0.1 and 1 ms guards, where some 15 dB rows lose one packet in 2000 to noise."
     where: [sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [fig:F9, test:VA-5, test:E-B]
+    evidence: [fig:F9, test:VA-5, test:E-B, pytest:tests/unit/test_eb_arc.py, pytest:tests/runtime/test_eb_arc_va5.py]
     gates: []
   C-ABS-EA:
     text: "E-A headline (position-driven binary control under signaling delay)."
@@ -480,20 +480,35 @@ claims:
     gates: []
 
   # ================================================================ VII Case studies
+  # E-B: primary geometry modelled on the lab arrangement (SIM, nominal geometry), AWS run
+  # 20261011T060442Z_eb_arc_d41a75 on c7i.16xlarge at sremu 5be649a (clean per the job's
+  # SREMU_GIT_COMMIT export; the commit's src/sremu tree hash equals the run's,
+  # paper/sweeps/results/E-B-arc/meta.json sremu.commit_verified); lab-like SIM geometry as
+  # the supporting row. Every number is a gen_results.py macro read from those results.
   C-EB-WHY:
-    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; E-B setup (lab-like SIM geometry, unit-amplitude states ASSUMED, QPSK packets, Es/N0 at RX1)."
+    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; E-B measures how the two interact."
     where: [sections/07_case_studies.tex]
     evidence: [cite:ETSI_GS_RIS008, test:E-B, fig:F9]
     gates: []
-  C-EB-MECH:
-    text: "E-B1/VA-5: the earliest affected sample equals to_ticks(t_sw + tau) in every step switch inside a packet and earlier samples are bitwise identical; LOS blocked: bit errors after the switch; LOS present: no bit error, EVM rises."
+  C-EB-SETUP:
+    text: "E-B setup. Primary geometry modelled on the lab arrangement (SIM, nominal geometry: every distance or angle known only within a range takes the middle of that range; not the measured geometry; no measurement compared): six tiles of 5 x 8 cells on an arc around the Tx acting as one surface, joint exact optimum per receiver over all cells, one command per tile for the same time. Lab-like SIM geometry (one panel of three tiles) as the supporting case. Receiver positions (1.2 m from the Tx at two angles) are an engineering choice [ENG]. Assumptions for both: |Gamma| = 1 (ASSUMED), complex-linear transition [ENG], the LOS-blocked occluder removes the LOS only (idealized on the arc, where a real plate would also shadow RIS rays). QPSK packets, one-shot preamble equalizer, Es/N0 at RX1."
     where: [sections/07_case_studies.tex]
-    evidence: [test:VA-5, test:RT-05, fig:F9]
+    evidence: [test:E-B, pytest:tests/unit/test_eb_arc.py, fig:F9, spec:DESIGN-11-E-B]
+    gates: []
+  C-EB-MECH:
+    text: "E-B1/VA-5 on both geometries: in every step switch inside a packet the earliest affected sample equals to_ticks(t_sw + tau) and earlier samples are bitwise identical; on the arc each tile's command applies at its own to_ticks(t_sw + tau_tile). Arc, LOS blocked: channel change and rotation as generated, EVM before the switch unchanged, many payload bit errors after a switch at T_p/4 (also with a 200 us linear transition). Arc, LOS present: smaller change, EVM rises, the stated number of bit errors (one in this run)."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:VA-5, test:RT-05, pytest:tests/runtime/test_eb_arc_va5.py, fig:F9]
     gates: []
   C-EB-TIMING:
-    text: "E-B2 (lab-like): with the LOS present (the primary case of the study design) no semantics loses a packet; in the declared LOS-blocked sensitivity variant (shown in F9b) timed commands lose no packet while the lead exceeds the latency, asap fails once latency exceeds the guard, and tick-based untimed semantics lose most packets even without jitter; lab-arc run pending."
+    text: "E-B2 on the arc, 0.5 ms guard, cases fixed before the run (eb_plan.json): LOS present at Es/N0 25 dB: no semantics loses more than the stated (small) fraction. LOS present at the pre-declared 15 dB sensitivity and LOS blocked at 25 dB (F9b): tick-based untimed semantics lose the stated large range at every jitter, also without jitter (the two cases show the same pattern); late timed commands apply on arrival; timed commands lose no packet while the lead exceeds the worst latency (2 ms lead: none up to J = 1 ms, losses at J = 3 ms; 0.5 ms lead: losses at J = 1 ms; 5 ms lead: none at any J); asap commands lose none while the worst latency fits in the guard and fail beyond it. Requirement stated as: a timed command loses no packet when its lead exceeds the worst latency; an untimed one loses none while the worst latency fits in the guard (sufficient conditions, as measured). gen_results.py checks the lead and guard rules on every row of the two cases."
     where: [sections/07_case_studies.tex]
-    evidence: [test:E-B, test:RT-07, fig:F9]
+    evidence: [test:E-B, test:RT-07, pytest:tests/runtime/test_eb_arc_va5.py::test_eb2_point_arc_tick_based, fig:F9]
+    gates: []
+  C-EB-LABLIKE:
+    text: "Supporting lab-like SIM geometry (F9c,d), LOS blocked at 25 dB: channel change and bit errors after the switch; timed commands with a 2 ms lead lose no packet up to J = 1 ms and the stated fraction at J = 3 ms; asap and tick-based losses as generated; LOS present: no packet lost at 25 dB (checked); no 15 dB run in this geometry."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:E-B, test:VA-5, fig:F9]
     gates: []
   C-EA-SETUP:
     text: "E-A setup: corridor, 1-D RWP, on-off RIS line, LOS partition; under the area-tied kernel the unblocked-corridor optimum gain is as generated; controllers; batch path; pre-registered hypotheses with one disclosed amendment."
