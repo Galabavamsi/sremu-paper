@@ -1,0 +1,81 @@
+{
+  "figure": "F4",
+  "title": "Lab consistency check: digitized map, prior-median prediction and residual on identical polar axes; distribution of the RMSE difference M0 - M2 over the prior draws with the decoy C2 detection rate",
+  "content_key": "58271ded7d5f90bcc98eded8afd720785a85a7a126714193ece0a6fe269dabf7",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ASSUMED",
+    "DIG",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ASSUMED",
+    "DIG",
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "../sremu/validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded/F4.csv",
+      "data_class": "DIG",
+      "note": "measured_dbm DIG; pred_* SIM-sremu; residual DIG minus SIM-sremu",
+      "provenance": {
+        "git_commit": "7a632876ae731f708c081fabc09b255bb3b29339",
+        "git_dirty": false,
+        "study": "V-LAB"
+      },
+      "sha256": "f1ec9aaed598ec9f340d0442ab48023d41b1aae44541888e9bba0a63259729f3"
+    },
+    {
+      "path": "../sremu/validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded/F4.meta.json",
+      "data_class": "SIM-sremu",
+      "sha256": "0f640abcd4da179e3aa9e593f7188ee6c36b610b6dcc8eca5f2fab2594962e32"
+    },
+    {
+      "path": "../sremu/validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded/F4_delta_rmse.csv",
+      "data_class": "SIM-sremu",
+      "sha256": "0ab37698149e8b76b37fedb96e67c9c6ac2bc3833dad293582259da27357f25b"
+    },
+    {
+      "path": "../sremu/validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded/table_v.json",
+      "data_class": "DIG",
+      "sha256": "a4dd3485bd98aa49f33df3d7d26238d1e316aca850b1021dd3d711f7fc12488c"
+    },
+    {
+      "path": "../sremu/validation/ants_fig4b/protocol.json",
+      "data_class": "ASSUMED",
+      "note": "pre-registered protocol (geometry prior, decision rules)",
+      "sha256": "fe8a90188464f9ccf972c8918e4f7fc06b12ea7e9616f731b9114b6fca4ca9c8"
+    }
+  ],
+  "assumptions": [
+    "committed unblinded V-LAB run; geometry, Gamma magnitudes and antennas are prior draws (ASSUMED), not the lab's geometry",
+    "cell edges drawn at the midpoints between the inferred theta and r centres",
+    "residual colour scale clipped at +-5 dB; the clipped cell is annotated",
+    "label: consistency check under geometric uncertainty (naming rule of the protocol)"
+  ],
+  "profile": "full",
+  "script": "figures/src/f04_lab_check.py",
+  "script_sha256": "4536b22ae78c5ca5ed66a7d7d4566cb3e1fd37ee3840473928ae63118dd6945e",
+  "outputs": {
+    "figures/out/F4.pdf": "e6dcbd3e505fabb3e109453d94a025dde56e7d0eb4338b23a89ae2520ea82fc4",
+    "figures/data/F4.csv": "5e9b0b0c63f2eafaf5e47335c9f9bd53dd798c1a3a4a49c521523f6b3bfea9f2"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:19Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1589,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  }
+}

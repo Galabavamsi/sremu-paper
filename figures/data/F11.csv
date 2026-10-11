@@ -1,0 +1,56 @@
+panel,series,data_class,x_name,x,y_name,y,y_lo,y_hi,note
+lab,"RIS-term loss vs ideal continuous, ideal_1bit",SIM-sremu,row,ideal_1bit,loss_db,-2.8914294012751562,,,input class of the alphabet: ANALYTIC
+lab,"RIS-term loss vs ideal continuous, ideal_2bit",SIM-sremu,row,ideal_2bit,loss_db,-0.7523861250728092,,,input class of the alphabet: ANALYTIC
+lab,"RIS-term loss vs ideal continuous, lab_mag1",SIM-sremu,row,lab_mag1,loss_db,-2.8574434789889622,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, lab_mag2_0p7",SIM-sremu,row,lab_mag2_0p7,loss_db,-3.7944270096587687,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, lab_mag2_0p5",SIM-sremu,row,lab_mag2_0p5,loss_db,-4.4613383609287744,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, tang_ris1",SIM-sremu,row,tang_ris1,loss_db,-4.5939683989443445,,,input class of the alphabet: REPORTED
+lab,"RIS-term loss vs ideal continuous, abeywickrama_b2",SIM-sremu,row,abeywickrama_b2,loss_db,-4.143120815094156,,,input class of the alphabet: ANALYTIC
+lab,"RIS-term loss vs ideal continuous, lab_dead10",SIM-sremu,row,lab_dead10,loss_db,-3.7482678286966693,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, lab_stuck10",SIM-sremu,row,lab_stuck10,loss_db,-3.602140514870771,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, lab_eff0p5",SIM-sremu,row,lab_eff0p5,loss_db,-5.867743435628775,,,input class of the alphabet: ASSUMED
+lab,"RIS-term loss vs ideal continuous, ideal_designed_on_lab",SIM-sremu,row,ideal_designed_on_lab,loss_db,-3.040352358177585,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, ideal_1bit",SIM-sremu,row,ideal_1bit,loss_db,-3.273444908030694,,,input class of the alphabet: ANALYTIC
+synth_near,"RIS-term loss vs ideal continuous, ideal_2bit",SIM-sremu,row,ideal_2bit,loss_db,-0.8735277316441223,,,input class of the alphabet: ANALYTIC
+synth_near,"RIS-term loss vs ideal continuous, lab_mag1",SIM-sremu,row,lab_mag1,loss_db,-3.1832047361417066,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, lab_mag2_0p7",SIM-sremu,row,lab_mag2_0p7,loss_db,-4.085449525582835,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, lab_mag2_0p5",SIM-sremu,row,lab_mag2_0p5,loss_db,-4.73525479806837,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, tang_ris1",SIM-sremu,row,tang_ris1,loss_db,-4.969353038131957,,,input class of the alphabet: REPORTED
+synth_near,"RIS-term loss vs ideal continuous, abeywickrama_b2",SIM-sremu,row,abeywickrama_b2,loss_db,-4.317528119423101,,,input class of the alphabet: ANALYTIC
+synth_near,"RIS-term loss vs ideal continuous, lab_dead10",SIM-sremu,row,lab_dead10,loss_db,-4.131350670644617,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, lab_stuck10",SIM-sremu,row,lab_stuck10,loss_db,-4.0171961358832124,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, lab_eff0p5",SIM-sremu,row,lab_eff0p5,loss_db,-6.1935046927815165,,,input class of the alphabet: ASSUMED
+synth_near,"RIS-term loss vs ideal continuous, ideal_designed_on_lab",SIM-sremu,row,ideal_designed_on_lab,loss_db,-3.6276430652814087,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, ideal_1bit",SIM-sremu,row,ideal_1bit,loss_db,-3.2174058142876003,,,input class of the alphabet: ANALYTIC
+synth_far,"RIS-term loss vs ideal continuous, ideal_2bit",SIM-sremu,row,ideal_2bit,loss_db,-0.8912018780510966,,,input class of the alphabet: ANALYTIC
+synth_far,"RIS-term loss vs ideal continuous, lab_mag1",SIM-sremu,row,lab_mag1,loss_db,-3.1995611367416044,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, lab_mag2_0p7",SIM-sremu,row,lab_mag2_0p7,loss_db,-4.174173689681349,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, lab_mag2_0p5",SIM-sremu,row,lab_mag2_0p5,loss_db,-4.885021396341563,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, tang_ris1",SIM-sremu,row,tang_ris1,loss_db,-4.914452773499473,,,input class of the alphabet: REPORTED
+synth_far,"RIS-term loss vs ideal continuous, abeywickrama_b2",SIM-sremu,row,abeywickrama_b2,loss_db,-4.452643017332438,,,input class of the alphabet: ANALYTIC
+synth_far,"RIS-term loss vs ideal continuous, lab_dead10",SIM-sremu,row,lab_dead10,loss_db,-4.0907266589634945,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, lab_stuck10",SIM-sremu,row,lab_stuck10,loss_db,-3.9847217489749456,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, lab_eff0p5",SIM-sremu,row,lab_eff0p5,loss_db,-6.2098610933814165,,,input class of the alphabet: ASSUMED
+synth_far,"RIS-term loss vs ideal continuous, ideal_designed_on_lab",SIM-sremu,row,ideal_designed_on_lab,loss_db,-3.5662767252225143,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, ideal_1bit",SIM-sremu,row,ideal_1bit,loss_db,-3.2818475981314776,,,input class of the alphabet: ANALYTIC
+corridor,"RIS-term loss vs ideal continuous, ideal_2bit",SIM-sremu,row,ideal_2bit,loss_db,-0.7919749393010109,,,input class of the alphabet: ANALYTIC
+corridor,"RIS-term loss vs ideal continuous, lab_mag1",SIM-sremu,row,lab_mag1,loss_db,-3.2861528143292196,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, lab_mag2_0p7",SIM-sremu,row,lab_mag2_0p7,loss_db,-4.364926216164674,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, lab_mag2_0p5",SIM-sremu,row,lab_mag2_0p5,loss_db,-5.1547620496380375,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, tang_ris1",SIM-sremu,row,tang_ris1,loss_db,-5.093303364699949,,,input class of the alphabet: REPORTED
+corridor,"RIS-term loss vs ideal continuous, abeywickrama_b2",SIM-sremu,row,abeywickrama_b2,loss_db,-4.664904498911136,,,input class of the alphabet: ANALYTIC
+corridor,"RIS-term loss vs ideal continuous, lab_dead10",SIM-sremu,row,lab_dead10,loss_db,-4.169127553756395,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, lab_stuck10",SIM-sremu,row,lab_stuck10,loss_db,-3.979254657775239,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, lab_eff0p5",SIM-sremu,row,lab_eff0p5,loss_db,-6.296452770969032,,,input class of the alphabet: ASSUMED
+corridor,"RIS-term loss vs ideal continuous, ideal_designed_on_lab",SIM-sremu,row,ideal_designed_on_lab,loss_db,-3.4487744229646444,,,input class of the alphabet: ASSUMED
+eta,"large-N closed-form loss eta, ideal_1bit",ANALYTIC,row,ideal_1bit,eta_db,-3.9223975406030527,,,alphabet class ANALYTIC
+eta,"large-N closed-form loss eta, ideal_2bit",ANALYTIC,row,ideal_2bit,eta_db,-0.9120975839632417,,,alphabet class ANALYTIC
+eta,"large-N closed-form loss eta, lab_mag1",ANALYTIC,row,lab_mag1,eta_db,-4.104924113756909,,,alphabet class ASSUMED
+eta,"large-N closed-form loss eta, lab_mag2_0p7",ANALYTIC,row,lab_mag2_0p7,eta_db,-5.510744117427732,,,alphabet class ASSUMED
+eta,"large-N closed-form loss eta, lab_mag2_0p5",ANALYTIC,row,lab_mag2_0p5,eta_db,-6.583035136432288,,,alphabet class ASSUMED
+eta,"large-N closed-form loss eta, tang_ris1",ANALYTIC,row,tang_ris1,eta_db,-5.934050486873074,,,alphabet class REPORTED
+eta,"large-N closed-form loss eta, abeywickrama_b2",ANALYTIC,row,abeywickrama_b2,eta_db,-5.819755791585517,,,alphabet class ANALYTIC
+eta,"large-N closed-form loss eta, lab_dead10",ANALYTIC,row,lab_dead10,eta_db,-5.020073924970411,,,alphabet class ASSUMED
+eta,"large-N closed-form loss eta, lab_eff0p5",ANALYTIC,row,lab_eff0p5,eta_db,-7.115224070396719,,,alphabet class ASSUMED
+classes,lab state amplitudes,ASSUMED,,,,nan,,,|sigma1| = 1; |sigma2| per row
+classes,Tang RIS1 published 27 GHz table values,REPORTED,,,,nan,,,applied as an angle-independent alphabet [ENG]

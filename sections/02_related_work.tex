@@ -1,7 +1,9 @@
 % Section II -- Related work and gap (DRAFT TEXT, WP12 skeleton stage).
 % Source: research/related_work.md (snapshot of 10 Oct 2026), sections 2-4.
 % The TRACE paragraph uses the DESIGN 1.2 wording; it needs human gate H-4 (agreement of
-% Smriti Kumar and Mansi Ambwani) before posting. The lineage paragraph needs H-1.
+% Smriti Kumar and Mansi Ambwani) before posting. DESIGN D24: the paper makes no comparison
+% with any earlier simulator; the single transparency sentence at the end is the only
+% mention of the authors' earlier in-house simulator.
 \section{Related Work and Gap}\label{sec:related}
 
 \subsection{Coefficient-level simulators and ray tracers}
@@ -73,12 +75,5 @@ QRIS accepts measured or simulated unit-cell patterns, which is close to (iii), 
 offline~\cite{Burtakov2023QRIS}. The gap is therefore a combination, and it is dated: a
 RIS operator could be added to an existing IQ-level emulator.
 
-\subsection{Lineage}\label{sec:related-lineage}
-\claim{C-LINEAGE}\sremu{} is the third generation of an in-house emulator. Generation v1
-is the Python discrete-time pass-band IQ simulator described in~\cite[Sec.~IV-A]{Mishra2025WCL};
-v2 reworked its transport and added a web dashboard. Audits of both found a RIS kernel
-normalization that grows with aperture refinement, sample counts truncated per time step,
-and a resulting CFO gain error. \sremu{} replaces each of these with a tested alternative
-and keeps the legacy behaviour behind explicit adapters for comparison
-(Section~\ref{sec:vv}). Timing results of v1 or v2 are compared with \sremu{} solely when
-both run on the same host.
+\claim{C-LINEAGE}An earlier in-house simulator by the authors was used
+in~\cite{Mishra2025WCL,Mishra2025NCC}; \sremu{} is an independent new implementation.

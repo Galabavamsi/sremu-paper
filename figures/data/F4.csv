@@ -1,0 +1,137 @@
+panel,series,data_class,x_name,x,y_name,y,y_lo,y_hi,note
+a,measured (digitized),DIG,cell,0,p_dbm,-12.365,,,theta_deg=0.0; r_m=0.6; split=train; sigma_dig_db=0.079
+b,M2 prior-median prediction,SIM-sremu,cell,0,p_dbm,-12.64972130848487,,,theta_deg=0.0; r_m=0.6; split=train; sigma_geom_db=1.3426497292858401
+c,measured minus M2 prediction,DIG,cell,0,residual_db,0.284721308484869,,,theta_deg=0.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,1,p_dbm,-11.551,,,theta_deg=5.0; r_m=0.6; split=train; sigma_dig_db=0.1
+b,M2 prior-median prediction,SIM-sremu,cell,1,p_dbm,-12.420891319480729,,,theta_deg=5.0; r_m=0.6; split=train; sigma_geom_db=1.9387687309332124
+c,measured minus M2 prediction,DIG,cell,1,residual_db,0.869891319480729,,,theta_deg=5.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,2,p_dbm,-12.365,,,theta_deg=15.0; r_m=0.6; split=train; sigma_dig_db=0.079
+b,M2 prior-median prediction,SIM-sremu,cell,2,p_dbm,-12.696021315480012,,,theta_deg=15.0; r_m=0.6; split=train; sigma_geom_db=1.0253012324412523
+c,measured minus M2 prediction,DIG,cell,2,residual_db,0.3310213154800117,,,theta_deg=15.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,3,p_dbm,-10.06,,,theta_deg=25.0; r_m=0.6; split=train; sigma_dig_db=0.045
+b,M2 prior-median prediction,SIM-sremu,cell,3,p_dbm,-12.616026965164266,,,theta_deg=25.0; r_m=0.6; split=train; sigma_geom_db=1.5338469464480387
+c,measured minus M2 prediction,DIG,cell,3,residual_db,2.556026965164266,,,theta_deg=25.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,4,p_dbm,-10.467,,,theta_deg=35.0; r_m=0.6; split=train; sigma_dig_db=0.058
+b,M2 prior-median prediction,SIM-sremu,cell,4,p_dbm,-12.573003851935592,,,theta_deg=35.0; r_m=0.6; split=train; sigma_geom_db=1.734929638788088
+c,measured minus M2 prediction,DIG,cell,4,residual_db,2.1060038519355917,,,theta_deg=35.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,5,p_dbm,-11.732,,,theta_deg=45.0; r_m=0.6; split=train; sigma_dig_db=0.063
+b,M2 prior-median prediction,SIM-sremu,cell,5,p_dbm,-12.647020442174863,,,theta_deg=45.0; r_m=0.6; split=train; sigma_geom_db=1.3749030118547447
+c,measured minus M2 prediction,DIG,cell,5,residual_db,0.915020442174864,,,theta_deg=45.0; r_m=0.6; split=train
+a,measured (digitized),DIG,cell,6,p_dbm,-16.071,,,theta_deg=0.0; r_m=0.9; split=test; sigma_dig_db=0.19
+b,M2 prior-median prediction,SIM-sremu,cell,6,p_dbm,-16.06966618232663,,,theta_deg=0.0; r_m=0.9; split=test; sigma_geom_db=1.7451077109451023
+c,measured minus M2 prediction,DIG,cell,6,residual_db,-0.001333817673373261,,,theta_deg=0.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,7,p_dbm,-17.517,,,theta_deg=5.0; r_m=0.9; split=test; sigma_dig_db=0.072
+b,M2 prior-median prediction,SIM-sremu,cell,7,p_dbm,-15.495172653506835,,,theta_deg=5.0; r_m=0.9; split=test; sigma_geom_db=3.272919263284912
+c,measured minus M2 prediction,DIG,cell,7,residual_db,-2.021827346493165,,,theta_deg=5.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,8,p_dbm,-14.534,,,theta_deg=15.0; r_m=0.9; split=test; sigma_dig_db=0.067
+b,M2 prior-median prediction,SIM-sremu,cell,8,p_dbm,-16.041512002125625,,,theta_deg=15.0; r_m=0.9; split=test; sigma_geom_db=2.032688516858613
+c,measured minus M2 prediction,DIG,cell,8,residual_db,1.5075120021256243,,,theta_deg=15.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,9,p_dbm,-14.082,,,theta_deg=25.0; r_m=0.9; split=test; sigma_dig_db=0.053
+b,M2 prior-median prediction,SIM-sremu,cell,9,p_dbm,-15.817549182638508,,,theta_deg=25.0; r_m=0.9; split=test; sigma_geom_db=2.671697329703723
+c,measured minus M2 prediction,DIG,cell,9,residual_db,1.7355491826385077,,,theta_deg=25.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,10,p_dbm,-16.523,,,theta_deg=35.0; r_m=0.9; split=test; sigma_dig_db=0.056
+b,M2 prior-median prediction,SIM-sremu,cell,10,p_dbm,-15.882933542660458,,,theta_deg=35.0; r_m=0.9; split=test; sigma_geom_db=2.3473550224152415
+c,measured minus M2 prediction,DIG,cell,10,residual_db,-0.6400664573395414,,,theta_deg=35.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,11,p_dbm,-12.546,,,theta_deg=45.0; r_m=0.9; split=test; sigma_dig_db=0.063
+b,M2 prior-median prediction,SIM-sremu,cell,11,p_dbm,-16.13204451070909,,,theta_deg=45.0; r_m=0.9; split=test; sigma_geom_db=1.82210134977751
+c,measured minus M2 prediction,DIG,cell,11,residual_db,3.5860445107090904,,,theta_deg=45.0; r_m=0.9; split=test
+a,measured (digitized),DIG,cell,12,p_dbm,-20.771,,,theta_deg=0.0; r_m=1.2; split=train; sigma_dig_db=0.223
+b,M2 prior-median prediction,SIM-sremu,cell,12,p_dbm,-18.55886315400576,,,theta_deg=0.0; r_m=1.2; split=train; sigma_geom_db=1.7297167355210703
+c,measured minus M2 prediction,DIG,cell,12,residual_db,-2.212136845994241,,,theta_deg=0.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,13,p_dbm,-19.687,,,theta_deg=5.0; r_m=1.2; split=train; sigma_dig_db=0.077
+b,M2 prior-median prediction,SIM-sremu,cell,13,p_dbm,-18.244496999036464,,,theta_deg=5.0; r_m=1.2; split=train; sigma_geom_db=3.6681193054468073
+c,measured minus M2 prediction,DIG,cell,13,residual_db,-1.4425030009635371,,,theta_deg=5.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,14,p_dbm,-18.512,,,theta_deg=15.0; r_m=1.2; split=train; sigma_dig_db=0.073
+b,M2 prior-median prediction,SIM-sremu,cell,14,p_dbm,-18.67716992517753,,,theta_deg=15.0; r_m=1.2; split=train; sigma_geom_db=1.405007828037558
+c,measured minus M2 prediction,DIG,cell,14,residual_db,0.16516992517752982,,,theta_deg=15.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,15,p_dbm,-17.517,,,theta_deg=25.0; r_m=1.2; split=train; sigma_dig_db=0.072
+b,M2 prior-median prediction,SIM-sremu,cell,15,p_dbm,-17.990368598050406,,,theta_deg=25.0; r_m=1.2; split=train; sigma_geom_db=3.6652083689051627
+c,measured minus M2 prediction,DIG,cell,15,residual_db,0.4733685980504063,,,theta_deg=25.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,16,p_dbm,-19.415,,,theta_deg=35.0; r_m=1.2; split=train; sigma_dig_db=0.083
+b,M2 prior-median prediction,SIM-sremu,cell,16,p_dbm,-17.791845468576486,,,theta_deg=35.0; r_m=1.2; split=train; sigma_geom_db=3.9660577812219966
+c,measured minus M2 prediction,DIG,cell,16,residual_db,-1.6231545314235127,,,theta_deg=35.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,17,p_dbm,-18.512,,,theta_deg=45.0; r_m=1.2; split=train; sigma_dig_db=0.073
+b,M2 prior-median prediction,SIM-sremu,cell,17,p_dbm,-18.57270285896894,,,theta_deg=45.0; r_m=1.2; split=train; sigma_geom_db=1.7060165823141689
+c,measured minus M2 prediction,DIG,cell,17,residual_db,0.06070285896893779,,,theta_deg=45.0; r_m=1.2; split=train
+a,measured (digitized),DIG,cell,18,p_dbm,-20.319,,,theta_deg=0.0; r_m=1.5; split=test; sigma_dig_db=0.093
+b,M2 prior-median prediction,SIM-sremu,cell,18,p_dbm,-20.08666763906682,,,theta_deg=0.0; r_m=1.5; split=test; sigma_geom_db=3.130164970355292
+c,measured minus M2 prediction,DIG,cell,18,residual_db,-0.232332360933178,,,theta_deg=0.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,19,p_dbm,-22.76,,,theta_deg=5.0; r_m=1.5; split=test; sigma_dig_db=0.087
+b,M2 prior-median prediction,SIM-sremu,cell,19,p_dbm,-19.699996207370425,,,theta_deg=5.0; r_m=1.5; split=test; sigma_geom_db=4.19421260086008
+c,measured minus M2 prediction,DIG,cell,19,residual_db,-3.0600037926295762,,,theta_deg=5.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,20,p_dbm,-18.963,,,theta_deg=15.0; r_m=1.5; split=test; sigma_dig_db=0.052
+b,M2 prior-median prediction,SIM-sremu,cell,20,p_dbm,-19.947773998089332,,,theta_deg=15.0; r_m=1.5; split=test; sigma_geom_db=4.196305963785594
+c,measured minus M2 prediction,DIG,cell,20,residual_db,0.9847739980893309,,,theta_deg=15.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,21,p_dbm,-20.771,,,theta_deg=25.0; r_m=1.5; split=test; sigma_dig_db=0.089
+b,M2 prior-median prediction,SIM-sremu,cell,21,p_dbm,-19.244283458042172,,,theta_deg=25.0; r_m=1.5; split=test; sigma_geom_db=4.68232656325042
+c,measured minus M2 prediction,DIG,cell,21,residual_db,-1.5267165419578284,,,theta_deg=25.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,22,p_dbm,-33.2,,,theta_deg=35.0; r_m=1.5; split=test; sigma_dig_db=0.045
+b,M2 prior-median prediction,SIM-sremu,cell,22,p_dbm,-19.518496353736218,,,theta_deg=35.0; r_m=1.5; split=test; sigma_geom_db=4.734286430348931
+c,measured minus M2 prediction,DIG,cell,22,residual_db,-13.681503646263785,,,theta_deg=35.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,23,p_dbm,-20.771,,,theta_deg=45.0; r_m=1.5; split=test; sigma_dig_db=0.089
+b,M2 prior-median prediction,SIM-sremu,cell,23,p_dbm,-20.03303920790338,,,theta_deg=45.0; r_m=1.5; split=test; sigma_geom_db=3.0683308735858086
+c,measured minus M2 prediction,DIG,cell,23,residual_db,-0.7379607920966222,,,theta_deg=45.0; r_m=1.5; split=test
+a,measured (digitized),DIG,cell,24,p_dbm,-24.748,,,theta_deg=0.0; r_m=1.8; split=train; sigma_dig_db=0.078
+b,M2 prior-median prediction,SIM-sremu,cell,24,p_dbm,-22.00883955875733,,,theta_deg=0.0; r_m=1.8; split=train; sigma_geom_db=2.6703779011867073
+c,measured minus M2 prediction,DIG,cell,24,residual_db,-2.739160441242671,,,theta_deg=0.0; r_m=1.8; split=train
+a,measured (digitized),DIG,cell,25,p_dbm,-25.291,,,theta_deg=5.0; r_m=1.8; split=train; sigma_dig_db=0.101
+b,M2 prior-median prediction,SIM-sremu,cell,25,p_dbm,-21.501684390403387,,,theta_deg=5.0; r_m=1.8; split=train; sigma_geom_db=3.364514368591899
+c,measured minus M2 prediction,DIG,cell,25,residual_db,-3.7893156095966134,,,theta_deg=5.0; r_m=1.8; split=train
+a,measured (digitized),DIG,cell,26,p_dbm,-18.512,,,theta_deg=15.0; r_m=1.8; split=train; sigma_dig_db=0.127
+b,M2 prior-median prediction,SIM-sremu,cell,26,p_dbm,-21.657358824713313,,,theta_deg=15.0; r_m=1.8; split=train; sigma_geom_db=3.26334348464674
+c,measured minus M2 prediction,DIG,cell,26,residual_db,3.1453588247133126,,,theta_deg=15.0; r_m=1.8; split=train
+a,measured (digitized),DIG,cell,27,p_dbm,-19.596,,,theta_deg=25.0; r_m=1.8; split=train; sigma_dig_db=0.05
+b,M2 prior-median prediction,SIM-sremu,cell,27,p_dbm,-21.297723241813554,,,theta_deg=25.0; r_m=1.8; split=train; sigma_geom_db=3.6978731725826908
+c,measured minus M2 prediction,DIG,cell,27,residual_db,1.7017232418135535,,,theta_deg=25.0; r_m=1.8; split=train
+a,measured (digitized),DIG,cell,28,p_dbm,-23.845,,,theta_deg=35.0; r_m=1.8; split=train; sigma_dig_db=0.068
+b,M2 prior-median prediction,SIM-sremu,cell,28,p_dbm,-21.626836006427382,,,theta_deg=35.0; r_m=1.8; split=train; sigma_geom_db=3.774955589797476
+c,measured minus M2 prediction,DIG,cell,28,residual_db,-2.2181639935726167,,,theta_deg=35.0; r_m=1.8; split=train
+a,measured (digitized),DIG,cell,29,p_dbm,-26.556,,,theta_deg=45.0; r_m=1.8; split=train; sigma_dig_db=0.097
+b,M2 prior-median prediction,SIM-sremu,cell,29,p_dbm,-21.963609897805497,,,theta_deg=45.0; r_m=1.8; split=train; sigma_geom_db=2.7948026705429396
+c,measured minus M2 prediction,DIG,cell,29,residual_db,-4.5923901021945035,,,theta_deg=45.0; r_m=1.8; split=train
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-8.875,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-8.625,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-8.375,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-8.125,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-7.875,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-7.625,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-7.375,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-7.125,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-6.875,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-6.625,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-6.375,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-6.125,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-5.875,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-5.625,draws,0.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-5.375,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-5.125,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-4.875,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-4.625,draws,4.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-4.375,draws,1.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-4.125,draws,2.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-3.875,draws,16.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-3.625,draws,8.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-3.375,draws,10.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-3.125,draws,12.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-2.875,draws,30.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-2.625,draws,52.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-2.375,draws,107.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-2.125,draws,118.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-1.875,draws,172.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-1.625,draws,184.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-1.375,draws,209.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-1.125,draws,174.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-0.875,draws,165.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-0.625,draws,156.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-0.375,draws,113.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,-0.125,draws,151.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,0.125,draws,97.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,0.375,draws,76.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,0.625,draws,48.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,0.875,draws,42.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,1.125,draws,22.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,1.375,draws,18.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,1.625,draws,4.0,,,
+d,histogram of Delta RMSE (M0 - M2) over prior draws,SIM-sremu,bin_center_db,1.875,draws,3.0,,,
+d,C2 threshold on the median Delta RMSE (protocol),ASSUMED,,,threshold_db,1.0,,,pre-registered decision rule
+d,decoy C2 detection rate (power analysis),SIM-sremu,n_decoys,500.0,rate,0.0,,,

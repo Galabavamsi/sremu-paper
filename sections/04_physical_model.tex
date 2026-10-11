@@ -59,12 +59,12 @@ default obliquity, the cosine pattern measured by Tang et al.~\cite{Tang2022mmWa
 Huygens (physical-optics) factor; and the indicator keeps front-side incidence and reflection,
 so a path to the back of a panel contributes exactly zero (PH-09).
 
-\claim{C-K1-AREA}Two properties separate K1 from the kernel of the earlier emulator's second
-generation (v2), which had neither. The contribution of each cell is tied to its area, so
-subdividing a fixed aperture into more cells leaves the received power unchanged, while the
-power of the v2 kernel grew with every subdivision (PH-04). The factor $j$ sets the phase of the RIS path relative to the LOS path;
-without it the phase would be wrong by a quarter turn, which a comparison with image theory
-detects (PH-05). \claim{C-K1-FORMS}For one quadrature point per cell, K1 is algebraically
+\claim{C-K1-AREA}Two properties of K1 matter for every result in this paper. The
+contribution of each cell is tied to its area, so subdividing a fixed aperture into more cells
+leaves the received power unchanged (PH-04, Section~\ref{sec:vv-tang}); a kernel with a fixed
+per-cell gain would instead grow with every subdivision. The factor $j$ sets the phase of the
+RIS path relative to the LOS path; without it the phase would be wrong by a quarter turn,
+which a comparison with image theory detects (PH-05). \claim{C-K1-FORMS}For one quadrature point per cell, K1 is algebraically
 equal to three published forms: the cell model of Tang et al.~\cite{Tang2022mmWave} times
 $j$, the general path-loss model of ETSI GR RIS 003~\cite[clause 6.3.1.2]{ETSI_GR_RIS003_v121}
 with its recommended cell gain $G=4\pi d_xd_y/\lambda^2$, and the model of

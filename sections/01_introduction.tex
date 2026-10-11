@@ -70,17 +70,17 @@ area. The paper makes four contributions.
   (Table~\ref{tab:modelcard}); \numOracleCount{} analytic oracle checks taken from the
   continuous-integration record; MATLAB code-to-code comparisons; agreement with
   published path-loss model curves~\cite{Tang2021PathLoss,Tang2022mmWave}; a pre-registered
-  consistency check against digitized laboratory data; and the root cause of a
-  carrier-frequency-offset (CFO) gain error in the legacy code, whose estimate slope moves
-  from \numCfoSlopeLegacy{} to \numCfoSlopeFixed{}.
+  consistency check against a laboratory measurement collected by the authors, with its
+  null result and the measurement-design lesson it teaches; and carrier-frequency-offset
+  (CFO) and bit-error-rate checks against the Cram\'er--Rao bound and theory.
 \item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
   \claim{C-CONTRIB-3}Explicit definitions of lockstep and paced operation; the real-time
   factor (RTF), deadline misses and latency percentiles; scaling over links, elements,
   surfaces, sample rates and feature sets on a laptop and a Linux server; and a fitted
   cost model.
-\item \emph{Results that need a sample-level emulator} (Section~\ref{sec:cases}).
+\item \emph{Case studies of timed control} (Section~\ref{sec:cases}).
   \claim{C-CONTRIB-4}The timing of a reconfiguration inside a frame and the value of
-  timestamped commands; the time scale on which signaling delay erodes position-driven
+  timestamped commands, which require the sample level; the time scale on which signaling delay erodes position-driven
   binary control in a blocked corridor; a non-ideality ablation; and a model-based
   dimensioning of an FM-band surface.
 \end{itemize}
@@ -96,8 +96,7 @@ Fields are scalar and co-polar, RIS paths are single-bounce, and wall reflection
 order one. Paced-mode timing is measured and reported per platform, never assumed.}}
 \end{figure}
 
-\claim{C-LINEAGE}\sremu{} replaces two earlier generations of an in-house emulator
-(Section~\ref{sec:related-lineage}). The rest of the paper is organized as follows.
+The rest of the paper is organized as follows.
 Section~\ref{sec:related} reviews related tools. Section~\ref{sec:design} describes the
 design and Section~\ref{sec:model} the physical model. Section~\ref{sec:vv} separates
 verification from validation. Section~\ref{sec:wallclock} characterizes wall-clock

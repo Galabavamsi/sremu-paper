@@ -3,7 +3,7 @@
 Table III (API mapping): rows and the sremu / UHD columns come from
 ``sremu.api.metadata.table_iii()`` (the ``Table III:`` block of that module's docstring,
 DESIGN 8.1: "generated from api/metadata.py docstrings"); the third column maps each row to
-the ANTS/v1 compatibility wrappers of ``sremu.compat`` (DESIGN 8.2). That column is written
+the compatibility wrappers of ``sremu.compat`` (DESIGN 8.2). That column is written
 here, keyed by the leading call of each sremu cell, and checked against the code:
 
 * every key must match exactly one row of ``table_iii()`` and every row must have a key, so
@@ -12,7 +12,9 @@ here, keyed by the leading call of each sremu cell, and checked against the code
   deprecated v1 spellings ``send_to_simulator`` / ``recieve_from_simulator`` must exist.
 
 The srsRAN and GNU Radio columns of ``table_iii()`` are not printed (lead instruction for the
-paper: sremu vs UHD vs v1 wrappers); the raw REQ/REP mode is described in the text instead.
+paper: sremu vs UHD vs the wrappers); the raw REQ/REP mode is described in the text instead.
+DESIGN D24: the printed caption names no earlier simulator; the internal names below (V1_*)
+are kept for the tests that exercise them.
 
 Usage: python tools/gen_tables.py [--out DIR]   (writes DIR/table3_api.tex; ASCII only)
 """
@@ -110,10 +112,8 @@ def render_table3(rows: list[tuple[str, str, str]]) -> str:
         "% sremu.compat signatures. Do not edit; edit the sremu docstring or gen_tables.py.",
         r"\begin{table*}[t]",
         r"\caption{Python interface of \sremu{} (UHD-shaped, not UHD-compatible), its UHD"
-        r" counterpart~\cite{UHDManual} and the compatibility wrappers that keep the names of"
-        r" the earlier in-house emulator. The deprecated v1 spellings \texttt{send\_to\_simulator}"
-        r" and \texttt{recieve\_from\_simulator} remain as aliases. Generated from the"
-        r" \texttt{sremu.api.metadata} docstring.}",
+        r" counterpart~\cite{UHDManual} and the two one-call compatibility wrappers for simple"
+        r" scripts. Generated from the \texttt{sremu.api.metadata} docstring.}",
         r"\label{tab:api}",
         r"\centering",
         r"\footnotesize",

@@ -1,0 +1,89 @@
+{
+  "figure": "F5",
+  "title": "(a) CFO estimation error vs applied offset, noise off, with the generic integer-samples-per-tick pitfall; (b) estimator RMSE vs the Cramer-Rao bound; (c) BER vs Eb/N0 with Clopper-Pearson intervals",
+  "content_key": "1eb3933f4c9c0d7eda89ab065d09afedd5f84c95ea9fb6a9a16598436b5d193c",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ANALYTIC",
+    "ASSUMED",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ANALYTIC",
+    "ASSUMED",
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo_sweep_noise_free.csv",
+      "data_class": "SIM-sremu",
+      "note": "engine_* and legacy_* columns plotted (legacy_* = sremu output re-timed by the integer-samples-per-tick adapter); dig_* columns not plotted (D24)",
+      "provenance": {
+        "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
+        "sremu_dirty": true,
+        "run_dir": "validation/cfo/results/20261010T232549Z_vcfo",
+        "study": "V-CFO",
+        "dirty_patch_sha256": "81af3aa08ec9060d3ca69033a7a75751954410438f1c83b551f1bbd2e09f4cac",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics"
+      },
+      "sha256": "8dfb75ed6f07c88fd164a0b6e625ac8d7271a9ac0c13e4a67ae035be6b5bbaad"
+    },
+    {
+      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo4_rmse_vs_crb.csv",
+      "data_class": "SIM-sremu",
+      "note": "CRB columns are ANALYTIC",
+      "sha256": "5d3c265538614ca9ba6ac32b195b66020225152066bb3006f772234c92d0269f"
+    },
+    {
+      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/meta.json",
+      "data_class": "SIM-sremu",
+      "sha256": "1e1fc4ea37deb7d308a9f5b9dc664cb954a8452d6adeb54567e8d292c23fa924"
+    },
+    {
+      "path": "sweeps/results/E-F/ber/ber.csv",
+      "data_class": "SIM-sremu",
+      "note": "theory_ber column is ANALYTIC",
+      "provenance": {
+        "experiment": "E-F"
+      },
+      "sha256": "ef0b386ca310be1ce9ee5f645efa90d65ab22c8b3945780cb2cc3b87a534cded"
+    },
+    {
+      "path": "sweeps/results/E-F/ber/meta.json",
+      "data_class": "ASSUMED",
+      "note": "lab |Gamma| ASSUMED; genie = oracle CSI",
+      "sha256": "3a7c40718c047569e1cad13a6097c245698bad4a008e8435bd5772d45273afab"
+    }
+  ],
+  "assumptions": [
+    "(a) BPSK burst: 200-symbol header, 2389 samples at 5880 S/s; estimators on header samples; the pitfall series re-times the engine's output with 11 samples per 2 ms tick (D24: generic lesson, not another simulator)",
+    "(b) periodogram + parabolic estimator, N = 2000 header samples, 7 CFO points x 200 keyed trials per SNR; noise is the engine's physical k T0 F f_s",
+    "(c) static lab-like LOS + RIS scene, Eb/N0 set through the TX power against the physical noise; >= 200 errors or 2e7 bits per point; Clopper-Pearson 95 % intervals"
+  ],
+  "profile": "full",
+  "script": "figures/src/f05_cfo_ber.py",
+  "script_sha256": "99712cb8f75f190e1fbc983995a88deb96f678292b6a966a0ae015b2327c52ff",
+  "outputs": {
+    "figures/out/F5.pdf": "6c9af20fa9de91ca605f9ddc737a48b53a414eb0baa00e3285cd3fa152d25b79",
+    "figures/data/F5.csv": "ed5ca83a52d515d1cde5703ca2c39b18b0e1f05c7a39520bca9d15666693d5c5"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:12Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1573,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  }
+}

@@ -12,14 +12,18 @@ deterministic, also with controllers in the loop, and make their received sample
 bit for bit under any client chunking, any cut by events or barriers, and across process
 boundaries. \claim{C-CONTRIB-2}The area-tied kernel equals three published forms of the RIS
 path-loss model and reproduces published model curves within \numTangCurveMaxDevDb~dB, and
-the emulator as a whole passes \numOracleCount{} analytic oracle checks. \claim{C-ABS-LAB}A pre-registered comparison with
-digitized laboratory data \txtVLabOutcome. \claim{C-LINEAGE}Counting samples exactly moves the
-slope of the estimated carrier-frequency offset of the legacy engine from \numCfoSlopeLegacy{}
-to \numCfoSlopeFixed{}. \claim{C-ABS-PACED}In wall-clock-paced mode on \txtPacedPlatform{} the
+the emulator as a whole passes \numOracleCount{} analytic oracle checks. \claim{C-ABS-LAB}A
+pre-registered comparison with a laboratory measurement collected by the authors
+\txtVLabOutcome; \claim{C-LAB-LESSON}its lesson is that a RIS map at \numLabFreqGHz~GHz needs a
+geometry recorded to about a millimetre. \claim{C-CRB}Frequency-offset estimates
+through the emulator are exact with noise off and reach the Cram\'er--Rao bound with its
+physical noise. \claim{C-ABS-PACED}In wall-clock-paced mode on \txtPacedPlatform{} the
 emulator sustains \numPacedLinks{} links at \numPacedMSps~MS/s with a deadline-miss rate below
-\numSustainMissRate. \claim{C-ABS-EB}In one case study, a RIS switch inside a packet
-\txtEBResult. \claim{C-ABS-EA}In the other, position-driven binary control under signaling
-delay \txtEAResult. Both results depend on when a command takes effect within the sample
-stream, which coefficient-level and block-level tools do not represent.
+\numSustainMissRate. \claim{C-ABS-EB}In one case study, with RIS switches between
+packets, \txtEBResult. \claim{C-ABS-EA}In the other, position-driven binary control under
+signaling delay \txtEAResult. The intra-frame result depends on when a command takes effect
+within the sample stream, which coefficient-level and block-level tools do not represent. The
+delay result runs on the coefficient path; a subset run at the sample level agrees with it within
+\numVaOneMaxDiffDb~dB.
 \sremustub{Closing sentences on what the results imply for the design and testing of RIS
 controllers, written from the supported claims of claims.yaml once the studies are complete.}

@@ -1,0 +1,10 @@
+{
+  "figure": "F2",
+  "content_key": "aaa15e4a708b9031643f4a607d68983554f47ca90a53f65c69b6b13003e493f1",
+  "source": "figures/tikz/F2.tex",
+  "inputs": [
+    "figures/tikz/sremu-figstyle.tex"
+  ],
+  "data_classes": [],
+  "tool": "latexmk (standalone TikZ)"
+}

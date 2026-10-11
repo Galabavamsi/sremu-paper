@@ -22,7 +22,10 @@
 #
 # Sections III, IV, VIII-X and the appendix (WP12, stage C) describe sremu commit 2a016a6;
 # each capability claim there names the tests that exercise it. Module paths are in the TeX
-# comments next to the claims.
+# comments next to the claims. Sections V and VII (WP12 stage C draft) describe the committed
+# study and experiment results; their numbers come from tools/gen_results.py.
+# DESIGN D24 (fresh-attempt framing): no claim compares sremu with an earlier simulator; the
+# single transparency sentence is C-LINEAGE.
 
 claims:
   # ================================================================ abstract, I, II
@@ -82,9 +85,9 @@ claims:
     evidence: [test:RT-05, test:RT-06, test:RT-08, test:RT-18, test:IO-02, test:IO-03, test:IO-05, fig:F1, fig:F2, cite:ETSI_GS_RIS008]
     gates: []
   C-CONTRIB-2:
-    text: "A verified physical model with a stated validity domain: area-tied kernel equal to three published forms, model card, CI oracle count, MATLAB code-to-code, Tang curves, pre-registered lab consistency check, CFO root cause."
+    text: "A verified physical model with a stated validity domain: area-tied kernel equal to three published forms, model card, CI oracle count, MATLAB code-to-code, Tang curves, pre-registered consistency check against a laboratory measurement collected by the authors (null result and measurement-design lesson), CFO and BER checks against the CRB and theory."
     where: [sections/01_introduction.tex, sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-CFO-2, test:V-CFO-3, fig:F3, fig:F4, fig:F5]
+    evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5]
     gates: [H-6]
   C-CONTRIB-3:
     text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling, cost-model fit on a laptop and a Linux server."
@@ -92,7 +95,7 @@ claims:
     evidence: [test:RT-18, fig:F7, fig:F8]
     gates: [H-5]
   C-CONTRIB-4:
-    text: "Results that need a sample-level emulator: intra-frame reconfiguration timing (E-B), signaling-delay time scale in a blocked corridor (E-A), non-ideality ablation (E-C), FM dimensioning (E-D)."
+    text: "Case studies of timed control: intra-frame reconfiguration timing (E-B, the study that requires the sample level), signaling-delay time scale in a blocked corridor (E-A, batch path with an IQ consistency subset), non-ideality ablation (E-C), FM dimensioning (E-D)."
     where: [sections/01_introduction.tex, sections/abstract.tex]
     evidence: [test:VA-5, test:VA-1, fig:F9, fig:F10, fig:F11, fig:F12]
     gates: [H-6]
@@ -102,10 +105,10 @@ claims:
     evidence: [spec:DESIGN-1.5, cite:ETSI_GR_RIS003_v121]
     gates: []
   C-LINEAGE:
-    text: "sremu is the third generation of the in-house emulator; v1 is the simulator of the WCL letter (Sec. IV-A); audits found the kernel normalization, truncated sample counts and the CFO gain error; exact counting moves the CFO slope from the legacy to the fixed value; legacy behaviour kept behind adapters."
-    where: [sections/01_introduction.tex, sections/02_related_work.tex, sections/10_conclusion.tex]
-    evidence: [cite:Mishra2025WCL, test:PH-04, test:V-CFO-2, test:V-CFO-3]
-    gates: [H-1]
+    text: "An earlier in-house simulator by the authors was used in [Mishra & Kherani WCL 2025, NCC 2025]; sremu is an independent new implementation. (DESIGN D24: the single allowed transparency sentence; no comparison with that simulator is made anywhere in the paper.)"
+    where: [sections/02_related_work.tex]
+    evidence: [cite:Mishra2025WCL, cite:Mishra2025NCC, spec:DESIGN-D24]
+    gates: []
   C-TRACE:
     text: "TRACE paragraph and Table I row (DESIGN 1.2 wording)."
     where: [sections/02_related_work.tex, sections/tables/table1_tools.tex]
@@ -117,19 +120,21 @@ claims:
     evidence: [test:V-TANG-1, fig:F3, cite:Tang2022mmWave]
     gates: []
   C-ABS-LAB:
-    text: "Pre-registered comparison with digitized 3.5 GHz laboratory data (outcome phrase from the protocol's decision rules)."
+    text: "Pre-registered comparison with a digitized 3.5 GHz laboratory measurement collected by the authors (outcome phrase from the protocol's decision rules and power label: underpowered, null result)."
     where: [sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [fig:F4]
-    gates: [H-1, H-6]
+    evidence: [test:V-LAB, fig:F4, spec:DESIGN-10.9]
+    gates: [H-6]
+    banned_word_uses:
+      - {word: only, context: "from LOS-only"}
   C-ABS-PACED:
     text: "Wall-clock-paced runs on the named platform sustain N links at Y MS/s with a deadline-miss rate below 1e-3 (Sustainable, DESIGN 12.1)."
     where: [sections/abstract.tex, sections/10_conclusion.tex]
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-ABS-EB:
-    text: "E-B headline (RIS switch inside a packet)."
+    text: "E-B headline (lab-like SIM geometry, LOS blocked): with timed commands no packet is lost; with tick-based untimed semantics up to the stated fraction is lost (the lab-arc run is pending)."
     where: [sections/abstract.tex, sections/10_conclusion.tex]
-    evidence: [fig:F9, test:VA-5]
+    evidence: [fig:F9, test:VA-5, test:E-B]
     gates: []
   C-ABS-EA:
     text: "E-A headline (position-driven binary control under signaling delay)."
@@ -219,7 +224,7 @@ claims:
     evidence: [test:IO-06, pytest:tests/io/test_io_api_device.py::test_api_table_iii_rows, pytest:tests/io/test_io_api_device.py::test_api_command_time_and_time_forms, pytest:tests/io/test_io_api_device.py::test_api_streamargs_rates_are_exact, table:tab:api, cite:UHDManual]
     gates: []
   C-COMPAT:
-    text: "Send_to_sim / Receive_from_sim keep the earlier emulator's names; ported v1 scripts deliver every sample."
+    text: "Send_to_sim / Receive_from_sim give simple scripts a one-call interface; a BPSK transmitter and receiver script pair delivers every sample through them."
     where: [sections/03_design.tex, generated/tables/table3_api.tex]
     evidence: [test:IO-07]
     gates: []
@@ -281,7 +286,7 @@ claims:
     evidence: [test:PH-02, test:PH-09, cite:Tang2022mmWave]
     gates: []
   C-K1-AREA:
-    text: "Area tie makes fixed-aperture power independent of subdivision (v2 kernel grew); j fixes the RIS-vs-LOS phase (no_j fails image theory)."
+    text: "Area tie makes fixed-aperture power independent of subdivision (a fixed per-cell gain would grow); j fixes the RIS-vs-LOS phase (a kernel without j fails image theory)."
     where: [sections/04_physical_model.tex]
     evidence: [test:PH-04, test:PH-05]
     gates: []
@@ -390,9 +395,9 @@ claims:
     evidence: [pytest:tests/oracles/test_oracle_isolation.py, pytest:tests/unit/test_layering.py::test_oracle_isolation, pytest:tests/unit/test_layering.py::test_oracle_isolation_teeth, pytest:tests/oracles/test_oracles_pm_checks.py]
     gates: []
   C-TEETH:
-    text: "Each guard against a legacy defect has a teeth twin that must fail the legacy behaviour (v2 kernel, no j, block-constant Doppler, Lagrange FD, single-slot commands, per-tick CFO phase, truncated counts); the V-WCL W1 teeth (legacy_wcl_eq2) is not named in the paper until H-3 (DESIGN 1.6 rule 6)."
+    text: "Several guards have a negative-control twin that runs a deliberately wrong variant (kernel without j, too-short fractional-delay filter, replay with a dropped command) and must reject it. DESIGN D24: the teeth tests that reproduce earlier code (kernel without the area tie, block-constant Doppler, next-tick semantics) stay in the suite but are not featured in the paper."
     where: [sections/appendix.tex]
-    evidence: [test:PH-04, test:PH-05, test:PH-17, test:PH-20, test:RT-07, test:RT-09, test:V-CFO-2, pytest:tests/physics/test_ph_legacy_teeth.py]
+    evidence: [test:PH-05, test:PH-20, test:RT-16]
     gates: []
   C-REPRO:
     text: "Two repositories; tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates of that commit, current figures, pipeline macros and supported claims; code constants read from the locked code; manifests and bitwise replay."
@@ -400,7 +405,123 @@ claims:
     evidence: [spec:DESIGN-13.5, test:RT-16]
     gates: []
   C-PROVENANCE:
-    text: "Data classes MEAS (measured data), DIG, REPORTED, ASSUMED, SIM-sremu, SIM-legacy-v1, SIM-legacy-v2, ANALYTIC, MATLAB on every input and figure; manifests list input hashes and classes; private data read from a private location with skipping tests; legacy behaviour behind adapters."
+    text: "Data classes MEAS (measured data), DIG, REPORTED, ASSUMED, SIM-sremu, ANALYTIC, MATLAB on every input and figure; manifests list input hashes and classes; private data read from a private location with skipping tests; the laboratory measurement collected by the authors enters as a digitized map (DIG)."
     where: [sections/appendix.tex]
     evidence: [pytest:tests/unit/test_manifest.py, spec:DESIGN-3.6, spec:DESIGN-10.1]
+    gates: []
+
+  # ================================================================ V Verification and validation
+  C-VV-TABLE:
+    text: "Table IV (generated from the pinned junit): every analytic identifier (PH, RT, IO) passes; ST and G tiers as counted; total passed and skipped tests; no skipped test carries a spec id."
+    where: [sections/05_verification_validation.tex, generated/tables/table4_vv.tex]
+    evidence: [table:tab:vv, test:PH-01, test:PH-02, test:PH-04, test:RT-01, test:RT-03, test:RT-05, test:RT-08, test:IO-01, test:IO-02, test:ST-01, test:ST-04, test:G1, spec:DESIGN-10.1]
+    gates: []
+  C-MATLAB:
+    text: "Goldens G1-G8 from MATLAB R2026a scripts pass; this is code-to-code agreement, not validation; G2/G3 compare beam shapes after removing a documented constant and say nothing about absolute RIS power."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:G1, test:G2, test:G3, test:G4, test:G5, test:G6, test:G7, test:G8, cite:ETSI_GR_RIS003_v121, spec:DESIGN-10.6]
+    gates: []
+  C-REFINE:
+    text: "Fixed-aperture refinement (F3a): K1 with the default cell model stays within the stated deviation of the far-field closed form for every N; the patch model stays within the stated deviation of the continuous PO integral near field; the point model converges slowly (model-form difference)."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:PH-04, test:PH-26, fig:F3]
+    gates: []
+  C-LAB-DATA:
+    text: "The V-LAB data set is a laboratory measurement collected by the authors (3.5 GHz, 30 cells, binary RIS of six tiles), surviving as a colour map, digitized (DIG) with per-cell uncertainty; the geometry is known within ranges."
+    where: [sections/05_verification_validation.tex, sections/appendix.tex]
+    evidence: [test:V-LAB, fig:F4, spec:DESIGN-10.9]
+    gates: [H-1]
+  C-LAB-PREREG:
+    text: "The analysis plan (prior, models M0-M3, split, decision rules C1-C3) was fixed and hash-locked before any model-data comparison; the loader refuses data unless the hash matches; commit, date and deposit DOI are pipeline placeholders until H-6."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:V-LAB, spec:DESIGN-10.9]
+    gates: [H-6]
+  C-LAB-POWER:
+    text: "Before unblinding, the decoy power analysis (500 decoys from M2) gave a C2 detection rate of 0, below the 0.5 threshold: labelled underpowered. The decoy counts of C1 and C3 are reported with it (protocol paper_wording)."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:V-LAB, fig:F4]
+    gates: [H-6]
+  C-LAB-RESULT:
+    text: "Unblinded outcome: C1, C2, C3 fail (also in every sensitivity run); median test RMSE of M0, M0n, M2 and bias as generated; null result, underpowered, not evidence for or against the model; one colour-scale-pinned cell is an outlier."
+    where: [sections/05_verification_validation.tex, generated/tables/table5_lab.tex]
+    evidence: [test:V-LAB, fig:F4, table:tab:lab]
+    gates: [H-6]
+    banned_word_uses:
+      - {word: only, context: "from LOS-only"}
+  C-LAB-LESSON:
+    text: "Diagnostic outside the protocol: no single extra lab fact raises the C2 detection rate above 0; exact tile geometry plus positions to +-1 mm gives the stated rate (close to the 0.5 threshold); a RIS map at 3.5 GHz needs geometry recorded to about a millimetre before it can separate the models."
+    where: [sections/05_verification_validation.tex, sections/10_conclusion.tex]
+    evidence: [test:V-LAB, spec:DESIGN-10.9]
+    gates: []
+  C-CFO:
+    text: "Noise-free CFO sweep: LS and lag-1 estimators recover the applied offset within the stated errors; the received samples are identical for client epochs of 0.25, 2 and 3.7 ms (V-CFO-1); the same sweep across two OS processes over native ZMQ is bitwise identical (V-CFO-3)."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:V-CFO-1, test:V-CFO-3, test:G4, fig:F5]
+    gates: []
+  C-CFO-LESSON:
+    text: "Generic design lesson (D24, no simulator named): delivering a whole number of samples per tick scales every frequency estimate by the ratio of needed to delivered samples (11.76/11 here); reproduced by re-timing sremu's own output; exact rational counts remove it."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:V-CFO-2, test:RT-01, fig:F5, spec:DESIGN-D24]
+    gates: []
+  C-CRB:
+    text: "With the emulator's physical noise a periodogram estimator reaches the CRB (pooled ratios as generated; the lowest, below 1, is 2.3 standard errors from 1 and read as sampling error; worst offset within 1.5 x CRB); the lag-1 estimator follows its own small-error theory."
+    where: [sections/05_verification_validation.tex, sections/10_conclusion.tex]
+    evidence: [test:ST-05, test:V-CFO-1, fig:F5, cite:Kay1989Freq]
+    gates: []
+  C-BER:
+    text: "BER through the emulator (physical noise): theory inside the 95 % Clopper-Pearson interval at every point with genie CSI; outside at the stated number of low-Eb/N0 points with 64-pilot LS (estimation loss); ST-04 is the CI version."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:ST-04, fig:F5]
+    gates: []
+  C-DOPPLER-VV:
+    text: "Rendered LOS Doppler equals the closed form within the stated deviation; the RIS contribution follows an independent per-cell K1 sum where the reference RIS amplitude exceeds 10 % of its maximum (away from pattern nulls); interpolation error at auto T_u far below eps_rel, growing as T_u^2; verify_interp follows it but reads low (up to the stated percentage)."
+    where: [sections/05_verification_validation.tex]
+    evidence: [test:PH-17, test:PH-18, test:PH-19, fig:F6]
+    gates: []
+
+  # ================================================================ VII Case studies
+  C-EB-WHY:
+    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; E-B setup (lab-like SIM geometry, unit-amplitude states ASSUMED, QPSK packets, Es/N0 at RX1)."
+    where: [sections/07_case_studies.tex]
+    evidence: [cite:ETSI_GS_RIS008, test:E-B, fig:F9]
+    gates: []
+  C-EB-MECH:
+    text: "E-B1/VA-5: the earliest affected sample equals to_ticks(t_sw + tau) in every step switch inside a packet and earlier samples are bitwise identical; LOS blocked: bit errors after the switch; LOS present: no bit error, EVM rises."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:VA-5, test:RT-05, fig:F9]
+    gates: []
+  C-EB-TIMING:
+    text: "E-B2 (lab-like): with the LOS present (the primary case of the study design) no semantics loses a packet; in the declared LOS-blocked sensitivity variant (shown in F9b) timed commands lose no packet while the lead exceeds the latency, asap fails once latency exceeds the guard, and tick-based untimed semantics lose most packets even without jitter; lab-arc run pending."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:E-B, test:RT-07, fig:F9]
+    gates: []
+  C-EA-SETUP:
+    text: "E-A setup: corridor, 1-D RWP, on-off RIS line, LOS partition; under the area-tied kernel the unblocked-corridor optimum gain is as generated; controllers; batch path; pre-registered hypotheses with one disclosed amendment."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:E-A, test:W2, cite:Mishra2025WCL, fig:F10]
+    gates: [H-6]
+  C-EA-RESULT:
+    text: "E-A: optimum gain (mean of per-batch dB) and tau_half with CIs; H-A1, H-A2, H-A3 supported; time scale set by lambda/v, not the mobility period."
+    where: [sections/07_case_studies.tex, sections/abstract.tex, sections/10_conclusion.tex]
+    evidence: [test:E-A, fig:F10]
+    gates: [H-6]
+  C-VA1:
+    text: "VA-1 (consistency check, not a finding): IQ path through the served engine with external controller and RX application agrees with the batch path within the stated difference (limit 0.02 dB)."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:VA-1, fig:F10]
+    gates: []
+  C-EC:
+    text: "E-C ablation (short analytic result, exact optimum): losses per alphabet and geometry as generated; lab states nearly antipodal (|d|, |m|); unequal amplitudes and ideal-design deployment cost more."
+    where: [sections/07_case_studies.tex, generated/tables/table8_ablation.tex]
+    evidence: [test:PH-24, test:PH-25, test:PH-29, fig:F11, table:tab:ablation, cite:WuZhang2020Discrete, cite:Abeywickrama2020Practical]
+    gates: []
+  C-ED:
+    text: "E-D (model-based dimensioning, not validated): required aperture range; RIS-minus-direct gap at grazing over every distance and height of F12; the 56.25 m^2 panel suffices in none of the primary map entries; the four-ray sensitivity and the experimental P.526 direct path change the count."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:PH-10, test:PH-11, test:V-FM, fig:F12]
+    gates: []
+  C-EE:
+    text: "External-process runs so far: V-CFO-3 (two processes, native ZMQ) and VA-1 (external controller and RX app); no srsRAN or GNU Radio binary run yet."
+    where: [sections/07_case_studies.tex]
+    evidence: [test:V-CFO-3, test:IO-02, test:IO-08]
     gates: []

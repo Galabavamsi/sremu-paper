@@ -1,0 +1,92 @@
+{
+  "figure": "F10",
+  "title": "E-A: gain over RIS absent vs signaling delay tau_SUI (log x) for four controllers in the blocked corridor at 1 and 2.4 GHz with the half-retention delay tau_half; IQ path vs batch path (VA-1)",
+  "content_key": "97e12dc36066ca4c184e8450b580c7beee1e2506be212d7acac09e02251bd635",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "sweeps/results/E-A/gains.csv",
+      "data_class": "SIM-sremu",
+      "provenance": {
+        "experiment": "E-A"
+      },
+      "sha256": "27c89f2dace3a4075debfec79b0bc4c03946fa4ee0cd061e0a257d85db861f00"
+    },
+    {
+      "path": "sweeps/results/E-A/retention.csv",
+      "data_class": "SIM-sremu",
+      "sha256": "8a7dc3dd6bf87098007d7c6d0c14107a52b8e063a3ae9c46e007a2fcea1e1866"
+    },
+    {
+      "path": "sweeps/results/E-A/tau_half.csv",
+      "data_class": "SIM-sremu",
+      "sha256": "8c5d16d9faabd6188c5436fd6dab60e44fbc25fd31becedb90e0622cd4ebe7bf"
+    },
+    {
+      "path": "sweeps/results/E-A/hypotheses.json",
+      "data_class": "SIM-sremu",
+      "decisions": {
+        "H-A1": "supported",
+        "H-A2": "supported",
+        "H-A3_report_f1.0G_h1_L0": "supported",
+        "H-A3_report_f1.0G_h2_L0": "supported",
+        "H-A3_report_f1.0G_h4_L0": "supported",
+        "H-A3_report_f1.0G_h6_L0": "supported",
+        "H-A3": "supported",
+        "H-A3_report_f1.0G_h4_L20": "supported",
+        "H-A3_report_f2.4G_h2_L20": "supported",
+        "H-A3_report_f2.4G_h4_L20": "supported",
+        "H-A3_report_f1.0G_h2_L10": "supported",
+        "H-A3_report_f1.0G_h2_L30": "supported",
+        "H-A3_report_f2.4G_h2_L10": "supported",
+        "H-A3_report_f2.4G_h2_L30": "supported"
+      },
+      "sha256": "522d5214471a0fdf5506498c73073d7d07c9fbed621d248c6deaf1f2d547e69f"
+    },
+    {
+      "path": "sweeps/results/E-A-IQ/va1.csv",
+      "data_class": "SIM-sremu",
+      "provenance": {
+        "experiment": "E-A-IQ"
+      },
+      "sha256": "f5707bb8c85c63828eea41fa33582ef98c23c0c5350a99744e9eb091a2685b33"
+    }
+  ],
+  "assumptions": [
+    "A1 blocked corridor: partition loss 20 dB on the LOS only (RIS hops unattenuated), h = 2 m, l = 10 m, 1-D random waypoint at 1 m/s, AP offset 0.5 m [ENG]",
+    "position-driven controllers use a 1 cm lookup grid of the scene model (oracle geometry) and a 1 ms command latency",
+    "gain = mean of 20 paired per-batch dB gains (pre-registered), Student-t 95 % CI",
+    "VA-1 rows ran on two hosts (laptop and an AWS c7i.8xlarge); powers do not depend on the host"
+  ],
+  "profile": "full",
+  "script": "figures/src/f10_signaling_delay.py",
+  "script_sha256": "8feac45c03dd389a5d16b2817b7e7cc1b5c78f9f03d0c227f34d50b1b0f447d7",
+  "outputs": {
+    "figures/out/F10.pdf": "3a5f025b30039ae47ac15312736c84301b18d9949ab781fe1e89339ee8c59a2b",
+    "figures/data/F10.csv": "f9008f4aaf4fba00a5bb0e23a68abc29b257e9737e8540782465df70194bf1e0"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:24Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1576,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  }
+}

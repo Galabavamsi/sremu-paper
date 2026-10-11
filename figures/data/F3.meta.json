@@ -1,0 +1,127 @@
+{
+  "figure": "F3",
+  "title": "(a) Fixed-aperture refinement: K1 power independent of the cell count N (far specular, auto cell model; near anomalous, po_patch) and the forced point model; (b) Tang et al. published model curves vs sremu with digitized measured points",
+  "content_key": "e7c4fe85e69f6a002750f88c5d933ee214e466f3a2b03493fc08d55dd61f59d7",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ANALYTIC",
+    "DIG",
+    "REPORTED",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ANALYTIC",
+    "DIG",
+    "REPORTED",
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "../sremu/validation/tang/results/20261010T232551Z_vtang/vtang_points.csv",
+      "data_class": "DIG",
+      "note": "published_eq9_dbm and measured_dbm are DIG (Tang 2022 Fig. 10); engine_dbm is SIM-sremu",
+      "provenance": {
+        "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
+        "sremu_dirty": true,
+        "run_dir": "validation/tang/results/20261010T232551Z_vtang",
+        "study": "V-TANG",
+        "dirty_patch_sha256": "81af3aa08ec9060d3ca69033a7a75751954410438f1c83b551f1bbd2e09f4cac",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics"
+      },
+      "sha256": "bbf25ad8b8edcb8fba3b914e991bc4ef4f09f537d3df848255e5c667d06c6fea"
+    },
+    {
+      "path": "../sremu/validation/tang/results/20261010T232551Z_vtang/meta.json",
+      "data_class": "REPORTED",
+      "note": "run metadata incl. link-budget parameters from Tang 2022 Tables III/IV",
+      "sha256": "f34e9ad742290069425760e999d95ebef013d497e54db93685f8cfa254e9c727"
+    }
+  ],
+  "assumptions": [
+    "(a) PH-04 geometry: 1 m^2 plate, 3.5 GHz, Gamma = 1, Tx at 30 deg; computed with the installed sremu at plot time",
+    "(a) near anomalous reference: continuous PO plate integral with the default obliquity sqrt(cos cos) and factor j, 200 x 200 Gauss-Legendre nodes (independent numpy, not sremu)",
+    "(b) committed V-TANG run; Tang Fig. 10 x positions snapped to the nominal 0.5 m grid by the study"
+  ],
+  "profile": "full",
+  "script": "figures/src/f03_aperture_tang.py",
+  "script_sha256": "4dab76e25cc9dcf19905d4a3f595bf3bce1b68df5d71f56ec8902647ccc39ffd",
+  "outputs": {
+    "figures/out/F3.pdf": "e403d7c839672cc4e2837ecf1bb2ecfc68272ed46aa617c374a2f47941ddabd9",
+    "figures/data/F3.csv": "cfcbfadd39d3e74abbef0e7c2528e0abee7603a95a4521ed8b3d395166104c90"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:35Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1573,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  },
+  "panel_a_values": {
+    "N": [
+      16.0,
+      64.0,
+      256.0,
+      1024.0,
+      4096.0,
+      16384.0
+    ],
+    "far_auto": [
+      -0.0051052545126992754,
+      -0.005106108300054757,
+      -0.005106108300054757,
+      -0.0050875281105504655,
+      -0.005106108300054757,
+      -0.00511075673432515
+    ],
+    "far_auto_model": [
+      "po_patch",
+      "po_patch",
+      "po_patch",
+      "point",
+      "point",
+      "point"
+    ],
+    "far_ref_db": [
+      -115.27478447308417
+    ],
+    "near_ref_db": [
+      -88.12997950101484
+    ],
+    "near_po_patch": [
+      0.03556800286429507,
+      0.03556800286429507,
+      0.031247715483146976,
+      0.031247715483146976,
+      0.031247715483146976,
+      0.031247715483146976
+    ],
+    "near_point": [
+      29.680568530277043,
+      27.925183967737794,
+      2.7655623634918953,
+      0.5264047064452058,
+      0.12617242922540584,
+      0.031247715483146976
+    ],
+    "pitch_over_lambda": [
+      2.9186858329838303,
+      1.4593429164919152,
+      0.7296714582459576,
+      0.3648357291229788,
+      0.1824178645614894,
+      0.0912089322807447
+    ]
+  }
+}

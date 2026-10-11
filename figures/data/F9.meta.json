@@ -1,0 +1,83 @@
+{
+  "figure": "F9",
+  "title": "E-B: (a) per-symbol EVM around an intra-frame switch; (b) PER vs latency jitter for timed / asap / tick-based command semantics (lab-like SIM geometry; lab-arc panels pending)",
+  "content_key": "836b3e1b5a8478ae8bedd94cb1971477d52c616fb0d4096bee34c482c9d4d9f4",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ASSUMED",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ASSUMED",
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "sweeps/results/E-B1/eb1_traces.csv",
+      "data_class": "SIM-sremu",
+      "provenance": {
+        "experiment": "E-B1"
+      },
+      "sha256": "73f94b84e2ed02284ea2b89d6c4b2481fa67aaa74ae483aa15d61eeac3136378"
+    },
+    {
+      "path": "sweeps/results/E-B1/eb1_points.csv",
+      "data_class": "SIM-sremu",
+      "sha256": "106f2d76ae7b413994e3433ba78828fde20873b0b374c000b717d64a121d37ef"
+    },
+    {
+      "path": "sweeps/results/E-B1/va5.json",
+      "data_class": "SIM-sremu",
+      "sha256": "4058649d050b443fdf0cea9a7a57171894c485982c02d3b46cb26b3576467c66"
+    },
+    {
+      "path": "sweeps/results/E-B2/eb2_per.csv",
+      "data_class": "SIM-sremu",
+      "provenance": {
+        "experiment": "E-B2"
+      },
+      "sha256": "311ece39e6c620365a13ab8d1918f35bfc1461bf4a187dd1869c369819ebe154"
+    },
+    {
+      "path": "sweeps/results/E-B2/meta.json",
+      "data_class": "ASSUMED",
+      "note": "lab |Gamma| ASSUMED",
+      "sha256": "582e7e2f1f8ab58e8ef75e2191dfc5f27c24241dccfc5b90ca9bed2378b0b69a"
+    }
+  ],
+  "assumptions": [
+    "lab-like SIM geometry (scenarios/lab_like_A.yaml), not the laboratory's",
+    "lab state amplitudes |Gamma| = 1 ASSUMED; complex-linear transition path [ENG]",
+    "TX power set for Es/N0 = 25 dB at RX1 under its own optimum (physical noise, NF 7 dB)",
+    "lab-arc panels PENDING (AWS run); this figure shows the lab-like panels only"
+  ],
+  "profile": "full",
+  "script": "figures/src/f09_intraframe.py",
+  "script_sha256": "e6a8c3f64968dcae84ffc630d268651f76e9b8ef8e9219d19bdd44aa2458b253",
+  "outputs": {
+    "figures/out/F9.pdf": "377e113d63eabdc8f3d2456fc6711db4fa1e857939e38d6e7732be671dc780cf",
+    "figures/data/F9.csv": "1555b79e9eabb67c3390a0266db42aaf6d8fc84bba9da761e328ac06efad2148"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:21Z",
+  "print": {
+    "registry_width": "double",
+    "target_width_in": 7.16,
+    "pdf_width_in": 7.1572,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  },
+  "panel_a_smoothing_symbols": 8,
+  "va5_pass": true,
+  "panel_a_switch_symbol": 143.99999999999653,
+  "pending": "lab-arc panels (scenarios/studies/lab_arc.yaml), AWS"
+}

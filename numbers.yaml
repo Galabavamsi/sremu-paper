@@ -40,7 +40,7 @@ macros:
     max_chars: 2
   - macro: numLabFreqGHz
     kind: number
-    description: Carrier frequency of the digitized laboratory map (ANTS Fig. 4(b) dataset, DIG)
+    description: Carrier frequency of the digitized laboratory map (laboratory measurement collected by the authors, DIG)
     unit: GHz
     source: {type: data, id: "V-LAB-dataset"}
     value: "3.5"
@@ -77,17 +77,6 @@ macros:
     description: Verb phrase completing "a pre-registered comparison with digitized lab data ..." (C1-C3 outcome and power label)
     source: {type: study, id: "V-LAB"}
     max_chars: 72
-  - macro: numCfoSlopeLegacy
-    kind: number
-    description: CFO estimate slope reproduced by the legacy truncation adapter
-    source: {type: study, id: "V-CFO-2"}
-    max_chars: 6
-  - macro: numCfoSlopeFixed
-    kind: number
-    description: CFO estimate slope of the new engine across two processes
-    source: {type: study, id: "V-CFO-3"}
-    max_chars: 6
-
   # ------------------------------------------------------------------ wall-clock behaviour
   - macro: txtPacedPlatform
     kind: text
@@ -106,10 +95,37 @@ macros:
     source: {type: benchmark, id: "B3"}
     max_chars: 5
 
+  # E-F API latency (DESIGN 11 E-F): PENDING (AWS; a transport latency fix is pending and the
+  # latency will be re-measured). Placeholders until the benchmark results exist.
+  - macro: numApiSendPfiftyUs
+    kind: number
+    description: "PENDING (AWS): in-process send/recv call latency p50, 1000-sample buffers"
+    unit: "us"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numApiSendPninetynineUs
+    kind: number
+    description: "PENDING (AWS): in-process send/recv call latency p99, 1000-sample buffers"
+    unit: "us"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numZmqRttPfiftyUs
+    kind: number
+    description: "PENDING (AWS): native-ZMQ two-process round trip p50"
+    unit: "us"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numApiThroughputMsps
+    kind: number
+    description: "PENDING (AWS): sustained API throughput"
+    unit: "MS/s"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 5
+
   # ------------------------------------------------------------------ case studies
   - macro: txtEBResult
     kind: text
-    description: E-B headline phrase (intra-frame switch; timed vs asap vs legacy semantics)
+    description: E-B headline phrase (RIS switches between packets; timed vs tick-based untimed semantics; lab-like SIM geometry)
     source: {type: experiment, id: "E-B"}
     max_chars: 84
   - macro: txtEAResult
@@ -117,6 +133,1152 @@ macros:
     description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
     source: {type: experiment, id: "E-A"}
     max_chars: 84
+
+  # ================================================================== Sections V and VII
+  # Filled by tools/gen_results.py from committed result files (study/experiment/test/
+  # figure sources). txtLab* lock/deposit macros, txtEBArcResult and the B3 macros above
+  # stay placeholders until their inputs exist (H-6, AWS).
+  - macro: numCiPct
+    kind: number
+    description: "Confidence level of the reported intervals (Student-t, Clopper-Pearson, bootstrap)"
+    unit: "%"
+    source: {type: definition, id: "DESIGN-10.9/11-CI-95"}
+    value: "95"
+    max_chars: 2
+  - macro: numCfoGateFactor
+    kind: number
+    description: "Pre-set V-CFO-4 / ST-05 limit: RMSE <= this factor x CRB at every CFO point"
+    source: {type: definition, id: "DESIGN-10.10-V-CFO-4"}
+    value: "1.5"
+    max_chars: 3
+  - macro: numBerMinErrors
+    kind: number
+    description: "E-F stopping rule: at least this many bit errors per point"
+    source: {type: definition, id: "DESIGN-11-E-F"}
+    value: "200"
+    max_chars: 3
+  - macro: numBerMaxBits
+    kind: number
+    description: "E-F stopping rule: or this many data bits per point"
+    source: {type: definition, id: "DESIGN-11-E-F"}
+    value: "\\ensuremath{2\\times10^{7}}"
+    max_chars: 8
+  - macro: numBerPilots
+    kind: number
+    description: "Pilot symbols of the LS channel estimate of E-F"
+    source: {type: definition, id: "DESIGN-11-E-F"}
+    value: "64"
+    max_chars: 2
+  - macro: numBerStCiPct
+    kind: number
+    description: "Confidence level of the ST-04 Clopper-Pearson intervals"
+    unit: "%"
+    source: {type: definition, id: "DESIGN-10.5-ST-04"}
+    value: "99"
+    max_chars: 2
+  - macro: numFmLinkKm
+    kind: number
+    description: "E-D link length"
+    unit: "km"
+    source: {type: definition, id: "DESIGN-11-E-D"}
+    value: "52"
+    max_chars: 2
+  - macro: numFmFreqMHz
+    kind: number
+    description: "E-D carrier frequency"
+    unit: "MHz"
+    source: {type: definition, id: "DESIGN-11-E-D"}
+    value: "100"
+    max_chars: 3
+  - macro: numOracleIdsTotal
+    kind: number
+    description: "Number of analytic spec ids (PH except the experimental PH-12, RT, IO) in Table IV"
+    source: {type: test, id: "junit:ids(PH,RT,IO)"}
+    max_chars: 3
+  - macro: numOracleTests
+    kind: number
+    description: "Implementation test cases carrying a PH/RT/IO id in the pinned junit"
+    source: {type: test, id: "junit:tests(PH,RT,IO)"}
+    max_chars: 6
+  - macro: numStatIds
+    kind: number
+    description: "ST ids passing in the pinned junit"
+    source: {type: test, id: "junit:count(ST)"}
+    max_chars: 2
+  - macro: numGoldenIds
+    kind: number
+    description: "G ids (MATLAB goldens) passing in the pinned junit"
+    source: {type: test, id: "junit:count(G)"}
+    max_chars: 2
+  - macro: numJunitPassed
+    kind: number
+    description: "Test cases passed in the pinned junit"
+    source: {type: test, id: "junit:passed"}
+    max_chars: 6
+  - macro: numJunitSkipped
+    kind: number
+    description: "Test cases skipped in the pinned junit"
+    source: {type: test, id: "junit:skipped"}
+    max_chars: 3
+  - macro: numRefineNmin
+    kind: number
+    description: "Smallest cell count of the F3(a) refinement"
+    source: {type: figure, id: "F3"}
+    max_chars: 3
+  - macro: numRefineNmax
+    kind: number
+    description: "Largest cell count of the F3(a) refinement"
+    source: {type: figure, id: "F3"}
+    max_chars: 7
+  - macro: numRefineFarMaxDevDb
+    kind: number
+    description: "Max |K1 auto - far-field closed form| over N, far specular (bound, rounded up)"
+    unit: "dB"
+    source: {type: figure, id: "F3"}
+    max_chars: 5
+  - macro: numRefineNearMaxDevDb
+    kind: number
+    description: "Max |K1 po_patch - continuous PO integral| over N, near anomalous (bound, rounded up)"
+    unit: "dB"
+    source: {type: figure, id: "F3"}
+    max_chars: 5
+  - macro: numRefinePointCoarseDb
+    kind: number
+    description: "Forced point model minus PO integral at the coarsest N, near anomalous"
+    unit: "dB"
+    source: {type: figure, id: "F3"}
+    max_chars: 3
+  - macro: numRefinePointFirstAutoN
+    kind: number
+    description: "Smallest N with pitch <= lambda/2"
+    source: {type: figure, id: "F3"}
+    max_chars: 6
+  - macro: numRefinePointFirstAutoDb
+    kind: number
+    description: "Point model minus PO integral at that N, near anomalous"
+    unit: "dB"
+    source: {type: figure, id: "F3"}
+    max_chars: 4
+  - macro: numLabCells
+    kind: number
+    description: "Cells of the digitized laboratory map"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numLabTrainCells
+    kind: number
+    description: "Training cells (three rings)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numLabTestCells
+    kind: number
+    description: "Test cells (two rings)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numLabSigDigMinDb
+    kind: number
+    description: "Smallest per-cell digitization uncertainty"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabSigDigMaxDb
+    kind: number
+    description: "Largest per-cell digitization uncertainty"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabDraws
+    kind: number
+    description: "Prior draws K of the primary analysis"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabBootstrap
+    kind: number
+    description: "Paired-bootstrap resamples of the primary analysis"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 7
+  - macro: numLabDecoys
+    kind: number
+    description: "Decoy data sets of the power analysis"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabDecoyDetections
+    kind: number
+    description: "Decoys in which C2 held"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabDecoyCiHighPct
+    kind: number
+    description: "Upper 95 % limit of the decoy C2 detection rate"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 4
+  - macro: numLabDecoyConeDetections
+    kind: number
+    description: "Decoys (truth M2, primary sigma_rep) in which C1 held; reported with the underpowered statement (protocol paper_wording)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabDecoyCthreeDetections
+    kind: number
+    description: "Decoys (truth M2, primary sigma_rep) in which C3 held"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabUnderpoweredRate
+    kind: number
+    description: "Detection-rate threshold below which the study is underpowered (protocol)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabConeBiasMaxDb
+    kind: number
+    description: "C1 threshold on the median |bias| (protocol)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabConeMarginDb
+    kind: number
+    description: "C1 margin of RMSE(M2) over RMSE(M0n) (protocol)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabCtwoMinDb
+    kind: number
+    description: "C2 threshold on the median Delta RMSE (protocol)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabCtwoCiFracPct
+    kind: number
+    description: "C2 minimum fraction of draws whose bootstrap CI excludes zero (protocol)"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabCtwoRhoMin
+    kind: number
+    description: "C2 minimum Spearman rho (protocol)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabPriorPosCm
+    kind: number
+    description: "Half-width of the prior on the measurement positions (protocol)"
+    unit: "cm"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numQuantLoPct
+    kind: number
+    description: "Lower reported quantile of the prior-draw distributions (protocol)"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numQuantHiPct
+    kind: number
+    description: "Upper reported quantile of the prior-draw distributions (protocol)"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 2
+  - macro: numLabRmseMzero
+    kind: number
+    description: "Median test RMSE of M0 (LOS only)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabRmseMzeroN
+    kind: number
+    description: "Median test RMSE of M0n (log-distance)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabRmseMtwo
+    kind: number
+    description: "Median test RMSE of M2 (lab configuration)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabRmseMtwoLo
+    kind: number
+    description: "5 % quantile of the M2 test RMSE over draws"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabRmseMtwoHi
+    kind: number
+    description: "95 % quantile of the M2 test RMSE over draws"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 5
+  - macro: numLabBiasMtwo
+    kind: number
+    description: "Median test bias of M2 (measured - predicted)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabDeltaRmse
+    kind: number
+    description: "Median Delta RMSE = RMSE(M0) - RMSE(M2)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabCiExcludesPct
+    kind: number
+    description: "Draws whose paired-bootstrap CI of Delta RMSE excludes zero"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 4
+  - macro: numLabSpearman
+    kind: number
+    description: "Spearman rho of ring-mean-removed residuals (C2)"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabDeltaRmseMone
+    kind: number
+    description: "Median Delta RMSE = RMSE(M1) - RMSE(M2) (C3)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabCthreeCiExcludesPct
+    kind: number
+    description: "C3: draws whose CI excludes zero"
+    unit: "%"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 4
+  - macro: numLabLambdaMm
+    kind: number
+    description: "Wavelength at the laboratory carrier"
+    unit: "mm"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 3
+  - macro: numLabResidualOutlierDb
+    kind: number
+    description: "Largest |residual| of M2 (the colour-scale-pinned cell)"
+    unit: "dB"
+    source: {type: study, id: "V-LAB"}
+    max_chars: 6
+  - macro: numLabDiagSingleFacts
+    kind: number
+    description: "Single extra lab facts tried by the diagnostic (not part of the protocol)"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 2
+  - macro: numLabDiagPosMm
+    kind: number
+    description: "Position tolerance of the best diagnostic fact"
+    unit: "mm"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 2
+  - macro: numLabDiagPosFiveMm
+    kind: number
+    description: "Position tolerance of the next diagnostic fact"
+    unit: "mm"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 2
+  - macro: numLabDiagRate
+    kind: number
+    description: "Decoy C2 detection rate with exact tile geometry and positions to +-1 mm"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 4
+  - macro: numLabDiagRateLo
+    kind: number
+    description: "Lower 95 % limit of that rate"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 4
+  - macro: numLabDiagRateHi
+    kind: number
+    description: "Upper 95 % limit of that rate"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 4
+  - macro: numLabDiagDecoys
+    kind: number
+    description: "Decoys of that diagnostic run"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 3
+  - macro: numLabDiagGeomRate
+    kind: number
+    description: "Decoy C2 detection rate with every geometric quantity known exactly"
+    source: {type: study, id: "V-LAB-diagnostic"}
+    max_chars: 4
+  - macro: txtLabLockCommit
+    kind: text
+    description: "Commit that locked the V-LAB protocol hash (PENDING lead input; H-6)"
+    source: {type: study, id: "V-LAB-lock"}
+    max_chars: 12
+  - macro: txtLabLockDate
+    kind: text
+    description: "Date of that commit (PENDING lead input; H-6)"
+    source: {type: study, id: "V-LAB-lock"}
+    max_chars: 12
+  - macro: txtLabDepositDoi
+    kind: text
+    description: "DOI of the Zenodo/OSF deposit of the protocol (PENDING, human gate H-6)"
+    source: {type: study, id: "V-LAB-deposit"}
+    max_chars: 30
+  - macro: numCfoSweepPoints
+    kind: number
+    description: "CFO values of the noise-free sweep"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 2
+  - macro: numCfoSweepMaxHz
+    kind: number
+    description: "Largest |CFO| of the sweep"
+    unit: "Hz"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 5
+  - macro: numCfoBurstSamples
+    kind: number
+    description: "Samples of the BPSK test burst"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 5
+  - macro: numCfoRateSps
+    kind: number
+    description: "Sample rate of the CFO study"
+    unit: "S/s"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 5
+  - macro: numCfoLsMaxErrHz
+    kind: number
+    description: "Max |error| of the LS estimator, noise off"
+    unit: "Hz"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 12
+  - macro: numCfoLagMaxErrHz
+    kind: number
+    description: "Max |error| of the lag-1 estimator, noise off"
+    unit: "Hz"
+    source: {type: study, id: "V-CFO-1"}
+    max_chars: 12
+  - macro: numCfoTickMs
+    kind: number
+    description: "Tick of the generic integer-samples-per-tick pitfall"
+    unit: "ms"
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 2
+  - macro: numCfoSamplesPerTick
+    kind: number
+    description: "Samples that one tick needs at the study rate"
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 5
+  - macro: numCfoSamplesDelivered
+    kind: number
+    description: "Whole samples per tick delivered by the pitfall"
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 2
+  - macro: numCfoTickScale
+    kind: number
+    description: "Fitted slope of the LS estimate under the pitfall"
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 6
+  - macro: numCfoTickScalePct
+    kind: number
+    description: "Relative frequency error of the pitfall"
+    unit: "%"
+    source: {type: study, id: "V-CFO-2"}
+    max_chars: 4
+  - macro: numCfoHeaderSamples
+    kind: number
+    description: "Header samples used by the estimators (V-CFO-4)"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 5
+  - macro: numCfoSnrLo
+    kind: number
+    description: "Lowest per-sample SNR of V-CFO-4"
+    unit: "dB"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 2
+  - macro: numCfoSnrMid
+    kind: number
+    description: "Middle per-sample SNR of V-CFO-4"
+    unit: "dB"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 2
+  - macro: numCfoSnrHi
+    kind: number
+    description: "Highest per-sample SNR of V-CFO-4"
+    unit: "dB"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 2
+  - macro: numCfoPoints
+    kind: number
+    description: "CFO points per SNR of V-CFO-4"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 2
+  - macro: numCfoTrials
+    kind: number
+    description: "Keyed trials per CFO point and SNR"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 4
+  - macro: numCfoRatioZero
+    kind: number
+    description: "Pooled periodogram RMSE / CRB at the lowest SNR"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 5
+  - macro: numCfoRatioTen
+    kind: number
+    description: "Pooled periodogram RMSE / CRB at the middle SNR"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 5
+  - macro: numCfoRatioTwenty
+    kind: number
+    description: "Pooled periodogram RMSE / CRB at the highest SNR"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 5
+  - macro: numCfoRatioMaxPoint
+    kind: number
+    description: "Worst single-point periodogram RMSE / CRB at the gated SNRs"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 5
+  - macro: numCfoRatioTwentySe
+    kind: number
+    description: "Distance of the pooled RMSE / CRB at the highest SNR below 1, in standard errors of an efficient estimator (1/sqrt(2n))"
+    source: {type: study, id: "V-CFO-4"}
+    max_chars: 4
+  - macro: numBerPoints
+    kind: number
+    description: "(modulation, Eb/N0) points of the E-F BER run"
+    source: {type: experiment, id: "E-F"}
+    max_chars: 3
+  - macro: numBerLsOutside
+    kind: number
+    description: "Points at which theory falls outside the LS-pilot interval"
+    source: {type: experiment, id: "E-F"}
+    max_chars: 3
+  - macro: numBerLsOutsideMaxEbnoDb
+    kind: number
+    description: "Largest Eb/N0 of those points"
+    unit: "dB"
+    source: {type: experiment, id: "E-F"}
+    max_chars: 3
+  - macro: numBerEbnoMin
+    kind: number
+    description: "Smallest Eb/N0 of the E-F run"
+    unit: "dB"
+    source: {type: experiment, id: "E-F"}
+    max_chars: 3
+  - macro: numBerEbnoMax
+    kind: number
+    description: "Largest Eb/N0 of the E-F run"
+    unit: "dB"
+    source: {type: experiment, id: "E-F"}
+    max_chars: 3
+  - macro: numDopVms
+    kind: number
+    description: "Receiver speed of the F6 scene"
+    unit: "m/s"
+    source: {type: figure, id: "F6"}
+    max_chars: 3
+  - macro: numDopFcGHz
+    kind: number
+    description: "Carrier of the F6 scene"
+    unit: "GHz"
+    source: {type: figure, id: "F6"}
+    max_chars: 4
+  - macro: numDopLosHz
+    kind: number
+    description: "Closed-form LOS Doppler shift v f_c / c"
+    unit: "Hz"
+    source: {type: figure, id: "F6"}
+    max_chars: 8
+  - macro: numDopLosDevHz
+    kind: number
+    description: "Max |rendered - closed form| of the LOS instantaneous frequency"
+    unit: "Hz"
+    source: {type: figure, id: "F6"}
+    max_chars: 10
+  - macro: numDopRisDevHz
+    kind: number
+    description: "Max |rendered - closed form| of the RIS instantaneous frequency away from pattern nulls"
+    unit: "Hz"
+    source: {type: figure, id: "F6"}
+    max_chars: 5
+  - macro: numDopRisMedHz
+    kind: number
+    description: "Median of the same deviation"
+    unit: "Hz"
+    source: {type: figure, id: "F6"}
+    max_chars: 5
+  - macro: numDopRisNullPct
+    kind: number
+    description: "Null threshold: |h_RIS| above this fraction of its maximum"
+    unit: "%"
+    source: {type: figure, id: "F6"}
+    max_chars: 3
+  - macro: numDopRisKeptPct
+    kind: number
+    description: "Samples above the null threshold"
+    unit: "%"
+    source: {type: figure, id: "F6"}
+    max_chars: 3
+  - macro: numDopTuAutoUs
+    kind: number
+    description: "Automatic snapshot period T_u of the F6 scene"
+    unit: "us"
+    source: {type: figure, id: "F6"}
+    max_chars: 5
+  - macro: numDopErrAuto
+    kind: number
+    description: "Max relative interpolation error at the automatic T_u (vs exact channel)"
+    source: {type: figure, id: "F6"}
+    max_chars: 10
+  - macro: numDopViAuto
+    kind: number
+    description: "verify_interp estimate at the automatic T_u"
+    source: {type: figure, id: "F6"}
+    max_chars: 10
+  - macro: numDopTuMaxMs
+    kind: number
+    description: "Largest T_u of the F6(b) sweep"
+    unit: "ms"
+    source: {type: figure, id: "F6"}
+    max_chars: 4
+  - macro: numDopErrMax
+    kind: number
+    description: "Max relative interpolation error at that T_u"
+    source: {type: figure, id: "F6"}
+    max_chars: 10
+  - macro: numDopViMaxLowPct
+    kind: number
+    description: "Largest shortfall of the verify_interp estimate below the measured error over the F6(b) sweep"
+    unit: "%"
+    source: {type: figure, id: "F6"}
+    max_chars: 3
+  - macro: numEbFcGHz
+    kind: number
+    description: "Carrier of the E-B scene (scenarios/lab_like_A.yaml)"
+    unit: "GHz"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 4
+  - macro: numEbRateMsps
+    kind: number
+    description: "Sample rate of the E-B waveform"
+    unit: "MS/s"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 3
+  - macro: numEbSps
+    kind: number
+    description: "Samples per QPSK symbol"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 2
+  - macro: numEbPreamble
+    kind: number
+    description: "Preamble symbols per packet"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 3
+  - macro: numEbPayload
+    kind: number
+    description: "Payload symbols per packet"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 4
+  - macro: numEbPacketMs
+    kind: number
+    description: "Packet duration T_p"
+    unit: "ms"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 6
+  - macro: numEbEsnoDb
+    kind: number
+    description: "Es/N0 at RX1 under its own optimum"
+    unit: "dB"
+    source: {type: experiment, id: "E-B"}
+    max_chars: 3
+  - macro: numVaFivePass
+    kind: number
+    description: "Step switches inside a packet that pass VA-5"
+    source: {type: experiment, id: "VA-5"}
+    max_chars: 3
+  - macro: numVaFiveTotal
+    kind: number
+    description: "Step switches inside a packet (E-B1)"
+    source: {type: experiment, id: "VA-5"}
+    max_chars: 3
+  - macro: numEbBlockedChangeDb
+    kind: number
+    description: "Change of RX1's channel by the switch, LOS blocked"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbBlockedRotDeg
+    kind: number
+    description: "|Rotation| of RX1's channel by the switch, LOS blocked"
+    unit: "deg"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 3
+  - macro: numEbRefEvmDb
+    kind: number
+    description: "Payload EVM without a switch, LOS blocked"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbOneEvmDb
+    kind: number
+    description: "Payload EVM with a step switch at T_p/4, LOS blocked"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbOneErrors
+    kind: number
+    description: "Payload bit errors with a step switch at T_p/4, LOS blocked"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 4
+  - macro: numEbOneBits
+    kind: number
+    description: "Payload bits per packet"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 5
+  - macro: numEbTransLongUs
+    kind: number
+    description: "Longest linear transition of E-B1"
+    unit: "us"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 4
+  - macro: numEbLinErrors
+    kind: number
+    description: "Payload bit errors with that linear transition at T_p/4, LOS blocked"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 4
+  - macro: numEbLosChangeDb
+    kind: number
+    description: "Change of RX1's channel by the switch, LOS present"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbLosRotDeg
+    kind: number
+    description: "|Rotation| of RX1's channel by the switch, LOS present"
+    unit: "deg"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 3
+  - macro: numEbLosEvmDb
+    kind: number
+    description: "Payload EVM with a step switch at T_p/4, LOS present"
+    unit: "dB"
+    source: {type: experiment, id: "E-B1"}
+    max_chars: 6
+  - macro: numEbPackets
+    kind: number
+    description: "Packets per E-B2 point"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 5
+  - macro: numEbGuardMs
+    kind: number
+    description: "Guard of the F9(b) slice"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 4
+  - macro: numEbLatencyMs
+    kind: number
+    description: "Fixed part of the command latency"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 4
+  - macro: numEbLeadsMs
+    kind: text
+    description: "Leads of the timed commands"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 14
+  - macro: numEbLeadMinMs
+    kind: number
+    description: "Shortest lead"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 4
+  - macro: numEbLeadMaxMs
+    kind: number
+    description: "Longest lead"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 4
+  - macro: numEbJitterMaxMs
+    kind: number
+    description: "Largest latency jitter J"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbJitterOneMs
+    kind: number
+    description: "The jitter value quoted for the asap and short-lead failures"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbTickMs
+    kind: number
+    description: "Tick of the tick-based untimed semantics"
+    unit: "ms"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbPerUpperPct
+    kind: number
+    description: "Clopper-Pearson upper limit of PER = 0 (2000 packets)"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 5
+  - macro: numEbTimedFivePer
+    kind: number
+    description: "PER of timed commands with the longest lead at the largest jitter"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbTimedHalfPerOnePct
+    kind: number
+    description: "PER of timed commands, shortest lead, J = 1 ms, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbTimedTwoPerThreePct
+    kind: number
+    description: "PER of timed commands, 2 ms lead, J = 3 ms, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbAsapPerOnePct
+    kind: number
+    description: "PER of asap commands at J = 1 ms, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbTickPerZeroPct
+    kind: number
+    description: "PER of tick-based semantics without jitter, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbTickPerMaxPct
+    kind: number
+    description: "Largest PER of tick-based semantics, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: numEbLosPerMaxPct
+    kind: number
+    description: "Largest PER of any semantics with the LOS present (lab alphabet)"
+    unit: "%"
+    source: {type: experiment, id: "E-B2"}
+    max_chars: 3
+  - macro: txtEBArcResult
+    kind: text
+    description: "E-B result on the lab-arc geometry (PENDING: AWS run)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 84
+  - macro: numEaLengthM
+    kind: number
+    description: "Corridor length l"
+    unit: "m"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaApOffsetM
+    kind: number
+    description: "Offset of the access point from the user line (documented V-WCL deviation)"
+    unit: "m"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaSpeed
+    kind: number
+    description: "Random-waypoint speed v"
+    unit: "m/s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaHeightM
+    kind: number
+    description: "RIS line distance h of the primary geometry"
+    unit: "m"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 2
+  - macro: numEaCellsOne
+    kind: number
+    description: "RIS cells at the lower carrier"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaCellsTwo
+    kind: number
+    description: "RIS cells at the higher carrier"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaFcOneGHz
+    kind: number
+    description: "Lower E-A carrier"
+    unit: "GHz"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaFcTwoGHz
+    kind: number
+    description: "Higher E-A carrier"
+    unit: "GHz"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaLossDb
+    kind: number
+    description: "Partition loss on the LOS (A1)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaBatches
+    kind: number
+    description: "Batches per E-A point"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaPeriods
+    kind: number
+    description: "Mean movement periods per batch"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaGainAzero
+    kind: number
+    description: "Instantaneous-optimum gain over RIS absent, unblocked corridor (A0, h = 2 m), under the area-tied kernel"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainOpt
+    kind: number
+    description: "Instantaneous-optimum gain over RIS absent, A1, lower carrier (mean of per-batch dB)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainOptLo
+    kind: number
+    description: "Lower 95 % limit of that gain"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainOptHi
+    kind: number
+    description: "Upper 95 % limit of that gain"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainOptTwo
+    kind: number
+    description: "Instantaneous-optimum gain, A1, higher carrier (mean of per-batch dB)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainStale
+    kind: number
+    description: "Gain of the stale optimum, A1, lower carrier"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainUrap
+    kind: number
+    description: "Gain of URAP at tau_SUI = 1 s, A1, lower carrier"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainBandit
+    kind: number
+    description: "Gain of the probe bandit at tau_SUI = 1 s, A1, lower carrier"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaGainWclFast
+    kind: number
+    description: "Gain of the heuristic at the shortest tau_SUI, A1, lower carrier"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaTauHalf
+    kind: number
+    description: "tau_half of the exact optimum, A1, lower carrier (H-A1)"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaTauHalfLo
+    kind: number
+    description: "Lower 95 % limit of tau_half"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaTauHalfHi
+    kind: number
+    description: "Upper 95 % limit of tau_half"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaPeriodOverTau
+    kind: number
+    description: "Mean movement period / tau_half"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaTauHalfTwo
+    kind: number
+    description: "tau_half at the higher carrier"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaRatio
+    kind: number
+    description: "tau_half ratio higher/lower carrier (H-A2)"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaRatioLo
+    kind: number
+    description: "Lower 95 % limit of the ratio"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaRatioHi
+    kind: number
+    description: "Upper 95 % limit of the ratio"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
+  - macro: numEaRatioPred
+    kind: number
+    description: "Predicted ratio (wavelength ratio)"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaTauOverLambdaV
+    kind: number
+    description: "tau_half / (lambda / v) at the lower carrier"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaTauBanditMinS
+    kind: number
+    description: "Smallest tau_SUI of the H-A3 comparison"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaBanditMinDb
+    kind: number
+    description: "Smallest bandit-minus-URAP gain over the H-A3 delays"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaBanditMaxDb
+    kind: number
+    description: "Largest bandit-minus-URAP gain over the H-A3 delays"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numVaOneRows
+    kind: number
+    description: "Rows of the VA-1 IQ consistency subset"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 2
+  - macro: numVaOneDurS
+    kind: number
+    description: "Duration of each VA-1 run"
+    unit: "s"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 5
+  - macro: numVaOneMaxDiffDb
+    kind: number
+    description: "Max |IQ - batch| over the VA-1 rows (rounded up)"
+    unit: "dB"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 6
+  - macro: numVaOneTolDb
+    kind: number
+    description: "VA-1 acceptance limit (pre-registered)"
+    unit: "dB"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 5
+  - macro: numEcOneBitMin
+    kind: number
+    description: "Smallest 1-bit loss over the four settings"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 4
+  - macro: numEcOneBitMax
+    kind: number
+    description: "Largest 1-bit loss over the four settings"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 4
+  - macro: numEcOneBitEta
+    kind: number
+    description: "Large-N closed-form loss of the ideal 1-bit alphabet (magnitude)"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 6
+  - macro: numEcAbsD
+    kind: number
+    description: "|d| of the lab states (Gamma = m + d s)"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 6
+  - macro: numEcAbsM
+    kind: number
+    description: "|m| of the lab states"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 6
+  - macro: numEcLabVsOneBitMaxDb
+    kind: number
+    description: "Max |lab-state loss - ideal 1-bit loss| over the settings (rounded up)"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 5
+  - macro: numEcHalfMaxDb
+    kind: number
+    description: "Largest loss with |Gamma_2| = 0.5"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 4
+  - macro: numEcEffExtraDb
+    kind: number
+    description: "Mean extra loss of efficiency 0.5 over the lab states"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 4
+  - macro: numEcDesignPenaltyMinDb
+    kind: number
+    description: "Smallest extra loss of an ideal design deployed on the lab states"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 5
+  - macro: numEcDesignPenaltyMaxDb
+    kind: number
+    description: "Largest extra loss of an ideal design deployed on the lab states"
+    unit: "dB"
+    source: {type: experiment, id: "E-C"}
+    max_chars: 5
+  - macro: numFmAreqMin
+    kind: number
+    description: "Smallest required aperture, primary rows of F12"
+    unit: "m^2"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 6
+  - macro: numFmAreqMax
+    kind: number
+    description: "Largest required aperture, primary rows of F12"
+    unit: "m^2"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 7
+  - macro: numFmPanelMtwo
+    kind: number
+    description: "Aperture of the 30 x 30 x 0.25 m panel"
+    unit: "m^2"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 6
+  - macro: numFmPrimaryEntries
+    kind: number
+    description: "Map entries with the two-ray + knife-edge direct path"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 6
+  - macro: numFmPrimarySufficient
+    kind: number
+    description: "Of those, entries where the panel suffices"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 5
+  - macro: numFmPfiveEntries
+    kind: number
+    description: "Map entries with the experimental P.526 + knife-edge direct path"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 6
+  - macro: numFmPfiveSufficient
+    kind: number
+    description: "Of those, entries where the panel suffices"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 5
+  - macro: numFmFourRaySufficient
+    kind: number
+    description: "Entries (same count as the primary rows) where the panel suffices with the four-ray knife-edge direct path (model-form sensitivity row)"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 5
+  - macro: numFmGapMinDb
+    kind: number
+    description: "Direct minus RIS path at grazing (nu = 0), every d2 and h_r of Fig. 12, primary lateral rows with ground on the RIS hops (min)"
+    unit: "dB"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 5
+  - macro: numFmGapMaxDb
+    kind: number
+    description: "Same, max"
+    unit: "dB"
+    source: {type: experiment, id: "E-D"}
+    max_chars: 5
 
   # ------------------------------------------------------------------ sremu code (read at build time)
   # Constants and defaults of the committed sremu code, read from the installed (final build:

@@ -1,0 +1,89 @@
+{
+  "figure": "F6",
+  "title": "(a) Instantaneous frequency of the LOS and RIS paths through the engine vs the closed forms; (b) interpolation error vs snapshot period T_u, measured against a per-sample exact channel and estimated by verify_interp",
+  "content_key": "16d1c66d7cc6af8f1b89fde40be9928d3bf35caeada033022246e533d899663c",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ANALYTIC",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ANALYTIC",
+    "SIM-sremu"
+  ],
+  "inputs": [],
+  "assumptions": [
+    "SIM geometry of the PH-17 test (T9) built with sremu's physics model; panel 12 x 12 cells of 41.7 mm at (25, 10, 0) m; state 0 (Gamma = 1) everywhere",
+    "noise off; DC tone with a declared 1 Hz band (integer delay); numpy_ref backend",
+    "RIS contribution = run with the panel minus run without it at the same T_u",
+    "(b) larger T_u through the policy's error target with t_u_max raised to 0.1 s (this figure only; the shipped cap is 10 ms)"
+  ],
+  "profile": "full",
+  "script": "figures/src/f06_doppler.py",
+  "script_sha256": "3fef9beec4545dfcbbb3ba3e12579040043a5b5acefece74a10e7ad3d2ce4383",
+  "outputs": {
+    "figures/out/F6.pdf": "61a65147c9b4a3d06fa8ae9b0c9d2c2fdcffe2e504ab544ae6a49786e7303bdc",
+    "figures/data/F6.csv": "3ee4a4c43bdd91a1c7e844f852c834bcadb233db42a76efc94504bb5b199cc84"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:44Z",
+  "print": {
+    "registry_width": "single",
+    "target_width_in": 3.5,
+    "pdf_width_in": 3.4979,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  },
+  "v_mps": 30.0,
+  "fc_hz": 3500000000.0,
+  "t_u_auto_s": 0.000741,
+  "verify_interp_auto": 6.781363186106036e-06,
+  "max_dev_los_hz": 1.950866135302931e-10,
+  "max_dev_ris_hz": 0.33458997921419353,
+  "median_dev_ris_hz": 0.03645693857731658,
+  "ris_null_frac": 0.1,
+  "ris_samples_kept_frac": 0.8840884088408841,
+  "f_los_closed_hz": 350.2422999580597,
+  "f_ris_closed_t0_hz": 325.1825626770302,
+  "sweep": [
+    {
+      "eps": 0.001,
+      "t_u_s": 0.000741,
+      "err_vs_exact": 7.041550806982312e-06,
+      "verify_interp": 6.781363186106036e-06
+    },
+    {
+      "eps": 0.003,
+      "t_u_s": 0.001283,
+      "err_vs_exact": 2.1162089065022852e-05,
+      "verify_interp": 1.6859751312790565e-05
+    },
+    {
+      "eps": 0.01,
+      "t_u_s": 0.002344,
+      "err_vs_exact": 7.026912359411746e-05,
+      "verify_interp": 4.8763797948359454e-05
+    },
+    {
+      "eps": 0.03,
+      "t_u_s": 0.00406,
+      "err_vs_exact": 0.00021318946099206252,
+      "verify_interp": 0.0001997040841855896
+    },
+    {
+      "eps": 0.1,
+      "t_u_s": 0.007412,
+      "err_vs_exact": 0.0006838558975399177,
+      "verify_interp": 0.0004109094343133023
+    }
+  ]
+}

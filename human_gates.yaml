@@ -9,7 +9,7 @@ gates:
   H-1:
     title: Lab answers (Tx position/height/antenna, tile layout and pitch, sigma1/sigma2 origin and |Gamma|, Tx power and cables), permission to publish the Fig. 4(b) CSV, and which v1 commit the WCL letter used
     who: Author / lab
-    blocks: V-LAB "validation" wording; publication of the data file; the lineage sentence naming v1 as the WCL letter's simulator
+    blocks: V-LAB "validation" wording and the description of the lab data set; publication of the data file (DESIGN D24 removed the lineage sentence it used to block; the single transparency sentence needs no lab answer)
     status: open
   H-2:
     title: Licence (MIT vs Apache-2.0) and arXiv licence

@@ -1,0 +1,66 @@
+{
+  "figure": "F11",
+  "title": "E-C non-ideality ablation: loss of the RIS term relative to ideal continuous phase across the lab-like, synthetic (near and far receiver) and corridor geometries",
+  "content_key": "d9678854d553ed855b489d6aaeb942d5d2832d980c2a8dd900cd58473912c2db",
+  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_dirty": null,
+  "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
+  "lock_commit": "UNPINNED",
+  "data_classes": [
+    "ANALYTIC",
+    "ASSUMED",
+    "REPORTED",
+    "SIM-sremu"
+  ],
+  "data_classes_in_rows": [
+    "ANALYTIC",
+    "ASSUMED",
+    "REPORTED",
+    "SIM-sremu"
+  ],
+  "inputs": [
+    {
+      "path": "sweeps/results/E-C/table8.csv",
+      "data_class": "SIM-sremu",
+      "note": "eta_large_n_db is ANALYTIC; alphabets: ideal (ANALYTIC), lab (ASSUMED amplitudes), Tang RIS1 (REPORTED)",
+      "provenance": {
+        "experiment": "E-C"
+      },
+      "sha256": "2a6de6e35dd8b3f886eb2665870ad8a63f835daee89dbf104ecfaeb820ac7908"
+    },
+    {
+      "path": "sweeps/results/E-C/meta.json",
+      "data_class": "ASSUMED",
+      "note": "lab |Gamma| ASSUMED",
+      "sha256": "875b7b7a4f66b9dc1487eca47312fd04fac2b3e58c93273b38bf7bbfeeea28c4"
+    }
+  ],
+  "assumptions": [
+    "loss = power-averaged optimum over the geometry's points relative to ideal continuous phase, exact finite-alphabet optimum per alphabet",
+    "failure rows on the lab |Gamma| = 1 alphabet; the optimizer knows the failed cells; 200 keyed maps per point (lab, synthetic), 10 per position (corridor)",
+    "Abeywickrama row: beta_min 0.2, alpha 1.6, phi 0, b = 2 [ENG]",
+    "lab-like geometry: SIM, V-LAB prior median Tx; no measured data read"
+  ],
+  "profile": "full",
+  "script": "figures/src/f11_ablation.py",
+  "script_sha256": "4fa4058ed334b1fcbe75b99c46c433c4162094cd2c444f4488e8285230cd3bfd",
+  "outputs": {
+    "figures/out/F11.pdf": "d31b33e135d6a0424fa2e65fe596ce5e75aa914c1c387f20cb7c2e9ac51b2438",
+    "figures/data/F11.csv": "e9798f46ea9c69f4d5b399385dbbf593fd3223803ad92ca49a2fb5d82973d94d"
+  },
+  "versions": {
+    "python": "3.12.4",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "generated_utc": "2026-10-11T07:35:16Z",
+  "print": {
+    "registry_width": "single",
+    "target_width_in": 3.5,
+    "pdf_width_in": 3.4987,
+    "font_pt": 8,
+    "fonttype": "Type 42 (TrueType)"
+  }
+}

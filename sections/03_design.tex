@@ -192,9 +192,10 @@ targets, out-of-domain queries, oversize messages, refused operations and rate m
 (IO-06). RIS commands carry state indices, phases (quantized by the panel) or a codebook
 index, an optional transition and a late policy; \texttt{set\_command\_time} times later
 commands as in UHD. Each stream has one channel, and an unmodified UHD application does not
-run against this interface (Section~\ref{sec:future}). \claim{C-COMPAT}The wrappers
-\texttt{Send\_to\_sim} and \texttt{Receive\_from\_sim} keep the names of the earlier emulator;
-the ported v1 TX and RX scripts deliver every sample through them (IO-07).
+run against this interface (Section~\ref{sec:future}). \claim{C-COMPAT}Two wrappers,
+\texttt{Send\_to\_sim} and \texttt{Receive\_from\_sim}, give simple scripts a one-call
+interface; a BPSK transmitter and receiver script pair delivers every sample through them
+(IO-07).
 
 \claim{C-FRAMES}A data-plane message has a \numFrameHeaderBytes-byte little-endian header and
 a payload sent without copying. The header holds a magic word, version, flags (start and end
