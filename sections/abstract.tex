@@ -1,26 +1,37 @@
-% Abstract (title T1; author decision 2026-10-11). Every result value is a pipeline macro
-% (numbers.yaml; tools/gen_results.py); tools/check_arxiv.py bounds the length (<= 1920
-% characters, <= 200 words) by counting each result macro at its max_chars budget, so the
-% result phrases written by the pipeline must respect those budgets (gen_results.py checks
-% them). Where each result runs is stated: E-B at the sample level in lockstep with an
-% in-process controller and a modelled latency; E-A on the coefficient (batch) path, which
-% agrees with the sample-level runs within the VA-1 tolerance. No "open"/"open-source" until
-% the release is approved (human gate H-2). The laboratory null result (Section V-D) is not
-% in the abstract for length; the introduction and the conclusion state it.
+% Abstract (title T1; author decision 2026-10-11; rewritten for mock-review must-fix 2/3/4/5/10,
+% 2026-10-12). One result per sentence, every result value a number macro of the pipeline
+% (numbers.yaml; tools/gen_results.py); no sentence is composed from a pipeline phrase macro,
+% except \txtPacedPlatform in the paced sentence, which part 3 of the revision rewrites with
+% the new B3/B4 results (must-fix 1, which also defines "headless" and adds the served path).
+% tools/check_arxiv.py bounds the length (<= 1920 characters, <= 200 words); the name of the
+% emulator is written out (not \sremu) so that --emit-plain gives the arXiv text. Where each
+% result runs is stated: E-B at the sample level in lockstep with a modelled command latency
+% (C-ABS-EB: the closed form that the IQ-level PER follows with the line of sight blocked;
+% the waveform-level loss of exposed packets with it present at the 15 dB sensitivity); E-A on
+% the offline evaluator of channel coefficients (C-ABS-EA; VA-1, its consistency check, is in
+% Section VII-B), primary geometry and range over the computed geometries; Tang as agreement
+% of the model class, the published residual being inherited (C-ABS-TANG), with the statement
+% that no switching or timing behaviour is compared with measurements; GNU Radio as the
+% external application of E-E (C-EE). No "open"/"open-source" until the release is approved
+% (human gate H-2). The laboratory null result (Section V-D) is not in the abstract for
+% length; the introduction and the conclusion state it.
 \begin{abstract}
 Controllers of reconfigurable intelligent surfaces (RIS) are usually tested on per-block
-channel coefficients with ideal, instantly switching elements, hiding when a switch lands in
-the signal. sremu, a software-only emulator, applies RIS-assisted propagation to
-complex-baseband samples exchanged with external applications through a
-software-defined-radio-style interface. RIS configurations are timestamped commands from a
-controller in the loop, applied at an exact, logged sample on every receiver. In lockstep
-sample-level runs with an in-process controller, \numEbGuardMs~ms guards between packets and
-\numEbLatencyMs~ms plus up to $J$ of command latency, in a geometry modelled on our
-laboratory, \txtEBResult. Headless paced runs with \numBthreeOnePageUs~$\mu$s pages on
+channel coefficients with instant switching, hiding when a switch lands in the signal. We
+present sremu, a software-only emulator that applies RIS-assisted propagation to
+complex-baseband (IQ) samples of external applications, such as unmodified GNU Radio, behind a
+software-defined-radio-style interface, and executes timestamped commands of a controller in
+the loop at an exact, logged sample on every receiver. In lockstep runs with modelled command
+latency and the line of sight blocked, the IQ-level packet error rate follows the closed-form
+probability that a switch lands after the preamble; with the line of sight present,
+\numEbLosLoExposedMinPct--\numEbLosLoExposedMaxPct~\% of such packets fail at
+$E_s/N_0=\numEbArcEsnoLowDb$~dB. Headless paced runs with \numBthreeOnePageUs~$\mu$s pages on
 \txtPacedPlatform{} sustain \numPacedLinks{} links at \numPacedMSps~MS/s with a deadline-miss
-rate below \numSustainMissRate. Against third-party chamber measurements at
-\numTangFcGHz~GHz, the emulator's received power is \numTangMeasBiasDb~dB low on average
-(RMSE \numTangMeasRmseDb~dB), like the published model it reproduces. On the coefficient path
-(within \numVaOneMaxDiffDb~dB of sample-level runs), position-driven binary control under
-signaling delay \txtEAResult.
+rate below \numSustainMissRate. On an offline evaluator of channel coefficients,
+position-driven binary control loses half its benefit after a signaling delay of
+\numEaTauLambdaVMin--\numEaTauLambdaVMax\,$\lambda/v$ over \numEaGeometries{} geometries
+(\numEaTauOverLambdaV\,$\lambda/v$ in the primary one; $\lambda$: wavelength, $v$: speed). The
+emulator reproduces a published path-loss model, inheriting its \numTangPubMeasBiasDb~dB mean
+offset from third-party chamber measurements at \numTangFcGHz~GHz; no switching or timing
+behaviour was compared with measurements.
 \end{abstract}

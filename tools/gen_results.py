@@ -1387,32 +1387,28 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     hi_rows = [r for r in a2 if r["los"] == "present" and r["es_n0_target_db"] == es_hi
                and r["guard_s"] == guard_f9]  # both alphabets: "no semantics loses more"
     v["numEbArcLosHighPerMaxPct"] = pct(max(float(r["per"]) for r in hi_rows), 1)
-    # The abstract and the conclusion state txtEBResult for the whole guard slice of the run
-    # (every alphabet, LOS case and Es/N0), not only for the two F9(b) cases: check it there.
+    # Timed commands whose lead exceeds the worst latency lose no packet: checked on the whole
+    # guard slice of F9(b) (every alphabet, LOS case and Es/N0), not only on its two cases.
     # At the other guards a few Es/N0 = 15 dB rows lose one packet in 2000 to noise even with
-    # timed commands on time, so the phrase is tied to the guard named next to it.
+    # timed commands on time, so the rule is checked at the guard that F9(b) shows. (The
+    # abstract prints no phrase macro of E-B or E-A since mock-review must-fix 2.)
     slice_rows = [r for r in a2 if r["guard_s"] == guard_f9]
     for r in slice_rows:
         if (r["semantics"] == "timed" and Fraction(r["lead_s"]) > lat_fixed
                 + Fraction(r["jitter_s"]) and int(r["packet_errors"]) != 0):
-            raise SystemExit("gen_results: txtEBResult says timed commands whose lead exceeds the "
-                             f"latency lose no packet; {r['alphabet']}/{r['los']}/"
+            raise SystemExit("gen_results: timed commands whose lead exceeds the latency must "
+                             f"lose no packet; {r['alphabet']}/{r['los']}/"
                              f"{r['es_n0_target_db']} lead {r['lead_s']} J {r['jitter_s']} lost "
                              f"{r['packet_errors']}")
     if max(float(r["per"]) for r in slice_rows if r["semantics"] == "tick-based") \
             != max(tick_all):
         raise SystemExit("gen_results: the largest tick-based PER of the guard slice is not in "
                          "the F9(b) cases that Section VII-A quotes")
-    # Headline (MAJOR-3): timed vs asap in the two F9(b) cases, where a mistimed switch costs
-    # bits; the asap guard rule and the timed lead rule were checked on every row above.
+    # Timed vs asap in the two F9(b) cases (MAJOR-3), where a mistimed switch costs bits; the
+    # asap guard rule and the timed lead rule were checked on every row above.
     asap_one = sorted(arc_per("asap", "1/1000", c) for c in cases)
     if asap_one[0] <= 0.0:
-        raise SystemExit("gen_results: txtEBResult says asap commands lose packets at J = 1 ms")
-    v["txtEBResult"] = ("where a mistimed switch costs bits, commands applied on arrival lose "
-                        f"{pct(asap_one[0], 0)}--"
-                        f"{pct(asap_one[1], 0)}\\,\\% of the packets at "
-                        f"$J={v['numEbJitterOneMs']}$\\,ms, timestamped ones whose lead exceeds "
-                        "the latency none")
+        raise SystemExit("gen_results: Section VII-A says asap commands lose packets at J = 1 ms")
     # closed form of the E-B2 timing and the full-grid table (tools/case_tables.py)
     case_tables.eb2_values(v, tables, a2, traffic=traffic, rate_sps=tx_stream["rate_sps"],
                            lat_fixed=lat_fixed, guards=sorted(guards), jits=jits,
@@ -1512,8 +1508,6 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     decisions = {k: hyp[k]["decision"] for k in ("H-A1", "H-A2", "H-A3")}
     if set(decisions.values()) != {"supported"}:
         raise SystemExit(f"gen_results: Section VII text assumes H-A1..3 supported: {decisions}")
-    v["txtEAResult"] = (f"loses half its benefit after {v['numEaTauHalf']}\\,s, a time set by "
-                        f"$\\lambda/v$")
     # setup of E-A, read from the corridor template and the sweep specs (not typed)
     corr = read_yaml(sremu_root / "scenarios" / "studies" / "ea_corridor.yaml")
     mu = next(nd for nd in corr["nodes"] if nd["id"] == "mu")["trajectory"]

@@ -37,7 +37,7 @@ in advance~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}.
 (i)~multi-node emulation at the level of complex-baseband (IQ) samples behind an interface in the style
 of a software-defined radio (SDR); (ii)~RIS configurations issued at run time by an external controller and
 applied at an explicit, logged sample; (iii)~per-state responses imported from
-measurements as functions of state, frequency, incidence angle and reflection angle; and
+measurements as functions of state, frequency, and incidence and reflection angle in one plane; and
 (iv)~characterized wall-clock behaviour. Each property exists in some tool; the
 contribution of this paper is their integration, together with the evidence needed to
 trust the result.
@@ -58,27 +58,29 @@ both the requested and the applied sample are logged. The paper makes four contr
   interface (API) shaped after the USRP Hardware Driver (UHD)~\cite{UHDManual}, a framed ZeroMQ
   (ZMQ) data plane, and a response-table schema aligned with the parameters of ETSI GS RIS
   008~\cite{ETSI_GS_RIS008}.
+\item \emph{A verified physical model with stated validity limits}
+  (Sections~\ref{sec:model},~\ref{sec:vv}). \claim{C-CONTRIB-2}An area-tied aperture kernel
+  with a cell model and a model card; an import path for per-state tables, tested but not
+  used here with a measured table; \numOracleCount{} analytic oracle checks; MATLAB
+  code-to-code checks; agreement of the model class with third-party chamber measurements,
+  inherited from a published path-loss model that the emulator reproduces~\cite{Tang2022mmWave};
+  a consistency check against a laboratory measurement collected by the authors, under a
+  pre-specified plan hash-locked before unblinding, with its null result and
+  measurement-design lesson; and carrier-frequency-offset (CFO) and bit-error-rate checks
+  against the Cram\'er--Rao bound and theory.
+\item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
+  \claim{C-CONTRIB-3}Definitions of lockstep and paced operation, the real-time factor (RTF),
+  deadline misses and latency percentiles; scaling over links, elements, surfaces, sample rates and feature sets
+  on AWS Linux servers; and the latency of commands served over the control socket.
 \item \emph{Case studies of timed control} (Section~\ref{sec:cases}).
   \claim{C-CONTRIB-4}At the sample level, in lockstep with an in-process controller and a
   modelled command latency: what a reconfiguration inside a packet does to the symbols, and
   when timestamped commands, commands applied on arrival and switching on a free-running
   timer lose packets. On channel coefficients (for E-A an offline evaluator that agrees with
-  sample-level runs within the pre-specified tolerance): the time scale on which signaling delay erodes position-driven
-  binary control in a blocked corridor, and a non-ideality ablation. Appendix~\ref{app:cases} adds a model-based
-  dimensioning of an FM-band surface.
-\item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
-  \claim{C-CONTRIB-3}Definitions of lockstep and paced operation, the real-time factor (RTF),
-  deadline misses and latency percentiles; scaling over links, elements, surfaces, sample rates and feature sets
-  on AWS Linux servers; and the latency of commands served over the control socket.
-\item \emph{A verified physical model with stated validity and accuracy}
-  (Sections~\ref{sec:model},~\ref{sec:vv}). \claim{C-CONTRIB-2}An area-tied physical-optics
-  kernel with a cell model and a model card; \numOracleCount{} analytic oracle checks;
-  MATLAB code-to-code checks; agreement with a published path-loss model and, as
-  accuracy, with third-party chamber measurements~\cite{Tang2022mmWave}; a consistency check
-  against a laboratory measurement collected by the authors, under a pre-specified plan
-  hash-locked before unblinding, with its null result and measurement-design lesson; and
-  carrier-frequency-offset (CFO) and bit-error-rate checks against the Cram\'er--Rao bound
-  and theory.
+  the sample-level VA-1 runs within the pre-specified tolerance): the time scale on
+  which signaling delay erodes position-driven binary control in a blocked corridor, and a
+  non-ideality ablation. Appendix~\ref{app:cases} adds a model-based dimensioning of an
+  FM-band surface.
 \end{itemize}
 
 \emph{Scope.} \claim{C-SCOPE}\sremu{} is not a UHD drop-in: it offers a UHD-shaped API, and

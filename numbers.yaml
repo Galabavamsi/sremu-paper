@@ -281,7 +281,7 @@ macros:
     max_chars: 4
   - macro: txtVLabOutcome
     kind: text
-    description: Verb phrase completing "a blinded comparison with a digitized laboratory map, analysed under a plan hash-locked before unblinding, ..." (C1-C3 outcome and power label)
+    description: Verb phrase completing "a laboratory comparison under a pre-specified plan hash-locked before unblinding ..." (conclusion; C1-C3 outcome and power label)
     source: {type: study, id: "V-LAB"}
     max_chars: 72
   # ------------------------------------------------------------------ wall-clock behaviour
@@ -1150,18 +1150,6 @@ macros:
     unit: "MS/s"
     source: {type: benchmark, id: "E-F-latency"}
     max_chars: 5
-
-  # ------------------------------------------------------------------ case studies
-  - macro: txtEBResult
-    kind: text
-    description: "E-B headline phrase (timed vs asap) for the 0.5 ms guard slice of the arc run, in the cases where a mistimed switch costs bits (the two F9(b) cases: LOS present at the pre-declared 15 dB sensitivity and LOS blocked at 25 dB), which the abstract names next to it (lockstep, in-process controller, modelled latency 0.2 ms + U[0, J]; geometry modelled on the lab arrangement, SIM nominal). gen_results checks the asap guard rule and the timed lead rule on every row of the two cases and that on-time timed commands lose no packet on every row of the slice"
-    source: {type: experiment, id: "E-B-arc"}
-    max_chars: 156
-  - macro: txtEAResult
-    kind: text
-    description: E-A headline phrase (signaling-delay time scale; H-A1/H-A2 outcome)
-    source: {type: experiment, id: "E-A"}
-    max_chars: 60
 
   # ================================================================== Sections V and VII
   # Filled by tools/gen_results.py from committed result files (study/experiment/test/
@@ -2169,7 +2157,7 @@ macros:
     max_chars: 4
   - macro: numEbCfMaxExcessPts
     kind: number
-    description: "Largest excess of the measured PER over the closed form, percentage points, asap and timed cells of the blocked arc grid (switches late in the preamble)"
+    description: "Largest excess of the measured PER over the closed form, percentage points, asap and timed cells of the blocked arc grid (switches late in the preamble); rounded up, a bound"
     source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbCfCellsPos
@@ -2184,7 +2172,7 @@ macros:
     max_chars: 3
   - macro: numEbCfTickExcessPts
     kind: number
-    description: "Largest excess of the measured PER over the tick-based closed form, percentage points, blocked cells without overwritten commands"
+    description: "Largest excess of the measured PER over the tick-based closed form, percentage points, blocked cells without overwritten commands; rounded up, a bound"
     source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
   - macro: numEbTickOverwriteCells

@@ -1,31 +1,33 @@
 % Section X -- Conclusion (BLOCKER-1): written from supported claims only; each sentence is
 % mapped to its claim, whose evidence (tests, figures, human gates) decides whether it may
-% stay in a final build. It does not repeat the abstract's numbers.
+% stay in a final build. Revised for mock-review must-fix 3/5/10 (2026-10-12): the E-B rule is
+% stated as the closed form of the semantics (threshold guard + preamble for asap commands, not
+% for tick-based ones, which also carry no time; lead + guard/2 + preamble for timed ones;
+% checked on every blocked cell by gen_results) plus
+% the measured cost of exposure; E-A as the primary geometry's constant within the range over
+% the computed geometries, the classical lambda/v scaling; Tang as agreement of the model class
+% with no timing validation. The served-path sentence (C-WC-PACEDCMD) is rewritten in part 3
+% with the new B4 results. The next validation step is stated in Section IX (C-NEXT-VALIDATION).
 \section{Conclusion}\label{sec:conclusion}
 
-\claim{C-TIMED-CMD}\sremu{} makes the moment at which a RIS configuration takes effect part of
-the experiment: a command lands at a requested and logged sample on every receiver,
-\claim{C-LOCKSTEP-EXACT}and lockstep runs with controllers in the loop are deterministic. For
-the design of RIS controllers, the case studies point to three rules.
-\claim{C-EB-TIMING}Where a switch inside a packet costs bits, a command must carry its switch
-time with a lead above its worst latency, or its whole latency must fit inside the guard
-between packets: in the guard slice studied, untimed commands lost packets once the worst
-latency exceeded the guard. \claim{C-EA-RESULT}Position-driven
-control needs position reports younger than a fraction of $\lambda/v$: in the corridor
-studied, half of the RIS benefit was gone after \numEaTauOverLambdaV\,$\lambda/v$.
-\claim{C-EC}Designing for the states of the surface, rather than for an ideal alphabet,
-recovered up to \numEcDesignPenaltyMaxDb~dB for the laboratory states (magnitudes assumed) in
-the geometries studied.
+\claim{C-TIMED-CMD}In \sremu{} a RIS command takes effect at a requested and logged sample on
+every receiver, \claim{C-LOCKSTEP-EXACT}and lockstep runs with controllers in the loop are
+deterministic. \claim{C-EB-TIMING}With the line of sight blocked, the packet error rate followed
+the closed form of the semantics: commands applied on arrival lost no packet while their worst
+latency stayed below the guard plus the preamble (\numEbTpreMs~ms here), timed ones below their lead
+plus half the guard plus the preamble; with a line of sight, the waveform set the cost.
+\claim{C-EA-RESULT}Position reports must be younger than a fraction of $\lambda/v$, as Doppler
+decorrelation predicts~\cite{Clarke1968,Jakes1974}: half of the RIS benefit was gone after
+\numEaTauLambdaVMin--\numEaTauLambdaVMax\,$\lambda/v$ across geometries
+(\numEaTauOverLambdaV\,$\lambda/v$ in the primary one). \claim{C-EC}Designing for the laboratory
+states rather than an ideal alphabet recovered up to \numEcDesignPenaltyMaxDb~dB in the geometries
+studied (magnitudes assumed).
 
-For testing, the results teach three lessons. \claim{C-WC-PACEDCMD}Command timing must be
-measured on the path that the controller will use: over the served control socket the visible
-latency reached a p99 of \numBfourVisPninetynineMaxMs~ms, above the latencies modelled in
-lockstep, so a lead that suffices in a lockstep study need not suffice there.
-\claim{C-ABS-LAB}A comparison with a laboratory map, analysed under a pre-specified plan
-hash-locked before unblinding, \txtVLabOutcome; \claim{C-LAB-LESSON}a RIS map at
-\numLabFreqGHz~GHz needs its geometry recorded to about a millimetre before it can test the
-spatial structure of a model. \claim{C-ABS-TANG}The absolute level, in contrast, can be tested
-against third-party chamber data, where the emulator and the published model that it
-reproduces show nearly the same offset from the measurements.
-\claim{C-NEXT-VALIDATION}The next step is a comparison with open sub-6\,GHz measurements of a
-reconfigurable surface under a newly locked analysis plan.
+\claim{C-WC-PACEDCMD}Command timing must be measured on the path that the controller will use:
+over the served control socket the visible latency reached a p99 of
+\numBfourVisPninetynineMaxMs~ms, above the latencies modelled in lockstep, so a lead that
+suffices in a lockstep study need not suffice there. \claim{C-ABS-LAB}A laboratory comparison
+under a pre-specified plan hash-locked before unblinding \txtVLabOutcome;
+\claim{C-LAB-LESSON}at \numLabFreqGHz~GHz a RIS map needs its geometry recorded to about a
+millimetre. \claim{C-ABS-TANG}Third-party chamber data test the model class, whose published
+offset the emulator inherits; no switching or timing behaviour was compared with measurements.

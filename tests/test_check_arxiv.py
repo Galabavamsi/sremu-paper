@@ -50,11 +50,14 @@ def test_placeholder_budget_is_counted() -> None:
 
 
 def test_abstract_over_budget_fails(paper_copy: Path) -> None:
-    # Blow up the budget of a result phrase the abstract prints (txtEAResult).
+    # Blow up the budget of a text macro that the abstract prints (the first \txt... macro of
+    # the abstract; since must-fix 2 it prints no result phrase, only the platform name).
+    found = re.search(r"\\(txt[A-Za-z]+)", abstract_source(paper_copy))
+    assert found, "the abstract prints no text macro; pick another budget to blow up"
     ny = paper_copy / "numbers.yaml"
     text = ny.read_text(encoding="utf-8")
-    new, n = re.subn(r"(- macro: txtEAResult\b.*?max_chars: )\d+", r"\g<1>900", text, count=1,
-                     flags=re.S)
+    new, n = re.subn(rf"(- macro: {found.group(1)}\b.*?max_chars: )\d+", r"\g<1>900", text,
+                     count=1, flags=re.S)
     assert n == 1
     ny.write_text(new, encoding="utf-8")
     errs = check_arxiv(paper_copy).errors

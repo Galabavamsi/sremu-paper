@@ -127,18 +127,18 @@ def test_number_rule_on_tex_markup() -> None:
 
 
 def test_pipeline_result_phrases_obey_word_rules(paper_copy: Path) -> None:
-    """A text macro filled by the pipeline is printed in the abstract, so its value is
-    checked too (the TeX source only shows \\txtEBResult)."""
+    """A text macro filled by the pipeline is printed in the text (here the conclusion's V-LAB
+    outcome phrase), so its value is checked too (the TeX source only shows \\txtVLabOutcome)."""
     results = paper_copy / "generated" / "results.json"
     results.write_text(json.dumps({"sremu_commit": "a" * 40, "values": {
-        "txtEBResult": "is, for the first time, shown in real time",
+        "txtVLabOutcome": "is, for the first time, shown in real time",
         "numTangCurveMaxDevDb": "0.014"}}), encoding="utf-8")
     errs = check_claims(paper_copy, "draft", junit=[]).errors
-    assert any("numbers:txtEBResult: banned word 'first'" in e for e in errs), errs
-    assert any("numbers:txtEBResult: unqualified 'real-time'" in e for e in errs), errs
+    assert any("numbers:txtVLabOutcome: banned word 'first'" in e for e in errs), errs
+    assert any("numbers:txtVLabOutcome: unqualified 'real-time'" in e for e in errs), errs
     assert not any("numTangCurveMaxDevDb" in e for e in errs)  # numbers are pipeline output
     results.write_text(json.dumps({"sremu_commit": "a" * 40, "values": {
-        "txtEBResult": "shows a measurable EVM transient"}}), encoding="utf-8")
+        "txtVLabOutcome": "shows a measurable EVM transient"}}), encoding="utf-8")
     assert check_claims(paper_copy, "draft", junit=[]).ok
 
 

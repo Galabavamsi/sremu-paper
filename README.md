@@ -10,16 +10,18 @@ pipeline macros written by `tools/gen_results.py`, and the data figures F3-F6 an
 drawn by the scripts in `figures/src/`. Provenance (Appendix H, generated from the result
 records): the pinned regeneration job 20261011T235822Z_regen_37a552 (AWS c7i.48xlarge, sremu
 4ec4c2b, clean) produced the test record, E-A, E-A-IQ (VA-1), E-B1/E-B2, E-B-arc, E-C, E-F
-(BER), E-E and V-TANG/V-CFO/V-FM; sremu 0f06793 = the code of 4ec4c2b plus those result files
-(the commit `sremu.lock` is to pin). V-LAB stays at its locked analysis commit 7a63287
+(BER), E-E and V-TANG/V-CFO/V-FM; sremu 0f06793 = the code of 4ec4c2b plus those result files.
+The commit `sremu.lock` is to pin is a results-only commit on a code commit (planned on
+2026-10-12: on bf08268, served-only render threshold and docs, after the benchmark reruns);
+Appendix H therefore names no lock hash. V-LAB stays at its locked analysis commit 7a63287
 (predictions computed before the lock at 9dca79f); the regeneration job's V-LAB file check is
 `sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json`. Benchmarks keep their
 own commits (B1/B2 F0-F4 309c633; B6 laptop; B2-F4/F5, B3, B4 being rerun at 4ec4c2b at the
 time of writing). E-B (Section VII-A, F9) is led by the lab-arc run (geometry modelled on the
 lab arrangement, SIM, nominal geometry; aggregated results and provenance in
 `sweeps/results/E-B-arc/`); the lab-like geometry is the supporting row. The laboratory map,
-the lab-state phases and the FM scenario appeared in the authors' unpublished ANTS 2025
-submission (claim C-LINEAGE-DATA); every cited verification identifier is listed in Appendix G
+the lab-state phases, the frequency-offset sweep with its BPSK burst and the FM scenario
+appeared in the authors' unpublished ANTS 2025 submission (claim C-LINEAGE-DATA); every cited verification identifier is listed in Appendix G
 (`verification_ids.yaml` -> `tools/vv_ids.py`, checked against sremu's DESIGN.md, oracle
 table and test docstrings). Section VI and
 Appendix E (F7, F8, platform table `tab:platforms`) come from the benchmark runs B1-B4 (AWS c7i.48xlarge and c7i.8xlarge, sremu

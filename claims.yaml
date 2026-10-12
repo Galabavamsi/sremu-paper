@@ -30,8 +30,8 @@
 claims:
   # ================================================================ abstract, I, II
   C-GAP:
-    text: "As of 10 Oct 2026, no surveyed tool, open or not, combines (i) IQ-level multi-node emulation behind an SDR-style interface, (ii) runtime external RIS commands applied at an explicit logged sample, (iii) imported measured per-state responses, and (iv) characterized wall-clock behaviour; sremu itself is not open yet (Table I Open column: 'Not yet (on request)'; release conditional, Code and Data Availability)."
-    where: [sections/01_introduction.tex, sections/02_related_work.tex]
+    text: "As of 10 Oct 2026, no surveyed tool, open or not, combines (i) IQ-level multi-node emulation behind an SDR-style interface, (ii) runtime external RIS commands applied at an explicit logged sample, (iii) imported measured per-state responses (state, frequency, and incidence and reflection angle in one plane of incidence; must-fix 8), and (iv) characterized wall-clock behaviour; sremu itself is not open yet (Table I Open column: 'Not yet (on request)'; release conditional, Code and Data Availability)."
+    where: [sections/01_introduction.tex, sections/02_related_work.tex, sections/app_a_survey.tex]
     evidence:
       - table:tab:tools
       - cite:Gurses2026ACHEM
@@ -63,7 +63,7 @@ claims:
       - {word: only, context: "software-only emulator"}
   C-MODELCARD:
     text: "Table II (generated from sremu docs/model_card.yaml): model, validity domain, evidence and default per component, including 'statistical background only' for diffuse fading and 'coupling via tables only'."
-    where: [generated/tables/table2_model_card.tex, sections/04_physical_model.tex]
+    where: [generated/tables/table2_model_card.tex, sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-01, test:PH-02, test:PH-04, test:PH-26, test:PH-28, test:PH-31, test:PH-10, test:PH-32, test:PH-08, test:PH-11, test:ST-02, test:G6, test:PH-17, test:PH-18, test:PH-19, test:PH-20, test:PH-21, test:G5, test:PH-13, test:PH-15, test:RT-12, table:tab:modelcard]
     gates: []
     banned_word_uses:
@@ -85,7 +85,7 @@ claims:
     evidence: [test:RT-05, test:RT-06, test:RT-08, test:RT-18, test:IO-02, test:IO-03, test:IO-05, fig:F1, fig:F2, cite:ETSI_GS_RIS008]
     gates: []
   C-CONTRIB-2:
-    text: "A verified physical model with stated validity and accuracy: area-tied kernel equal to three published forms, model card, CI oracle count, MATLAB code-to-code, Tang curves (implementation check) and Tang chamber measurements (accuracy, measured minus emulator), a consistency check against a laboratory measurement collected by the authors under a pre-specified plan hash-locked before unblinding (null result and measurement-design lesson), CFO and BER checks against the CRB and theory."
+    text: "A verified physical model with stated validity limits: the area-tied aperture kernel (equal to three published forms; physical optics in the strict sense only with the Kirchhoff obliquity, Appendix C), cell model, model card, an import path for per-state tables that is tested but not used here with a measured table (reported and assumed states only; Table I), CI oracle count, MATLAB code-to-code, agreement of the model class with Tang's third-party chamber measurements, inherited from the published path-loss model that the emulator reproduces (K1 equals it for one point per cell; the curves are an implementation check; not a test of switching or timing), a consistency check against a laboratory measurement collected by the authors under a pre-specified plan hash-locked before unblinding (null result and measurement-design lesson), CFO and BER checks against the CRB and theory. Listed second, in section order (Sections IV-V)."
     where: [sections/01_introduction.tex]
     evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5, cite:Tang2022mmWave]
     gates: []
@@ -95,7 +95,7 @@ claims:
     evidence: [test:RT-18, fig:F7, fig:F8]
     gates: [H-5]
   C-CONTRIB-4:
-    text: "Case studies of timed control: at the sample level, in lockstep with an in-process controller and a modelled latency, intra-frame reconfiguration and timed vs asap vs timer-latched commands (E-B); on channel coefficients (for E-A an offline vectorized evaluator, not the engine's run_batch, that agrees with the VA-1 sample-level runs within the VA-1 tolerance; E-C static coefficients), the signaling-delay time scale in a blocked corridor (E-A) and a non-ideality ablation (E-C); FM dimensioning (E-D)."
+    text: "Case studies of timed control: at the sample level, in lockstep with an in-process controller and a modelled latency, intra-frame reconfiguration and timed vs asap vs timer-latched commands (E-B); on channel coefficients (for E-A an offline vectorized evaluator, not the engine's run_batch, that agrees with the VA-1 sample-level runs within the VA-1 tolerance, stated as 'agrees with the sample-level VA-1 runs' (one geometry, two controllers, two delays; must-fix 4); E-C static coefficients), the signaling-delay time scale in a blocked corridor (E-A) and a non-ideality ablation (E-C); FM dimensioning (E-D)."
     where: [sections/01_introduction.tex]
     evidence: [test:VA-5, test:VA-1, test:E-B, fig:F9, fig:F10, fig:F11, fig:F12]
     gates: []
@@ -110,8 +110,8 @@ claims:
     evidence: [cite:Mishra2025WCL, cite:Mishra2025NCC, spec:DESIGN-D24]
     gates: []
   C-LINEAGE-DATA:
-    text: "Data lineage (must-fix 11; allowed by D24, which forbids software lineage only): the laboratory map (sremu validation/ants_fig4b), the two laboratory cell-state phases (state library lab_binary_3p5ghz, provenance 'unpublished ANTS 2025 manuscript') and the FM-band scenario of E-D (validation/fm/vfm.py, 'replaces ANTS Fig. 6') appeared earlier in the authors' unpublished ANTS 2025 conference submission, which drew a qualitative validation claim from the map (its abstract, Sec. III-C and conclusion: emulated and measured maps compared by directional trends, called a validation; read in research/scratch/ants/ants.txt); the pre-specified V-LAB comparison supersedes that validation (Sec. II says 'whose qualitative validation Section V-D supersedes'), and E-D replaces the earlier FM result. No citation: the submission is unpublished (rejected criticism R1-M3); a cover letter on the overlap is journal-stage."
-    where: [sections/02_related_work.tex, sections/app_f_cases.tex]
+    text: "Data lineage (must-fix 11; allowed by D24, which forbids software lineage only): the laboratory map (sremu validation/ants_fig4b), the two laboratory cell-state phases (state library lab_binary_3p5ghz, provenance 'unpublished ANTS 2025 manuscript'), the frequency-offset sweep of V-CFO with its BPSK burst (the 29 offsets within +-1400 Hz are the grid of ANTS Fig. 2, which the sremu V-CFO-3 test docstring calls 'the ANTS Fig. 2 sweep regenerated'; the 2389-sample burst at 5880 S/s is the waveform of the BPSK pair of the ANTS CFO demonstration, its Sec. III-A, ported in sremu engine/streams.py; data/validation/cfo/PROVENANCE.md; disclosed in Sec. II and App. D since 2026-10-12) and the FM-band scenario of E-D (validation/fm/vfm.py, 'replaces ANTS Fig. 6') appeared earlier in the authors' unpublished ANTS 2025 conference submission, which drew a qualitative validation claim from the map (its abstract, Sec. III-C and conclusion: emulated and measured maps compared by directional trends, called a validation; read in research/scratch/ants/ants.txt); the pre-specified V-LAB comparison supersedes that validation (Sec. II says 'whose qualitative validation Section V-D supersedes'), and E-D replaces the earlier FM result. No citation: the submission is unpublished (rejected criticism R1-M3); a cover letter on the overlap is journal-stage."
+    where: [sections/02_related_work.tex, sections/app_f_cases.tex, sections/app_d_vv.tex]
     evidence: [spec:DESIGN-10.9, spec:DESIGN-10.12, fig:F4, fig:F12]
     gates: []
   C-TRACE:
@@ -120,7 +120,7 @@ claims:
     evidence: [cite:Kumar2026TRACE]
     gates: [H-4]
   C-ABS-TANG:
-    text: "Tang et al. (MAJOR-9; author decision D-12 of 2026-10-11, reframed by mock-review must-fix 3 of 2026-10-12): the kernel reproduces the published model curves within the stated bound, an implementation check that also bounds the digitization error (K1 equals Tang's model for one point per cell); against the digitized chamber measurements (Fig. 10 of arXiv 2101.08607v2) of one 27 GHz surface in one uniformly coded state in specular geometries the emulator's received power is low by the stated mean (measured minus emulator; SD, RMSE; largest difference and per-geometry range in Appendix D), every measured point lies above it (checked by gen_results), and the published model is low by numTangPubMeasBiasDb (measured minus published, checked against vtang_summary.json): the emulator inherits Tang's published residual, so this is agreement of the model class with chamber data, not a test of reconfiguration, steering, near-field structure or timing; no switching, transient or timing behaviour is compared with measurements; caveats (Appendix D): digitized data, reported link budget and reflection amplitude, no stated measurement uncertainty, dependent points."
+    text: "Tang et al. (MAJOR-9; author decision D-12 of 2026-10-11, reframed by mock-review must-fix 3 of 2026-10-12): the kernel reproduces the published model curves within the stated bound, an implementation check that also bounds the digitization error (K1 equals Tang's model for one point per cell); against the digitized chamber measurements (Fig. 10 of arXiv 2101.08607v2) of one 27 GHz surface in one uniformly coded state in specular geometries the emulator's received power is low by the stated mean (measured minus emulator; SD, RMSE; largest difference and per-geometry range in Appendix D), every measured point lies above it (checked by gen_results), and the published model is low by numTangPubMeasBiasDb (measured minus published, checked against vtang_summary.json): the emulator inherits Tang's published residual, so this is agreement of the model class with chamber data, not a test of reconfiguration, steering, near-field structure or timing; no switching, transient or timing behaviour is compared with measurements; abstract (2026-10-12): the emulator reproduces a published path-loss model, inheriting its numTangPubMeasBiasDb dB mean offset, and no switching or timing behaviour was compared with measurements; conclusion: chamber data test only the model class; caveats (Appendix D): digitized data, reported link budget and reflection amplitude, no stated measurement uncertainty, dependent points."
     where: [sections/abstract.tex, sections/05_verification_validation.tex, sections/app_d_vv.tex, sections/10_conclusion.tex, generated/tables/tableA_tang.tex]
     evidence: [test:V-TANG-1, fig:F3, cite:Tang2022mmWave, table:tab:tang]
     gates: []
@@ -137,18 +137,18 @@ claims:
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-ABS-EB:
-    text: "E-B headline (timed vs asap; MAJOR-3) for the 0.5 ms guard slice of the arc run (geometry modelled on the lab arrangement, SIM nominal geometry; AWS run, sweeps/results/E-B-arc), at the sample level in lockstep with an in-process controller and a modelled latency of 0.2 ms + U[0, J]: where a mistimed switch costs bits (the F9b cases: LOS present at the pre-declared 15 dB sensitivity, LOS blocked at 25 dB), commands applied on arrival lose the stated range at J = 1 ms, while timed commands whose lead exceeds the latency lose none (checked on every row of the slice). With the LOS present at 25 dB no semantics loses more than a small fraction (body text)."
+    text: "E-B in the abstract (mock-review must-fix 2/10, 2026-10-12; number macros only, the phrase macro txtEBResult was removed): in lockstep runs with a modelled command latency (0.2 ms + J U; arc geometry modelled on the lab arrangement, SIM nominal geometry; AWS run, sweeps/results/E-B-arc), the IQ-level PER with the line of sight blocked follows the closed-form probability that a switch lands after the preamble (C-EB-CLOSED: every blocked cell with a zero closed form lost nothing, the excess is at most numEbCfMaxExcessPts points; checked by case_tables.eb2_compare); with the line of sight present, numEbLosLoExposedMinPct to numEbLosLoExposedMaxPct % of such (exposed) packets fail at the 15 dB sensitivity (PER over closed form, both alphabets, cells with a closed form of at least 0.1). The blocked case is the idealized regime in which the plate spares the RIS hops; the closed form itself is a property of the semantics."
     where: [sections/abstract.tex]
-    evidence: [fig:F9, test:VA-5, test:E-B, pytest:tests/unit/test_eb_arc.py, pytest:tests/runtime/test_eb_arc_va5.py]
+    evidence: [fig:F9, test:VA-5, test:E-B, pytest:tests/unit/test_eb_arc.py, pytest:tests/runtime/test_eb_arc_va5.py, table:tab:eb2grid]
     gates: []
   C-ABS-EA:
-    text: "E-A headline on the coefficient path (position-driven binary control under signaling delay), which agrees with sample-level runs within the VA-1 difference."
+    text: "E-A in the abstract (mock-review must-fix 2/4/5, 2026-10-12; number macros only, the phrase macro txtEAResult was removed): on the offline vectorized evaluator of channel coefficients (experiments/ea.py, not the engine's run_batch; VA-1 checks it against IQ-level runs in one geometry, Section VII-B), position-driven binary control (exact optimum) loses half its benefit after numEaTauOverLambdaV lambda/v in the primary geometry (1 GHz, 1 m/s: numEaTauHalf s) and numEaTauLambdaVMin to numEaTauLambdaVMax lambda/v over the numEaGeometries computed geometries (Table tab:eageo); lambda the wavelength, v the speed."
     where: [sections/abstract.tex]
-    evidence: [fig:F10, test:VA-1, test:E-A]
+    evidence: [fig:F10, test:VA-1, test:E-A, table:tab:eageo]
     gates: []
   C-NEXT-VALIDATION:
     text: "Next validation step (author decision 2026-10-11: deferred to arXiv v2): the open sub-6 GHz data set of Rossanese et al. 2024; it needs a new analysis plan locked before the emulator is run on the data because of the configuration-independent floor, the cells' seven phase states plus an absorbing state (WiNTECH 2022, Table 1) and the descriptive structure already seen (pre-specified, not blind)."
-    where: [sections/09_future_work.tex, sections/10_conclusion.tex]
+    where: [sections/09_future_work.tex]
     evidence: [cite:Rossanese2024OpenMeas, cite:Rossanese2022WiNTECH]
     gates: []
   C-ACK:
@@ -160,17 +160,17 @@ claims:
   # ================================================================ III Design
   C-ARCH:
     text: "The engine runs in the application's process (Device.inproc) or as a served process (Device.connect) behind one engine interface; a run with TX and RX in two OS processes gives bitwise the same RX samples as in one process."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-02, test:IO-06, pytest:tests/io/test_io_api_device.py::test_api_recv_chunking_is_invisible, pytest:tests/io/test_io_wp8_serve_cli.py, fig:F1]
     gates: []
   C-PLANES:
     text: "A served engine uses ZMQ on three planes: framed IQ (TX ingress PUSH/PULL, per-RX egress), raw REQ/REP peers, JSON control on ROUTER (barriers to registered controllers on the same connection, never PUB) and telemetry on PUB; a session can start paused (default of the serving command)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-02, test:IO-03, test:RT-08, pytest:tests/io/test_io_wp8_lifecycle.py, pytest:tests/io/test_io_wp8_messages.py, pytest:tests/io/test_io_wp8_serve_cli.py, cite:ZeroMQ, fig:F1]
     gates: []
   C-RECORDING:
     text: "Each run directory holds the manifest (versions, git commit and dirty flag, platform, seeds and RNG scheme, input hashes and data classes, mode, backend, per-link interpolation/filter choices, counters), the resolved scenario, an append-only flushed event log, a metrics log per window and optional SigMF recordings with command annotations; replay and a static HTML report read run directories."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-05, test:RT-16, pytest:tests/unit/test_manifest.py, pytest:tests/io/test_io_eventlog.py, pytest:tests/io/test_io_report.py, cite:SigMF]
     gates: []
   C-IMPL:
@@ -180,7 +180,7 @@ claims:
     gates: []
   C-TIMEBASE:
     text: "Exact rational rates and times; to_ticks = floor(t f + 1/2) (UHD rounding, error <= 1/(2f)); count = ceil(t1 f) - ceil(t0 f) for any mix of rates; API floats via their shortest decimal; wall time never enters data-plane arithmetic."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-01, test:RT-02, test:RT-15, cite:UHDManual]
     gates: []
   C-INVARIANCE:
@@ -195,42 +195,42 @@ claims:
     gates: []
   C-TIES:
     text: "Every command is kept; at equal time on one panel the later seq wins and the earlier is superseded; commands at different future times both apply."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-07]
     gates: []
   C-RECORDS:
     text: "One record per command with id, seq, source, op, requested/applied surface time, per-RX requested/applied samples, lateness, wall receipt/delivery times, status and a BLAKE2b hash of the applied configuration."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-06, test:IO-05, pytest:tests/io/test_io_eventlog.py, pytest:tests/unit/test_contracts.py::test_panel_config_hash_matches_independent_blake2b]
     gates: []
   C-COUNTERFACTUAL:
     text: "RIS absent/present is a separate counterfactual timeline with per-receiver switch samples, flagged in its records, that never changes element states."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [pytest:tests/runtime/test_rt04_and_events.py::test_set_enabled_counterfactual_removes_ris_paths_per_tile, pytest:tests/io/test_io_api_device.py::test_api_marker_and_set_enabled_records]
     gates: []
   C-TRANSITIONS:
     text: "Transition classes with step, linear or exponential profiles; h = h_old + sum_c g_c dh_c exactly by linearity, dh_c interpolated between snapshots (valid under mobility); re-command starts from the instantaneous Gamma; default duration reconfiguration_time_s; complex-linear path is ENG."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-12, cite:ETSI_GS_RIS008]
     gates: []
   C-BARRIERS:
     text: "Barriers at t_b = m T_c: every RX computed to to_ticks(t_b + L_min) first; observation from samples before to_ticks(t_b) (IQ-measured power, RIS state; optional positions, IQ window, oracle CSI flagged); actions at t_b + latency >= L_min, earlier raises LOOKAHEAD_VIOLATION; lateness 0 by construction; decision time does not change RX samples; in-process and remote controllers give identical RX."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-08, test:RT-17, fig:F2]
     gates: []
   C-LOCKSTEP:
     text: "Lockstep TX commitment by samples, end of burst or idle_until; RX pages wait for linked TX; stall report after the stall timeout; barrier runs deterministic; unregistered timed commands deterministic when on time, else nondeterministic_inputs."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-13, test:RT-08, test:RT-06]
     gates: []
   C-PACED:
     text: "Paced release R_j = t0 + k1/f + D_lag with hybrid sleep; late timed TX bursts dropped (time error), untimed gaps zero-filled (underflow), RX overflow drops pages, misses counted at the default slacks; paced mode is soft real time; lockstep + async is rejected."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-18, pytest:tests/io/test_io_wp8_backpressure.py, spec:DESIGN-4.10]
     gates: []
   C-BATCH:
     text: "The batch path (run_batch) evaluates combine(snapshot(t), cfg(t)) with the same model, commands, controllers and RNG keys, switches at surface time and reports tau_RIS->r; in a static scene with noise off, an in-process controller and no signaling delay its time-averaged power equals the IQ path's within the VA-4 relative tolerance, printed as numVaFourRelTol (1e-9, read by tools/vv_ids.py from sremu tests/runtime/test_va4_batch.py; VA-4 covers the static lab_like_A scene only). It holds each step at its start value (left-point rule, sremu engine/batch.py), so under mobility with a delayed controller it reads up to the stated 0.09 dB above the served IQ runs of VA-1 (va1.csv diff_iq_minus_run_batch_db, exact optimum at tau_SUI 0.1 s; checked by gen_results/case_tables) and fails VA-1's 0.02 dB limit; E-A therefore uses a separate vectorized midpoint evaluator (C-EA-EVAL)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:VA-4, test:VA-1]
     gates: []
   C-REPLAY:
@@ -240,27 +240,27 @@ claims:
     gates: []
   C-API:
     text: "UHD-shaped Python API (not UHD-compatible): TX/RX streams, UHD-style metadata with exact time specs, UHD stream modes, status codes (UHD RX and async codes plus sremu codes), timed RIS commands, set_command_time, one channel per stream; Table III generated from the code."
-    where: [sections/03_design.tex, generated/tables/table3_api.tex]
+    where: [sections/03_design.tex, generated/tables/table3_api.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-06, pytest:tests/io/test_io_api_device.py::test_api_table_iii_rows, pytest:tests/io/test_io_api_device.py::test_api_command_time_and_time_forms, pytest:tests/io/test_io_api_device.py::test_api_streamargs_rates_are_exact, table:tab:api, cite:UHDManual]
     gates: []
   C-COMPAT:
     text: "Send_to_sim / Receive_from_sim give simple scripts a one-call interface; a BPSK transmitter and receiver script pair delivers every sample through them."
-    where: [sections/03_design.tex, generated/tables/table3_api.tex]
+    where: [sections/03_design.tex, generated/tables/table3_api.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-07]
     gates: []
   C-FRAMES:
     text: "48-byte little-endian frame header (magic, version, flags, stream id, seq, first sample, count, nchan, dtype, wall clock), zero-copy payload; malformed frames dropped and counted; TX blocks at HWM (lockstep backpressure)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-01, test:IO-02, pytest:tests/io/test_io_wp8_backpressure.py]
     gates: []
   C-CONTROL:
     text: "JSON control envelope validated in order size (1 MiB), syntax, element count (65,536), schema; every refusal one code, counted; messages above the 16 MiB ZMQ MAXMSGSIZE close the connection without a reply (not counted); operations as listed; socket commands land at the exact sample with zero lateness in lockstep."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-01, test:IO-03, test:IO-04, pytest:tests/io/test_io_wp8_messages.py]
     gates: []
   C-SECURITY:
     text: "No message field is a file path; loopback binding unless remote binding is allowed; no authentication; per-client command rate limit refused and counted."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:IO-04]
     gates: []
   C-RAW:
@@ -270,34 +270,34 @@ claims:
     gates: []
   C-TABLES:
     text: "Response tables Gamma(s,f,theta_i,theta_s) on one angle grid: signed in-plane angles atan2(d.u, d.n) in the plane of the panel normal and its u axis (single plane of incidence; the off-plane component is projected out, or refused with out_of_plane='error'; obliquity and indicator use 3-D cosines), read at the link carrier (flat across the signal band, which may not exceed the validity bandwidth), with mandatory provenance fields (source kind, description, reference, reference plane, polarization, cell pattern flag, sigmas, raw hash, licence, creation record, transformations)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:PH-31, pytest:tests/physics/test_ph31_validators.py]
     gates: []
   C-TABLE-CHECKS:
     text: "Validators: passivity (sigma-aware for measured/digitized), reciprocity (sigma-derived tolerance; recorded symmetrization), grid density, domain, bandwidth; complex-linear interpolation; incidence-only tables via the recorded half-difference extension; raw non-reciprocal tables rejected."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:PH-31, test:PH-28]
     gates: []
   C-TABLE-IMPORT:
     text: "CSV long form + provenance sidecar, MATLAB S-curve importer (simulated stand-in); built-ins: lab binary (assumed amplitudes), Tang RIS1/RIS2, ideal b-bit, antipodal, on-off, Abeywickrama; Monte Carlo sampling from stated sigma."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [test:PH-31, pytest:tests/physics/test_ph31_builtin_tables.py, pytest:tests/unit/test_states_cli.py, cite:Tang2022mmWave, cite:Mishra2025WCL, cite:Abeywickrama2020Practical]
     gates: []
   C-CAPS:
     text: "Panel capabilities with GS RIS 008 parameter names where they exist (n_elements, layout, control_granularity, states, gamma_source, operating_band_hz, max_bandwidth_hz, reconfiguration_time_s, max_command_rate_hz, static_power_w as metadata)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [pytest:tests/unit/test_contracts.py::test_ris_capabilities_defaults_and_dict, pytest:tests/io/test_io_wp8_messages.py::test_rt08_caps_roundtrip_with_nonfinite_floats, cite:ETSI_GS_RIS008, table:tab:standards]
     gates: []
 
   # ================================================================ IV Physical model
   C-STACK:
     text: "Analytic trajectories (static, waypoints, constant velocity, RWP 1-D/2-D, trace, external); snapshot in f64 gives non-RIS paths and B[r,s,n] per panel (rows = link x ground hop variant; separable form for angle-free tables); combine linear in Gamma; Friis-normalized coefficients; baseband conventions."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:ST-01, test:PH-08, test:PH-32, pytest:tests/physics/test_ph_geometry_trajectories.py, pytest:tests/physics/test_ph_propagation_contract.py::test_contract_combine_linear_in_gamma_and_disabled_panel, pytest:tests/physics/test_ph_propagation_contract.py::test_contract_angle_dependent_table_uses_b_form, cite:Bettstetter2003RWP]
     gates: []
   C-LOS:
     text: "LOS with scalar co-polar patterns (isotropic, cos^alpha with peak 2(alpha+1), tabulated) and explicit visibility (occluder 0, partition 10^(-L/20) [ENG], knife edge F(nu) coherent with RIS paths); occluders and partitions act on the LOS path and the ground and wall images (physics/propagation.py, ground.py, walls.py), never on a RIS hop; optional ground image, RIS hop image expansion, order-1 walls, additive diffuse."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-01, test:PH-27, test:PH-11, test:PH-10, test:PH-32, test:PH-08, test:ST-02]
     gates: []
   C-K1:
@@ -312,12 +312,12 @@ claims:
     gates: []
   C-K1-FORMS:
     text: "For point cells K1 equals Tang et al.'s cell model times j, ETSI GR RIS 003 clause 6.3.1.2 with G = 4 pi dx dy / lambda^2, and Ellingson's model with area-tied element gain, to double precision."
-    where: [sections/04_physical_model.tex, sections/10_conclusion.tex]
+    where: [sections/04_physical_model.tex]
     evidence: [test:PH-02, cite:Tang2022mmWave, cite:ETSI_GR_RIS003_v121, cite:Ellingson2021PathLoss]
     gates: []
   C-K1-GUARDS:
     text: "Scenario check warns below three wavelengths and rejects below one; default obliquity energy-bounded; Kirchhoff option warns; only with the Kirchhoff obliquity is K1 the physical-optics integral, with the default it is an area-tied aperture kernel (both agree at specular); the continuous reference integral of F3(a) uses the default obliquity (figures/src/f03_aperture_tang.py)."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-23, pytest:tests/unit/test_scenario_guards.py, fig:F3]
     gates: []
   C-CELL-MODEL:
@@ -327,69 +327,69 @@ claims:
     gates: []
   C-RICHARDSON:
     text: "Richardson check for po_patch: up to 8 representative links at Delta and Delta/2, at most 2 halvings to 0.05 dB, else failure; result in the manifest."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-04, pytest:tests/physics/test_ph04_refinement.py]
     gates: []
   C-NONIDEAL:
     text: "Ordered non-ideality pipeline: granularity expansion, quantizer argmax Re{Gamma-bar e^-j phi} with Gamma-bar the table at the panel reference geometry (unequal amplitudes), failure map (dead absorbing), table at cell angles, efficiency sqrt(eta) refused for measured/digitized unless overridden, coupling hook (a CouplingHook protocol whose only implementation is NoCoupling; separable tables only), transition. Mutual coupling is not modelled: a per-state table Gamma(S,F,T,T) holds coupling only for identical neighbours (locally periodic model, GR RIS 003 5.1.2). Closed-form checks incl. the binary decomposition Gamma = m +- d."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-13, test:PH-15, test:PH-25, test:PH-30, test:ST-03, cite:ETSI_GR_RIS003_v121]
     gates: []
   C-OPTIMUM:
     text: "Exact finite-alphabet optimum by a critical-angle sweep, O(S^2 N log(S^2 N)), equal to exhaustive search on every tested instance; not claimed as new."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-24, test:PH-29, cite:Zhang2022OptimalBinary, cite:Zhao2024OptimalDiscrete]
     gates: []
   C-DOPPLER:
     text: "Geometric Doppler: absolute snapshot grid; chord delay with exact carrier phase and complex-linear amplitude per non-RIS path; RIS rows split into tiles (reference delay + interpolated residual); switches never interpolated across."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-17, test:PH-18, test:PH-19]
     gates: []
   C-INTERP-BOUND:
     text: "One target eps_rel split in half between chord (T_curv formula) and tile residual; T_u0 = min(T_curv, cap), halvings up to M_MAX, cheapest feasible pair; scenario can lower T_u only."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-18, test:PH-19]
     gates: []
   C-VERIFY-INTERP:
     text: "verify_interp evaluates the exact midpoint snapshot every 64th interval, logs the max relative error per link, keeps the maximum in the manifest and flags runs above 2 eps_rel."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-18]
     gates: []
   C-FD:
     text: "Narrowband test pi B dtau <= 0.05 rad; otherwise grouped paths with one FD filter per group; Kaiser-sinc (beta 8) with 8/16/32 taps for B/f_s up to 0.2/0.6/0.8, 1024-phase polyphase table with linear interpolation, in-band error below -60 dB; wider bands rejected; integer delay when pi B/(2 f_s) <= 0.05."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-20, test:RT-11, cite:Laakso1996FracDelay]
     gates: []
   C-NOISE:
     text: "Thermal noise once per receiver, power k_B T0 F f_s (T0 = 290 K)."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:PH-21, test:G5]
     gates: []
   C-RNG:
     text: "Keyed variates: BLAKE2b-derived keys of (seed, purpose, name), Philox4x32-10 counter = absolute index; adding nodes or rechunking changes no other variate; backends produce identical integer streams; CFO as phase of the absolute index; Wiener PN; front end."
-    where: [sections/04_physical_model.tex]
+    where: [sections/04_physical_model.tex, sections/app_c_model.tex]
     evidence: [test:RT-14, test:RT-09, test:G4, pytest:tests/runtime/test_noise_oscillator.py, pytest:tests/runtime/test_noise_frontend.py, cite:Salmon2011Philox]
     gates: []
 
   # ================================================================ VIII Discussion
   C-STANDARDS:
     text: "Table VI maps GR RIS 002 (controller / micro-controller / control signalling), GR RIS 003 (5.1.2, 5.1.3, 6.3.1.2, 6.6, 6.8) and GS RIS 008 (4.1-4.8) to sremu elements; alignment, not conformance; EVM row used by the E-B study."
-    where: [sections/08_discussion.tex, sections/tables/table6_standards.tex]
+    where: [sections/08_discussion.tex, sections/tables/table6_standards.tex, sections/app_a_survey.tex]
     evidence: [table:tab:standards, cite:ETSI_GR_RIS002_v121, cite:ETSI_GR_RIS003_v121, cite:ETSI_GS_RIS008, test:PH-02, test:PH-05, test:PH-23, test:PH-26, test:PH-30, test:PH-31, test:RT-05, test:RT-06, test:RT-08, test:RT-12, test:RT-17, test:IO-03, test:G2, test:G3, fig:F9]
     gates: []
   C-CONTROLLER-API:
     text: "Controller protocol (name, period, min latency, observation spec, latency model; setup with capabilities and keyed generator; decide) runs in process or remotely with identical RX; built-ins as listed (incl. a reading of the WCL heuristic and a UCB1 bandit); keyed randomness. Gate H-3: the sentence makes a statement about the WCL letter (our reading of its heuristic)."
-    where: [sections/08_discussion.tex]
+    where: [sections/08_discussion.tex, sections/app_b_interfaces.tex]
     evidence: [test:RT-08, test:VA-3, pytest:tests/unit/test_wp9_controllers.py, pytest:tests/unit/test_wp9_rng_reproducibility.py, cite:Mishra2025WCL, cite:Auer2002UCB]
     gates: [H-3]
   C-RISENV:
     text: "RisEnv: Gymnasium reset/step (subclass when installed, duck-typed otherwise), state or codebook actions after a latency, pilot-tone power reward, keyed samplers; batch path only in this release (IQ backends not connected)."
-    where: [sections/08_discussion.tex]
+    where: [sections/08_discussion.tex, sections/app_b_interfaces.tex]
     evidence: [pytest:tests/unit/test_wp9_env.py, pytest:tests/unit/test_wp9_gym_quickstart.py, cite:Towers2024Gymnasium]
     gates: []
   C-REGRET:
     text: "RisEnv reports the exact finite-alphabet optimum from oracle CSI and the regret gap (zero for an optimal controller; can be negative with dead cells); the optimum bounds every built-in controller at every tested position."
-    where: [sections/08_discussion.tex]
+    where: [sections/08_discussion.tex, sections/app_b_interfaces.tex]
     evidence: [test:VA-3, pytest:tests/unit/test_wp9_env.py::test_env_regret_is_zero_at_the_exhaustive_optimum_and_nonnegative, pytest:tests/unit/test_wp9_env.py::test_rollout_exact_optimum_has_zero_regret_and_ris_absent_drops_the_ris]
     gates: []
   C-LIMITS:
@@ -415,12 +415,12 @@ claims:
     evidence: [test:PH-05, test:PH-20, test:RT-16]
     gates: []
   C-REPRO:
-    text: "Two repositories; the lock names the emulator commit that holds the results (the results-only commit that contains the regeneration commit's code); tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates in a test record of the locked code, current figures, pipeline macros and supported claims (the tool currently requires junit commit == lock commit, which is stricter; see the open issue on results-only locks); code constants read from the locked code; manifests and bitwise replay; the results record their own commit, tree state and host (provenance table); neither repository is public yet (availability section)."
+    text: "Two repositories; the lock names the emulator commit that holds the results (a results-only commit: it adds nothing but result files to the code commit below it; no hash in the text, since the lock is re-pinned); tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates in a test record of the locked code, current figures, pipeline macros and supported claims (the tool currently requires junit commit == lock commit, which is stricter; see the open issue on results-only locks); code constants read from the locked code; manifests and bitwise replay; the results record their own commit, tree state and host (provenance table); neither repository is public yet (availability section)."
     where: [sections/appendix.tex]
     evidence: [spec:DESIGN-13.5, test:RT-16, table:tab:provenance]
     gates: []
   C-REPRO-RUNS:
-    text: "Provenance of this version (must-fix 14), all from data: results at txtProvRegenCommit (= test record's sidecar commit, clean) are txtProvRegenResults, all but benchmarks from one regeneration job on txtProvRegenHost (sidecar); the lock commit (0f06793) adds only result files to that commit; the other results keep their commits, txtProvOtherCommits, grouped from the provenance rows by tools/vv_ids.py; benchmarks are separate jobs on dedicated hosts; V-LAB is not rerun (locked plan): one run at txtLabCodeCommit (clean) on predictions computed before the lock; the regeneration job's vlab_check (sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json, hash in meta.json, checked by tools/vv_ids.py) shows the V-LAB protocol and analysis files byte-identical to 7a63287 and the protocol digest equal to the lock; imported modules changed, so no claim that a rerun would reproduce it."
+    text: "Provenance of this version (must-fix 14), all from data: results at txtProvRegenCommit (= test record's sidecar commit, clean) are txtProvRegenResults, all but benchmarks from one regeneration job on txtProvRegenHost (sidecar); the lock commit adds nothing but result files to the code commit below it (generic since 2026-10-12: the lock will be the results-only commit on a newer code commit, so the text names no hash), and each result keeps its own commit; the other results keep their commits, txtProvOtherCommits, grouped from the provenance rows by tools/vv_ids.py; benchmarks are separate jobs on dedicated hosts; V-LAB is not rerun (locked plan): one run at txtLabCodeCommit (clean) on predictions computed before the lock; the regeneration job's vlab_check (sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json, hash in meta.json, checked by tools/vv_ids.py) shows the V-LAB protocol and analysis files byte-identical to 7a63287 and the protocol digest equal to the lock; imported modules changed, so no claim that a rerun would reproduce it."
     where: [sections/appendix.tex]
     evidence: [table:tab:provenance, spec:DESIGN-10.9, spec:DESIGN-13.5]
     gates: []
@@ -438,17 +438,17 @@ claims:
   # ================================================================ V Verification and validation
   C-VV-TABLE:
     text: "Table VII (generated from the test record of commit txtProvRegenCommit, the regeneration job's junit): every analytic identifier (PH, RT, IO) passes; ST, G and VA (VA-1, VA-3, VA-4, VA-5; there is no VA-2) tiers as counted; total passed and skipped tests; no skipped test carries a spec id; Appendix G lists every cited identifier (C-ID-TABLE)."
-    where: [sections/05_verification_validation.tex, generated/tables/table4_vv.tex]
+    where: [sections/05_verification_validation.tex, generated/tables/table4_vv.tex, sections/app_d_vv.tex]
     evidence: [table:tab:vv, test:PH-01, test:PH-02, test:PH-04, test:RT-01, test:RT-03, test:RT-05, test:RT-08, test:IO-01, test:IO-02, test:ST-01, test:ST-04, test:G1, spec:DESIGN-10.1]
     gates: []
   C-MATLAB:
     text: "Goldens G1-G8 from MATLAB R2026a scripts pass; this is code-to-code agreement, not validation; G2/G3 compare beam shapes after removing a documented constant and say nothing about absolute RIS power."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:G1, test:G2, test:G3, test:G4, test:G5, test:G6, test:G7, test:G8, cite:ETSI_GR_RIS003_v121, spec:DESIGN-10.6]
     gates: []
   C-REFINE:
     text: "Fixed-aperture refinement (F3a): K1 with the default cell model stays within the stated deviation of the far-field closed form for every N; the patch model stays within the stated deviation of the continuous PO integral near field; the point model converges slowly (model-form difference)."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:PH-04, test:PH-26, fig:F3]
     gates: []
   C-LAB-DATA:
@@ -463,44 +463,44 @@ claims:
     gates: []
   C-LAB-POWER:
     text: "Before unblinding, the decoy power analysis (500 decoys from M2) gave a C2 detection rate of 0, below the 0.5 threshold: labelled underpowered. The decoy counts of C1 and C3 are reported with it (protocol paper_wording)."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:V-LAB, fig:F4]
     gates: []
   C-LAB-RESULT:
     text: "Unblinded outcome: C1, C2, C3 fail (also in every sensitivity run); median test RMSE of M0, M0n, M2 and bias as generated; Spearman rho with its 95 % (Fieller) interval; descriptive, outside the decision rules: the observed RMSE gain lies close to the median of the decoys drawn from M2 and above that of the decoys drawn from M0; null result, underpowered, not evidence for or against the model; one colour-scale-pinned cell is an outlier."
-    where: [sections/05_verification_validation.tex, generated/tables/table5_lab.tex]
+    where: [sections/05_verification_validation.tex, generated/tables/table5_lab.tex, sections/app_d_vv.tex]
     evidence: [test:V-LAB, fig:F4, table:tab:lab]
     gates: []
     banned_word_uses:
       - {word: only, context: "from LOS-only"}
   C-LAB-LESSON:
     text: "Diagnostic outside the protocol: no single extra lab fact raises the C2 detection rate above 0; exact tile geometry plus positions to +-1 mm gives the stated rate (close to the 0.5 threshold); a RIS map at 3.5 GHz needs geometry recorded to about a millimetre before it can separate the models."
-    where: [sections/05_verification_validation.tex, sections/10_conclusion.tex]
+    where: [sections/05_verification_validation.tex, sections/10_conclusion.tex, sections/app_d_vv.tex]
     evidence: [test:V-LAB, spec:DESIGN-10.9]
     gates: []
   C-CFO:
     text: "Noise-free CFO sweep: LS and lag-1 estimators recover the applied offset within the stated errors; the received samples are identical for client epochs of 0.25, 2 and 3.7 ms (V-CFO-1); the same sweep across two OS processes over native ZMQ is bitwise identical (V-CFO-3)."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:V-CFO-1, test:V-CFO-3, test:G4, fig:F5]
     gates: []
   C-CFO-LESSON:
     text: "Generic design lesson (no simulator named): delivering a whole number of samples per tick scales every frequency estimate by the ratio of needed to delivered samples (11.76/11 here); reproduced by re-timing sremu's own output; exact rational counts remove it."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:V-CFO-2, test:RT-01, fig:F5, spec:DESIGN-D24]
     gates: []
   C-CRB:
     text: "With the emulator's physical noise a periodogram estimator reaches the CRB (pooled ratios as generated; the lowest, below 1, is 2.3 standard errors from 1 and read as sampling error; worst offset within 1.5 x CRB); the lag-1 estimator follows its own small-error theory."
-    where: [sections/05_verification_validation.tex, sections/10_conclusion.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:ST-05, test:V-CFO-1, fig:F5, cite:Kay1989Freq]
     gates: []
   C-BER:
-    text: "BER through the emulator (physical noise): theory inside the 95 % Clopper-Pearson interval at every point with genie CSI; outside at the stated number of low-Eb/N0 points with 64-pilot LS (estimation loss); ST-04 is the CI version."
-    where: [sections/05_verification_validation.tex]
+    text: "BER through the emulator (physical noise), study E-F (Fig. F5(c); sweeps/results/E-F/ber): theory inside the 95 % Clopper-Pearson interval at every one of the numBerPoints points with genie CSI; outside at the stated number of low-Eb/N0 points with 64-pilot LS (estimation loss). Section V-E cites E-F for this result; ST-04 is the reduced version in the test record (99 % intervals, 6 points per modulation, at least 100 errors or 2e6 bits) and is cited only in Appendix D for what it covers."
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:ST-04, fig:F5]
     gates: []
   C-DOPPLER-VV:
     text: "Rendered LOS Doppler equals the closed form within the stated deviation; the RIS contribution follows an independent per-cell K1 sum where the reference RIS amplitude exceeds 10 % of its maximum (away from pattern nulls); interpolation error at auto T_u far below eps_rel, growing as T_u^2; verify_interp follows it but reads low (up to the stated percentage)."
-    where: [sections/05_verification_validation.tex]
+    where: [sections/05_verification_validation.tex, sections/app_d_vv.tex]
     evidence: [test:PH-17, test:PH-18, test:PH-19, fig:F6]
     gates: []
 
@@ -511,57 +511,57 @@ claims:
   # research/analysis/bench_findings.md. F5 (native ZMQ) is pending a rerun: placeholder only.
   C-WC-DEFS:
     text: "Definitions as in DESIGN 12.1: lockstep vs paced (release R_j); RTF = min over received streams of samples/f_s per wall second; aggregate throughput = received samples summed over streams per wall second; page latency = delivery - R_j; miss at slack s when latency > s, so the miss rate is the latency CCDF and zero slack is missed by construction (computation starts at R_j); Sustainable = >= 60 s after a 5 s warm-up, miss rate < 1e-3 at 1 ms slack, no late input samples, no overflowing pages; visible latency and lateness of commands."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.1, spec:DESIGN-4.10, test:RT-18]
     gates: []
   C-WC-HOSTS:
     text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge, B3/B4 on AWS c7i.8xlarge with the engine pinned to 16 logical CPUs and nothing else running, B6 on the laptop; B1-B4 at one emulator commit (309c633), B3/B4 from a clean tree, B1/B2 with a recorded dirty flag although their uploaded bundle is byte-identical to the commit's tree (bench meta.json dirty_note; provenance table); B2 packed 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; B3 is headless; benchmark scenes carry no physical result (Table VII); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX)."
-    where: [sections/06_wallclock.tex, generated/tables/table7_platforms.tex]
+    where: [sections/06_wallclock.tex, generated/tables/table7_platforms.tex, sections/app_e_bench.tex]
     evidence: [table:tab:platforms, table:tab:provenance, spec:DESIGN-12.3]
     gates: []
   C-WC-LOCKSTEP:
     text: "B2 lockstep (packed): points planned/run/ok/below floor/failed as generated, every failure an F5 (native ZMQ) point: three receive time-outs from a benchmark configuration error (served run shorter than the clients' streams) and one benchmark error below the floor, both fixed in the benchmark (sremu 60d0e6d), not in the emulator; F5 excluded and its base-point RTF from the rerun at the pinned commit (placeholder until then); base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; static limit 8 links at RTF >= 1 for every N at 1 MS/s; a single link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F7, spec:DESIGN-12.2, pytest:tests/bench/test_bench_zmq_point.py]
     gates: []
   C-WC-ISOLATION:
     text: "Isolation check: the six reference points rerun alone were up to 16 % faster (ratio 0.99-1.16), so packed RTFs are conservative; at 16 links the packed RTF is 0.90-0.94 over N while the base configuration alone (B1) reached 1.07; the limit is 8 links packed and between 8 and 16 alone."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F7]
     gates: []
   C-WC-PACED:
     text: "B3 paced (headless, AWS c7i.8xlarge): largest Sustainable configuration per series as generated (8 links at 1 MS/s with 1.024 ms pages, worst p99 and miss rate as generated; one link at 0.512 ms pages; 2 links at 0.256 ms pages; a single link at 23.04 MS/s; 2 links at 5.76 MS/s (0.356 ms pages); at 0.512 ms pages 4 links with four surfaces, more than with one, and one link at N = 4096)."
-    where: [sections/06_wallclock.tex, sections/abstract.tex, sections/10_conclusion.tex]
+    where: [sections/06_wallclock.tex, sections/abstract.tex, sections/10_conclusion.tex, sections/app_e_bench.tex]
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-WC-SHORTPAGES:
     text: "Short pages: the two-link 0.512 ms point failed in one of three repetitions through a few stalls of up to 11 ms although its median utilization is 0.27; mobility (F3) misses the deadline on the pages that hold a snapshot recomputation (miss rate equal to the snapshot-page share P/(f_s T_u)); at 0.1 MS/s 58 pages above 1 ms (1-4 ms) fail the threshold in the single repetition, not explained by per-page cost or timers (the engine spins before releases closer than 1.5 ms); cause not identified."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F8]
     gates: [H-5]
   C-WC-LOCKCMD:
     text: "B4 lockstep: 22,800 commands at 10 Hz-10 kHz, in process and remote, all lateness values zero; at 10 kHz one command per run switches after the end of the run and stays scheduled (benign); the original check counted it, the corrected check recomputed offline passes; per-command engine cost 1.25-1.49 ms from RTF with and without the loop; RTF at 10 kHz none/in-process/remote as generated."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [test:RT-08, pytest:tests/bench/test_bench_b4_checks.py, pytest:tests/bench/test_bench_suites.py::test_b4_lockstep_check_rejects_vacuous_zero_lateness]
     gates: []
   C-WC-PACEDCMD:
     text: "B4 paced, served over the control socket: no repetition Sustainable; 1 ms-slack miss rates at 10 and 100 commands/s as generated vs at most ~1e-3 headless (B3, same links and pages); asap visible latency median and p99 as generated; the paced schedule adds at most one page; the floor is the engine work on the page with a configuration change; the spread is consistent with the GIL hand-over between the control thread and the paced loop (most of the latency from the implementation: configuration change and serving thread, not the paced schedule; rare outliers up to 76 ms); B3 comparison is across two instances of the same type; timed commands with a 2 ms lead below the command latency were late and applied on arrival (rule: lead > latency + clock-estimate error); >= 1 kHz engine-bound (achieved rate; page latencies up to 29 s; a repetition up to 18 % longer than its virtual time since the engine catches up after the client stops; timed-command backlog)."
-    where: [sections/06_wallclock.tex, sections/10_conclusion.tex]
+    where: [sections/06_wallclock.tex, sections/10_conclusion.tex, sections/app_e_bench.tex]
     evidence: [fig:F8, test:RT-06, spec:DESIGN-4.10]
     gates: [H-5]
   C-WC-COSTMODEL:
     text: "B1 cost model (DESIGN 7.4 form, 20 engine points): indicative, relative RMS 39 %, max 69 %; constant term 65 us = 76 % of the 86 us single-link page; largest errors are mobility underestimates, where a snapshot costs ~0.61 ms + 0.50 ms per link with little RQ dependence at the B1 sizes (8-coefficient diagnostic fit, 12 %, not used for prediction); at the larger N of B2 the snapshot cost grows with N (same snapshot period for N >= 900, F3 RTF still falls); snapshot kernel exponents 1.06 (NumPy, RQ 40 to 1e6) and 0.76 (numba, to 1.7e7)."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-7.4, spec:DESIGN-12.2]
     gates: []
   C-WC-CROSSTOOL:
     text: "B6 context on the laptop (not a ranking): same near-field sum, sremu vs MATLAB R2026a agree to 7.8e-14 dB; per-evaluation times for sremu (new positions, configuration change), vectorized MATLAB, per-element MATLAB loop and phased.RISReflector (different model) as generated; different work per call, one loaded machine, per-call time not the cost of a streaming emulator."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.2, test:G1]
     gates: []
   C-WC-LIMITS:
     text: "Limitations of Section VI: stated hosts, commit and scenes only; one instance per benchmark, 3 repetitions; paced timing headless or with the control socket alone; F5 pending; packed values conservative by up to 16 %; indicative cost model; B6 laptop not idle; paced mode is soft real time."
-    where: [sections/06_wallclock.tex]
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.3]
     gates: []
 
@@ -573,12 +573,12 @@ claims:
   # the supporting row. Every number is a gen_results.py macro read from those results.
   C-EB-WHY:
     text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; GR RIS 004 sizes the RIS-controller delay budget by the 5G NR frame structure (cl. 4.4); E-B runs at the sample level in lockstep with an in-process controller (modelled latency) and measures how the two interact; its three lessons (equalizer trained before a mid-packet switch; a long linear transition spreads but does not remove the damage; with a strong LOS QPSK tolerates the wrong configuration) are the E-B1 and E-B2 results below."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [cite:ETSI_GS_RIS008, cite:ETSI_GR_RIS004, test:E-B, test:VA-5, fig:F9]
     gates: []
   C-EB-SETUP:
     text: "E-B setup. Primary geometry modelled on the lab arrangement (SIM, nominal geometry: every distance or angle known only within a range takes the middle of that range; not the measured geometry; no measurement compared): six tiles of 5 x 8 cells on an arc around the Tx acting as one surface, joint exact optimum per receiver over all cells, one command per tile for the same time. Lab-like SIM geometry (one panel of three tiles) as the supporting case. Receiver positions (1.2 m from the Tx at two angles) are an engineering choice [ENG]. Assumptions for both: |Gamma| = 1 (ASSUMED), complex-linear transition [ENG], the LOS-blocking plate removes the LOS only, never a RIS hop, although on the arc it crosses numEbArcBlockerCrossed of the numEbArcBlockerCells Tx->cell segments (recorded by the E-B driver per blocked point; no cell->RX segment), so the blocked results belong to that idealized regime and the LOS-present cases are the physically consistent ones. QPSK packets, one-shot preamble equalizer, Es/N0 at RX1."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [test:E-B, pytest:tests/unit/test_eb_arc.py, fig:F9, spec:DESIGN-11-E-B]
     gates: []
   C-EB-MECH:
@@ -587,7 +587,7 @@ claims:
     evidence: [test:VA-5, test:RT-05, pytest:tests/runtime/test_eb_arc_va5.py, fig:F9]
     gates: []
   C-EB-TIMING:
-    text: "E-B2 on the arc, lockstep with a modelled latency Lambda = 0.2 ms + J U: the whole grid (guards 0.1/0.5/1 ms, five J, timed with three leads, asap, tick-based; lab alphabet LOS present at 25 and 15 dB and blocked at 25 dB; ideal 1-bit LOS present at 25 and 15 dB) was fixed before any point ran (eb_plan.json) and is reported in Table tab:eb2grid; F9b shows the 0.5 ms guard. Timed commands carry a switch time at the guard centre and apply on arrival if late; asap commands apply on arrival, as untimed UHD commands. At the 0.5 ms guard: 0.5 ms lead fails at J = 1 ms (both F9b cases), 5 ms lead loses none at any J; LOS present at 25 dB QPSK tolerates the wrong configuration. gen_results checks the 0.5 ms-guard lead and guard rules on every row of the two F9b cases (the asap guard rule as stated holds at that guard only: at the 0.1 ms guard a switch early in the preamble costs nothing, see C-EB-CLOSED). Conclusion (unchanged in this round, open issue for part 2): in the guard slice studied, untimed commands lost packets once the worst latency exceeded the guard."
+    text: "E-B2 on the arc, lockstep with a modelled latency Lambda = 0.2 ms + J U: the whole grid (guards 0.1/0.5/1 ms, five J, timed with three leads, asap, tick-based; lab alphabet LOS present at 25 and 15 dB and blocked at 25 dB; ideal 1-bit LOS present at 25 and 15 dB) was fixed before any point ran (eb_plan.json) and is reported in Table tab:eb2grid; F9b shows the 0.5 ms guard. Timed commands carry a switch time at the guard centre and apply on arrival if late; asap commands apply on arrival, as untimed UHD commands. At the 0.5 ms guard: 0.5 ms lead fails at J = 1 ms (both F9b cases), 5 ms lead loses none at any J; LOS present at 25 dB QPSK tolerates the wrong configuration. gen_results checks the 0.5 ms-guard lead and guard rules on every row of the two F9b cases (the asap guard rule as stated holds at that guard only: at the 0.1 ms guard a switch early in the preamble costs nothing, see C-EB-CLOSED). Conclusion (must-fix 10, 2026-10-12): with the line of sight blocked the PER followed the closed form of the semantics; commands applied on arrival (asap) lost no packet while their worst latency (0.2 ms + J) stayed below the guard plus the preamble (T_pre = numEbTpreMs ms), timed ones below the lead plus half the guard plus T_pre (the conclusion says 'applied on arrival', not 'untimed': tick-based commands carry no time either and lose packets at any latency through the wait for the next tick; every blocked cell with a zero closed form lost nothing, at all three guards: case_tables.eb2_compare; at the 0.1 ms guard asap with J = 0.1 ms has a worst latency of 0.3 ms, above the guard but below guard + T_pre, and lost none); with the line of sight present the waveform sets the cost (C-EB-CLOSED)."
     where: [sections/07_case_studies.tex, sections/app_f_cases.tex, sections/10_conclusion.tex]
     evidence: [test:E-B, test:RT-07, fig:F9, table:tab:eb2grid, cite:UHDManual]
     gates: []
@@ -603,12 +603,12 @@ claims:
     gates: []
   C-EB-SERVED:
     text: "Bridge to the served path (MAJOR-3): E-B is lockstep with a modelled latency; over the served control socket in paced mode (B4) the visible asap latency has the stated median and p99 ranges and rare outliers, and with the 2 ms lead used there the stated per-repetition fraction of timed commands was late at 10 commands/s; a timed command there is on time when its lead exceeds the command latency plus the client's virtual-time error (the rule of Section VI; no computed needed-lead macro, R2-F2; the earlier 'p99 + one page' rule was dropped because B4 repetition 2 at 10 commands/s had 1.2 % late with a 2 ms lead, below its 5.6 ms asap p99); the J <= 1 ms regime of F9 is not yet reachable through the served path. Numbers are B4 macros and change with the transport rerun."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [fig:F8, fig:F9, test:RT-06]
     gates: [H-5]
   C-EB-LABLIKE:
     text: "Supporting lab-like SIM geometry (F9c,d), LOS blocked at 25 dB: channel change and bit errors after the switch; timed commands with a 2 ms lead lose no packet up to J = 1 ms and the stated fraction at J = 3 ms; asap and tick-based losses as generated; LOS present: no packet lost at 25 dB (checked); no 15 dB run in this geometry."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [test:E-B, test:VA-5, fig:F9]
     gates: []
   C-EA-SETUP:
@@ -627,7 +627,7 @@ claims:
     evidence: [test:E-A, cite:Mishra2025WCL]
     gates: [H-3]
   C-EA-RESULT:
-    text: "E-A: optimum gain (mean of per-batch dB) and tau_half with CIs at both carriers; in units of lambda/v the half-lives are the stated constants: the time scale is the classical lambda/v (Doppler) scaling [Clarke 1968, Jakes 1974], consistent with known channel-aging effects on RIS [Papazafeiropoulos 2023, Zhang 2022]; the constant is geometry- and metric-specific (Clarke field/envelope half-correlation times 0.24/0.18 lambda/v; the 0.42 rule of thumb is a geometric mean of 1/f_D and the envelope half time, not a correlation level); the tau ratio lies 3 % above the wavelength ratio 0.417 (corridor fixed in metres); H-A1/H-A2 supported but their pre-set ranges were wide (weak test); the constant is not universal: over the 12 computed geometries (tau_half.csv; Table tab:eageo) tau_half spans 0.27-0.55 lambda/v (0.082-0.163 s at 1 GHz), rising with the partition loss at fixed carrier and offset and falling with the offset h at fixed loss (monotonicity checked by gen_results), 0.35 lambda/v without the partition; Section VII-B gives the no-partition (A0) optimum gain and tau_half at 1 GHz (numEaGainAzero, numEaTauHalfAzero), the values a partition acting on both the LOS and the AP->RIS hop would give, since the A1 gains and tau_half belong to the idealized LOS-only partition (mock review must-fix 6); 0.42 lambda/v is the primary geometry's value; one trajectory at one speed; what E-A adds: the constants for these geometries, the retention metric, the negative bandit/URAP result (H-A3 supported); the WCL heuristic reaches the stated gain at the shortest delay (gate H-3). Abstract ('a time set by lambda/v', 0.126 s) and conclusion (0.421 lambda/v 'in the corridor studied') name the primary geometry only: open issue for part 2. Conclusion: reports younger than a fraction of lambda/v."
+    text: "E-A: optimum gain (mean of per-batch dB) and tau_half with CIs at both carriers; in units of lambda/v the half-lives are the stated constants: the time scale is the classical lambda/v (Doppler) scaling [Clarke 1968, Jakes 1974], consistent with known channel-aging effects on RIS [Papazafeiropoulos 2023, Zhang 2022]; the constant is geometry- and metric-specific (Clarke field/envelope half-correlation times 0.24/0.18 lambda/v; the 0.42 rule of thumb is a geometric mean of 1/f_D and the envelope half time, not a correlation level); the tau ratio lies 3 % above the wavelength ratio 0.417 (corridor fixed in metres); H-A1/H-A2 supported but their pre-set ranges were wide (weak test); the constant is not universal: over the 12 computed geometries (tau_half.csv; Table tab:eageo) tau_half spans 0.27-0.55 lambda/v (0.082-0.163 s at 1 GHz), rising with the partition loss at fixed carrier and offset and falling with the offset h at fixed loss (monotonicity checked by gen_results), 0.35 lambda/v without the partition; Section VII-B gives the no-partition (A0) optimum gain and tau_half at 1 GHz (numEaGainAzero, numEaTauHalfAzero), the values a partition acting on both the LOS and the AP->RIS hop would give, since the A1 gains and tau_half belong to the idealized LOS-only partition (mock review must-fix 6); 0.42 lambda/v is the primary geometry's value; one trajectory at one speed; what E-A adds: the constants for these geometries, the retention metric, the negative bandit/URAP result (H-A3 supported); the WCL heuristic reaches the stated gain at the shortest delay (gate H-3). Abstract and conclusion (must-fix 5, 2026-10-12): the primary geometry's numEaTauOverLambdaV lambda/v together with the range numEaTauLambdaVMin to numEaTauLambdaVMax lambda/v over the computed geometries; the conclusion presents it as the classical Doppler-decorrelation scaling [Clarke 1968, Jakes 1974]: position reports must be younger than a fraction of lambda/v."
     where: [sections/07_case_studies.tex, sections/app_f_cases.tex, generated/tables/tableF_eageo.tex, sections/abstract.tex, sections/10_conclusion.tex]
     evidence: [test:E-A, fig:F10, table:tab:eageo, cite:Clarke1968, cite:Jakes1974, cite:Papazafeiropoulos2023Aging, cite:Zhang2022OutdatedCSI]
     gates: [H-3]
@@ -637,37 +637,37 @@ claims:
     evidence: [test:VA-1, fig:F10]
     gates: []
   C-EC:
-    text: "E-C ablation (short analytic result, exact optimum, batch path): losses per alphabet and geometry as generated; lab states nearly antipodal (|d|, |m|; magnitudes ASSUMED unit); unequal amplitudes and ideal-design deployment cost more (conclusion: designing for the true states recovers up to the stated penalty in the geometries studied)."
-    where: [sections/07_case_studies.tex, generated/tables/table8_ablation.tex, sections/10_conclusion.tex]
+    text: "E-C ablation (short analytic result, exact optimum, batch path): losses per alphabet and geometry as generated; lab states nearly antipodal (|d|, |m|; magnitudes ASSUMED unit); unequal amplitudes and ideal-design deployment cost more (conclusion: designing for the laboratory states recovers up to the stated penalty, numEcDesignPenaltyMaxDb for an ideal design deployed on the lab states, in the geometries studied)."
+    where: [sections/07_case_studies.tex, generated/tables/table8_ablation.tex, sections/10_conclusion.tex, sections/app_f_cases.tex]
     evidence: [test:PH-24, test:PH-25, test:PH-29, fig:F11, table:tab:ablation, cite:WuZhang2020Discrete, cite:Abeywickrama2020Practical]
     gates: []
   C-ED:
     text: "E-D (model-based dimensioning, not validated): required aperture range; RIS-minus-direct gap at grazing over every distance and height of F12; the 56.25 m^2 panel suffices in none of the primary map entries; the four-ray sensitivity and the experimental P.526 direct path change the count."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [test:PH-10, test:PH-11, test:V-FM, fig:F12]
     gates: []
   C-EE:
-    text: "External-process runs: V-CFO-3 (two processes, native ZMQ), VA-1 (external controller and RX app) and E-E: unmodified GNU Radio 3.10.9.2 (Ubuntu package; stock gr-zeromq REQ/REP blocks and a DQPSK modem built from stock blocks, separate process) as the raw REQ/REP peer through a SIM RIS scene."
-    where: [sections/07_case_studies.tex]
+    text: "External-process runs: V-CFO-3 (two processes, native ZMQ), VA-1 (external controller and RX app) and E-E: unmodified GNU Radio 3.10.9.2 (Ubuntu package; stock gr-zeromq REQ/REP blocks and a DQPSK modem built from stock blocks, separate process) as the raw REQ/REP peer through a SIM RIS scene. The abstract names unmodified GNU Radio as an external application."
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex, sections/abstract.tex]
     evidence: [test:V-CFO-3, test:IO-02, test:IO-08, pytest:tests/integration/test_gnuradio_raw.py]
     gates: []
   C-EE-LINK:
     text: "E-E static sweep (one fresh run and modem per RIS configuration): no symbol error with focusing; SER and uncoded 200-bit block error rate (windows of the decision stream, no coding/CRC) do not decrease as the configuration gain falls; random loses every block; gains relative to focusing within the stated dB of an isotropic array-factor prediction (internal consistency check, not a measurement); implementation loss vs coherent DQPSK theory quoted only for rows with >= 100 symbol errors and the link up, larger once the link is lost. gen_results checks each statement against sweeps/results/E-E."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [table:tab:ee, pytest:tests/integration/test_gnuradio_raw.py, pytest:tests/integration/test_gnuradio_analysis.py]
     gates: []
   C-EE-TIMING:
     text: "E-E switching run: three RIS switches scheduled over the control socket before virtual time started, applied with zero lateness; ML change point of the IQ GNU Radio received at k_applied (offset 0) for each; every run: GNU Radio received every sample, bitwise equal to the emulator's own RX record, all counters zero; two independent repetitions of all runs bitwise identical (sha256 of received IQ and decisions)."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [pytest:tests/integration/test_gnuradio_raw.py::test_gnuradio_dqpsk_switching_run_through_raw_mode, pytest:tests/integration/test_gnuradio_raw.py::test_gnuradio_static_runs_are_bitwise_reproducible, pytest:tests/io/test_io08_raw_exit_when_done.py, test:IO-03]
     gates: []
   C-EE-SPEED:
     text: "E-E runs are lockstep (virtual time; the sample exchange paces the emulator); lockstep RTF range of the GNU Radio + sremu loop over every laptop sweep of single runs in the result files (three dedicated sweeps plus the throughput runs of the E-E result run while E-E comes from the laptop; CPU named, WSL2, host load not controlled) at 1 MS/s and at the highest rate run (5.76 MS/s); AWS value pending the pinned regeneration (placeholder)."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [spec:DESIGN-11-E-E, spec:DESIGN-12.1, pytest:tests/integration/test_gnuradio_raw.py]
     gates: []
   C-EE-NOTRUN:
     text: "srsRAN and OpenAirInterface analysed, not run: srsRAN 4G pads TX only to the end of the RX block it reads, lockstep needs TX one FD look-ahead ahead, so a lockstep srsRAN pair stalls without a per-peer TX delay >= look-ahead and partial RX replies; srsRAN 4G not packaged for Ubuntu 24.04; OAI rfsimulator uses its own TCP framing (new transport). Future work."
-    where: [sections/07_case_studies.tex]
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [cite:OAIrfsim, cite:srsRANZMQ, spec:DESIGN-8.4]
     gates: []

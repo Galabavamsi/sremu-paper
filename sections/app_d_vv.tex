@@ -142,7 +142,9 @@ detection rate stays close to the pre-set threshold.
 \claim{C-CFO}A receiver oscillator offset $f$ rotates the received baseband at $f$. The sweep
 used a BPSK burst of \numCfoBurstSamples{} samples at \numCfoRateSps~S/s; besides the
 least-squares phase estimator, a lag-1 estimator recovers $f$ within \numCfoLagMaxErrHz~Hz
-(Fig.~\ref{fig:F5}(a)).
+(Fig.~\ref{fig:F5}(a)). \claim{C-LINEAGE-DATA}The sweep, with its offset grid and its BPSK
+burst, appeared in the authors' unpublished ANTS 2025 submission (Section~\ref{sec:related});
+the emulator regenerates it here.
 
 \claim{C-CFO-LESSON}Fig.~\ref{fig:F5}(a) also shows the generic pitfall. At
 \numCfoRateSps~S/s a tick of \numCfoTickMs~ms holds \numCfoSamplesPerTick{} samples. A time
@@ -165,13 +167,13 @@ pre-set limit of \numCfoGateFactor{} (Fig.~\ref{fig:F5}(b); V-CFO-4, ST-05). The
 estimator follows its own small-error theory but not the bound: its variance falls with the
 number of samples, the bound's with its cube.
 
-\claim{C-BER}Fig.~\ref{fig:F5}(c) sends BPSK and QPSK through a static lab-like link with the
-emulator's physical noise. The transmit power sets $E_b/N_0$ from \numBerEbnoMin{} to \numBerEbnoMax~dB, and
+\claim{C-BER}In the study E-F, Fig.~\ref{fig:F5}(c), BPSK and QPSK pass through a static
+lab-like link with the emulator's physical noise. The transmit power sets $E_b/N_0$ from \numBerEbnoMin{} to \numBerEbnoMax~dB, and
 each point collects at least \numBerMinErrors{} errors or \numBerMaxBits{} bits. With a
 least-squares channel estimate from
 \numBerPilots{} pilots, theory falls outside the interval at \numBerLsOutside{} points, all at
-$E_b/N_0\le\numBerLsOutsideMaxEbnoDb$~dB, as expected from the estimation loss. ST-04 repeats
-the genie check with \numBerStCiPct\,\% intervals in the test record.
+$E_b/N_0\le\numBerLsOutsideMaxEbnoDb$~dB, as expected from the estimation loss. ST-04, a
+reduced version in the test record, repeats the genie check with \numBerStCiPct\,\% intervals.
 
 \begin{figure*}[t]
 \centering

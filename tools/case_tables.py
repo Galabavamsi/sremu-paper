@@ -354,10 +354,14 @@ def eb2_values(v: dict[str, str], tables: dict[str, str], a2: Sequence[Mapping[s
     v["numEbCfAsapOnePct"] = dec(100.0 * float(a1["cf"]), 1)
     v["numEbCfTimedThreeMeasPct"] = dec(100.0 * t3["per"], 1)
     v["numEbCfTimedThreePct"] = dec(100.0 * float(t3["cf"]), 1)
-    v["numEbCfMaxExcessPts"] = dec(100.0 * cmp["blocked_at_max_excess"], 1)
+    # "at most" bounds: rounded up (the exact tick excess is 1.45 points, which half-even
+    # rounding of its binary float would print as 1.4)
+    v["numEbCfMaxExcessPts"] = dec(100.0 * cmp["blocked_at_max_excess"], 1,
+                                   mode=ROUND_CEILING)
     v["numEbCfCellsPos"] = str(cmp["n_blocked_at_pos"])
     v["numEbCfCellsInCi"] = str(cmp["n_blocked_at_in_ci"])
-    v["numEbCfTickExcessPts"] = dec(100.0 * cmp["blocked_tick_free_max_excess"], 1)
+    v["numEbCfTickExcessPts"] = dec(100.0 * cmp["blocked_tick_free_max_excess"], 1,
+                                    mode=ROUND_CEILING)
     v["numEbTickOverwriteCells"] = str(cmp["n_tick_overwrite_cells"])
     v["numEbLosLoExposedMinPct"] = dec(100.0 * cmp["los_lo_ratio_min"], 0)
     v["numEbLosLoExposedMaxPct"] = dec(100.0 * cmp["los_lo_ratio_max"], 0)

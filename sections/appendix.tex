@@ -82,10 +82,9 @@ Data Availability states the conditions of their release.
 
 \claim{C-REPRO-RUNS}The results produced at emulator commit \txtProvRegenCommit{} from a clean
 tree are \txtProvRegenResults; all of them except benchmarks come from one regeneration job on
-an \txtProvRegenHost{} instance. The lock commit adds nothing but result files to
-\txtProvRegenCommit{}, so the two commits hold the same code. The other
-results keep the commit at which they were produced (Table~\ref{tab:provenance}):
-\txtProvOtherCommits. The benchmarks are measurements on dedicated hosts
+an \txtProvRegenHost{} instance. The lock commit adds nothing but result files to its parent
+commit, and each result keeps the commit at which it was produced
+(Table~\ref{tab:provenance}); for the other results these are \txtProvOtherCommits. The benchmarks are measurements on dedicated hosts
 (Appendix~\ref{app:bench}) and run as separate jobs. V-LAB is not rerun, because its analysis
 plan is locked: it ran once, at \txtLabCodeCommit{} from a clean tree, on predictions computed
 before the lock. The regeneration job checked that at \txtProvRegenCommit{} the V-LAB protocol

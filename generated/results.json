@@ -1,5 +1,5 @@
 {
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "sremu_commit": "d3fd6cb3d6f94ab37a7b20abdab5ca6a3f0f28eb",
   "note": "values computed by tools/gen_results.py from committed result files; each result ran at the commit its own record names (Table tab:provenance, summarized in Appendix H by txtProvRegenCommit / txtProvOtherCommits); V-LAB keeps its locked analysis commit by design",
   "values": {
     "numBerEbnoMax": "10",
@@ -283,7 +283,7 @@
     "numEbCfCellsInCi": "10",
     "numEbCfCellsPos": "14",
     "numEbCfMaxExcessPts": "8.8",
-    "numEbCfTickExcessPts": "1.4",
+    "numEbCfTickExcessPts": "1.5",
     "numEbCfTickZeroMaxPct": "92",
     "numEbCfTickZeroMinPct": "47",
     "numEbCfTimedThreeMeasPct": "23.1",
@@ -460,8 +460,6 @@
     "txtArchiveDoi": "\\sremuUnreleased",
     "txtBsixMatlab": "R2026a",
     "txtDataDoi": "\\sremuUnreleased",
-    "txtEAResult": "loses half its benefit after 0.126\\,s, a time set by $\\lambda/v$",
-    "txtEBResult": "where a mistimed switch costs bits, commands applied on arrival lose 39--46\\,\\% of the packets at $J=1$\\,ms, timestamped ones whose lead exceeds the latency none",
     "txtEaPlanSha": "5b59f8f2",
     "txtEbArcPanels": "six",
     "txtEeAwsInstance": "c7i.48xlarge",
@@ -573,7 +571,7 @@
     },
     "implementation": {
       "src_py_files": 103,
-      "src_lines": 40905
+      "src_lines": 40993
     },
     "sensitivity_cellmodel": {
       "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",

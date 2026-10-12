@@ -10,8 +10,8 @@
 \toprule
 Component & Model & Validity domain & Evidence & Default \\
 \midrule
-LOS & Friis + patterns + explicit V & Far field of the antennas & \texttt{PH-01} & On \\
-RIS & K1, \texttt{point} & Cell in the far field of Tx and Rx ($r \geq 3\lambda$); pitch $\leq \lambda/2$; scalar co-pol & \texttt{PH-02--07}, \texttt{G1--3}, \texttt{V-TANG} & auto \\
+LOS & Friis + patterns + explicit V & Far field of the antennas; occluders act on LOS (and ground/wall image legs), never on RIS hops & \texttt{PH-01} & On \\
+RIS & K1, \texttt{point} & Point-scatterer regime of Tx and Rx ($r \geq 3\lambda$); pitch $\leq \lambda/2$; scalar co-pol & \texttt{PH-02--07}, \texttt{G1--3}, \texttt{V-TANG} & auto \\
 RIS & K1, \texttt{po\_patch} & As above; uniform-patch PO; Richardson-converged & \texttt{PH-04}, \texttt{PH-26} & Pitch $> \lambda/2$ \\
 $\Gamma$ tables & Complex-linear LUT & Inside the grid; band $\leq$ validity bandwidth; reciprocal & \texttt{PH-28}, \texttt{PH-31} & --- \\
 Ground & Flat-earth image + Fresnel & Smooth, flat; no curvature (P.526 experimental) & \texttt{PH-10}, \texttt{PH-32}, \texttt{G8} & Off \\
@@ -21,7 +21,7 @@ Diffuse & Additive SoS & Statistical background only & \texttt{ST-02}, \texttt{G
 Mobility/Doppler & Chord delay + exact phase + tiles & $\varepsilon_{\mathrm{rel}} \leq 10^{-3}$ (bound plus \texttt{verify\_interp}) & \texttt{PH-17--19} & Auto \\
 Wideband & FD Kaiser 8/16/32 & $B \leq 0.8 f_s$; $\leq -60$ dB in band & \texttt{PH-20} & Auto \\
 Noise & $k T_0 F f_s$ per RX & --- & \texttt{PH-21}, \texttt{G5} & On \\
-Non-idealities & Ordered pipeline: command, quantizer, failures, table, efficiency, coupling hook, transition & Tables, failures, efficiency; coupling via tables only & \texttt{PH-13--15}, \texttt{PH-25}, \texttt{PH-30} & --- \\
+Non-idealities & Ordered pipeline: command, quantizer, failures, table, efficiency, coupling hook, transition & Per-state tables, failures, efficiency; coupling not modelled beyond what a per-state table measured with identical neighbours contains (coupling hook implemented as no coupling) & \texttt{PH-13--15}, \texttt{PH-25}, \texttt{PH-30} & --- \\
 Transitions & Per-class $g_c$, complex-linear $\Gamma$ path & [ENG] until measured & \texttt{RT-12} & Step \\
 \bottomrule
 \end{tabular}
