@@ -2,7 +2,7 @@
   "lab": {
     "n_points": 30,
     "n_cells": 120,
-    "direct_over_ris_cont_db": -3.427576707702222
+    "direct_over_ris_cont_db": -3.4275767077022223
   },
   "synth_near": {
     "n_points": 1,
@@ -17,7 +17,7 @@
   "synth_spec": {
     "n_points": 1,
     "n_cells": 256,
-    "direct_over_ris_cont_db": 0.4805662876491782
+    "direct_over_ris_cont_db": 0.480566287649179
   },
   "corridor": {
     "n_points": 999,

@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figcommon as fc
 
 FID = "F12"
-RUN = "../sremu/validation/fm/results/20261010T232549Z_vfm"
+RUN = "../sremu/validation/fm/results/20261012T000448Z_vfm"
 MAP = f"{RUN}/vfm_ed_map.csv"
 META = f"{RUN}/meta.json"
 A0 = 56.25

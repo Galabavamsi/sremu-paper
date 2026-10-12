@@ -1,8 +1,8 @@
 {
   "figure": "F12",
   "title": "E-D sizing map: required aperture vs obstruction excess loss; P.526 rows labelled EXPERIMENTAL; model-based dimensioning, not validated",
-  "content_key": "c160f48d1f64089c2c31590a472a0fe701a1546a510e5e62783ef524b6f1b669",
-  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "content_key": "11d9d49a04458cf2a94126082fe383742dc1b0c0bf9f0179715f6d4e7628b550",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -18,25 +18,25 @@
   ],
   "inputs": [
     {
-      "path": "../sremu/validation/fm/results/20261010T232549Z_vfm/vfm_ed_map.csv",
+      "path": "../sremu/validation/fm/results/20261012T000448Z_vfm/vfm_ed_map.csv",
       "data_class": "SIM-sremu",
       "note": "model-based dimensioning, not validated; P.526 rows EXPERIMENTAL",
       "provenance": {
-        "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
-        "sremu_dirty": true,
-        "run_dir": "validation/fm/results/20261010T232549Z_vfm",
+        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "sremu_dirty": false,
+        "run_dir": "/opt/job/out/validation/fm/20261012T000448Z_vfm",
         "study": "V-FM / E-D",
-        "dirty_patch_sha256": "81af3aa08ec9060d3ca69033a7a75751954410438f1c83b551f1bbd2e09f4cac",
-        "platform": "Windows-11-10.0.26200-SP0",
-        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics"
+        "dirty_patch_sha256": null,
+        "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
       },
-      "sha256": "821d169b9cdbde67b2daf2ea5f292031e18d150a1c79f1bf38d90e6dc59b8e3d"
+      "sha256": "bf2010c2705349bc0bf7e07d4884c5f095ff77340b1457039dc113df84ee0fa1"
     },
     {
-      "path": "../sremu/validation/fm/results/20261010T232549Z_vfm/meta.json",
+      "path": "../sremu/validation/fm/results/20261012T000448Z_vfm/meta.json",
       "data_class": "ASSUMED",
       "note": "ground constants ASSUMED",
-      "sha256": "344df0d692950b956616ebade3c069849f1947499e2be4502f44b8bd45a86082"
+      "sha256": "9e18827140896640106f93108f08bd09cf60c374370833ce29d9dd68597759d3"
     }
   ],
   "assumptions": [
@@ -47,10 +47,10 @@
   ],
   "profile": "full",
   "script": "figures/src/f12_fm_sizing.py",
-  "script_sha256": "08dc70b6b4ebbbe78dba77152266cc4a85af8b6cb44b50570c3d59b6bc0ea5e1",
+  "script_sha256": "fd1fb678c14847dbffceb82f94048da2171b325750d2ac4a2d4c62d05d1bafe4",
   "outputs": {
     "figures/out/F12.pdf": "46fce67195329c9fa14d48fb5493338f2c26c892b0cc0dc6f33b9d242d317de0",
-    "figures/data/F12.csv": "c22a41f06afd97afa93042361277e57385e75ba4801a6fa4f12e8458629f66f1"
+    "figures/data/F12.csv": "fc31ae4d6e4b98426db1ddab8d7ad1fadf5ecc9b939e3208ae3f616781635f0f"
   },
   "versions": {
     "python": "3.12.4",
@@ -59,7 +59,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T07:35:27Z",
+  "generated_utc": "2026-10-12T00:35:13Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

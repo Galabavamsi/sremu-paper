@@ -246,7 +246,7 @@
       ]
     }
   ],
-  "written_utc": "2026-10-11T06:05:59.263287Z",
+  "written_utc": "2026-10-12T00:03:50.257027Z",
   "argv": [
     "/opt/job/sremu/experiments/eb.py",
     "--scenario",
@@ -254,6 +254,8 @@
     "--out",
     "/opt/job/out/eb_arc",
     "--jobs",
-    "64"
+    "176",
+    "--threads-per-job",
+    "1"
   ]
 }

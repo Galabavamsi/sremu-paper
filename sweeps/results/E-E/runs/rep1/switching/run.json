@@ -13,46 +13,46 @@
  "tx_stream": "gr.tx0",
  "rx_stream": "grrx.rx0",
  "serve_cmd": [
-  "/home/galaba_vamsi/venv_sremu_invB/bin/python",
+  "/opt/venv/bin/python",
   "-m",
   "sremu.commands.serve",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/scene.yaml",
+  "/opt/job/out/ee/rep1/switching/scene.yaml",
   "--serve",
-  "tcp://127.0.0.1:42639",
+  "tcp://127.0.0.1:33761",
   "--pub",
   "none",
   "--tx",
-  "tcp://127.0.0.1:46637",
+  "tcp://127.0.0.1:54015",
   "--out",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/rec",
+  "/opt/job/out/ee/rep1/switching/rec",
   "--exit-when-done",
   "--raw-peer",
-  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:58555,rx_port=tcp://127.0.0.1:58211,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:58753,rx_port=tcp://127.0.0.1:32793,tx_stream=gr.tx0,rx_stream=grrx.rx0"
  ],
  "gr_cmd": [
   "/usr/bin/python3",
-  "/home/galaba_vamsi/trackG/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
+  "/opt/job/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
   "--tx",
-  "tcp://127.0.0.1:58555",
+  "tcp://127.0.0.1:58753",
   "--rx",
-  "tcp://127.0.0.1:58211",
+  "tcp://127.0.0.1:32793",
   "--n",
   "1650000",
   "--out",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/switching/gr",
+  "/opt/job/out/ee/rep1/switching/gr",
   "--timeout",
   "900.0"
  ],
  "request_items": null,
  "af_pred_db": {
   "random": -23.714951583859033,
-  "focus": 0.0,
-  "uniform": -8.323217586916435
+  "uniform": -8.323217586916435,
+  "focus": 0.0
  },
  "python": "3.12.3",
- "numpy": "2.5.4",
- "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
- "t_start_unix": 1791735841.2935367,
+ "numpy": "2.5.3",
+ "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+ "t_start_unix": 1791763528.9022634,
  "commands_sent": [
   {
    "config": "focus",
@@ -67,7 +67,7 @@
     "k_req": {
      "grrx.rx0": 400000
     },
-    "t_wall_recv_ns": 155283368844
+    "t_wall_recv_ns": 418531829532
    }
   },
   {
@@ -83,7 +83,7 @@
     "k_req": {
      "grrx.rx0": 800000
     },
-    "t_wall_recv_ns": 155296631424
+    "t_wall_recv_ns": 418533672834
    }
   },
   {
@@ -99,13 +99,13 @@
     "k_req": {
      "grrx.rx0": 1200000
     },
-    "t_wall_recv_ns": 155298372280
+    "t_wall_recv_ns": 418535284723
    }
   }
  ],
- "t_resume_wall_s": 3.5580990340000085,
+ "t_resume_wall_s": 0.6635826389999693,
  "gr_exit": 0,
- "t_gr_done_wall_s": 12.821087154999987,
+ "t_gr_done_wall_s": 4.336647935999963,
  "serve_exit": 0,
- "wall_s": 12.821225864000013
+ "wall_s": 4.336692212000003
 }

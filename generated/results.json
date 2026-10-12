@@ -1,5 +1,5 @@
 {
-  "sremu_commit": "ecab7da51ee67944f89bbdf97ffb99dce6ce936b",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "note": "values computed by tools/gen_results.py from committed result files; the studies ran at the commits listed in provenance (several were dirty trees); a final build needs every study rerun at the pinned commit",
   "values": {
     "numBerEbnoMax": "10",
@@ -280,15 +280,16 @@
     "numEcOneBitMax": "3.3",
     "numEcOneBitMin": "2.9",
     "numEeAfMaxDiffDb": "1.0",
+    "numEeAwsRtfLo": "2.89",
     "numEeCells": "256",
     "numEeConfigs": "10",
     "numEeCpOffsetMax": "0",
     "numEeDistM": "5",
     "numEeFcGHz": "3.5",
     "numEeLaptopRateHiMsps": "5.76",
-    "numEeLaptopRtfHiMax": "0.50",
+    "numEeLaptopRtfHiMax": "0.44",
     "numEeLaptopRtfHiMin": "0.39",
-    "numEeLaptopRtfLoMax": "1.56",
+    "numEeLaptopRtfLoMax": "1.28",
     "numEeLaptopRtfLoMin": "0.60",
     "numEeLossMaxDb": "0.56",
     "numEeLossMinDb": "0.55",
@@ -309,8 +310,8 @@
     "numFmPrimaryEntries": "1224",
     "numFmPrimarySufficient": "0",
     "numGoldenIds": "8",
-    "numJunitPassed": "2011",
-    "numJunitSkipped": "6",
+    "numJunitPassed": "2130",
+    "numJunitSkipped": "5",
     "numLabBiasMtwo": "\\ensuremath{-0.60}",
     "numLabBootstrap": "10\\,000",
     "numLabCells": "30",
@@ -357,7 +358,7 @@
     "numLabUnderpoweredRate": "0.5",
     "numOracleCount": "58",
     "numOracleIdsTotal": "58",
-    "numOracleTests": "671",
+    "numOracleTests": "674",
     "numPacedEngineCpus": "16",
     "numPacedLinks": "8",
     "numPacedMSps": "1",
@@ -394,9 +395,10 @@
     "txtEBResult": "where a mistimed switch costs bits, commands applied on arrival lose 39--46\\,\\% of the packets at $J=1$\\,ms, timestamped ones whose lead exceeds the latency none",
     "txtEaPlanSha": "5b59f8f2",
     "txtEbArcPanels": "six",
+    "txtEeAwsInstance": "c7i.48xlarge",
     "txtEeGrVersion": "3.10.9.2",
     "txtEeLaptopCpu": "AMD Ryzen 9 8945H",
-    "txtEeLaptopSweeps": "four",
+    "txtEeLaptopSweeps": "three",
     "txtEeReps": "two",
     "txtHostPaced": "c7i.8xlarge",
     "txtHostServer": "c7i.48xlarge",
@@ -412,22 +414,24 @@
       ],
       "meta": {
         "sremu_paper.xml": {
-          "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+          "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
           "sremu_dirty": false,
-          "note": "pytest -m '(unit or physics or runtime or io or golden) or (statistical or integration or validation_smoke)' -n 8 (the tasks.py paper-junit markers), run 2026-10-11 with NUMBA_DISABLE_INTEL_SVML=1 before any file of the sremu tree was edited; commit read from .git/refs/heads/master; dirty flag from the task statement (HEAD 5be649a, clean), not from git status (agents run no git): 2011 passed, 6 skipped"
+          "git_state_source": "file /opt/job/out/_regen/git_state.json (no git process)",
+          "host": "AWS c7i.48xlarge",
+          "note": "tools/tasks.py paper-junit (CI + nightly markers, -n 8) in the pinned regeneration job (experiments/regenerate_paper_data.sh, mode full, scope full) on AWS c7i.48xlarge; git state from _regen/git_state.json; SREMU_GR_PYTHON=/usr/bin/python3; SREMU_VA1_RECORD = the job's paper_results/E-A-IQ; ../paper/sweeps = the job's hash-checked copies of the paper sweep specs"
         }
       }
     },
     "F3": "figures/data/F3.meta.json",
     "V-TANG": {
-      "run": "validation/tang/results/20261010T232551Z_vtang",
-      "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
-      "sremu_dirty": true,
+      "run": "validation/tang/results/20261012T000448Z_vtang",
+      "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "sremu_dirty": false,
       "measured_minus_emulator": {
         "n": 36,
-        "bias": 0.9770486050905869,
-        "sd": 0.3801776362489037,
-        "rmse": 1.0464913519599905,
+        "bias": 0.9770486050906008,
+        "sd": 0.3801776362489034,
+        "rmse": 1.0464913519600032,
         "max_abs": 1.5904903104524735
       }
     },
@@ -449,49 +453,52 @@
       }
     },
     "V-CFO": {
-      "run": "validation/cfo/results/20261010T232549Z_vcfo",
-      "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
-      "sremu_dirty": true
+      "run": "validation/cfo/results/20261012T000448Z_vcfo",
+      "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "sremu_dirty": false
     },
     "E-F": {
-      "sha256": "b293bdfc713a62e20545f2464589194000adddc2d999c90550544fe7aeac0adc",
-      "git_commit": "f518ed160b1e72eb29001f3d07829824c1331c2f",
-      "git_dirty": true,
-      "dirty_patch_sha256": "a8a6f13ff02dd5b96e9731e43c2b41886322c212fc12c555437ec0c1274a0aed",
-      "platform": "Windows-11-10.0.26200-SP0",
-      "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-      "aws_instance": null,
-      "t_end_utc": "2026-10-11T05:59:47.584459Z"
+      "sha256": "afe33448869899206779395bcfb2485b66f9c468e18623b5498e63104808216b",
+      "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "git_dirty": false,
+      "dirty_patch_sha256": null,
+      "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+      "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+      "aws_instance": {
+        "type": "c7i.48xlarge",
+        "id": "i-0b61314ac0dcfeb18"
+      },
+      "t_end_utc": "2026-10-12T00:22:04.986084Z"
     },
     "F6": "figures/data/F6.meta.json",
     "E-B-arc": {
       "results": "sweeps/results/E-B-arc",
-      "run_id": "20261011T060442Z_eb_arc_d41a75",
-      "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+      "run_id": "regen_2026-10-11T23:59:37Z",
+      "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
       "sremu_dirty": false,
-      "commit_source": "SREMU_GIT_COMMIT export of the AWS job (host/job_stdout.txt); the commit's src/sremu tree hash equals the run's (meta.json sremu.commit_verified)",
-      "aws_instance": "c7i.16xlarge",
+      "commit_source": "recorded by the run (git_state.json and every point manifest)",
+      "aws_instance": "c7i.48xlarge",
       "geometry_label": "modelled on the lab arrangement (SIM, nominal geometry)",
-      "t_end_utc": "2026-10-11T06:15:57.420720Z"
+      "t_end_utc": "2026-10-12T00:04:47.705470Z"
     },
-    "E-A": "2026-10-10T18:39:10.361262Z",
+    "E-A": "2026-10-12T00:03:23.981902Z",
     "V-FM": {
-      "run": "validation/fm/results/20261010T232549Z_vfm",
-      "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
-      "sremu_dirty": true
+      "run": "validation/fm/results/20261012T000448Z_vfm",
+      "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "sremu_dirty": false
     },
     "E-E": {
-      "git": null,
-      "git_reason": "git not found",
-      "note": "laptop WSL2 Ubuntu 24.04 (AMD Ryzen 9 8945H, 16 logical CPUs), GNU Radio 3.10.9.2 from apt; sremu working tree copied into WSL at 20261011T162135Z: HEAD ecab7da51ee67944f89bbdf97ffb99dce6ce936b (read from .git files; git was not run) plus uncommitted edits of concurrent tracks (src tree sha256 in git.code); NOT a pinned commit - the paper run is repeated at the pinned commit",
-      "host": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "git": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "git_reason": "from SREMU_GIT_COMMIT/SREMU_GIT_DIRTY (job bundle without .git)",
+      "note": "pinned regeneration job (experiments/regenerate_paper_data.sh, mode full) at sremu 4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24 on ip-172-31-39-198 (1 logical CPUs); GNU Radio 3.10.9.2 from the Ubuntu archive (_regen/gnuradio.json); served engine NUMBA_NUM_THREADS=16; repetitions run beside the VA-1 and E-C processes (lockstep: values and hashes do not depend on load); throughput runs alone on the otherwise idle host after every other experiment (MEAS of this host)",
+      "host": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
       "laptop_host": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-      "laptop_sweeps": 4,
-      "laptop_sweeps_include_ee_run": true
+      "laptop_sweeps": 3,
+      "laptop_sweeps_include_ee_run": false
     },
     "implementation": {
       "src_py_files": 103,
-      "src_lines": 40658
+      "src_lines": 40905
     },
     "bench": {
       "B2": {

@@ -1,8 +1,8 @@
 {
   "figure": "F10",
   "title": "E-A: gain over RIS absent vs signaling delay tau_SUI (log x) for four controllers in the blocked corridor at 1 and 2.4 GHz with the half-retention delay tau_half; IQ path vs batch path (VA-1)",
-  "content_key": "97e12dc36066ca4c184e8450b580c7beee1e2506be212d7acac09e02251bd635",
-  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "content_key": "ccfcd7ec4fa5ceae82ad384065ee043d536302e6df97aacef5b48b5430946465",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -19,17 +19,17 @@
       "provenance": {
         "experiment": "E-A"
       },
-      "sha256": "27c89f2dace3a4075debfec79b0bc4c03946fa4ee0cd061e0a257d85db861f00"
+      "sha256": "92e901bffb8f186f64120657c63a3c50e20263213f8568b6e1267b3b261d73e5"
     },
     {
       "path": "sweeps/results/E-A/retention.csv",
       "data_class": "SIM-sremu",
-      "sha256": "8a7dc3dd6bf87098007d7c6d0c14107a52b8e063a3ae9c46e007a2fcea1e1866"
+      "sha256": "7ae0755f8a5907808dd3aa032a8b44b4d3ddc74c8bb3a7225248ee7892046509"
     },
     {
       "path": "sweeps/results/E-A/tau_half.csv",
       "data_class": "SIM-sremu",
-      "sha256": "8c5d16d9faabd6188c5436fd6dab60e44fbc25fd31becedb90e0622cd4ebe7bf"
+      "sha256": "116c8e32147980becb62969c8916173f25df47204dd6d96f2d9062832405da4d"
     },
     {
       "path": "sweeps/results/E-A/hypotheses.json",
@@ -50,7 +50,7 @@
         "H-A3_report_f2.4G_h2_L10": "supported",
         "H-A3_report_f2.4G_h2_L30": "supported"
       },
-      "sha256": "522d5214471a0fdf5506498c73073d7d07c9fbed621d248c6deaf1f2d547e69f"
+      "sha256": "ed4583243fe6bfebbc33f19e9f5fd68f65f9edaa8838687c9b54beb3e04412c4"
     },
     {
       "path": "sweeps/results/E-A-IQ/va1.csv",
@@ -58,7 +58,7 @@
       "provenance": {
         "experiment": "E-A-IQ"
       },
-      "sha256": "f5707bb8c85c63828eea41fa33582ef98c23c0c5350a99744e9eb091a2685b33"
+      "sha256": "4d76b4b96ecd7f91c2e73ca3b2d373f81a3168fd350ffce6d5fff0afc42a2503"
     }
   ],
   "assumptions": [
@@ -72,7 +72,7 @@
   "script_sha256": "8feac45c03dd389a5d16b2817b7e7cc1b5c78f9f03d0c227f34d50b1b0f447d7",
   "outputs": {
     "figures/out/F10.pdf": "3a5f025b30039ae47ac15312736c84301b18d9949ab781fe1e89339ee8c59a2b",
-    "figures/data/F10.csv": "f9008f4aaf4fba00a5bb0e23a68abc29b257e9737e8540782465df70194bf1e0"
+    "figures/data/F10.csv": "f0aa4a29321c8c473e2f197fc1da50af41a9de4ce616e44b038c2942280f18c5"
   },
   "versions": {
     "python": "3.12.4",
@@ -81,7 +81,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T07:35:24Z",
+  "generated_utc": "2026-10-12T00:35:08Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

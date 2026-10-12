@@ -64,8 +64,8 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/tang/results/20261010T232551Z_vtang/vtang_points.csv
-      - ../sremu/validation/tang/results/20261010T232551Z_vtang/meta.json
+      - ../sremu/validation/tang/results/20261012T000448Z_vtang/vtang_points.csv
+      - ../sremu/validation/tang/results/20261012T000448Z_vtang/meta.json
     evidence: [PH-04, V-TANG-1, V-TANG-2]
     data_classes: [ANALYTIC, SIM-sremu, DIG, REPORTED]
     outputs: [figures/out/F3.pdf, figures/data/F3.csv, figures/data/F3.meta.json]
@@ -98,9 +98,9 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo_sweep_noise_free.csv
-      - ../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo4_rmse_vs_crb.csv
-      - ../sremu/validation/cfo/results/20261010T232549Z_vcfo/meta.json
+      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo_sweep_noise_free.csv
+      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo4_rmse_vs_crb.csv
+      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/meta.json
       - sweeps/results/E-F/ber/ber.csv
       - sweeps/results/E-F/ber/meta.json
     evidence: [V-CFO-1, V-CFO-3, V-CFO-4, ST-05, E-F, ST-04]
@@ -234,8 +234,8 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/fm/results/20261010T232549Z_vfm/vfm_ed_map.csv
-      - ../sremu/validation/fm/results/20261010T232549Z_vfm/meta.json
+      - ../sremu/validation/fm/results/20261012T000448Z_vfm/vfm_ed_map.csv
+      - ../sremu/validation/fm/results/20261012T000448Z_vfm/meta.json
     evidence: [E-D, V-FM]
     data_classes: [SIM-sremu, ANALYTIC, ASSUMED]
     outputs: [figures/out/F12.pdf, figures/data/F12.csv, figures/data/F12.meta.json]

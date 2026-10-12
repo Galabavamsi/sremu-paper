@@ -34,28 +34,29 @@
     "files": {
       "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
       "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+      "experiments/compare_regen.py": "91d571839cf082336913ddf634931cd85bf5eec23d46723eee6fe810da42de72",
       "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
-      "experiments/ea_iq.py": "d381202d2ae2e86c6a336a6d6079a1d01744f6f9e2e8b2b6a4efcb6aa14a0cd8",
-      "experiments/eb.py": "dff7b9565155f58832ecefac2142da8928b71bf11e11357b7a506ccf51225949",
-      "experiments/eb_aggregate.py": "75ae755d5158d8432c057a91e12f8db91618be105164742c05fef8c32048157f",
+      "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
+      "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
+      "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
       "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
-      "experiments/ef.py": "0237a8cefd2dc657334de38bae364221f184a0c5cb9e7a4a30f8a73b8b76a351",
-      "experiments/finalize.py": "6c97cae57773efa11f87aa0ceb2542774a6c4fa1f79654a7ce30cd83f357f9f1",
+      "experiments/ee_gnuradio.py": "2e3473ac5c6088db107402a8bb79009d078ef763ac37e0cb8cce6e37cea56236",
+      "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
+      "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+      "experiments/install_regen.py": "a8161d9de765f1293b83030d380e4cf536d288e5f18a343da6870dc380829c96",
+      "experiments/regen_checks.py": "7d79da5df50fa440a717ff40449c5311ce263eefc953fe2e1aa1e1066b115b61",
       "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+      "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
       "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
-      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d",
-      "paper/sweeps/ea_ref.yaml": "fba0d7c7cd05ff3da218e8c311ac2c9b53d7863f108649f354d570118c5c0f89",
-      "paper/sweeps/ea_tau.yaml": "8413059a75307f39df5611770c0757605e42a68023c99d44507ffdf2ed65c818",
-      "paper/sweeps/eb1.yaml": "b5c8b53ddaf1787097e6f813a695de67e34afd7395e5a12447a4fbc7526cf79f",
-      "paper/sweeps/eb2_ideal1.yaml": "a428bf9606ab8aa6f08e54ab39e2c96b592ed327355eda1ae948ab8727b3852f",
-      "paper/sweeps/eb2_lab.yaml": "3dec21b80634c55e105279560c7dca609de28368deefd864804204a484c4f7a2"
+      "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
+      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
     },
-    "src_sremu_tree_sha256": "b226771181d3954fd2b70c664ac16611b71d7f1e217500f312d486f076a1643c"
+    "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
   },
-  "written_utc": "2026-10-10T18:39:10.361262Z",
+  "written_utc": "2026-10-12T00:03:23.981902Z",
   "sweep_roots": [
-    "runs\\wp11\\ea_ref",
-    "runs\\wp11\\ea_tau"
+    "/opt/job/out/ea_ref",
+    "/opt/job/out/ea_tau"
   ],
   "checks_per_geometry": {
     "f1.0G_h1_L0": {
@@ -67,7 +68,7 @@
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     },
     "f1.0G_h4_L0": {
-      "interp_max_db_err_all_on": 0.0004887239507234813,
+      "interp_max_db_err_all_on": 0.0004887239507254099,
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     },
     "f1.0G_h6_L0": {
@@ -87,7 +88,7 @@
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     },
     "f2.4G_h4_L20": {
-      "interp_max_db_err_all_on": 0.0008766807427000428,
+      "interp_max_db_err_all_on": 0.0008766807426981143,
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     },
     "f1.0G_h2_L10": {
@@ -103,7 +104,7 @@
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     },
     "f2.4G_h2_L30": {
-      "interp_max_db_err_all_on": 0.00794294272526945,
+      "interp_max_db_err_all_on": 0.00794294272527523,
       "trajectory_check_max_abs_m": 5.6346038945775945e-12
     }
   },

@@ -10,33 +10,33 @@
  "tx_stream": "gr.tx0",
  "rx_stream": "grrx.rx0",
  "serve_cmd": [
-  "/home/galaba_vamsi/venv_sremu_invB/bin/python",
+  "/opt/venv/bin/python",
   "-m",
   "sremu.commands.serve",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/static_uniform/scene.yaml",
+  "/opt/job/out/ee/rep1/static_uniform/scene.yaml",
   "--serve",
-  "tcp://127.0.0.1:54429",
+  "tcp://127.0.0.1:38949",
   "--pub",
   "none",
   "--tx",
-  "tcp://127.0.0.1:36729",
+  "tcp://127.0.0.1:35041",
   "--out",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/static_uniform/rec",
+  "/opt/job/out/ee/rep1/static_uniform/rec",
   "--exit-when-done",
   "--raw-peer",
-  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:56491,rx_port=tcp://127.0.0.1:36945,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:34295,rx_port=tcp://127.0.0.1:37927,tx_stream=gr.tx0,rx_stream=grrx.rx0"
  ],
  "gr_cmd": [
   "/usr/bin/python3",
-  "/home/galaba_vamsi/trackG/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
+  "/opt/job/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
   "--tx",
-  "tcp://127.0.0.1:56491",
+  "tcp://127.0.0.1:34295",
   "--rx",
-  "tcp://127.0.0.1:36945",
+  "tcp://127.0.0.1:37927",
   "--n",
   "300000",
   "--out",
-  "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/rep1/static_uniform/gr",
+  "/opt/job/out/ee/rep1/static_uniform/gr",
   "--timeout",
   "900.0"
  ],
@@ -45,9 +45,9 @@
   "uniform": -8.323217586916435
  },
  "python": "3.12.3",
- "numpy": "2.5.4",
- "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
- "t_start_unix": 1791735825.389002,
+ "numpy": "2.5.3",
+ "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+ "t_start_unix": 1791763520.7805033,
  "commands_sent": [
   {
    "config": "uniform",
@@ -62,13 +62,13 @@
     "k_req": {
      "grrx.rx0": 0
     },
-    "t_wall_recv_ns": 133933127643
+    "t_wall_recv_ns": 410409894206
    }
   }
  ],
- "t_resume_wall_s": 3.1435680680000075,
+ "t_resume_wall_s": 0.660442149000005,
  "gr_exit": 0,
- "t_gr_done_wall_s": 8.637239650999987,
+ "t_gr_done_wall_s": 3.8326475790000245,
  "serve_exit": 0,
- "wall_s": 8.637300348999986
+ "wall_s": 3.832693357000039
 }

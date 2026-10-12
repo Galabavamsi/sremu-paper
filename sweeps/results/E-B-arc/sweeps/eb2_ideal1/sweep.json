@@ -46,7 +46,7 @@
     ]
   },
   "n_points": 75,
-  "jobs": 64,
+  "jobs": 176,
   "environment": {
     "sremu_version": "0.1.0.dev0",
     "contract_version": "1.1",
@@ -61,10 +61,10 @@
     },
     "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
     "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
-    "logical_cpus": 64,
+    "logical_cpus": 192,
     "power_plan_or_governor": null,
     "gpu": [],
-    "aws_instance": "type='c7i.16xlarge' id='i-0c71d7b6d144377ea'"
+    "aws_instance": "type='c7i.48xlarge' id='i-0b61314ac0dcfeb18'"
   },
   "argv": [
     "/opt/job/sremu/experiments/eb.py",
@@ -73,9 +73,11 @@
     "--out",
     "/opt/job/out/eb_arc",
     "--jobs",
-    "64"
+    "176",
+    "--threads-per-job",
+    "1"
   ],
-  "t_start_utc": "2026-10-11T06:09:47.119249Z",
-  "t_end_utc": "2026-10-11T06:11:50.158252Z",
+  "t_start_utc": "2026-10-12T00:04:07.694507Z",
+  "t_end_utc": "2026-10-12T00:04:20.701234Z",
   "n_failed": 0
 }

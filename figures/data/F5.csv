@@ -1,166 +1,166 @@
 panel,series,data_class,x_name,x,y_name,y,y_lo,y_hi,note
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1400.0,error_hz,3.3651303965598345e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1400.0,error_hz,3.433342499192804e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-1400.0,error_hz,3.990862751379609e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1400.0,error_hz,-96.72790574218084,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-1400.0,error_hz,-96.72727272727273,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1300.0,error_hz,-1.6780177247710526e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1300.0,error_hz,-1.6711965145077556e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-1300.0,error_hz,1.4660372471553273e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1300.0,error_hz,-89.81876961776857,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1300.0,error_hz,-89.81876961776811,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-1300.0,error_hz,-89.81818181818181,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1200.0,error_hz,9.390532795805484e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1200.0,error_hz,9.43600753089413e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-1200.0,error_hz,8.440110832452774e-10,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1200.0,error_hz,-82.90963349317235,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1200.0,error_hz,-82.90963349317167,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-1200.0,error_hz,-82.9090909090909,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1100.0,error_hz,-3.0968294595368207e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1100.0,error_hz,-3.092281986027956e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-1100.0,error_hz,1.4634906619903632e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1100.0,error_hz,-76.00049736875076,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1100.0,error_hz,-76.00049736874985,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-1100.0,error_hz,-76.0,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1000.0,error_hz,-1.5404566511278972e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-1000.0,error_hz,-1.5370460459962487e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-1000.0,error_hz,-6.034269972587936e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1000.0,error_hz,-69.09136124441466,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-1000.0,error_hz,-69.09136124441443,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-1000.0,error_hz,-69.0909090909091,,,
 a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-900.0,error_hz,1.3642420526593924e-12,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-900.0,error_hz,-1.0057306099042762e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-900.0,error_hz,-62.18222511997726,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-900.0,error_hz,-62.18222511997658,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-900.0,error_hz,-62.18181818181818,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-800.0,error_hz,1.2846612662542611e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-800.0,error_hz,1.2880718713859096e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-800.0,error_hz,1.1138126865262166e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-800.0,error_hz,-55.273088995481544,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-800.0,error_hz,-55.2730889954812,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-800.0,error_hz,-55.27272727272727,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-700.0,error_hz,7.082689990056679e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-700.0,error_hz,7.128164725145325e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-700.0,error_hz,4.703906597569585e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-700.0,error_hz,-48.36395287105222,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-700.0,error_hz,-48.36395287105188,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-700.0,error_hz,-48.36363636363637,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-600.0,error_hz,1.0231815394945443e-12,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-600.0,error_hz,1.3642420526593924e-12,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-600.0,error_hz,1.1103338692919351e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-600.0,error_hz,-41.45481674666371,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-600.0,error_hz,-41.45481674666348,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-600.0,error_hz,-41.45454545454545,,,
 a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-500.0,error_hz,-2.984279490192421e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-500.0,error_hz,-8.177153176802676e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-500.0,error_hz,-34.54568062218027,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-500.0,error_hz,-34.54568062218016,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-500.0,error_hz,-34.54545454545455,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-400.0,error_hz,-1.3386625141720288e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-400.0,error_hz,-1.3369572116062045e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-400.0,error_hz,-3.456136710155988e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-400.0,error_hz,-27.63654449774174,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-400.0,error_hz,-27.63654449774151,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-400.0,error_hz,-27.636363636363637,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-300.0,error_hz,-7.821654435247183e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-300.0,error_hz,-7.810285751475021e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-300.0,error_hz,-1.316379893978592e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-300.0,error_hz,-20.727408373278024,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-300.0,error_hz,-20.727408373277967,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-300.0,error_hz,-20.727272727272727,,,
 a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-200.0,error_hz,7.568701221316587e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-200.0,error_hz,-3.375589585630223e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-200.0,error_hz,-13.818272248861462,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-200.0,error_hz,-13.818181818181818,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-100.0,error_hz,-1.8701484805205837e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,-100.0,error_hz,-1.865885224106023e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,-100.0,error_hz,-5.808814762531256e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,-100.0,error_hz,-6.909136124293553,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,-100.0,error_hz,-6.909090909090909,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,0.0,error_hz,2.129183435768298e-16,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,0.0,error_hz,-2.983166064767019e-16,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,0.0,error_hz,0.0,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,0.0,error_hz,2.129183435768298e-16,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,0.0,error_hz,-2.983166064767019e-16,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,0.0,error_hz,0.0,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,100.0,error_hz,1.0862777344300412e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,100.0,error_hz,1.0858514087885851e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,100.0,error_hz,8.955339581007138e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,100.0,error_hz,6.909136124369567,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,100.0,error_hz,6.909136124369553,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,100.0,error_hz,6.909090909090909,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,200.0,error_hz,-6.934897101018578e-12,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,200.0,error_hz,-7.048583938740194e-12,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,200.0,error_hz,4.687024102167925e-10,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,200.0,error_hz,13.818272248846398,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,200.0,error_hz,13.818181818181818,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,300.0,error_hz,-8.282086128019728e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,300.0,error_hz,-8.29345481179189e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,300.0,error_hz,5.0386006478220224e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,300.0,error_hz,20.727408373416097,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,300.0,error_hz,20.727408373415983,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,300.0,error_hz,20.727272727272727,,,
 a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,400.0,error_hz,-3.581135388230905e-12,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,400.0,error_hz,-5.199467523198109e-10,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,400.0,error_hz,27.636544497897944,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,400.0,error_hz,27.636544497897717,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,400.0,error_hz,27.636363636363637,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,500.0,error_hz,-1.1050360626541078e-10,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,500.0,error_hz,-1.106741365219932e-10,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,500.0,error_hz,8.964775588538032e-10,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,500.0,error_hz,34.54568062220153,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,500.0,error_hz,34.5456806222013,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,500.0,error_hz,34.54545454545455,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,600.0,error_hz,-2.887645678129047e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,600.0,error_hz,-2.8990143619012088e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,600.0,error_hz,1.5509158401982859e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,600.0,error_hz,41.454816746589245,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,600.0,error_hz,41.45481674658913,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,600.0,error_hz,41.45454545454545,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,700.0,error_hz,7.958078640513122e-13,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,700.0,error_hz,6.821210263296962e-13,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,700.0,error_hz,1.1607426131376997e-10,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,700.0,error_hz,48.36395287100902,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,700.0,error_hz,48.36395287100879,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,700.0,error_hz,48.36363636363637,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,800.0,error_hz,7.923972589196637e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,800.0,error_hz,7.889866537880152e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,800.0,error_hz,-5.031211003370117e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,800.0,error_hz,55.27308899559466,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,800.0,error_hz,55.27272727272727,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,900.0,error_hz,9.43600753089413e-12,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,900.0,error_hz,9.094947017729282e-12,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,900.0,error_hz,-5.882270670554135e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,900.0,error_hz,62.182225119962936,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,900.0,error_hz,62.18181818181818,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1000.0,error_hz,-9.401901479577646e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1000.0,error_hz,-9.447376214666292e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,1000.0,error_hz,-8.372467164008413e-09,,,
 a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1000.0,error_hz,69.09136124439851,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,1000.0,error_hz,69.0909090909091,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1100.0,error_hz,7.389644451905042e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1100.0,error_hz,7.344169716816396e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,1100.0,error_hz,1.3565568224294111e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1100.0,error_hz,76.00049736870346,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1100.0,error_hz,76.00049736870301,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,1100.0,error_hz,76.0,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1200.0,error_hz,7.344169716816396e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1200.0,error_hz,7.298694981727749e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,1200.0,error_hz,-6.023810783517547e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1200.0,error_hz,82.90963349323738,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1200.0,error_hz,82.90963349323647,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,1200.0,error_hz,82.9090909090909,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1300.0,error_hz,-9.526957001071423e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1300.0,error_hz,-9.549694368615746e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,1300.0,error_hz,1.94754647964146e-08,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1300.0,error_hz,89.81876961781177,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1300.0,error_hz,89.81876961781086,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,1300.0,error_hz,89.81818181818181,,,
-a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1400.0,error_hz,-1.9326762412674725e-11,,,
+a,"sremu, unwrapped-phase LS",SIM-sremu,cfo_hz,1400.0,error_hz,-1.978150976356119e-11,,,
 a,"sremu, lag-1",SIM-sremu,cfo_hz,1400.0,error_hz,-6.101117833168246e-09,,,
-a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1400.0,error_hz,96.72790574221676,,,"generic pitfall, D24; not another tool's output"
+a,"integer samples per tick (sremu output re-timed), LS",SIM-sremu,cfo_hz,1400.0,error_hz,96.72790574221608,,,"generic pitfall, D24; not another tool's output"
 a,(11.76/11 - 1) f,ANALYTIC,cfo_hz,1400.0,error_hz,96.72727272727273,,,
 b,CRB,ANALYTIC,snr_db,0.0,std_hz,0.025628792429744588,,,
-b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,0.0,rmse_hz,0.025526632352385312,,,ratio max point 1.07212869996396
+b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,0.0,rmse_hz,0.025526632352385625,,,ratio max point 1.07212869996396
 b,"lag-1, pooled RMSE",SIM-sremu,snr_db,0.0,rmse_hz,14.733379855087133,,,
 b,lag-1 small-error theory,ANALYTIC,snr_db,0.0,std_hz,14.807891039044318,,,
 b,CRB,ANALYTIC,snr_db,10.0,std_hz,0.008104535775767379,,,
-b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,10.0,rmse_hz,0.00800251102213263,,,ratio max point 1.0582785990545809
-b,"lag-1, pooled RMSE",SIM-sremu,snr_db,10.0,rmse_hz,1.4719646283201453,,,
+b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,10.0,rmse_hz,0.008002511022132482,,,ratio max point 1.0582785990545809
+b,"lag-1, pooled RMSE",SIM-sremu,snr_db,10.0,rmse_hz,1.4719646283201466,,,
 b,lag-1 small-error theory,ANALYTIC,snr_db,10.0,std_hz,1.4874344137446176,,,
 b,CRB,ANALYTIC,snr_db,20.0,std_hz,0.002562879242974459,,,
-b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,20.0,rmse_hz,0.002452744072046654,,,ratio max point 1.0010660627534338
-b,"lag-1, pooled RMSE",SIM-sremu,snr_db,20.0,rmse_hz,0.15616982055483758,,,
+b,"periodogram + parabolic, pooled RMSE",SIM-sremu,snr_db,20.0,rmse_hz,0.0024527440720460997,,,ratio max point 1.0010660627534338
+b,"lag-1, pooled RMSE",SIM-sremu,snr_db,20.0,rmse_hz,0.15616982055483825,,,
 b,lag-1 small-error theory,ANALYTIC,snr_db,20.0,std_hz,0.15523236726562,,,
-c,bpsk genie BER,SIM-sremu,ebn0_db,0.0,ber,0.0789935555875576,0.07787531183443032,0.08012279583838353,bits=222208; errors=17553; theory_in_ci95=True
-c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,0.0,ber,0.07981710829493087,0.07869352701936995,0.08095166441987772,errors=17736; theory_in_ci95=False
+c,bpsk genie BER,SIM-sremu,ebn0_db,0.0,ber,0.0789935555875576,0.07787531183443032,0.08012279583838354,bits=222208; errors=17553; theory_in_ci95=True
+c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,0.0,ber,0.07981710829493087,0.07869352701936994,0.08095166441987772,errors=17736; theory_in_ci95=False
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,0.0,ber,0.07864960352514258,,,
-c,bpsk genie BER,SIM-sremu,ebn0_db,2.0,ber,0.03748739919354839,0.036701392218757255,0.03828550022674456,bits=222208; errors=8330; theory_in_ci95=True
-c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,2.0,ber,0.03796442972350231,0.0371736042743162,0.0387673364826494,errors=8436; theory_in_ci95=True
+c,bpsk genie BER,SIM-sremu,ebn0_db,2.0,ber,0.03748739919354839,0.03670139221875726,0.038285500226744575,bits=222208; errors=8330; theory_in_ci95=True
+c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,2.0,ber,0.03796442972350231,0.037173604274316194,0.0387673364826494,errors=8436; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,2.0,ber,0.03750612835892598,,,
-c,bpsk genie BER,SIM-sremu,ebn0_db,4.0,ber,0.012960829493087557,0.012494665454994992,0.013439761382257548,bits=222208; errors=2880; theory_in_ci95=True
-c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,4.0,ber,0.012942828341013825,0.012476986953220933,0.01342143810676911,errors=2876; theory_in_ci95=True
+c,bpsk genie BER,SIM-sremu,ebn0_db,4.0,ber,0.012960829493087557,0.01249466545499499,0.01343976138225755,bits=222208; errors=2880; theory_in_ci95=True
+c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,4.0,ber,0.012942828341013825,0.01247698695322093,0.013421438106769112,errors=2876; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,4.0,ber,0.01250081804073755,,,
 c,bpsk genie BER,SIM-sremu,ebn0_db,6.0,ber,0.002430155529953917,0.0022297019130370116,0.0026437588688804432,bits=222208; errors=540; theory_in_ci95=True
 c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,6.0,ber,0.0025201612903225806,0.0023159587358300864,0.0027375078331629433,errors=560; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,6.0,ber,0.002388290780932807,,,
-c,bpsk genie BER,SIM-sremu,ebn0_db,8.0,ber,0.00019351238479262673,0.00016851067065370192,0.00022117765139223404,bits=1111040; errors=215; theory_in_ci95=True
+c,bpsk genie BER,SIM-sremu,ebn0_db,8.0,ber,0.00019351238479262673,0.00016851067065370192,0.0002211776513922341,bits=1111040; errors=215; theory_in_ci95=True
 c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,8.0,ber,0.00020071284562211982,0.00017523423210241275,0.0002288539077540468,errors=223; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,8.0,ber,0.00019090777407599314,,,
-c,bpsk genie BER,SIM-sremu,ebn0_db,10.0,ber,3.3626822969414625e-06,2.6112552975332837e-06,4.262999158017877e-06,bits=20221952; errors=68; theory_in_ci95=True
-c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,10.0,ber,3.3132310866923234e-06,2.5677094771390417e-06,4.20768447943289e-06,errors=67; theory_in_ci95=True
+c,bpsk genie BER,SIM-sremu,ebn0_db,10.0,ber,3.3626822969414625e-06,2.6112552975332833e-06,4.262999158017878e-06,bits=20221952; errors=68; theory_in_ci95=True
+c,bpsk 64-pilot LS BER,SIM-sremu,ebn0_db,10.0,ber,3.3132310866923234e-06,2.5677094771390413e-06,4.20768447943289e-06,errors=67; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,10.0,ber,3.872108215522035e-06,,,
 c,qpsk genie BER,SIM-sremu,ebn0_db,0.0,ber,0.07905205933179724,0.07826039862048492,0.07984921327368837,bits=444416; errors=35132; theory_in_ci95=True
 c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,0.0,ber,0.07997461837557604,0.07917873592363824,0.08077598196465018,errors=35542; theory_in_ci95=False
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,0.0,ber,0.07864960352514258,,,
-c,qpsk genie BER,SIM-sremu,ebn0_db,2.0,ber,0.03772591445852535,0.03716763125644261,0.038290234891243204,bits=444416; errors=16766; theory_in_ci95=True
+c,qpsk genie BER,SIM-sremu,ebn0_db,2.0,ber,0.03772591445852535,0.03716763125644262,0.038290234891243204,bits=444416; errors=16766; theory_in_ci95=True
 c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,2.0,ber,0.03830195132488479,0.037739572885567986,0.038870359355900254,errors=17022; theory_in_ci95=False
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,2.0,ber,0.03750612835892598,,,
 c,qpsk genie BER,SIM-sremu,ebn0_db,4.0,ber,0.012805569556451613,0.012477060677055608,0.01314045283703146,bits=444416; errors=5691; theory_in_ci95=True
-c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,4.0,ber,0.012967579925115207,0.012637012767283242,0.013304519187840915,errors=5763; theory_in_ci95=False
+c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,4.0,ber,0.012967579925115207,0.01263701276728324,0.013304519187840915,errors=5763; theory_in_ci95=False
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,4.0,ber,0.01250081804073755,,,
-c,qpsk genie BER,SIM-sremu,ebn0_db,6.0,ber,0.0025111607142857145,0.002366142828934538,0.002662723950778687,bits=444416; errors=1116; theory_in_ci95=True
-c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,6.0,ber,0.0025921658986175116,0.002444798921392605,0.002746076137356559,errors=1152; theory_in_ci95=False
+c,qpsk genie BER,SIM-sremu,ebn0_db,6.0,ber,0.0025111607142857145,0.0023661428289345385,0.002662723950778687,bits=444416; errors=1116; theory_in_ci95=True
+c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,6.0,ber,0.0025921658986175116,0.0024447989213926048,0.002746076137356559,errors=1152; theory_in_ci95=False
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,6.0,ber,0.002388290780932807,,,
-c,qpsk genie BER,SIM-sremu,ebn0_db,8.0,ber,0.00019351238479262673,0.00017061973601901768,0.00021862038281682543,bits=1333248; errors=258; theory_in_ci95=True
-c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,8.0,ber,0.00020776329685099848,0.0001840165903241722,0.00023372372301184017,errors=277; theory_in_ci95=True
+c,qpsk genie BER,SIM-sremu,ebn0_db,8.0,ber,0.00019351238479262673,0.00017061973601901768,0.00021862038281682546,bits=1333248; errors=258; theory_in_ci95=True
+c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,8.0,ber,0.00020776329685099848,0.00018401659032417218,0.00023372372301184015,errors=277; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,8.0,ber,0.00019090777407599314,,,
 c,qpsk genie BER,SIM-sremu,ebn0_db,10.0,ber,3.0326508890558477e-06,2.3251168128199126e-06,3.887719910952973e-06,bits=20444160; errors=62; theory_in_ci95=True
-c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,10.0,ber,3.815270473328325e-06,3.015814117220918e-06,4.761627965538815e-06,errors=78; theory_in_ci95=True
+c,qpsk 64-pilot LS BER,SIM-sremu,ebn0_db,10.0,ber,3.815270473328325e-06,3.0158141172209175e-06,4.761627965538815e-06,errors=78; theory_in_ci95=True
 c,Q(sqrt(2 Eb/N0)),ANALYTIC,ebn0_db,10.0,ber,3.872108215522035e-06,,,
 c,lab-like scene: lab state amplitudes |Gamma| = 1,ASSUMED,,,,nan,,,E-F scene assumption

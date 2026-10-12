@@ -4,69 +4,69 @@ panel,series,data_class,x_name,x,y_name,y,y_lo,y_hi,note
 (a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.01,gain_db,5.583857399783789,5.5051820330407955,5.662532766526783,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-55.992637906140786
 (a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.03,gain_db,5.422163710532422,5.344077329344988,5.500250091719855,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-56.154302066860055
 (a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.1,gain_db,4.087342950304275,4.014288844552106,4.160397056056444,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-57.48882391746101
-(a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.3,gain_db,2.3090316492162066,2.249627060706557,2.3684362377258563,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-59.26601126633933
+(a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.3,gain_db,2.3090316492162066,2.2496270607065574,2.368436237725856,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-59.26601126633933
 (a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,1.0,gain_db,1.1680269159952226,1.1350898867374437,1.2009639452530014,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.40413462278009
-(a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,3.0,gain_db,0.6852546986472206,0.6653045959268604,0.7052048013675807,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.885170658075644
+(a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,3.0,gain_db,0.6852546986472204,0.6653045959268603,0.7052048013675806,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.885170658075644
 (a),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,10.0,gain_db,0.5447678347201126,0.5306951680969236,0.5588405013433015,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.02498421831416
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.01,gain_db,4.448260292474,4.381385630451501,4.515134954496499,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-57.12731972557972
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.03,gain_db,4.304505192623024,4.238414432996919,4.370595952249129,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-57.27102470069198
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.1,gain_db,3.1435582706918423,3.0842470984658528,3.202869442917832,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-58.43144636486027
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.3,gain_db,1.6218403292213928,1.5774688652411146,1.666211793201671,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-59.95171976999729
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,1.0,gain_db,0.7203478994764521,0.6985603820411355,0.7421354169117687,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.85043926463952
-(a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,3.0,gain_db,0.3764448227856493,0.3656087669375144,0.3872808786337842,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.192882063414984
+(a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,3.0,gain_db,0.3764448227856493,0.36560876693751443,0.38728087863378413,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.192882063414984
 (a),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,10.0,gain_db,0.2737111523444274,0.26619955943589135,0.2812227452529634,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.29502531767203
 (a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.01,gain_db,0.8574266194926252,0.8035247618851773,0.9113284771000731,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.71619799908866
-(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.03,gain_db,0.774741266228428,0.7280795504531314,0.8214029820037245,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.7974680846889
+(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.03,gain_db,0.7747412662284281,0.7280795504531316,0.8214029820037246,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-60.7974680846889
 (a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.1,gain_db,0.5331164249748725,0.5139886978915019,0.5522441520582432,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.03709837916278
-(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.3,gain_db,0.5112460490140238,0.4932617215288263,0.5292303764992213,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.058905183149655
+(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.3,gain_db,0.5112460490140236,0.4932617215288261,0.5292303764992211,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.058905183149655
 (a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,1.0,gain_db,0.4981594842662176,0.48334262864543553,0.5129763398869996,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.07140912512971
-(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,3.0,gain_db,0.49825594344936625,0.4868585860425302,0.5096533008562023,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.07112663280351
+(a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,3.0,gain_db,0.49825594344936636,0.4868585860425303,0.5096533008562024,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.07112663280351
 (a),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,10.0,gain_db,0.49939160857588955,0.4819625064793387,0.5168207106724404,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.070637268950634
 (a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.01,gain_db,0.11873792628376587,0.11623036566834,0.12124548689919173,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.449399249655194
-(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.03,gain_db,0.11888236703354235,0.11640083739420136,0.12136389667288335,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.44919224529569
+(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.03,gain_db,0.11888236703354241,0.11640083739420143,0.12136389667288339,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.44919224529569
 (a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.1,gain_db,0.1157026414592156,0.11157513876657195,0.11983014415185926,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.452578568144
 (a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.3,gain_db,0.11867188892988038,0.11484394812064143,0.12249982973911934,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.44926830522859
-(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,1.0,gain_db,0.12008630608644921,0.11648987991203918,0.12368273226085924,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.4481424725974
-(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,3.0,gain_db,0.1186189404714602,0.1148077280789071,0.12243015286401329,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.44961378998503
+(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,1.0,gain_db,0.12008630608644925,0.1164898799120392,0.12368273226085931,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.4481424725974
+(a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,3.0,gain_db,0.1186189404714602,0.11480772807890713,0.12243015286401326,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.44961378998503
 (a),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,10.0,gain_db,0.11796257868653108,0.1145477029996584,0.12137745437340376,f1.0G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-61.45016249318532
-(a),tau_half of the exact optimum,SIM-sremu,,,tau_half_s,0.12609905427876741,0.12516661137446813,0.12713595801570218,f1.0G_h2_L20
+(a),tau_half of the exact optimum,SIM-sremu,,,tau_half_s,0.12609905427876741,0.12516661137446808,0.1271359580157021,f1.0G_h2_L20
 (b),reference instant,SIM-sremu,tau_sui_s,,gain_db,5.4798624587656475,5.401286412090369,5.558438505440926,f2.4G_h2_L20
-(b),reference stale,SIM-sremu,tau_sui_s,,gain_db,0.20143849989379695,0.18753723263028213,0.21533976715731176,f2.4G_h2_L20
+(b),reference stale,SIM-sremu,tau_sui_s,,gain_db,0.2014384998937969,0.18753723263028205,0.21533976715731173,f2.4G_h2_L20
 (b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.01,gain_db,5.337486316988105,5.259656421970118,5.4153162120060925,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-63.843268078388746
 (b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.03,gain_db,4.501359847893771,4.426304621245507,4.5764150745420356,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-64.67920980052936
-(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.1,gain_db,2.4026329704631166,2.3399242157985904,2.465341725127643,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-66.77704998124173
+(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.1,gain_db,2.4026329704631157,2.3399242157985896,2.465341725127642,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-66.77704998124173
 (b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,0.3,gain_db,1.1278562665698224,1.0929660933095924,1.1627464398300524,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.04899517222223
-(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,1.0,gain_db,0.44459667478237785,0.431482499969519,0.4577108495952367,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.72945715247275
-(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,3.0,gain_db,0.2793752863487259,0.2709565295426549,0.28779404315479684,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.89396729305041
-(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,10.0,gain_db,0.2209956821594931,0.21441784767298674,0.22757351664599948,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.95211832519483
+(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,1.0,gain_db,0.44459667478237763,0.4314824999695188,0.45771084959523645,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.72945715247275
+(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,3.0,gain_db,0.2793752863487259,0.270956529542655,0.2877940431547968,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.89396729305041
+(b),"gain over RIS absent, exact",SIM-sremu,tau_sui_s,10.0,gain_db,0.22099568215949303,0.2144178476729867,0.22757351664599937,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.95211832519483
 (b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.01,gain_db,4.1545936098146665,4.088970865371805,4.220216354257528,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-65.02520140177197
 (b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.03,gain_db,3.4297158520504913,3.368134842914505,3.491296861186478,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-65.74975985146568
 (b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.1,gain_db,1.6916620522507901,1.6433575017224133,1.739966602779167,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-67.48664363871305
-(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.3,gain_db,0.7183392951509914,0.6950222306974818,0.7416563596045009,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.45708140793376
-(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,1.0,gain_db,0.2534411020355318,0.245785747918696,0.26109645615236754,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.91980766470398
-(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,3.0,gain_db,0.14251313790931625,0.13806924289956277,0.14695703291906972,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.03027091829345
-(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,10.0,gain_db,0.1044116758808495,0.10114253737779552,0.10768081438390348,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.0682109135354
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.01,gain_db,0.23121900175510976,0.22221076257137154,0.24022724093884798,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.94212863263483
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.03,gain_db,0.2233281884793798,0.21468415509634106,0.23197222186241853,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.94988031877509
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.1,gain_db,0.20263424378710235,0.195782937877152,0.2094855496970527,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97042739673819
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.3,gain_db,0.20213969183469288,0.19588292122718187,0.2083964624422039,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97079115921011
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,1.0,gain_db,0.20071713308702854,0.19399635798880632,0.20743790818525076,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97235722021149
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,3.0,gain_db,0.20119823676850931,0.19497262443176638,0.20742384910525224,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.9718014903244
-(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,10.0,gain_db,0.20229822934667335,0.19528825092757163,0.20930820776577508,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.9708625658071
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.01,gain_db,0.04717435037486403,0.04549358022223822,0.048855120527489845,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12521373701608
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.03,gain_db,0.04765069568217414,0.04546411145479433,0.04983727990955396,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.1247488036104
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.1,gain_db,0.046528574271200676,0.044569977543031554,0.0484871709993698,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12573101165844
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.3,gain_db,0.046889360563027775,0.044997424823043634,0.048781296303011916,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.1254980490823
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,1.0,gain_db,0.047413416431971736,0.045782585884351266,0.049044246979592206,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12497760710221
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,3.0,gain_db,0.04638180800306768,0.04484180116645923,0.047921814839676134,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12597461413958
-(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,10.0,gain_db,0.0461496555973407,0.044246431965574026,0.04805287922910738,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12626869383173
+(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,0.3,gain_db,0.7183392951509913,0.6950222306974817,0.7416563596045008,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.45708140793376
+(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,1.0,gain_db,0.2534411020355317,0.24578574791869598,0.26109645615236743,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.91980766470398
+(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,3.0,gain_db,0.14251313790931622,0.13806924289956274,0.1469570329190697,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.03027091829345
+(b),"gain over RIS absent, wcl",SIM-sremu,tau_sui_s,10.0,gain_db,0.10441167588084936,0.10114253737779536,0.10768081438390337,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.0682109135354
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.01,gain_db,0.23121900175510968,0.22221076257137146,0.2402272409388479,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.94212863263483
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.03,gain_db,0.2233281884793797,0.21468415509634103,0.2319722218624184,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.94988031877509
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.1,gain_db,0.20263424378710232,0.195782937877152,0.20948554969705263,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97042739673819
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,0.3,gain_db,0.2021396918346928,0.19588292122718182,0.20839646244220378,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97079115921011
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,1.0,gain_db,0.20071713308702846,0.1939963579888063,0.20743790818525062,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.97235722021149
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,3.0,gain_db,0.2011982367685093,0.19497262443176638,0.2074238491052522,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.9718014903244
+(b),"gain over RIS absent, bandit",SIM-sremu,tau_sui_s,10.0,gain_db,0.2022982293466733,0.19528825092757157,0.20930820776577502,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-68.9708625658071
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.01,gain_db,0.04717435037486393,0.04549358022223821,0.048855120527489644,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12521373701608
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.03,gain_db,0.04765069568217405,0.04546411145479431,0.0498372799095538,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.1247488036104
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.1,gain_db,0.04652857427120063,0.044569977543031554,0.0484871709993697,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12573101165844
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,0.3,gain_db,0.04688936056302773,0.04499742482304363,0.048781296303011826,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.1254980490823
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,1.0,gain_db,0.04741341643197163,0.0457825858843512,0.04904424697959207,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12497760710221
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,3.0,gain_db,0.04638180800306763,0.044841801166459236,0.04792181483967603,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12597461413958
+(b),"gain over RIS absent, urap",SIM-sremu,tau_sui_s,10.0,gain_db,0.04614965559734066,0.044246431965574054,0.04805287922910727,f2.4G_h2_L20; mean of 20 per-batch dB gains; p_mean_dbm=-69.12626869383173
 (b),tau_half of the exact optimum,SIM-sremu,,,tau_half_s,0.054092114138219356,0.053719599622057544,0.05450175708236559,f2.4G_h2_L20
 c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 0.1 s, off",diff_db,0.0018931595913400656,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
 c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 0.1 s, on",diff_db,0.0018934796929812592,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
-c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 1 s, off",diff_db,0.0006082927942472338,,,accept=True; host=AMD Ryzen 9 8945H w/ Radeon 780M Graphics; duration_s=1000
-c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 1 s, on",diff_db,0.0006082212578348845,,,accept=True; host=AMD Ryzen 9 8945H w/ Radeon 780M Graphics; duration_s=1000
+c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 1 s, off",diff_db,0.0006082927942472338,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
+c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"opt. 1 s, on",diff_db,0.0006082212578348845,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
 c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 0.1 s, off",diff_db,0.00022495339536732217,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
 c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 0.1 s, on",diff_db,0.00022546686587077147,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
-c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 1 s, off",diff_db,0.00021677120901131275,,,accept=True; host=AMD Ryzen 9 8945H w/ Radeon 780M Graphics; duration_s=1000
-c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 1 s, on",diff_db,0.00021737013919675974,,,accept=True; host=AMD Ryzen 9 8945H w/ Radeon 780M Graphics; duration_s=1000
+c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 1 s, off",diff_db,0.00021677120901131275,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
+c,IQ minus batch (vectorized midpoint),SIM-sremu,row,"URAP 1 s, on",diff_db,0.00021737013919675974,,,accept=True; host=Intel(R) Xeon(R) Platinum 8488C; duration_s=1000
 c,VA-1 acceptance band (noise off),SIM-sremu,,,tol_db,0.02,,,pre-registered: |IQ - batch| <= 0.02 dB

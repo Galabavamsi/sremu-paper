@@ -5,10 +5,10 @@ map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_los
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,8.596132058986521,a_req_m2,407.9555272381534,,,nu=0.3; direct 133.49931848800838 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,9.425921129475704,a_req_m2,402.7438106658502,,,nu=0.4; direct 133.6109974212077 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,10.233815970452941,a_req_m2,397.743016391991,,,nu=0.5; direct 133.71952365994045 dB; RIS(A0) 150.70912438434448 dB
-map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,393.0463962437572,,,nu=0.6; direct 133.82269854643067 dB; RIS(A0) 150.70912438434448 dB
+map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,393.0463962437559,,,nu=0.6; direct 133.8226985464307 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.772307518482704,a_req_m2,388.7000184789845,,,nu=0.7; direct 133.9192836944558 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,12.499168518918246,a_req_m2,384.71775974611427,,,nu=0.8; direct 134.00873021744218 dB; RIS(A0) 150.70912438434448 dB
-map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,381.09265561016235,,,nu=0.9; direct 134.09096333678715 dB; RIS(A0) 150.70912438434448 dB
+map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,381.09265561016366,,,nu=0.9; direct 134.09096333678713 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.864081633280277,a_req_m2,377.8051732632652,,,nu=1.0; direct 134.16621691212322 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,14.502216948630991,a_req_m2,374.82901682458635,,,nu=1.1; direct 134.23491084458715 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.111563147074726,a_req_m2,372.13504027268846,,,nu=1.2; direct 134.29756361683545 dB; RIS(A0) 150.70912438434448 dB
@@ -30,7 +30,7 @@ map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_los
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.9304159632227,a_req_m2,349.3835745502502,,,nu=2.8; direct 134.8455252442161 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.230947283828858,a_req_m2,348.56257059246224,,,nu=2.9; direct 134.86595992419407 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.521781811535323,a_req_m2,347.770768418001,,,nu=3.0; direct 134.88571342120898 dB; RIS(A0) 150.70912438434448 dB
-map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,347.00481206298673,,,nu=3.1; direct 134.9048649724422 dB; RIS(A0) 150.70912438434448 dB
+map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,347.00481206298787,,,nu=3.1; direct 134.90486497244217 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.076593474001577,a_req_m2,346.26172795572217,,,nu=3.2; direct 134.92348508071711 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.34158063845512,a_req_m2,345.53887467202026,,,nu=3.3; direct 134.94163662932195 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.5988983114406,a_req_m2,344.8338999454244,,,nu=3.4; direct 134.959375842183 dB; RIS(A0) 150.70912438434448 dB
@@ -40,7 +40,7 @@ map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_los
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.55931688936395,a_req_m2,342.1539396081603,,,nu=3.8; direct 135.02714402224592 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.783927544416954,a_req_m2,341.51088780405126,,,nu=3.9; direct 135.04348383797225 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.00294462598346,a_req_m2,340.8759358275959,,,nu=4.0; direct 135.0596480550809 dB; RIS(A0) 150.70912438434448 dB
-map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,340.2479680528335,,,nu=4.1; direct 135.07566411413336 dB; RIS(A0) 150.70912438434448 dB
+map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,340.2479680528347,,,nu=4.1; direct 135.07566411413333 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.425243619149875,a_req_m2,339.6259730472038,,,nu=4.2; direct 135.0915570059035 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.629005089505856,a_req_m2,339.00903210221526,,,nu=4.3; direct 135.1073495376678 dB; RIS(A0) 150.70912438434448 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.828134943827152,a_req_m2,338.3963092183333,,,nu=4.4; direct 135.1230625664111 dB; RIS(A0) 150.70912438434448 dB
@@ -59,7 +59,7 @@ map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.016699121988733,a_req_m2,461.13455571936845,,,nu=0.6; direct 119.38980393330141 dB; RIS(A0) 137.66390675487898 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.772309103011269,a_req_m2,452.9015136825731,,,nu=0.7; direct 119.5462818469523 dB; RIS(A0) 137.66390675487898 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,12.499170258368089,a_req_m2,444.9077942387276,,,nu=0.8; direct 119.70095700812287 dB; RIS(A0) 137.66390675487898 dB
-map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,437.13358921014,,,nu=0.9; direct 119.85407371403019 dB; RIS(A0) 137.66390675487898 dB
+map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,437.1335892101414,,,nu=0.9; direct 119.85407371403016 dB; RIS(A0) 137.66390675487898 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.864083626264453,a_req_m2,429.54960294567667,,,nu=1.0; direct 120.00609085191746 dB; RIS(A0) 137.66390675487898 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,14.502219042928058,a_req_m2,422.1223679394746,,,nu=1.1; direct 120.15758997665546 dB; RIS(A0) 137.66390675487898 dB
 map,"A_req, two-ray + knife edge, d2 0.5 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,15.11156532788114,a_req_m2,414.8177172278125,,,nu=1.2; direct 120.30921134633459 dB; RIS(A0) 137.66390675487898 dB
@@ -107,10 +107,10 @@ map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,8.596132058986521,a_req_m2,1596.9708553992218,,,nu=0.3; direct 133.49931848800838 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,9.425921129475704,a_req_m2,1576.5692211110058,,,nu=0.4; direct 133.6109974212077 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,10.233815970452941,a_req_m2,1556.9932571247682,,,nu=0.5; direct 133.71952365994045 dB; RIS(A0) 162.56280775970876 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,1538.6080043341333,,,nu=0.6; direct 133.82269854643067 dB; RIS(A0) 162.56280775970876 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,1538.6080043341287,,,nu=0.6; direct 133.8226985464307 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.772307518482704,a_req_m2,1521.5938002028947,,,nu=0.7; direct 133.9192836944558 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,12.499168518918246,a_req_m2,1506.0049658559092,,,nu=0.8; direct 134.00873021744218 dB; RIS(A0) 162.56280775970876 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,1491.8142385183114,,,nu=0.9; direct 134.09096333678715 dB; RIS(A0) 162.56280775970876 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,1491.8142385183162,,,nu=0.9; direct 134.09096333678713 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.864081633280277,a_req_m2,1478.9451556278873,,,nu=1.0; direct 134.16621691212322 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,14.502216948630991,a_req_m2,1467.2947800934382,,,nu=1.1; direct 134.23491084458715 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.111563147074726,a_req_m2,1456.7490177461661,,,nu=1.2; direct 134.29756361683545 dB; RIS(A0) 162.56280775970876 dB
@@ -132,7 +132,7 @@ map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.9304159632227,a_req_m2,1367.686790982566,,,nu=2.8; direct 134.8455252442161 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.230947283828858,a_req_m2,1364.472912740418,,,nu=2.9; direct 134.86595992419407 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.521781811535323,a_req_m2,1361.373346950939,,,nu=3.0; direct 134.88571342120898 dB; RIS(A0) 162.56280775970876 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,1358.3749564554194,,,nu=3.1; direct 134.9048649724422 dB; RIS(A0) 162.56280775970876 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,1358.3749564554234,,,nu=3.1; direct 134.90486497244217 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.076593474001577,a_req_m2,1355.4661009964782,,,nu=3.2; direct 134.92348508071711 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.34158063845512,a_req_m2,1352.6364405317295,,,nu=3.3; direct 134.94163662932195 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.5988983114406,a_req_m2,1349.876766947237,,,nu=3.4; direct 134.959375842183 dB; RIS(A0) 162.56280775970876 dB
@@ -142,7 +142,7 @@ map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.55931688936395,a_req_m2,1339.3858720665844,,,nu=3.8; direct 135.02714402224592 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.783927544416954,a_req_m2,1336.868600155535,,,nu=3.9; direct 135.04348383797225 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.00294462598346,a_req_m2,1334.3830355945108,,,nu=4.0; direct 135.0596480550809 dB; RIS(A0) 162.56280775970876 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,1331.924811186535,,,nu=4.1; direct 135.07566411413336 dB; RIS(A0) 162.56280775970876 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,1331.9248111865393,,,nu=4.1; direct 135.07566411413333 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.425243619149875,a_req_m2,1329.4899676070902,,,nu=4.2; direct 135.0915570059035 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.629005089505856,a_req_m2,1327.0749085066063,,,nu=4.3; direct 135.1073495376678 dB; RIS(A0) 162.56280775970876 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.828134943827152,a_req_m2,1324.676361305592,,,nu=4.4; direct 135.1230625664111 dB; RIS(A0) 162.56280775970876 dB
@@ -161,7 +161,7 @@ map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_d
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.016699121988733,a_req_m2,1340.4314014233953,,,nu=0.6; direct 119.38980393330141 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.772309103011269,a_req_m2,1316.4994970833636,,,nu=0.7; direct 119.5462818469523 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,12.499170258368089,a_req_m2,1293.2632584978944,,,nu=0.8; direct 119.70095700812287 dB; RIS(A0) 146.9322452620256 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,1270.6651070209014,,,nu=0.9; direct 119.85407371403019 dB; RIS(A0) 146.9322452620256 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,1270.6651070209055,,,nu=0.9; direct 119.85407371403016 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.864083626264453,a_req_m2,1248.6198857058523,,,nu=1.0; direct 120.00609085191746 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,14.502219042928058,a_req_m2,1227.030310809359,,,nu=1.1; direct 120.15758997665546 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,15.11156532788114,a_req_m2,1205.7970653956268,,,nu=1.2; direct 120.30921134633459 dB; RIS(A0) 146.9322452620256 dB
@@ -180,7 +180,7 @@ map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_d
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,20.964204266998795,a_req_m2,931.0602518436989,,,nu=2.5; direct 122.55514006858127 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,21.297743772866244,a_req_m2,908.7823901666405,,,nu=2.6; direct 122.76549773861952 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,21.619573092319122,a_req_m2,886.2867087008628,,,nu=2.7; direct 122.98321106955942 dB; RIS(A0) 146.9322452620256 dB
-map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,21.93041857551638,a_req_m2,863.5784450347545,,,nu=2.8; direct 123.20865992202478 dB; RIS(A0) 146.9322452620256 dB
+map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,21.93041857551638,a_req_m2,863.5784450347544,,,nu=2.8; direct 123.20865992202478 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,22.230949900905177,a_req_m2,840.6652767283502,,,nu=2.9; direct 123.44223360840125 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,22.52178443271792,a_req_m2,817.5570162593648,,,nu=3.0; direct 123.68433479775396 dB; RIS(A0) 146.9322452620256 dB
 map,"A_req, two-ray + knife edge, d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,22.80349143945695,a_req_m2,794.2653442109607,,,nu=3.1; direct 123.93538352558764 dB; RIS(A0) 146.9322452620256 dB
@@ -209,10 +209,10 @@ map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,8.596132058986521,a_req_m2,6293.047338627571,,,nu=0.3; direct 133.49931848800838 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,9.425921129475704,a_req_m2,6212.652352127319,,,nu=0.4; direct 133.6109974212077 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,10.233815970452941,a_req_m2,6135.511014420274,,,nu=0.5; direct 133.71952365994045 dB; RIS(A0) 174.47408792600743 dB
-map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,6063.061811134608,,,nu=0.6; direct 133.82269854643067 dB; RIS(A0) 174.47408792600743 dB
+map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,6063.06181113459,,,nu=0.6; direct 133.8226985464307 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.772307518482704,a_req_m2,5996.015382788745,,,nu=0.7; direct 133.9192836944558 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,12.499168518918246,a_req_m2,5934.585788023172,,,nu=0.8; direct 134.00873021744218 dB; RIS(A0) 174.47408792600743 dB
-map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,5878.665594737782,,,nu=0.9; direct 134.09096333678715 dB; RIS(A0) 174.47408792600743 dB
+map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,5878.665594737807,,,nu=0.9; direct 134.09096333678713 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.864081633280277,a_req_m2,5827.9534934114845,,,nu=1.0; direct 134.16621691212322 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,14.502216948630991,a_req_m2,5782.043848596609,,,nu=1.1; direct 134.23491084458715 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.111563147074726,a_req_m2,5740.487059097962,,,nu=1.2; direct 134.29756361683545 dB; RIS(A0) 174.47408792600743 dB
@@ -234,7 +234,7 @@ map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.9304159632227,a_req_m2,5389.527110635531,,,nu=2.8; direct 134.8455252442161 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.230947283828858,a_req_m2,5376.8624537634005,,,nu=2.9; direct 134.86595992419407 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.521781811535323,a_req_m2,5364.648258259185,,,nu=3.0; direct 134.88571342120898 dB; RIS(A0) 174.47408792600743 dB
-map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,5352.832755637953,,,nu=3.1; direct 134.9048649724422 dB; RIS(A0) 174.47408792600743 dB
+map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,5352.832755637972,,,nu=3.1; direct 134.90486497244217 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.076593474001577,a_req_m2,5341.370076126647,,,nu=3.2; direct 134.92348508071711 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.34158063845512,a_req_m2,5330.219473598926,,,nu=3.3; direct 134.94163662932195 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.5988983114406,a_req_m2,5319.344662422723,,,nu=3.4; direct 134.959375842183 dB; RIS(A0) 174.47408792600743 dB
@@ -244,7 +244,7 @@ map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.55931688936395,a_req_m2,5278.004084487122,,,nu=3.8; direct 135.02714402224592 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.783927544416954,a_req_m2,5268.08448498606,,,nu=3.9; direct 135.04348383797225 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.00294462598346,a_req_m2,5258.289831944737,,,nu=4.0; direct 135.0596480550809 dB; RIS(A0) 174.47408792600743 dB
-map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,5248.602915921151,,,nu=4.1; direct 135.07566411413336 dB; RIS(A0) 174.47408792600743 dB
+map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,5248.60291592117,,,nu=4.1; direct 135.07566411413333 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.425243619149875,a_req_m2,5239.00813474165,,,nu=4.2; direct 135.0915570059035 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.629005089505856,a_req_m2,5229.491316577095,,,nu=4.3; direct 135.1073495376678 dB; RIS(A0) 174.47408792600743 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.828134943827152,a_req_m2,5220.03956545159,,,nu=4.4; direct 135.1230625664111 dB; RIS(A0) 174.47408792600743 dB
@@ -263,7 +263,7 @@ map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_d
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.016699121988733,a_req_m2,4926.3527250454035,,,nu=0.6; direct 119.38980393330141 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,11.772309103011269,a_req_m2,4838.398203810038,,,nu=0.7; direct 119.5462818469523 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,12.499170258368089,a_req_m2,4753.0003929606555,,,nu=0.8; direct 119.70095700812287 dB; RIS(A0) 158.2378634764676 dB
-map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,4669.947679489858,,,nu=0.9; direct 119.85407371403019 dB; RIS(A0) 158.2378634764676 dB
+map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.196495058304908,a_req_m2,4669.947679489875,,,nu=0.9; direct 119.85407371403016 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,13.864083626264453,a_req_m2,4588.927094636134,,,nu=1.0; direct 120.00609085191746 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,14.502219042928058,a_req_m2,4509.581101241046,,,nu=1.1; direct 120.15758997665546 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,15.11156532788114,a_req_m2,4431.544689758577,,,nu=1.2; direct 120.30921134633459 dB; RIS(A0) 158.2378634764676 dB
@@ -305,57 +305,57 @@ map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_d
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,26.582210499277235,a_req_m2,1422.2975515184714,,,nu=4.8; direct 130.18050476408672 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,26.760983355422713,a_req_m2,1336.0675335888802,,,nu=4.9; direct 130.7237457965946 dB; RIS(A0) 158.2378634764676 dB
 map,"A_req, two-ray + knife edge, d2 2 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,26.936168996727787,a_req_m2,1250.5413516457215,,,nu=5.0; direct 131.2983528697795 dB; RIS(A0) 158.2378634764676 dB
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,6.020599913279624,a_req_m2,241.03210130047546,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,6.887984087211764,a_req_m2,218.1251174910408,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,7.748487211742534,a_req_m2,197.5515866072791,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,8.596132058986521,a_req_m2,179.18360900933777,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,9.425921129475704,a_req_m2,162.8578983923445,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,10.233815970452941,a_req_m2,148.39322865705435,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,135.60321833799048,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.772307518482704,a_req_m2,124.30526011072305,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,12.499168518918246,a_req_m2,114.32638113767662,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,105.506744674502,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.864081633280277,a_req_m2,97.70140314877158,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,14.502216948630991,a_req_m2,90.78080617579053,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.111563147074726,a_req_m2,84.63046463694266,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.693070491502194,a_req_m2,79.15007997464228,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,16.247891368328983,a_req_m2,74.25236898769913,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,16.77730852844129,a_req_m2,69.86174933802118,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,17.28267618867945,a_req_m2,65.91299914312815,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,17.765373492952424,a_req_m2,62.34996412718021,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,18.22676916349511,a_req_m2,59.124356151155375,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,18.668195808340997,a_req_m2,56.194665728290154,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.09093222961687,a_req_m2,53.52519659541699,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.496192126965745,a_req_m2,51.08522096705028,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.88511774475843,a_req_m2,48.84824839412793,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,6.020599913279624,a_req_m2,241.03210130047623,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,6.887984087211764,a_req_m2,218.12511749104155,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,7.748487211742534,a_req_m2,197.55158660727975,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,8.596132058986521,a_req_m2,179.18360900933837,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,9.425921129475704,a_req_m2,162.85789839234502,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,10.233815970452941,a_req_m2,148.39322865705483,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.016697712285414,a_req_m2,135.60321833799094,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,11.772307518482704,a_req_m2,124.30526011072348,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,12.499168518918246,a_req_m2,114.32638113767702,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.196493183102556,a_req_m2,105.50674467450236,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,13.864081633280277,a_req_m2,97.7014031487719,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,14.502216948630991,a_req_m2,90.78080617579083,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.111563147074726,a_req_m2,84.63046463694295,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,15.693070491502194,a_req_m2,79.15007997464252,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,16.247891368328983,a_req_m2,74.25236898769936,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,16.77730852844129,a_req_m2,69.86174933802141,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,17.28267618867945,a_req_m2,65.91299914312837,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,17.765373492952424,a_req_m2,62.349964127180414,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,18.22676916349511,a_req_m2,59.124356151155574,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,18.668195808340997,a_req_m2,56.19466572829052,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.09093222961687,a_req_m2,53.525196595417164,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.496192126965745,a_req_m2,51.08522096705045,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,19.88511774475843,a_req_m2,48.848248394128085,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,20.258777217509603,a_req_m2,46.79139808516013,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,20.61816458715287,a_req_m2,44.89486327071478,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,20.96420167454465,a_req_m2,43.14145606513392,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.297741172710833,a_req_m2,41.516221843730314,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.61957048561364,a_req_m2,40.006113092187526,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,20.61816458715287,a_req_m2,44.89486327071493,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,20.96420167454465,a_req_m2,43.141456065134065,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.297741172710833,a_req_m2,41.51622184373045,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.61957048561364,a_req_m2,40.006113092187654,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,21.9304159632227,a_req_m2,38.599713786792606,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.230947283828858,a_req_m2,37.28700649620129,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.521781811535323,a_req_m2,36.05917547865521,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,34.908440040542104,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.076593474001577,a_req_m2,33.827913304398855,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.34158063845512,a_req_m2,32.81148230308631,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.5988983114406,a_req_m2,31.853705976745193,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.848960861037277,a_req_m2,30.949728209601698,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.230947283828858,a_req_m2,37.28700649620141,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.521781811535323,a_req_m2,36.059175478655334,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,22.803488814737506,a_req_m2,34.90844004054222,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.076593474001577,a_req_m2,33.82791330439896,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.34158063845512,a_req_m2,32.811482303086414,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.5988983114406,a_req_m2,31.8537059767453,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,23.848960861037277,a_req_m2,30.949728209601798,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.09215196092397,a_req_m2,30.095203515984387,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.328827273311727,a_req_m2,29.286233380663543,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.55931688936395,a_req_m2,28.519311588918274,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.328827273311727,a_req_m2,29.28623338066364,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.55931688936395,a_req_m2,28.51931158891837,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,24.783927544416954,a_req_m2,27.791277156639882,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.00294462598346,a_req_m2,27.0992736992241,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,26.44071426765199,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.425243619149875,a_req_m2,25.81325083759048,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.629005089505856,a_req_m2,25.214747768057105,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.2166339923791,a_req_m2,26.440714267652165,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.425243619149875,a_req_m2,25.813250837590566,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.629005089505856,a_req_m2,25.214747768057187,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,25.828134943827152,a_req_m2,24.643258654818382,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.02283590209894,a_req_m2,24.09700609405002,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.213297971920714,a_req_m2,23.574363947060675,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.02283590209894,a_req_m2,24.0970060940501,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.213297971920714,a_req_m2,23.57436394706075,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.39969945355962,a_req_m2,23.073841759686413,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.582207852407002,a_req_m2,22.594071042455347,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.582207852407002,a_req_m2,22.594071042455422,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.76098070816171,a_req_m2,22.133793161587555,,,EXPERIMENTAL module
-map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.936166349113254,a_req_m2,21.69184862777619,,,EXPERIMENTAL module
+map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 1.5 m",SIM-sremu,knife_edge_loss_db,26.936166349113254,a_req_m2,21.691848627776256,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,6.020599913279624,a_req_m2,277.5420597431556,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,6.887984351309344,a_req_m2,251.16526895314036,,,EXPERIMENTAL module
 map,"A_req, P.526 + knife edge (EXPERIMENTAL), d2 1 km, h_r 10 m",SIM-sremu,knife_edge_loss_db,7.748487733810876,a_req_m2,227.4753888016511,,,EXPERIMENTAL module

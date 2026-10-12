@@ -1,8 +1,8 @@
 {
   "figure": "F5",
   "title": "(a) CFO estimation error vs applied offset, noise off, with the generic integer-samples-per-tick pitfall; (b) estimator RMSE vs the Cramer-Rao bound; (c) BER vs Eb/N0 with Clopper-Pearson intervals",
-  "content_key": "1eb3933f4c9c0d7eda89ab065d09afedd5f84c95ea9fb6a9a16598436b5d193c",
-  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "content_key": "dadd7bd8a1a2ca3ce6776a81a0c8d15e8796d98e669ac4a91e9e57148bba8cbc",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -18,30 +18,30 @@
   ],
   "inputs": [
     {
-      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo_sweep_noise_free.csv",
+      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo_sweep_noise_free.csv",
       "data_class": "SIM-sremu",
       "note": "engine_* and legacy_* columns plotted (legacy_* = sremu output re-timed by the integer-samples-per-tick adapter); dig_* columns not plotted (D24)",
       "provenance": {
-        "sremu_commit": "9dca79f37955dc38fa8890110bea0f342eea207d",
-        "sremu_dirty": true,
-        "run_dir": "validation/cfo/results/20261010T232549Z_vcfo",
+        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "sremu_dirty": false,
+        "run_dir": "/opt/job/out/validation/cfo/20261012T000448Z_vcfo",
         "study": "V-CFO",
-        "dirty_patch_sha256": "81af3aa08ec9060d3ca69033a7a75751954410438f1c83b551f1bbd2e09f4cac",
-        "platform": "Windows-11-10.0.26200-SP0",
-        "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics"
+        "dirty_patch_sha256": null,
+        "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
       },
-      "sha256": "8dfb75ed6f07c88fd164a0b6e625ac8d7271a9ac0c13e4a67ae035be6b5bbaad"
+      "sha256": "eb3ad82a0ff39a66c5e9a2a3cadfbfc7742ff5e6454a191bad4452c19786c41d"
     },
     {
-      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/vcfo4_rmse_vs_crb.csv",
+      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo4_rmse_vs_crb.csv",
       "data_class": "SIM-sremu",
       "note": "CRB columns are ANALYTIC",
-      "sha256": "5d3c265538614ca9ba6ac32b195b66020225152066bb3006f772234c92d0269f"
+      "sha256": "abf166f2345032bd3e3b6644e62ca77b3485480e8d19f3e6d645acbdabdd9ec8"
     },
     {
-      "path": "../sremu/validation/cfo/results/20261010T232549Z_vcfo/meta.json",
+      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/meta.json",
       "data_class": "SIM-sremu",
-      "sha256": "1e1fc4ea37deb7d308a9f5b9dc664cb954a8452d6adeb54567e8d292c23fa924"
+      "sha256": "6fb2fb03c94f16f1240de008efeb92b4013d29020e9ce5d446d1202537df3bc5"
     },
     {
       "path": "sweeps/results/E-F/ber/ber.csv",
@@ -50,13 +50,13 @@
       "provenance": {
         "experiment": "E-F"
       },
-      "sha256": "ef0b386ca310be1ce9ee5f645efa90d65ab22c8b3945780cb2cc3b87a534cded"
+      "sha256": "ba11e3dbe65b42edeb055c1691217b63eea63b6877d473993d8d1ab628459b88"
     },
     {
       "path": "sweeps/results/E-F/ber/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED; genie = oracle CSI",
-      "sha256": "3a7c40718c047569e1cad13a6097c245698bad4a008e8435bd5772d45273afab"
+      "sha256": "f3244c2f78de61b0ff41994133668b4c69e4975d025cac1423bae92e57014bad"
     }
   ],
   "assumptions": [
@@ -66,10 +66,10 @@
   ],
   "profile": "full",
   "script": "figures/src/f05_cfo_ber.py",
-  "script_sha256": "99712cb8f75f190e1fbc983995a88deb96f678292b6a966a0ae015b2327c52ff",
+  "script_sha256": "40c831508e0ad21a1fd7b6bd9b8906ad93acdc3bf889d0ee7d93efaa684a5afb",
   "outputs": {
-    "figures/out/F5.pdf": "6c9af20fa9de91ca605f9ddc737a48b53a414eb0baa00e3285cd3fa152d25b79",
-    "figures/data/F5.csv": "ed5ca83a52d515d1cde5703ca2c39b18b0e1f05c7a39520bca9d15666693d5c5"
+    "figures/out/F5.pdf": "31f2fb0748c6cc2ec262e51275c2789e399dbed8f0e5609e24b1057ef2a26188",
+    "figures/data/F5.csv": "49d8e4a631bfc968a09ba7cd54b3e11914f6d7573d8e9d3bffba8249137b3742"
   },
   "versions": {
     "python": "3.12.4",
@@ -78,7 +78,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T07:35:12Z",
+  "generated_utc": "2026-10-12T00:34:54Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

@@ -1,0 +1,96 @@
+{
+  "manifest_version": "1.0",
+  "sremu_version": "0.1.0.dev0",
+  "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+  "git_dirty": false,
+  "dirty_patch_sha256": null,
+  "contract_version": "1.1",
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "pydantic": "2.14.0",
+    "pyzmq": "27.2.0",
+    "torch": null
+  },
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "logical_cpus": 192,
+  "power_plan_or_governor": null,
+  "gpu": [],
+  "aws_instance": {
+    "type": "c7i.48xlarge",
+    "id": "i-0b61314ac0dcfeb18"
+  },
+  "scenario_name": "ef_latency",
+  "scenario_sha256": "b54951e866526d5d511cd78d0f9f2bdc3fe68951c20543d45fe508b4aef4642a",
+  "inputs": [
+    {
+      "path": "data/states/ideal_antipodal.yaml",
+      "sha256": "25d6aa27f60ac568b554ab415295e62db323c8548cb4bc934dc2aa212db5605c",
+      "data_class": "ANALYTIC"
+    }
+  ],
+  "assumptions": [
+    "wall-clock measurements on the recording host (platform in the manifest environment; background load in host_load_samples)"
+  ],
+  "seed": 1,
+  "rng_scheme": "philox4x32-10/blake2b-v1",
+  "mode": "lockstep",
+  "coupling": "none",
+  "backend": "numba_cpu",
+  "threads": 192,
+  "deterministic": true,
+  "numba_disable_svml": true,
+  "page_size": {},
+  "links": {},
+  "verify_interp_max_rel": null,
+  "richardson_db": null,
+  "counters": {
+    "late_samples": 0,
+    "underflow_slip_samples": 0,
+    "overflow_pages": 0,
+    "bad_packets": 0,
+    "schema_errors": 0,
+    "seq_errors": 0,
+    "rec_dropped": 0,
+    "stall_zero_samples": 0,
+    "late_commands": 0,
+    "rejected_commands": 0,
+    "rate_limited_commands": 0,
+    "deadline_misses": 0
+  },
+  "nondeterministic_inputs": false,
+  "oracle_csi_used": false,
+  "argv": [
+    "-c",
+    "/opt/job/out/ef_latency"
+  ],
+  "t_start_utc": "2026-10-11T23:59:40.052536Z",
+  "t_end_utc": "2026-10-12T00:00:01.250196Z",
+  "wall_s": 21.1976777,
+  "host_load_samples": [
+    {
+      "t_utc": "2026-10-11T23:59:40.055708Z",
+      "cpu_busy_fraction": 0.017857142857142856,
+      "loadavg_1min": 0.58642578125
+    },
+    {
+      "t_utc": "2026-10-11T23:59:47.230262Z",
+      "cpu_busy_fraction": 0.3702576366996413,
+      "loadavg_1min": 0.61962890625
+    },
+    {
+      "t_utc": "2026-10-12T00:00:01.240611Z",
+      "cpu_busy_fraction": 0.19185800346151846,
+      "loadavg_1min": 0.94482421875
+    },
+    {
+      "t_utc": "2026-10-12T00:00:01.241868Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 0.94482421875
+    }
+  ],
+  "threading": null
+}

@@ -1,8 +1,8 @@
 {
   "figure": "F9",
   "title": "E-B: (a), (c) per-symbol EVM around an intra-frame switch; (b), (d) PER vs latency jitter for timed (2 ms lead) / asap / tick-based command semantics at a 0.5 ms guard. Top row (primary): geometry modelled on the lab arrangement (SIM, nominal geometry), LOS present at Es/N0 15 dB and LOS blocked at 25 dB; bottom row (supporting): lab-like SIM geometry, LOS blocked",
-  "content_key": "cd614f1586fee1e590482128461db90abdbd5ab1b48c784df12060313daff678",
-  "sremu_commit": "309c6335d639c16b8d2f62b50c1d521114d58621",
+  "content_key": "7c5fca93cc8d7156541212e5bba6903aefe5d34bfb6c5113cc7ba1af0c989c7a",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -49,7 +49,7 @@
       "path": "sweeps/results/E-B-arc/E-B2/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED",
-      "sha256": "e8ea7b383d3a8b0288852807bf846e70ecb142a9d1a40a8ea6c75abe36cf5576"
+      "sha256": "96801f2d37953963c0837104969ece783896c9f4fdb86056cbb4cfae16b5cc16"
     },
     {
       "path": "sweeps/results/E-B1/eb1_traces.csv",
@@ -58,13 +58,13 @@
       "provenance": {
         "experiment": "E-B1"
       },
-      "sha256": "73f94b84e2ed02284ea2b89d6c4b2481fa67aaa74ae483aa15d61eeac3136378"
+      "sha256": "4c018b7573cfab192834418dca20b5bb9b9ac759dda5ff9db391e1b7363deb18"
     },
     {
       "path": "sweeps/results/E-B1/eb1_points.csv",
       "data_class": "SIM-sremu",
       "geometry": "lab-like SIM geometry (not the lab's)",
-      "sha256": "106f2d76ae7b413994e3433ba78828fde20873b0b374c000b717d64a121d37ef"
+      "sha256": "096212a320806e455e74cc1f1d8c272f14242df99feb4c7e96bbbb88705292c4"
     },
     {
       "path": "sweeps/results/E-B1/va5.json",
@@ -79,24 +79,24 @@
       "provenance": {
         "experiment": "E-B2"
       },
-      "sha256": "311ece39e6c620365a13ab8d1918f35bfc1461bf4a187dd1869c369819ebe154"
+      "sha256": "dcfcbaea14b7a29205c12d2f8dd0f70836b6406da09ef3332a0bb2609f47f499"
     },
     {
       "path": "sweeps/results/E-B2/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED",
-      "sha256": "582e7e2f1f8ab58e8ef75e2191dfc5f27c24241dccfc5b90ca9bed2378b0b69a"
+      "sha256": "40cd1f63828b00ea2773f118eb13a1304a565fb11903c034121a6b01cc89f077"
     },
     {
       "path": "sweeps/results/E-B-arc/meta.json",
       "data_class": "SIM-sremu",
       "provenance": {
-        "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
         "sremu_dirty": false,
-        "run_id": "20261011T060442Z_eb_arc_d41a75",
-        "aws_instance": "c7i.16xlarge"
+        "run_id": "regen_2026-10-11T23:59:37Z",
+        "aws_instance": "c7i.48xlarge"
       },
-      "sha256": "0e43dfd68836dbd809a1c6341b186c1de6426daa7023982bc845c75b548232d8"
+      "sha256": "b31de00a0208f9156fa761b7ee23cc63619f81fc6f3fc345c14cb540976cde78"
     }
   ],
   "assumptions": [
@@ -111,7 +111,7 @@
   "script_sha256": "d4c115029619c1c7cd7d2536f3249afa3eca7dd37f7c69b13c8761a0ca8485b8",
   "outputs": {
     "figures/out/F9.pdf": "f2990513b49529fb0a72a01bf88b36b7564412e7486efbcda92dcbcaf5f2e57f",
-    "figures/data/F9.csv": "437f152bcea1c402e2fd100daae0994c9890235b280461ffadf500f9c2cc6cfc"
+    "figures/data/F9.csv": "b82af69f4d6ec26d45b0fff8fa11e04f6d8479e556620c544a283bd84557d5c1"
   },
   "versions": {
     "python": "3.12.4",
@@ -120,7 +120,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T08:39:06Z",
+  "generated_utc": "2026-10-12T00:35:06Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

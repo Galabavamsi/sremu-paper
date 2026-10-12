@@ -7,19 +7,22 @@
   "contract_version": "1.1",
   "versions": {
     "python": "3.12.3",
-    "numpy": "2.5.4",
+    "numpy": "2.5.3",
     "scipy": "1.18.1",
     "numba": "0.68.0",
     "pydantic": "2.14.0",
     "pyzmq": "27.2.0",
     "torch": null
   },
-  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
-  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-  "logical_cpus": 16,
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "logical_cpus": 192,
   "power_plan_or_governor": null,
   "gpu": [],
-  "aws_instance": null,
+  "aws_instance": {
+    "type": "c7i.48xlarge",
+    "id": "i-0b61314ac0dcfeb18"
+  },
   "scenario_name": "gr_ris_ber",
   "scenario_sha256": "0efe62379da70e3160a91dac181461bae5a187895de3bdc20b597a1e89d34bdb",
   "inputs": [
@@ -30,7 +33,7 @@
     }
   ],
   "assumptions": [
-    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:51041', 'pub': None, 'tx': 'tcp://127.0.0.1:45529'}"
+    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:35591', 'pub': None, 'tx': 'tcp://127.0.0.1:47973'}"
   ],
   "seed": 7,
   "rng_scheme": "philox4x32-10/blake2b-v1",
@@ -80,28 +83,47 @@
   "nondeterministic_inputs": false,
   "oracle_csi_used": false,
   "argv": [
-    "/home/galaba_vamsi/trackG/sremu/src/sremu/commands/serve.py",
-    "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/throughput/rate_3.84e+06/scene.yaml",
+    "/opt/job/sremu/src/sremu/commands/serve.py",
+    "/opt/job/out/ee/throughput/rate_3.84e+06/scene.yaml",
     "--serve",
-    "tcp://127.0.0.1:51041",
+    "tcp://127.0.0.1:35591",
     "--pub",
     "none",
     "--tx",
-    "tcp://127.0.0.1:45529",
+    "tcp://127.0.0.1:47973",
     "--out",
-    "/home/galaba_vamsi/trackG/ee_runs/20261011T162219Z_ee_laptop/throughput/rate_3.84e+06/rec",
+    "/opt/job/out/ee/throughput/rate_3.84e+06/rec",
     "--exit-when-done",
     "--raw-peer",
-    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:36689,rx_port=tcp://127.0.0.1:56475,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:52363,rx_port=tcp://127.0.0.1:60651,tx_stream=gr.tx0,rx_stream=grrx.rx0"
   ],
-  "t_start_utc": "2026-10-11T16:25:34.478059Z",
-  "t_end_utc": "2026-10-11T16:25:38.831007Z",
-  "wall_s": 4.3564674139999795,
+  "t_start_utc": "2026-10-12T00:22:16.439354Z",
+  "t_end_utc": "2026-10-12T00:22:22.875101Z",
+  "wall_s": 6.449128688999963,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-11T16:25:38.830957Z",
-      "cpu_busy_fraction": 0.14353380221042056,
-      "loadavg_1min": 4.55517578125
+      "t_utc": "2026-10-12T00:22:22.875002Z",
+      "cpu_busy_fraction": 0.02039249905066615,
+      "loadavg_1min": 1.5322265625
     }
-  ]
+  ],
+  "threading": {
+    "layer": "omp",
+    "layer_config": "default",
+    "num_threads": 16,
+    "omp_wait_policy": null,
+    "os_threads": 1,
+    "render": {
+      "parallel_min_work": 65536,
+      "paced_parallel_min_work": 262144,
+      "calls": {
+        "serial": 1110,
+        "parallel": 3376
+      },
+      "parallel_threads": [
+        "sremu-engine"
+      ],
+      "parallel_threads_alive": []
+    }
+  }
 }

@@ -157,7 +157,7 @@ nodes:
 - id: r05
   position_m:
   - 0.4242640687119285
-  - 0.4242640687119285
+  - 0.42426406871192845
   - 0.0
   trajectory: null
   antenna:
@@ -289,7 +289,7 @@ nodes:
 - id: r11
   position_m:
   - 0.6363961030678928
-  - 0.6363961030678928
+  - 0.6363961030678927
   - 0.0
   trajectory: null
   antenna:
@@ -421,7 +421,7 @@ nodes:
 - id: r17
   position_m:
   - 0.848528137423857
-  - 0.848528137423857
+  - 0.8485281374238569
   - 0.0
   trajectory: null
   antenna:
@@ -553,7 +553,7 @@ nodes:
 - id: r23
   position_m:
   - 1.0606601717798214
-  - 1.0606601717798214
+  - 1.0606601717798212
   - 0.0
   trajectory: null
   antenna:
@@ -685,7 +685,7 @@ nodes:
 - id: r29
   position_m:
   - 1.2727922061357857
-  - 1.2727922061357857
+  - 1.2727922061357855
   - 0.0
   trajectory: null
   antenna:

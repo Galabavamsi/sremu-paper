@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figcommon as fc
 
 FID = "F5"
-CFO_RUN = "../sremu/validation/cfo/results/20261010T232549Z_vcfo"
+CFO_RUN = "../sremu/validation/cfo/results/20261012T000448Z_vcfo"
 SWEEP = f"{CFO_RUN}/vcfo_sweep_noise_free.csv"
 CRB = f"{CFO_RUN}/vcfo4_rmse_vs_crb.csv"
 CFO_META = f"{CFO_RUN}/meta.json"

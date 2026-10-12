@@ -2,7 +2,7 @@
   "figure": "F6",
   "title": "(a) Instantaneous frequency of the LOS and RIS paths through the engine vs the closed forms; (b) interpolation error vs snapshot period T_u, measured against a per-sample exact channel and estimated by verify_interp",
   "content_key": "16d1c66d7cc6af8f1b89fde40be9928d3bf35caeada033022246e533d899663c",
-  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -35,7 +35,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T07:35:44Z",
+  "generated_utc": "2026-10-12T00:35:03Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

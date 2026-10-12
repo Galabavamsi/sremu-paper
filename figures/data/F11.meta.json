@@ -1,8 +1,8 @@
 {
   "figure": "F11",
   "title": "E-C non-ideality ablation: loss of the RIS term relative to ideal continuous phase across the lab-like, synthetic (near and far receiver) and corridor geometries",
-  "content_key": "d9678854d553ed855b489d6aaeb942d5d2832d980c2a8dd900cd58473912c2db",
-  "sremu_commit": "5be649a3a0018c848ffff087a3dfa934997b4f14",
+  "content_key": "211b8b2ef6845c0f307814f271b414b8e213b1606718023bc3e7baf76009cb1c",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -26,13 +26,13 @@
       "provenance": {
         "experiment": "E-C"
       },
-      "sha256": "2a6de6e35dd8b3f886eb2665870ad8a63f835daee89dbf104ecfaeb820ac7908"
+      "sha256": "e0e8ccac4e6bd05535a2685e4e13ed3090365f8ef8d8ac5d847aa9631a8bd4a6"
     },
     {
       "path": "sweeps/results/E-C/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED",
-      "sha256": "875b7b7a4f66b9dc1487eca47312fd04fac2b3e58c93273b38bf7bbfeeea28c4"
+      "sha256": "a4d66280d3864b25ee524c37d25e0484c3c2b6e16c0648bfa449dc33e4849d59"
     }
   ],
   "assumptions": [
@@ -45,8 +45,8 @@
   "script": "figures/src/f11_ablation.py",
   "script_sha256": "4fa4058ed334b1fcbe75b99c46c433c4162094cd2c444f4488e8285230cd3bfd",
   "outputs": {
-    "figures/out/F11.pdf": "d31b33e135d6a0424fa2e65fe596ce5e75aa914c1c387f20cb7c2e9ac51b2438",
-    "figures/data/F11.csv": "e9798f46ea9c69f4d5b399385dbbf593fd3223803ad92ca49a2fb5d82973d94d"
+    "figures/out/F11.pdf": "c15e27b1114b270a3674734890b17367ff3d9dac437c2652625ca4d134f170b6",
+    "figures/data/F11.csv": "a174d92921543935d06afcbd52e0c43c28a949b63b552b462594d5707b37e53f"
   },
   "versions": {
     "python": "3.12.4",
@@ -55,7 +55,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T07:35:16Z",
+  "generated_utc": "2026-10-12T00:35:11Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

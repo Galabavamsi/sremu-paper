@@ -14,42 +14,42 @@
   "inputs": [
     {
       "path": "exact_tau0.1_noiseoff/manifest.json",
-      "sha256": "db3c1e5b794f51a5d31d449b2913dac8239b2a5864a6240be32566fd0e3f9a03",
+      "sha256": "c83e630ce26ffd91455a4b0f31170b16644263ed041a9345baf0e42256706378",
       "data_class": "SIM-sremu"
     },
     {
       "path": "exact_tau0.1_noiseon/manifest.json",
-      "sha256": "376f49d097fe5f90a5363ad5572355bce13dcc79c24b07f37fc9d399b9f33b15",
+      "sha256": "abdc35325506aec743834a480b13b1971ce95129acbe51e09a6aea0c5c5a6c6b",
       "data_class": "SIM-sremu"
     },
     {
       "path": "exact_tau1_noiseoff/manifest.json",
-      "sha256": "8ecb65ad8f2468996428539d409a30ef60bd63c06e02953ebbdf1f4e911e8874",
+      "sha256": "3a73e60a7ef39cac1203c03b65c0200dc7e5fdebbcf5a4635c0b99d8a13493a5",
       "data_class": "SIM-sremu"
     },
     {
       "path": "exact_tau1_noiseon/manifest.json",
-      "sha256": "98b667629b13949080ba534e832a7bc3317990aaefaafc3e75e05bf10fdf3250",
+      "sha256": "9d0f6aced8530b9ee6d14972a7e73ec426ea2bcf80a5bf6f3b3df246c8eb65a2",
       "data_class": "SIM-sremu"
     },
     {
       "path": "urap_tau0.1_noiseoff/manifest.json",
-      "sha256": "19323fbb55007ba65cd7a6450f001a7ddffd86b4d329b50c4bd0aa19284290c8",
+      "sha256": "4a620f6239b40bef0ca9bd3dce6c9d89fbf8c32cb70ac6bb2463d3ea20d9cddf",
       "data_class": "SIM-sremu"
     },
     {
       "path": "urap_tau0.1_noiseon/manifest.json",
-      "sha256": "4c8ce971d9776d6f7cb1e382b69d95e72537b7e6c79caf4a38afce5d20d7fe7b",
+      "sha256": "4ce4f6edb74f40e5cef7b672c811839ded802115b43b6a1d514c7548675d2a2b",
       "data_class": "SIM-sremu"
     },
     {
       "path": "urap_tau1_noiseoff/manifest.json",
-      "sha256": "304b8f00fb01f7fdedd8e2ddb17be402a88128a657ca93bc2d35b6bfae0a4d38",
+      "sha256": "1a644d9fff2a770861a410b807f6e59656749f1636344505876a786cee3fadec",
       "data_class": "SIM-sremu"
     },
     {
       "path": "urap_tau1_noiseon/manifest.json",
-      "sha256": "32e56b2bbc543977fc88df802cc29bcf8b872fdc89e0957245fcc92b762fee8d",
+      "sha256": "af2ffa828acfb5b306f671dae6e44ea60c327575b78699bab947dd45949d09e5",
       "data_class": "SIM-sremu"
     }
   ],
@@ -60,247 +60,49 @@
     "files": {
       "experiments/__init__.py": "4a447ad6d86a75bafd2c524efe8bd2d7baacbbb61c919a70f59867454e8506f7",
       "experiments/common.py": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4",
+      "experiments/compare_regen.py": "91d571839cf082336913ddf634931cd85bf5eec23d46723eee6fe810da42de72",
       "experiments/ea.py": "34a4bcc989e7f35a5b033f7771266902718cb3e79501b13fd8c55073aa6171f5",
       "experiments/ea_iq.py": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
       "experiments/eb.py": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351",
       "experiments/eb_aggregate.py": "7eeb526348f2dd47078e6beaa72a5589e7c706caa19d20904cecbd1b750cfa49",
       "experiments/ec.py": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa",
+      "experiments/ee_gnuradio.py": "2e3473ac5c6088db107402a8bb79009d078ef763ac37e0cb8cce6e37cea56236",
       "experiments/ef.py": "9bce7ad7bc3b2ab3b599f0ba739de298c3bf20b739cf92ca09a99a471fb1f527",
-      "experiments/finalize.py": "90008c1e9e3c4ad7110db5c678a0dbca52277648bc88b6a2467b99aaae4217d9",
+      "experiments/finalize.py": "2f6037aabcd15c7ac8326846e0c49f644cc72c0362589739a8d05ead7489b674",
+      "experiments/install_regen.py": "a8161d9de765f1293b83030d380e4cf536d288e5f18a343da6870dc380829c96",
+      "experiments/regen_checks.py": "7d79da5df50fa440a717ff40449c5311ce263eefc953fe2e1aa1e1066b115b61",
       "experiments/run_sweeps.py": "5b74675fc54b1aa10f3ee3cb6ea5444d6d9bbe582326c9b80b9fca8a3ca82001",
+      "experiments/vlab_check.py": "97baf4653aab70bd5dd543a70b5524ac6bac161f462d85d10fcb3409c5547d61",
       "scenarios/studies/ea_corridor.yaml": "66329bbaf5ffed017c57a3aa46d9169477e61439a78baf29a323c8f22b4fcf29",
       "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
-      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d",
-      "paper/sweeps/ea_ref.yaml": "fba0d7c7cd05ff3da218e8c311ac2c9b53d7863f108649f354d570118c5c0f89",
-      "paper/sweeps/ea_tau.yaml": "8413059a75307f39df5611770c0757605e42a68023c99d44507ffdf2ed65c818",
-      "paper/sweeps/eb1.yaml": "b5c8b53ddaf1787097e6f813a695de67e34afd7395e5a12447a4fbc7526cf79f",
-      "paper/sweeps/eb2_ideal1.yaml": "a428bf9606ab8aa6f08e54ab39e2c96b592ed327355eda1ae948ab8727b3852f",
-      "paper/sweeps/eb2_lab.yaml": "3dec21b80634c55e105279560c7dca609de28368deefd864804204a484c4f7a2"
+      "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
     },
-    "src_sremu_tree_sha256": "651133f06cea53b9430fb47e353584e3b795c74bb11c55ce9274ac499a3ba162"
+    "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
   },
-  "written_utc": "2026-10-11T05:59:46.806481Z",
-  "out_root": "D:\\projects\\ris\\sremu\\runs\\wp11\\ea_iq",
+  "written_utc": "2026-10-12T00:22:04.401229Z",
+  "out_root": "/opt/job/out/ea_iq",
   "expected_rows": 8,
   "complete": true,
   "missing_rows": [],
   "all_accept": true,
   "hosts": {
-    "aws:20261010T232822Z_ea_iq_ef_18ffd1": {
+    "local": {
       "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
       "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
-      "aws_instance_type": "c7i.8xlarge",
+      "aws_instance_type": "c7i.48xlarge",
       "python": "3.12.3",
       "rows": [
         "exact_tau0.1_noiseoff",
         "exact_tau0.1_noiseon",
-        "urap_tau0.1_noiseoff",
-        "urap_tau0.1_noiseon"
-      ]
-    },
-    "local": {
-      "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-      "platform": "Windows-11-10.0.26200-SP0",
-      "aws_instance_type": null,
-      "python": "3.12.4",
-      "rows": [
         "exact_tau1_noiseoff",
         "exact_tau1_noiseon",
+        "urap_tau0.1_noiseoff",
+        "urap_tau0.1_noiseon",
         "urap_tau1_noiseoff",
         "urap_tau1_noiseon"
       ]
     }
   },
-  "imported_runs": {
-    "exact_tau0.1_noiseoff": {
-      "run_id": "20261010T232822Z_ea_iq_ef_18ffd1",
-      "origin": "lead AWS job (research/aws/runner.py): bundle of the sremu repo, outputs under $SREMU_JOB_OUT, returned as results.tgz",
-      "region": "ap-south-1",
-      "job_exit": 0,
-      "cpu_model_lscpu": "Intel(R) Xeon(R) Platinum 8488C",
-      "os": "Ubuntu 24.04 LTS (noble)",
-      "note": "Imported by the WP11 finalize track on 2026-10-11. The laptop runs of these four points (AMD Ryzen 9 8945H, Windows 11) did not finish: the driver's 600 s server wait timed out (runs/wp11/ea_iq_exact_0.1.log, ea_iq_urap_0.1.log), so the rows were measured on AWS. Bundle = git archive of HEAD at launch plus extra working-tree paths, without .git, so the manifests record git_commit null. HEAD at launch (23:28:22Z) was b4247316 (committed 23:26:44Z); src/ is identical in b4247316 and f518ed1 (git diff). The 12 driver and scenario files whose SHA-256 the job recorded (experiments/*.py, scenarios/studies/ea_corridor.yaml, scenarios/lab_like_A.yaml) equal their versions committed in f518ed1. The job's src_sremu_tree_sha256 (d61b9664...) differs from f518ed1's (8335241f...), so the bundle carried at least one extra untracked src file that the returned results do not identify.",
-      "instance_type": "c7i.8xlarge",
-      "instance_id": "i-0b2a8a362406d05fe",
-      "ami": "ami-065d2b03fb493085a",
-      "bundle_sha256": "aa8cb70aa91b3ba789065171292bd97bd71adc34646ac7f41b403898a853a035",
-      "job_cmd": "python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only exact:0.1; python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only urap:0.1; python -c \"from experiments.ef import run_latency; import json; print(json.dumps(run_latency('$SREMU_JOB_OUT/ef_latency'), default=str)[:4000])\"",
-      "source_path": "D:\\projects\\ris\\research\\aws\\results\\20261010T232822Z_ea_iq_ef_18ffd1\\out\\ea_iq\\exact_tau0.1_noiseoff",
-      "files_sha256": {
-        "controller.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "manifest.json": "db3c1e5b794f51a5d31d449b2913dac8239b2a5864a6240be32566fd0e3f9a03",
-        "meta.json": "ee4881ced82589758ea05fc77fad962ce3bdffdd33321ad7d39239d2d25c17f5",
-        "result.json": "8d9d81cdae532d3a8b561e998f06ccb3c611c7bdd2746e78ca4bfd189c432ca6",
-        "rx_windows.csv": "d92e01791dfed0f1995684303466996815ad78da2649b142895760ba5e11adc5",
-        "rxapp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "scenario.resolved.yaml": "fd76e655b567421d4b05f2e03ea6cdbf8107accbcfdc9b6a6ac90ec67520c9dd",
-        "scenario.yaml": "fd76e655b567421d4b05f2e03ea6cdbf8107accbcfdc9b6a6ac90ec67520c9dd",
-        "server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "server_summary.json": "6222545f0819213c6f08dd39265fb46123fbc61a094f7e42b4d86d49a65ce2f6"
-      },
-      "imported_utc": "2026-10-11T05:56:07.721949Z",
-      "replaced_local": {
-        "moved_to": "D:\\projects\\ris\\sremu\\runs\\wp11\\ea_iq_replaced_20261011T055607Z\\exact_tau0.1_noiseoff",
-        "had_result": false,
-        "had_manifest": false
-      }
-    },
-    "exact_tau0.1_noiseon": {
-      "run_id": "20261010T232822Z_ea_iq_ef_18ffd1",
-      "origin": "lead AWS job (research/aws/runner.py): bundle of the sremu repo, outputs under $SREMU_JOB_OUT, returned as results.tgz",
-      "region": "ap-south-1",
-      "job_exit": 0,
-      "cpu_model_lscpu": "Intel(R) Xeon(R) Platinum 8488C",
-      "os": "Ubuntu 24.04 LTS (noble)",
-      "note": "Imported by the WP11 finalize track on 2026-10-11. The laptop runs of these four points (AMD Ryzen 9 8945H, Windows 11) did not finish: the driver's 600 s server wait timed out (runs/wp11/ea_iq_exact_0.1.log, ea_iq_urap_0.1.log), so the rows were measured on AWS. Bundle = git archive of HEAD at launch plus extra working-tree paths, without .git, so the manifests record git_commit null. HEAD at launch (23:28:22Z) was b4247316 (committed 23:26:44Z); src/ is identical in b4247316 and f518ed1 (git diff). The 12 driver and scenario files whose SHA-256 the job recorded (experiments/*.py, scenarios/studies/ea_corridor.yaml, scenarios/lab_like_A.yaml) equal their versions committed in f518ed1. The job's src_sremu_tree_sha256 (d61b9664...) differs from f518ed1's (8335241f...), so the bundle carried at least one extra untracked src file that the returned results do not identify.",
-      "instance_type": "c7i.8xlarge",
-      "instance_id": "i-0b2a8a362406d05fe",
-      "ami": "ami-065d2b03fb493085a",
-      "bundle_sha256": "aa8cb70aa91b3ba789065171292bd97bd71adc34646ac7f41b403898a853a035",
-      "job_cmd": "python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only exact:0.1; python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only urap:0.1; python -c \"from experiments.ef import run_latency; import json; print(json.dumps(run_latency('$SREMU_JOB_OUT/ef_latency'), default=str)[:4000])\"",
-      "source_path": "D:\\projects\\ris\\research\\aws\\results\\20261010T232822Z_ea_iq_ef_18ffd1\\out\\ea_iq\\exact_tau0.1_noiseon",
-      "files_sha256": {
-        "controller.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "manifest.json": "376f49d097fe5f90a5363ad5572355bce13dcc79c24b07f37fc9d399b9f33b15",
-        "meta.json": "95686803053fbef5fc67b30a0b796b6f492941616771e3ccde943f4088fc90ef",
-        "result.json": "ac970805da47756e6eeff204c2c859dfc666c26ba70ee5c4e047a8ff854ab513",
-        "rx_windows.csv": "5b1fa6afa9fac2fbce40d907774feffed9a9fee93265c8a1e1759044052ffc50",
-        "rxapp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "scenario.resolved.yaml": "fd76e655b567421d4b05f2e03ea6cdbf8107accbcfdc9b6a6ac90ec67520c9dd",
-        "scenario.yaml": "fd76e655b567421d4b05f2e03ea6cdbf8107accbcfdc9b6a6ac90ec67520c9dd",
-        "server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "server_summary.json": "f5bad0601b52b76b13cd51adba3000d8142b8efab341e5cb85d41bd1faf0f2fc"
-      },
-      "imported_utc": "2026-10-11T05:56:07.721949Z",
-      "replaced_local": null
-    },
-    "urap_tau0.1_noiseoff": {
-      "run_id": "20261010T232822Z_ea_iq_ef_18ffd1",
-      "origin": "lead AWS job (research/aws/runner.py): bundle of the sremu repo, outputs under $SREMU_JOB_OUT, returned as results.tgz",
-      "region": "ap-south-1",
-      "job_exit": 0,
-      "cpu_model_lscpu": "Intel(R) Xeon(R) Platinum 8488C",
-      "os": "Ubuntu 24.04 LTS (noble)",
-      "note": "Imported by the WP11 finalize track on 2026-10-11. The laptop runs of these four points (AMD Ryzen 9 8945H, Windows 11) did not finish: the driver's 600 s server wait timed out (runs/wp11/ea_iq_exact_0.1.log, ea_iq_urap_0.1.log), so the rows were measured on AWS. Bundle = git archive of HEAD at launch plus extra working-tree paths, without .git, so the manifests record git_commit null. HEAD at launch (23:28:22Z) was b4247316 (committed 23:26:44Z); src/ is identical in b4247316 and f518ed1 (git diff). The 12 driver and scenario files whose SHA-256 the job recorded (experiments/*.py, scenarios/studies/ea_corridor.yaml, scenarios/lab_like_A.yaml) equal their versions committed in f518ed1. The job's src_sremu_tree_sha256 (d61b9664...) differs from f518ed1's (8335241f...), so the bundle carried at least one extra untracked src file that the returned results do not identify.",
-      "instance_type": "c7i.8xlarge",
-      "instance_id": "i-0b2a8a362406d05fe",
-      "ami": "ami-065d2b03fb493085a",
-      "bundle_sha256": "aa8cb70aa91b3ba789065171292bd97bd71adc34646ac7f41b403898a853a035",
-      "job_cmd": "python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only exact:0.1; python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only urap:0.1; python -c \"from experiments.ef import run_latency; import json; print(json.dumps(run_latency('$SREMU_JOB_OUT/ef_latency'), default=str)[:4000])\"",
-      "source_path": "D:\\projects\\ris\\research\\aws\\results\\20261010T232822Z_ea_iq_ef_18ffd1\\out\\ea_iq\\urap_tau0.1_noiseoff",
-      "files_sha256": {
-        "controller.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "manifest.json": "19323fbb55007ba65cd7a6450f001a7ddffd86b4d329b50c4bd0aa19284290c8",
-        "meta.json": "54d227ded6d027c0a09ced97e46ac87f9ba63d4d7b7c3a54a189ccc8309c10d4",
-        "result.json": "d3d2407d456a03dfe216299aa58fac2846d474ce86f5dc2f4cd27fee1ef7ae4a",
-        "rx_windows.csv": "3d85ca57f5d836e91624e27a40c6fbf87ad2ddef69e8115f594ccfe7fe9b0c37",
-        "rxapp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "scenario.resolved.yaml": "57c397f13b7eb3fc617ced8c373e7d6d01257e2154347e96e649f5ecafff992c",
-        "scenario.yaml": "57c397f13b7eb3fc617ced8c373e7d6d01257e2154347e96e649f5ecafff992c",
-        "server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "server_summary.json": "8f806fb31d3c7737740d6e2ee0fbb9efece98c9c04667b2b53afdc0e3b4ff587"
-      },
-      "imported_utc": "2026-10-11T05:56:07.721949Z",
-      "replaced_local": {
-        "moved_to": "D:\\projects\\ris\\sremu\\runs\\wp11\\ea_iq_replaced_20261011T055607Z\\urap_tau0.1_noiseoff",
-        "had_result": false,
-        "had_manifest": false
-      }
-    },
-    "urap_tau0.1_noiseon": {
-      "run_id": "20261010T232822Z_ea_iq_ef_18ffd1",
-      "origin": "lead AWS job (research/aws/runner.py): bundle of the sremu repo, outputs under $SREMU_JOB_OUT, returned as results.tgz",
-      "region": "ap-south-1",
-      "job_exit": 0,
-      "cpu_model_lscpu": "Intel(R) Xeon(R) Platinum 8488C",
-      "os": "Ubuntu 24.04 LTS (noble)",
-      "note": "Imported by the WP11 finalize track on 2026-10-11. The laptop runs of these four points (AMD Ryzen 9 8945H, Windows 11) did not finish: the driver's 600 s server wait timed out (runs/wp11/ea_iq_exact_0.1.log, ea_iq_urap_0.1.log), so the rows were measured on AWS. Bundle = git archive of HEAD at launch plus extra working-tree paths, without .git, so the manifests record git_commit null. HEAD at launch (23:28:22Z) was b4247316 (committed 23:26:44Z); src/ is identical in b4247316 and f518ed1 (git diff). The 12 driver and scenario files whose SHA-256 the job recorded (experiments/*.py, scenarios/studies/ea_corridor.yaml, scenarios/lab_like_A.yaml) equal their versions committed in f518ed1. The job's src_sremu_tree_sha256 (d61b9664...) differs from f518ed1's (8335241f...), so the bundle carried at least one extra untracked src file that the returned results do not identify.",
-      "instance_type": "c7i.8xlarge",
-      "instance_id": "i-0b2a8a362406d05fe",
-      "ami": "ami-065d2b03fb493085a",
-      "bundle_sha256": "aa8cb70aa91b3ba789065171292bd97bd71adc34646ac7f41b403898a853a035",
-      "job_cmd": "python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only exact:0.1; python -m experiments.ea_iq run --out $SREMU_JOB_OUT/ea_iq --cache /opt/job/cache --only urap:0.1; python -c \"from experiments.ef import run_latency; import json; print(json.dumps(run_latency('$SREMU_JOB_OUT/ef_latency'), default=str)[:4000])\"",
-      "source_path": "D:\\projects\\ris\\research\\aws\\results\\20261010T232822Z_ea_iq_ef_18ffd1\\out\\ea_iq\\urap_tau0.1_noiseon",
-      "files_sha256": {
-        "controller.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "manifest.json": "4c8ce971d9776d6f7cb1e382b69d95e72537b7e6c79caf4a38afce5d20d7fe7b",
-        "meta.json": "33e0eeb847c5761d8871d39a23666fe5baf0498fcc238a55317dda30002760ef",
-        "result.json": "f92147ea53f79a1da82d6038d25a11d67f077363a2d362eee1e4c67b1400353b",
-        "rx_windows.csv": "b3f6eb60bc6d03cf4809a8a00588262a5056dc3703ac316d29a84ec41603eab5",
-        "rxapp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "scenario.resolved.yaml": "57c397f13b7eb3fc617ced8c373e7d6d01257e2154347e96e649f5ecafff992c",
-        "scenario.yaml": "57c397f13b7eb3fc617ced8c373e7d6d01257e2154347e96e649f5ecafff992c",
-        "server.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "server_summary.json": "4395a1ede90ccba7d9820a48f24376b3a4f7966659f5a581f630a262b82f964f"
-      },
-      "imported_utc": "2026-10-11T05:56:07.721949Z",
-      "replaced_local": null
-    }
-  },
-  "batch_reference_cross_host_check": {
-    "batch_exact_tau0.1": {
-      "local_cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-      "local_platform": "Windows-11-10.0.26200-SP0",
-      "fields": {
-        "p_batch_dbm": {
-          "local": -57.298031357274404,
-          "imported": -57.298031357274404,
-          "equal": true
-        },
-        "p_vectorized_mid_dbm": {
-          "local": -57.392189840697874,
-          "imported": -57.392189840697874,
-          "equal": true
-        },
-        "p_vectorized_left_dbm": {
-          "local": -57.298232926200015,
-          "imported": -57.298232926200015,
-          "equal": true
-        },
-        "pieces": {
-          "local": 209991,
-          "imported": 209991,
-          "equal": true
-        },
-        "n_commands": {
-          "local": 9991,
-          "imported": 9991,
-          "equal": true
-        }
-      },
-      "all_equal": true
-    },
-    "batch_urap_tau0.1": {
-      "local_cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-      "local_platform": "Windows-11-10.0.26200-SP0",
-      "fields": {
-        "p_batch_dbm": {
-          "local": -61.21572995417709,
-          "imported": -61.21572995417709,
-          "equal": true
-        },
-        "p_vectorized_mid_dbm": {
-          "local": -61.216183733903556,
-          "imported": -61.216183733903556,
-          "equal": true
-        },
-        "p_vectorized_left_dbm": {
-          "local": -61.21597600429571,
-          "imported": -61.21597600429571,
-          "equal": true
-        },
-        "pieces": {
-          "local": 210000,
-          "imported": 210000,
-          "equal": true
-        },
-        "n_commands": {
-          "local": 10000,
-          "imported": 10000,
-          "equal": true
-        }
-      },
-      "all_equal": true
-    }
-  }
+  "imported_runs": {},
+  "batch_reference_cross_host_check": {}
 }

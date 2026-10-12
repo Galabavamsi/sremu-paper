@@ -58,9 +58,9 @@ from paper_common import (
     spec_id_status,
 )
 
-TANG_RUN = "validation/tang/results/20261010T232551Z_vtang"
-CFO_RUN = "validation/cfo/results/20261010T232549Z_vcfo"
-FM_RUN = "validation/fm/results/20261010T232549Z_vfm"
+TANG_RUN = "validation/tang/results/20261012T000448Z_vtang"
+CFO_RUN = "validation/cfo/results/20261012T000448Z_vcfo"
+FM_RUN = "validation/fm/results/20261012T000448Z_vfm"
 LAB_RUN = "validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded"
 LAB_PROTOCOL = "validation/ants_fig4b/protocol.json"
 LAB_PUSH_LOG = "sweeps/results/V-LAB-provenance/sremu_activity_20261011T1426Z.json"
@@ -499,6 +499,18 @@ def _join(values: list[str]) -> str:
     return "; ".join(dict.fromkeys(values))
 
 
+def _aws_type(aws: object) -> str | None:
+    """Instance type of a sysinfo ``aws_instance`` record: a dict with ``type`` (older records)
+    or the string ``"type='c7i.48xlarge' id='i-...'"`` (current sysinfo); None when absent."""
+    if not aws:
+        return None
+    if isinstance(aws, dict):
+        t = aws.get("type")
+        return str(t) if t else None
+    m = re.search(r"type='([^']+)'", str(aws))
+    return m.group(1) if m else str(aws)
+
+
 def provenance_rows(paper_root: Path, sremu_root: Path) -> list[dict[str, str]]:
     """Producing commit, tree state, host, date and record of every result the paper quotes,
     read from the result files' own records (MAJOR-8). Missing fields print as n/r."""
@@ -548,7 +560,7 @@ def provenance_rows(paper_root: Path, sremu_root: Path) -> list[dict[str, str]]:
         man = read_json(sw / rel / "manifest.json")
         aws = man.get("aws_instance") or {}
         add(name + " (aggregate)", used, man.get("git_commit"), _tree(man.get("git_dirty")),
-            _host(man.get("platform"), aws.get("type") if isinstance(aws, dict) else None),
+            _host(man.get("platform"), _aws_type(aws)),
             man.get("t_start_utc"), _tt("sweeps/results/" + rel))
     va1 = read_csv(sw / "E-A-IQ" / "va1.csv")
     va1m = read_json(sw / "E-A-IQ" / "meta.json")
@@ -583,7 +595,7 @@ def provenance_rows(paper_root: Path, sremu_root: Path) -> list[dict[str, str]]:
         g, h = s.get("git") or {}, s.get("host") or {}
         aws = h.get("aws_instance") or {}
         plat = str(h.get("platform") or "")
-        host = (f"AWS {aws.get('type')}" if aws else
+        host = (f"AWS {_aws_type(aws)}" if _aws_type(aws) else
                 "laptop (WSL2)" if "microsoft" in plat.lower() else _host(plat or None))
         man = next(iter(sorted((sw / rel / "runs").rglob("manifest.json"))), None)
         add(name, used, g.get("commit"), _tree(g.get("dirty")), host,
@@ -745,7 +757,7 @@ def ee_values(paper_root: Path) -> tuple[dict[str, str], dict[str, Any], str]:
     tp = {float(r["rate_sps"]): r for r in ee.get("throughput") or []}
     if aws and float(d["rate_sps"]) in tp:
         v["numEeAwsRtfLo"] = dec(tp[float(d["rate_sps"])]["sremu_rtf_median"], 2)
-        v["txtEeAwsInstance"] = str(aws.get("type"))
+        v["txtEeAwsInstance"] = str(_aws_type(aws))
     # laptop: every sweep (single run per rate) counts; the text quotes the range per rate.
     # While sweeps/results/E-E itself comes from that laptop, its throughput runs are one more
     # sweep: the quoted range must not leave out laptop runs that the result files hold (unless

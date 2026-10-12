@@ -35,10 +35,10 @@
   },
   "git_commit": null,
   "git_dirty": null,
-  "wall_s": 1.4847074220000138,
+  "wall_s": 1.0904218979999882,
   "sremu_version": "0.1.0.dev0",
-  "cpu_model": "AMD Ryzen 9 8945H w/ Radeon 780M Graphics",
-  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39"
  },
  "rx_equals_emulator_record": true,
  "emulator_record_samples": 300000,
@@ -54,11 +54,11 @@
    "blocks": 699,
    "worst_20ms_ser": 0.0004,
    "mer_db": 13.318532305015495,
-   "ls_gain_db": -9.378023212001136,
-   "ls_phase_deg": -100.58753951987367,
-   "ls_snr_db": 7.560546513705758,
+   "ls_gain_db": -9.37802321200109,
+   "ls_phase_deg": -100.5875395198737,
+   "ls_snr_db": 7.560546513705804,
    "ls_delay_samples": 0,
-   "es_n0_db": 13.581146426985383,
+   "es_n0_db": 13.581146426985427,
    "ser_theory": 3.5776893436700874e-06,
    "implied_loss_db": null,
    "lag": 524275,
@@ -67,10 +67,10 @@
   }
  ],
  "throughput": {
-  "sremu_rtf_median": 0.7078562377839486,
+  "sremu_rtf_median": 2.7235303412860095,
   "sremu_rtf_windows": 2,
-  "gr_rtf_steady": 0.5847182044887782,
-  "gr_wall_first_to_last_s": 0.45099999999999996
+  "gr_rtf_steady": 1.3208400000000005,
+  "gr_wall_first_to_last_s": 0.15000000000000002
  },
  "ok": true
 }
