@@ -14,6 +14,9 @@ main.pdf
 # build mode switch written by tools/build_paper.py
 generated/buildmode.tex
 
+# arXiv source package written by tools/make_arxiv_package.py (a build product)
+arxiv/
+
 # TikZ build directory (figures/out/F1.pdf, F2.pdf are the outputs)
 figures/build/
 generated/tables/model_card.md

@@ -127,6 +127,49 @@ The final mode refuses unless:
 - Primary category eess.SP. No repository URL in the comments field until it resolves
   publicly. The arXiv paper licence is a separate choice from the code licence (H-2).
 
+## arXiv package
+
+`tools/make_arxiv_package.py` turns a completed build into the source upload. It runs offline
+(standard library; pdflatex for the check, pdftotext if present) and never runs git.
+
+```powershell
+# after a final build (generated/buildmode.tex says \sremudraftfalse); refuses anything else
+D:\projects\ris\sremu\.venv\Scripts\python.exe tools\make_arxiv_package.py
+# trial run on a draft build: temp directory, everything labelled DRAFT-NOT-FOR-SUBMISSION
+D:\projects\ris\sremu\.venv\Scripts\python.exe tools\make_arxiv_package.py --mode draft-test
+```
+
+- **Files.** `main.tex` and what it reaches: `\input`/`\include`/`\InputIfFileExists`
+  (recursively, the generated files included), the figures of `\includegraphics` and of the
+  macros that wrap it (`\sremufigure`), local `.cls`/`.sty` files (none: `IEEEtran.cls` is the
+  stock V1.8b of the TeX distribution, which arXiv has), and `main.bbl`. `refs.bib` is left out
+  (arXiv uses the `.bbl`; it does not run BibTeX reliably). The list must equal the paper files
+  that the build read (`main.fls`), and every file must have the checksum that latexmk recorded
+  for `main.pdf` (`main.fdb_latexmk`), so a stale build is refused: rebuild first.
+- **Stripping** (`.tex` only; `.bbl` copied, line ends normalized): comment lines are dropped,
+  `code % text` becomes `code %` (the `%` keeps suppressing the end-of-line space), `\%`,
+  `\verb`, verbatim environments and URL arguments are kept; the `\claim{ID}` markers (the only
+  macro of `sremu-macros.tex` that prints nothing) are removed, as `{}` wherever plain removal
+  would change TeX's spaces; definitions of internal macros that nothing uses any more
+  (`\claim`, and `\sremustub`/`\sremuPlaceholder` once a final build has none) are dropped.
+  `main.tex` gets `\pdfoutput=1` as its first line (arXiv's cue for pdfLaTeX).
+- **Verification.** The package is compiled alone in a temporary directory with pdflatex (two
+  runs, more while LaTeX asks; no BibTeX) and must give exit 0, no undefined reference or
+  citation, the page count and the text (pdftotext) of `main.pdf`, and the same rendered
+  content (every page, font and figure stream of the two PDFs, decompressed). No packaged file
+  may contain `sremustub`, `TODO`, `\claim{`, `Planned]` or a local absolute path (in a
+  draft-test the draft's stubs are warnings), and the package must stay below arXiv's 50 MB.
+  The archive is written only when every check passes.
+- **Output** (final: `arxiv/`, gitignored; `--out DIR` elsewhere): `source/` (the tree),
+  `sremu-arxiv.tar.gz` (upload this; reproducible: the same build gives the same bytes),
+  `abstract.txt` (`check_arxiv.py --emit-plain`, for the form), `metadata.txt` (title, authors,
+  primary eess.SP, cross-list cs.NI, comments line "N pages, F figures, T tables") and
+  `verification.txt`.
+
+After the final build: run the tool, upload `sremu-arxiv.tar.gz`, paste `abstract.txt` and the
+fields of `metadata.txt` into the form, and check arXiv's own PDF against `main.pdf` before
+announcing (arXiv's TeX Live may differ from MiKTeX in package versions).
+
 ## Layout
 
 | Path | Content |
@@ -149,7 +192,7 @@ The final mode refuses unless:
 | `gates.yaml` | GATE-PHY / GATE-RT test ids |
 | `figures/registry.yaml` | F1-F12: script, inputs, data classes, owner, status |
 | `refs.bib`, `refs_verification.md`, `refs_verification.json`, `refs_sources/` | Bibliography and its verification record |
-| `tools/` | `build_paper.py`, `check_claims.py`, `check_refs.py`, `check_arxiv.py`, `verify_refs_online.py`, `paper_common.py`, `resolve_code_numbers.py`, `gen_tables.py`, `case_tables.py` (E-B2 closed form and full-grid table, E-A per-geometry table; called by `gen_results.py`) |
+| `tools/` | `build_paper.py`, `check_claims.py`, `check_refs.py`, `check_arxiv.py`, `make_arxiv_package.py` (arXiv source package of a build, see above), `verify_refs_online.py`, `paper_common.py`, `resolve_code_numbers.py`, `gen_tables.py`, `case_tables.py` (E-B2 closed form and full-grid table, E-A per-geometry table; called by `gen_results.py`) |
 | `tests/` | Tests of the tools (`python -m pytest`; the LaTeX test is marked `integration`) |
 
 ## Rules (DESIGN 1.6, 13.6)
