@@ -105,6 +105,20 @@ def test_source_entry_altered_fails(paper_copy: Path) -> None:
     assert any("Kay1989Freq: field 'doi' differs from the verified source" in e for e in errs)
 
 
+def test_case_protection_braces_keep_source_identity(paper_copy: Path) -> None:
+    """'{5G}' only protects letter case from the style; a changed word still fails."""
+    bib = paper_copy / "refs.bib"
+    text = bib.read_text(encoding="utf-8")
+    old = "End-to-End Simulation of {5G} Networks Assisted by {IRS} and {AF} Relays"
+    assert old in text  # case-protected in refs.bib, unprotected in the verified source
+    errs = check_refs(paper_copy).errors
+    assert not any("Pagin2022IRSAF" in e for e in errs)
+    bib.write_text(text.replace(old, old.replace("Networks", "Systems")), encoding="utf-8")
+    errs = check_refs(paper_copy).errors
+    assert any("Pagin2022IRSAF: field 'title' differs from the verified source" in e
+               for e in errs)
+
+
 def test_source_copy_matches_recorded_sha256(paper_copy: Path) -> None:
     src = paper_copy / "refs_sources" / "refs_verified_2026-10-10.bib"
     digest = hashlib.sha256(src.read_bytes()).hexdigest()

@@ -68,10 +68,13 @@ def main(argv: list[str] | None = None) -> int:
     ax_a.plot(f, e_ls, "o", color=fc.OI["blue"], ms=3, label="sremu (exact counts)")
     ax_a.set_xlabel("applied offset $f$ (Hz)")
     ax_a.set_ylabel(r"estimate $-$ applied (Hz)")
+    # head room above the data so that the legend rows sit clear of the 11-samples staircase
+    ax_a.set_ylim(-112, 140)
     ax_a.legend(loc="upper left", handlelength=1.2)
-    ax_a.text(0.97, 0.04, f"sremu: max $|$error$|$\n{np.max(np.abs(e_ls)):.1e} Hz (LS)",
+    ax_a.text(0.97, 0.04, f"sremu: max $|$error$|$\n{fc.sci_tex(float(np.max(np.abs(e_ls))))} "
+              "Hz (LS)",
               transform=ax_a.transAxes, ha="right", va="bottom")
-    fc.panel_label(ax_a, "(a)", x=0.03, y=0.44)
+    fc.panel_label(ax_a, "(a)", x=0.03, y=0.38)  # below the zero line of the sremu points
     for i in range(len(f)):
         rows.add("a", "sremu, unwrapped-phase LS", "SIM-sremu", "cfo_hz", f[i], "error_hz",
                  float(e_ls[i]))

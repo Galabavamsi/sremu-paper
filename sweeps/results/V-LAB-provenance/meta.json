@@ -19,6 +19,15 @@
       "path": "sremu_events_20261011T1426Z.json",
       "sha256": "2334595b67c8cda7187ded150ac5dd0a5e5b2ef784cc07838155066e790ca059",
       "content": "13 events (11 PushEvent, CreateEvent, WatchEvent); timestamps agree with the activity records within 1 s"
+    },
+    {
+      "path": "vlab_check_regen_20261011T235822Z.json",
+      "sha256": "bc51154e4d14b95eccd8fec35b1ace47ee4709c0b85a1a7820fab3522cc93ec0",
+      "content": "byte copy of _regen/vlab_check.json of the pinned regeneration job (research/aws/results/20261011T235822Z_regen_37a552, experiments/regenerate_paper_data.sh, AWS c7i.48xlarge, started 2026-10-11T23:59:37Z)",
+      "checked_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "checked_commit_source": "the job's _regen/provenance.json, git.commit (clean)",
+      "data_class": "PROVENANCE (a process record of the emulator's own job, not a third-party record)",
+      "use": "Appendix H: at the regeneration commit the V-LAB protocol and analysis files are byte-identical to 7a63287 and the protocol digest equals the lock; the record itself states that it does not cover the sremu modules the V-LAB code imports. tools/vv_ids.py checks it."
     }
   ],
   "facts_quoted": {

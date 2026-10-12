@@ -1174,12 +1174,12 @@ d,timed commands applied late,MEAS,rate_hz,10,fraction,0.011764705882352941,,,re
 d,timed commands applied late,MEAS,rate_hz,100,fraction,0.8215126050420168,,,repetition
 d,timed commands applied late,MEAS,rate_hz,100,fraction,0.8201680672268907,,,repetition
 d,timed commands applied late,MEAS,rate_hz,100,fraction,0.824873949579832,,,repetition
-d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,repetition
-d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,repetition
-d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,repetition
-d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,repetition
-d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,repetition
-d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,repetition
+d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
+d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
+d,timed commands applied late,MEAS,rate_hz,1000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
+d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
+d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
+d,timed commands applied late,MEAS,rate_hz,10000,fraction,0.0,,,"repetition; engine backlogged: not meaningful, not drawn as data"
 d,pages missing 1 ms deadline,MEAS,rate_hz,10,fraction,0.05383611089778051,,,repetition
 d,pages missing 1 ms deadline,MEAS,rate_hz,10,fraction,0.05072148409833688,,,repetition
 d,pages missing 1 ms deadline,MEAS,rate_hz,10,fraction,0.04532848646203995,,,repetition

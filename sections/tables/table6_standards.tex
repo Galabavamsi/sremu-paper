@@ -40,8 +40,8 @@ GR RIS 003 V1.2.1 &
   coefficients~\cite{ETSI_GR_RIS003_v121} &
   Response tables $\Gamma(s,f,\theta_i,\theta_s)$ with provenance and validators & PH-31 \\
  & \S5.1.3: mutually coupled antenna model~\cite{ETSI_GR_RIS003_v121} &
-  Not modelled; coupling enters through per-configuration tables; hook without
-  coefficients & --- \\
+  Not modelled; per-state tables hold coupling for identical neighbours (\S5.1.2); a hook
+  protocol, implemented as no coupling & --- \\
  & \S6.3.1.2: path-loss model, general case, with the recommended cell
   gain~\cite{ETSI_GR_RIS003_v121} &
   K1 with one point per cell is algebraically equal to it & PH-02 \\
@@ -60,8 +60,8 @@ GS RIS 008 V1.1.1 &
   PH-31 \\
  & \S4.3, \S4.4: bistatic radar cross section; reflected-beam spatial
   characteristics~\cite{ETSI_GS_RIS008} &
-  Incidence and reflection angle axes of a table; beam patterns compared with MATLAB
-  (code to code) & G2, G3 \\
+  Incidence and reflection angle axes of a table (one plane of incidence); beam patterns
+  compared with MATLAB (code to code) & G2, G3 \\
  & \S4.5: total reflected power~\cite{ETSI_GS_RIS008} &
   Energy diagnostic: scattered power at most the intercepted power & PH-23 \\
  & \S4.6: modulated-signal quality (EVM)~\cite{ETSI_GS_RIS008} &

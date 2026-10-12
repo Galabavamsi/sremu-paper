@@ -20,6 +20,8 @@ tick-based untimed semantics (next 2 ms tick after arrival, one pending slot per
 (b): LOS present at Es/N0 = 15 dB (the pre-declared sensitivity; open markers) and LOS
 blocked at 25 dB (filled markers). (d): LOS blocked at 25 dB (the lab-like run has no 15 dB
 slice). Error bars: Clopper-Pearson 95 %. Every label value is read from the data rows.
+The jitter axis is symmetric-log (linear below 0.1 ms), not categorical; series are offset by
+a few points so that coincident markers stay visible.
 """
 
 from __future__ import annotations
@@ -77,6 +79,12 @@ GUARD = "1/2000"  # the 0.5 ms guard slice
 LEAD = "1/500"  # the 2 ms lead shown for timed commands
 JITTER = ("0", "1/10000", "3/10000", "1/1000", "3/1000")
 SMOOTH = 8  # symbols of the running mean of the linear EVM power in panels (a), (c)
+EVM_YMIN_DB = -64.0  # room below the traces for the legend of panel (a)
+EVM_LEGEND_TOP_DB = -38.0  # the legend band of panel (a) lies below this level
+# (b), (d): symmetric-log jitter axis, linear below JITTER_LINTHRESH_MS, so that J = 0 has a
+# place and the logarithmic spacing of 0.1, 0.3, 1 and 3 ms is true (not categorical)
+JITTER_LINTHRESH_MS = 0.1
+JITTER_DX_PT = 2.4  # horizontal offset between series, in points (keeps overlaps readable)
 TRANSITIONS = (("blocked", "step", "step", fc.OI["vermillion"], "-"),
                ("blocked", "linear20us", r"linear, 20 $\mu$s", fc.OI["orange"], "--"),
                ("blocked", "linear200us", r"linear, 200 $\mu$s", fc.OI["purple"], ":"),
@@ -140,22 +148,27 @@ def draw_evm(ax: Any, geo: str, rows: fc.Rows, panel: str) -> float:
     t_sym = float(ref[1]["t_center_s"]) - t0
     s_sw = (t_sw - (t0 - t_sym / 2)) / t_sym
     n_pre = sum(1 for r in ref if r["kind"] == "preamble")
-    ax.axvline(s_sw, color=fc.OI["black"], lw=0.7, ls=(0, (1, 2)))
+    # the switch marker stops above the legend band at the bottom of panel (a)
+    ax.plot([s_sw, s_sw], [EVM_LEGEND_TOP_DB, 10], color=fc.OI["black"], lw=0.7,
+            ls=(0, (1, 2)))
     ax.axvspan(-0.5, n_pre - 0.5, color=fc.OI["grey"], alpha=0.15, lw=0)
     ax.text(n_pre / 2, 9.0, "preamble", ha="center", va="top")
     ax.text(s_sw + 6, 9.0, "switch", va="top")
     ax.text(0.985, 0.965, g["tag"], transform=ax.transAxes, ha="right", va="top",
             bbox={"facecolor": "white", "edgecolor": "none", "pad": 0.5, "alpha": 0.8})
     ax.set_xlim(-0.5, len(ref) - 0.5)
-    ax.set_ylim(-52, 10)
+    ax.set_ylim(EVM_YMIN_DB, 10)
     ax.set_ylabel(f"EVM, {SMOOTH}-symbol mean (dB)")
     return s_sw
 
 
 def draw_per(ax: Any, geo: str, rows: fc.Rows, panel: str) -> list[tuple[str, str]]:
+    from matplotlib.transforms import offset_copy
+
     g = GEOMS[geo]
     per = _read(g["per"])
-    x = np.arange(len(JITTER))
+    x = np.array([1e3 * float(Fraction(j)) for j in JITTER])  # jitter in ms (true values)
+    ax.set_xscale("symlog", linthresh=JITTER_LINTHRESH_MS, linscale=0.6)
     cases = g["cases"]
     n_series = len(SEMANTICS) * len(cases)
     k = 0
@@ -181,13 +194,21 @@ def draw_per(ax: Any, geo: str, rows: fc.Rows, panel: str) -> list[tuple[str, st
                          note=f"guard {ms(GUARD)} ms; {r['packet_errors']}/{r['n_packets']} "
                               f"packets; late={r['n_late']}; {ALPHA} alphabet; {g['label']}")
             ya, loa, hia = np.array(y), np.array(lo), np.array(hi)
-            dx = (k - (n_series - 1) / 2) * 0.07
-            ax.errorbar(x + dx, ya, yerr=[ya - loa, hia - ya], fmt=mk + ("-" if filled else "--"),
-                        color=col, ms=3.2, lw=0.8, elinewidth=0.8, capsize=1.5,
-                        mfc=col if filled else "white", mec=col)
+            # offset in points, not in data units: the axis is symmetric-log
+            shift = offset_copy(ax.transData, fig=ax.figure,
+                                x=(k - (n_series - 1) / 2) * JITTER_DX_PT, y=0.0,
+                                units="points")
+            ax.errorbar(x, ya, yerr=[ya - loa, hia - ya], fmt=mk + ("-" if filled else "--"),
+                        color=col, ms=3.2, lw=0.7, elinewidth=0.8, capsize=1.5,
+                        mfc=col if filled else "white", mec=col, transform=shift)
             k += 1
     ax.set_xticks(x)
     ax.set_xticklabels([ms(j) for j in JITTER])
+    # minor ticks at 0.2, 0.4, ..., 2, 4 ms show that the axis is logarithmic above 0.1 ms
+    ax.set_xticks([m * 10.0 ** e for e in (-1, 0) for m in range(2, 10)
+                   if m * 10.0 ** e < 4.5 and round(m * 10.0 ** e, 6) not in set(x)],
+                  minor=True)
+    ax.set_xlim(-0.03, 4.5)
     ax.set_ylabel("packet error rate")
     ax.set_ylim(-0.03, 1.0)
     return list(cases)

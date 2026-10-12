@@ -96,6 +96,21 @@ def setup_style() -> None:
     })
 
 
+def sci_tex(x: float, digits: int = 1) -> str:
+    """A number for figure text in mathtext power-of-ten notation, e.g. 3.1e-10 ->
+    '$3.1\\times10^{-10}$' (never the '3.1e-10' notation of the C library)."""
+    if x == 0 or not math.isfinite(x):
+        return f"${x:g}$"
+    exp = math.floor(math.log10(abs(x)))
+    mant = round(x / 10.0 ** exp, digits)
+    if abs(mant) >= 10:  # rounding carried into the next decade
+        mant, exp = mant / 10, exp + 1
+    if exp == 0:
+        return f"${mant:.{digits}f}$"
+    m_txt = "" if (digits == 0 and abs(mant) == 1) else f"{mant:.{digits}f}\\times"
+    return f"${m_txt}10^{{{exp}}}$"
+
+
 def panel_label(ax: Any, text: str, *, x: float = 0.02, y: float = 0.97,
                 polar: bool = False) -> None:
     """(a), (b), ... in the corner of a panel (a label, not a title)."""

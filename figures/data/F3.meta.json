@@ -1,7 +1,7 @@
 {
   "figure": "F3",
   "title": "(a) Fixed-aperture refinement: K1 power independent of the cell count N (far specular, auto cell model; near anomalous, po_patch) and the forced point model; (b) Tang et al. published model curves vs sremu with digitized measured points",
-  "content_key": "a2bd4c885c8367386598c877bf7c5b650032c7407ebc7e30aa6401227ddc7717",
+  "content_key": "b219fab347830af6af79c1f4855c231c3473be91a98c932c09917bcb7116d499",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -48,9 +48,9 @@
   ],
   "profile": "full",
   "script": "figures/src/f03_aperture_tang.py",
-  "script_sha256": "d5685f392e42dd4dda4d9ab8072a365f4c35102049b740ecf95a5cea25e1a8a7",
+  "script_sha256": "e67bb5fd7f421d17793da4098452f75b90a368af20bd590c8577951e5697dc4a",
   "outputs": {
-    "figures/out/F3.pdf": "e403d7c839672cc4e2837ecf1bb2ecfc68272ed46aa617c374a2f47941ddabd9",
+    "figures/out/F3.pdf": "0c8e24bdb8f876fd4aca1d562986aec93024aa2f7fdd9a353bbad51756773f20",
     "figures/data/F3.csv": "9cb5a28024784a501d46daacc5676cadb75a4c61097f09315573079e35a12a4a"
   },
   "versions": {
@@ -60,7 +60,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:34:48Z",
+  "generated_utc": "2026-10-12T01:04:30Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

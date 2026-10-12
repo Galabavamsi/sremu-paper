@@ -3,8 +3,9 @@
 % tools/gen_results.py from paper/sweeps/results and sremu validation/fm (or a definition
 % macro); figure F12 comes from figures/src/f12_*.py. E-D is "model-based dimensioning, not
 % validated". E-E: sremu examples/gnuradio_zmq, experiments/ee_gnuradio.py; results in
-% sweeps/results/E-E (laptop WSL2 run of a working tree, to be repeated at the pinned commit)
-% and E-E-laptop.
+% sweeps/results/E-E (regenerated at sremu 4ec4c2b on AWS c7i.48xlarge, clean tree) and
+% E-E-laptop (laptop throughput sweeps; no recorded commit). The FM scenario of E-D appeared
+% in the authors' unpublished ANTS 2025 submission (disclosed in C-LINEAGE-DATA and here).
 \section{Case-Study Details}\label{app:cases}
 
 This appendix extends Section~\ref{sec:cases}.
@@ -22,29 +23,69 @@ choice (ENG), and $E_s/N_0$ at RX1 is set against the physical noise. A lab-like
 case. Three assumptions apply to both geometries. The two states of the laboratory cells have
 unit amplitude ($|\Gamma|=1$, ASSUMED), because their magnitudes were not measured. During a
 transition the response follows the complex-linear path between the states, an engineering
-choice (ENG). When the line of sight is blocked, the occluder removes the direct path and leaves
-the RIS hops unattenuated; on the arc a real plate of that size would also shadow some RIS
-rays, so this case is an idealization. The packets run at \numEbSps{} samples per symbol and
+choice (ENG). When the line of sight is blocked, an opaque plate removes the direct paths, and
+the RIS hops stay unattenuated because occluders act on the line of sight alone. On the arc
+the plate crosses \numEbArcBlockerCrossed{} of the \numEbArcBlockerCells{} segments from the
+transmitter to a cell and none from a cell to a receiver, so a physical plate would shadow
+most of the incident illumination: the blocked results, PERs and EVMs alike, belong to this
+idealized regime, and the cases with the line of sight present are the physically consistent
+ones. The packets run at \numEbSps{} samples per symbol and
 \numEbRateMsps~MS/s.
 
-\claim{C-EB-TIMING}The slice of E-B2 shown uses guard intervals of \numEbGuardMs~ms, and on the
-arc each controller message carries one command per tile. The arc run fixed three cases before
-any point ran: the line of sight present at $E_s/N_0=\numEbEsnoDb$~dB, the same at
-\numEbArcEsnoLowDb~dB as a sensitivity, and the line of sight blocked. With the line of sight
-present at \numEbEsnoDb~dB QPSK tolerates the wrong configuration, although the EVM of the
-affected packets rises. With a lead of \numEbLeadMinMs~ms, timed commands fail already at
+\claim{C-EB-TIMING}The arc run fixed its whole E-B2 grid before any point ran
+(Table~\ref{tab:eb2grid}): guards of \numEbGuardShortMs, \numEbGuardMs{} and
+\numEbGuardLongMs~ms; five jitters; timed commands with three leads, asap and tick-based
+commands; the laboratory alphabet with the line of sight present at $E_s/N_0=\numEbEsnoDb$~dB
+and at \numEbArcEsnoLowDb~dB (a sensitivity) and blocked at \numEbEsnoDb~dB; and the ideal
+1-bit alphabet with the line of sight present at both $E_s/N_0$. On the arc each controller
+message carries one command per tile. With the line of sight present at \numEbEsnoDb~dB QPSK
+tolerates the wrong configuration, although the EVM of the affected packets rises. With a lead
+of \numEbLeadMinMs~ms and the \numEbGuardMs~ms guard, timed commands fail already at
 $J=\numEbJitterOneMs$~ms (\numEbArcTimedHalfPerOneLosPct~\% with the line of sight present at
 \numEbArcEsnoLowDb~dB and \numEbArcTimedHalfPerOneBlkPct~\% with it blocked); with
-\numEbLeadMaxMs~ms they lose no packet at any jitter. \claim{C-EB-SERVED}On the served path of
+\numEbLeadMaxMs~ms they lose no packet at any jitter.
+
+\input{generated/tables/tableF_eb2grid}
+
+\claim{C-EB-CLOSED}The closed form of Section~\ref{sec:cases-eb} follows from the timeline. With
+$\Lambda=\Lambda_0+JU$, $P(\Lambda>x)=\min\{1,\max[0,(\Lambda_0+J-x)/J]\}$, or
+$\mathbf{1}[\Lambda_0>x]$ for $J=0$. A packet starts $T_{\mathrm{g}}$ after an asap command is
+issued and $T_{\mathrm{g}}/2$ after the requested time of a timed one, which a late timed command
+misses by $\Lambda-\ell$; the switch thus lands after the preamble, of
+$T_{\mathrm{pre}}=\numEbTpreMs$~ms, with probability $P(\Lambda>T_{\mathrm{g}}+T_{\mathrm{pre}})$
+or $P(\Lambda>\ell+T_{\mathrm{g}}/2+T_{\mathrm{pre}})$. A tick-based command waits a further
+$W$ for the next tick of period $T_{\mathrm{t}}=\numEbTickMs$~ms. Over a run the guard starts
+visit every multiple of \numEbTickPhaseMinUs~$\mu$s (\numEbTickPhaseMaxUs~$\mu$s at the longest
+guard) of the tick phase equally often, so $W$ is uniform on $(0,T_{\mathrm{t}}]$ and the
+probability is $P(\Lambda+W>T_{\mathrm{g}}+T_{\mathrm{pre}})$, the integral over $U$ of a
+piecewise-linear function, which is $1-(T_{\mathrm{g}}+T_{\mathrm{pre}}-\Lambda_0)/T_{\mathrm{t}}$
+for $J=0$. With the line of sight blocked, every asap and timed cell with a zero closed form lost
+no packet; of the \numEbCfCellsPos{} with a positive one, \numEbCfCellsInCi{} contain it in
+their interval and none lies below it beyond its interval. The measured PER exceeds it by up to
+\numEbCfMaxExcessPts{} points, most at the \numEbGuardShortMs~ms guard, where many switches fall
+in the last part of the preamble and corrupt the channel estimate; switches up to
+\numEbPreSafeUs~$\mu$s into the preamble cost nothing. Tick-based cells exceed their closed form
+by at most \numEbCfTickExcessPts{} points, except the \numEbTickOverwriteCells{} cells with
+$J\ge\numEbJitterOneMs$~ms in which a later command overwrote a pending one before its tick;
+the next packet then needs no switch, and the PER can fall below the closed form. With the line
+of sight present, a fraction of the exposed packets fail:
+\numEbLosLoExposedMinPct--\numEbLosLoExposedMaxPct~\% at \numEbArcEsnoLowDb~dB for both
+alphabets, and no cell loses more
+than \numEbLosHiPerMaxPct~\% at \numEbEsnoDb~dB. The timing rules are thus consequences of the
+semantics, and what the IQ level measures is this conditional loss: where a switch inside the
+preamble starts to cost, how the equalizer fails after it, and how much a line of sight
+protects.
+
+\claim{C-EB-SERVED}On the served path of
 Section~\ref{sec:wc-loop} an asap command became visible after a median of
 \numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms, with p99
 \numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms and rare outliers of up to
 \numBfourVisMaxMs~ms; a timed command there is on time when its lead exceeds the command
 latency plus the error of the client's estimate of virtual time.
-\claim{C-EB-TICK}The clock of the tick-based semantics starts at $t=0$
-and keeps one pending command per panel. Its losses hold in both cases of
-Fig.~\ref{fig:F9}(b): with a timer period of the order of a packet, alignment with the frame
-decides.
+\claim{C-EB-TICK}The clock of the tick-based semantics starts at $t=0$ and keeps one pending
+command per panel. With a timer period of the order of a packet, alignment with the frame
+decides its losses, as the closed form shows; a timer period of seconds, as in the cited
+5G NR experiments, would expose at most one packet per period.
 
 \claim{C-EB-LABLIKE}In the lab-like geometry (Fig.~\ref{fig:F9}(c), (d)), with the line of
 sight blocked, the switch changes the channel of RX1 by
@@ -59,17 +100,59 @@ run at \numEbArcEsnoLowDb~dB.
 \subsection{E-A: protocol record and time scale}
 \claim{C-EA-SETUP}The access point sits \numEaApOffsetM~m off the user line, which keeps
 the line-of-sight power finite everywhere on the line, and the partition loss gives the RIS
-room to help. The
+room to help. The partition acts on the line of sight alone, although it crosses the path from
+the access point to every cell in every partitioned geometry. A partition that also attenuated
+that hop would scale both paths alike and leave the values of the corridor without a
+partition at \numEaFcOneGHz~GHz: an optimum gain of \numEaGainAzero~dB and
+$\tau_{1/2}=\numEaTauHalfAzero$~s. The
 hypotheses and their ranges were in the emulator's design document before the sweep: GitHub's
 push log (Section~\ref{sec:vv-lab}) records it in the initial push of the emulator repository.
 The plan that adds the decision rules and the evaluation rule (SHA-256 \txtEaPlanSha\ldots{}
 with LF line ends) was written before the sweep by the authors' record, but committed to the
 paper repository after it (commit \txtEaPlanCommit), so no third party dates those parts. One
-amendment, made before the full sweep after a short IQ run showed that evaluating each time
-step at its start overestimates the power, moved the evaluation to the step's midpoint; the
-plan discloses it and a short pipeline test seen before it.
+amendment, made before the full sweep, moved the evaluation of each time step from its start
+to its midpoint after a \numEaSmokeS~s IQ run (exact optimum,
+$\tau_{\mathrm{SUI}}=\numEaSmokeTauS$~s) had shown the start-of-step rule \numEaSmokeLeftDb~dB
+high and the midpoint \numEaSmokeMidDb~dB low; the plan discloses it and a short pipeline test
+seen before it. VA-1 therefore compares the IQ runs with a rule chosen after an IQ result had
+been seen: it checks the consistency of the evaluator, and it is not a blind test.
 
-\claim{C-EA-RESULT}For isotropic scattering the field and envelope correlations fall to one
+\claim{C-EA-EVAL}The engine's \texttt{run\_batch} evaluates one step per interpreter iteration,
+too slow for this sweep, so the points come from a vectorized evaluator in the experiment code
+that evaluates the same narrowband model. It tabulates the channel of the scene model along the
+user line on a grid of \numEaFineGridMm~mm (\numEaFineGridHiMm~mm at \numEaFcTwoGHz~GHz) and
+interpolates it complex-linearly, with an error of at most \numEaInterpMaxDb~dB against the
+scene model with all cells on, at random times in every geometry; it tabulates the decisions of the
+position-driven controllers on their \numEaCoarseGridCm~cm grid, equal to the live controllers'
+decisions at \numEaDecisionBarriers{} sampled barriers; it runs URAP and the bandit barrier by
+barrier with the engine's random keys; and it evaluates each \numEaStepMs~ms step, split at
+switch times, at its midpoint. With the start-of-step rule instead, it matches \texttt{run\_batch}
+within \numVaOneVecLeftDb~dB in the VA-1 configurations. VA-1 does not test the heuristic, the
+bandit, the \numEaFcTwoGHz~GHz carrier, the other geometries or the time series of the power;
+at the received power of its runs, noise moves the mean power by less than
+\numVaOneNoiseDiffDb~dB, so its noise-on rows repeat the noise-off test. Every point follows
+one random-waypoint trajectory (one seed), shared by all controllers, at one speed, and the RIS
+is a single row of $\lambda/4$ cells in a planar geometry; other trajectories, speeds or
+two-dimensional panels may change the constants.
+
+\claim{C-EA-WCL}The heuristic of~\cite{Mishra2025WCL}, as run, takes the OFF states as base,
+$b=h_{\mathrm{d}}+\sum_nZ_{\mathrm{off},n}$, and $d_n=Z_{\mathrm{on},n}-Z_{\mathrm{off},n}$ as the
+change when cell $n$ is switched on. A cell is on when its relative phase
+$\delta_n=\arg b-\arg d_n$ lies in an arc of width $\Theta$ at offset $\psi$ from one edge,
+$(\delta_n)_{2\pi}<\Theta-\psi$ or $(-\delta_n)_{2\pi}<\psi$, with $(\cdot)_{2\pi}$ reduced to
+$[0,2\pi)$. The controller evaluates $|b+\sum_{n\in A}d_n|^2$ on its channel model for
+$K=\numEaWclK$ candidates, $\Theta_l=l\pi/(2L)$ for $l=1,\dots,L$ and $\psi=j\Theta/(m+1)$ for
+$1\le j\le m\le M$ with $L=\numEaWclL$ and $M=\numEaWclM$, and keeps the best. The letter fixes
+$K$ but not the values of $\psi$; this grid is our choice.
+
+\input{generated/tables/tableF_eageo}
+
+\claim{C-EA-RESULT}Table~\ref{tab:eageo} lists every computed geometry: $\tau_{1/2}$ spans
+\numEaTauHalfMinS--\numEaTauHalfMaxS~s at \numEaFcOneGHz~GHz and
+\numEaTauLambdaVMin--\numEaTauLambdaVMax~$\lambda/v$ over all geometries; at a fixed carrier and
+offset it rises with the partition loss, and at a fixed loss it falls with the offset $h$. The
+constant thus belongs to the geometry and to the balance between the line of sight and the RIS
+path. For isotropic scattering the field and envelope correlations fall to one
 half after \numClarkeFieldHalf{} and \numClarkeEnvHalf{} $\lambda/v$~\cite{Clarke1968}. The
 rule-of-thumb coherence time $\sqrt{9/(16\pi)}/f_D=\numCoherenceRuleLambdaV\,\lambda/v$ lies
 close to the E-A constant, but it is the geometric mean of $1/f_D$ and the envelope
@@ -78,9 +161,9 @@ half-correlation time, not a correlation level. The ratio of the two half-lives,
 \numEaRatioPred; the corridor is the same in metres at both carriers, so it is not the same
 geometry in wavelengths and exact scaling is not expected. The ranges fixed before the sweep
 were \numEaHaOneLoS--\numEaHaOneHiS~s for H-A1 and \numEaHaTwoLo--\numEaHaTwoHi{} for H-A2, so
-their support is a weak test. What E-A adds to the classical scaling is the constant for this
-geometry, the retention metric and the result for controllers without positions: besides the
-bandit (H-A3 supported), URAP gains \numEaGainUrap~dB, and our reading of the heuristic
+their support is a weak test. What E-A adds to the classical scaling is the constants for these
+geometries, the retention metric and the result for controllers without positions: besides the
+bandit (H-A3 supported), URAP gains \numEaGainUrap~dB, and the heuristic
 of~\cite{Mishra2025WCL} reaches \numEaGainWclFast~dB at the shortest delay.
 
 \subsection{E-C per geometry}
@@ -104,7 +187,9 @@ amplitudes), REPORTED (published states of Tang et al.).}{fig:F11}
 \subsection{FM-band dimensioning (E-D)}\label{sec:cases-ed}
 \claim{C-ED}This subsection is model-based dimensioning, not validated. Can a focused RIS
 restore an FM broadcast link of \numFmLinkKm~km at \numFmFreqMHz~MHz behind an obstruction?
-With a flat-earth two-ray direct path, a coherent knife edge and ground on both RIS hops, the
+\claim{C-LINEAGE-DATA}The link and the panel of this scenario come from the authors'
+unpublished ANTS 2025 submission (Section~\ref{sec:related}); this dimensioning replaces its
+result. \claim{C-ED}With a flat-earth two-ray direct path, a coherent knife edge and ground on both RIS hops, the
 aperture needed for a RIS path as strong as the direct path is \numFmAreqMin--\numFmAreqMax~m$^2$
 over the receiver heights and distances of Fig.~\ref{fig:F12}. At grazing obstruction, over the
 same heights and distances, the RIS path of a \numFmPanelMtwo~m$^2$ panel is

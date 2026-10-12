@@ -13,6 +13,8 @@
     "numHardMessageMiB": "16",
     "numIntegerDelayRad": "0.05",
     "numKaiserBeta": "8",
+    "numLabStateOnePhaseDeg": "49.64",
+    "numLabStateTwoPhaseDeg": "\\ensuremath{-153.77}",
     "numMaxCmdRateKHz": "10",
     "numMaxElements": "65,536",
     "numMaxMessageMiB": "1",

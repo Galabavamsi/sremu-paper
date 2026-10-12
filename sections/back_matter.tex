@@ -1,21 +1,22 @@
-% Back matter (BLOCKER-3, MINOR-11). Code and data availability: conditional statement; the
-% macros come from availability.yaml through tools/gen_results.py and stay placeholders while
-% PENDING, so a final build refuses until the release is approved (human gate H-2) and the
-% fields are filled. When the code is public, the first sentence becomes "... are available at
-% \txtRepoUrl{} under the \txtLicence{} licence (archived at \txtArchiveDoi)".
+% Back matter (BLOCKER-3, MINOR-11). Code and data availability: the conditional statement of
+% availability.yaml (status: conditional; the release waits for the licence decision, human
+% gate H-2). It prints no licence, URL or DOI, so it is complete as it stands; the availability
+% macros expand to \sremuUnreleased while the status is conditional and must not be used here.
+% When the code is public (status: released, every field filled), the first sentence becomes
+% "... are available at \txtRepoUrl{} under the \txtLicence{} licence (archived at
+% \txtArchiveDoi)" and the data sentence names \txtDataDoi.
 % Acknowledgment: laboratory, funding and the generative-AI disclosure (IEEE: in the
 % acknowledgments; arXiv: report significant use) are a planned-content stub that the authors
 % write; a final build refuses it.
 \section*{Code and Data Availability}
 \claim{C-OPEN}The emulator \sremu{} and the pipeline that builds this paper from recorded
 results (sweep specifications, result files with their provenance, figure scripts) will be
-released under an open-source licence (\txtLicence) at \txtRepoUrl{} once all authors and
-IIT Bhilai have approved the release; until then they are available from the corresponding
-author on request. The exact versions used here, the analysis plans of
-Sections~\ref{sec:vv-lab} and~\ref{sec:cases-ea} and their lock records will be archived
-with the release (\txtArchiveDoi). The authors' own data files will be released as well
-(\txtDataDoi); the digitized laboratory map of Section~\ref{sec:vv-lab} will be released if
-the laboratory permits it. Third-party values, such as the curves and points
+released under an open-source licence once all authors and IIT Bhilai have approved the
+release; until then they are available from the corresponding author on request. The exact
+versions used here, the analysis plans of Sections~\ref{sec:vv-lab} and~\ref{sec:cases-ea}
+and their lock records will be archived with the release, together with the authors' own data
+files; the digitized laboratory map of Section~\ref{sec:vv-lab} will be released if the
+laboratory permits it. Third-party values, such as the curves and points
 of~\cite{Tang2022mmWave}, were digitized from published figures and are kept in the emulator
 repository with their source and digitization record.
 

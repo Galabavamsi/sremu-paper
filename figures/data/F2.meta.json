@@ -1,6 +1,6 @@
 {
   "figure": "F2",
-  "content_key": "aaa15e4a708b9031643f4a607d68983554f47ca90a53f65c69b6b13003e493f1",
+  "content_key": "1927f891fe82ad5cd7996c60a9cdf83bd7007455c198dc6d3843c3ff782ba8a3",
   "source": "figures/tikz/F2.tex",
   "inputs": [
     "figures/tikz/sremu-figstyle.tex"

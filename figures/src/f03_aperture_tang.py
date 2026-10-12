@@ -159,9 +159,10 @@ def main(argv: list[str] | None = None) -> int:
         eng = [float(r["engine_dbm"]) for r in pr]
         meas = [float(r["measured_dbm"]) for r in pr]
         lab = f"$d_1$ = {float(pr[0]['d1_m']):g} m, {float(pr[0]['theta_deg']):g}$^\\circ$"
-        ax_t.plot(d2, pub, "-", color=col, lw=1.0)
+        # the geometry legend shows colour lines (triangles mean "measured" in this panel)
+        ax_t.plot(d2, pub, "-", color=col, lw=1.0, label=lab)
         ax_t.plot(d2, eng, "o", color=col, mfc="none", ms=4.5, mew=0.8)
-        ax_t.plot(d2, meas, "^", color=col, ms=3.5, label=lab)
+        ax_t.plot(d2, meas, "^", color=col, ms=3.5)
         for x, a, b, c in zip(d2, pub, eng, meas, strict=True):
             rows.add(f"b-{p}", "published Eq. 9 model curve (vector-extracted)", "DIG", "d2_m",
                      x, "p_rx_dbm", a)

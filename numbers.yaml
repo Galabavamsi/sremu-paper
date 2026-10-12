@@ -167,6 +167,118 @@ macros:
     unit: GHz
     source: {type: study, id: "V-TANG"}
     max_chars: 2
+  - macro: numTangPubMeasBiasDb
+    kind: number
+    description: "Mean of measured minus Tang et al.'s published Eq. 9 curve over the V-TANG points (their own residual; exact decimal mean of the digitized values, half-even; printed without sign: the published model lies below every point, checked by gen_results)"
+    unit: dB
+    source: {type: study, id: "V-TANG-2"}
+    max_chars: 4
+  - macro: numTangGammaMag
+    kind: number
+    description: "Reflection amplitude of the coding state of Tang RIS1 used in V-TANG (REPORTED, Tang Table III; read from sremu data/validation/tang2022/tang2022_parameters.json)"
+    source: {type: study, id: "V-TANG"}
+    max_chars: 3
+  - macro: numTangGammaLossDb
+    kind: number
+    description: "-20 log10 of that amplitude: the level it alone removes from the model (Appendix D, discussion of the constant offset)"
+    unit: dB
+    source: {type: study, id: "V-TANG"}
+    max_chars: 4
+
+  # ------------------------------------------------------------------ Section IV-C / Appendix C: cell-model sensitivity
+  # Filled by tools/gen_results.py from paper/sweeps/results/sensitivity_cellmodel (point vs
+  # po_patch at the lab pitch, coefficient level; script and meta.json in that directory) and
+  # the V-LAB paired point-vs-patch record (sensitivity S-NF of the unblinded V-LAB run).
+  - macro: numLabPitchMm
+    kind: number
+    description: "Cell pitch of the laboratory tiles (lab_arc.yaml, nominal)"
+    unit: mm
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numLabPitchMarginMm
+    kind: number
+    description: "Half a wavelength at 3.5 GHz minus the lab pitch (the auto threshold margin)"
+    unit: mm
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numLabPitchMarginPct
+    kind: number
+    description: "That margin relative to half a wavelength"
+    unit: "%"
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numCellRetroAngleA
+    kind: number
+    description: "First retro-reflection angle at which the half-wavelength cell factor is quoted"
+    unit: deg
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 2
+  - macro: numCellRetroAngleB
+    kind: number
+    description: "Second retro-reflection angle at which the half-wavelength cell factor is quoted"
+    unit: deg
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 2
+  - macro: numCellRetroADb
+    kind: number
+    description: "po_patch minus point power of one far-field half-wavelength cell at the first retro angle (Richardson-converged patch)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 5
+  - macro: numCellRetroBDb
+    kind: number
+    description: "po_patch minus point power of one far-field half-wavelength cell at the second retro angle (refined start, Richardson-converged)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 5
+  - macro: numCellSensRisMinDb
+    kind: number
+    description: "Smallest decrease of the RIS power with po_patch forced (E-B RIS term of RX1 at its optimum, arc and lab-like, LOS blocked and present; E-C lab continuous optimum per receiver)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numCellSensRisMaxDb
+    kind: number
+    description: "Largest such decrease"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numCellSensEcMaxDb
+    kind: number
+    description: "Largest change of an E-C laboratory-geometry loss (RIS term vs continuous phase; 1-bit, 2-bit, lab, ideal-designed rows) with po_patch forced (bound, rounded up)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numCellSensSwitchMaxDb
+    kind: number
+    description: "Largest change of RX1's channel change at the E-B1 switch with po_patch forced (arc and lab-like, LOS blocked and present)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numCellSensCfgPct
+    kind: number
+    description: "Largest share of cells in which the E-B exact optima for RX1 or RX2 differ between point and po_patch"
+    unit: "%"
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 2
+  - macro: numCellSensDeployLossDb
+    kind: number
+    description: "Largest loss of deploying the point optimum for RX1 when po_patch is the model (E-B, bound, rounded up)"
+    unit: dB
+    source: {type: study, id: "sensitivity_cellmodel"}
+    max_chars: 4
+  - macro: numLabCmMedianMaxDb
+    kind: number
+    description: "V-LAB: largest per-ring median of |M2(point) - M2(po_patch)| at the same geometry (paired, sensitivity S-NF)"
+    unit: dB
+    source: {type: study, id: "V-LAB"}
+    max_chars: 4
+  - macro: numLabCmQninetyfiveMaxDb
+    kind: number
+    description: "V-LAB: largest per-ring 95th percentile of |M2(point) - M2(po_patch)| (paired, sensitivity S-NF)"
+    unit: dB
+    source: {type: study, id: "V-LAB"}
+    max_chars: 4
   - macro: txtVLabOutcome
     kind: text
     description: Verb phrase completing "a blinded comparison with a digitized laboratory map, analysed under a plan hash-locked before unblinding, ..." (C1-C3 outcome and power label)
@@ -194,8 +306,10 @@ macros:
   # Filled by tools/gen_results.py through tools/bench_results.py from
   # paper/sweeps/results/bench/{B1,B2,B3,B4,B6} (MEAS; provenance in each meta.json). F5
   # (native ZMQ) macros stay placeholders until F5 is rerun after the transport fix.
-  # Code and data availability (BLOCKER-3): read by tools/gen_results.py from availability.yaml;
-  # a PENDING field stays a placeholder, so a final build refuses until it is filled (H-2).
+  # Code and data availability (BLOCKER-3): read by tools/gen_results.py from availability.yaml.
+  # status conditional (current, H-2 open): the text prints no licence, URL or DOI and these
+  # macros expand to \sremuUnreleased (no placeholder); status released: a PENDING field stays a
+  # placeholder, so a final build refuses until it is filled.
   - macro: txtLicence
     kind: text
     description: "Code licence of sremu and of the paper artifact (availability.yaml; H-2)"
@@ -1453,6 +1567,47 @@ macros:
     description: "Start time of the unblinded V-LAB run (its run directory name)"
     source: {type: study, id: "V-LAB"}
     max_chars: 12
+  # Laboratory cell states (Section V-D, must-fix 11): the two reflection phases of the
+  # built-in state library lab_binary_3p5ghz (provenance: the authors' unpublished ANTS 2025
+  # manuscript; magnitudes unknown, ASSUMED where used), read from the locked sremu code.
+  - macro: numLabStateOnePhaseDeg
+    kind: number
+    description: "Reflection phase of laboratory cell state sigma1 at 3.5 GHz (state library lab_binary_3p5ghz)"
+    unit: deg
+    source: {type: code, id: sremu.physics.response, expr: "_read_library(BUILTIN_DIR / 'lab_binary_3p5ghz.yaml')['states'][0]['gamma'][0]['phase_deg']"}
+    max_chars: 6
+  - macro: numLabStateTwoPhaseDeg
+    kind: number
+    description: "Reflection phase of laboratory cell state sigma2 at 3.5 GHz (state library lab_binary_3p5ghz)"
+    unit: deg
+    source: {type: code, id: sremu.physics.response, expr: "_read_library(BUILTIN_DIR / 'lab_binary_3p5ghz.yaml')['states'][1]['gamma'][0]['phase_deg']"}
+    max_chars: 7
+  # Verification identifiers and provenance summary (must-fix 12, 14; tools/vv_ids.py).
+  - macro: numVaFourRelTol
+    kind: number
+    description: "Relative tolerance of VA-4 (IQ path vs batch path at zero signaling delay), read from sremu tests/runtime/test_va4_batch.py"
+    source: {type: test, id: "VA-4"}
+    max_chars: 8
+  - macro: txtProvRegenCommit
+    kind: text
+    description: "Emulator commit of the regeneration job (the test record's sidecar; clean tree required)"
+    source: {type: test, id: "junit-sidecar"}
+    max_chars: 7
+  - macro: txtProvRegenHost
+    kind: text
+    description: "Host of the regeneration job, as the test record's sidecar names it"
+    source: {type: test, id: "junit-sidecar"}
+    max_chars: 30
+  - macro: txtProvRegenResults
+    kind: text
+    description: "Results of Table tab:provenance produced at txtProvRegenCommit on a clean tree (grouped by tools/vv_ids.py from the provenance rows)"
+    source: {type: study, id: "provenance"}
+    max_chars: 220
+  - macro: txtProvOtherCommits
+    kind: text
+    description: "The other results of Table tab:provenance with their commit and tree state (grouped by tools/vv_ids.py from the provenance rows)"
+    source: {type: study, id: "provenance"}
+    max_chars: 420
   - macro: numLabSpearmanLo
     kind: number
     description: "Lower limit of the 95 % (Fieller) interval of the C2 Spearman rho"
@@ -1797,6 +1952,16 @@ macros:
     unit: "deg"
     source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
+  - macro: numEbArcBlockerCrossed
+    kind: number
+    description: "Tx -> cell segments that the LOS-blocking plate of the arc crosses (the plate acts on the LOS only; recorded by the E-B driver per blocked point, must-fix 6)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbArcBlockerCells
+    kind: number
+    description: "Cells of the arc surface (Tx -> cell segments checked against the blocking plate)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
   - macro: numEbArcRefEvmDb
     kind: number
     description: "Payload EVM without a switch, arc, LOS blocked"
@@ -1858,6 +2023,11 @@ macros:
     unit: "ms"
     source: {type: experiment, id: "E-B-arc"}
     max_chars: 4
+  - macro: numEbEvmSmoothSymbols
+    kind: number
+    description: "Symbols of the running mean of the EVM traces in F9(a), (c) (prose count; figures/data/F9.meta.json)"
+    source: {type: figure, id: "F9"}
+    max_chars: 5
   - macro: numEbLatencyMs
     kind: number
     description: "Fixed part of the command latency (both geometries)"
@@ -1970,6 +2140,128 @@ macros:
     kind: number
     description: "PER of asap commands at J = 1 ms, arc, LOS blocked"
     unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  # E-B2 closed form (tools/case_tables.py): P(switch after the preamble) under L = 0.2 ms + U[0, J]
+  - macro: numEbCfAsapOneMeasPct
+    kind: number
+    description: "Measured PER (one decimal) of asap commands, J = 1 ms, 0.5 ms guard, arc, LOS blocked, compared with the closed form"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfAsapOnePct
+    kind: number
+    description: "Closed-form P(L > T_g + T_pre) for asap commands, J = 1 ms, 0.5 ms guard [DERIVED from the run's latency, guard and preamble]"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfTimedThreeMeasPct
+    kind: number
+    description: "Measured PER (one decimal) of timed commands, 2 ms lead, J = 3 ms, 0.5 ms guard, arc, LOS blocked"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfTimedThreePct
+    kind: number
+    description: "Closed-form P(L > lead + T_g/2 + T_pre) for timed commands, 2 ms lead, J = 3 ms, 0.5 ms guard [DERIVED]"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfMaxExcessPts
+    kind: number
+    description: "Largest excess of the measured PER over the closed form, percentage points, asap and timed cells of the blocked arc grid (switches late in the preamble)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfCellsPos
+    kind: number
+    description: "Blocked asap/timed cells of the arc grid with a positive closed form"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbCfCellsInCi
+    kind: number
+    description: "Of those, cells whose Clopper-Pearson 95 % interval contains the closed form"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbCfTickExcessPts
+    kind: number
+    description: "Largest excess of the measured PER over the tick-based closed form, percentage points, blocked cells without overwritten commands"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbTickOverwriteCells
+    kind: number
+    description: "Blocked tick-based cells of the arc grid in which pending commands were overwritten (closed form not applicable)"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 2
+  - macro: numEbLosLoExposedMinPct
+    kind: number
+    description: "Smallest PER / closed form, LOS present at the low Es/N0, both alphabets, cells with closed form >= 10 % and no overwrite"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbLosLoExposedMaxPct
+    kind: number
+    description: "Largest PER / closed form, same cells"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbLosHiPerMaxPct
+    kind: number
+    description: "Largest PER of any cell of the full grid with the LOS present at the main Es/N0 (both alphabets, every guard)"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbTpreMs
+    kind: number
+    description: "Preamble duration T_pre (preamble symbols x samples per symbol / rate)"
+    unit: "ms"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 5
+  - macro: numEbGuardShortMs
+    kind: number
+    description: "Shortest guard of the E-B2 grid"
+    unit: "ms"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbGuardLongMs
+    kind: number
+    description: "Longest guard of the E-B2 grid"
+    unit: "ms"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbAsapShortGuardPct
+    kind: number
+    description: "PER of asap commands at J = 1 ms and the shortest guard, arc, LOS blocked (none at the longest guard, checked)"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbPreSafeUs
+    kind: number
+    description: "Latest worst-case switch time after the packet start among the blocked asap/timed cells that lost no packet (inside the preamble, checked)"
+    unit: "us"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 4
+  - macro: numEbCfTickZeroMinPct
+    kind: number
+    description: "Tick-based closed form 1 - (T_g + T_pre - L_0)/T_t at J = 0, smallest over the guards"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbCfTickZeroMaxPct
+    kind: number
+    description: "Same, largest over the guards"
+    unit: "%"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbTickPhaseMinUs
+    kind: number
+    description: "Finest grid of tick phases of the guard starts over a run (every phase visited equally often, checked)"
+    unit: "us"
+    source: {type: experiment, id: "E-B-arc"}
+    max_chars: 3
+  - macro: numEbTickPhaseMaxUs
+    kind: number
+    description: "Coarsest grid of tick phases of the guard starts over a run"
+    unit: "us"
     source: {type: experiment, id: "E-B-arc"}
     max_chars: 3
   # lab-like geometry (supporting row of F9)
@@ -2087,6 +2379,12 @@ macros:
     unit: "dB"
     source: {type: experiment, id: "E-A"}
     max_chars: 5
+  - macro: numEaTauHalfAzero
+    kind: number
+    description: "tau_half of the exact optimum, unblocked corridor (A0, h = 2 m, lower carrier): the value a partition that also attenuated the AP -> RIS hop would give (must-fix 6)"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 6
   - macro: numEaGainOpt
     kind: number
     description: "Instantaneous-optimum gain over RIS absent, A1, lower carrier (mean of per-batch dB)"
@@ -2295,6 +2593,136 @@ macros:
     unit: "dB"
     source: {type: experiment, id: "VA-1"}
     max_chars: 5
+  - macro: numVaOneVecLeftDb
+    kind: number
+    description: "Max |vectorized E-A evaluator with the start-of-step rule - run_batch| over the VA-1 rows (va1.csv; the evaluator's own check against the engine's batch path; rounded up)"
+    unit: "dB"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 6
+  - macro: numVaOneTauMinS
+    kind: number
+    description: "Shorter signaling delay of the VA-1 design"
+    unit: "s"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 4
+  - macro: numVaOneTauMaxS
+    kind: number
+    description: "Longer signaling delay of the VA-1 design"
+    unit: "s"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 3
+  - macro: numVaOneNoiseDiffDb
+    kind: number
+    description: "Power of ten bounding max |P_IQ(noise on) - P_IQ(noise off)| over the VA-1 pairs"
+    unit: "dB"
+    source: {type: experiment, id: "VA-1"}
+    max_chars: 5
+  - macro: numEaFineGridMm
+    kind: number
+    description: "Channel grid of the vectorized E-A evaluator up to 1.5 GHz (meta.json assumptions)"
+    unit: "mm"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaFineGridHiMm
+    kind: number
+    description: "Channel grid of the vectorized E-A evaluator above 1.5 GHz"
+    unit: "mm"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 3
+  - macro: numEaCoarseGridCm
+    kind: number
+    description: "Position grid of the controllers' decisions (GridChannel) in E-A"
+    unit: "cm"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 2
+  - macro: numEaStepMs
+    kind: number
+    description: "Evaluation step of the E-A evaluator (pieces split at switch times, midpoint rule)"
+    unit: "ms"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 2
+  - macro: numEaInterpMaxDb
+    kind: number
+    description: "Largest |h| error of the interpolated channel table (all cells on) against the scene model at keyed random times, over every E-A geometry (rounded up)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaDecisionBarriers
+    kind: number
+    description: "Barriers at which the tabulated decisions were checked against the live controllers (0 mismatches, checked)"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 8
+  - macro: numEaSmokeS
+    kind: number
+    description: "Duration of the IQ smoke run behind Amendment 1 of the E-A plan (read from E-A.md)"
+    unit: "s"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 3
+  - macro: numEaSmokeTauS
+    kind: number
+    description: "Signaling delay of that smoke run (E-A.md)"
+    unit: "s"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 4
+  - macro: numEaSmokeLeftDb
+    kind: number
+    description: "Start-of-step rule minus IQ in that smoke run (E-A.md)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 5
+  - macro: numEaSmokeMidDb
+    kind: number
+    description: "IQ minus midpoint rule in that smoke run, magnitude (E-A.md)"
+    unit: "dB"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 5
+  - macro: numEaWclL
+    kind: number
+    description: "Number L of arc widths of the WCL heuristic as run (E-A.md, checked against experiments/ea.py)"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 2
+  - macro: numEaWclM
+    kind: number
+    description: "Depth M of the nested offset grid of the WCL heuristic as run"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 2
+  - macro: numEaWclK
+    kind: number
+    description: "Candidates K = L M (M+1)/2 of the WCL heuristic (checked)"
+    source: {type: experiment, id: "E-A-plan"}
+    max_chars: 3
+  - macro: numEaGeometries
+    kind: number
+    description: "Computed E-A geometries (tau_half.csv)"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 2
+  - macro: numEaTauLambdaVMin
+    kind: number
+    description: "Smallest tau_half / (lambda/v) over every computed E-A geometry"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaTauLambdaVMax
+    kind: number
+    description: "Largest tau_half / (lambda/v) over every computed E-A geometry"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
+  - macro: numEaTauHalfMinS
+    kind: number
+    description: "Smallest tau_half at the lower carrier over its geometries"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaTauHalfMaxS
+    kind: number
+    description: "Largest tau_half at the lower carrier over its geometries"
+    unit: "s"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 5
+  - macro: numEaTauLvNoPart
+    kind: number
+    description: "tau_half / (lambda/v) of the primary geometry without the partition (lower carrier, same h)"
+    source: {type: experiment, id: "E-A"}
+    max_chars: 4
   - macro: numEcOneBitMin
     kind: number
     description: "Smallest 1-bit loss over the four settings"

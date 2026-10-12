@@ -47,19 +47,19 @@ rates (RT-01, RT-02); wall-clock time never enters data-plane arithmetic (RT-15)
 absolute grid, cut at snapshot boundaries, switch samples, barrier limits and the end of TX
 input (Fig.~\ref{fig:F2}(a)). Per-sample quantities are closed-form functions of the absolute
 sample index, and sums run in a fixed order, so the RX samples are identical bit for bit
-however clients chunk their calls, wherever events cut a page and, in deterministic mode,
-whatever the thread count (RT-03, RT-10).
+however clients chunk their calls, wherever events cut a page and, in deterministic mode (the
+default, Appendix~\ref{app:interfaces}), whatever the thread count (RT-03, RT-10).
 
 \begin{figure*}[t]
 \centering
-\sremufigure{F2}{\textwidth}{(a) Processing of one page portion of a rate group.
+\sremufigure{F2}{\textwidth}{(a) Processing of one page portion of a rate group;
+$h_{\mathrm{FD}}$: fractional-delay filter look-ahead.
 (b) Life cycle of RIS commands on the time axes of the surface and of two receivers. Left:
 a registered controller decides at barrier $t_b$ after every receiver has been computed up
 to $t_b+L_{\min}$, so its command at $t_{\mathrm{sw}}\ge t_b+L_{\min}$ lands without
 lateness at $k_r=\mathrm{to\_ticks}(t_{\mathrm{sw}}+\tau_r,f_r)$. Right: a command that
 arrives after its samples were computed is moved to the single surface time $t'$ that every
-receiver can still honour; the record keeps requested and applied samples. TikZ diagram;
-no data.}{fig:F2}
+receiver can still honour; the record keeps requested and applied samples.}{fig:F2}
 \end{figure*}
 
 \paragraph*{RIS commands}
@@ -128,13 +128,14 @@ $R_j=t_0+k_1/f+D_{\mathrm{lag}}$, with page end $k_1$ and an input slack $D_{\ma
 late inputs are dropped, missing samples become zeros and a slow RX client loses pages, each
 with a report, and deadline misses are counted (RT-18). Paced mode is soft real time: it counts misses rather
 than assuming their absence, and it admits asynchronous controllers, whose commands carry
-measured lateness. \claim{C-BATCH}A batch path evaluates
+measured lateness. \claim{C-BATCH}A batch path (\texttt{run\_batch}) evaluates
 $\mathrm{combine}(\mathrm{snapshot}(t),\mathrm{cfg}(t))$ on a time grid without IQ samples, with
 the same model, command semantics (switches at their surface time), controllers and random
-keys; in a static scene with noise
-off, an in-process controller and no signaling delay, its time-averaged received power equals
-that of the IQ path within the relative tolerance of VA-4, and agreement under mobility is a
-separate check (Section~\ref{sec:cases}). \claim{C-REPLAY}A replay re-injects the recorded TX
+keys; in a static scene with noise off, an in-process controller and no signaling delay, its
+time-averaged received power equals that of the IQ path within a relative \numVaFourRelTol{}
+(VA-4). Holding each step at its start value, it reads up to \numVaOneLeftMaxDb~dB high under
+mobility with a delayed controller, beyond the \numVaOneTolDb~dB limit of VA-1, so E-A uses a
+midpoint evaluator (Section~\ref{sec:cases-ea}). \claim{C-REPLAY}A replay re-injects the recorded TX
 streams and commands at their applied times and reproduces the recorded RX samples bit for bit
 (RT-16).
 
@@ -164,8 +165,9 @@ raw-IQ mode.
 % from_state_library, sample, half_difference extension), physics/tables/*.yaml (built-ins),
 % contracts.RisCapabilities (GS RIS 008 names).
 \claim{C-TABLES}Element responses are tables $\Gamma(s,f,\theta_i,\theta_s)$ over state,
-frequency, and incidence and reflection angles from the panel normal, with mandatory
-provenance such as the kind of source, uncertainties and a hash of the raw data.
+frequency, and signed incidence and reflection angles in one plane of incidence
+(Appendix~\ref{app:model}), read at the carrier, with mandatory provenance such as the kind of
+source, uncertainties and a hash of the raw data.
 \claim{C-TABLE-CHECKS}Validators reject tables that are not passive, not reciprocal or too
 coarse, and queries outside the grid or band (PH-31); interpolation is complex-linear, so the
 channel stays linear in $\Gamma$. \claim{C-TABLE-IMPORT}Tables come from CSV files with a

@@ -23,14 +23,32 @@
 \newcommand{\numTangPanelBiasMaxDb}{1.15}% study:V-TANG-2
 \newcommand{\numTangMeasN}{36}% study:V-TANG-2
 \newcommand{\numTangFcGHz}{27}% study:V-TANG
+\newcommand{\numTangPubMeasBiasDb}{0.98}% study:V-TANG-2
+\newcommand{\numTangGammaMag}{0.9}% study:V-TANG
+\newcommand{\numTangGammaLossDb}{0.92}% study:V-TANG
+\newcommand{\numLabPitchMm}{42.8}% study:sensitivity_cellmodel
+\newcommand{\numLabPitchMarginMm}{0.03}% study:sensitivity_cellmodel
+\newcommand{\numLabPitchMarginPct}{0.06}% study:sensitivity_cellmodel
+\newcommand{\numCellRetroAngleA}{30}% study:sensitivity_cellmodel
+\newcommand{\numCellRetroAngleB}{45}% study:sensitivity_cellmodel
+\newcommand{\numCellRetroADb}{\ensuremath{-3.9}}% study:sensitivity_cellmodel
+\newcommand{\numCellRetroBDb}{\ensuremath{-8.9}}% study:sensitivity_cellmodel
+\newcommand{\numCellSensRisMinDb}{0.2}% study:sensitivity_cellmodel
+\newcommand{\numCellSensRisMaxDb}{1.3}% study:sensitivity_cellmodel
+\newcommand{\numCellSensEcMaxDb}{0.1}% study:sensitivity_cellmodel
+\newcommand{\numCellSensSwitchMaxDb}{1.5}% study:sensitivity_cellmodel
+\newcommand{\numCellSensCfgPct}{8}% study:sensitivity_cellmodel
+\newcommand{\numCellSensDeployLossDb}{0.01}% study:sensitivity_cellmodel
+\newcommand{\numLabCmMedianMaxDb}{0.13}% study:V-LAB
+\newcommand{\numLabCmQninetyfiveMaxDb}{0.67}% study:V-LAB
 \newcommand{\txtVLabOutcome}{was underpowered and did not separate the RIS model from LOS-only}% study:V-LAB
 \newcommand{\txtPacedPlatform}{an AWS c7i.8xlarge (Linux)}% benchmark:B3
 \newcommand{\numPacedLinks}{8}% benchmark:B3
 \newcommand{\numPacedMSps}{1}% benchmark:B3
-\newcommand{\txtLicence}{\sremuPlaceholder{txtLicence}}% data:availability.yaml
-\newcommand{\txtRepoUrl}{\sremuPlaceholder{txtRepoUrl}}% data:availability.yaml
-\newcommand{\txtArchiveDoi}{\sremuPlaceholder{txtArchiveDoi}}% data:availability.yaml
-\newcommand{\txtDataDoi}{\sremuPlaceholder{txtDataDoi}}% data:availability.yaml
+\newcommand{\txtLicence}{\sremuUnreleased}% data:availability.yaml
+\newcommand{\txtRepoUrl}{\sremuUnreleased}% data:availability.yaml
+\newcommand{\txtArchiveDoi}{\sremuUnreleased}% data:availability.yaml
+\newcommand{\txtDataDoi}{\sremuUnreleased}% data:availability.yaml
 \newcommand{\txtPythonReq}{3.12}% data:sremu-pyproject
 \newcommand{\numSrcKloc}{41}% data:sremu-source-tree
 \newcommand{\numSrcModules}{103}% data:sremu-source-tree
@@ -250,6 +268,13 @@
 \newcommand{\txtLabResultCommit}{2333b60}% data:V-LAB-provenance
 \newcommand{\txtLabResultPushTime}{00:31:40 UTC}% data:V-LAB-provenance
 \newcommand{\txtLabRunTime}{00:30:44 UTC}% study:V-LAB
+\newcommand{\numLabStateOnePhaseDeg}{49.64}% code:sremu.physics.response:_read_library(BUILTIN_DIR / 'lab_binary_3p5ghz.yaml')['states'][0]['gamma'][0]['phase_deg']
+\newcommand{\numLabStateTwoPhaseDeg}{\ensuremath{-153.77}}% code:sremu.physics.response:_read_library(BUILTIN_DIR / 'lab_binary_3p5ghz.yaml')['states'][1]['gamma'][0]['phase_deg']
+\newcommand{\numVaFourRelTol}{\ensuremath{10^{-9}}}% test:VA-4
+\newcommand{\txtProvRegenCommit}{4ec4c2b}% test:junit-sidecar
+\newcommand{\txtProvRegenHost}{AWS c7i.48xlarge}% test:junit-sidecar
+\newcommand{\txtProvRegenResults}{the test record, V-TANG, V-CFO, V-FM (E-D), E-A, E-B (lab-like), E-C, BER, VA-1, E-B (arc geometry) and E-E (GNU Radio)}% study:provenance
+\newcommand{\txtProvOtherCommits}{V-LAB (7a63287, clean); V-LAB power analysis (9dca79f, uncommitted changes recorded); F3(a) values, F6 values and cell-model sensitivity (0f06793, tree state not recorded); B1 and B2 (309c633, dirty flag recorded, file tree equal to the commit's); B3 and B4 (309c633, clean); B6 (f518ed1, uncommitted changes recorded); E-E throughput (commit not recorded)}% study:provenance
 \newcommand{\numLabSpearmanLo}{\ensuremath{-0.76}}% study:V-LAB
 \newcommand{\numLabSpearmanHi}{0.34}% study:V-LAB
 \newcommand{\numLabDecoyDeltaMtwoDb}{\ensuremath{-1.16}}% study:V-LAB
@@ -311,6 +336,8 @@
 \newcommand{\numVaFiveArcTotal}{16}% experiment:VA-5
 \newcommand{\numEbArcBlockedChangeDb}{\ensuremath{-23.7}}% experiment:E-B-arc
 \newcommand{\numEbArcBlockedRotDeg}{137}% experiment:E-B-arc
+\newcommand{\numEbArcBlockerCrossed}{152}% experiment:E-B-arc
+\newcommand{\numEbArcBlockerCells}{240}% experiment:E-B-arc
 \newcommand{\numEbArcRefEvmDb}{\ensuremath{-24.6}}% experiment:E-B-arc
 \newcommand{\numEbArcOneErrors}{643}% experiment:E-B-arc
 \newcommand{\numEbOneBits}{1024}% experiment:E-B-arc
@@ -322,6 +349,7 @@
 \newcommand{\numEbArcLosOneErrors}{1}% experiment:E-B-arc
 \newcommand{\numEbPackets}{2000}% experiment:E-B-arc
 \newcommand{\numEbGuardMs}{0.5}% experiment:E-B-arc
+\newcommand{\numEbEvmSmoothSymbols}{eight}% figure:F9
 \newcommand{\numEbLatencyMs}{0.2}% experiment:E-B-arc
 \newcommand{\numEbLeadsMs}{0.5, 2 or 5}% experiment:E-B-arc
 \newcommand{\numEbLeadMinMs}{0.5}% experiment:E-B-arc
@@ -341,6 +369,27 @@
 \newcommand{\numEbArcAsapJitterOkMs}{0.3}% experiment:E-B-arc
 \newcommand{\numEbArcAsapPerOneLosPct}{39}% experiment:E-B-arc
 \newcommand{\numEbArcAsapPerOneBlkPct}{46}% experiment:E-B-arc
+\newcommand{\numEbCfAsapOneMeasPct}{45.6}% experiment:E-B-arc
+\newcommand{\numEbCfAsapOnePct}{44.4}% experiment:E-B-arc
+\newcommand{\numEbCfTimedThreeMeasPct}{23.1}% experiment:E-B-arc
+\newcommand{\numEbCfTimedThreePct}{23.1}% experiment:E-B-arc
+\newcommand{\numEbCfMaxExcessPts}{8.8}% experiment:E-B-arc
+\newcommand{\numEbCfCellsPos}{14}% experiment:E-B-arc
+\newcommand{\numEbCfCellsInCi}{10}% experiment:E-B-arc
+\newcommand{\numEbCfTickExcessPts}{1.4}% experiment:E-B-arc
+\newcommand{\numEbTickOverwriteCells}{5}% experiment:E-B-arc
+\newcommand{\numEbLosLoExposedMinPct}{54}% experiment:E-B-arc
+\newcommand{\numEbLosLoExposedMaxPct}{99}% experiment:E-B-arc
+\newcommand{\numEbLosHiPerMaxPct}{3.1}% experiment:E-B-arc
+\newcommand{\numEbTpreMs}{0.256}% experiment:E-B-arc
+\newcommand{\numEbGuardShortMs}{0.1}% experiment:E-B-arc
+\newcommand{\numEbGuardLongMs}{1}% experiment:E-B-arc
+\newcommand{\numEbAsapShortGuardPct}{88}% experiment:E-B-arc
+\newcommand{\numEbPreSafeUs}{200}% experiment:E-B-arc
+\newcommand{\numEbCfTickZeroMinPct}{47}% experiment:E-B-arc
+\newcommand{\numEbCfTickZeroMaxPct}{92}% experiment:E-B-arc
+\newcommand{\numEbTickPhaseMinUs}{4}% experiment:E-B-arc
+\newcommand{\numEbTickPhaseMaxUs}{8}% experiment:E-B-arc
 \newcommand{\numVaFiveTotal}{16}% experiment:VA-5
 \newcommand{\numEbBlockedChangeDb}{\ensuremath{-15.6}}% experiment:E-B1
 \newcommand{\numEbBlockedRotDeg}{59}% experiment:E-B1
@@ -361,6 +410,7 @@
 \newcommand{\numEaBatches}{20}% experiment:E-A
 \newcommand{\numEaPeriods}{500}% experiment:E-A
 \newcommand{\numEaGainAzero}{0.68}% experiment:E-A
+\newcommand{\numEaTauHalfAzero}{0.106}% experiment:E-A
 \newcommand{\numEaGainOpt}{5.61}% experiment:E-A
 \newcommand{\numEaGainOptLo}{5.53}% experiment:E-A
 \newcommand{\numEaGainOptHi}{5.69}% experiment:E-A
@@ -398,6 +448,29 @@
 \newcommand{\numVaOneMaxDiffDb}{0.002}% experiment:VA-1
 \newcommand{\numVaOneTolDb}{0.02}% experiment:VA-1
 \newcommand{\numVaOneLeftMaxDb}{0.09}% experiment:VA-1
+\newcommand{\numVaOneVecLeftDb}{0.0003}% experiment:VA-1
+\newcommand{\numVaOneTauMinS}{0.1}% experiment:VA-1
+\newcommand{\numVaOneTauMaxS}{1}% experiment:VA-1
+\newcommand{\numVaOneNoiseDiffDb}{\ensuremath{10^{-6}}}% experiment:VA-1
+\newcommand{\numEaFineGridMm}{1}% experiment:E-A
+\newcommand{\numEaFineGridHiMm}{0.5}% experiment:E-A
+\newcommand{\numEaCoarseGridCm}{1}% experiment:E-A
+\newcommand{\numEaStepMs}{5}% experiment:E-A
+\newcommand{\numEaInterpMaxDb}{0.008}% experiment:E-A
+\newcommand{\numEaDecisionBarriers}{50\,400}% experiment:E-A
+\newcommand{\numEaSmokeS}{20}% experiment:E-A-plan
+\newcommand{\numEaSmokeTauS}{0.1}% experiment:E-A-plan
+\newcommand{\numEaSmokeLeftDb}{0.095}% experiment:E-A-plan
+\newcommand{\numEaSmokeMidDb}{0.002}% experiment:E-A-plan
+\newcommand{\numEaWclL}{4}% experiment:E-A-plan
+\newcommand{\numEaWclM}{3}% experiment:E-A-plan
+\newcommand{\numEaWclK}{24}% experiment:E-A-plan
+\newcommand{\numEaGeometries}{12}% experiment:E-A
+\newcommand{\numEaTauLambdaVMin}{0.27}% experiment:E-A
+\newcommand{\numEaTauLambdaVMax}{0.55}% experiment:E-A
+\newcommand{\numEaTauHalfMinS}{0.082}% experiment:E-A
+\newcommand{\numEaTauHalfMaxS}{0.163}% experiment:E-A
+\newcommand{\numEaTauLvNoPart}{0.35}% experiment:E-A
 \newcommand{\numEcOneBitMin}{2.9}% experiment:E-C
 \newcommand{\numEcOneBitMax}{3.3}% experiment:E-C
 \newcommand{\numEcOneBitEta}{3.92}% experiment:E-C

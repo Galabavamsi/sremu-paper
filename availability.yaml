@@ -12,7 +12,21 @@
 #   data_doi     DOI of the authors' own data files (CC BY 4.0 proposed; the laboratory map
 #                needs the laboratory's permission, human gate H-1)
 # Values are plain text; a URL is printed with \url, a DOI as written.
+#
+# status selects the statement that "Code and Data Availability" prints:
+#   conditional  (current; author decision pending, H-2) the emulator, the paper pipeline and
+#                the authors' data will be released under an open-source licence once all
+#                authors and IIT Bhilai approve, and are available from the corresponding author
+#                on request until then. No licence, URL or DOI is printed, so the text is
+#                complete without them; the four macros expand to \sremuUnreleased, which stops
+#                any build that would print one, and they are not placeholders (a final build
+#                is not blocked by them).
+#   released     the code is public: every field must be filled (a PENDING field stays a
+#                placeholder and a final build refuses), and the section's first sentence
+#                becomes "... are available at \txtRepoUrl{} under the \txtLicence{} licence
+#                (archived at \txtArchiveDoi)" (sections/back_matter.tex).
 
+status: conditional
 licence: PENDING
 repo_url: PENDING
 archive_doi: PENDING

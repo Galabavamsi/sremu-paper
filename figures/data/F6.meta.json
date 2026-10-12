@@ -1,7 +1,7 @@
 {
   "figure": "F6",
   "title": "(a) Instantaneous frequency of the LOS and RIS paths through the engine vs the closed forms; (b) interpolation error vs snapshot period T_u, measured against a per-sample exact channel and estimated by verify_interp",
-  "content_key": "16d1c66d7cc6af8f1b89fde40be9928d3bf35caeada033022246e533d899663c",
+  "content_key": "2e6f0eaf3a2c3bbcf9dfce630e3cd5aee15d42bb8d7f1bb537f6701800ec9949",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -23,9 +23,9 @@
   ],
   "profile": "full",
   "script": "figures/src/f06_doppler.py",
-  "script_sha256": "3fef9beec4545dfcbbb3ba3e12579040043a5b5acefece74a10e7ad3d2ce4383",
+  "script_sha256": "d2b5b4a45467f17d39d7f42895102a061fc590317e11dcda439d953127132bda",
   "outputs": {
-    "figures/out/F6.pdf": "61a65147c9b4a3d06fa8ae9b0c9d2c2fdcffe2e504ab544ae6a49786e7303bdc",
+    "figures/out/F6.pdf": "4a26e25785e736be598af24037ef8df7676aae3dba1308983774de8eef863357",
     "figures/data/F6.csv": "3ee4a4c43bdd91a1c7e844f852c834bcadb233db42a76efc94504bb5b199cc84"
   },
   "versions": {
@@ -35,7 +35,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:35:03Z",
+  "generated_utc": "2026-10-12T01:03:36Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

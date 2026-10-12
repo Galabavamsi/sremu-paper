@@ -29,8 +29,10 @@ a regret reference that bounds every built-in controller at every tested positio
 
 \subsection{Limitations}\label{sec:disc-limits}
 \claim{C-LIMITS}Appendix~\ref{app:model} lists what the release does not model or provide.
-Three limits matter most here. The paced mode is soft real time: it counts
-deadline misses and does not prevent them. Agreement with MATLAB compares two codes and does
-not validate absolute RIS power; validation needs measurements (Section~\ref{sec:vv}). And
-mutual coupling enters solely through measured or simulated tables of whole configurations, so
-a controller cannot exploit coupling that its tables do not contain.
+Four limits matter most here. The paced mode is soft real time: it counts
+deadline misses and does not prevent them. No timing, switching or transient behaviour has
+been compared with measurements, so E-B is model-based, and the data of Tang et al.\ test the
+absolute level of one static state (Section~\ref{sec:vv}). Mutual coupling is not modelled beyond what a per-state table with
+identical neighbours holds, so a controller cannot exploit coupling between differing states. And
+occluders never attenuate a RIS hop, so the blocked arc of E-B and the corridor of E-A are
+idealized.

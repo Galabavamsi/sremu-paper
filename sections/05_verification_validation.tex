@@ -4,8 +4,10 @@
 % figures/src/*.py. Honesty rules (DESIGN 1.6): verification != validation; MATLAB is
 % code-to-code; digitized data are DIG; the lab study is a "consistency check under geometric
 % uncertainty" (no lab geometry supplied, H-1). The tick-truncation pitfall is a generic design
-% lesson. Tang et al. (V-C) is reported as accuracy, measured minus emulator (author decision
-% D-12 of 2026-10-11, reversing DESIGN 10.8). The detail moved for length (test-record notes,
+% lesson. Tang et al. (V-C) reports measured minus emulator (author decision D-12 of
+% 2026-10-11), framed as agreement of the K1/Tang model class with Tang's chamber data: the
+% emulator inherits Tang's own published residual, and the curve agreement is the
+% implementation check (mock review must-fix 3, 2026-10-12). The detail moved for length (test-record notes,
 % MATLAB references, refinement, Tang per geometry, lab protocol with Table V and F4, CFO, CRB
 % and BER with F5, Doppler with F6) is in Appendix D (sections/app_d_vv.tex), same markers.
 \section{Verification and Validation}\label{sec:vv}
@@ -17,10 +19,10 @@ verification. Data read off a published figure are labelled DIG with their digit
 uncertainty, and every caption names the classes of its data (Appendix~\ref{app:provenance}).
 
 \subsection{Analytic oracles}\label{sec:vv-oracles}
-\claim{C-VV-TABLE}The test record of the emulator commit used for this paper is summarized per
-tier in Appendix~\ref{app:vv}. Each identifier names one property, its oracle (a closed form or
-exact property, kept in a test package that may not import the code under test,
-Appendix~\ref{app:oracles}) and a fixed tolerance. All \numOracleCount{} analytic
+\claim{C-VV-TABLE}The test record of emulator commit \txtProvRegenCommit{} is summarized per
+tier in Appendix~\ref{app:vv}. Each identifier (Appendix~\ref{app:oracles}) names one property,
+its oracle (a closed form or exact property, kept in a test package that may not import the
+code under test) and a fixed tolerance. All \numOracleCount{} analytic
 identifiers (PH, RT and IO) pass, in \numOracleTests{} implementation tests; the statistical
 tier adds \numStatIds{} identifiers and the code-to-code tier \numGoldenIds{}. In total
 \numJunitPassed{} tests passed and \numJunitSkipped{} were skipped, none of them with an
@@ -42,23 +44,23 @@ the patch model stays within \numRefineNearMaxDevDb~dB of the continuous physica
 integral, while one point per cell converges slowly (Appendix~\ref{app:vv}).
 
 \claim{C-ABS-TANG}Tang et al.\ measured the path loss of millimeter-wave surfaces in an
-anechoic chamber and fitted a model to it~\cite{Tang2022mmWave}. We extracted the model curves
-and the measured points of their Fig.~10 from the vector graphics of the
-paper~\cite{Tang2022mmWave} (DIG) and ran the same \numTangMeasN{} links, four geometries
-of nine receiver distances, through the emulator with the default cell model, the reported
-unit-cell state and the reported link budget (REPORTED). The emulator reproduces the
+anechoic chamber and fitted a model to it~\cite{Tang2022mmWave}. We extracted the curves and
+points of their Fig.~10 from the vector graphics of arXiv version
+2101.08607v2~\cite{Tang2022mmWave} (DIG) and
+ran the same \numTangMeasN{} links through the emulator with the default cell model and
+the reported unit-cell state and link budget (REPORTED). The emulator reproduces the
 published model curves within \numTangCurveMaxDevDb~dB; since K1 equals that model for one
-point per cell, this checks the implementation. Against the chamber measurements, the
-emulator's received power is low by \numTangMeasBiasDb~dB on average (SD
-\numTangMeasSdDb~dB, RMSE \numTangMeasRmseDb~dB, largest difference \numTangMeasMaxDb~dB;
-per geometry \numTangPanelBiasMinDb--\numTangPanelBiasMaxDb~dB, Appendix~\ref{app:tang}), and
-every measured point lies above it (Fig.~\ref{fig:F3}(b)). This is the accuracy of the model
-class that the emulator shares with Tang et al.'s model, against third-party measurements of
-one \numTangFcGHz~GHz surface in one state and in specular geometries: it tests the absolute
-level and its dependence on distance and angle, not reconfiguration or near-field structure.
-The points are digitized without a stated measurement uncertainty, their distances were
-snapped to the nominal grid, and the points of one geometry are not independent. We do not
-fit away the constant part of the error, which may come from the reported link-budget terms.
+point per cell, this checks the implementation and bounds the digitization error. Against the
+chamber measurements the emulator's received power is low by \numTangMeasBiasDb~dB on
+average (SD \numTangMeasSdDb~dB, RMSE \numTangMeasRmseDb~dB; per geometry, with the caveats of
+the digitized data, in Appendix~\ref{app:tang}), every measured point lies above it
+(Fig.~\ref{fig:F3}(b)), and the
+published model is low by \numTangPubMeasBiasDb~dB: the emulator inherits the published
+residual. This is agreement of the model class with chamber data for one \numTangFcGHz~GHz
+surface in one uniformly coded state in specular geometries; it tests the absolute level and
+its dependence on distance and angle, not reconfiguration, steering or near-field structure,
+and no switching, transient or timing behaviour of the emulator has been compared with
+measurements.
 
 \begin{figure*}[t]
 \centering
@@ -73,23 +75,23 @@ measurements), REPORTED (link budget).}{fig:F3}
 \end{figure*}
 
 \subsection{Laboratory consistency check}\label{sec:vv-lab}
-\claim{C-LAB-DATA}The data set is a laboratory measurement collected by the authors: the
-received power at \numLabFreqGHz~GHz on a polar grid of \numLabCells{} cells in front of a
-binary RIS of six tiles, which survives as a colour map that we digitized
-(DIG, \numLabSigDigMinDb--\numLabSigDigMaxDb~dB per cell). Its geometry is known within ranges,
-the measurement positions to about $\pm\numLabPriorPosCm$~cm.
+\claim{C-LAB-DATA}The data set is a laboratory measurement collected by the authors
+(Appendix~\ref{app:vv}): the received power at \numLabFreqGHz~GHz on a polar grid of
+\numLabCells{} cells in front of a binary RIS of six tiles, whose cell states have phases of
+\numLabStateOnePhaseDeg$^\circ$ and \numLabStateTwoPhaseDeg$^\circ$ (magnitudes unknown), surviving
+as a colour map that we digitized (DIG, \numLabSigDigMinDb--\numLabSigDigMaxDb~dB per cell). Its geometry is known within ranges, the measurement positions to about
+$\pm\numLabPriorPosCm$~cm.
 
-\claim{C-LAB-PRESPEC}We therefore wrote the analysis plan before any comparison of model and
+\claim{C-LAB-PRESPEC}We therefore wrote the analysis plan before fitting any RIS model to the
 data: \numLabDraws{} geometries drawn from a prior over the unknowns, five models with fitted
 offsets, among them line of sight alone (M0), a log-distance fit (M0n) and the laboratory
 configuration (M2), fitted on three rings and scored on two, and three decision rules: C1
 (level consistent), C2 (the RIS model explains spatial structure better than M0) and C3
-(better than a uniform mirror). The data loader refuses the measured map unless the hash of
-the protocol files matches; the hash was pushed to the emulator's private GitHub repository on
-\txtLabLockDate, after a descriptive inspection of the digitized map but before any comparison,
-as GitHub's server-side push log records (Appendix~\ref{app:vv}). The plan is therefore
-pre-specified and hash-locked, with a timestamp from the repository host, not from a public
-registry, in which nothing was deposited before unblinding. \claim{C-LAB-POWER}Before unblinding, the plan ran
+(better than a uniform mirror). The data loader refuses the map unless the hash of the
+protocol files matches; GitHub's push log dates the hash before any comparison but after a
+descriptive inspection of the map (Appendix~\ref{app:vv}), so the plan is pre-specified and
+hash-locked before unblinding, not blind.
+\claim{C-LAB-POWER}Before unblinding, the plan ran
 the full analysis on \numLabDecoys{} synthetic maps drawn from M2 itself: C2 held in
 \numLabDecoyDetections{} of them (\numCiPct\,\% upper limit \numLabDecoyCiHighPct~\%), far
 below the pre-set threshold of \numLabUnderpoweredRate{}, so the study was labelled

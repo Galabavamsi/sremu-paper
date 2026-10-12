@@ -189,7 +189,7 @@ figures:
     outputs: [figures/out/F9.pdf, figures/data/F9.csv, figures/data/F9.meta.json]
     owner: WP12
     status: ready
-    notes: "top row from the E-B lab-arc AWS run (sweeps/results/E-B-arc: run 20261011T060442Z_eb_arc_d41a75, c7i.16xlarge, sremu 5be649a clean per the job's SREMU_GIT_COMMIT export; the commit's src/sremu tree hash equals the run's, meta.json sremu.commit_verified); bottom row from the committed lab-like E-B1/E-B2 results"
+    notes: "top row from the E-B lab-arc run of the pinned regeneration job (sweeps/results/E-B-arc: run regen_2026-10-11T23:59:37Z of job 20261011T235822Z_regen_37a552, AWS c7i.48xlarge, sremu 4ec4c2b clean per git_state.json and every point manifest); bottom row from the lab-like E-B1/E-B2 results of the same job"
   F10:
     title: "E-A: gain over RIS absent vs signaling delay tau_SUI (log x) for four controllers in the blocked corridor at 1 and 2.4 GHz with the half-retention delay tau_half; IQ path vs batch path (VA-1)"
     width: double

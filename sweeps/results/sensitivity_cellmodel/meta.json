@@ -1,0 +1,64 @@
+{
+ "experiment": "sensitivity_cellmodel",
+ "data_classes": [
+  "SIM-sremu",
+  "ANALYTIC",
+  "ASSUMED"
+ ],
+ "description": "Cell-model sensitivity (point vs po_patch) at the lab pitch: far-field factor of a half-wavelength cell; E-B design quantities on the arc and lab-like geometries; E-C laboratory-geometry losses. Coefficient level, no IQ run; no study is rerun.",
+ "assumptions": [
+  "laboratory states with |Gamma| = 1 (ASSUMED), as in E-B and E-C",
+  "cell_model forced on every panel; po_patch with the default sub-cell size and Richardson check (sremu defaults)",
+  "E-B quantities from experiments/eb.py design() at t = 0 (static scene)",
+  "E-C quantities from experiments/ec.py lab_geometry_scenario/csi_points/eval_row",
+  "cell factor: one lambda/2 cell at 3.5 GHz, Tx 50 m and Rx 60 m at the stated in-plane angles, ideal_antipodal state 0 (Gamma = 1), isotropic antennas"
+ ],
+ "inputs": [
+  {
+   "path": "experiments/eb.py",
+   "sha256": "4c23df4b4cfe5bb8138dad9a1d6433ce7d5a8708d65ed2431fc097c2bc5c3351"
+  },
+  {
+   "path": "experiments/ec.py",
+   "sha256": "9a64e1d96248ce412b1f84f9922d90d6e1122238d8bdfc25b0b45270585e9daa"
+  },
+  {
+   "path": "experiments/common.py",
+   "sha256": "5f4eb3b73d9c4a869c154f46bd970c71864ea775c74ad822b90e6ad64f9fc2b4"
+  },
+  {
+   "path": "scenarios/studies/lab_arc.yaml",
+   "sha256": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a"
+  },
+  {
+   "path": "scenarios/lab_like_A.yaml",
+   "sha256": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
+  },
+  {
+   "path": "data/states/lab_binary_3p5ghz.yaml",
+   "sha256": "a49e9e5f60f50000f22b40a151c12e64f683c0b2934ae44d5b57e1948e0e0368"
+  },
+  {
+   "path": "data/states/ideal_antipodal.yaml",
+   "sha256": "25d6aa27f60ac568b554ab415295e62db323c8548cb4bc934dc2aa212db5605c"
+  }
+ ],
+ "script": "cellmodel_sensitivity.py",
+ "script_sha256": "718bc6285424a81032085745af95c5526165b6f2bb67075cb971143710c67aa5",
+ "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+ "sremu_dirty": null,
+ "sremu_dirty_note": "not determined: the script starts no git process",
+ "src_sremu_tree_sha256": "c9e0a2565a75e3af32413cf77eb4be7747446afd0349a7700185873444a64391",
+ "versions": {
+  "python": "3.12.4",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1"
+ },
+ "platform": "Windows-11-10.0.26200-SP0",
+ "t_start_utc": "2026-10-12T00:54:46Z",
+ "t_end_utc": "2026-10-12T00:54:48Z",
+ "files": {
+  "results.json": "threshold, cell_factor, eb, ec_lab (see the script docstring)",
+  "cellmodel_sensitivity.py": "the script that wrote this directory"
+ }
+}

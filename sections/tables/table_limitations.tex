@@ -22,9 +22,18 @@ Ray tracing, buildings, terrain profiles, several knife edges on one path, walls
   Explicit scenes: LOS, flat ground, order-one walls, one knife edge per path, additive
   diffuse term \\
 RIS--RIS paths; polarization & Single-bounce RIS paths; scalar co-polar fields \\
-Mutual-coupling physics &
-  Per-configuration tables~\cite{ETSI_GR_RIS003_v121}; a coupling hook without shipped
-  coefficients \\
+Attenuation of RIS hops by occluders; fading or multipath on RIS hops &
+  Occluders act on the LOS path and its ground and wall images; RIS hops are deterministic
+  free-space paths (optional flat-ground images) \\
+Mutual coupling between differing neighbour states &
+  Per-state tables, which hold coupling for identical neighbours (locally
+  periodic)~\cite{ETSI_GR_RIS003_v121}; a coupling-hook protocol, implemented as no
+  coupling \\
+Angle-dependent tables outside one plane of incidence &
+  Single-plane tables; off-plane components projected out, or refused on request \\
+Switching, transient or timing behaviour compared with measurements &
+  Transition profiles as an engineering choice; command records with requested and applied
+  samples \\
 Frequency-dependent $\Gamma$ filters; non-reciprocal tables &
   Signals wider than a table's validity bandwidth and non-reciprocal tables are rejected \\
 Sampling-frequency offset, IQ imbalance, amplifier and converter models &

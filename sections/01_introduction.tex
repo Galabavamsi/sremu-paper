@@ -33,7 +33,7 @@ offline~\cite{Basar2020SimRIS,Burtakov2023QRIS}, Open Radio Access Network (O-RA
 loop over coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}, and IQ-level
 emulators have no RIS model~\cite{Gurses2026ACHEM,OAIrfsim,srsRANZMQ} or fix the RIS channels
 in advance~\cite{Tsampazi2025RISColosseum,Tsampazi2025ORISing}.
-\claim{C-GAP}To our knowledge, as of 10 Oct 2026, no surveyed open tool combines
+\claim{C-GAP}To our knowledge, as of 10 Oct 2026, no surveyed tool combines
 (i)~multi-node emulation at the level of complex-baseband (IQ) samples behind an interface in the style
 of a software-defined radio (SDR); (ii)~RIS configurations issued at run time by an external controller and
 applied at an explicit, logged sample; (iii)~per-state responses imported from
@@ -62,8 +62,8 @@ both the requested and the applied sample are logged. The paper makes four contr
   \claim{C-CONTRIB-4}At the sample level, in lockstep with an in-process controller and a
   modelled command latency: what a reconfiguration inside a packet does to the symbols, and
   when timestamped commands, commands applied on arrival and switching on a free-running
-  timer lose packets. On the coefficient path, which agrees with the sample level within the
-  pre-specified tolerance: the time scale on which signaling delay erodes position-driven
+  timer lose packets. On channel coefficients (for E-A an offline evaluator that agrees with
+  sample-level runs within the pre-specified tolerance): the time scale on which signaling delay erodes position-driven
   binary control in a blocked corridor, and a non-ideality ablation. Appendix~\ref{app:cases} adds a model-based
   dimensioning of an FM-band surface.
 \item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
@@ -83,8 +83,8 @@ both the requested and the applied sample are logged. The paper makes four contr
 
 \emph{Scope.} \claim{C-SCOPE}\sremu{} is not a UHD drop-in: it offers a UHD-shaped API, and
 virtual-USRP emulation is a separate line of work~\cite{Gurses2026ACHEM}. It is not a
-hard-real-time emulator, not a ray tracer, and not a model of mutual coupling, which enters
-solely through measured or simulated per-configuration tables~\cite{ETSI_GR_RIS003_v121}.
+hard-real-time emulator, not a ray tracer, and not a model of mutual coupling beyond what
+per-state tables measured with identical neighbours contain~\cite{ETSI_GR_RIS003_v121}.
 Fields are scalar and co-polar, RIS paths are single-bounce, and wall reflections are of
 order one. Paced-mode timing is measured and reported per platform, never assumed.
 Appendices~\ref{app:survey}--\ref{app:cases}, after the references, extend

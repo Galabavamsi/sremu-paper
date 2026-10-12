@@ -46,8 +46,11 @@
   \draw[flow] (s5.west) -- ++(-0.22,0) |- (s1.west);
 
   % ================================================================ (b) command lifecycle
+  % Panel (b) is shifted 0.40 cm left (into the gap after panel (a)) and its right half 0.35 cm
+  % right, so that the set_config label of the barrier fits left of the divider.
+  \begin{scope}[xshift=-0.40cm]
   \node[anchor=north west, inner sep=0pt] at (6.95,0) {\figtitle (b)};
-  \def\xl{9.00}  \def\xr{18.10}
+  \def\xl{9.00}  \def\xr{18.50}
   \def\yC{-0.95} \def\yR{-2.55} \def\yA{-4.25} \def\yB{-5.95}
   \node[note, anchor=east, align=right] at (8.90,\yC) {Controller};
   \node[note, anchor=east, align=right] at (8.90,\yR) {RIS (time $t$)};
@@ -57,27 +60,32 @@
   % samples already computed: before the barrier decides, and before the late command
   \fill[okSky!32] (\xl,\yA-0.17) rectangle (10.60,\yA+0.17);
   \fill[okSky!32] (\xl,\yB-0.17) rectangle (10.60,\yB+0.17);
+  \begin{scope}[xshift=0.35cm]
   \fill[okSky!32] (13.70,\yA-0.17) rectangle (16.45,\yA+0.17);
   \fill[okSky!32] (13.70,\yB-0.17) rectangle (16.00,\yB+0.17);
+  \end{scope}
   % observation window [t_b - W, t_b)
   \fill[pattern=north east lines, pattern color=okBlue] (9.30,\yA-0.17) rectangle (9.85,\yA+0.17);
   \fill[pattern=north east lines, pattern color=okBlue] (9.30,\yB-0.17) rectangle (9.85,\yB+0.17);
   \foreach \y in {\yR,\yA,\yB} { \draw[lane, ->] (\xl,\y) -- (\xr,\y); }
   \draw[lane] (\xl,\yC) -- (\xr,\yC);
-  \draw[lane, densely dotted] (13.35,0.0) -- (13.35,-7.25);
+  \draw[lane, densely dotted] (13.70,0.0) -- (13.70,-7.25);
 
   % ---- barrier of a registered controller (lockstep)
   \node[note, anchor=north west] at (9.05,-0.12) {registered controller, barrier at $t_b$};
   \draw (9.85,\yR+0.08) -- (9.85,\yR-0.08) node[below=-1pt] {$t_b$};
-  \draw (10.60,\yR+0.08) -- (10.60,\yR-0.08) node[below=-1pt] {$t_b{+}L_{\min}$};
+  % t_b + L_min is labelled above the axis, t_sw below it, so the two labels cannot collide
+  \draw (10.60,\yR-0.08) -- (10.60,\yR+0.08) node[above=-1pt] {$t_b{+}L_{\min}$};
   \draw (11.40,\yR+0.08) -- (11.40,\yR-0.08) node[anchor=north east, inner sep=1pt] {$t_{\mathrm{sw}}$};
   \draw[densely dashed, okBlack!60] (10.60,\yR-0.45) -- (10.60,\yB-0.17);
   \node[note, anchor=south, align=center] at (9.57,\yA+0.24) {observation\\ window};
   \node[note, anchor=north, align=center] at (9.80,\yB-0.24) {computed before\\ the barrier runs};
   \draw[ctrl] (9.85,\yR+0.08) -- node[left, note, pos=0.5] {\texttt{ctrl.barrier}} (10.05,\yC-0.20);
   \node[box, fill=okSky!18, inner sep=2pt] (dec) at (10.65,\yC) {decide};
-  \draw[ctrl] (11.25,\yC-0.20) -- node[right, note, pos=0.45, align=left]
-    {\texttt{ris.set\_config} at\\ $t_b{+}L$, then \texttt{ctrl.ack}} (11.40,\yR+0.08);
+  % the action takes effect at t_sw = t_b + max(latency, L_min) (sremu.engine.barriers)
+  \draw[ctrl] (11.25,\yC-0.20) -- (11.40,\yR+0.08);
+  \node[note, anchor=north west, align=left] at (11.55,\yC-0.28)
+    {\texttt{ris.set\_config}\\ at $t_{\mathrm{sw}}\ge t_b{+}L_{\min}$,\\ then \texttt{ctrl.ack}};
   \draw[okBlack!70, ->] (11.40,\yR) -- (11.55,\yA+0.17);
   \draw[okBlack!70, ->] (11.40,\yR) -- (12.30,\yB+0.17);
   \fill[okVermillion] (11.55,\yA) circle (2.4pt);
@@ -87,14 +95,16 @@
   \node[note, anchor=north, align=center] at (12.25,\yB-0.24) {lateness $0$\\ on every RX};
 
   % ---- late command of an unregistered source (apply_on_arrival)
+  \begin{scope}[xshift=0.35cm]
   \node[note, anchor=north west] at (13.45,-0.12) {unregistered client, late command};
   \node[box, fill=okSky!18, inner sep=2pt] (cl) at (14.55,\yC) {\texttt{ris.set\_config} at $t_{\mathrm{req}}$};
   \draw[ctrl] (14.55,\yC-0.20) -- (14.55,\yR+0.08);
   \draw (14.55,\yR+0.08) -- (14.55,\yR-0.08) node[anchor=north east, inner sep=1pt] {$t_{\mathrm{req}}$};
   \draw (16.30,\yR+0.08) -- (16.30,\yR-0.08);
   \node[anchor=south] at (16.30,\yR+0.06) {$t'$};
-  \node[note, anchor=west, align=left] at (15.05,-1.72)
-    {$t'=\max_r\bigl(\mathrm{frontier}_r/f_r$\\ $\qquad\qquad{}-\tau_r\bigr)$};
+  % on one line, right-aligned to the edge of the panel
+  \node[note, anchor=east] at (18.15,-1.72)
+    {$t'=\max_r\bigl(\mathrm{frontier}_r/f_r-\tau_r\bigr)$};
   \draw[okBlack!70, ->] (14.55,\yR) -- (14.70,\yA+0.17);
   \draw[okBlack!70, ->] (14.55,\yR) -- (15.45,\yB+0.17);
   \draw[okBlack!70, ->] (16.30,\yR) -- (16.45,\yA+0.17);
@@ -109,6 +119,7 @@
   \draw[decorate, decoration={brace, amplitude=3pt, mirror}] (15.45,\yB-0.24) -- (17.20,\yB-0.24)
     node[midway, below=3pt, note, align=center]
     {lateness $k_{\mathrm{applied}}-k_{\mathrm{req}}$,\\ status \texttt{late\_applied}};
+  \end{scope}
 
   % ---- legend of panel (b)
   \def\yL{-7.85}
@@ -118,5 +129,6 @@
   \node[note, anchor=west] at (12.30,\yL) {applied sample $k_{\mathrm{applied}}$};
   \fill[okSky!32] (15.10,\yL-0.12) rectangle (15.55,\yL+0.12);
   \node[note, anchor=west] at (15.60,\yL) {computed samples};
+  \end{scope}
 \end{tikzpicture}
 \end{document}

@@ -50,12 +50,31 @@ patches for larger cells.
 \input{generated/tables/tableA_tang}
 \claim{C-ABS-TANG}Table~\ref{tab:tang} breaks the comparison of Section~\ref{sec:vv-tang} down
 by geometry: the digitized measurements of Tang et al.\ (DIG) against the emulator with the
-reported link budget (REPORTED).
+reported link budget (REPORTED). The largest difference is \numTangMeasMaxDb~dB and the
+per-geometry means span \numTangPanelBiasMinDb--\numTangPanelBiasMaxDb~dB; the published model,
+too, lies below every measured point. Since K1 equals Tang et al.'s model for one point per
+cell, the table characterizes that model class against their chamber data; it does not test
+reconfiguration, steering or timing. The extraction reads the plotted vertices and marker
+centres of Fig.~10 of the arXiv version 2101.08607v2 of~\cite{Tang2022mmWave}, so its error is
+that of the axis calibration, which the curve agreement bounds; the distances carry a constant
+calibration offset of a few millimetres, removed by snapping them to the nominal grid. The
+source states no measurement uncertainty, and the points of one geometry are not independent.
+We do not fit away the constant part of the error. It may come from the reported link-budget
+terms or from the reported amplitude of the coding state, $|\Gamma|=\numTangGammaMag$: a unit
+amplitude would raise the model by \numTangGammaLossDb~dB~\cite{Tang2022mmWave}.
 
 \subsection{Laboratory consistency check: protocol and outcome}
-\claim{C-LAB-DATA}The geometry of the laboratory measurement was not recorded to the precision
-a model needs: the distance from the transmitter to the tiles, the angular span of the tiles,
-the cell type and the measurement positions are known within ranges.
+\claim{C-LAB-DATA}The authors measured the map with two Ettus B200 radios and vertical whip
+antennas in front of six binary tiles fabricated by their group, whose RIS hardware includes
+the switched unit cells of~\cite{Khan2025INDICON}. The map and the two state phases of
+Section~\ref{sec:vv-lab} appeared in the authors' unpublished ANTS 2025 conference
+submission, which drew a qualitative validation claim from the map; this study digitized that
+colour map, the form in which the measurement was available to it, and its pre-specified null
+result supersedes that claim. The geometry of the measurement was not recorded to the
+precision a model needs: the distance from the transmitter to the tiles, the angular span of
+the tiles, the cell type (whether the tiles use the cell of~\cite{Khan2025INDICON} was not
+recorded, so the prior covers it and a square half-wavelength cell) and the measurement
+positions are known within ranges.
 \claim{C-LAB-PRESPEC}The five models of the plan are line of sight alone (M0),
 a log-distance fit that also fits its exponent (M0n), a uniform mirror (M1), the laboratory configuration (M2) and M2 with
 a floor (M3). The offsets are fitted on three rings (\numLabTrainCells{} cells) and scored on
@@ -67,7 +86,10 @@ explains spatial structure) needs a median RMSE gain of M2 over M0 of at least
 \numLabCtwoMinDb~dB, a paired-bootstrap interval that excludes zero in at least
 \numLabCtwoCiFracPct~\% of the draws, and a Spearman correlation of at least
 \numLabCtwoRhoMin{} whose interval excludes zero. C3 is C2 with M1 in place of M0.
-The hash was committed to the emulator repository (commit \txtLabLockCommit) and pushed on
+The plan followed a descriptive inspection of the map: the cell grid, the per-cell
+digitization uncertainty, the two cells pinned to the colour scale, the mean and spread of
+each ring and a log-distance fit to all cells were known when it was written, but no RIS model
+had been fitted to the data. The hash was committed to the emulator repository (commit \txtLabLockCommit) and pushed on
 \txtLabLockDate; GitHub's server-side push log,
 exported later, records that push (Appendix~\ref{app:provenance}). Two commits followed: an
 option of the run script that names the columns of the measured file, and a test change

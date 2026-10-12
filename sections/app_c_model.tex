@@ -17,7 +17,16 @@ default; the identifiers refer to Section~\ref{sec:vv} and Appendix~\ref{app:vv}
 and two-dimensional random waypoint~\cite{Bettstetter2003RWP} with keyed legs, a cubic-spline
 trace, or timed updates from a client, so positions never depend on an update grid. Tables
 without angle dependence use a separable form of
-the coefficient tensor. Channel coefficients are dimensionless and normalized as in the Friis
+the coefficient tensor. Tables with angle dependence are cuts in one plane of incidence: a
+direction $\mathbf d$ from a cell enters as the signed angle
+$\mathrm{atan2}(\mathbf d\cdot\mathbf u,\mathbf d\cdot\mathbf n)$ in the plane of the panel
+normal $\mathbf n$ and its axis $\mathbf u$, and its component along the other axis is
+projected out (a panel option refuses off-plane geometry instead), while the obliquity and the
+front-side indicator of K1 use the full cosines. Tables of the incidence angle alone,
+$g(\theta)$, enter through the reciprocal extension $\Gamma(\theta_i,\theta_s)=g(|\theta_i-\theta_s|/2)$, an engineering choice (ENG). A table is read
+at the carrier of the link (linear in frequency between its grid points) and held over the
+signal's band, which may not exceed the table's validity bandwidth; there is no $\Gamma$ filter.
+No measured angle-dependent table is used in this paper. Channel coefficients are dimensionless and normalized as in the Friis
 equation, $P_R=P_T|h|^2$, with antenna gains inside $h$. The complex baseband signal $x(t)$
 of a carrier $f_c$ is $s(t)=\sqrt2\,\mathrm{Re}\{x(t)e^{j2\pi f_ct}\}$, and a path with delay
 $\tau$ maps $x(t)$ to $a\,x(t-\tau)\,e^{-j2\pi f_c\tau}$.
@@ -27,8 +36,10 @@ $\tau$ maps $x(t)$ to $a\,x(t-\tau)\,e^{-j2\pi f_c\tau}$.
 pattern with peak gain $2(\alpha+1)$, or a tabulated pattern with provenance) and an explicit
 visibility factor $V$: zero behind an opaque occluder, $10^{-L/20}$ through a partition with
 transmission loss $L$~dB (an engineering choice), or the Fresnel knife-edge factor $F(\nu)$
-of one edge, which keeps its phase and adds coherently to the RIS paths. Scenario names
-never imply blockage. Optional mechanisms add a flat-ground image path with Fresnel
+of one edge, which keeps its phase and adds coherently to the RIS paths. Occluders and
+partitions act on the LOS path and on the ground and wall images, never on a RIS hop, so a
+blocked scenario whose occluder also crosses RIS hops is idealized (Appendix~\ref{app:cases}).
+Scenario names never imply blockage. Optional mechanisms add a flat-ground image path with Fresnel
 coefficients, image expansion of the two RIS hops over that ground, order-one images in
 finite walls and an additive diffuse term (Table~\ref{tab:modelcard}).
 
@@ -40,7 +51,11 @@ three wavelengths, where the point-scatterer approximation weakens, and rejects 
 below one wavelength. With the default obliquity the scattered power of a passive panel does
 not exceed the power it intercepts in any tested configuration (PH-23); the alternative obliquity
 $(\cos\theta_i+\cos\theta_s)/2$ can exceed it for anomalous reflection and therefore
-emits a validity warning when selected.
+emits a validity warning when selected. With that Kirchhoff obliquity K1 is the
+physical-optics integral of the aperture; with the default it is an area-tied aperture kernel
+whose obliquity follows the measured cosine pattern, and both agree at specular reflection.
+The continuous physical-optics reference of Fig.~\ref{fig:F3}(a) integrates the same kernel
+with the default obliquity.
 
 \claim{C-CELL-MODEL}Forcing \texttt{point} on cells larger than the \texttt{auto} threshold
 emits a warning, and tables whose measurement already contains the cell pattern force
@@ -52,6 +67,25 @@ representative links at sub-cell size $\Delta$ and at $\Delta/2$, halves $\Delta
 \numRichardsonHalvings{} times while the change exceeds \numRichardsonTolDb~dB, and fails
 otherwise; the accepted size and the estimate go to the manifest.
 
+\claim{C-CELL-MODEL}The laboratory pitch of \numLabPitchMm~mm lies \numLabPitchMarginMm~mm
+(\numLabPitchMarginPct~\%) below half a wavelength at \numLabFreqGHz~GHz, so \texttt{auto}
+resolves to \texttt{point} in E-B, in the laboratory-like geometry of E-C and in E-E, whose
+cells have the same pitch; the synthetic panel of E-C has a pitch of exactly half a
+wavelength, which \texttt{auto} also resolves to \texttt{point}. E-A sets \texttt{point} on its
+quarter-wavelength cells, the geometries of Tang et al.\ and E-D resolve to it, and the
+laboratory check draws \texttt{point} and \texttt{po\_patch} with equal prior weight. Forcing \texttt{po\_patch} on every panel of E-B and of the E-C laboratory
+geometry (coefficient level; record in Appendix~\ref{app:provenance}) lowers the RIS power by
+\numCellSensRisMinDb--\numCellSensRisMaxDb~dB. The exact optima of E-B change in at most
+\numCellSensCfgPct~\% of the cells, and the \texttt{point} optimum loses at most
+\numCellSensDeployLossDb~dB under \texttt{po\_patch}; the change of RX1's channel at the E-B1
+switch moves by at most \numCellSensSwitchMaxDb~dB, the most with the line of sight present;
+and the E-C losses relative to continuous phase move by at most \numCellSensEcMaxDb~dB. In the
+laboratory check the paired M2 predictions of the two models differ by a median of at most
+\numLabCmMedianMaxDb~dB per ring (95th percentile at most \numLabCmQninetyfiveMaxDb~dB). For a
+single half-wavelength cell at \numCellRetroAngleB$^\circ$ or wider retro-reflection the
+default Richardson check does not converge from sub-cells of \numSubcellMax$\lambda$ and fails,
+so the value quoted in Section~\ref{sec:model-cells} comes from a finer start.
+
 \claim{C-NONIDEAL}A command (state indices, phases or a codebook entry) is expanded from
 controls to physical cells by the panel's control granularity. Stuck and dead cells follow a
 failure map, and dead cells absorb by default. The efficiency factor scales the amplitude by
@@ -62,7 +96,8 @@ Section~\ref{sec:design-time} acts in time.
 \claim{C-OPTIMUM}For a direction $\theta$ the best per-element choice is
 $s_n(\theta)=\arg\max_s\mathrm{Re}\{Z[s,n]e^{-j\theta}\}$; it can change at the critical
 angles $\arg(Z[a,n]-Z[b,n])\pm\pi/2$ and nowhere else, and the optimum is the choice at the
-direction of the optimal sum, which the sweep over the sorted critical angles finds.
+direction of the optimal sum, which the sweep over the sorted critical angles finds in
+$O(S^2N\log(S^2N))$ operations for $S$ states and $N$ cells.
 
 \subsection{Interpolation bound and fractional delay}
 % channel/interp.py (EPS_REL split D1, t_curv_s, tile_side_max_m, choose_policy, M_MAX,
@@ -108,7 +143,8 @@ enough for the half-sample error, $\pi B/(2f_s)$, to stay below \numIntegerDelay
 
 \claim{C-NOISE}The thermal noise is complex Gaussian. \claim{C-RNG}Random keys are derived with
 a BLAKE2b hash of the seed, purpose and name, and the counter-based Philox4x32-10
-generator~\cite{Salmon2011Philox} takes the absolute index as its counter. Further
+generator~\cite{Salmon2011Philox} takes the absolute index (sample or step) as its counter,
+so the compiled and reference backends produce identical integer streams (RT-14). Further
 impairments are carrier-frequency offsets of TX and RX oscillators,
 computed as phases of the absolute sample index (RT-09), Wiener phase noise with keyed
 increments, and a front end with full-scale mapping, gain and optional clipping.
@@ -118,5 +154,5 @@ increments, and a front end with full-scale mapping, gain and optional clipping.
 % code: sremu/ml/env.py accepts backend="batch" and raises for the IQ backends).
 \input{sections/tables/table_limitations}
 \claim{C-LIMITS}Table~\ref{tab:limitations} lists what the current release does not model or
-provide, and what it offers instead; Section~\ref{sec:disc-limits} names the three limits that
+provide, and what it offers instead; Section~\ref{sec:disc-limits} names the four limits that
 matter most for reading the results of this paper.

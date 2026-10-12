@@ -41,29 +41,40 @@ PACED = f"{B4}/paced/paced.json"
 SUMMARY4 = f"{B4}/paced/summary.json"
 META4 = f"{B4}/meta.json"
 
-# (a) CCDF series: (series key, L, label, colour, line style)
+# Labels name the page duration that ran (page samples / sample rate, read from points.csv)
+# in microseconds, the unit of Section VI, not the page target of the series key.
+# (a) CCDF series: (series key, L, label prefix, colour, line style)
 CCDF = (
-    ("fs1e6_page5e-4_N240_R1_F1", 1, "1 MS/s, 0.51 ms pages, $L$=1", fc.OI["blue"], "-"),
-    ("fs1e6_page1e-3_N240_R1_F1", 8, "1 MS/s, 1.02 ms pages, $L$=8", fc.OI["green"], "-"),
-    ("fs23.04e6_page1e-3_N240_R1_F1", 1, "23.04 MS/s, 0.71 ms pages, $L$=1", fc.OI["orange"],
-     "-"),
-    ("fs1e6_page5e-4_N240_R1_F3", 1, "mobility (F3), 0.51 ms, $L$=1", fc.OI["vermillion"],
-     "--"),
-    ("fs1e5_page1e-3_N240_R1_F1", 1, "0.1 MS/s, 1.28 ms pages, $L$=1", fc.OI["purple"], "--"),
+    ("fs1e6_page5e-4_N240_R1_F1", 1, "", fc.OI["blue"], "-"),
+    ("fs1e6_page1e-3_N240_R1_F1", 8, "", fc.OI["green"], "-"),
+    ("fs23.04e6_page1e-3_N240_R1_F1", 1, "", fc.OI["orange"], "-"),
+    ("fs1e6_page5e-4_N240_R1_F3", 1, "mobility (F3), ", fc.OI["vermillion"], "--"),
+    ("fs1e5_page1e-3_N240_R1_F1", 1, "", fc.OI["purple"], "--"),
 )
-# (b) configurations in plan order: (series key, label)
+# (b) configurations in plan order: (series key, label prefix; None: the sample rate)
 CONFIGS = (
-    ("fs1e6_page5e-4_N240_R1_F1", "1 MS/s, 0.5 ms"),
-    ("fs1e6_page1e-3_N240_R1_F1", "1 MS/s, 1 ms"),
-    ("fs1e6_page2.5e-4_N240_R1_F1", "1 MS/s, 0.25 ms"),
-    ("fs5.76e6_page5e-4_N240_R1_F1", "5.76 MS/s, 0.5 ms"),
-    ("fs23.04e6_page1e-3_N240_R1_F1", "23.04 MS/s, 1 ms"),
-    ("fs1e6_page5e-4_N4096_R1_F1", "$N$ = 4096, 0.5 ms"),
-    ("fs1e6_page5e-4_N240_R4_F1", "four surfaces, 0.5 ms"),
-    ("fs1e6_page5e-4_N240_R1_F3", "mobility (F3), 0.5 ms"),
-    ("fs1e5_page1e-3_N240_R1_F1", "0.1 MS/s, 1 ms"),
+    ("fs1e6_page5e-4_N240_R1_F1", None),
+    ("fs1e6_page1e-3_N240_R1_F1", None),
+    ("fs1e6_page2.5e-4_N240_R1_F1", None),
+    ("fs5.76e6_page5e-4_N240_R1_F1", None),
+    ("fs23.04e6_page1e-3_N240_R1_F1", None),
+    ("fs1e6_page5e-4_N4096_R1_F1", "$N$ = 4096"),
+    ("fs1e6_page5e-4_N240_R4_F1", "four surfaces"),
+    ("fs1e6_page5e-4_N240_R1_F3", "mobility (F3)"),
+    ("fs1e5_page1e-3_N240_R1_F1", None),
 )
+RATE_UNIT = "commands/s"  # command-rate unit of the caption and of Section VI
 PCT_CCDF = (("p50", 0.5), ("p95", 0.05), ("p99", 0.01), ("p999", 0.001))
+
+
+def series_page(pts: list[dict], key: str) -> tuple[str, str]:
+    """(sample-rate text, page-duration text in us) of a B3 series, from its points."""
+    found = {(r["rate_sps"], r["page"]) for r in pts if r["series"] == key}
+    if len(found) != 1:
+        raise SystemExit(f"F8: series {key} has {len(found)} (rate, page) pairs")
+    rate, page = found.pop()
+    fs = float(rate)
+    return f"{fs / 1e6:g} MS/s", f"{int(page) / fs * 1e6:.0f} $\\mu$s"
 
 
 def _hist_ccdf(hists: list[dict]) -> tuple[list[float], list[float], int]:
@@ -114,7 +125,9 @@ def main(argv: list[str] | None = None) -> int:
     ax_b, ax_c, ax_d = (fig.add_subplot(gs[1, k]) for k in range(3))
 
     # (a) miss rate vs slack = page-latency CCDF
-    for key, L, lab, col, ls in CCDF:
+    for key, L, prefix, col, ls in CCDF:
+        rate_txt, page_txt = series_page(pts, key)
+        lab = f"{prefix}{rate_txt}, {page_txt} pages, $L$ = {L}"
         ids = [r["point_id"] for r in pts if r["series"] == key and int(r["L"]) == L]
         if not ids:
             raise SystemExit(f"F8: no B3 point {key} L={L}")
@@ -128,7 +141,7 @@ def main(argv: list[str] | None = None) -> int:
         xs = [r["page_latency_us"][p] / 1e3 for p, _ in PCT_CCDF]
         ys = [q for _, q in PCT_CCDF]
         ax_a.plot(xs, ys, ls="", marker="x", ms=3.5, mew=0.8, color=fc.OI["black"],
-                  label="served, 2 links, 10 cmd/s" if k == 0 else None)
+                  label=f"served, 2 links, 10 {RATE_UNIT}" if k == 0 else None)
         for (p, q), x in zip(PCT_CCDF, xs, strict=True):
             rows.add("a", "served B4 page latency percentile (10 Hz)", "MEAS", "slack_ms", x,
                      "miss_rate", q, note=f"{r['mode']} rep {r['rep']} {p}")
@@ -159,7 +172,11 @@ def main(argv: list[str] | None = None) -> int:
                  f"worst p99 {best['worst_p99_latency_us']} us; worst miss rate at 1 ms "
                  f"{best['worst_miss_rate_1ms']}")
     ax_b.set_yticks(yy)
-    ax_b.set_yticklabels([lab for _, lab in CONFIGS])
+    b_labels = []
+    for key, prefix in CONFIGS:
+        rate_txt, page_txt = series_page(pts, key)
+        b_labels.append(f"{prefix or rate_txt}, {page_txt}")
+    ax_b.set_yticklabels(b_labels)
     ax_b.set_ylim(len(CONFIGS) - 0.5, -0.5)
     ax_b.set_xscale("log", base=2)
     ax_b.set_xticks([0.5, 1, 2, 4, 8])
@@ -186,48 +203,77 @@ def main(argv: list[str] | None = None) -> int:
                      "worst of 3 reps")
         ax_c.plot(rates, ys, color=col, ls=ls, marker=mk, ms=3, lw=1.0,
                   label=f"{mode}, {'median' if p == 'p50' else 'p99'}")
-    ax_c.axvspan(700, 14000, color=fc.OI["grey"], alpha=0.15, lw=0)
-    ax_c.text(3000, 0.65, "engine-bound", ha="center", va="bottom")
+    # shaded: rates at which the engine is backlogged (the runs' engine_bound flag)
+    bound = sorted({r["rate_hz"] for r in paced if r["engine_bound"]})
+    if bound and any(r["rate_hz"] >= bound[0] and not r["engine_bound"] for r in paced):
+        raise SystemExit("F8: engine_bound is not monotone in the command rate")
+    shade_lo = bound[0] / 10 ** 0.15 if bound else None
+    if shade_lo is not None:
+        ax_c.axvspan(shade_lo, 14000, color=fc.OI["grey"], alpha=0.15, lw=0)
+        # two lines, so that the label stays inside the band and the axes
+        ax_c.text((shade_lo * 14000) ** 0.5, 80, "engine-\nbound", ha="center", va="center",
+                  linespacing=1.0)
     ax_c.axhline(2.0, color=fc.OI["grey"], lw=0.8, ls=":")
-    ax_c.text(500, 1.75, "2 ms lead", color=fc.OI["grey"], va="top", ha="right")
+    ax_c.text(8, 1.62, "2 ms lead", color=fc.OI["black"], va="top", ha="left")
     ax_c.set_xscale("log")
     ax_c.set_yscale("log")
     ax_c.set_xlim(7, 14000)
     ax_c.set_ylim(0.5, 3e4)
-    ax_c.set_xlabel("requested command rate (Hz)")
+    ax_c.set_xlabel(f"requested command rate ({RATE_UNIT})")
     ax_c.set_ylabel("visible command latency (ms)")
-    ax_c.legend(loc="center left", bbox_to_anchor=(0.0, 0.6), fontsize=fc.FONT_PT,
-                handlelength=1.8, labelspacing=0.12)
-    fc.panel_label(ax_c, "(c)")
+    # legend in the empty upper-left corner, kept narrow: colour = mode, line style = statistic
+    from matplotlib.lines import Line2D
 
-    # (d) late timed commands and pages missing the 1 ms deadline
-    for name, col, mk, fn, sel in (
-            ("timed commands applied late", fc.OI["orange"], "s",
-             lambda r: r["status"].get("late_applied", 0) / r["commands"], "timed"),
-            ("pages missing 1 ms deadline", fc.OI["black"], "o",
-             lambda r: r["miss_rate"]["1ms"], None)):
-        med = []
+    c_handles = [Line2D([], [], color=fc.OI["blue"], marker="o", ms=3, lw=1.0, label="asap"),
+                 Line2D([], [], color=fc.OI["orange"], marker="s", ms=3, lw=1.0,
+                        label="timed"),
+                 Line2D([], [], color=fc.OI["black"], ls="-", lw=1.0, label="median"),
+                 Line2D([], [], color=fc.OI["black"], ls="--", lw=1.0, label="p99")]
+    ax_c.legend(handles=c_handles, loc="upper left", bbox_to_anchor=(0.0, 1.0),
+                fontsize=fc.FONT_PT, handlelength=1.6, labelspacing=0.12, borderaxespad=0.2)
+    fc.panel_label(ax_c, "(c)", x=0.86, y=0.10)
+
+    # (d) late timed commands and pages missing the 1 ms deadline. In a backlogged repetition
+    # (engine_bound) commands land in the engine's virtual future, so "applied late" is not
+    # meaningful there: those repetitions are drawn as grey crosses, outside the median line.
+    for name, legend, col, mk, fn, sel, needs_live in (
+            ("timed commands applied late", "timed commands late", fc.OI["orange"], "s",
+             lambda r: r["status"].get("late_applied", 0) / r["commands"], "timed", True),
+            ("pages missing 1 ms deadline", "pages missing deadline", fc.OI["black"],
+             "o", lambda r: r["miss_rate"]["1ms"], None, False)):
+        mx, med = [], []
         for f in rates:
-            vals = [fn(r) for r in paced if r["rate_hz"] == f and (sel is None
-                                                                    or r["mode"] == sel)]
-            med.append(statistics.median(vals))
-            ax_d.plot([f] * len(vals), vals, ls="", marker=mk, ms=2.5, color=col, alpha=0.6,
-                      mfc="none", mew=0.7)
-            for v in vals:
+            reps = [r for r in paced if r["rate_hz"] == f and (sel is None or r["mode"] == sel)]
+            ok = [fn(r) for r in reps if not (needs_live and r["engine_bound"])]
+            bad = [fn(r) for r in reps if needs_live and r["engine_bound"]]
+            if ok:
+                mx.append(f)
+                med.append(statistics.median(ok))
+                ax_d.plot([f] * len(ok), ok, ls="", marker=mk, ms=2.5, color=col, alpha=0.6,
+                          mfc="none", mew=0.7)
+            if bad:
+                ax_d.plot([f] * len(bad), bad, ls="", marker="x", ms=3.5, mew=0.8,
+                          color=fc.OI["grey"])
+            for v in ok:
                 rows.add("d", name, "MEAS", "rate_hz", f, "fraction", v, note="repetition")
-        ax_d.plot(rates, med, color=col, lw=1.0, marker=mk, ms=3, label=name)
-        if sel == "timed":
-            ax_d.text(40, 0.87, "late timed\ncommands", color=col, va="bottom", ha="center")
-        else:
-            ax_d.text(3200, 0.9, "pages missing\n1 ms deadline", color=col, va="top",
-                      ha="center")
-    ax_d.axvspan(700, 14000, color=fc.OI["grey"], alpha=0.15, lw=0)
+            for v in bad:
+                rows.add("d", name, "MEAS", "rate_hz", f, "fraction", v,
+                         note="repetition; engine backlogged: not meaningful, not drawn as data")
+        ax_d.plot(mx, med, color=col, lw=1.0, marker=mk, ms=3, label=legend)
+    if any(r["engine_bound"] for r in paced):
+        ax_d.plot([], [], ls="", marker="x", ms=3.5, mew=0.8, color=fc.OI["grey"],
+                  label="backlogged (invalid)")
+    if shade_lo is not None:
+        ax_d.axvspan(shade_lo, 14000, color=fc.OI["grey"], alpha=0.15, lw=0)
     ax_d.set_xscale("log")
     ax_d.set_xlim(7, 14000)
-    ax_d.set_ylim(-0.04, 1.15)
-    ax_d.set_xlabel("requested command rate (Hz)")
+    ax_d.set_ylim(-0.04, 1.62)
+    ax_d.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    ax_d.set_xlabel(f"requested command rate ({RATE_UNIT})")
     ax_d.set_ylabel("fraction")
-    fc.panel_label(ax_d, "(d)", y=0.12, x=0.84)
+    ax_d.legend(loc="upper left", bbox_to_anchor=(0.0, 1.0), fontsize=fc.FONT_PT,
+                handlelength=1.6, labelspacing=0.12, borderaxespad=0.2)
+    fc.panel_label(ax_d, "(d)", y=0.40, x=0.84)
 
     m3 = json.loads(fc.input_path(META3).read_text(encoding="utf-8"))
     m4 = json.loads(fc.input_path(META4).read_text(encoding="utf-8"))

@@ -36,21 +36,38 @@ failures.
 \claim{C-TEETH}Several guards have a negative-control twin: a test that runs a deliberately
 wrong variant and must reject it, for example a kernel without the factor $j$, a
 fractional-delay filter that is too short, or a replay that drops a command. A guard that accepts its wrong
-variant is broken. Section~\ref{sec:vv} and Appendix~\ref{app:vv} summarize every check with its tolerance and
-status as recorded in the test record of the pinned commit; a spec identifier counts as
+variant is broken. Section~\ref{sec:vv} and Appendix~\ref{app:vv} summarize every check with
+its status as recorded in the test record of commit \txtProvRegenCommit{}
+(Appendix~\ref{app:repro}); a spec identifier counts as
 passed when at least one of its implementation tests passed and none failed or was skipped,
 and the tests of the rendering path count once per backend.
 
+\claim{C-ID-TABLE}Tables~\ref{tab:ids-ph} and~\ref{tab:ids-rt} list every verification
+identifier cited in this paper with the property it checks, its oracle or reference and its
+tolerance. They are generated from a transcription that the pipeline checks against the
+emulator's specification, its table of oracle values and the docstrings of the tests that
+carry each identifier: a number found in none of them, an identifier cited without a row and
+an identifier that did not pass in the test record all stop the pipeline. The VA identifiers
+(VA-1, VA-3, VA-4 and VA-5, the complete list of the specification) are consistency checks between
+the engine's paths and run in the test record beside the four tiers.
+
+\input{generated/tables/tableA_ids}
+
 \section{Reproducibility}\label{app:repro}
+% The provenance table (first cited in this appendix) is input here rather than at the end of
+% Appendix I, so that the two-column float lands at the top of a page that still carries the
+% text of Appendices H and I instead of on its own last page.
+\input{generated/tables/tableA_provenance}
 \claim{C-REPRO}The paper is built from two repositories, the emulator and the paper, by a
-Python pipeline rather than by hand. The paper's lock file names the emulator commit. In the
+Python pipeline rather than by hand. The paper's lock file names the emulator commit that
+holds the results. In the
 emulator repository, \texttt{python tools/tasks.py paper-junit FILE} runs the test tiers and
 writes a test record with the commit and the state of the working tree. In the paper
 repository, the single command
-\texttt{python tools/build\_paper.py --mode final --profile full --junit FILE} then rebuilds
+\texttt{python tools/build\_paper.py -{}-mode final -{}-profile full -{}-junit FILE} then rebuilds
 every stale figure and table and compiles the paper. It refuses to produce a PDF unless the
 installed emulator is the locked commit, both working trees are clean, every identifier of
-both verification gates passed in a test record of that commit, every figure is current,
+both verification gates passed in a test record of the locked code, every figure is current,
 every number is a macro written by the pipeline and every claim is supported. A figure is
 current when its stored content key, a hash of the emulator commit, the sweep specification,
 the input files and the figure script, matches. The constants and defaults quoted in
@@ -62,6 +79,19 @@ build checks the lock commit, the test record and the figure content keys; the r
 themselves record the commit, tree state and host they were produced on, and
 Table~\ref{tab:provenance} lists them. Neither repository is public yet; the section Code and
 Data Availability states the conditions of their release.
+
+\claim{C-REPRO-RUNS}The results produced at emulator commit \txtProvRegenCommit{} from a clean
+tree are \txtProvRegenResults; all of them except benchmarks come from one regeneration job on
+an \txtProvRegenHost{} instance. The lock commit adds nothing but result files to
+\txtProvRegenCommit{}, so the two commits hold the same code. The other
+results keep the commit at which they were produced (Table~\ref{tab:provenance}):
+\txtProvOtherCommits. The benchmarks are measurements on dedicated hosts
+(Appendix~\ref{app:bench}) and run as separate jobs. V-LAB is not rerun, because its analysis
+plan is locked: it ran once, at \txtLabCodeCommit{} from a clean tree, on predictions computed
+before the lock. The regeneration job checked that at \txtProvRegenCommit{} the V-LAB protocol
+and analysis files are byte-identical to those of \txtLabCodeCommit{} and that the protocol
+hash still equals the lock; emulator modules that the analysis imports have changed since, so
+we do not claim that a rerun would reproduce it.
 
 \section{Data Provenance}\label{app:provenance}
 \claim{C-PROVENANCE}Every input and every figure carries data classes: MEAS (measured
@@ -75,11 +105,10 @@ the repositories with their hashes and provenance; data not yet cleared for publ
 read from a private location, and the tests that need them are skipped when it is absent.
 Response tables keep their own provenance (Section~\ref{sec:design-states}). The laboratory
 measurement of Section~\ref{sec:vv-lab} is a measurement collected by the authors and enters
-as a digitized map (DIG). Process records carry no physical quantity: GitHub's push log of
+as a digitized map (DIG); Appendix~\ref{app:vv} states its origin. Process records carry no
+physical quantity: GitHub's push log of
 the emulator repository, quoted in Section~\ref{sec:vv-lab}, is kept as an exported copy with
 its hash. Table~\ref{tab:provenance} lists the producing commit, tree state, host and date of
 every result. The digitized measurements of Tang et al.\ enter as DIG with the
 reported link budget (REPORTED); Appendix~\ref{app:tang} breaks their comparison with the
 emulator (Section~\ref{sec:vv-tang}) down by geometry.
-
-\input{generated/tables/tableA_provenance}

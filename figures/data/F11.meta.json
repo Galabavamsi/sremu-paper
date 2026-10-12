@@ -1,7 +1,7 @@
 {
   "figure": "F11",
   "title": "E-C non-ideality ablation: loss of the RIS term relative to ideal continuous phase across the lab-like, synthetic (near and far receiver) and corridor geometries",
-  "content_key": "211b8b2ef6845c0f307814f271b414b8e213b1606718023bc3e7baf76009cb1c",
+  "content_key": "0487c0bd569af3843a24689817903ceeee708d96807876c42ec23af6a7450c73",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -55,7 +55,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:35:11Z",
+  "generated_utc": "2026-10-12T01:15:49Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

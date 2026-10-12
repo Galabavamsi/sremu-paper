@@ -55,6 +55,15 @@ PRINTED_FIELDS = ("note", "howpublished", "title", "booktitle", "journal", "inst
 ORIGINS = ("source", "source+augmented", "new")
 
 
+def _identity(field: str, value: str | None) -> str | None:
+    """A field as it identifies the record. Braces in a title only protect letter case from
+    the bibliography style ('{5G}' prints as 5G, not 5g), so a case-protected title is the
+    same record as the verified source's unprotected one; every character else must match."""
+    if value is not None and field == "title":
+        return value.replace("{", "").replace("}", "")
+    return value
+
+
 def parse_verification_rows(md_text: str) -> dict[str, str]:
     """Key -> origin, from the 'Per-entry record' table of refs_verification.md."""
     _, _, tail = md_text.partition("## Per-entry record")
@@ -156,7 +165,7 @@ def check_refs(paper_root: Path = PAPER_ROOT) -> Report:
             continue
         for fld in COMPARED_FIELDS:
             a, b = e.fields.get(fld), src.fields.get(fld)
-            if b is not None and a != b:
+            if b is not None and _identity(fld, a) != _identity(fld, b):
                 rep.error(f"{key}: field {fld!r} differs from the verified source")
             if b is None and a is not None and origin == "source":
                 rep.error(f"{key}: field {fld!r} added to a 'source' entry (use source+augmented)")

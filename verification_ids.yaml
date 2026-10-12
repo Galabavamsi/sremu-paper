@@ -1,0 +1,347 @@
+# verification_ids.yaml -- one row per verification identifier of the paper (Appendix G,
+# Tables tab:ids-ph and tab:ids-rt, written by tools/vv_ids.py through gen_results.py).
+#
+# The facts come from the emulator, not from this file: sremu docs/DESIGN.md section 10 and
+# its lead amendments (every line that names the identifier), tests/oracles/tables.py (oracle
+# values and tolerances by spec id) and the docstrings of the test modules that carry the
+# identifier. tools/vv_ids.py refuses
+#   * a number in `property`, `oracle` or `tol` that appears in none of those sources,
+#   * an identifier cited anywhere in the paper text or tables without a row here,
+#   * a row whose identifier did not pass in the test record (rows marked
+#     `record: experimental` or `record: study` are outside the record by design),
+#   * the words legacy, v1 and v2 (framing D24).
+#
+# Fields: id; property; oracle (oracle or reference of the check); tol (acceptance);
+# optional tests (further sremu test modules whose docstrings are sources), refs (other
+# identifiers whose sources apply) and record (experimental | study).
+# Text: $...$ is LaTeX math; outside it 1e-12 is written 10^{-12}, +- is \pm, <= is \le,
+# >= is \ge, deg is a degree sign and % is escaped.
+ids:
+  # ---------------------------------------------------------------- PH: physics closed forms
+  - id: PH-01
+    property: Free-space line of sight (Friis)
+    oracle: "closed form: $-63.329$ dB at 3.5 GHz, 10 m; $-106.768$ dB at 100 MHz, 52 km"
+    tol: rel. 1e-12
+  - id: PH-02
+    property: Kernel K1 equals published forms (point cells)
+    oracle: "Tang et al. Eq. 12, ETSI far field with area gain, Ellingson"
+    tol: rel. 1e-12
+  - id: PH-03
+    property: "$N^2$ law of a focused far-field panel"
+    oracle: "Tang et al. Eq. 8: $N=100$, 400, 1600 at $\\lambda/2$, 2 km"
+    tol: "+-0.01 dB; slope 12.04 +-0.01 dB per $4\\times$"
+  - id: PH-04
+    property: Power invariant under aperture refinement
+    oracle: "1 m$^2$, 3.5 GHz: $-115.280$ dB far, any $N$; $-88.128$ dB near, converged patches"
+    tol: "+-0.01 dB far; +-0.10 dB near"
+  - id: PH-05
+    property: "Image theory and the Huygens factor $j$"
+    oracle: "40 deg plate of 12 m vs image; disk on axis vs closed form"
+    tol: "0.3 dB, 3 deg; 0.01 dB"
+  - id: PH-06
+    property: Monostatic radar cross section of a plate
+    oracle: "1 m$^2$ at 400 m: $-126.067$ dB"
+    tol: "+-0.01 dB"
+  - id: PH-07
+    property: Near-field focusing saturation, passivity
+    oracle: "$d=1$ m: $-23.864$ dB ($L=1$ m), $-6.021$ dB ($L\\to\\infty$); $|h|\\le 0.5$"
+    tol: "+-0.01 dB; bound exact"
+  - id: PH-08
+    property: Reciprocity of the full scene
+    oracle: LOS, ground, two walls, knife edge, RIS with a symmetric table
+    tol: rel. 1e-12
+  - id: PH-09
+    property: Visibility of the panel
+    oracle: node behind the panel
+    tol: RIS term exactly 0
+  - id: PH-10
+    property: Flat ground, Fresnel coefficients
+    oracle: "two-ray 139.10 dB (52 km, 100 MHz); Brewster angle 26.565 deg; PEC"
+    tol: "+-0.01 dB; 1e-12; exact"
+  - id: PH-11
+    property: "Single knife edge $F(\\nu)$"
+    oracle: "$|F(0)|=0.5$; approximation $J(\\nu)$ vs exact loss; $\\nu=10$: 32.95 dB"
+    tol: "1e-12; 0.15 dB; +-0.01 dB"
+  - id: PH-12
+    property: Smooth-earth P.526 path (experimental tier)
+    oracle: "regression: excess loss 37.14 and 20.28 dB at 52 km"
+    tol: "+-0.01 dB"
+    record: experimental
+  - id: PH-13
+    property: "Large-$N$ quantization loss"
+    oracle: "$\\eta(b)=-3.922$, $-0.912$, $-0.224$ dB; lab pair $-4.105$ dB; Monte Carlo"
+    tol: "+-0.001 dB; Monte Carlo +-0.15 dB"
+  - id: PH-14
+    property: Phase-dependent amplitude model
+    oracle: "$(\\beta_{\\min},\\alpha)=(0.2,1.6)$: $-5.508$ dB; $(0.8,1.6)$: $-1.085$ dB"
+    tol: "+-0.01 dB"
+  - id: PH-15
+    property: Efficiency and dead cells
+    oracle: "$\\eta=0.5$: $-3.0103$ dB; 10% dead cells, $N=1024$: $-0.915$ dB"
+    tol: "1e-9; +-0.10 dB"
+  - id: PH-16
+    property: Phase-wrap invariance
+    oracle: phases shifted by whole turns
+    tol: "$|\\Delta h|\\le$ 1e-15$\\,|h|$"
+  - id: PH-17
+    property: Geometric Doppler shift
+    oracle: "LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz"
+    tol: "1e-6 rad, +-0.001 Hz; +-0.01 Hz"
+  - id: PH-18
+    property: Snapshot interpolation and render tiles
+    oracle: brute force per element and sample, three scenes
+    tol: "$|\\Delta h|/|h|\\le$ 1e-3"
+  - id: PH-19
+    property: Invariance to snapshot period and chunking
+    oracle: "$T_u$ = auto, auto/2, auto/4; client chunks of 0.25, 1, 3.7 ms"
+    tol: "rel. 2e-3; chunks bitwise"
+  - id: PH-20
+    property: Fractional delay, wideband rendering
+    oracle: every filter row in band; known delay of 37.4 samples
+    tol: "<= $-60$ dB; 0.01 samples"
+  - id: PH-21
+    property: Thermal noise power, independence
+    oracle: "$-113.975$ dBm at 1 MS/s, $F=0$ dB; correlation across receivers"
+    tol: "+-0.05 dB; $|\\rho|\\le 0.016$"
+  - id: PH-22
+    property: Linearity, time shift, seeds
+    oracle: exact algebraic identities
+    tol: 1e-12
+  - id: PH-23
+    property: Energy bound of a panel
+    oracle: scattered vs incident power, every tested configuration
+    tol: scattered <= incident
+  - id: PH-24
+    property: Exact binary optimum
+    oracle: "brute force: $N=20$ ($2^{20}$ configurations), 100 positions"
+    tol: rel. 1e-12
+  - id: PH-25
+    property: "Binary decomposition $\\Gamma=m+ds$"
+    oracle: "decomposed vs direct; lab pair: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB"
+    tol: "1e-12; +-0.01 dB"
+  - id: PH-26
+    property: Point vs patch cell model
+    oracle: "$16\\times16$ panel, 3.5 GHz: specular; 45 deg retro, 8.11 dB in the far field"
+    tol: "0.05 dB; +-0.1 dB"
+  - id: PH-27
+    property: Occluders and partitions
+    oracle: "segment-polygon cases; partition of $L$ dB on the LOS"
+    tol: exact
+  - id: PH-28
+    property: Extension of incidence-angle tables
+    oracle: symmetry and specular entry of the extended table
+    tol: exact
+  - id: PH-29
+    property: General finite-alphabet optimum
+    oracle: "brute force: $S=4$, $N=10$, 50 instances"
+    tol: rel. 1e-12
+  - id: PH-30
+    property: Quantizer
+    oracle: per-element brute force, unequal amplitudes
+    tol: exact
+  - id: PH-31
+    property: Response-table validators
+    oracle: passivity, reciprocity, grid density, domain, provenance
+    tol: exact or raises
+  - id: PH-32
+    property: Ground on the RIS hops
+    oracle: "$\\Gamma_g=0$ gives the free-space term; four hop variants"
+    tol: 1e-12
+  # ---------------------------------------------------------------- G: MATLAB code-to-code
+  - id: G1
+    property: Per-element K1 sum
+    oracle: toolbox primitives; lab-like layouts, geometries of Tang et al.
+    tol: max. rel. 1e-9
+  - id: G2
+    property: Steered beam pattern
+    oracle: "phased.RISReflector, $16\\times16$ at $\\lambda/2$, constant removed"
+    tol: "+-0.5 deg; 0.05 dB"
+  - id: G3
+    property: One-bit beam pattern
+    oracle: "mirror lobe at 41.15 deg, $-0.97$ dB"
+    tol: "+-0.25 deg; +-0.10 dB"
+  - id: G4
+    property: Frequency offset
+    oracle: comm.PhaseFrequencyOffset, arbitrary chunk sizes
+    tol: 1e-9 of the RMS
+  - id: G5
+    property: Thermal noise
+    oracle: comm.ThermalNoise, 290 K, 1 MS/s
+    tol: "+-0.01 dB"
+  - id: G6
+    property: Fading statistics
+    oracle: comm.RayleighChannel autocorrelation and level crossings
+    tol: as ST-02
+  - id: G7
+    property: ETSI far-field closed form
+    oracle: focused panel at 100 MHz; physical-optics plate bound
+    tol: "1 dB; bound + 0.01 dB"
+  - id: G8
+    property: Two-ray channel
+    oracle: phased.TwoRayChannel at 52 km
+    tol: "+-0.05 dB"
+  # ---------------------------------------------------------------- RT: runtime
+  - id: RT-01
+    property: Exact sample counts
+    oracle: 5880 S/s, 23.04 and 30.72 MS/s together; awkward durations
+    tol: exact
+  - id: RT-02
+    property: Time round trips
+    oracle: "$k$ up to $2^{40}$ at three rates; property tests"
+    tol: exact
+  - id: RT-03
+    property: Invariance to chunks, epochs, barriers, threads
+    oracle: client chunks of 1, 7, 1000 samples; 1, 4, 16 threads
+    tol: bitwise
+  - id: RT-04
+    property: Page-size invariance
+    oracle: page targets of 0.25, 0.5, 1 ms
+    tol: rel. 1e-9
+  - id: RT-05
+    property: Switch sample of each receiver
+    oracle: "$\\mathrm{to\\_ticks}(t_{\\mathrm{sw}}+\\tau)$ for a receiver at 2 km, 23.04 MS/s"
+    tol: exact
+  - id: RT-06
+    property: Late commands
+    oracle: applied on arrival with logged lateness, or rejected
+    tol: exact
+  - id: RT-07
+    property: Same-time ties
+    oracle: later sequence number wins, both logged
+    tol: exact
+  - id: RT-08
+    property: Barrier determinism
+    oracle: controllers sleeping 0 vs 50 ms; random rates and periods
+    tol: bitwise; lateness 0
+  - id: RT-09
+    property: Oscillator-offset continuity
+    oracle: 500 Hz at 5880 S/s across block boundaries
+    tol: "+-1e-9 rad"
+  - id: RT-10
+    property: Skip invariance
+    oracle: receiver inactive for 0.3 s, then active
+    tol: bitwise
+  - id: RT-11
+    property: Known delay through the engine
+    oracle: 37.4 samples
+    tol: 0.01 samples
+  - id: RT-12
+    property: Reconfiguration transitions
+    oracle: "linear 20 $\\mu$s ramp; re-command during a transition"
+    tol: "1e-9; 1e-3"
+  - id: RT-13
+    property: Transmit commitment and stalls
+    oracle: end of burst, idle-until, stall report, zero fill
+    tol: as specified
+  - id: RT-14
+    property: Keyed random streams
+    oracle: an added node leaves other variates unchanged; two backends
+    tol: bitwise
+  - id: RT-15
+    property: Independence of the wall clock
+    oracle: static import check; patched clock
+    tol: identical output
+  - id: RT-16
+    property: Replay
+    oracle: recorded TX and commands reproduce the RX samples
+    tol: bitwise
+  - id: RT-17
+    property: Lookahead violation
+    oracle: "action earlier than $t_b+L_{\\min}$"
+    tol: error raised
+  - id: RT-18
+    property: Paced-mode counters
+    oracle: injected sleep load, late TX burst, unread RX stream
+    tol: exact counts
+  - id: RT-19
+    property: Backend equivalence through the engine
+    oracle: lab walk, vehicle and FM scenes
+    tol: "rel. 1e-9; RMS 1e-6"
+  # ---------------------------------------------------------------- IO: interfaces
+  - id: IO-01
+    property: Malformed frames and messages
+    oracle: "$10^4$ malformed frames; malformed JSON"
+    tol: no crash; exact counts
+  - id: IO-02
+    property: Two OS processes over native ZMQ
+    oracle: TX and RX processes vs in-process lockstep
+    tol: bitwise
+  - id: IO-03
+    property: Socket command at the exact sample
+    oracle: commands over the control socket in lockstep
+    tol: lateness 0
+  - id: IO-04
+    property: Size, element and bind limits
+    oracle: 1 MiB requests, 65,536 elements, loopback binds
+    tol: refused and counted
+  - id: IO-05
+    property: SigMF recordings
+    oracle: required keys, annotation order, collection hashes
+    tol: pass
+  - id: IO-06
+    property: API status codes
+    oracle: timeout, overflow, late command, time and sequence errors
+    tol: exact
+  - id: IO-07
+    property: Compatibility wrappers
+    oracle: in-house BPSK scripts through the wrapper calls
+    tol: 2389 samples, exact
+  - id: IO-08
+    property: Raw request-reply mode
+    oracle: stub peers, both request formats
+    tol: sample-exact in lockstep
+  # ---------------------------------------------------------------- ST: statistical
+  - id: ST-01
+    property: Random-waypoint law
+    oracle: "$l=10$ m, $v=1$ m/s, $10^4$ periods vs stationary law"
+    tol: "KS $D\\le 0.02$; mean leg +-2.5%"
+  - id: ST-02
+    property: Diffuse fading statistics
+    oracle: "$f_D=50$ Hz: autocorrelation vs $J_0$; level crossings"
+    tol: "0.05; 10%; KS 0.01"
+  - id: ST-03
+    property: Quantization and failure Monte Carlo
+    oracle: as PH-13 and PH-15, more trials
+    tol: "+-0.15 dB; +-0.10 dB"
+    refs: [PH-13, PH-15]
+  - id: ST-04
+    property: BER through the emulator
+    oracle: "BPSK, QPSK: 6 points, >= 100 errors or $2\\times10^6$ bits"
+    tol: theory inside 99% interval
+  - id: ST-05
+    property: "Frequency estimator vs Cram\\'er--Rao bound"
+    oracle: periodogram at 10 and 20 dB SNR
+    tol: RMSE <= 1.5 bound
+  # ---------------------------------------------------------------- VA: engine-path consistency
+  - id: VA-1
+    property: Served IQ path vs batch evaluation (E-A)
+    oracle: external controller and RX application, 1000 s runs
+    tol: 0.02 dB, noise off; CI, noise on
+  - id: VA-3
+    property: Exhaustive optimum bounds every controller
+    oracle: "$N=20$ ($2^{20}$ configurations), 29 positions"
+    tol: rel. 1e-12
+  - id: VA-4
+    property: IQ path equals batch path
+    oracle: static lab-like scene, noise off, no signaling delay
+    tol: rel. 1e-9
+  - id: VA-5
+    property: Sample-exact intra-frame switch
+    oracle: earliest affected sample; earlier samples vs no switch
+    tol: exact; bitwise
+  # ---------------------------------------------------------------- V-CFO: frequency-offset study
+  - id: V-CFO-1
+    property: Frequency offset, noise off
+    oracle: "BPSK burst of 2389 samples at 5880 S/s, offsets to $\\pm1400$ Hz"
+    tol: 1e-6 Hz; epochs identical
+    tests: [tests/runtime/test_vcfo_engine.py]
+  - id: V-CFO-3
+    property: Same sweep, two OS processes over ZMQ
+    oracle: unwrapped-phase estimator; output vs V-CFO-1
+    tol: "slope 1 +-0.002, $|$intercept$|<2$ Hz; bitwise"
+    tests: [tests/integration/test_vcfo3_two_process.py]
+  - id: V-CFO-4
+    property: Frequency estimator with physical noise
+    oracle: SNR 0, 10, 20 dB; 200 trials at 7 offsets
+    tol: RMSE <= 1.5 bound at 10, 20 dB
+    record: study

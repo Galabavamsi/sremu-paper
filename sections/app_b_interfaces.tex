@@ -12,7 +12,7 @@ them.
 \centering
 \sremufigure{F1}{\columnwidth}{Architecture of \sremu{}. Applications and controllers are
 separate processes (or run in the engine's process through \texttt{Device.inproc}). Solid
-lines: IQ data plane; dashed: control plane; dotted: recording. TikZ diagram; no data.}{fig:F1}
+lines: IQ data plane; dashed: control plane; dotted: recording.}{fig:F1}
 \end{figure}
 
 \subsection{Recording, time base and command bookkeeping}
@@ -42,7 +42,11 @@ share one cursor. Per-sample quantities depend on the absolute sample index and 
 enclosing snapshots, recursions restart from closed-form anchors at page starts and snapshot
 boundaries, parallel work splits samples, and the RX samples do not depend on barrier limits,
 input availability or whether inactive pages were skipped (RT-03, RT-10). A change of the page target is not bit-exact: it changes the double-precision
-accumulators within the relative tolerance of RT-04 (Section~\ref{sec:vv}).
+accumulators within the relative tolerance of RT-04 (Section~\ref{sec:vv}). Deterministic
+mode, the default of the command-line tools and the mode recorded by every emulator run reported here,
+compiles the kernels without Intel's short vector math library and keeps their cache apart, so
+that how parallel work splits the samples cannot change a result; without it, thread-count
+invariance is not claimed bit for bit.
 
 \claim{C-RECORDS}A command record also holds the command's identifiers, and the
 configuration hash is a BLAKE2b hash of the applied configuration.

@@ -34,9 +34,13 @@ VA1 = "sweeps/results/E-A-IQ/va1.csv"
 GEOMS = (("f1.0G_h2_L20", "(a) 1 GHz"), ("f2.4G_h2_L20", "(b) 2.4 GHz"))
 CTRL = (("exact", "exact optimum", fc.OI["blue"], "o"),
         ("wcl", "heuristic", fc.OI["green"], "s"),
-        ("bandit", "probe bandit", fc.OI["orange"], "D"),
+        ("bandit", "bandit", fc.OI["orange"], "D"),  # the name the text uses
         ("urap", "URAP", fc.OI["purple"], "^"))
 VA1_TOL_DB = 0.02
+# text rows above the curves of (a), (b): tau_half label, then the panel label (dB)
+TAU_LABEL_Y_DB = 6.05
+PANEL_LABEL_Y_DB = 6.62
+YMAX_DB = 6.95
 
 
 def _read(rel: str) -> list[dict[str, str]]:
@@ -87,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
         th = taus[geo]
         t_half = float(th["tau_half_s"])
         ax.axvline(t_half, color=fc.OI["vermillion"], lw=0.9, ls="-.")
-        ax.text(t_half * 1.12, 6.05, r"$\tau_{1/2}$ = " f"{t_half:.3f} s",
+        ax.text(t_half * 1.12, TAU_LABEL_Y_DB,r"$\tau_{1/2}$ = " f"{t_half:.3f} s",
                 color=fc.OI["vermillion"], va="center")
         rows.add(lab[:3], "tau_half of the exact optimum", "SIM-sremu", "", "", "tau_half_s",
                  t_half, float(th["tau_half_ci_low_s"]), float(th["tau_half_ci_high_s"]),
@@ -95,9 +99,11 @@ def main(argv: list[str] | None = None) -> int:
         ax.set_xscale("log")
         ax.set_xlim(0.007, 14)
         ax.set_xlabel(r"signaling delay $\tau_{\mathrm{SUI}}$ (s)")
-        ax.text(0.97, 0.86, lab, transform=ax.transAxes, ha="right", va="top")
+        # panel label in its own row above the tau_half label, clear of the P(0) line
+        ax.text(0.97, PANEL_LABEL_Y_DB, lab, ha="right", va="center",
+                transform=ax.get_yaxis_transform())
     axes[0].set_ylabel("gain over RIS absent (dB)")
-    axes[0].set_ylim(-0.2, 6.4)
+    axes[0].set_ylim(-0.2, YMAX_DB)
     plt.setp(axes[1].get_yticklabels(), visible=False)
     h, lbl = axes[0].get_legend_handles_labels()
     order = [2, 3, 4, 5, 0, 1]

@@ -144,7 +144,7 @@ def main(argv: list[str] | None = None) -> int:
     ax_h.axvline(c2_min, color=fc.OI["vermillion"], lw=1.0, ls="--")
     med = float(np.median(d))
     ax_h.axvline(med, color=fc.OI["blue"], lw=1.0, ls=":")
-    ax_h.text(c2_min + 0.08, counts.max() * 0.97, "C2\nneeds\n$\\geq$" f"{_num(c2_min, 'g')} dB",
+    ax_h.text(c2_min + 0.3, counts.max() * 0.97,"C2\nneeds\n$\\geq$" f"{_num(c2_min, 'g')} dB",
               va="top", fontsize=fc.FONT_PT, color=fc.OI["vermillion"])
     ax_h.text(0.03, 0.97, "(d)", transform=ax_h.transAxes, va="top")
     ax_h.text(0.03, 0.80,

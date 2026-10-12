@@ -1,0 +1,29 @@
+{
+ "vlab_run": "validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded",
+ "run_git_commit": "7a632876ae731f708c081fabc09b255bb3b29339",
+ "run_git_dirty": false,
+ "run_decisions": "C1 fails, C2 fails, C3 fails",
+ "protocol_digest": "d8623254ac6f9785f147b38fd8449b457f87c0c658baaae688eff597b09e0b7c",
+ "preregistered_sha256": "d8623254ac6f9785f147b38fd8449b457f87c0c658baaae688eff597b09e0b7c",
+ "run_protocol_digest": "d8623254ac6f9785f147b38fd8449b457f87c0c658baaae688eff597b09e0b7c",
+ "digest_equals_lock": true,
+ "lock_equals_run": true,
+ "protocol_files": {
+  "PROTOCOL.md": {
+   "sha256": "8792ffb49431a23515680b075cd3b645c263db45320f2d77dc60a29739d4627a",
+   "run_input_sha256": "8792ffb49431a23515680b075cd3b645c263db45320f2d77dc60a29739d4627a"
+  },
+  "protocol.json": {
+   "sha256": "fe8a90188464f9ccf972c8918e4f7fc06b12ea7e9616f731b9114b6fca4ca9c8",
+   "run_input_sha256": "fe8a90188464f9ccf972c8918e4f7fc06b12ea7e9616f731b9114b6fca4ca9c8"
+  }
+ },
+ "protocol_files_equal_run_inputs": true,
+ "files_compared": 13,
+ "files_differing_from_7a63287": [],
+ "files_not_at_7a63287": [],
+ "reference": "FILES_7A63287: the files of a checkout of 7a632876ae731f708c081fabc09b255bb3b29339 (experiments/vlab_check.py); authoritative: git diff --exit-code 7a63287 <commit> -- validation/ants_fig4b",
+ "not_covered": "the sremu modules the V-LAB code imports (sremu.analysis.stats, sremu.rng, sremu.physics.*, sremu.record.manifest, ...): this check does not show that a re-run at this commit would reproduce the 7a63287 run",
+ "ok": true,
+ "summary": "protocol digest = lock = run record; 13/13 files byte-identical to 7a63287, 0 other; run at 7a63287 dirty False"
+}

@@ -1,8 +1,8 @@
 {
   "figure": "F7",
   "title": "Lockstep scalability on one AWS c7i.48xlarge (B2): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates",
-  "content_key": "5f952f497415cd2ec2e3031600ec33d6c8beab47e11743dda42cce0a306d446b",
-  "sremu_commit": "e460da6873324f59616a3c014c066da9bfec3728",
+  "content_key": "6e92d6ee2e0b0840138cbebb6aba2e173857f35eaaceda6179408f907e2fa893",
+  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
   "lock_commit": "UNPINNED",
@@ -58,7 +58,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-11T11:27:58Z",
+  "generated_utc": "2026-10-12T01:15:46Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

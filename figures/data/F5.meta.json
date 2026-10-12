@@ -1,7 +1,7 @@
 {
   "figure": "F5",
   "title": "(a) CFO estimation error vs applied offset, noise off, with the generic integer-samples-per-tick pitfall; (b) estimator RMSE vs the Cramer-Rao bound; (c) BER vs Eb/N0 with Clopper-Pearson intervals",
-  "content_key": "dadd7bd8a1a2ca3ce6776a81a0c8d15e8796d98e669ac4a91e9e57148bba8cbc",
+  "content_key": "5d7e371d12de9b5cd34bf9d508f17f51ca15334fff98894fd25415f1398b39eb",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -66,9 +66,9 @@
   ],
   "profile": "full",
   "script": "figures/src/f05_cfo_ber.py",
-  "script_sha256": "40c831508e0ad21a1fd7b6bd9b8906ad93acdc3bf889d0ee7d93efaa684a5afb",
+  "script_sha256": "aca2306dd577ee0c381efc733d5d9d0da1d30c25fb85c21775ce28b44c7d1ebe",
   "outputs": {
-    "figures/out/F5.pdf": "31f2fb0748c6cc2ec262e51275c2789e399dbed8f0e5609e24b1057ef2a26188",
+    "figures/out/F5.pdf": "afdf91b3604c54e73872b7c1a606b12d003c77efe24d52050c4eae52e91c5c88",
     "figures/data/F5.csv": "49d8e4a631bfc968a09ba7cd54b3e11914f6d7573d8e9d3bffba8249137b3742"
   },
   "versions": {
@@ -78,7 +78,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:34:54Z",
+  "generated_utc": "2026-10-12T01:23:49Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

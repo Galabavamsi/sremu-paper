@@ -12,6 +12,9 @@
 %                            otherwise a framed placeholder (draft) or an error (final).
 %   \claim{ID}               optional per-sentence claim marker; prints nothing. IDs are
 %                            checked against claims.yaml by tools/check_claims.py.
+%   \sremuUnreleased         value of an availability macro (licence, URL, DOI) while
+%                            availability.yaml has status: conditional. The text must not print
+%                            one: a red [not released] in draft, a hard error in final.
 
 \newif\ifsremudraft
 \sremudrafttrue
@@ -22,6 +25,14 @@
     \textcolor{red}{\textbf{??}}%
   \else
     \PackageError{sremu}{Unresolved pipeline number '#1'}{Run tools/build_paper.py with results available.}%
+  \fi}
+
+\newcommand{\sremuUnreleased}{%
+  \ifsremudraft
+    \textcolor{red}{\textbf{[not released]}}%
+  \else
+    \PackageError{sremu}{Availability field printed while availability.yaml has status
+      conditional}{Keep the conditional statement, or set status: released and fill the fields.}%
   \fi}
 
 \newcommand{\sremustub}[1]{%

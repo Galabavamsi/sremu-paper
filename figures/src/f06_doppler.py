@@ -189,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
     dr_all = np.abs(f_ris - f_ris_cf)[keep]
     dr = float(np.max(dr_all))
     dr_med = float(np.median(dr_all))
-    ax_a.text(0.40, 0.05, f"max $|$deviation$|$\nLOS {dl:.0e} Hz\nRIS {dr:.2f} Hz",
+    ax_a.text(0.40, 0.05, f"max $|$deviation$|$\nLOS {fc.sci_tex(dl, 0)} Hz\nRIS {dr:.2f} Hz",
               transform=ax_a.transAxes, ha="left", va="bottom")
     for i in range(0, n - 1, 10):
         rows.add("a", "LOS rendered", "SIM-sremu", "t_s", float(tm[i]), "f_hz", float(f_los[i]))
@@ -223,8 +223,10 @@ def main(argv: list[str] | None = None) -> int:
     ax_b.set_xlabel("snapshot period $T_u$ (ms)")
     ax_b.set_ylabel(r"max $|\Delta h|/|h|$")
     ax_b.set_ylim(1e-6, 1e-1)
-    ax_b.legend(loc="upper left", handlelength=1.6, labelspacing=0.2)
-    fc.panel_label(ax_b, "(b)", x=0.90, y=0.12)
+    # legend in two columns in the empty band above the default-target line (clear of data)
+    ax_b.legend(loc="upper left", bbox_to_anchor=(0.04, 1.0), ncol=2, handlelength=1.6,
+                labelspacing=0.2, columnspacing=0.8)
+    fc.panel_label(ax_b, "(b)", x=0.90, y=0.95)
     for eps, tu, err, vi in sweep:
         note = f"policy target eps={eps:g}"
         rows.add("b", "max |y - h|/|h| over 1 s (h: snapshot at every sample)", "SIM-sremu",

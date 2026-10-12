@@ -1,7 +1,7 @@
 {
   "figure": "F12",
   "title": "E-D sizing map: required aperture vs obstruction excess loss; P.526 rows labelled EXPERIMENTAL; model-based dimensioning, not validated",
-  "content_key": "11d9d49a04458cf2a94126082fe383742dc1b0c0bf9f0179715f6d4e7628b550",
+  "content_key": "09dfeec5f0a0c0bdb5cf57344fd4b87abb18fcde0d54310fc0c375cc6f90b37c",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -59,7 +59,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:35:13Z",
+  "generated_utc": "2026-10-12T01:15:51Z",
   "print": {
     "registry_width": "single",
     "target_width_in": 3.5,

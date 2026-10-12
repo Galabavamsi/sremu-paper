@@ -1,0 +1,337 @@
+{
+ "threshold": {
+  "pitch_m": 0.0428,
+  "fc_hz": 3500000000.0,
+  "half_wavelength_m": 0.042827494,
+  "margin_m": 2.7494000000002905e-05,
+  "margin_rel": 0.0006419707863365273,
+  "auto_resolves_to": "point"
+ },
+ "cell_factor": {
+  "pitch_over_lambda": 0.5,
+  "distances_m": [
+   50.0,
+   60.0
+  ],
+  "fine_subcell_max_wavelengths": 0.05,
+  "rows": [
+   {
+    "kind": "retro",
+    "angle_deg": 0.0,
+    "patch_minus_point_db": -1.34477994733674e-06,
+    "patch_fine_minus_point_db": -1.6153097419992125e-06,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "retro",
+    "angle_deg": 15.0,
+    "patch_minus_point_db": -0.9408030540992949,
+    "patch_fine_minus_point_db": -0.9695476452735897,
+    "continuous_patch_factor_db": -0.9791196694971566,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 25,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "retro",
+    "angle_deg": 30.0,
+    "patch_minus_point_db": -3.886647934315172,
+    "patch_fine_minus_point_db": -3.886647934315172,
+    "continuous_patch_factor_db": -3.922397540603051,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 100,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "retro",
+    "angle_deg": 45.0,
+    "patch_minus_point_db": null,
+    "patch_fine_minus_point_db": -8.899911430162303,
+    "continuous_patch_factor_db": -8.91778454827066,
+    "note_default": "po_patch: po_patch Richardson check: |dP| = 0.054 dB > 0.05 dB after 2 halvings (history ['0.521', '0.216', '0.054'] dB)",
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": null,
+    "po_patch_fine_quadrature_points": 400
+   },
+   {
+    "kind": "retro",
+    "angle_deg": 60.0,
+    "patch_minus_point_db": null,
+    "patch_fine_minus_point_db": -16.441310163159745,
+    "continuous_patch_factor_db": -16.468148087255262,
+    "note_default": "po_patch: po_patch Richardson check: |dP| = 0.081 dB > 0.05 dB after 2 halvings (history ['0.792', '0.326', '0.081'] dB)",
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": null,
+    "po_patch_fine_quadrature_points": 400
+   },
+   {
+    "kind": "specular",
+    "angle_deg": 0.0,
+    "patch_minus_point_db": -1.34477994733674e-06,
+    "patch_fine_minus_point_db": -1.6153097419992125e-06,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "specular",
+    "angle_deg": 15.0,
+    "patch_minus_point_db": -1.2540339380380827e-06,
+    "patch_fine_minus_point_db": -1.5066300459172957e-06,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "specular",
+    "angle_deg": 30.0,
+    "patch_minus_point_db": -1.009428147812768e-06,
+    "patch_fine_minus_point_db": -1.2160952148765833e-06,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "specular",
+    "angle_deg": 45.0,
+    "patch_minus_point_db": -6.831383322983917e-07,
+    "patch_fine_minus_point_db": -8.343210174406368e-07,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   },
+   {
+    "kind": "specular",
+    "angle_deg": 60.0,
+    "patch_minus_point_db": -3.659104988080297e-07,
+    "patch_fine_minus_point_db": -4.699871608922747e-07,
+    "continuous_patch_factor_db": 0.0,
+    "note_default": null,
+    "note_fine": null,
+    "point_quadrature_points": 1,
+    "po_patch_quadrature_points": 9,
+    "po_patch_fine_quadrature_points": 100
+   }
+  ]
+ },
+ "eb": {
+  "arc_blocked": {
+   "point": {
+    "rx1_ris_term_s1_db": -36.93082358147318,
+    "rx1_direct_db": -Infinity,
+    "rx1_ris_term_change_db": -23.665188736552373,
+    "rx1_ris_term_rotation_deg": 136.88322282022176,
+    "rx1_total_change_db": -23.665188736552373,
+    "rx1_total_rotation_deg": 136.88322282022176,
+    "n_differing_elements": 132,
+    "quadrature_points": {
+     "t0": 40,
+     "t1": 40,
+     "t2": 40,
+     "t3": 40,
+     "t4": 40,
+     "t5": 40
+    },
+    "direct_minus_ris_db": null
+   },
+   "po_patch": {
+    "rx1_ris_term_s1_db": -37.35327230945237,
+    "rx1_direct_db": -Infinity,
+    "rx1_ris_term_change_db": -24.143721720255968,
+    "rx1_ris_term_rotation_deg": 152.9600778913884,
+    "rx1_total_change_db": -24.143721720255968,
+    "rx1_total_rotation_deg": 152.96007789138844,
+    "n_differing_elements": 136,
+    "quadrature_points": {
+     "t0": 1000,
+     "t1": 1000,
+     "t2": 360,
+     "t3": 360,
+     "t4": 1000,
+     "t5": 1000
+    },
+    "direct_minus_ris_db": null
+   },
+   "delta": {
+    "ris_term_s1_patch_minus_point_db": -0.4224487279791944,
+    "ris_term_change_patch_minus_point_db": -0.47853298370359454,
+    "total_change_patch_minus_point_db": -0.47853298370359454,
+    "rotation_patch_minus_point_deg": 16.076855071166676,
+    "rx1_optimum_cells_differing": 2,
+    "rx2_optimum_cells_differing": 2,
+    "n_cells": 240,
+    "point_optimum_under_patch_loss_db": -0.00544168171851152
+   }
+  },
+  "arc_present": {
+   "point": {
+    "rx1_ris_term_s1_db": -37.26178663294075,
+    "rx1_direct_db": -44.91276903277893,
+    "rx1_ris_term_change_db": -27.42801596763188,
+    "rx1_ris_term_rotation_deg": 68.07833221469082,
+    "rx1_total_change_db": -10.482557709488315,
+    "rx1_total_rotation_deg": -19.216424324700302,
+    "n_differing_elements": 122,
+    "quadrature_points": {
+     "t0": 40,
+     "t1": 40,
+     "t2": 40,
+     "t3": 40,
+     "t4": 40,
+     "t5": 40
+    },
+    "direct_minus_ris_db": -7.650982399838185
+   },
+   "po_patch": {
+    "rx1_ris_term_s1_db": -37.68990575016406,
+    "rx1_direct_db": -44.91276903277893,
+    "rx1_ris_term_change_db": -24.25133442195112,
+    "rx1_ris_term_rotation_deg": -61.64414058107551,
+    "rx1_total_change_db": -8.979334421543882,
+    "rx1_total_rotation_deg": -27.655749965153454,
+    "n_differing_elements": 118,
+    "quadrature_points": {
+     "t0": 1000,
+     "t1": 1000,
+     "t2": 360,
+     "t3": 360,
+     "t4": 1000,
+     "t5": 1000
+    },
+    "direct_minus_ris_db": -7.222863282614874
+   },
+   "delta": {
+    "ris_term_s1_patch_minus_point_db": -0.42811911722331075,
+    "ris_term_change_patch_minus_point_db": 3.176681545680758,
+    "total_change_patch_minus_point_db": 1.503223287944433,
+    "rotation_patch_minus_point_deg": -8.439325640453152,
+    "rx1_optimum_cells_differing": 0,
+    "rx2_optimum_cells_differing": 20,
+    "n_cells": 240,
+    "point_optimum_under_patch_loss_db": 0.0
+   }
+  },
+  "lab_like_blocked": {
+   "point": {
+    "rx1_ris_term_s1_db": -46.493576665163225,
+    "rx1_direct_db": -Infinity,
+    "rx1_ris_term_change_db": -15.56462589682667,
+    "rx1_ris_term_rotation_deg": -58.73472274652241,
+    "rx1_total_change_db": -15.56462589682667,
+    "rx1_total_rotation_deg": -58.73472274652241,
+    "n_differing_elements": 59,
+    "quadrature_points": {
+     "ris0": 120
+    },
+    "direct_minus_ris_db": null
+   },
+   "po_patch": {
+    "rx1_ris_term_s1_db": -46.9892315555695,
+    "rx1_direct_db": -Infinity,
+    "rx1_ris_term_change_db": -15.531545990614084,
+    "rx1_ris_term_rotation_deg": -50.70476779026446,
+    "rx1_total_change_db": -15.531545990614084,
+    "rx1_total_rotation_deg": -50.70476779026446,
+    "n_differing_elements": 57,
+    "quadrature_points": {
+     "ris0": 1080
+    },
+    "direct_minus_ris_db": null
+   },
+   "delta": {
+    "ris_term_s1_patch_minus_point_db": -0.4956548904062785,
+    "ris_term_change_patch_minus_point_db": 0.03307990621258483,
+    "total_change_patch_minus_point_db": 0.03307990621258483,
+    "rotation_patch_minus_point_deg": 8.029954956257946,
+    "rx1_optimum_cells_differing": 6,
+    "rx2_optimum_cells_differing": 0,
+    "n_cells": 120,
+    "point_optimum_under_patch_loss_db": 0.006139748745112805
+   }
+  },
+  "lab_like_present": {
+   "point": {
+    "rx1_ris_term_s1_db": -46.493576665163225,
+    "rx1_direct_db": -46.437961491569446,
+    "rx1_ris_term_change_db": -11.715164788547302,
+    "rx1_ris_term_rotation_deg": 88.95004921582307,
+    "rx1_total_change_db": -5.132881540514802,
+    "rx1_total_rotation_deg": 20.13108036040961,
+    "n_differing_elements": 63,
+    "quadrature_points": {
+     "ris0": 120
+    },
+    "direct_minus_ris_db": 0.05561517359377888
+   },
+   "po_patch": {
+    "rx1_ris_term_s1_db": -46.99537130431462,
+    "rx1_direct_db": -46.437961491569446,
+    "rx1_ris_term_change_db": -11.567223487852305,
+    "rx1_ris_term_rotation_deg": 84.32772533793286,
+    "rx1_total_change_db": -4.746035587315282,
+    "rx1_total_rotation_deg": 19.33326670407296,
+    "n_differing_elements": 62,
+    "quadrature_points": {
+     "ris0": 1080
+    },
+    "direct_minus_ris_db": 0.5574098127451705
+   },
+   "delta": {
+    "ris_term_s1_patch_minus_point_db": -0.5017946391513917,
+    "ris_term_change_patch_minus_point_db": 0.14794130069499722,
+    "total_change_patch_minus_point_db": 0.3868459531995203,
+    "rotation_patch_minus_point_deg": -0.7978136563366469,
+    "rx1_optimum_cells_differing": 0,
+    "rx2_optimum_cells_differing": 1,
+    "n_cells": 120,
+    "point_optimum_under_patch_loss_db": 0.0
+   }
+  }
+ },
+ "ec_lab": {
+  "point": {
+   "loss_ris_db_ideal_1bit": -2.8914294012751562,
+   "loss_ris_db_ideal_2bit": -0.7523861250728092,
+   "loss_ris_db_lab_mag1": -2.8574434789889622,
+   "loss_ris_db_ideal_designed_on_lab": -3.040352358177585,
+   "direct_over_ris_cont_db": -3.427576707702222
+  },
+  "po_patch": {
+   "loss_ris_db_ideal_1bit": -2.89758462323292,
+   "loss_ris_db_ideal_2bit": -0.747654862429012,
+   "loss_ris_db_lab_mag1": -2.8950297904276203,
+   "loss_ris_db_ideal_designed_on_lab": -2.9430594602442266,
+   "direct_over_ris_cont_db": -2.647708460067795
+  },
+  "delta": {
+   "cont_ris_power_patch_minus_point_db_mean": -0.6289713272827581,
+   "cont_ris_power_patch_minus_point_db_min": -1.3042749180662319,
+   "cont_ris_power_patch_minus_point_db_max": -0.24817973425381062,
+   "loss_ris_db_ideal_1bit_patch_minus_point": -0.006155221957763857,
+   "loss_ris_db_lab_mag1_patch_minus_point": -0.03758631143865809
+  }
+ }
+}

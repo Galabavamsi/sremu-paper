@@ -1,7 +1,7 @@
 {
   "figure": "F10",
   "title": "E-A: gain over RIS absent vs signaling delay tau_SUI (log x) for four controllers in the blocked corridor at 1 and 2.4 GHz with the half-retention delay tau_half; IQ path vs batch path (VA-1)",
-  "content_key": "ccfcd7ec4fa5ceae82ad384065ee043d536302e6df97aacef5b48b5430946465",
+  "content_key": "425614bbb738b7c0ab1b48566321a12e3d973ba8d83cfb8cc9eaebf9dea1f855",
   "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
@@ -69,9 +69,9 @@
   ],
   "profile": "full",
   "script": "figures/src/f10_signaling_delay.py",
-  "script_sha256": "8feac45c03dd389a5d16b2817b7e7cc1b5c78f9f03d0c227f34d50b1b0f447d7",
+  "script_sha256": "5ce1bba72ac34233712da0fe89b54704099f321728fa8f801935f1fd2a84ae8a",
   "outputs": {
-    "figures/out/F10.pdf": "3a5f025b30039ae47ac15312736c84301b18d9949ab781fe1e89339ee8c59a2b",
+    "figures/out/F10.pdf": "0cdbc1d54f08ceed266f57dbd19592af07b9dbd03386f01127504e212711d089",
     "figures/data/F10.csv": "f0aa4a29321c8c473e2f197fc1da50af41a9de4ce616e44b038c2942280f18c5"
   },
   "versions": {
@@ -81,7 +81,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T00:35:08Z",
+  "generated_utc": "2026-10-12T01:03:07Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,
