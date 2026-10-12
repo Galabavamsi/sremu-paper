@@ -20,7 +20,7 @@ frameworks~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX} is not implemented.
 \subsection{Hooks for learning-based control}\label{sec:disc-ml}
 \claim{C-CONTROLLER-API}Learning-based control is outside our scope, but \sremu{} provides
 three hooks: one controller object runs in the engine or in an external process with identical
-samples (RT-08), with built-in baselines (Appendix~\ref{app:interfaces});
+samples, with built-in baselines (Appendix~\ref{app:interfaces});
 \claim{C-RISENV}an environment, \texttt{RisEnv}, wraps a scenario in the reset/step interface
 of Gymnasium~\cite{Towers2024Gymnasium}, with rewards computed on the batch path in this
 release; \claim{C-REGRET}and at every step it reports the exact finite-alphabet optimum

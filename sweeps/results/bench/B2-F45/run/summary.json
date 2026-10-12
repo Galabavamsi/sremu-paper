@@ -1,0 +1,34 @@
+{
+  "suite": "b2",
+  "plan": "server",
+  "points_planned": 64,
+  "points_run": 64,
+  "points_ok": 64,
+  "points_below_floor": 0,
+  "points_failed": 0,
+  "points_interrupted": 0,
+  "failed_point_ids": [],
+  "points_not_in_plan": 2931,
+  "points_filtered": 845,
+  "runtime_dropped": {},
+  "wall_s": 469.08570347999995,
+  "base_point_rtf": null,
+  "thread_scaling_rtf": {},
+  "max_L_rtf_ge_1": {
+    "N40": null,
+    "N240": null,
+    "N900": null,
+    "N4096": null,
+    "N16384": null
+  },
+  "ris_check_failures": [],
+  "all_ris_paths_nonzero": true,
+  "points_with_threads_outside_slot": [],
+  "lateness_or_loss_nonzero": [],
+  "isolation_ratio": {
+    "n": 1,
+    "min": 1.170054009737561,
+    "max": 1.170054009737561
+  },
+  "interrupted": null
+}

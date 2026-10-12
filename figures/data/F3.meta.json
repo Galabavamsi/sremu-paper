@@ -1,11 +1,11 @@
 {
   "figure": "F3",
   "title": "(a) Fixed-aperture refinement: K1 power independent of the cell count N (far specular, auto cell model; near anomalous, po_patch) and the forced point model; (b) Tang et al. published model curves vs sremu with digitized measured points",
-  "content_key": "b219fab347830af6af79c1f4855c231c3473be91a98c932c09917bcb7116d499",
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "content_key": "0b06290b2a4923c063f5f464d0aa8f9efe49f1110a3b1074f15e4f6432e5a6bf",
+  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
-  "lock_commit": "UNPINNED",
+  "lock_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "data_classes": [
     "ANALYTIC",
     "DIG",
@@ -20,13 +20,13 @@
   ],
   "inputs": [
     {
-      "path": "../sremu/validation/tang/results/20261012T000448Z_vtang/vtang_points.csv",
+      "path": "../sremu/validation/tang/results/20261012T025951Z_vtang/vtang_points.csv",
       "data_class": "DIG",
       "note": "published_eq9_dbm and measured_dbm are DIG (Tang 2022 Fig. 10); engine_dbm is SIM-sremu",
       "provenance": {
-        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "sremu_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "sremu_dirty": false,
-        "run_dir": "/opt/job/out/validation/tang/20261012T000448Z_vtang",
+        "run_dir": "/opt/job/out/validation/tang/20261012T025951Z_vtang",
         "study": "V-TANG",
         "dirty_patch_sha256": null,
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
@@ -35,10 +35,10 @@
       "sha256": "41dc5cdc8f4b7d148e67404c9aa3fffe3cc45f8b419306e359dac3bc760b4646"
     },
     {
-      "path": "../sremu/validation/tang/results/20261012T000448Z_vtang/meta.json",
+      "path": "../sremu/validation/tang/results/20261012T025951Z_vtang/meta.json",
       "data_class": "REPORTED",
       "note": "run metadata incl. link-budget parameters from Tang 2022 Tables III/IV",
-      "sha256": "38841910ad2c1f1a65d186f01e35ff9a908d976feeaf05064faf63de3f4f0a15"
+      "sha256": "6c3a16cf2fff096e3f99247238f094602e26579a909d7cf7704c8445c56ff102"
     }
   ],
   "assumptions": [
@@ -48,7 +48,7 @@
   ],
   "profile": "full",
   "script": "figures/src/f03_aperture_tang.py",
-  "script_sha256": "e67bb5fd7f421d17793da4098452f75b90a368af20bd590c8577951e5697dc4a",
+  "script_sha256": "adf7a3a588a986346c62ab2b7c4df27634b656eb0579ca70ee41a30ee2e26874",
   "outputs": {
     "figures/out/F3.pdf": "0c8e24bdb8f876fd4aca1d562986aec93024aa2f7fdd9a353bbad51756773f20",
     "figures/data/F3.csv": "9cb5a28024784a501d46daacc5676cadb75a4c61097f09315573079e35a12a4a"
@@ -60,7 +60,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T01:04:30Z",
+  "generated_utc": "2026-10-12T06:58:51Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

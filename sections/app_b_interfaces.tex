@@ -6,7 +6,9 @@
 
 This appendix extends Section~\ref{sec:design} and the hooks of Section~\ref{sec:disc-ml}.
 \claim{C-ARCH}Fig.~\ref{fig:F1} shows the processes of \sremu{} and the planes that connect
-them.
+them. \claim{C-IMPL}The package is built on NumPy and SciPy, with pyzmq for the
+sockets~\cite{ZeroMQ} and pydantic for validation; Gymnasium and SigMF are
+optional~\cite{Towers2024Gymnasium,SigMF}.
 
 \begin{figure}[t]
 \centering

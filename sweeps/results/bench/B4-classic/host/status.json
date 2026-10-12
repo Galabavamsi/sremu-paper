@@ -1,0 +1,46 @@
+{
+ "job": "b4classic",
+ "deadline_min": 100.0,
+ "cpu_plan": {
+  "engine": "1-8,17-24",
+  "clients": "9-10,25-26",
+  "reserved": "0,16"
+ },
+ "results": [
+  {
+   "step": "b4_paced_classic",
+   "cmd": [
+    "taskset",
+    "-c",
+    "1-8,17-24",
+    "/opt/venv/bin/python",
+    "-m",
+    "bench.b4_control",
+    "--part",
+    "paced",
+    "--plan",
+    "classic",
+    "--tag",
+    "paced_classic",
+    "--budget-min",
+    "95",
+    "--out",
+    "/opt/job/out/runs"
+   ],
+   "cpus": "1-8,17-24",
+   "env": {
+    "NUMBA_NUM_THREADS": "16",
+    "SREMU_CPUS": "1-8,17-24",
+    "SREMU_CLIENT_CPUS": "9-10,25-26"
+   },
+   "budget_min": 94.99999964634577,
+   "timeout_s": 5909.9999787807465,
+   "rc": 0,
+   "wall_s": 1703.405576467514,
+   "log": "b4_paced_classic.log",
+   "interrupted_by": null
+  }
+ ],
+ "wall_s": 1703.4060642719269,
+ "rc": 0
+}

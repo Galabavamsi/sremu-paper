@@ -15,24 +15,24 @@
   "sremu.commands.serve",
   "/opt/job/out/ee/rep2/static_focusq0.35/scene.yaml",
   "--serve",
-  "tcp://127.0.0.1:50035",
+  "tcp://127.0.0.1:34259",
   "--pub",
   "none",
   "--tx",
-  "tcp://127.0.0.1:51003",
+  "tcp://127.0.0.1:41747",
   "--out",
   "/opt/job/out/ee/rep2/static_focusq0.35/rec",
   "--exit-when-done",
   "--raw-peer",
-  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:51649,rx_port=tcp://127.0.0.1:54685,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:33675,rx_port=tcp://127.0.0.1:56221,tx_stream=gr.tx0,rx_stream=grrx.rx0"
  ],
  "gr_cmd": [
   "/usr/bin/python3",
   "/opt/job/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
   "--tx",
-  "tcp://127.0.0.1:51649",
+  "tcp://127.0.0.1:33675",
   "--rx",
-  "tcp://127.0.0.1:54685",
+  "tcp://127.0.0.1:56221",
   "--n",
   "300000",
   "--out",
@@ -47,7 +47,7 @@
  "python": "3.12.3",
  "numpy": "2.5.3",
  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
- "t_start_unix": 1791763553.8949828,
+ "t_start_unix": 1791774053.4005294,
  "commands_sent": [
   {
    "config": "focusq:0.35",
@@ -62,13 +62,13 @@
     "k_req": {
      "grrx.rx0": 0
     },
-    "t_wall_recv_ns": 443524905614
+    "t_wall_recv_ns": 434946270080
    }
   }
  ],
- "t_resume_wall_s": 0.6609277140000245,
+ "t_resume_wall_s": 0.6610827499999914,
  "gr_exit": 0,
- "t_gr_done_wall_s": 3.882166347000009,
+ "t_gr_done_wall_s": 3.8339419659999976,
  "serve_exit": 0,
- "wall_s": 3.882212853999988
+ "wall_s": 3.8340023960000167
 }

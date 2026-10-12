@@ -8,26 +8,36 @@ commit 2a016a6 (claims name their tests). Sections V (Verification and validatio
 (Case studies) are drafted from the committed study and experiment results; their numbers are
 pipeline macros written by `tools/gen_results.py`, and the data figures F3-F6 and F9-F12 are
 drawn by the scripts in `figures/src/`. Provenance (Appendix H, generated from the result
-records): the pinned regeneration job 20261011T235822Z_regen_37a552 (AWS c7i.48xlarge, sremu
-4ec4c2b, clean) produced the test record, E-A, E-A-IQ (VA-1), E-B1/E-B2, E-B-arc, E-C, E-F
-(BER), E-E and V-TANG/V-CFO/V-FM; sremu 0f06793 = the code of 4ec4c2b plus those result files.
-The commit `sremu.lock` is to pin is a results-only commit on a code commit (planned on
-2026-10-12: on bf08268, served-only render threshold and docs, after the benchmark reruns);
-Appendix H therefore names no lock hash. V-LAB stays at its locked analysis commit 7a63287
-(predictions computed before the lock at 9dca79f); the regeneration job's V-LAB file check is
-`sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json`. Benchmarks keep their
-own commits (B1/B2 F0-F4 309c633; B6 laptop; B2-F4/F5, B3, B4 being rerun at 4ec4c2b at the
-time of writing). E-B (Section VII-A, F9) is led by the lab-arc run (geometry modelled on the
+records): the pinned regeneration job 20261012T025330Z_regen_35b184 (AWS c7i.48xlarge, sremu
+bf08268, clean) produced E-A, E-A-IQ (VA-1), E-B1/E-B2, E-B-arc, E-C, E-F (BER and API
+latency), E-E and V-TANG/V-CFO/V-FM; the test record is at 1e1fcab (the planned lock: the
+`src/sremu` of bf08268 plus tools and result files; `gen_results.py` checks that the installed
+checkout's `src/sremu` hash equals the one the regeneration results record). Appendix H names
+the regeneration commit (`txtProvRegenCommit`, from the E-A row) and the test-record commit
+(`txtProvTestCommit`, from the junit sidecar), no lock hash. V-LAB stays at its locked analysis
+commit 7a63287 (predictions computed before the lock at 9dca79f); the V-LAB file check at the
+test record's commit is `sweeps/results/V-LAB-provenance/vlab_check_lock_1e1fcab.json`.
+Benchmarks keep their own commits: B1 and B2 (lockstep scaling F0-F4, surface and thread scans)
+at 309c633; B2-F45 (F4/F5 rerun and F5 stress), B3, B4 (plan served-1ms) and B4-classic at
+bf08268 (clean); B6 (laptop) at 06cdf7a (clean). The superseded B3/B4 runs at 309c633 and the
+dirty-tree B6 laptop run are not in the paper tree (originals in research/aws/results and
+sremu/runs/bench). E-B (Section VII-A, F9) is led by the lab-arc run (geometry modelled on the
 lab arrangement, SIM, nominal geometry; aggregated results and provenance in
 `sweeps/results/E-B-arc/`); the lab-like geometry is the supporting row. The laboratory map,
 the lab-state phases, the frequency-offset sweep with its BPSK burst and the FM scenario
 appeared in the authors' unpublished ANTS 2025 submission (claim C-LINEAGE-DATA); every cited verification identifier is listed in Appendix G
 (`verification_ids.yaml` -> `tools/vv_ids.py`, checked against sremu's DESIGN.md, oracle
 table and test docstrings). Section VI and
-Appendix E (F7, F8, platform table `tab:platforms`) come from the benchmark runs B1-B4 (AWS c7i.48xlarge and c7i.8xlarge, sremu
-309c633) and B6 (laptop), copied with provenance to `sweeps/results/bench/` and read by
-`tools/bench_results.py` (called from `gen_results.py`). AWAITING the pinned rerun: the F5
-(native ZMQ) RTF and the E-F API latency (plans in `numbers.yaml`). Revision of 2026-10-11:
+Appendix E (F7, F8, platform table `tab:platforms`) come from the benchmark runs B1, B2,
+B2-F45, B3, B4, B4-classic (AWS c7i.48xlarge and c7i.8xlarge) and B6 (laptop), copied with
+sha256-checked provenance to `sweeps/results/bench/<run>/meta.json`, and from the E-F API
+latency of the regeneration job (`sweeps/results/E-F/latency`), read by
+`tools/bench_results.py` (called from `gen_results.py`). Paced scope (must-fix 1): headless B3
+is an engine-alone upper bound; served B4 (one external command process over the control
+socket) is not backlogged at 10 and 100 commands/s and places timed commands with leads from
+`numBfourLeadOkMs` on their exact sample (`numBfourExactOkMinPct`), but no served repetition
+meets the Sustainable rule (`numBfourMissLowMinPct`-`numBfourMissMidMaxPct` % of pages miss the
+1 ms deadline); 1000 commands/s is engine-bound. Revision of 2026-10-11:
 title T1; Tang reported as measured minus emulator (since 2026-10-12 framed as agreement of the
 K1/Tang model class with Tang's chamber data: the emulator inherits Tang's published residual);
 the V-LAB plan is "pre-specified, hash-locked before
@@ -54,6 +64,17 @@ D:\projects\ris\sremu\.venv\Scripts\python.exe tools\build_paper.py --mode draft
 # final: refuses (non-zero exit, no PDF) while anything is outstanding
 D:\projects\ris\sremu\.venv\Scripts\python.exe tools\build_paper.py --mode final --profile full --junit <pinned junit xml>
 ```
+
+Latexmk is a Perl script: run the build from Git Bash (its `/usr/bin/perl`) or with another
+Perl on `PATH`; MiKTeX's own launcher fails without one.
+
+Page budget: the main text (Sections I-X and the back matter) and the references it cites end
+on page 14 (page fit of 2026-10-12: Sections I-X end on p. 12, references [1]-[76] on p. 14).
+References cited only in the appendices are numbered after them and print next, before
+Appendix A; they may run onto p. 15. Detail moved for length sits in Appendices A-F under the
+same claim markers (claims.yaml `where` lists both files). Caveats stay in the main text even
+when their numbers moved (e.g. C-EB-SERVED: Section VII-A keeps the conclusion, Section VI and
+Appendix F the numbers).
 
 Result macros and generated tables (run after the junit is in place and after the figure
 scripts, which write `figures/data/F3.meta.json` and `F6.meta.json`):
@@ -124,7 +145,7 @@ The final mode refuses unless:
 | `availability.yaml` | Release status (conditional / released), licence, repository URL, archive DOI and data DOI of "Code and Data Availability" |
 | `sweeps/results/V-LAB-provenance/` | GitHub's push log of the sremu repository (lock facts of Section V-D; data class PROVENANCE) and the regeneration job's V-LAB file check (Appendix H) |
 | `sweeps/results/sensitivity_cellmodel/` | Cell-model sensitivity, `point` vs `po_patch` at the lab pitch (Section IV-C, Appendix C): `results.json`, `meta.json` and the script that wrote them (coefficient level, sremu installed in the venv; rerun with `python sweeps/results/sensitivity_cellmodel/cellmodel_sensitivity.py <out_dir>`) |
-| `verification_ids.yaml` -> `generated/tables/tableA_ids.tex` | Every verification identifier cited in the paper (Appendix G, `tab:ids-ph`, `tab:ids-rt`); `tools/vv_ids.py` checks each number against sremu `docs/DESIGN.md`, `tests/oracles/tables.py` and the test docstrings, and also writes the Appendix H provenance summary macros |
+| `verification_ids.yaml` -> `generated/tables/tableA_ids.tex` | Every verification identifier cited in the paper (Appendix G, `tab:ids-ph`, `tab:ids-rt`); `tools/vv_ids.py` checks each number against sremu `docs/DESIGN.md`, `tests/oracles/tables.py` and the test docstrings, fills the column "Sec." (the subsections of Sections III and IV whose statements each identifier checks, from the test evidence of the claim markers there in `claims.yaml` and the identifiers cited there; those sections cite only VA-1 and VA-4 inline), and also writes the Appendix H provenance summary macros |
 | `gates.yaml` | GATE-PHY / GATE-RT test ids |
 | `figures/registry.yaml` | F1-F12: script, inputs, data classes, owner, status |
 | `refs.bib`, `refs_verification.md`, `refs_verification.json`, `refs_sources/` | Bibliography and its verification record |

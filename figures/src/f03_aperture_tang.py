@@ -29,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figcommon as fc
 
 FID = "F3"
-TANG_RUN = "../sremu/validation/tang/results/20261012T000448Z_vtang"
+TANG_RUN = "../sremu/validation/tang/results/20261012T025951Z_vtang"
 TANG_POINTS = f"{TANG_RUN}/vtang_points.csv"
 TANG_META = f"{TANG_RUN}/meta.json"
 

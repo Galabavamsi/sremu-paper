@@ -7,6 +7,11 @@
 % and imports, panel capabilities) is in Appendix B (sections/app_b_interfaces.tex), with the
 % same markers.
 \section{Design}\label{sec:design}
+% Verification identifiers are not cited inline in Sections III and IV (mock review should-fix
+% 5); Tables tab:ids-ph and tab:ids-rt (Appendix G) list each identifier with the sections
+% whose statements it checks (column "Sec.", from the evidence of claims.yaml).
+The tests that check statements of this section and the next are listed in
+Appendix~\ref{app:oracles}, each with the subsections whose statements it checks.
 
 \subsection{Architecture}\label{sec:design-arch}
 % sremu/api/device.py (Device.inproc, Device.connect, Device.from_engine; EngineProtocol of
@@ -18,7 +23,7 @@ every transmit (TX) stream, the propagation model and the RIS configurations in 
 inside the Python process of an application (\texttt{Device.inproc}) or as a served process
 reached through sockets (\texttt{Device.connect}); both forms implement one engine interface,
 and a run whose TX and RX applications are separate operating-system processes gives the
-same RX samples, bit for bit, as the same run in one process (IO-02).
+same RX samples, bit for bit, as the same run in one process.
 \claim{C-PLANES}A served engine uses ZMQ sockets~\cite{ZeroMQ}: a framed IQ data plane (one
 ingress socket for TX applications, one egress socket per RX stream), a raw request--reply data
 plane (Section~\ref{sec:design-if}), a control plane of JavaScript Object Notation (JSON)
@@ -27,10 +32,9 @@ carries the barrier messages of registered controllers, and a \texttt{PUB} socke
 telemetry. \claim{C-RECORDING}A recorder writes a manifest, the resolved scenario, an event
 log of every command record and, optionally, SigMF recordings~\cite{SigMF} per run.
 \claim{C-IMPL}\sremu{} is a Python package (Python \txtPythonReq{} or later; \numSrcModules{}
-modules, about \numSrcKloc{} thousand lines) built on NumPy and SciPy, with a NumPy reference
-backend and a compiled numba backend for rendering, pyzmq for the sockets~\cite{ZeroMQ} and
-pydantic for validation; Gymnasium and SigMF are optional~\cite{Towers2024Gymnasium,SigMF}. It
-runs on Windows and Linux.
+modules, about \numSrcKloc{} thousand lines) with a NumPy reference backend and a compiled
+numba backend for rendering (dependencies in Appendix~\ref{app:interfaces}); it runs on Windows
+and Linux.
 % pyproject.toml (requires-python, dependencies; DESIGN 2.4); the size macros are counted by
 % tools/gen_results.py over src/sremu/**/*.py of the checkout. The architecture figure F1 is
 % in Appendix B.
@@ -42,13 +46,13 @@ runs on Windows and Linux.
 of every stream is at $t=0$. A time maps to a sample as $\mathrm{to\_ticks}(t,f)=\lfloor
 tf+1/2\rfloor$, the nearest sample with ties rounded up as in UHD~\cite{UHDManual}, and a
 stream produces $\lceil t_1f\rceil-\lceil t_0f\rceil$ samples on $[t_0,t_1)$ for any mix of
-rates (RT-01, RT-02); wall-clock time never enters data-plane arithmetic (RT-15).
+rates; wall-clock time never enters data-plane arithmetic.
 \claim{C-INVARIANCE}Each RX stream is processed in pages of about \numPageTargetMs~ms on an
 absolute grid, cut at snapshot boundaries, switch samples, barrier limits and the end of TX
 input (Fig.~\ref{fig:F2}(a)). Per-sample quantities are closed-form functions of the absolute
 sample index, and sums run in a fixed order, so the RX samples are identical bit for bit
 however clients chunk their calls, wherever events cut a page and, in deterministic mode (the
-default, Appendix~\ref{app:interfaces}), whatever the thread count (RT-03, RT-10).
+default, Appendix~\ref{app:interfaces}), whatever the thread count.
 
 \begin{figure*}[t]
 \centering
@@ -73,7 +77,7 @@ k_{r,j}=\mathrm{to\_ticks}\bigl(t_{\mathrm{sw}}+\tau_{r,j}(t_{\mathrm{sw}}),\,f_
 \label{eq:kr}
 \end{equation}
 where $\tau_{r,j}$ is the propagation delay from the reference point of tile $j$ (the panel
-centre for an untiled panel) to the receiver in the geometry at $t_{\mathrm{sw}}$ (RT-05), so
+centre for an untiled panel) to the receiver in the geometry at $t_{\mathrm{sw}}$, so
 receivers at different distances see one switch at different samples (Fig.~\ref{fig:F2}(b)).
 The time of a command is an exact surface time, a sample of a named RX stream, or `as soon as
 possible' (asap), the earliest time that every receiver can still honour.
@@ -82,18 +86,18 @@ is late when a switch sample falls below a frontier. The default policy,
 \texttt{apply\_on\_arrival} as in UHD, moves the switch to the single surface time
 $t'=\max_{r,j}(\mathrm{frontier}_r/f_r-\tau_{r,j})$ and maps every receiver again
 with~\eqref{eq:kr}, so all receivers still see one physical switch; the policy
-\texttt{reject} returns \texttt{LATE\_COMMAND} and applies nothing (RT-06).
+\texttt{reject} returns \texttt{LATE\_COMMAND} and applies nothing.
 \claim{C-RECORDS}Each command yields one record with requested and applied surface times and
 samples per receiver, their difference (the lateness), wall-clock receipt and delivery times,
-status and a hash of the applied configuration (Appendix~\ref{app:interfaces}).
+status and a hash of the applied configuration.
 \claim{C-TRANSITIONS}A reconfiguration need not be instantaneous: changing elements form
 transition classes with profiles $g_c$ (a step, the default; a linear ramp; or an
 exponential), and because $\mathrm{combine}$ is linear in $\Gamma$ the channel is exactly
 $h(t)=h_{\mathrm{old}}(t)+\sum_c g_c(t-t_{\mathrm{sw},r})\,\Delta h_c(t)$, with each change
-$\Delta h_c$ interpolated like any path, also under mobility (RT-12). The default duration is
-the panel's \texttt{reconfiguration\_time\_s}, named after a GS RIS 008
-parameter~\cite{ETSI_GS_RIS008}; the
-complex-linear path between states is an engineering choice (ENG).
+$\Delta h_c$ interpolated like any path, also under mobility. The default duration is the
+panel's \texttt{reconfiguration\_time\_s}, named after a GS RIS 008
+parameter~\cite{ETSI_GS_RIS008}; the complex-linear path between states is an engineering
+choice (ENG).
 % channel/transitions.py (classes single | by_edge; freeze_terms for re-command); no
 % gamma_path table is implemented, so none is claimed.
 
@@ -108,9 +112,9 @@ $\mathrm{to\_ticks}(t_b+L_{\min},f_r)$, exclusive, and then gives the controller
 observation built from samples before $\mathrm{to\_ticks}(t_b,f_r)$, such as each receiver's
 measured power. Actions take effect at $t_b$ plus a latency drawn
 from a keyed model and never smaller than $L_{\min}$; an earlier action raises
-\texttt{LOOKAHEAD\_VIOLATION} (RT-17). The frontier limit and~\eqref{eq:kr} use the same
+\texttt{LOOKAHEAD\_VIOLATION}. The frontier limit and~\eqref{eq:kr} use the same
 monotone rounding and $\tau_{r,j}\ge0$, so these actions are never late and the time a
-controller takes to decide changes no RX sample, in process or remote (RT-08): the lookahead
+controller takes to decide changes no RX sample, in process or remote: the lookahead
 rule of conservative parallel discrete-event simulation.
 
 \paragraph*{Lockstep, paced and batch operation}
@@ -126,7 +130,7 @@ arrive on time, and otherwise the manifest flags nondeterministic inputs.
 \claim{C-PACED}In paced mode, page $j$ is released at wall time
 $R_j=t_0+k_1/f+D_{\mathrm{lag}}$, with page end $k_1$ and an input slack $D_{\mathrm{lag}}$;
 late inputs are dropped, missing samples become zeros and a slow RX client loses pages, each
-with a report, and deadline misses are counted (RT-18). Paced mode is soft real time: it counts misses rather
+with a report, and deadline misses are counted. Paced mode is soft real time: it counts misses rather
 than assuming their absence, and it admits asynchronous controllers, whose commands carry
 measured lateness. \claim{C-BATCH}A batch path (\texttt{run\_batch}) evaluates
 $\mathrm{combine}(\mathrm{snapshot}(t),\mathrm{cfg}(t))$ on a time grid without IQ samples, with
@@ -134,28 +138,28 @@ the same model, command semantics (switches at their surface time), controllers 
 keys; in a static scene with noise off, an in-process controller and no signaling delay, its
 time-averaged received power equals that of the IQ path within a relative \numVaFourRelTol{}
 (VA-4). Holding each step at its start value, it reads up to \numVaOneLeftMaxDb~dB high under
-mobility with a delayed controller, beyond the \numVaOneTolDb~dB limit of VA-1, so E-A uses a
-midpoint evaluator (Section~\ref{sec:cases-ea}). \claim{C-REPLAY}A replay re-injects the recorded TX
-streams and commands at their applied times and reproduces the recorded RX samples bit for bit
-(RT-16).
+mobility with a delayed controller and fails the limit of VA-1, so E-A uses a midpoint
+evaluator (Section~\ref{sec:cases-ea}).
+\claim{C-REPLAY}A replay re-injects the recorded TX streams and commands at their applied times
+and reproduces the recorded RX samples bit for bit.
 
 \subsection{Interfaces}\label{sec:design-if}
 % api/device.py, api/streams.py, api/metadata.py (codes, modes, table_iii), compat.py;
 % the API table (generated by tools/gen_tables.py) is in Appendix B.
 \claim{C-API}The Python API follows UHD~\cite{UHDManual} without binary compatibility: streams
-carry UHD-style metadata with exact time specifications, failures are status codes (IO-06),
-and RIS commands carry state indices, phases or a codebook index, an optional transition and a
-late policy. Each stream has one channel, and an unmodified UHD application does not run
-against this interface (Section~\ref{sec:future}). \claim{C-CONTROL}Control messages are
-validated before dispatch, so every refusal has one code, and a socket command lands at its
-exact sample with zero lateness in lockstep mode (IO-03). \claim{C-SECURITY}Sockets bind to
-loopback addresses unless remote binding is allowed; there is no authentication (IO-04).
+carry UHD-style metadata with exact time specifications, failures are status codes, and RIS
+commands carry state indices, phases or a codebook index, an optional transition and a late
+policy. Each stream has one channel, and an unmodified UHD application does not run against
+this interface (Section~\ref{sec:future}). \claim{C-CONTROL}Control messages are validated
+before dispatch, so every refusal has one code, and a socket command lands at its exact sample
+with zero lateness in lockstep mode. \claim{C-SECURITY}Sockets bind to loopback addresses
+unless remote binding is allowed; there is no authentication.
 \claim{C-RAW}For radio software that exchanges raw samples over request--reply sockets, the
 engine takes the broker role of the srsRAN ZMQ setup~\cite{srsRANZMQ}: it requests TX samples
 from the peer and answers its receive requests, with timing implicit in sample counts, so the
-mode is lockstep. Its two request formats were taken from the srsRAN 4G and GNU Radio sources
-and are tested against stub peers (IO-08); unmodified GNU Radio \txtEeGrVersion{} runs against
-it (Section~\ref{sec:cases-ee}). No srsRAN binary has been run, so we call it an srsRAN-style
+mode is lockstep. Its two request formats, taken from the srsRAN 4G and GNU Radio sources, are
+tested against stub peers, and unmodified GNU Radio \txtEeGrVersion{} runs against it
+(Section~\ref{sec:cases-ee}); no srsRAN binary has been run, so we call it an srsRAN-style
 raw-IQ mode.
 % transport/rawreqrep.py (srsran_dummy, gnuradio_count); examples/gnuradio_zmq;
 % tests/integration/test_gnuradio_raw.py (Linux, gated on a GNU Radio interpreter).
@@ -169,7 +173,7 @@ frequency, and signed incidence and reflection angles in one plane of incidence
 (Appendix~\ref{app:model}), read at the carrier, with mandatory provenance such as the kind of
 source, uncertainties and a hash of the raw data.
 \claim{C-TABLE-CHECKS}Validators reject tables that are not passive, not reciprocal or too
-coarse, and queries outside the grid or band (PH-31); interpolation is complex-linear, so the
+coarse, and queries outside the grid or band; interpolation is complex-linear, so the
 channel stays linear in $\Gamma$. \claim{C-TABLE-IMPORT}Tables come from CSV files with a
 provenance sidecar, MATLAB unit-cell curves or built-in alphabets, including the published
 states of Tang et al.~\cite{Tang2022mmWave}. \claim{C-CAPS}Panel capabilities carry the names

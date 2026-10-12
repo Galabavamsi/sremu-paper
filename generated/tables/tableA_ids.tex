@@ -3,114 +3,114 @@
 % tests/oracles/tables.py, the test modules' docstrings and the test record.
 % Do not edit.
 \begin{table*}[t]
-\caption{Physics identifiers (PH) and MATLAB code-to-code references (G): the property checked, its oracle or reference, and the acceptance tolerance, transcribed from the emulator's specification and test modules (the pipeline requires each number to appear in them). Tolerances in dB, degrees, Hz or samples are absolute; rel.: relative to the reference magnitude; bitwise: identical samples. Tests: implementation tests in the test record of commit 4ec4c2b that carry the identifier. exp.: experimental tier, outside the record.}
+\caption{Physics identifiers (PH) and MATLAB code-to-code references (G): the property checked, its oracle or reference, and the acceptance tolerance, transcribed from the emulator's specification and test modules (the pipeline requires each number to appear in them). Tolerances in dB, degrees, Hz or samples are absolute; rel.: relative to the reference magnitude; bitwise: identical samples. Sec.: subsections of Sections~\ref{sec:design} and~\ref{sec:model} whose statements the identifier checks (those sections cite few identifiers in place); --: none. Tests: implementation tests in the test record of commit 1e1fcab that carry the identifier. exp.: experimental tier, outside the record.}
 \label{tab:ids-ph}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.05}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42in}>{\raggedright\arraybackslash}p{1.95in}>{\raggedright\arraybackslash}p{2.68in}>{\raggedright\arraybackslash}p{1.45in}>{\raggedleft\arraybackslash}p{0.3in}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42in}>{\raggedright\arraybackslash}p{1.85in}>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1.45in}>{\raggedright\arraybackslash}p{0.48in}>{\raggedleft\arraybackslash}p{0.3in}@{}}
 \toprule
-Id & Property & Oracle or reference & Tolerance & Tests \\
+Id & Property & Oracle or reference & Tolerance & Sec. & Tests \\
 \midrule
-PH-01 & Free-space line of sight (Friis) & closed form: $-63.329$ dB at 3.5 GHz, 10 m; $-106.768$ dB at 100 MHz, 52 km & rel. $10^{-12}$ & 4 \\
-PH-02 & Kernel K1 equals published forms (point cells) & Tang et al. Eq. 12, ETSI far field with area gain, Ellingson & rel. $10^{-12}$ & 13 \\
-PH-03 & $N^2$ law of a focused far-field panel & Tang et al. Eq. 8: $N=100$, 400, 1600 at $\lambda/2$, 2 km & $\pm$0.01 dB; slope 12.04 $\pm$0.01 dB per $4\times$ & 2 \\
-PH-04 & Power invariant under aperture refinement & 1 m$^2$, 3.5 GHz: $-115.280$ dB far, any $N$; $-88.128$ dB near, converged patches & $\pm$0.01 dB far; $\pm$0.10 dB near & 11 \\
-PH-05 & Image theory and the Huygens factor $j$ & 40$^\circ$ plate of 12 m vs image; disk on axis vs closed form & 0.3 dB, 3$^\circ$; 0.01 dB & 3 \\
-PH-06 & Monostatic radar cross section of a plate & 1 m$^2$ at 400 m: $-126.067$ dB & $\pm$0.01 dB & 1 \\
-PH-07 & Near-field focusing saturation, passivity & $d=1$ m: $-23.864$ dB ($L=1$ m), $-6.021$ dB ($L\to\infty$); $|h|\le 0.5$ & $\pm$0.01 dB; bound exact & 5 \\
-PH-08 & Reciprocity of the full scene & LOS, ground, two walls, knife edge, RIS with a symmetric table & rel. $10^{-12}$ & 20 \\
-PH-09 & Visibility of the panel & node behind the panel & RIS term exactly 0 & 5 \\
-PH-10 & Flat ground, Fresnel coefficients & two-ray 139.10 dB (52 km, 100 MHz); Brewster angle 26.565$^\circ$; PEC & $\pm$0.01 dB; $10^{-12}$; exact & 17 \\
-PH-11 & Single knife edge $F(\nu)$ & $|F(0)|=0.5$; approximation $J(\nu)$ vs exact loss; $\nu=10$: 32.95 dB & $10^{-12}$; 0.15 dB; $\pm$0.01 dB & 29 \\
-PH-12 & Smooth-earth P.526 path (experimental tier) & regression: excess loss 37.14 and 20.28 dB at 52 km & $\pm$0.01 dB & exp. \\
-PH-13 & Large-$N$ quantization loss & $\eta(b)=-3.922$, $-0.912$, $-0.224$ dB; lab pair $-4.105$ dB; Monte Carlo & $\pm$0.001 dB; Monte Carlo $\pm$0.15 dB & 11 \\
-PH-14 & Phase-dependent amplitude model & $(\beta_{\min},\alpha)=(0.2,1.6)$: $-5.508$ dB; $(0.8,1.6)$: $-1.085$ dB & $\pm$0.01 dB & 5 \\
-PH-15 & Efficiency and dead cells & $\eta=0.5$: $-3.0103$ dB; 10\% dead cells, $N=1024$: $-0.915$ dB & $10^{-9}$; $\pm$0.10 dB & 6 \\
-PH-16 & Phase-wrap invariance & phases shifted by whole turns & $|\Delta h|\le$ $10^{-15}\,|h|$ & 14 \\
-PH-17 & Geometric Doppler shift & LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz & $10^{-6}$ rad, $\pm$0.001 Hz; $\pm$0.01 Hz & 10 \\
-PH-18 & Snapshot interpolation and render tiles & brute force per element and sample, three scenes & $|\Delta h|/|h|\le$ $10^{-3}$ & 27 \\
-PH-19 & Invariance to snapshot period and chunking & $T_u$ = auto, auto/2, auto/4; client chunks of 0.25, 1, 3.7 ms & rel. $2\times10^{-3}$; chunks bitwise & 9 \\
-PH-20 & Fractional delay, wideband rendering & every filter row in band; known delay of 37.4 samples & $\le$ $-60$ dB; 0.01 samples & 41 \\
-PH-21 & Thermal noise power, independence & $-113.975$ dBm at 1 MS/s, $F=0$ dB; correlation across receivers & $\pm$0.05 dB; $|\rho|\le 0.016$ & 6 \\
-PH-22 & Linearity, time shift, seeds & exact algebraic identities & $10^{-12}$ & 10 \\
-PH-23 & Energy bound of a panel & scattered vs incident power, every tested configuration & scattered $\le$ incident & 21 \\
-PH-24 & Exact binary optimum & brute force: $N=20$ ($2^{20}$ configurations), 100 positions & rel. $10^{-12}$ & 2 \\
-PH-25 & Binary decomposition $\Gamma=m+ds$ & decomposed vs direct; lab pair: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB & $10^{-12}$; $\pm$0.01 dB & 6 \\
-PH-26 & Point vs patch cell model & $16\times16$ panel, 3.5 GHz: specular; 45$^\circ$ retro, 8.11 dB in the far field & 0.05 dB; $\pm$0.1 dB & 7 \\
-PH-27 & Occluders and partitions & segment-polygon cases; partition of $L$ dB on the LOS & exact & 24 \\
-PH-28 & Extension of incidence-angle tables & symmetry and specular entry of the extended table & exact & 2 \\
-PH-29 & General finite-alphabet optimum & brute force: $S=4$, $N=10$, 50 instances & rel. $10^{-12}$ & 1 \\
-PH-30 & Quantizer & per-element brute force, unequal amplitudes & exact & 3 \\
-PH-31 & Response-table validators & passivity, reciprocity, grid density, domain, provenance & exact or raises & 36 \\
-PH-32 & Ground on the RIS hops & $\Gamma_g=0$ gives the free-space term; four hop variants & $10^{-12}$ & 9 \\
+PH-01 & Free-space line of sight (Friis) & closed form: $-63.329$ dB at 3.5 GHz, 10 m; $-106.768$ dB at 100 MHz, 52 km & rel. $10^{-12}$ & \ref{sec:model-stack} & 4 \\
+PH-02 & Kernel K1 equals published forms (point cells) & Tang et al. Eq. 12, ETSI far field with area gain, Ellingson & rel. $10^{-12}$ & \ref{sec:model-k1} & 13 \\
+PH-03 & $N^2$ law of a focused far-field panel & Tang et al. Eq. 8: $N=100$, 400, 1600 at $\lambda/2$, 2 km & $\pm$0.01 dB; slope 12.04 $\pm$0.01 dB per $4\times$ & -- & 2 \\
+PH-04 & Power invariant under aperture refinement & 1 m$^2$, 3.5 GHz: $-115.280$ dB far, any $N$; $-88.128$ dB near, converged patches & $\pm$0.01 dB far; $\pm$0.10 dB near & \ref{sec:model-k1}, \ref{sec:model-cells} & 11 \\
+PH-05 & Image theory and the Huygens factor $j$ & 40$^\circ$ plate of 12 m vs image; disk on axis vs closed form & 0.3 dB, 3$^\circ$; 0.01 dB & \ref{sec:model-k1} & 3 \\
+PH-06 & Monostatic radar cross section of a plate & 1 m$^2$ at 400 m: $-126.067$ dB & $\pm$0.01 dB & -- & 1 \\
+PH-07 & Near-field focusing saturation, passivity & $d=1$ m: $-23.864$ dB ($L=1$ m), $-6.021$ dB ($L\to\infty$); $|h|\le 0.5$ & $\pm$0.01 dB; bound exact & -- & 5 \\
+PH-08 & Reciprocity of the full scene & LOS, ground, two walls, knife edge, RIS with a symmetric table & rel. $10^{-12}$ & \ref{sec:model-stack} & 20 \\
+PH-09 & Visibility of the panel & node behind the panel & RIS term exactly 0 & \ref{sec:model-k1} & 5 \\
+PH-10 & Flat ground, Fresnel coefficients & two-ray 139.10 dB (52 km, 100 MHz); Brewster angle 26.565$^\circ$; PEC & $\pm$0.01 dB; $10^{-12}$; exact & \ref{sec:model-stack} & 17 \\
+PH-11 & Single knife edge $F(\nu)$ & $|F(0)|=0.5$; approximation $J(\nu)$ vs exact loss; $\nu=10$: 32.95 dB & $10^{-12}$; 0.15 dB; $\pm$0.01 dB & \ref{sec:model-stack} & 29 \\
+PH-12 & Smooth-earth P.526 path (experimental tier) & regression: excess loss 37.14 and 20.28 dB at 52 km & $\pm$0.01 dB & -- & exp. \\
+PH-13 & Large-$N$ quantization loss & $\eta(b)=-3.922$, $-0.912$, $-0.224$ dB; lab pair $-4.105$ dB; Monte Carlo & $\pm$0.001 dB; Monte Carlo $\pm$0.15 dB & \ref{sec:model-nonideal} & 11 \\
+PH-14 & Phase-dependent amplitude model & $(\beta_{\min},\alpha)=(0.2,1.6)$: $-5.508$ dB; $(0.8,1.6)$: $-1.085$ dB & $\pm$0.01 dB & -- & 5 \\
+PH-15 & Efficiency and dead cells & $\eta=0.5$: $-3.0103$ dB; 10\% dead cells, $N=1024$: $-0.915$ dB & $10^{-9}$; $\pm$0.10 dB & \ref{sec:model-nonideal} & 6 \\
+PH-16 & Phase-wrap invariance & phases shifted by whole turns & $|\Delta h|\le$ $10^{-15}\,|h|$ & -- & 14 \\
+PH-17 & Geometric Doppler shift & LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz & $10^{-6}$ rad, $\pm$0.001 Hz; $\pm$0.01 Hz & \ref{sec:model-doppler} & 10 \\
+PH-18 & Snapshot interpolation and render tiles & brute force per element and sample, three scenes & $|\Delta h|/|h|\le$ $10^{-3}$ & \ref{sec:model-doppler} & 27 \\
+PH-19 & Invariance to snapshot period and chunking & $T_u$ = auto, auto/2, auto/4; client chunks of 0.25, 1, 3.7 ms & rel. $2\times10^{-3}$; chunks bitwise & \ref{sec:model-doppler} & 9 \\
+PH-20 & Fractional delay, wideband rendering & every filter row in band; known delay of 37.4 samples & $\le$ $-60$ dB; 0.01 samples & \ref{sec:model-doppler} & 41 \\
+PH-21 & Thermal noise power, independence & $-113.975$ dBm at 1 MS/s, $F=0$ dB; correlation across receivers & $\pm$0.05 dB; $|\rho|\le 0.016$ & \ref{sec:model-doppler} & 6 \\
+PH-22 & Linearity, time shift, seeds & exact algebraic identities & $10^{-12}$ & -- & 10 \\
+PH-23 & Energy bound of a panel & scattered vs incident power, every tested configuration & scattered $\le$ incident & -- & 21 \\
+PH-24 & Exact binary optimum & brute force: $N=20$ ($2^{20}$ configurations), 100 positions & rel. $10^{-12}$ & \ref{sec:model-nonideal} & 2 \\
+PH-25 & Binary decomposition $\Gamma=m+ds$ & decomposed vs direct; lab pair: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB & $10^{-12}$; $\pm$0.01 dB & \ref{sec:model-nonideal} & 6 \\
+PH-26 & Point vs patch cell model & $16\times16$ panel, 3.5 GHz: specular; 45$^\circ$ retro, 8.11 dB in the far field & 0.05 dB; $\pm$0.1 dB & \ref{sec:model-cells} & 7 \\
+PH-27 & Occluders and partitions & segment-polygon cases; partition of $L$ dB on the LOS & exact & \ref{sec:model-stack} & 24 \\
+PH-28 & Extension of incidence-angle tables & symmetry and specular entry of the extended table & exact & \ref{sec:design-states} & 2 \\
+PH-29 & General finite-alphabet optimum & brute force: $S=4$, $N=10$, 50 instances & rel. $10^{-12}$ & \ref{sec:model-nonideal} & 1 \\
+PH-30 & Quantizer & per-element brute force, unequal amplitudes & exact & \ref{sec:model-nonideal} & 3 \\
+PH-31 & Response-table validators & passivity, reciprocity, grid density, domain, provenance & exact or raises & \ref{sec:design-states} & 36 \\
+PH-32 & Ground on the RIS hops & $\Gamma_g=0$ gives the free-space term; four hop variants & $10^{-12}$ & \ref{sec:model-stack} & 9 \\
 \midrule
-G1 & Per-element K1 sum & toolbox primitives; lab-like layouts, geometries of Tang et al. & max. rel. $10^{-9}$ & 17 \\
-G2 & Steered beam pattern & phased.RISReflector, $16\times16$ at $\lambda/2$, constant removed & $\pm$0.5$^\circ$; 0.05 dB & 3 \\
-G3 & One-bit beam pattern & mirror lobe at 41.15$^\circ$, $-0.97$ dB & $\pm$0.25$^\circ$; $\pm$0.10 dB & 3 \\
-G4 & Frequency offset & comm.PhaseFrequencyOffset, arbitrary chunk sizes & $10^{-9}$ of the RMS & 3 \\
-G5 & Thermal noise & comm.ThermalNoise, 290 K, 1 MS/s & $\pm$0.01 dB & 3 \\
-G6 & Fading statistics & comm.RayleighChannel autocorrelation and level crossings & as ST-02 & 1 \\
-G7 & ETSI far-field closed form & focused panel at 100 MHz; physical-optics plate bound & 1 dB; bound + 0.01 dB & 2 \\
-G8 & Two-ray channel & phased.TwoRayChannel at 52 km & $\pm$0.05 dB & 1 \\
+G1 & Per-element K1 sum & toolbox primitives; lab-like layouts, geometries of Tang et al. & max. rel. $10^{-9}$ & -- & 17 \\
+G2 & Steered beam pattern & phased.RISReflector, $16\times16$ at $\lambda/2$, constant removed & $\pm$0.5$^\circ$; 0.05 dB & -- & 3 \\
+G3 & One-bit beam pattern & mirror lobe at 41.15$^\circ$, $-0.97$ dB & $\pm$0.25$^\circ$; $\pm$0.10 dB & -- & 3 \\
+G4 & Frequency offset & comm.PhaseFrequencyOffset, arbitrary chunk sizes & $10^{-9}$ of the RMS & \ref{sec:model-doppler} & 3 \\
+G5 & Thermal noise & comm.ThermalNoise, 290 K, 1 MS/s & $\pm$0.01 dB & \ref{sec:model-doppler} & 3 \\
+G6 & Fading statistics & comm.RayleighChannel autocorrelation and level crossings & as ST-02 & -- & 1 \\
+G7 & ETSI far-field closed form & focused panel at 100 MHz; physical-optics plate bound & 1 dB; bound + 0.01 dB & -- & 2 \\
+G8 & Two-ray channel & phased.TwoRayChannel at 52 km & $\pm$0.05 dB & -- & 1 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 \begin{table*}[t]
-\caption{Runtime (RT), interface (IO), statistical (ST), engine-path consistency (VA) and frequency-offset (V-CFO) identifiers, as in Table~\ref{tab:ids-ph}. Tolerances in dB, degrees, Hz or samples are absolute; rel.: relative to the reference magnitude; bitwise: identical samples. Tests: implementation tests in the test record of commit 4ec4c2b that carry the identifier. study: accepted in the study record (Appendix~\ref{app:provenance}), not in the test record.}
+\caption{Runtime (RT), interface (IO), statistical (ST), engine-path consistency (VA) and frequency-offset (V-CFO) identifiers, as in Table~\ref{tab:ids-ph}. Tolerances in dB, degrees, Hz or samples are absolute; rel.: relative to the reference magnitude; bitwise: identical samples. Sec.: subsections of Sections~\ref{sec:design} and~\ref{sec:model} whose statements the identifier checks (those sections cite few identifiers in place); --: none. Tests: implementation tests in the test record of commit 1e1fcab that carry the identifier. study: accepted in the study record (Appendix~\ref{app:provenance}), not in the test record.}
 \label{tab:ids-rt}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.05}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42in}>{\raggedright\arraybackslash}p{1.95in}>{\raggedright\arraybackslash}p{2.68in}>{\raggedright\arraybackslash}p{1.45in}>{\raggedleft\arraybackslash}p{0.3in}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42in}>{\raggedright\arraybackslash}p{1.85in}>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1.45in}>{\raggedright\arraybackslash}p{0.48in}>{\raggedleft\arraybackslash}p{0.3in}@{}}
 \toprule
-Id & Property & Oracle or reference & Tolerance & Tests \\
+Id & Property & Oracle or reference & Tolerance & Sec. & Tests \\
 \midrule
-RT-01 & Exact sample counts & 5880 S/s, 23.04 and 30.72 MS/s together; awkward durations & exact & 13 \\
-RT-02 & Time round trips & $k$ up to $2^{40}$ at three rates; property tests & exact & 14 \\
-RT-03 & Invariance to chunks, epochs, barriers, threads & client chunks of 1, 7, 1000 samples; 1, 4, 16 threads & bitwise & 24 \\
-RT-04 & Page-size invariance & page targets of 0.25, 0.5, 1 ms & rel. $10^{-9}$ & 8 \\
-RT-05 & Switch sample of each receiver & $\mathrm{to\_ticks}(t_{\mathrm{sw}}+\tau)$ for a receiver at 2 km, 23.04 MS/s & exact & 5 \\
-RT-06 & Late commands & applied on arrival with logged lateness, or rejected & exact & 6 \\
-RT-07 & Same-time ties & later sequence number wins, both logged & exact & 6 \\
-RT-08 & Barrier determinism & controllers sleeping 0 vs 50 ms; random rates and periods & bitwise; lateness 0 & 20 \\
-RT-09 & Oscillator-offset continuity & 500 Hz at 5880 S/s across block boundaries & $\pm10^{-9}$ rad & 14 \\
-RT-10 & Skip invariance & receiver inactive for 0.3 s, then active & bitwise & 8 \\
-RT-11 & Known delay through the engine & 37.4 samples & 0.01 samples & 6 \\
-RT-12 & Reconfiguration transitions & linear 20 $\mu$s ramp; re-command during a transition & $10^{-9}$; $10^{-3}$ & 11 \\
-RT-13 & Transmit commitment and stalls & end of burst, idle-until, stall report, zero fill & as specified & 9 \\
-RT-14 & Keyed random streams & an added node leaves other variates unchanged; two backends & bitwise & 21 \\
-RT-15 & Independence of the wall clock & static import check; patched clock & identical output & 17 \\
-RT-16 & Replay & recorded TX and commands reproduce the RX samples & bitwise & 18 \\
-RT-17 & Lookahead violation & action earlier than $t_b+L_{\min}$ & error raised & 8 \\
-RT-18 & Paced-mode counters & injected sleep load, late TX burst, unread RX stream & exact counts & 10 \\
-RT-19 & Backend equivalence through the engine & lab walk, vehicle and FM scenes & rel. $10^{-9}$; RMS $10^{-6}$ & 4 \\
+RT-01 & Exact sample counts & 5880 S/s, 23.04 and 30.72 MS/s together; awkward durations & exact & \ref{sec:design-time} & 13 \\
+RT-02 & Time round trips & $k$ up to $2^{40}$ at three rates; property tests & exact & \ref{sec:design-time} & 14 \\
+RT-03 & Invariance to chunks, epochs, barriers, threads & client chunks of 1, 7, 1000 samples; 1, 4, 16 threads & bitwise & \ref{sec:design-time} & 24 \\
+RT-04 & Page-size invariance & page targets of 0.25, 0.5, 1 ms & rel. $10^{-9}$ & \ref{sec:design-time} & 8 \\
+RT-05 & Switch sample of each receiver & $\mathrm{to\_ticks}(t_{\mathrm{sw}}+\tau)$ for a receiver at 2 km, 23.04 MS/s & exact & \ref{sec:design-time} & 5 \\
+RT-06 & Late commands & applied on arrival with logged lateness, or rejected & exact & \ref{sec:design-time} & 6 \\
+RT-07 & Same-time ties & later sequence number wins, both logged & exact & \ref{sec:design-time} & 6 \\
+RT-08 & Barrier determinism & controllers sleeping 0 vs 50 ms; random rates and periods & bitwise; lateness 0 & \ref{sec:design-arch}, \ref{sec:design-time} & 20 \\
+RT-09 & Oscillator-offset continuity & 500 Hz at 5880 S/s across block boundaries & $\pm10^{-9}$ rad & \ref{sec:model-doppler} & 14 \\
+RT-10 & Skip invariance & receiver inactive for 0.3 s, then active & bitwise & \ref{sec:design-time} & 8 \\
+RT-11 & Known delay through the engine & 37.4 samples & 0.01 samples & \ref{sec:model-doppler} & 6 \\
+RT-12 & Reconfiguration transitions & linear 20 $\mu$s ramp; re-command during a transition & $10^{-9}$; $10^{-3}$ & \ref{sec:design-time} & 11 \\
+RT-13 & Transmit commitment and stalls & end of burst, idle-until, stall report, zero fill & as specified & \ref{sec:design-time} & 9 \\
+RT-14 & Keyed random streams & an added node leaves other variates unchanged; two backends & bitwise & \ref{sec:model-doppler} & 21 \\
+RT-15 & Independence of the wall clock & static import check; patched clock & identical output & \ref{sec:design-time} & 17 \\
+RT-16 & Replay & recorded TX and commands reproduce the RX samples & bitwise & \ref{sec:design-arch}, \ref{sec:design-time} & 18 \\
+RT-17 & Lookahead violation & action earlier than $t_b+L_{\min}$ & error raised & \ref{sec:design-time} & 8 \\
+RT-18 & Paced-mode counters & injected sleep load, late TX burst, unread RX stream & exact counts & \ref{sec:design-time} & 10 \\
+RT-19 & Backend equivalence through the engine & lab walk, vehicle and FM scenes & rel. $10^{-9}$; RMS $10^{-6}$ & -- & 4 \\
 \midrule
-IO-01 & Malformed frames and messages & $10^4$ malformed frames; malformed JSON & no crash; exact counts & 22 \\
-IO-02 & Two OS processes over native ZMQ & TX and RX processes vs in-process lockstep & bitwise & 3 \\
-IO-03 & Socket command at the exact sample & commands over the control socket in lockstep & lateness 0 & 12 \\
-IO-04 & Size, element and bind limits & 1 MiB requests, 65,536 elements, loopback binds & refused and counted & 27 \\
-IO-05 & SigMF recordings & required keys, annotation order, collection hashes & pass & 30 \\
-IO-06 & API status codes & timeout, overflow, late command, time and sequence errors & exact & 14 \\
-IO-07 & Compatibility wrappers & in-house BPSK scripts through the wrapper calls & 2389 samples, exact & 11 \\
-IO-08 & Raw request-reply mode & stub peers, both request formats & sample-exact in lockstep & 11 \\
+IO-01 & Malformed frames and messages & $10^4$ malformed frames; malformed JSON & no crash; exact counts & \ref{sec:design-if} & 22 \\
+IO-02 & Two OS processes over native ZMQ & TX and RX processes vs in-process lockstep & bitwise & \ref{sec:design-arch} & 3 \\
+IO-03 & Socket command at the exact sample & commands over the control socket in lockstep & lateness 0 & \ref{sec:design-arch}, \ref{sec:design-time}, \ref{sec:design-if} & 12 \\
+IO-04 & Size, element and bind limits & 1 MiB requests, 65,536 elements, loopback binds & refused and counted & \ref{sec:design-if} & 27 \\
+IO-05 & SigMF recordings & required keys, annotation order, collection hashes & pass & \ref{sec:design-arch}, \ref{sec:design-time} & 30 \\
+IO-06 & API status codes & timeout, overflow, late command, time and sequence errors & exact & \ref{sec:design-arch}, \ref{sec:design-if} & 14 \\
+IO-07 & Compatibility wrappers & in-house BPSK scripts through the wrapper calls & 2389 samples, exact & -- & 11 \\
+IO-08 & Raw request-reply mode & stub peers, both request formats & sample-exact in lockstep & \ref{sec:design-if} & 11 \\
 \midrule
-ST-01 & Random-waypoint law & $l=10$ m, $v=1$ m/s, $10^4$ periods vs stationary law & KS $D\le 0.02$; mean leg $\pm$2.5\% & 4 \\
-ST-02 & Diffuse fading statistics & $f_D=50$ Hz: autocorrelation vs $J_0$; level crossings & 0.05; 10\%; KS 0.01 & 7 \\
-ST-03 & Quantization and failure Monte Carlo & as PH-13 and PH-15, more trials & $\pm$0.15 dB; $\pm$0.10 dB & 4 \\
-ST-04 & BER through the emulator & BPSK, QPSK: 6 points, $\ge$ 100 errors or $2\times10^6$ bits & theory inside 99\% interval & 12 \\
-ST-05 & Frequency estimator vs Cram\'er--Rao bound & periodogram at 10 and 20 dB SNR & RMSE $\le$ 1.5 bound & 3 \\
+ST-01 & Random-waypoint law & $l=10$ m, $v=1$ m/s, $10^4$ periods vs stationary law & KS $D\le 0.02$; mean leg $\pm$2.5\% & \ref{sec:model-stack} & 4 \\
+ST-02 & Diffuse fading statistics & $f_D=50$ Hz: autocorrelation vs $J_0$; level crossings & 0.05; 10\%; KS 0.01 & \ref{sec:model-stack} & 7 \\
+ST-03 & Quantization and failure Monte Carlo & as PH-13 and PH-15, more trials & $\pm$0.15 dB; $\pm$0.10 dB & \ref{sec:model-nonideal} & 4 \\
+ST-04 & BER through the emulator & BPSK, QPSK: 6 points, $\ge$ 100 errors or $2\times10^6$ bits & theory inside 99\% interval & -- & 12 \\
+ST-05 & Frequency estimator vs Cram\'er--Rao bound & periodogram at 10 and 20 dB SNR & RMSE $\le$ 1.5 bound & -- & 3 \\
 \midrule
-VA-1 & Served IQ path vs batch evaluation (E-A) & external controller and RX application, 1000 s runs & 0.02 dB, noise off; CI, noise on & 1 \\
-VA-3 & Exhaustive optimum bounds every controller & $N=20$ ($2^{20}$ configurations), 29 positions & rel. $10^{-12}$ & 4 \\
-VA-4 & IQ path equals batch path & static lab-like scene, noise off, no signaling delay & rel. $10^{-9}$ & 2 \\
-VA-5 & Sample-exact intra-frame switch & earliest affected sample; earlier samples vs no switch & exact; bitwise & 13 \\
+VA-1 & Served IQ path vs batch evaluation (E-A) & external controller and RX application, 1000 s runs & 0.02 dB, noise off; CI, noise on & \ref{sec:design-time} & 1 \\
+VA-3 & Exhaustive optimum bounds every controller & $N=20$ ($2^{20}$ configurations), 29 positions & rel. $10^{-12}$ & -- & 4 \\
+VA-4 & IQ path equals batch path & static lab-like scene, noise off, no signaling delay & rel. $10^{-9}$ & \ref{sec:design-time} & 2 \\
+VA-5 & Sample-exact intra-frame switch & earliest affected sample; earlier samples vs no switch & exact; bitwise & -- & 13 \\
 \midrule
-V-CFO-1 & Frequency offset, noise off & BPSK burst of 2389 samples at 5880 S/s, offsets to $\pm1400$ Hz & $10^{-6}$ Hz; epochs identical & 5 \\
-V-CFO-3 & Same sweep, two OS processes over ZMQ & unwrapped-phase estimator; output vs V-CFO-1 & slope 1 $\pm$0.002, $|$intercept$|<2$ Hz; bitwise & 1 \\
-V-CFO-4 & Frequency estimator with physical noise & SNR 0, 10, 20 dB; 200 trials at 7 offsets & RMSE $\le$ 1.5 bound at 10, 20 dB & study \\
+V-CFO-1 & Frequency offset, noise off & BPSK burst of 2389 samples at 5880 S/s, offsets to $\pm1400$ Hz & $10^{-6}$ Hz; epochs identical & -- & 5 \\
+V-CFO-3 & Same sweep, two OS processes over ZMQ & unwrapped-phase estimator; output vs V-CFO-1 & slope 1 $\pm$0.002, $|$intercept$|<2$ Hz; bitwise & -- & 1 \\
+V-CFO-4 & Frequency estimator with physical noise & SNR 0, 10, 20 dB; 200 trials at 7 offsets & RMSE $\le$ 1.5 bound at 10, 20 dB & -- & study \\
 \bottomrule
 \end{tabular}
 \end{table*}

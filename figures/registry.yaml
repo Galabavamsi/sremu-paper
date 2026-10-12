@@ -64,8 +64,8 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/tang/results/20261012T000448Z_vtang/vtang_points.csv
-      - ../sremu/validation/tang/results/20261012T000448Z_vtang/meta.json
+      - ../sremu/validation/tang/results/20261012T025951Z_vtang/vtang_points.csv
+      - ../sremu/validation/tang/results/20261012T025951Z_vtang/meta.json
     evidence: [PH-04, V-TANG-1, V-TANG-2]
     data_classes: [ANALYTIC, SIM-sremu, DIG, REPORTED]
     outputs: [figures/out/F3.pdf, figures/data/F3.csv, figures/data/F3.meta.json]
@@ -98,9 +98,9 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo_sweep_noise_free.csv
-      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo4_rmse_vs_crb.csv
-      - ../sremu/validation/cfo/results/20261012T000448Z_vcfo/meta.json
+      - ../sremu/validation/cfo/results/20261012T025950Z_vcfo/vcfo_sweep_noise_free.csv
+      - ../sremu/validation/cfo/results/20261012T025950Z_vcfo/vcfo4_rmse_vs_crb.csv
+      - ../sremu/validation/cfo/results/20261012T025950Z_vcfo/meta.json
       - sweeps/results/E-F/ber/ber.csv
       - sweeps/results/E-F/ber/meta.json
     evidence: [V-CFO-1, V-CFO-3, V-CFO-4, ST-05, E-F, ST-04]
@@ -121,7 +121,7 @@ figures:
     owner: WP12
     status: ready
   F7:
-    title: "Lockstep scalability on one AWS c7i.48xlarge (B2): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates"
+    title: "Lockstep scalability on AWS c7i.48xlarge (B2, B2-F45): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates; (d) one-link RTF vs the number of surfaces; (e) RTF vs numba threads; (f) F5 (native ZMQ data plane, end to end) vs F4 of the same rerun"
     width: double
     source: script
     script: figures/src/f07_lockstep.py
@@ -132,14 +132,17 @@ figures:
       - sweeps/results/bench/B2/run/isolation.csv
       - sweeps/results/bench/B2/run/summary.json
       - sweeps/results/bench/B2/meta.json
+      - sweeps/results/bench/B2-F45/run/points.csv
+      - sweeps/results/bench/B2-F45/stress_separate/summary.json
+      - sweeps/results/bench/B2-F45/meta.json
     evidence: [B2]
     data_classes: [MEAS]
     outputs: [figures/out/F7.pdf, figures/data/F7.csv, figures/data/F7.meta.json]
     owner: WP12
     status: ready
-    notes: "B2 run 20261011T084048Z_b2_server (c7i.48xlarge, sremu 309c633; the job's dirty flag only meant unshipped local edits, the bundle equals git archive 309c633); 11 points packed, isolation check as open markers; aggregate throughput recomputed as n_rx x f_s x RTF (the run's aggregate column counts pre-restart samples); F5 (native ZMQ) not drawn, pending rerun after the transport fix"
+    notes: "(a)-(e): B2 run 20261011T084048Z_b2_server (c7i.48xlarge, sremu 309c633; the job's dirty flag only meant unshipped local edits, the bundle equals git archive 309c633); 11 points packed, isolation check as open markers; aggregate throughput recomputed as n_rx x f_s x RTF (the run's aggregate column counts pre-restart samples); its failed F5 points are not drawn. (f): B2-F45 run 20261012T032501Z_b2_server (another c7i.48xlarge, sremu bf08268 clean), F5 end-to-end RTF vs F4 of the same run, plus the range of 100 F5 stress runs"
   F8:
-    title: "Paced mode and control loop on AWS c7i.8xlarge (B3, B4): (a) deadline-miss rate vs slack = page-latency CCDF, headless runs and served runs with commands; (b) largest Sustainable link count per configuration; (c) visible command latency vs command rate, timed and asap; (d) late timed commands and pages missing the 1 ms deadline vs command rate"
+    title: "Paced mode and the served control loop on AWS c7i.8xlarge (B3, B4): (a) deadline-miss rate vs slack = page-latency CCDF, headless runs and served runs with commands; (b) largest Sustainable link count per configuration and the failing count with its repetitions; (c) fraction of served timed commands applied late vs lead; (d) apply delay vs command rate, backlogged repetitions marked"
     width: double
     source: script
     script: figures/src/f08_paced.py
@@ -151,6 +154,7 @@ figures:
       - sweeps/results/bench/B3/run/summary.json
       - sweeps/results/bench/B3/meta.json
       - sweeps/results/bench/B4/paced/paced.json
+      - sweeps/results/bench/B4/paced/spec.json
       - sweeps/results/bench/B4/paced/summary.json
       - sweeps/results/bench/B4/meta.json
     evidence: [B3, B4]
@@ -158,7 +162,7 @@ figures:
     outputs: [figures/out/F8.pdf, figures/data/F8.csv, figures/data/F8.meta.json]
     owner: WP12
     status: ready
-    notes: "B3 run 20261011T074437Z_b3_server and B4 run 20261011T074639Z_b4_paced (c7i.8xlarge, sremu 309c633 clean); no stage breakdown was recorded, so (a) shows total page latency; zero slack is missed by construction (computation starts at the release)"
+    notes: "B3 run 20261012T025455Z_b3_server and B4 run 20261012T025715Z_b4_paced (plan served-1ms; c7i.8xlarge, two instances, sremu bf08268 clean); no stage breakdown was recorded, so (a) shows total page latency; zero slack is missed by construction (computation starts at the release); backlogged repetitions (all at 1000 commands/s) are grey crosses in (d) and excluded from (c)"
   F9:
     title: "E-B: (a), (c) per-symbol EVM around an intra-frame switch; (b), (d) PER vs latency jitter for timed (2 ms lead) / asap / tick-based command semantics at a 0.5 ms guard. Top row (primary): geometry modelled on the lab arrangement (SIM, nominal geometry), LOS present at Es/N0 15 dB and LOS blocked at 25 dB; bottom row (supporting): lab-like SIM geometry, LOS blocked"
     width: double
@@ -234,8 +238,8 @@ figures:
     sweep: null
     inputs:
       - figures/src/figcommon.py
-      - ../sremu/validation/fm/results/20261012T000448Z_vfm/vfm_ed_map.csv
-      - ../sremu/validation/fm/results/20261012T000448Z_vfm/meta.json
+      - ../sremu/validation/fm/results/20261012T025951Z_vfm/vfm_ed_map.csv
+      - ../sremu/validation/fm/results/20261012T025951Z_vfm/meta.json
     evidence: [E-D, V-FM]
     data_classes: [SIM-sremu, ANALYTIC, ASSUMED]
     outputs: [figures/out/F12.pdf, figures/data/F12.csv, figures/data/F12.meta.json]

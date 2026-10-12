@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "sremu_version": "0.1.0.dev0",
-  "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+  "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
   "git_dirty": false,
   "dirty_patch_sha256": null,
   "contract_version": "1.1",
@@ -21,7 +21,7 @@
   "gpu": [],
   "aws_instance": {
     "type": "c7i.48xlarge",
-    "id": "i-0b61314ac0dcfeb18"
+    "id": "i-08e220489c936dc18"
   },
   "scenario_name": "none",
   "scenario_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
@@ -65,14 +65,14 @@
     "/opt/job/out/eb_arc",
     "--with-latency"
   ],
-  "t_start_utc": "2026-10-12T00:22:05.260754Z",
-  "t_end_utc": "2026-10-12T00:22:05.261465Z",
-  "wall_s": 0.000716519999969023,
+  "t_start_utc": "2026-10-12T03:17:21.381254Z",
+  "t_end_utc": "2026-10-12T03:17:21.381982Z",
+  "wall_s": 0.0007340710001244588,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-12T00:22:05.261426Z",
+      "t_utc": "2026-10-12T03:17:21.381923Z",
       "cpu_busy_fraction": 0.0,
-      "loadavg_1min": 1.86572265625
+      "loadavg_1min": 1.93994140625
     }
   ],
   "threading": null

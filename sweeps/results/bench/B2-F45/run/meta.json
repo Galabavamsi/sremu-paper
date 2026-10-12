@@ -1,0 +1,60 @@
+{
+  "suite": "b2",
+  "spec_sha256": "48169fc15f6c1bd364e5c7d9bb025deddcd03a81cb4529facb7a4cc8cd6a72a5",
+  "interrupted": null,
+  "data_classes": {
+    "*": "MEAS"
+  },
+  "workload_data_classes": {
+    "*": "SIM-sremu"
+  },
+  "platform_label": "AWS c7i.48xlarge (Intel(R) Xeon(R) Platinum 8488C, 192 logical CPUs, Linux)",
+  "paced": false,
+  "windows_paced_not_representative": false,
+  "caveats": [
+    "Lockstep RTF: virtual time (min over RX streams) / wall time; RTF_min over complete 100 ms virtual windows (section 12.1).",
+    "Repetitions are shorter than the paced protocol of section 12.3 (>= 60 s, >= 1e4 pages); every point states its virtual time and pages.",
+    "The full product is pruned by the plan and by series pruning (see dropped.csv).",
+    "SIM benchmark geometry; LOS and RIS paths only (no ground, walls or diffuse).",
+    "F5 RTF is end-to-end (served engine's warm-up boundary to the RX client's last sample: computation, transport and client delivery); rtf_rx_client_median is the RX client's own figure (pre-fix metric, over-states a starved client), rtf_server_median the engine-only figure.",
+    "below_floor rows carry only a pilot RTF (sizing estimate), not a measured RTF.",
+    "Partial run: point filter features=['F4', 'F5'] points=None (64 of 909 plan points; the rest in dropped.csv).",
+    "F5 client processes ran on CPUs outside every slot (free cores; see slots.json client_cpus).",
+    "11 points ran concurrently, each pinned to 16 CPUs of whole cores in one NUMA node; concurrent points share L3, memory bandwidth and the power budget (see isolation.csv for the same points run alone).",
+    "Background load in meta.json includes the other concurrent points."
+  ],
+  "files": [
+    "dropped.csv",
+    "isolation.csv",
+    "points.csv",
+    "slots.json"
+  ],
+  "background_load": {
+    "n_samples": 237,
+    "period_s": 2.0,
+    "baseline_busy_fraction": 1.7360508315683483e-05,
+    "background_busy": {
+      "n": 235.0,
+      "min": 0.005358181652188855,
+      "max": 0.6660478730445555,
+      "mean": 0.28443243113261224,
+      "p50": 0.21765967283828075,
+      "p90": 0.5800269567655711,
+      "p99": 0.6543777154054505
+    },
+    "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
+  },
+  "quiet_gate": null,
+  "pinning": {
+    "affinity": "0,96",
+    "affinity_supported": true,
+    "env": {
+      "NUMBA_NUM_THREADS": null,
+      "SREMU_CPUS": null,
+      "SREMU_CLIENT_CPUS": null,
+      "SREMU_GOVERNOR": "unavailable"
+    },
+    "power_plan_or_governor": null
+  },
+  "created_utc": "2026-10-12T03:32:53Z"
+}

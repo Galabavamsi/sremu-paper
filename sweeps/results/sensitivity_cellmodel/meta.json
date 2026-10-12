@@ -45,18 +45,18 @@
  ],
  "script": "cellmodel_sensitivity.py",
  "script_sha256": "718bc6285424a81032085745af95c5526165b6f2bb67075cb971143710c67aa5",
- "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+ "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
  "sremu_dirty": null,
  "sremu_dirty_note": "not determined: the script starts no git process",
- "src_sremu_tree_sha256": "c9e0a2565a75e3af32413cf77eb4be7747446afd0349a7700185873444a64391",
+ "src_sremu_tree_sha256": "ab590463b30dbca58edf66c99683b08804660812d97876ef6efe590430c71a85",
  "versions": {
   "python": "3.12.4",
   "numpy": "2.5.3",
   "scipy": "1.18.1"
  },
  "platform": "Windows-11-10.0.26200-SP0",
- "t_start_utc": "2026-10-12T00:54:46Z",
- "t_end_utc": "2026-10-12T00:54:48Z",
+ "t_start_utc": "2026-10-12T06:59:37Z",
+ "t_end_utc": "2026-10-12T06:59:39Z",
  "files": {
   "results.json": "threshold, cell_factor, eb, ec_lab (see the script docstring)",
   "cellmodel_sensitivity.py": "the script that wrote this directory"

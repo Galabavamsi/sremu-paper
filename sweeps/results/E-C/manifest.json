@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "sremu_version": "0.1.0.dev0",
-  "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+  "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
   "git_dirty": false,
   "dirty_patch_sha256": null,
   "contract_version": "1.1",
@@ -21,7 +21,7 @@
   "gpu": [],
   "aws_instance": {
     "type": "c7i.48xlarge",
-    "id": "i-0b61314ac0dcfeb18"
+    "id": "i-08e220489c936dc18"
   },
   "scenario_name": "ec_lab_polar30",
   "scenario_sha256": "bb974d1b1644c583c684eccadbfc2e9a354c760a3f257a28aab21e5ccf5c8c5b",
@@ -72,14 +72,14 @@
     "/opt/job/out/_ea_cache",
     "200"
   ],
-  "t_start_utc": "2026-10-12T00:00:30.048975Z",
-  "t_end_utc": "2026-10-12T00:06:12.537953Z",
-  "wall_s": 342.48900439700003,
+  "t_start_utc": "2026-10-12T02:55:39.463763Z",
+  "t_end_utc": "2026-10-12T03:01:29.076768Z",
+  "wall_s": 349.613026955,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-12T00:06:12.524851Z",
-      "cpu_busy_fraction": 0.4133714380598885,
-      "loadavg_1min": 28.73046875
+      "t_utc": "2026-10-12T03:01:29.058932Z",
+      "cpu_busy_fraction": 0.4083783092633173,
+      "loadavg_1min": 25.3935546875
     }
   ],
   "threading": null

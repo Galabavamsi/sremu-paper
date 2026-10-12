@@ -9,6 +9,7 @@ groups the rows of the provenance table without losing one.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -50,6 +51,28 @@ def test_cited_ids_expand_ranges(tmp_path: Path) -> None:
     assert "PH-30" not in got  # comments do not cite
 
 
+def test_statement_sections_follow_claim_evidence_and_headings(tmp_path: Path) -> None:
+    (tmp_path / "sections").mkdir()
+    (tmp_path / "claims.yaml").write_text(
+        "claims:\n"
+        "  C-A:\n    evidence: [test:RT-05, 'test:E-B', 'fig:F2']\n"
+        "  C-B:\n    evidence: [test:PH-04, test:RT-05]\n", encoding="utf-8")
+    (tmp_path / "sections" / "03_design.tex").write_text(
+        "\\section{Design}\\label{sec:d}\n\\claim{C-A}Text.\n"
+        "\\subsection{Time}\\label{sec:d-time}\n\\claim{C-B}Text (VA-4). % \\claim{C-A} PH-30\n"
+        "\\subsection{Unlabelled}\nAgain (RT-01--RT-02).\n", encoding="utf-8")
+    (tmp_path / "sections" / "04_physical_model.tex").write_text(
+        "\\section{Model}\\label{sec:m}\n\\subsection{K1}\\label{sec:m-k1}\\claim{C-B}K1.\n",
+        encoding="utf-8")
+    got = vv_ids.statement_sections(tmp_path)
+    assert got["RT-05"] == ["sec:d", "sec:d-time", "sec:m-k1"]  # document order, no repeats
+    assert got["PH-04"] == ["sec:d-time", "sec:m-k1"]
+    assert got["VA-4"] == ["sec:d-time"]  # cited in place
+    assert got["RT-01"] == got["RT-02"] == ["sec:d"]  # unlabelled subsection: its section
+    assert "PH-30" not in got  # comments do not count
+    assert got["E-B"] == ["sec:d"]  # every test evidence counts; table rows are matched later
+
+
 def test_tex_conventions() -> None:
     assert vv_ids.tex("40 deg; +-1e-9 rad; 10% dead") == r"40$^\circ$; $\pm10^{-9}$ rad; 10\% dead"
     assert vv_ids.tex("rel. 2e-3") == r"rel. $2\times10^{-3}$"
@@ -68,24 +91,35 @@ def test_provenance_summary_groups_every_row(tmp_path: Path) -> None:
         (paper_copy / rel).parent.mkdir(parents=True, exist_ok=True)
         (paper_copy / rel).write_bytes((PAPER_ROOT / rel).read_bytes())
     rows = [
-        {"result": "Test record", "commit": "aaaaaaa", "tree": "clean"},
-        {"result": "E-A (aggregate)", "commit": "aaaaaaa", "tree": "clean"},
-        {"result": "V-LAB", "commit": "7a63287", "tree": "clean"},
-        {"result": "B1", "commit": "309c633", "tree": "flagged"},
-        {"result": "B2", "commit": "309c633", "tree": "flagged"},
-        {"result": "E-E throughput", "commit": "n/r", "tree": "n/r"},
+        {"result": "Test record", "commit": "ccccccc", "tree": "clean", "host": "laptop"},
+        {"result": "E-A (aggregate)", "commit": "aaaaaaa", "tree": "clean", "host": "AWS x"},
+        {"result": "B3", "commit": "aaaaaaa", "tree": "clean", "host": "AWS y"},
+        {"result": "V-LAB", "commit": "7a63287", "tree": "clean", "host": "laptop"},
+        {"result": "B1", "commit": "309c633", "tree": "flagged", "host": "AWS x"},
+        {"result": "B2", "commit": "309c633", "tree": "flagged", "host": "AWS x"},
+        {"result": "E-E throughput", "commit": "n/r", "tree": "n/r", "host": "laptop"},
     ]
+    # the V-LAB check must be made at the test record's commit (here: ccccccc)
     meta = paper_copy / vv_ids.VLAB_META
-    meta.write_text(meta.read_text(encoding="utf-8").replace(
-        "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24", "aaaaaaa" + "0" * 33), encoding="utf-8")
-    v = vv_ids.provenance_values(paper_copy, rows, {"sremu_commit": "aaaaaaa" + "0" * 33,
-                                                    "sremu_dirty": False, "host": "AWS x"})
-    assert v["txtProvRegenCommit"] == "aaaaaaa"
-    assert v["txtProvRegenResults"] == "the test record and E-A"
+    doc = json.loads(meta.read_text(encoding="utf-8"))
+    for f in doc["files"]:
+        if f["path"] == Path(vv_ids.VLAB_CHECK).name:
+            f["checked_commit"] = "ccccccc" + "0" * 33
+    meta.write_text(json.dumps(doc), encoding="utf-8")
+    junit = {"sremu_commit": "ccccccc" + "0" * 33, "sremu_dirty": False, "host": "laptop"}
+    v = vv_ids.provenance_values(paper_copy, rows, junit)
+    assert v["txtProvRegenCommit"] == "aaaaaaa"  # the regeneration job's E-A row
+    assert v["txtProvRegenHost"] == "AWS x"
+    assert v["txtProvRegenResults"] == "E-A and B3"
+    assert v["txtProvTestCommit"] == "ccccccc"
+    assert v["txtProvTestHost"] == "laptop"
     assert v["txtProvOtherCommits"] == (
-        "V-LAB (7a63287, clean); B1 and B2 (309c633, dirty flag recorded,"
-        " file tree equal to the commit's); E-E throughput (commit not recorded)")
+        "the test record (ccccccc, clean); V-LAB (7a63287, clean); B1 and B2 (309c633, dirty"
+        " flag recorded, file tree equal to the commit's); E-E throughput (commit not"
+        " recorded)")
     assert vv_ids._short("E-B, arc geometry") == "E-B (arc geometry)"
     assert vv_ids._short("Cell-model sensitivity") == "cell-model sensitivity"
     with pytest.raises(SystemExit):
-        vv_ids.provenance_values(paper_copy, rows, {"sremu_commit": "aaaaaaa", "sremu_dirty": True})
+        vv_ids.provenance_values(paper_copy, rows, {"sremu_commit": "ccccccc", "sremu_dirty": True})
+    with pytest.raises(SystemExit):  # V-LAB check at another commit than the test record
+        vv_ids.provenance_values(paper_copy, rows, {**junit, "sremu_commit": "d" * 40})

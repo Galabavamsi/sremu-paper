@@ -8,23 +8,26 @@
 % switching, as in the cited RIS + 5G NR experiments). The detail moved for length (E-B setup
 % and lab-like row, E-A protocol record and time-scale comparison, E-C table and F11, E-D with
 % F12, E-E table, throughput and the srsRAN/OAI analysis) is in Appendix F
-% (sections/app_f_cases.tex), with the same markers.
+% (sections/app_f_cases.tex), with the same markers. Page fit (2026-10-12): the served-path
+% numbers of C-EB-SERVED are stated in Section VI and Appendix F only (mock review should-fix
+% 6); VII-A keeps the bridge's conclusion in one sentence without numbers, so the caveat that
+% the J <= 1 ms regime is not reached on the served path stays in the main text. The VA-1 side
+% results (start-of-step match, interpolation bound) are in Appendix F.
 \section{Case Studies}\label{sec:cases}
 
 The studies use the semantics of Section~\ref{sec:design}; their geometries are simulated
-(SIM) and labelled, and every assumed input is named. E-B depends on when a command takes
-effect and runs at the sample level; E-A depends on how old the information behind a command
-is and is evaluated offline on channel coefficients, with a sample-level consistency check; E-C
-evaluates static channel coefficients; E-E runs unmodified radio software. Appendix~\ref{app:cases} adds details and a
-model-based FM-band dimensioning (E-D).
+(SIM) and labelled, and every assumed input is named. E-B, on when a command takes effect,
+runs at the sample level; E-A, on how old the information behind a command is, is evaluated
+offline on channel coefficients with a sample-level consistency check; E-C evaluates static
+channel coefficients; E-E runs unmodified radio software. Appendix~\ref{app:cases} adds
+details and a model-based FM-band dimensioning (E-D).
 
 \subsection{Intra-frame RIS reconfiguration}\label{sec:cases-eb}
 \claim{C-EB-WHY}A tool with one channel coefficient per block cannot place a reconfiguration
-inside a packet. ETSI GS RIS 008 lists reconfiguration time and modulated-signal quality among
-the parameters of a RIS test~\cite{ETSI_GS_RIS008}, and ETSI GR RIS 004 sizes the delay budget
-of a RIS controller by the frame structure of 5G NR~\cite{ETSI_GR_RIS004}; this study measures
-how a switch inside a packet and the timing of the command behind it interact, at the sample
-level and in lockstep with an in-process controller, so the command latency is modelled.
+inside a packet, yet ETSI GR RIS 004 sizes the delay budget of a RIS controller by the frame
+structure of 5G NR~\cite{ETSI_GR_RIS004}. This study measures how a switch inside a packet and
+the timing of the command behind it interact, at the sample level and in lockstep with an
+in-process controller, so the command latency is modelled.
 
 \claim{C-EB-SETUP}The geometry is modelled on the laboratory arrangement of
 Section~\ref{sec:vv-lab} but simulated (SIM) with nominal dimensions (the middle of each known
@@ -96,18 +99,16 @@ costs nothing, one late in it causes the excess, and with the line of sight pres
 \numEbArcEsnoLowDb~dB and at most \numEbLosHiPerMaxPct~\% of all packets at \numEbEsnoDb~dB.
 
 \claim{C-EB-TICK}A third semantics, a constructed worst case, latches commands on a free-running
-\numEbTickMs~ms timer not aligned with the packets. Its closed-form exposure, set by the timer
-phase (Appendix~\ref{app:cases}), is \numEbCfTickZeroMinPct--\numEbCfTickZeroMaxPct~\% without
-jitter over the guards (Fig.~\ref{fig:F9}(b): \numEbArcTickPerMinPct--\numEbArcTickPerMaxPct~\%
-lost), so the timer period against the frame decides, not the controller. RIS experiments with
-5G NR testbeds also switch on an uncoordinated timer~\cite{Yashvanth2026Random,Kiran2026Random},
-but with a period of seconds.
+\numEbTickMs~ms timer not aligned with the packets: its closed-form exposure
+(Appendix~\ref{app:cases}) is \numEbCfTickZeroMinPct--\numEbCfTickZeroMaxPct~\% without jitter
+over the guards (Fig.~\ref{fig:F9}(b): \numEbArcTickPerMinPct--\numEbArcTickPerMaxPct~\% lost),
+set by the timer period against the frame, not by the controller. RIS experiments with 5G NR
+testbeds also switch on an uncoordinated timer, but with a period of
+seconds~\cite{Yashvanth2026Random,Kiran2026Random}.
 
-\claim{C-EB-SERVED}These runs are lockstep with a modelled latency. Served in paced mode, the
-asap latency reached a p99 of \numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms
-and \numBfourLateRepMinPct{} to \numBfourLateRepMaxPct~\% of timed commands with a
-\numBfourLeadMs~ms lead were late (Section~\ref{sec:wc-loop}), so the regime
-$J\le\numEbJitterOneMs$~ms of Fig.~\ref{fig:F9} is not yet reachable through the served path.
+\claim{C-EB-SERVED}These runs are lockstep with a modelled latency; on the served path of
+Section~\ref{sec:wc-loop}, even the median asap latency exceeds every latency of the regime
+$J\le\numEbJitterOneMs$~ms of Fig.~\ref{fig:F9} (Appendix~\ref{app:cases}).
 \claim{C-EB-LABLIKE}The lab-like geometry (Fig.~\ref{fig:F9}(c), (d); Appendix~\ref{app:cases})
 supports this picture.
 
@@ -157,9 +158,7 @@ external receiver application (one geometry, exact optimum and URAP, delays of
 \numVaOneTauMinS{} and \numVaOneTauMaxS~s, mean power alone), agree with the evaluator within
 \numVaOneMaxDiffDb~dB, inside the pre-specified limit of \numVaOneTolDb~dB (VA-1,
 Fig.~\ref{fig:F10}(c)). The engine's \texttt{run\_batch} reads up to \numVaOneLeftMaxDb~dB
-higher and fails that limit (Section~\ref{sec:design-time}); with its start-of-step rule the
-evaluator matches it within \numVaOneVecLeftDb~dB, and with all cells on its channel
-interpolation errs by at most \numEaInterpMaxDb~dB (Appendix~\ref{app:cases}).
+higher and fails that limit (Appendix~\ref{app:cases}).
 
 \begin{figure*}[t]
 \centering
@@ -174,10 +173,10 @@ runs (rows: controller, delay, noise), with the acceptance band. Data class: SIM
 
 \subsection{Non-ideality ablation}\label{sec:cases-ec}
 \claim{C-EC}Because the optimum over a finite alphabet is exact
-(Section~\ref{sec:model-nonideal}), the cost of a non-ideality is a short analytic result
-rather than the outcome of a heuristic; Appendix~\ref{app:cases} gives the loss of the
-optimized RIS term relative to ideal continuous phase per alphabet and geometry. The results
-agree with prior work~\cite{WuZhang2020Discrete,Abeywickrama2020Practical}. One-bit control
+(Section~\ref{sec:model-nonideal}), the cost of a non-ideality, the loss of the optimized RIS
+term relative to ideal continuous phase, is a short analytic result rather than the outcome of
+a heuristic (Appendix~\ref{app:cases}); the results agree with prior
+work~\cite{WuZhang2020Discrete,Abeywickrama2020Practical}. One-bit control
 costs \numEcOneBitMin--\numEcOneBitMax~dB, less than the large-$N$ closed-form loss of
 \numEcOneBitEta~dB, because a finite panel in a fixed geometry is not a random phase ensemble.
 The laboratory states, with magnitudes ASSUMED to be unit, are nearly antipodal (in
@@ -189,13 +188,12 @@ and designing for an ideal alphabet but deploying on the true states costs
 
 \subsection{Integration with external IQ applications}\label{sec:cases-ee}
 % E-E: sremu examples/gnuradio_zmq, experiments/ee_gnuradio.py; results in sweeps/results/E-E
-% (regenerated at sremu 4ec4c2b on AWS c7i.48xlarge, clean tree) and E-E-laptop (laptop
+% (regenerated at sremu bf08268 on AWS c7i.48xlarge, clean tree) and E-E-laptop (laptop
 % throughput sweeps; no recorded commit).
-\claim{C-EE}Besides V-CFO-3 and VA-1, which ran with external processes, the raw
-request--reply mode (Section~\ref{sec:design-if}) ran with unmodified GNU Radio
-\txtEeGrVersion{} (Ubuntu package) as the peer, in a separate process that knows nothing of the
-emulator: its stock ZMQ request and reply blocks and a DQPSK modem of stock blocks with blind
-timing and carrier recovery. In the scene (SIM), transmitter and receiver stand \numEeDistM~m
+\claim{C-EE}The raw request--reply mode (Section~\ref{sec:design-if}) ran with unmodified GNU
+Radio \txtEeGrVersion{} (Ubuntu package) as the peer, in a separate process that knows nothing
+of the emulator: its stock ZMQ request and reply blocks and a differential QPSK (DQPSK) modem
+of stock blocks with blind timing and carrier recovery. In the scene (SIM), transmitter and receiver stand \numEeDistM~m
 from an ideal 1-bit RIS of \numEeCells{} cells at \numEeFcGHz~GHz, with a partition of
 \numEeWallDb~dB on the direct path, at \numEeRateMsps~MS/s (Appendix~\ref{app:cases}). \claim{C-EE-LINK}In
 \numEeConfigs{} fresh runs of \numEeStaticS~s, one per RIS configuration, GNU Radio makes no

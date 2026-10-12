@@ -3,4 +3,4 @@
 # the HEAD of `repo` and both working trees are clean. The lead pins it after GATE-PHY and
 # GATE-RT are green.
 repo: ../sremu
-commit: UNPINNED
+commit: 1e1fcab3b8f6c2db3edf5273923e145c49014eae

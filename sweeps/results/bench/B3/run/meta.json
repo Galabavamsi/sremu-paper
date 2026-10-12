@@ -23,17 +23,17 @@
     "points.csv"
   ],
   "background_load": {
-    "n_samples": 1827,
+    "n_samples": 2501,
     "period_s": 2.0,
-    "baseline_busy_fraction": 0.0003124674513071555,
+    "baseline_busy_fraction": 0.000936816904340585,
     "background_busy": {
-      "n": 1825.0,
+      "n": 2499.0,
       "min": 0.0,
-      "max": 0.007755779475601909,
-      "mean": 0.0002219980082324873,
-      "p50": 0.00018338139625162508,
-      "p90": 0.00047520652950078235,
-      "p99": 0.00104061826627469
+      "max": 0.010708880992599035,
+      "mean": 0.0002090415575732591,
+      "p50": 0.00013821858997323938,
+      "p90": 0.00044407227635034907,
+      "p99": 0.0013447866119403462
     },
     "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
   },
@@ -49,5 +49,5 @@
     },
     "power_plan_or_governor": null
   },
-  "created_utc": "2026-10-11T08:43:49Z"
+  "created_utc": "2026-10-12T04:15:49Z"
 }

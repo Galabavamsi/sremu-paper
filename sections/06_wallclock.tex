@@ -1,114 +1,130 @@
-% Section VI -- Wall-clock behaviour and scalability (WP12 draft, stage C; DESIGN 12; condensed
-% for length 2026-10-12). Every number is a macro of numbers.yaml filled by
-% tools/gen_results.py (via tools/bench_results.py) from the committed benchmark results in
-% paper/sweeps/results/bench/{B1,B2,B3,B4,B6} (byte copies of the AWS and laptop runs; MEAS;
-% provenance in each meta.json; analysis in research/analysis/bench_findings.md). No number is
-% compared across instance types or with the laptop (B3 and B4: two instances of one type,
-% stated where they are compared). F5 (native ZMQ data plane) results await the rerun at the
-% pinned commit: their macros stay placeholders until then (numbers.yaml states the plan). B2
-% aggregate throughput is recomputed as n_rx x f_s x RTF. The detail moved for length (host
-% table, F7 lockstep figure, B2 packing and failures, isolation check, B3 protocol and stalls,
-% B4 narrative, cost model, cross-tool B6) is in Appendix E (sections/app_e_bench.tex), with
-% the same markers.
+% Section VI -- Wall-clock behaviour and scalability (WP12; DESIGN 12; rewritten 2026-10-12 with
+% the benchmark runs at the pinned code commit, mock-review must-fix 1, 13 and 18; condensed for
+% length). Every number is a macro of numbers.yaml filled by tools/gen_results.py (via
+% tools/bench_results.py) from paper/sweeps/results/bench/{B1,B2,B2-F45,B3,B4,B4-classic,B6} and
+% sweeps/results/E-F/latency (byte copies of the AWS and laptop runs; MEAS; provenance in each
+% meta.json; analysis in research/analysis/bench_findings.md and ab_paced_aws.md). B1 and B2
+% (lockstep scaling, surface and thread scans) ran at 309c633, B2-F45, B3 and B4 at bf08268
+% (Table tab:platforms). No number is compared across instance types, commits or with the
+% laptop; the F5/F4 ratio is taken within one run. B2 aggregate throughput is recomputed as
+% n_rx x f_s x RTF. The detail (host table, F7, B2 packing and failures, isolation check, the F5
+% metric, E-F p99s, B3 stopping rule and stalls, the B4 lead sweep and backlog rule,
+% B4-classic, cost model, cross-tool B6) is in Appendix E (sections/app_e_bench.tex), with the
+% same markers. "Headless" and "served" are defined here (must-fix 1); the abstract uses both.
+% Adversarial review 2026-10-12: timed-command fractions are pooled over repetitions (said so;
+% per-repetition values in App. E and as markers in Fig. 3(c)); achieved command rates at
+% 1000 commands/s are per-repetition ranges; the limitations give the sustained envelope
+% (B3: 8 links at 0.1-1 MS/s, one at 23.04 MS/s) instead of the measured ranges.
+% Page fit (2026-10-12): the E-F API latency, the link example and the two/four-surface RTF at
+% the top rate moved to Appendix E, with their markers.
 \section{Wall-Clock Behaviour and Scalability}\label{sec:wallclock}
 
 \claim{C-WC-DEFS}Lockstep runs advance virtual time as fast as the inputs and the host allow
 and never drop a sample; paced runs release page $j$ at the wall time $R_j$ of
-Section~\ref{sec:design-time}. The real-time factor (RTF) is the virtual time advanced (the
-minimum over the received streams of samples produced divided by the sample rate) per unit of
-wall time, so a run with RTF${}\geq1$ keeps up with the wall clock; aggregate throughput is the
-received samples, summed over streams, per second of wall time. A paced page misses
-its deadline at slack $s$ when the time from $R_j$ to its delivery exceeds $s$, so the miss
-rate at slack $s$ is the complementary distribution of the page latency. A configuration is
-\emph{Sustainable} when, over at least \numSustainMinDurationS~s after a warm-up of
-\numSustainWarmupS~s, fewer than a fraction \numSustainMissRate{} of its pages miss the
-deadline at \numSustainSlackMs~ms slack, no input sample arrives late and no output page
-overflows. The visible latency of a command is the wall time from its receipt to the delivery
-of the page that holds its switch sample; its lateness is the distance in samples between the
-requested and the applied switch sample.
+Section~\ref{sec:design-time}, so a received sample is delivered between
+$D_{\mathrm{lag}}$ (\numPacedLagMs~ms by default) plus the page's computation and one page more
+after its own wall time. The real-time factor (RTF) is the virtual time advanced (the minimum
+over the received streams) per unit of wall time. A paced page misses its deadline at slack
+$s$ when it is delivered later than $R_j+s$; a configuration is \emph{Sustainable} when, over at
+least \numSustainMinDurationS~s after a warm-up of \numSustainWarmupS~s, fewer than a fraction
+\numSustainMissRate{} of its pages miss the deadline at \numSustainSlackMs~ms slack, no input
+sample arrives late and no output page overflows. A \emph{headless} run generates and consumes
+its streams inside the emulator process, without client processes, transport or control
+socket, and bounds what the engine alone achieves; a \emph{served} run exchanges samples or
+commands with other processes over sockets. A link is a transmitter--receiver pair
+($L=n_{\mathrm{tx}}n_{\mathrm{rx}}$). The visible latency of a command runs from its
+receipt to the delivery of the page that holds its switch; a timed command is late when that
+sample was already computed at its receipt, and is then applied on arrival.
+\claim{C-WC-HOSTS}Lockstep benchmarks ran on AWS \txtHostServer{} instances, paced ones on
+\txtHostPaced{} instances with the engine pinned to \numPacedEngineCpus{} logical CPUs, on
+scenes that load the engine and carry no physical result (Table~\ref{tab:platforms},
+Appendix~\ref{app:bench}).
 
-\claim{C-WC-HOSTS}The lockstep benchmarks (B1, B2) ran on an AWS \txtHostServer{} instance and
-the paced and control-loop benchmarks (B3, B4) on two AWS \txtHostPaced{} instances, with the
-engine pinned to \numPacedEngineCpus{} logical CPUs. The paced runs of B3 are headless
-(streams generated and consumed in the emulator process, without client or transport costs),
-and the scenes, with line-of-sight and single-bounce surface paths on every
-transmitter--receiver link, load the engine and carry no physical result
-(Appendix~\ref{app:bench}).
-
-\subsection{Lockstep scaling}
+\subsection{Lockstep scaling and data plane}\label{sec:wc-data}
 \claim{C-WC-LOCKSTEP}One link at \numBtwoBaseMsps~MS/s through one surface of \numBtwoBaseN{}
 elements, with a static geometry and thermal noise (feature set F1), runs at RTF
-\numBtwoBaseRtf. In static scenes the element count barely matters, because the geometry
-snapshot is computed once: from $N=\numBtwoNmin$ to \numBtwoNmax{} the single-link RTF stays
-within \numBtwoNspreadPct~\%. With mobility (F3) the snapshot is recomputed and the single-link
-RTF falls from \numBtwoFthreeRtfSmall{} at $N=\numBtwoNmin$ to \numBtwoFthreeRtfLarge{} at
-$N=\numBtwoNmax$. A static scene keeps RTF${}\geq1$ up to \numBtwoMaxLinks{} links at
-\numBtwoBaseMsps~MS/s for every $N$, and a single link keeps up at \numBtwoTopMsps~MS/s (RTF
-\numBtwoTopRtf); oscillator impairments, mobility and recording lower the single-link RTF
-step by step, and aggregate throughput peaks at \numBtwoAggMaxMsps~MS/s, at an RTF below one.
-\claim{C-WC-ISOLATION}The points ran up to \numBtwoSlots{} at a time
-on one host, and reference points rerun alone were up to \numBtwoIsoMaxPct~\% faster, so these
-values are conservative (Appendix~\ref{app:bench}, which also covers the native ZMQ data plane,
-F5, whose rerun is pending).
+\numBtwoBaseRtf; from $N=\numBtwoNmin$ to \numBtwoNmax{} this RTF stays within
+\numBtwoNspreadPct~\%, because a static snapshot is computed once, while with mobility (F3) it
+falls from \numBtwoFthreeRtfSmall{} to \numBtwoFthreeRtfLarge. Surfaces likewise cost little
+when static and much with mobility (Fig.~\ref{fig:F7}(d)): from none to four, the one-link RTF
+falls from \numBtwoRzeroStaticRtf{} to \numBtwoRfourStaticRtf{} static and from
+\numBtwoRzeroMobileRtf{} to \numBtwoRfourMobileRtf{} with mobility. With one static surface, \numBtwoMaxLinks{} links keep RTF${}\geq1$ at
+\numBtwoBaseMsps~MS/s for every $N$. Threads help little (Fig.~\ref{fig:F7}(e)): at
+\numBtwoMaxLinks{} links the RTF is \numBtwoThrOneRtf{} with one numba thread,
+\numBtwoThrBestRtf{} with \numBtwoThrBest{} and \numBtwoThrMaxRtf{} with \numBtwoThrMax.
+\claim{C-WC-ISOLATION}Up to \numBtwoSlots{} points ran at a time on one host; rerun alone,
+reference points were up to \numBtwoIsoMaxPct~\% faster, so these values are conservative.
+
+\claim{C-WC-DATAPLANE}Served over the native ZMQ data plane to a transmitting and a receiving
+client process (F5, rerun B2-F45), the base point delivered samples end to end at RTF
+\numBtwoFfiveRtf, against \numBtwoFfiveFfourRtf{} in process with recording (F4) in the same
+run; over \numBtwoFfivePoints{} configurations F5 reached
+\numBtwoFfiveRatioMin--\numBtwoFfiveRatioMax{} times the F4 RTF and never kept up with the wall
+clock (Fig.~\ref{fig:F7}(f)), and all \numBtwoFfiveStressRuns{} stress runs of the base point
+on \numBtwoFfiveStressWorkers{} concurrent workers completed. Appendix~\ref{app:bench} adds
+the latency of the UHD-shaped API (E-F).
 
 \subsection{Paced operation}
-\claim{C-WC-PACED}Fig.~\ref{fig:F8}(b) gives the largest Sustainable configuration of each B3
-series. At \numBtwoBaseMsps~MS/s with one surface of \numBtwoBaseN{} elements and noise, the
-emulator sustains \numBthreeOneLinks{} links with pages of \numBthreeOnePageUs~$\mu$s, with a
-worst p99 page latency of \numBthreeOnePninetynineUs~$\mu$s and a worst miss rate of
-\numBthreeOneMiss{} at \numSustainSlackMs~ms slack, and a single link is Sustainable at
-\numBthreeTopMsps~MS/s (p99 \numBthreeTopPninetynineUs~$\mu$s). \claim{C-WC-SHORTPAGES}At
-shorter pages the limit is not set by the computation alone but by rare stalls, and with
-mobility by the pages that hold a geometry recomputation, so no mobility configuration is
-Sustainable at \numBthreeHalfPageUs~$\mu$s pages (Appendix~\ref{app:bench}).
+\claim{C-WC-PACED}Headless (B3), at \numBtwoBaseMsps~MS/s with one surface of \numBtwoBaseN{}
+elements and noise, the engine alone sustains \numBthreeOneLinks{} links with pages of
+\numBthreeOnePageUs~$\mu$s (worst p99 page latency \numBthreeOnePninetynineUs~$\mu$s),
+\numBthreeHalfLinks{} with \numBthreeHalfPageUs~$\mu$s and \numBthreeQuarterLinks{} with
+\numBthreeQuarterPageUs~$\mu$s; \numBthreeLowLinks{} links at \numBthreeLowMsps~MS/s,
+\numBthreeMidLinks{} at \numBthreeMidMsps~MS/s and one at \numBthreeTopMsps~MS/s
+(Fig.~\ref{fig:F8}(b)). \claim{C-WC-SHORTPAGES}These limits are indicative: link counts were
+doubled until a repetition failed, \numBthreeSingleRepEnds{} of the \numBthreeSeries{} series
+ended on a single repetition, and short pages fail on computation or on rare stalls
+(Appendix~\ref{app:bench}). Mobility, tried at \numBthreeHalfPageUs~$\mu$s pages alone, missed
+\numBthreeFthreeMissPct~\% of the deadlines with one link.
 
 \begin{figure*}[t]
 \centering
-\sremufigure{F8}{\textwidth}{Paced operation and control loop on AWS \txtHostPaced{}
-instances (B3, B4; MEAS). (a) Deadline-miss rate versus slack, i.e.\ the complementary
-distribution of the page latency, pooled over the repetitions of headless points (solid:
-largest Sustainable point of a series; dashed: the unsustainable point that ended a series)
-and, as crosses, the reported percentiles of the served runs with \numBfourLinks{} links and
-\numBfourRateLowHz~commands/s; dotted: the \numSustainSlackMs~ms slack and the
-\numSustainMissRate{} threshold of the Sustainable rule. (b) Largest Sustainable number of links
-per configuration (page duration as run; ``none'': not even one link). (c) Visible command latency
-versus requested command rate, timed (\numBfourLeadMs~ms lead) and asap: median of the
-per-repetition medians and worst p99. (d) Fraction of timed commands applied late and of pages
-missing the \numSustainSlackMs~ms deadline (lines: medians; markers: repetitions). Shaded: the
-engine limits the command rate.}{fig:F8}
+\sremufigure{F8}{\textwidth}{Paced operation and the served control loop on AWS
+\txtHostPaced{} instances (B3, B4; MEAS). (a) Deadline-miss rate versus slack (the complementary
+distribution of the page latency), pooled over the repetitions of headless points (solid:
+largest Sustainable points and the served scene; dashed: points that ended a series), and the
+reported percentiles of the served runs (\numBfourLinks{} links, \numBfourPageUs~$\mu$s pages;
+markers); dotted: the \numSustainSlackMs~ms slack and the \numSustainMissRate{} threshold.
+(b) Largest Sustainable number of links (dots; page duration as run; ``none'': not one link)
+and the failed count (crosses), labelled with the repetitions run there. (c) Fraction of
+served timed commands applied late versus lead (lines: pooled; markers: repetitions; zero at
+the floor); the others took effect at their exact sample. Shaded: range of the asap
+visible-latency p99. (d) Apply delay (after the nominal release of the page with the switch)
+versus requested command rate (median, p99); crosses: backlogged repetitions; shaded:
+engine-bound.}{fig:F8}
 \end{figure*}
 
 \subsection{Control loop}\label{sec:wc-loop}
-\claim{C-WC-LOCKCMD}In lockstep, controllers issued \numBfourLockCommands{} commands at rates
-from \numBfourRateMinHz~Hz to \numBfourRateMaxKHz~kHz, in process and over the control socket,
-and every lateness value is zero, as the barrier semantics require. The loop costs wall time
-instead: at \numBfourRateMidHz~Hz and above, each in-process command costs
-\numBfourCmdCostMinMs--\numBfourCmdCostMaxMs~ms of engine time, so at \numBfourRateMaxKHz~kHz the RTF drops from \numBfourRtfNone{} to
-\numBfourRtfInproc{} in process and to \numBfourRtfRemote{} over the socket.
+\claim{C-WC-LOCKCMD}In lockstep, controllers issued \numBfourLockCommands{} commands at
+\numBfourRateMinHz~Hz to \numBfourRateMaxKHz~kHz, in process and over the control socket, and
+every lateness value is zero, as the barrier semantics require. From \numBfourRateMidHz~Hz on,
+each in-process command costs \numBfourCmdCostMinMs--\numBfourCmdCostMaxMs~ms of engine time, so
+at \numBfourRateMaxKHz~kHz
+the RTF drops from \numBfourRtfNone{} to \numBfourRtfInproc{} in process and to
+\numBfourRtfRemote{} over the socket.
 
-\claim{C-WC-PACEDCMD}In paced mode with asynchronous commands from an external process (B4,
-\numBfourLinks{} links, pages of \numBfourPageMs~ms), no repetition was Sustainable
-(Fig.~\ref{fig:F8}(d)): at \numBfourRateLowHz~commands/s,
-\numBfourMissLowMinPct--\numBfourMissLowMaxPct~\% of the pages missed the
-\numSustainSlackMs~ms deadline, against at most \numBthreeTwoLinkMissMax{} for the same links and
-pages without the control socket (B3, another instance of the same type). An asap command
-became visible after a median of \numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms, with p99
-\numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms (Fig.~\ref{fig:F8}(c)) and rare
-outliers of up to \numBfourVisMaxMs~ms; most of this latency comes from the implementation, not
-the paced schedule: the configuration change and, as the spread suggests, the hand-over
-between the control-socket thread and the paced loop, which share one Python interpreter.
-Timed commands sent with a lead of
-\numBfourLeadMs~ms, less than this latency, were late in \numBfourLateRepMinPct{} to
-\numBfourLateRepMaxPct~\% of the cases per repetition at \numBfourRateLowHz~commands/s and were
-applied on arrival, as designed: a timed command is in time when its lead exceeds the command
-latency plus the error of the client's estimate of virtual time.
+\claim{C-WC-PACEDCMD}Served in paced mode to an external process sending configuration
+commands over the control socket (B4: \numBfourLinks{} links, \numBfourPageUs~$\mu$s pages;
+Fig.~\ref{fig:F8}(c, d)), the engine was not backlogged at \numBfourRateLowHz{} and
+\numBfourRateMidHz~commands/s. Asap commands became visible after a median of
+\numBfourVisPfiftyMinMs--\numBfourVisPfiftyMaxMs~ms and a p99 of
+\numBfourVisPninetynineMinMs--\numBfourVisPninetynineMaxMs~ms; pooled over repetitions, timed
+commands took effect at their exact sample in at least \numBfourExactOkMinPct~\% of the cases
+with leads of
+\numBfourLeadOkMs~ms or more, and \numBfourLateTwoMinPct--\numBfourLateTwoMaxPct~\% were late
+with \numBfourLeadMinMs~ms. No served repetition met the Sustainable rule:
+\numBfourMissLowMinPct--\numBfourMissLowMaxPct~\% of the pages at \numBfourRateLowHz{} and
+\numBfourMissMidMinPct--\numBfourMissMidMaxPct~\% at \numBfourRateMidHz~commands/s missed the
+\numSustainSlackMs~ms deadline (at most \numBfourMissFiveMidMax{} at \numBacklogSlackMs~ms slack),
+where the same links and pages missed none headless. At \numBfourRateHighHz~commands/s the
+engine was the bottleneck (\numBfourAchievedMin--\numBfourAchievedMax{} commands/s achieved).
+We thus regard served controller-in-the-loop operation, shown at
+\numBfourRateLowHz--\numBfourRateMidHz~commands/s with leads of \numBfourLeadOkMs~ms or more, as
+preliminary.
 
-\claim{C-WC-COSTMODEL}A page cost model fitted in B1 is indicative (relative RMS error
-\numBoneRelRmsPct~\%), with a constant term of \numBoneFixedSharePct~\% of the single-link page
-cost; \claim{C-WC-CROSSTOOL}B6 times a near-field surface sum with \sremu{} and MATLAB
-\txtBsixMatlab{} on a laptop as context, not as a ranking; where both compute the same model
-they agree to \numBsixAgreeDb~dB (Appendix~\ref{app:bench}). \claim{C-WC-LIMITS}\emph{Limitations.} The numbers hold for
-the stated hosts, commit and scenes, with one instance and \numBthreeReps{} repetitions per
-point for B3 and B4; paced timing was measured headless or with the control socket alone, and
-packed lockstep values are conservative by up to \numBtwoIsoMaxPct~\%. Paced mode is soft real
-time; its results are measured, not guaranteed.
+\claim{C-WC-LIMITS}\emph{Limitations.} The numbers hold for the stated hosts, commits and
+scenes (one instance per benchmark, up to \numBthreeReps{} repetitions per point). Paced runs,
+all on Linux, sustained at most \numBthreeOneLinks{} links at
+\numBthreeLowMsps--\numPacedMSps~MS/s and one at \numBthreeTopMsps~MS/s headless; none
+exchanged samples with external applications. Paced mode is soft real time; its results are measured,
+not guaranteed.

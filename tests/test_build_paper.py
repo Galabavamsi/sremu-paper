@@ -175,6 +175,10 @@ def test_draft_build_never_runs_git(paper_copy: Path) -> None:
 
 
 def test_final_refuses_unpinned_lock(paper_copy: Path) -> None:
+    lock = paper_copy / "sremu.lock"  # the repository's lock may be pinned: unpin the copy
+    lines = lock.read_text(encoding="utf-8").splitlines()
+    unpinned = ["commit: UNPINNED" if ln.startswith("commit:") else ln for ln in lines]
+    lock.write_text("".join(ln + chr(10) for ln in unpinned), encoding="utf-8")
     rec = Recorder(git_head="a" * 40, allow_git=True)
     rep = build(paper_copy, mode="final", latex=False, sremu_root=SREMU_ROOT,
                 git=GitProbe(runner=rec), runner=rec)
@@ -198,6 +202,12 @@ def test_final_refuses_head_mismatch_and_dirty_tree(paper_copy: Path) -> None:
 def test_final_refuses_placeholders_even_with_green_gates(paper_copy: Path, tmp_path: Path) -> None:
     sha = "c" * 40
     (paper_copy / "sremu.lock").write_text(f"repo: ../sremu\ncommit: {sha}\n", encoding="utf-8")
+    # Since 2026-10-12 the pipeline fills every number; drop one value so that a placeholder
+    # remains in this copy (the refusal under test).
+    res = paper_copy / "generated" / "results.json"
+    doc = json.loads(res.read_text(encoding="utf-8"))
+    doc["values"].pop("numBtwoFfiveRtf")
+    res.write_text(json.dumps(doc), encoding="utf-8")
     junit = _green_junit(tmp_path / "junit.xml", props=pinned(sha))
     rec = Recorder(git_head=sha, clean=True, allow_git=True)
     rep = build(paper_copy, mode="final", latex=False, junit=[junit], sremu_root=SREMU_ROOT,

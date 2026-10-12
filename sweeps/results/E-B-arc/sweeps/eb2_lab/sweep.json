@@ -85,7 +85,7 @@
     "logical_cpus": 192,
     "power_plan_or_governor": null,
     "gpu": [],
-    "aws_instance": "type='c7i.48xlarge' id='i-0b61314ac0dcfeb18'"
+    "aws_instance": "type='c7i.48xlarge' id='i-08e220489c936dc18'"
   },
   "argv": [
     "/opt/job/sremu/experiments/eb.py",
@@ -98,7 +98,7 @@
     "--threads-per-job",
     "1"
   ],
-  "t_start_utc": "2026-10-12T00:03:52.559705Z",
-  "t_end_utc": "2026-10-12T00:04:07.687020Z",
+  "t_start_utc": "2026-10-12T02:58:53.629653Z",
+  "t_end_utc": "2026-10-12T02:59:09.147287Z",
   "n_failed": 0
 }

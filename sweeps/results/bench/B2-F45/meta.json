@@ -1,0 +1,212 @@
+{
+  "benchmark": "B2-F45",
+  "description": "Rerun of the B2 feature sets F4 (recording) and F5 (native ZMQ data plane: lockstep engine served to a TX client process and an RX client process) at the pinned code commit, server plan filtered to F4,F5 (64 points, packed as in B2), plus two F5 stress checks of the base point (100 runs on 10 concurrent workers; 30 runs with every RX client paused 3 s before its warm-up completes); copied unchanged (worker logs and resolved scenarios not copied)",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "wall-clock RTF on the stated host; SIM-sremu benchmark scenes with an asserted non-zero RIS path"
+  },
+  "run": {
+    "run_id": "20261012T032501Z_b2_server",
+    "job": "20261012T032344Z_b2f45_9a5441",
+    "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261012T032344Z_b2f45_9a5441\\out\\runs\\20261012T032501Z_b2_server",
+    "t_start_utc": "2026-10-12T03:25:01.833298Z",
+    "t_end_utc": "2026-10-12T03:32:53.926205Z",
+    "wall_s": 472.12510906800003,
+    "argv": [
+      "/opt/job/sremu/bench/b2_lockstep.py",
+      "--plan",
+      "server",
+      "--features",
+      "F4,F5",
+      "--workers",
+      "auto",
+      "--cpus-per-point",
+      "16",
+      "--reserve-cores",
+      "1",
+      "--f5-clients",
+      "separate",
+      "--budget-min",
+      "45",
+      "--out",
+      "/opt/job/out/runs"
+    ],
+    "points": {
+      "points_planned": 64,
+      "points_run": 64,
+      "points_ok": 64,
+      "points_below_floor": 0,
+      "points_failed": 0
+    },
+    "f5_metric": "rtf_median of F5 rows = end-to-end: virtual time after the warm-up delivered to the RX client process (min over RX streams) / wall time from the served engine's warm-up boundary (server clock) to the RX client's last sample (client clock); rtf_rx_client_median (the pre-fix client-only figure) and rtf_server_median (engine only) are diagnostics (bench/_engine_point.py measure_zmq)",
+    "f5_clients": "separate: TX/RX client processes pinned to free cores outside the point's slot (slots.json client_cpus)",
+    "stress": {
+      "stress_separate": {
+        "runs_requested": 100,
+        "runs_ok": 100,
+        "runs_failed": 0,
+        "runs_stalled_or_lost": 0,
+        "concurrency": 10,
+        "settings": {
+          "reps": 3,
+          "rep_wall_s": 6.0,
+          "min_virtual_s": "0.3",
+          "point_cap_s": 150.0,
+          "rx_pause_s": 0.0
+        },
+        "rtf_end_to_end": {
+          "n": 100.0,
+          "min": 0.7887387586154266,
+          "median": 0.8562061615489256,
+          "max": 0.9014119803351855
+        },
+        "rtf_rx_client": {
+          "n": 100.0,
+          "min": 0.7896627132595659,
+          "median": 0.8587738957357216,
+          "max": 0.9036233454313273
+        },
+        "rtf_server": {
+          "n": 100.0,
+          "min": 0.7888119528911581,
+          "median": 0.8563337487097884,
+          "max": 0.9015269780113422
+        }
+      },
+      "stress_pause3": {
+        "runs_requested": 30,
+        "runs_ok": 30,
+        "runs_failed": 0,
+        "runs_stalled_or_lost": 0,
+        "concurrency": 10,
+        "settings": {
+          "reps": 1,
+          "rep_wall_s": 2.0,
+          "min_virtual_s": "0.3",
+          "point_cap_s": 150.0,
+          "rx_pause_s": 3.0
+        },
+        "rtf_end_to_end": {
+          "n": 30.0,
+          "min": 0.099984852810666,
+          "median": 0.10139569095876597,
+          "max": 0.10230639882820627
+        },
+        "rtf_rx_client": {
+          "n": 30.0,
+          "min": 8.799848611819424,
+          "median": 56.04000011002658,
+          "max": 65.70211647742826
+        },
+        "rtf_server": {
+          "n": 30.0,
+          "min": 0.1000237792840119,
+          "median": 0.8893199170337257,
+          "max": 1.1296656942650418
+        }
+      }
+    }
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.48xlarge",
+    "instance_id": "i-07eff3e44e12c9cf4",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 192,
+      "threads_per_core": 2,
+      "cores_per_socket": 48,
+      "sockets": 2,
+      "numa_nodes": 2,
+      "l3": "210 MiB (2 instances)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       389910404 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "pinning": {
+      "affinity": "0,96",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": null,
+        "SREMU_CPUS": null,
+        "SREMU_CLIENT_CPUS": null,
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 235.0,
+      "min": 0.005358181652188855,
+      "max": 0.6660478730445555,
+      "mean": 0.28443243113261224,
+      "p50": 0.21765967283828075,
+      "p90": 0.5800269567655711,
+      "p99": 0.6543777154054505
+    },
+    "job_results_tgz_sha256": "16be3108b71cf73e2eb55003cd9eaf3accf82348893b657adf2fb74d793a81f6",
+    "launch": {
+      "run_id": "20261012T032344Z_b2f45_9a5441",
+      "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
+      "git_dirty": "0",
+      "instance_id": "i-07eff3e44e12c9cf4",
+      "type": "c7i.48xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "a23c1399bcc5683e7c45782777e80b75053a98ab28f1de6e2de9d6b0adf57521",
+      "results_key": "sremu/jobs/20261012T032344Z_b2f45_9a5441/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0; for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer; do systemctl stop $u 2>/dev/null; done; export SREMU_GOVERNOR=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo unavailable); python -m bench.b2_lockstep --plan server --features F4,F5 --workers auto --cpus-per-point 16 --reserve-cores 1 --f5-clients separate --budget-min 45 --out $SREMU_JOB_OUT/runs > $SREMU_JOB_OUT/b2_f45.log 2>&1; echo B2_EXIT=$?; python -m bench.f5_stress --runs 100 --concurrency 10 --cpus-per-worker 16 --f5-clients separate --reps 3 --rep-wall-s 6 --timeout-min 12 --out $SREMU_JOB_OUT/stress_separate > $SREMU_JOB_OUT/stress_separate.log 2>&1; echo S2_EXIT=$?; python -m bench.f5_stress --runs 30 --concurrency 10 --cpus-per-worker 16 --reps 1 --rep-wall-s 2 --rx-pause-s 3 --timeout-min 6 --out $SREMU_JOB_OUT/stress_pause3 > $SREMU_JOB_OUT/stress_pause3.log 2>&1; echo S3_EXIT=$?; python -m bench.summarize --root $SREMU_JOB_OUT/runs --out $SREMU_JOB_OUT/bench_summary.json; echo SUM_EXIT=$?",
+      "maxmin": 100
+    }
+  },
+  "sremu": {
+    "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
+    "dirty_flag_recorded": false,
+    "commit_source": "SREMU_GIT_COMMIT / SREMU_GIT_DIRTY=0 exported by the AWS job (host/job_stdout.txt line 1; launches.jsonl); manifests record git_dirty false"
+  },
+  "supersedes": "the F5 rows of 20261011T084048Z_b2_server (309c633; failed, not reported) and the F4/F5 reruns at 4ec4c2b and earlier commits (not in the paper tree)",
+  "caveats": [
+    "F4 and F5 points ran packed (up to 11 at a time, 16 vCPUs each, as in B2); the single isolation reference point (L8 N240 F5) was 1.17x faster alone.",
+    "F5 = F4 + native ZMQ transport to two client processes; the F5/F4 ratio is taken within this run (same host, commit and packing). F4 of this run is not compared with F4 of the 309c633 B2 run (other commit and instance).",
+    "stress_pause3: RX clients sleep 3 s before their warm-up completes; the end-to-end figure must fall (it did: about 0.1) while the client-only figure inflates; this checks the metric, not a performance."
+  ],
+  "used_by": [
+    "figures/src/f07_lockstep.py (F7 f)",
+    "tools/bench_results.py"
+  ],
+  "files": {
+    "host/job_stdout.txt": "ec48327ff29963d78c70f296f307b448b437855fea737cce9a6f1be04ab98b2e",
+    "host/lscpu.txt": "2e97b102f375970b59281ba4768c74c5f698936dad4335a317f08d5e2465ba55",
+    "host/meminfo.txt": "dfadf85f5a1edd011ec350aaa17e1658c22e905c53d86f4f389a14bb881605ee",
+    "host/b2_f45.log": "0207fb94f583642c46f3bf0753afc0b3a4032c65ee3d492ee111b3d648a4f137",
+    "host/bench_summary.json": "f8af0c3546021318f5ce69b552c89473fdb91c3a32d8f13f9f4c17efe1a005f3",
+    "run/dropped.csv": "f0cc1d7a36da64bf82a345dcf8fa9e62b6c764a3ad6231afbec8c63157d39159",
+    "run/isolation.csv": "d9a291a8f53cb463ecfa03eaaaf1f95b132ceb71f247b3c3947c0af16930cc9b",
+    "run/manifest.json": "b2e6dc51e0cfc5e04d11f6344fe8b7dca48c29076448987bbab51f3027cdacef",
+    "run/meta.json": "e08d26f214638ae5e32ef220527819cfcd09f0a5f4dda4c28bf3f6207295beb9",
+    "run/points.csv": "ee1229eacf9321adb80681b67ab58aec3ffec616fe58284e9881877f89c59f8c",
+    "run/slots.json": "d9b3dc779be3d4c5fce24e3a45bfff0557396952d4312a3f47b79855e917a234",
+    "run/spec.json": "d0746c6635d5938dae3bbe098dda204233cc1b588d496b683d71cf3fbab35165",
+    "run/summary.json": "50bc405fd8c8cc1ecea50070015462f72f381d69b0a0e555ab091ea6241718b8",
+    "stress_separate/runs.jsonl": "e7df89758390fdb834b281358408a1431d82735ecee5a94fa03f2f303eb3e514",
+    "stress_separate/summary.json": "d6e58fd6b1cc31f792c58e497d5f8944b448fb5271656b4561567dc499e8acf6",
+    "host/stress_separate.log": "58cc24a2984477e47f79a207e891d10d68adb949af60fe6fd17a95e4fa6f8a71",
+    "stress_pause3/runs.jsonl": "f3988f9737505300abaf9c9970007dce502c6aaff199779c368ba64618be42e7",
+    "stress_pause3/summary.json": "4bcee3e2e3c61efa14a30808bfa7f180b6085a026840c598bdc4cf853e4c5073",
+    "host/stress_pause3.log": "47dee7734273e309a950628a589fa40d4e2e2af24fac322b79d5f02a7c18c6d1"
+  },
+  "written_utc": "2026-10-12T04:30:48Z"
+}

@@ -1,11 +1,11 @@
 {
   "figure": "F9",
   "title": "E-B: (a), (c) per-symbol EVM around an intra-frame switch; (b), (d) PER vs latency jitter for timed (2 ms lead) / asap / tick-based command semantics at a 0.5 ms guard. Top row (primary): geometry modelled on the lab arrangement (SIM, nominal geometry), LOS present at Es/N0 15 dB and LOS blocked at 25 dB; bottom row (supporting): lab-like SIM geometry, LOS blocked",
-  "content_key": "d2f384b7f65031f0223db1c6c37ef3a4c095b3e6d5958e53ea8f177eec3a7854",
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "content_key": "9efa563899df8c97e283aa62094f55ffaa0e00a7c7b3da9227e1fbedea683e6e",
+  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
-  "lock_commit": "UNPINNED",
+  "lock_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "data_classes": [
     "ASSUMED",
     "SIM-sremu"
@@ -49,7 +49,7 @@
       "path": "sweeps/results/E-B-arc/E-B2/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED",
-      "sha256": "96801f2d37953963c0837104969ece783896c9f4fdb86056cbb4cfae16b5cc16"
+      "sha256": "45c49b249322971a02fbeaa2b45a7abfb21e448b4c176c653bfe45ef0c76ba17"
     },
     {
       "path": "sweeps/results/E-B1/eb1_traces.csv",
@@ -85,18 +85,18 @@
       "path": "sweeps/results/E-B2/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED",
-      "sha256": "40cd1f63828b00ea2773f118eb13a1304a565fb11903c034121a6b01cc89f077"
+      "sha256": "73a91b0867349e50dd1d691be5d8d55e5beb8aa5a07ca4a71ace73b011bc3fee"
     },
     {
       "path": "sweeps/results/E-B-arc/meta.json",
       "data_class": "SIM-sremu",
       "provenance": {
-        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "sremu_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "sremu_dirty": false,
-        "run_id": "regen_2026-10-11T23:59:37Z",
+        "run_id": "regen_2026-10-12T02:54:47Z",
         "aws_instance": "c7i.48xlarge"
       },
-      "sha256": "b31de00a0208f9156fa761b7ee23cc63619f81fc6f3fc345c14cb540976cde78"
+      "sha256": "7d48e165028e3739772198dbfcac68f5925335b2a9240b91ff858955337c0ab6"
     }
   ],
   "assumptions": [
@@ -120,7 +120,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T01:03:04Z",
+  "generated_utc": "2026-10-12T06:59:16Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

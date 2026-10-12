@@ -1,0 +1,14 @@
++ export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0
++ SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4
++ SREMU_GIT_DIRTY=0
++ bash bench/aws/job.sh b4classic --deadline-min 100
+[job.sh] job=b4classic governor=unavailable out=/opt/job/out python=/opt/venv/bin/python
+[run_job] b4_paced_classic: taskset -c 1-8,17-24 /opt/venv/bin/python -m bench.b4_control --part paced --plan classic --tag paced_classic --budget-min 95 --out /opt/job/out/runs (timeout 5909.9999787807465)
+[run_job] done rc=0 wall=1703s
++ echo JOB_EXIT=0
+JOB_EXIT=0
++ python -m bench.summarize --root /opt/job/out/runs --out /opt/job/out/bench_summary.json
+wrote /opt/job/out/bench_summary.json
++ echo SUM_EXIT=0
+SUM_EXIT=0
+JOB_EXIT=0

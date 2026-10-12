@@ -75,12 +75,12 @@ claims:
     evidence: [test:RT-05, test:RT-06, test:RT-07, test:IO-03, fig:F2]
     gates: []
   C-LOCKSTEP-EXACT:
-    text: "Lockstep runs are sample-exact and deterministic, including with controllers in the loop; RX samples are bitwise identical under client chunking, event/barrier cuts and across process boundaries."
+    text: "Lockstep runs are sample-exact and deterministic, including with controllers in the loop, in process (E-B, modelled latency) and over the control socket in barrier mode (VA-1; B4 lockstep, 22,800 commands with zero lateness); RX samples are bitwise identical under client chunking, event/barrier cuts and across process boundaries. Conclusion (must-fix 1; scoped to barrier controllers as Sec. III C-LOCKSTEP states, adversarial review 2026-10-12): 'lockstep runs with barrier controllers, in process or over the control socket, are deterministic'. Paced operation is not claimed deterministic."
     where: [sections/10_conclusion.tex]
     evidence: [test:RT-03, test:RT-08, test:RT-16, test:IO-02]
     gates: []
   C-CONTRIB-1:
-    text: "Timed RIS control in an IQ-level emulator: per-receiver application, one physical switch time for late commands, command log, deterministic barriers, measured paced mode, UHD-shaped API, framed ZMQ data plane, GS RIS 008-aligned table schema."
+    text: "Timed RIS control in an IQ-level emulator: per-receiver application, one physical switch time for late commands, command log, deterministic barriers in lockstep (in process and over the control socket; must-fix 1 scoping), a paced mode that measures its own timing, UHD-shaped API, framed ZMQ data plane, GS RIS 008-aligned table schema."
     where: [sections/01_introduction.tex]
     evidence: [test:RT-05, test:RT-06, test:RT-08, test:RT-18, test:IO-02, test:IO-03, test:IO-05, fig:F1, fig:F2, cite:ETSI_GS_RIS008]
     gates: []
@@ -90,14 +90,14 @@ claims:
     evidence: [test:PH-02, test:PH-04, test:PH-26, test:G1, test:G2, test:G3, test:V-TANG-1, test:V-LAB, test:V-CFO-1, test:ST-04, test:ST-05, fig:F3, fig:F4, fig:F5, cite:Tang2022mmWave]
     gates: []
   C-CONTRIB-3:
-    text: "Characterized wall-clock behaviour: definitions, RTF, deadline misses, latency percentiles, scaling over links, elements, surfaces, rates and feature sets on AWS Linux servers (the laptop contributes the B6 cross-tool context, no scaling run), and the latency of commands served over the control socket. The fitted cost model is not a contribution (MINOR-10); Section VI reports it as indicative."
+    text: "Characterized wall-clock behaviour: definitions (lockstep, paced, headless = streams generated and consumed in the emulator process without client processes, transport or control socket, served), RTF, deadline misses, latency percentiles; scaling over links, elements, surfaces (B2 R = 0/1/2/4 scan, must-fix 13), numba threads (B2 thread scan), rates and feature sets including the native ZMQ data plane end to end (B2-F45) on AWS Linux servers; headless paced limits (B3); and, for an external controller served over the control socket (B4), command latency and the exact-sample fraction of timed commands, whose page-deadline miss rates fail the Sustainable rule (must-fix 1: the served outcome stated next to the headless one). The laptop contributes the B6 cross-tool context, no scaling run. The fitted cost model is not a contribution (MINOR-10)."
     where: [sections/01_introduction.tex]
     evidence: [test:RT-18, fig:F7, fig:F8]
     gates: [H-5]
   C-CONTRIB-4:
-    text: "Case studies of timed control: at the sample level, in lockstep with an in-process controller and a modelled latency, intra-frame reconfiguration and timed vs asap vs timer-latched commands (E-B); on channel coefficients (for E-A an offline vectorized evaluator, not the engine's run_batch, that agrees with the VA-1 sample-level runs within the VA-1 tolerance, stated as 'agrees with the sample-level VA-1 runs' (one geometry, two controllers, two delays; must-fix 4); E-C static coefficients), the signaling-delay time scale in a blocked corridor (E-A) and a non-ideality ablation (E-C); FM dimensioning (E-D)."
+    text: "Case studies of timed control: at the sample level, in lockstep with an in-process controller and a modelled latency, intra-frame reconfiguration and timed vs asap vs timer-latched commands (E-B); on channel coefficients (for E-A an offline vectorized evaluator, not the engine's run_batch, that agrees with the VA-1 sample-level runs within the VA-1 tolerance, stated as 'agrees with the sample-level VA-1 runs' (one geometry, two controllers, two delays; must-fix 4); E-C static coefficients), the signaling-delay time scale in a blocked corridor (E-A) and a non-ideality ablation (E-C). The FM dimensioning (E-D) is not a contribution (mock review should-fix 7; Section VII and Appendix F keep it)."
     where: [sections/01_introduction.tex]
-    evidence: [test:VA-5, test:VA-1, test:E-B, fig:F9, fig:F10, fig:F11, fig:F12]
+    evidence: [test:VA-5, test:VA-1, test:E-B, fig:F9, fig:F10, fig:F11]
     gates: []
   C-SCOPE:
     text: "Scope box: not a UHD drop-in, not hard real time, not a ray tracer, no model of mutual coupling (per-state tables hold coupling only for identical neighbours, the locally periodic model of GR RIS 003), scalar co-polar, single-bounce RIS paths, order-1 walls; paced timing measured per platform."
@@ -132,7 +132,7 @@ claims:
     banned_word_uses:
       - {word: only, context: "from LOS-only"}
   C-ABS-PACED:
-    text: "Headless wall-clock-paced runs with the stated page size on the named platform sustain N links at Y MS/s with a deadline-miss rate below 1e-3 (Sustainable, DESIGN 12.1)."
+    text: "Abstract paced sentence (must-fix 1, 13; 2026-10-12): on the named platform (AWS c7i.8xlarge, Linux) the emulator alone ('headless', defined in place) sustains numPacedLinks transmitter-receiver links ('links' defined in place) at numPacedMSps MS/s, missing under 1e-3 of the 1 ms page deadlines (the Sustainable rule; B3, 1024 us pages, 3 repetitions); with 2 links (numBfourLinks, stated in the abstract so that the served misses are not read as the 8-link headless configuration) serving an external controller at 10-100 commands/s (B4, 1024 us pages) it applied at least numBfourExactOkMinPct % of the commands timed numBfourLeadOkMs ms ahead at their exact sample (pooled over the repetitions per rate and lead; one repetition at 4 ms had 99.66 %, App. E) (leads >= 4 ms: every timed command was exact or late, checked), but missed numBfourMissLowMinPct-numBfourMissMidMaxPct % of the 1 ms page deadlines, so no served repetition is Sustainable. No paced run exchanged IQ samples with external applications (Sec. VI limitations)."
     where: [sections/abstract.tex]
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
@@ -142,7 +142,7 @@ claims:
     evidence: [fig:F9, test:VA-5, test:E-B, pytest:tests/unit/test_eb_arc.py, pytest:tests/runtime/test_eb_arc_va5.py, table:tab:eb2grid]
     gates: []
   C-ABS-EA:
-    text: "E-A in the abstract (mock-review must-fix 2/4/5, 2026-10-12; number macros only, the phrase macro txtEAResult was removed): on the offline vectorized evaluator of channel coefficients (experiments/ea.py, not the engine's run_batch; VA-1 checks it against IQ-level runs in one geometry, Section VII-B), position-driven binary control (exact optimum) loses half its benefit after numEaTauOverLambdaV lambda/v in the primary geometry (1 GHz, 1 m/s: numEaTauHalf s) and numEaTauLambdaVMin to numEaTauLambdaVMax lambda/v over the numEaGeometries computed geometries (Table tab:eageo); lambda the wavelength, v the speed."
+    text: "E-A in the abstract (mock-review must-fix 2/4/5, 2026-10-12; number macros only): on the offline vectorized evaluator of channel coefficients (experiments/ea.py, not the engine's run_batch; VA-1 checks it against IQ-level runs in one geometry, Section VII-B), position-driven binary control (exact optimum) loses half its benefit after numEaTauLambdaVMin to numEaTauLambdaVMax lambda/v of signaling delay over the numEaGeometries computed geometries (Table tab:eageo); lambda the wavelength, v the speed. The primary geometry's value (numEaTauOverLambdaV lambda/v; 1 GHz, 1 m/s: numEaTauHalf s) is stated in Section VII-B and the conclusion; it left the abstract for length on 2026-10-12 (paced sentence of must-fix 1)."
     where: [sections/abstract.tex]
     evidence: [fig:F10, test:VA-1, test:E-A, table:tab:eageo]
     gates: []
@@ -175,7 +175,7 @@ claims:
     gates: []
   C-IMPL:
     text: "Implementation facts read by gen_results from the sremu checkout: Python >= the pyproject requires-python version; number of modules and thousands of lines in src/sremu; NumPy/SciPy, NumPy reference and numba backends, pyzmq, pydantic; Gymnasium and SigMF optional (DESIGN 2.4); runs on Windows (test record, laptop) and Linux (AWS runs)."
-    where: [sections/03_design.tex]
+    where: [sections/03_design.tex, sections/app_b_interfaces.tex]
     evidence: [spec:DESIGN-2.4, cite:ZeroMQ, cite:Towers2024Gymnasium, cite:SigMF, test:IO-02]
     gates: []
   C-TIMEBASE:
@@ -415,17 +415,17 @@ claims:
     evidence: [test:PH-05, test:PH-20, test:RT-16]
     gates: []
   C-REPRO:
-    text: "Two repositories; the lock names the emulator commit that holds the results (a results-only commit: it adds nothing but result files to the code commit below it; no hash in the text, since the lock is re-pinned); tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates in a test record of the locked code, current figures, pipeline macros and supported claims (the tool currently requires junit commit == lock commit, which is stricter; see the open issue on results-only locks); code constants read from the locked code; manifests and bitwise replay; the results record their own commit, tree state and host (provenance table); neither repository is public yet (availability section)."
+    text: "Two repositories; the lock names the emulator commit that holds the results (no hash in the text, since the lock is re-pinned); tasks.py paper-junit records the test run with commit and dirty flag; build_paper.py --mode final refuses unless lock = installed commit, clean trees, green gates in a test record of the locked code (the tool requires junit commit == lock commit), current figures, pipeline macros and supported claims; code constants read from the locked code; manifests and bitwise replay; the results record their own commit, tree state and host (provenance table); neither repository is public yet (availability section)."
     where: [sections/appendix.tex]
     evidence: [spec:DESIGN-13.5, test:RT-16, table:tab:provenance]
     gates: []
   C-REPRO-RUNS:
-    text: "Provenance of this version (must-fix 14), all from data: results at txtProvRegenCommit (= test record's sidecar commit, clean) are txtProvRegenResults, all but benchmarks from one regeneration job on txtProvRegenHost (sidecar); the lock commit adds nothing but result files to the code commit below it (generic since 2026-10-12: the lock will be the results-only commit on a newer code commit, so the text names no hash), and each result keeps its own commit; the other results keep their commits, txtProvOtherCommits, grouped from the provenance rows by tools/vv_ids.py; benchmarks are separate jobs on dedicated hosts; V-LAB is not rerun (locked plan): one run at txtLabCodeCommit (clean) on predictions computed before the lock; the regeneration job's vlab_check (sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json, hash in meta.json, checked by tools/vv_ids.py) shows the V-LAB protocol and analysis files byte-identical to 7a63287 and the protocol digest equal to the lock; imported modules changed, so no claim that a rerun would reproduce it."
+    text: "Provenance of this version (must-fix 14), all from data (tools/vv_ids.py provenance_values from the provenance rows): the regeneration commit txtProvRegenCommit is the commit of the regeneration job's E-A row (clean), and the results at it (clean) are txtProvRegenResults, all but the benchmarks from one regeneration job on txtProvRegenHost (the host of the E-A row); the benchmarks (B2-F45, B3, B4, B4-classic at that commit) are separate jobs on dedicated hosts; the test record was made at txtProvTestCommit (junit sidecar, clean), and gen_results checks that the installed emulator checkout's src/sremu hash (experiments/common.py code_hashes) equals the src_sremu_tree_sha256 recorded by the regeneration results (sweeps/results/meta.json, E-F/latency, E-C), so the test record and the build use the emulator source of the regeneration commit (no claim about other files); the other results keep their commits, txtProvOtherCommits; V-LAB is not rerun (locked plan): one run at txtLabCodeCommit (clean) on predictions computed before the lock; the check at the test record's commit (sweeps/results/V-LAB-provenance/vlab_check_lock_1e1fcab.json, hash in meta.json, checked by tools/vv_ids.py against the junit commit) shows the V-LAB protocol and analysis files byte-identical to 7a63287 and the protocol digest equal to the lock; imported modules changed, so no claim that a rerun would reproduce it."
     where: [sections/appendix.tex]
     evidence: [table:tab:provenance, spec:DESIGN-10.9, spec:DESIGN-13.5]
     gates: []
   C-ID-TABLE:
-    text: "Tables tab:ids-ph and tab:ids-rt (must-fix 12) list every verification identifier cited in the paper (PH, G, RT, IO, ST, VA, V-CFO) with property, oracle or reference, tolerance and the number of implementation tests in the test record; generated by tools/vv_ids.py from verification_ids.yaml, whose every number must appear in sremu docs/DESIGN.md (lines naming the id), tests/oracles/tables.py (ORACLE entries of that spec id) or the docstrings of the tests carrying the id; a cited id without a row, a row not passed in the record (except PH-12 experimental and V-CFO-4 study) and legacy/v1/v2 wording stop gen_results. VA identifiers are VA-1, VA-3, VA-4, VA-5 (no VA-2 in the specification)."
+    text: "Tables tab:ids-ph and tab:ids-rt (must-fix 12) list every verification identifier cited in the paper (PH, G, RT, IO, ST, VA, V-CFO) with property, oracle or reference, tolerance, the subsections of Sections III and IV whose statements the id checks (column Sec., mock review should-fix 5: those sections carry no inline ids except VA-1 and VA-4 in III-B; vv_ids.statement_sections, from the test evidence of the claim markers there plus ids cited in place) and the number of implementation tests in the test record; generated by tools/vv_ids.py from verification_ids.yaml, whose every number must appear in sremu docs/DESIGN.md (lines naming the id), tests/oracles/tables.py (ORACLE entries of that spec id) or the docstrings of the tests carrying the id; a cited id without a row, a row not passed in the record (except PH-12 experimental and V-CFO-4 study) and legacy/v1/v2 wording stop gen_results. VA identifiers are VA-1, VA-3, VA-4, VA-5 (no VA-2 in the specification)."
     where: [sections/appendix.tex, generated/tables/tableA_ids.tex]
     evidence: [table:tab:ids-ph, table:tab:ids-rt, table:tab:vv, test:VA-1, test:VA-3, test:VA-4, test:VA-5, spec:DESIGN-10.1, spec:DESIGN-4.11]
     gates: []
@@ -437,7 +437,7 @@ claims:
 
   # ================================================================ V Verification and validation
   C-VV-TABLE:
-    text: "Table VII (generated from the test record of commit txtProvRegenCommit, the regeneration job's junit): every analytic identifier (PH, RT, IO) passes; ST, G and VA (VA-1, VA-3, VA-4, VA-5; there is no VA-2) tiers as counted; total passed and skipped tests; no skipped test carries a spec id; Appendix G lists every cited identifier (C-ID-TABLE)."
+    text: "Table VII (generated from the test record of commit txtProvTestCommit, the junit sidecar's commit): every analytic identifier (PH, RT, IO) passes; ST, G and VA (VA-1, VA-3, VA-4, VA-5; there is no VA-2) tiers as counted; total passed and skipped tests; no skipped test carries a spec id; Appendix G lists every cited identifier (C-ID-TABLE)."
     where: [sections/05_verification_validation.tex, generated/tables/table4_vv.tex, sections/app_d_vv.tex]
     evidence: [table:tab:vv, test:PH-01, test:PH-02, test:PH-04, test:RT-01, test:RT-03, test:RT-05, test:RT-08, test:IO-01, test:IO-02, test:ST-01, test:ST-04, test:G1, spec:DESIGN-10.1]
     gates: []
@@ -505,22 +505,22 @@ claims:
     gates: []
 
   # ================================================================ VI Wall-clock behaviour
-  # Benchmarks B1-B4 (AWS, sremu 309c633) and B6 (laptop), copied with provenance in
-  # paper/sweeps/results/bench; every number is a bench_results.py macro (MEAS). Analysis and
-  # the two corrections (B2 aggregate recomputed; B4 lockstep check recomputed offline) are in
-  # research/analysis/bench_findings.md. F5 (native ZMQ) is pending a rerun: placeholder only.
+  # Benchmarks B1, B2 (AWS, sremu 309c633), B2-F45, B3, B4, B4-classic (AWS, bf08268) and B6
+  # (laptop, 06cdf7a), copied with provenance in paper/sweeps/results/bench; E-F latency from
+  # the regeneration job (sweeps/results/E-F/latency). Every number is a bench_results.py macro
+  # (MEAS). Analysis: research/analysis/bench_findings.md and ab_paced_aws.md.
   C-WC-DEFS:
-    text: "Definitions as in DESIGN 12.1: lockstep vs paced (release R_j); RTF = min over received streams of samples/f_s per wall second; aggregate throughput = received samples summed over streams per wall second; page latency = delivery - R_j; miss at slack s when latency > s, so the miss rate is the latency CCDF and zero slack is missed by construction (computation starts at R_j); Sustainable = >= 60 s after a 5 s warm-up, miss rate < 1e-3 at 1 ms slack, no late input samples, no overflowing pages; visible latency and lateness of commands."
+    text: "Definitions as in DESIGN 12.1: lockstep vs paced (release R_j; a received sample is delivered between D_lag (default 1 ms, code macro) plus the page's computation and one page more after its wall time, must-fix 1); RTF = min over received streams of samples/f_s per wall second; page latency = delivery - R_j; miss at slack s when latency > s, so the miss rate is the latency CCDF and zero slack is missed by construction (computation starts at R_j); Sustainable = >= 60 s after a 5 s warm-up, miss rate < 1e-3 at 1 ms slack, no late input samples, no overflowing pages; headless (streams generated and consumed in the emulator process, no client processes, transport or control socket: an engine-alone bound) and served (samples or commands over sockets); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX); visible latency of a command; a timed command is late when its switch sample was computed before its receipt and is then applied on arrival."
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.1, spec:DESIGN-4.10, test:RT-18]
     gates: []
   C-WC-HOSTS:
-    text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge, B3/B4 on AWS c7i.8xlarge with the engine pinned to 16 logical CPUs and nothing else running, B6 on the laptop; B1-B4 at one emulator commit (309c633), B3/B4 from a clean tree, B1/B2 with a recorded dirty flag although their uploaded bundle is byte-identical to the commit's tree (bench meta.json dirty_note; provenance table); B2 packed 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; B3 is headless; benchmark scenes carry no physical result (Table VII); a link is a TX-RX pair (L = n_tx n_rx; 8 links = 2 TX x 4 RX)."
+    text: "Hosts and protocol: B1/B2 on an AWS c7i.48xlarge at 309c633 (recorded dirty flag, uploaded bundle byte-identical to the commit's tree; bench meta.json dirty_note), B2-F45 on another c7i.48xlarge and B3, B4, B4-classic on three c7i.8xlarge instances at bf08268 from a clean tree (engine pinned to 16 logical CPUs, command client on 4, the rest idle), B6 on the laptop at 06cdf7a (clean); B2 and B2-F45 packed up to 11 points of 16 logical CPUs; paced points ran 3 repetitions of 60 s (>= 46,876 pages each) and count as Sustainable only when every repetition is; L doubled while Sustainable, the first unsustainable repetition ends point and series; headless runs have no external inputs (late-input condition trivially met, must-fix 18); benchmark scenes carry no physical result (Table tab:platforms)."
     where: [sections/06_wallclock.tex, generated/tables/table7_platforms.tex, sections/app_e_bench.tex]
     evidence: [table:tab:platforms, table:tab:provenance, spec:DESIGN-12.3]
     gates: []
   C-WC-LOCKSTEP:
-    text: "B2 lockstep (packed): points planned/run/ok/below floor/failed as generated, every failure an F5 (native ZMQ) point: three receive time-outs from a benchmark configuration error (served run shorter than the clients' streams) and one benchmark error below the floor, both fixed in the benchmark (sremu 60d0e6d), not in the emulator; F5 excluded and its base-point RTF from the rerun at the pinned commit (placeholder until then); base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; static limit 8 links at RTF >= 1 for every N at 1 MS/s; a single link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
+    text: "B2 lockstep (309c633, packed): points planned/run/ok/below floor/failed as generated, every failure an F5 point (three receive time-outs from a benchmark configuration error and one benchmark error below the floor, both fixed in the benchmark, not in the emulator), F5 rerun as B2-F45; base point RTF; static scenes: single-link RTF within a few percent over N = 40-16384, mobility (F3): RTF falls with N; surfaces (must-fix 13, B2 points.csv, one link, N = 240): static 1 MS/s RTF from numBtwoRzeroStaticRtf (R = 0) to numBtwoRfourStaticRtf (R = 4), mobile from numBtwoRzeroMobileRtf to numBtwoRfourMobileRtf, 23.04 MS/s keeps up with up to two surfaces (numBtwoTopRtwoRtf) but not four (numBtwoTopRfourRtf) (checked by bench_results); threads (B2 thread scan, 8 links): numBtwoThrOneRtf with one numba thread, numBtwoThrBestRtf with numBtwoThrBest, numBtwoThrMaxRtf with numBtwoThrMax (gain numBtwoThrGain; numBtwoThrGainSixtyfour at 64 links); static limit 8 links at RTF >= 1 for every N at 1 MS/s; one link keeps up at 23.04 MS/s; feature-set RTFs at one link; peak aggregate throughput with noise (F1; recomputed n_rx f_s RTF; at that point RTF < 1)."
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F7, spec:DESIGN-12.2, pytest:tests/bench/test_bench_zmq_point.py]
     gates: []
@@ -529,38 +529,43 @@ claims:
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F7]
     gates: []
+  C-WC-DATAPLANE:
+    text: "Data plane (MAJOR-11 / journal-later 11, must-fix 15 placeholder filled): B2-F45 (bf08268, another c7i.48xlarge): F5 = native ZMQ data plane to a TX and an RX client process, end-to-end RTF (virtual time delivered to the RX client over wall time from the served engine's warm-up boundary to the client's last sample) of the base point numBtwoFfiveRtf against F4 numBtwoFfiveFfourRtf in the same run; F5/F4 numBtwoFfiveRatioMin-numBtwoFfiveRatioMax over numBtwoFfivePoints twin points; no F5 point at RTF >= 1; all numBtwoFfiveStressRuns stress runs on numBtwoFfiveStressWorkers concurrent workers completed (no stall, no bad packet) at the stated RTF range; starved-client check (RX paused numBtwoFfivePauseS s): end-to-end numBtwoFfivePauseRtf vs client-only numBtwoFfivePauseClientRtf (App. E). E-F latency (regeneration job, bf08268, c7i.48xlarge whose CPUs other work of the job kept up to numEfLatencyBusyMaxPct % busy; lockstep): UHD-shaped API in-process send of 1000 samples p50/p99, native-ZMQ two-process round trip p50/p99, sustained ZMQ rate with 10,000-sample buffers; in-process receive (includes computation) and alternating rate in App. E. All values checked by bench_results (same host type as B2, clean Linux run)."
+    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
+    evidence: [fig:F7, test:IO-02, spec:DESIGN-11-E-F, spec:DESIGN-12.2]
+    gates: [H-5]
   C-WC-PACED:
-    text: "B3 paced (headless, AWS c7i.8xlarge): largest Sustainable configuration per series as generated (8 links at 1 MS/s with 1.024 ms pages, worst p99 and miss rate as generated; one link at 0.512 ms pages; 2 links at 0.256 ms pages; a single link at 23.04 MS/s; 2 links at 5.76 MS/s (0.356 ms pages); at 0.512 ms pages 4 links with four surfaces, more than with one, and one link at N = 4096)."
-    where: [sections/06_wallclock.tex, sections/abstract.tex, sections/10_conclusion.tex, sections/app_e_bench.tex]
+    text: "B3 paced (headless = engine-alone upper bound, AWS c7i.8xlarge, bf08268): largest Sustainable configuration per series as generated: 8 links at 1 MS/s with 1024 us pages (worst p99 and miss rate as generated), 4 links with 512 us pages, 2 with 256 us, 8 at 0.1 MS/s (1.28 ms pages), 2 at 5.76 MS/s (356 us pages), a single link at 23.04 MS/s (711 us pages); at 512 us pages four surfaces sustain as many links as one (4) and N = 4096 one link; mobility (F3) has no Sustainable point (one repetition, one link, 512 us pages only)."
+    where: [sections/06_wallclock.tex, sections/abstract.tex, sections/app_e_bench.tex]
     evidence: [fig:F8, spec:DESIGN-12.1]
     gates: [H-5]
   C-WC-SHORTPAGES:
-    text: "Short pages: the two-link 0.512 ms point failed in one of three repetitions through a few stalls of up to 11 ms although its median utilization is 0.27; mobility (F3) misses the deadline on the pages that hold a snapshot recomputation (miss rate equal to the snapshot-page share P/(f_s T_u)); at 0.1 MS/s 58 pages above 1 ms (1-4 ms) fail the threshold in the single repetition, not explained by per-page cost or timers (the engine spins before releases closer than 1.5 ms); cause not identified."
+    text: "Stopping rule and short pages (must-fix 18): limits are indicative (L doubled until a repetition fails; numBthreeSingleRepEnds of numBthreeSeries series ended on a single repetition, Fig. 3(b) labels the repetitions); the 512 us series ends on computation (8 links: median utilization 0.71, 2.2 % misses), the 256 us and N = 4096 series end in the third repetition of their last point through stalls of 11 ms and 142 ms (cause not identified: no stage breakdown); mobility tried at 512 us pages alone: one link misses 17 % of the deadlines, below the 23 % share of pages that hold a snapshot recomputation (T_u 2.25 ms; such a page takes up to 1.3 ms p99) while the mean load stays below the wall clock; not tried: mobility at other pages or link counts, several surfaces with mobility, paced runs with client processes on the data plane."
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [fig:F8]
     gates: [H-5]
   C-WC-LOCKCMD:
-    text: "B4 lockstep: 22,800 commands at 10 Hz-10 kHz, in process and remote, all lateness values zero; at 10 kHz one command per run switches after the end of the run and stays scheduled (benign); the original check counted it, the corrected check recomputed offline passes; per-command engine cost 1.25-1.49 ms from RTF with and without the loop; RTF at 10 kHz none/in-process/remote as generated."
+    text: "B4 lockstep (bf08268): 22,800 commands at 10 Hz-10 kHz, in process and remote, all lateness values zero; at 10 kHz one command per run switches after the end of the run and stays scheduled (counted as scheduled after the end, not a failure); per-command engine cost from RTF with and without the loop as generated (1.36-1.39 ms at >= 100 Hz), including the page split and the rebuild of link statics; B6 times a configuration change with cached geometry on the laptop (no cross-host ratio; the runs record no stage breakdown, must-fix 18); RTF at 10 kHz none/in-process/remote as generated."
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [test:RT-08, pytest:tests/bench/test_bench_b4_checks.py, pytest:tests/bench/test_bench_suites.py::test_b4_lockstep_check_rejects_vacuous_zero_lateness]
     gates: []
   C-WC-PACEDCMD:
-    text: "B4 paced, served over the control socket: no repetition Sustainable; 1 ms-slack miss rates at 10 and 100 commands/s as generated vs at most ~1e-3 headless (B3, same links and pages); asap visible latency median and p99 as generated; the paced schedule adds at most one page; the floor is the engine work on the page with a configuration change; the spread is consistent with the GIL hand-over between the control thread and the paced loop (most of the latency from the implementation: configuration change and serving thread, not the paced schedule; rare outliers up to 76 ms); B3 comparison is across two instances of the same type; timed commands with a 2 ms lead below the command latency were late and applied on arrival (rule: lead > latency + clock-estimate error); >= 1 kHz engine-bound (achieved rate; page latencies up to 29 s; a repetition up to 18 % longer than its virtual time since the engine catches up after the client stops; timed-command backlog)."
-    where: [sections/06_wallclock.tex, sections/10_conclusion.tex, sections/app_e_bench.tex]
+    text: "B4 served paced (bf08268, plan served-1ms: 2 links, 1024 us pages, one external command process over the control socket, TX generated and RX kept in the engine): at 10 and 100 commands/s no repetition backlogged (rule: page latency p50 > one page or > 1 % of pages beyond 5 ms slack; checked); asap visible latency median and p99 ranges as generated; timed commands exact in at least numBfourExactOkMinPct % with leads >= 4 ms, late numBfourLateTwoMinPct-numBfourLateTwoMaxPct % with 2 ms (every timed command exact or late, checked); no repetition Sustainable: 1 ms-slack miss rates as generated at both rates (5 ms slack at most as generated) against zero misses headless for the same links and pages (B3; another instance of the same type); at 1000 commands/s engine-bound (achieved rate as generated, every repetition backlogged); conclusion: served controller-in-the-loop operation shown at 10-100 commands/s with leads >= 4 ms on this host but against a looser deadline than the Sustainable rule, called preliminary (must-fix 1). App. E: served engines render small pages serially, idle OpenMP workers sleep (passive), heap frozen; lateness via the virtual margin: per-repetition p1 0.5-1.4 ms with a 2 ms lead (every repetition > 1 % late) and 2.9-3.3 ms with 4 ms (every repetition with a lead >= 4 ms < 1 % late), so a single margin threshold would lie between max p1(2 ms) and min p1(4 ms), of the order of one page plus its computation, stated as an inference (checked in bench_results); late fractions pooled, plus the single-repetition maximum at 4 ms; the largest apply delay (130 ms) is one repetition's page stall of about that length (checked); achieved rates at 1000 commands/s per repetition; client round trip p99 and apply delay as generated; GIL hand-over stated as a hypothesis (must-fix 18); B4-classic (512 us pages, 2 ms lead) gives the same picture, its headless baseline is not marginal."
+    where: [sections/06_wallclock.tex, sections/10_conclusion.tex, sections/app_e_bench.tex, sections/abstract.tex]
     evidence: [fig:F8, test:RT-06, spec:DESIGN-4.10]
     gates: [H-5]
   C-WC-COSTMODEL:
-    text: "B1 cost model (DESIGN 7.4 form, 20 engine points): indicative, relative RMS 39 %, max 69 %; constant term 65 us = 76 % of the 86 us single-link page; largest errors are mobility underestimates, where a snapshot costs ~0.61 ms + 0.50 ms per link with little RQ dependence at the B1 sizes (8-coefficient diagnostic fit, 12 %, not used for prediction); at the larger N of B2 the snapshot cost grows with N (same snapshot period for N >= 900, F3 RTF still falls); snapshot kernel exponents 1.06 (NumPy, RQ 40 to 1e6) and 0.76 (numba, to 1.7e7)."
-    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
+    text: "B1 cost model (DESIGN 7.4 form, 20 engine points): indicative, relative RMS 39 %, max 69 %; constant term 65 us = 76 % of the 86 us single-link page; largest errors are mobility underestimates, where a snapshot costs ~0.61 ms + 0.50 ms per link with little RQ dependence at the B1 sizes (8-coefficient diagnostic fit, 12 %, not used for prediction); at the larger N of B2 the snapshot cost grows with N (same snapshot period for N >= 900, F3 RTF still falls); snapshot kernel exponents 1.06 (NumPy, RQ 40 to 1e6) and 0.76 (numba, to 1.7e7). Appendix E only since 2026-10-12."
+    where: [sections/app_e_bench.tex]
     evidence: [spec:DESIGN-7.4, spec:DESIGN-12.2]
     gates: []
   C-WC-CROSSTOOL:
-    text: "B6 context on the laptop (not a ranking): same near-field sum, sremu vs MATLAB R2026a agree to 7.8e-14 dB; per-evaluation times for sremu (new positions, configuration change), vectorized MATLAB, per-element MATLAB loop and phased.RISReflector (different model) as generated; different work per call, one loaded machine, per-call time not the cost of a streaming emulator."
-    where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
+    text: "B6 context on the laptop (06cdf7a, clean; not a ranking): same near-field sum, sremu vs MATLAB R2026a agree as generated; per-evaluation times for sremu (new positions, configuration change), vectorized MATLAB, per-element MATLAB loop and phased.RISReflector (different model) as generated; different work per call, one loaded machine, per-call time not the cost of a streaming emulator. Appendix E only since 2026-10-12."
+    where: [sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.2, test:G1]
     gates: []
   C-WC-LIMITS:
-    text: "Limitations of Section VI: stated hosts, commit and scenes only; one instance per benchmark, 3 repetitions; paced timing headless or with the control socket alone; F5 pending; packed values conservative by up to 16 %; indicative cost model; B6 laptop not idle; paced mode is soft real time."
+    text: "Limitations of Section VI (must-fix 1 envelope): stated hosts, commits and scenes only; one instance per benchmark, 3 repetitions (fewer at the end of some B3 series); packed values conservative by up to 16 %; paced operation measured on Linux only, sustaining (headless) at most 8 links at 0.1-1 MS/s and one link at 23.04 MS/s, headless or with commands over the control socket; no paced run exchanged samples with external applications; paced mode is soft real time; cost model and B6 context in Appendix E."
     where: [sections/06_wallclock.tex, sections/app_e_bench.tex]
     evidence: [spec:DESIGN-12.3]
     gates: []
@@ -572,7 +577,7 @@ claims:
   # paper/sweeps/results/E-B-arc/meta.json sremu.commit_verified); lab-like SIM geometry as
   # the supporting row. Every number is a gen_results.py macro read from those results.
   C-EB-WHY:
-    text: "Block-coefficient tools cannot place a reconfiguration inside a packet; GS RIS 008 lists reconfiguration time and modulated-signal quality; GR RIS 004 sizes the RIS-controller delay budget by the 5G NR frame structure (cl. 4.4); E-B runs at the sample level in lockstep with an in-process controller (modelled latency) and measures how the two interact; its three lessons (equalizer trained before a mid-packet switch; a long linear transition spreads but does not remove the damage; with a strong LOS QPSK tolerates the wrong configuration) are the E-B1 and E-B2 results below."
+    text: "Block-coefficient tools cannot place a reconfiguration inside a packet (that GS RIS 008 lists reconfiguration time and modulated-signal quality is stated in Section I since the page fit of 2026-10-12); GR RIS 004 sizes the RIS-controller delay budget by the 5G NR frame structure (cl. 4.4); E-B runs at the sample level in lockstep with an in-process controller (modelled latency) and measures how the two interact; its three lessons (equalizer trained before a mid-packet switch; a long linear transition spreads but does not remove the damage; with a strong LOS QPSK tolerates the wrong configuration) are the E-B1 and E-B2 results below."
     where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [cite:ETSI_GS_RIS008, cite:ETSI_GR_RIS004, test:E-B, test:VA-5, fig:F9]
     gates: []
@@ -602,7 +607,7 @@ claims:
     evidence: [test:E-B, fig:F9, table:tab:eb2grid]
     gates: []
   C-EB-SERVED:
-    text: "Bridge to the served path (MAJOR-3): E-B is lockstep with a modelled latency; over the served control socket in paced mode (B4) the visible asap latency has the stated median and p99 ranges and rare outliers, and with the 2 ms lead used there the stated per-repetition fraction of timed commands was late at 10 commands/s; a timed command there is on time when its lead exceeds the command latency plus the client's virtual-time error (the rule of Section VI; no computed needed-lead macro, R2-F2; the earlier 'p99 + one page' rule was dropped because B4 repetition 2 at 10 commands/s had 1.2 % late with a 2 ms lead, below its 5.6 ms asap p99); the J <= 1 ms regime of F9 is not yet reachable through the served path. Numbers are B4 macros and change with the transport rerun."
+    text: "Bridge from E-B's modelled latency to the measured served path (must-fix 1, MAJOR-3): E-B is lockstep with a modelled latency; on the served path (B4) asap commands became visible after a median and p99 as generated, beyond the J <= 1 ms regime of F9; a timed command is exact when its lead covers the delay to the server, the client's virtual-time error and about one page plus its computation (App. E: per-repetition virtual-margin p1 0.5-1.4 ms with 2 ms, 2.9-3.3 ms with 4 ms; the threshold bracket is an inference); late fractions pooled over the repetitions; late fractions: 2 ms lead (the E-B lead) as generated, 4 ms at most numBfourLateFourMaxPct %, 6-12 ms (from about the asap p99 upward) at most numBfourLateSixMaxPct %; so a timed controller on this path needs a lead of 4 ms or more for the on-time regime of F9; the E-B2 grid was not rerun through the served path."
     where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [fig:F8, fig:F9, test:RT-06]
     gates: [H-5]
@@ -632,7 +637,7 @@ claims:
     evidence: [test:E-A, fig:F10, table:tab:eageo, cite:Clarke1968, cite:Jakes1974, cite:Papazafeiropoulos2023Aging, cite:Zhang2022OutdatedCSI]
     gates: [H-3]
   C-VA1:
-    text: "VA-1 (consistency check, not a finding): IQ path through the served engine with external controller and RX application agrees with the E-A evaluator (vectorized, midpoint rule) within the stated difference (limit 0.02 dB); coverage: primary geometry at 1 GHz only, exact optimum and URAP at tau_SUI 0.1 and 1 s, mean power only (noise rows: see C-EA-EVAL); the engine's batch path (run_batch, start-of-step rule, 5 ms grid) reads up to the stated amount higher in the same runs and fails the limit (for the exact optimum at 0.1 s only; va1.csv diff_iq_minus_run_batch_db; checked by gen_results/case_tables); with the same start-of-step rule the evaluator matches run_batch within 0.0003 dB, and with all cells on its channel interpolation errs by at most 0.008 dB (C-EA-EVAL)."
+    text: "VA-1 (consistency check, not a finding): IQ path through the served engine with external controller and RX application agrees with the E-A evaluator (vectorized, midpoint rule) within the stated difference (limit 0.02 dB); coverage: primary geometry at 1 GHz only, exact optimum and URAP at tau_SUI 0.1 and 1 s, mean power only (noise rows: see C-EA-EVAL); the engine's batch path (run_batch, start-of-step rule, 5 ms grid) reads up to the stated amount higher in the same runs and fails the limit (for the exact optimum at 0.1 s only; va1.csv diff_iq_minus_run_batch_db; checked by gen_results/case_tables); with the same start-of-step rule the evaluator matches run_batch within 0.0003 dB, and with all cells on its channel interpolation errs by at most 0.008 dB (C-EA-EVAL; since the page fit of 2026-10-12 these two side results are stated in Appendix F only, and Sec. VII-B points there)."
     where: [sections/07_case_studies.tex]
     evidence: [test:VA-1, fig:F10]
     gates: []
@@ -647,8 +652,8 @@ claims:
     evidence: [test:PH-10, test:PH-11, test:V-FM, fig:F12]
     gates: []
   C-EE:
-    text: "External-process runs: V-CFO-3 (two processes, native ZMQ), VA-1 (external controller and RX app) and E-E: unmodified GNU Radio 3.10.9.2 (Ubuntu package; stock gr-zeromq REQ/REP blocks and a DQPSK modem built from stock blocks, separate process) as the raw REQ/REP peer through a SIM RIS scene. The abstract names unmodified GNU Radio as an external application."
-    where: [sections/07_case_studies.tex, sections/app_f_cases.tex, sections/abstract.tex]
+    text: "External-process runs: V-CFO-3 (two processes, native ZMQ), VA-1 (external controller and RX app) and E-E: unmodified GNU Radio 3.10.9.2 (Ubuntu package; stock gr-zeromq REQ/REP blocks and a DQPSK modem built from stock blocks, separate process) as the raw REQ/REP peer through a SIM RIS scene (the raw request-reply data plane, not the UHD-shaped API). Since 2026-10-12 the abstract no longer names GNU Radio (length; open issue of part 2a)."
+    where: [sections/07_case_studies.tex, sections/app_f_cases.tex]
     evidence: [test:V-CFO-3, test:IO-02, test:IO-08, pytest:tests/integration/test_gnuradio_raw.py]
     gates: []
   C-EE-LINK:

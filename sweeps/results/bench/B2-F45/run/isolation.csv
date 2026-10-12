@@ -1,0 +1,2 @@
+point_id,rtf_parallel,rtf_isolated,ratio_isolated_over_parallel,rtf_min_parallel,rtf_min_isolated,concurrent_points_parallel,status_isolated,slot_cpus
+L8_N240_R1_fs1e6_F5,0.19255409807219198,0.22529869454076776,1.170054009737561,,,7,ok,16

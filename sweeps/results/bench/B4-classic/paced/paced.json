@@ -1,0 +1,3953 @@
+[
+  {
+    "rate_hz": 10,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.204718772,
+    "commands": 595,
+    "status": {
+      "applied": 575,
+      "late_applied": 20
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 1551.0,
+      "mean": 21.91764705882353,
+      "p50": 0.0,
+      "p99": 1104.0,
+      "p99.9": 1551.0
+    },
+    "lateness_nonzero": 40,
+    "lateness_max": 1551,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 1551,
+      "rx001.rx0": 1551
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 2417.3160000000003,
+      "max": 5917.055,
+      "mean": 3421.894379831933,
+      "p50": 3270.498,
+      "p90": 4361.149,
+      "p99": 5300.103,
+      "p99.9": 5917.055
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 2417.3160000000003,
+      "max": 5917.055,
+      "mean": 3421.894379831933,
+      "p50": 3270.498,
+      "p90": 4361.149,
+      "p99": 5300.103,
+      "p99.9": 5917.055
+    },
+    "late_fraction": 0.03361344537815126,
+    "exact_fraction": 0.9663865546218487,
+    "virtual_margin_us": {
+      "n": 595.0,
+      "min": -465.45,
+      "max": 2058.0830000076294,
+      "mean": 1692.933944544151,
+      "p1": 911.8520000019074,
+      "p50": 1755.1719999923707,
+      "p99": 1971.4560000038148
+    },
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 955.187,
+      "max": 3791.726,
+      "mean": 1439.695487394958,
+      "p50": 1210.496,
+      "p90": 2308.855,
+      "p99": 3083.7090000000003
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2344.9060000046984,
+      "p90": 3415.407999995068,
+      "p99": 5011.150999990832,
+      "p99.9": 7462.571000004914,
+      "max": 7462.571000004914
+    },
+    "pacer_t0_ns": 77190356657,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 19901,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 128,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 19773,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 625,
+        "late_applied": 20
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2344.9060000046984,
+        "p90": 3415.407999995068,
+        "p99": 5011.150999990832,
+        "p99.9": 7462.571000004914,
+        "max": 7462.571000004914
+      },
+      "wall_s": 64.402079315,
+      "achieved_rate_hz": 10.015204584392542
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.05766752852230158,
+      "5ms": 0.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 136.735,
+      "p50": 157.999,
+      "p95": 1055.999,
+      "p99": 1439.999,
+      "p999": 2463.9990000000003,
+      "max": 4102.908,
+      "mean": 278.825871378713
+    },
+    "utilization": {
+      "p50": 0.307199,
+      "p99": 2.555903,
+      "max": 5.094838
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 20,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10Hz"
+  },
+  {
+    "rate_hz": 10,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.19756636,
+    "commands": 595,
+    "status": {
+      "applied": 562,
+      "late_applied": 33
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 3038.0,
+      "mean": 33.285714285714285,
+      "p50": 0.0,
+      "p99": 990.0,
+      "p99.9": 3038.0
+    },
+    "lateness_nonzero": 66,
+    "lateness_max": 3038,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 3038,
+      "rx001.rx0": 3038
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 1993.66,
+      "max": 9017.392,
+      "mean": 3043.572878991597,
+      "p50": 2837.981,
+      "p90": 3970.349,
+      "p99": 4968.667,
+      "p99.9": 9017.392
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 1993.66,
+      "max": 9017.392,
+      "mean": 3043.572878991597,
+      "p50": 2837.981,
+      "p90": 3970.349,
+      "p99": 4968.667,
+      "p99.9": 9017.392
+    },
+    "late_fraction": 0.05546218487394958,
+    "exact_fraction": 0.9445378151260504,
+    "virtual_margin_us": {
+      "n": 595.0,
+      "min": -733.4964999923707,
+      "max": 1591.8344999961853,
+      "mean": 1164.950335298817,
+      "p1": 431.7815000038147,
+      "p50": 1219.0275000152587,
+      "p99": 1559.3674999923705
+    },
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 950.967,
+      "max": 6846.917,
+      "mean": 1561.9328050420168,
+      "p50": 1377.851,
+      "p90": 2335.817,
+      "p99": 3175.151
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2380.0129999926867,
+      "p90": 3422.1580000064478,
+      "p99": 5102.332000006982,
+      "p99.9": 7843.712000010328,
+      "max": 7843.712000010328
+    },
+    "pacer_t0_ns": 142490661953,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 275223,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 256,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 274967,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 609,
+        "late_applied": 36
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2380.0129999926867,
+        "p90": 3422.1580000064478,
+        "p99": 5102.332000006982,
+        "p99.9": 7843.712000010328,
+        "max": 7843.712000010328
+      },
+      "wall_s": 64.403111586,
+      "achieved_rate_hz": 10.015044057905591
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.05775286076338223,
+      "5ms": 8.53322410806475e-05
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 137.227,
+      "p50": 157.999,
+      "p95": 1055.999,
+      "p99": 1471.999,
+      "p999": 2559.9990000000003,
+      "max": 6883.944,
+      "mean": 280.26656652074854
+    },
+    "utilization": {
+      "p50": 0.307199,
+      "p99": 2.555903,
+      "max": 9.852032999999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 33,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10Hz"
+  },
+  {
+    "rate_hz": 10,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.19683140299998,
+    "commands": 595,
+    "status": {
+      "applied": 561,
+      "late_applied": 34
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 3411.0,
+      "mean": 47.60336134453782,
+      "p50": 0.0,
+      "p99": 1171.0,
+      "p99.9": 3411.0
+    },
+    "lateness_nonzero": 68,
+    "lateness_max": 3411,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 3411,
+      "rx001.rx0": 3411
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 2225.3540000000003,
+      "max": 7575.751,
+      "mean": 3101.1230537815127,
+      "p50": 2864.742,
+      "p90": 4082.315,
+      "p99": 5355.446,
+      "p99.9": 7575.751
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 2225.3540000000003,
+      "max": 7575.751,
+      "mean": 3101.1230537815127,
+      "p50": 2864.742,
+      "p90": 4082.315,
+      "p99": 5355.446,
+      "p99.9": 7575.751
+    },
+    "late_fraction": 0.05714285714285714,
+    "exact_fraction": 0.9428571428571428,
+    "virtual_margin_us": {
+      "n": 595.0,
+      "min": 160.25599999046327,
+      "max": 1730.664999988556,
+      "mean": 1256.7884520914397,
+      "p1": 496.1469999847412,
+      "p50": 1309.987999977112,
+      "p99": 1665.454
+    },
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 988.663,
+      "max": 5777.939,
+      "mean": 1524.7128201680673,
+      "p50": 1337.997,
+      "p90": 2374.3360000000002,
+      "p99": 3187.66
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2152.7920000039558,
+      "p90": 3145.1480000157517,
+      "p99": 5485.252999989143,
+      "p99.9": 7941.282000018646,
+      "max": 7941.282000018646
+    },
+    "pacer_t0_ns": 207783050439,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 530474,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 384,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 530090,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 608,
+        "late_applied": 37
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2152.7920000039558,
+        "p90": 3145.1480000157517,
+        "p99": 5485.252999989143,
+        "p99.9": 7941.282000018646,
+        "max": 7941.282000018646
+      },
+      "wall_s": 64.40206091299999,
+      "achieved_rate_hz": 10.01520744609902
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.05674594031863059,
+      "5ms": 5.11993446483885e-05
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 137.643,
+      "p50": 157.999,
+      "p95": 1055.999,
+      "p99": 1439.999,
+      "p999": 2559.9990000000003,
+      "max": 5828.416,
+      "mean": 278.8715400677538
+    },
+    "utilization": {
+      "p50": 0.307199,
+      "p99": 2.523135,
+      "max": 7.538132999999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 34,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10Hz"
+  },
+  {
+    "rate_hz": 10,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.20344668799999,
+    "commands": 595,
+    "status": {
+      "applied": 595
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 1633.1670000000001,
+      "max": 5509.79,
+      "mean": 2457.3488470588236,
+      "p50": 2104.425,
+      "p90": 3512.664,
+      "p99": 4952.021,
+      "p99.9": 5509.79
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 1633.1670000000001,
+      "max": 5509.79,
+      "mean": 2457.3488470588236,
+      "p50": 2104.425,
+      "p90": 3512.664,
+      "p99": 4952.021,
+      "p99.9": 5509.79
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 1363.328,
+      "max": 5179.175,
+      "mean": 1958.3808823529412,
+      "p50": 1860.8980000000001,
+      "p90": 2403.282,
+      "p99": 3589.299
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2327.785999966636,
+      "p90": 3434.0590000283555,
+      "p99": 5071.6060000013385,
+      "p99.9": 6368.529999974726,
+      "max": 6368.529999974726
+    },
+    "pacer_t0_ns": 273079779375,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 785618,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 512,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 785106,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 645
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2327.785999966636,
+        "p90": 3434.0590000283555,
+        "p99": 5071.6060000013385,
+        "p99.9": 6368.529999974726,
+        "max": 6368.529999974726
+      },
+      "wall_s": 64.40289758400002,
+      "achieved_rate_hz": 10.01507733652408
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.06318852452021947,
+      "5ms": 2.559967232419425e-05
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 136.649,
+      "p50": 157.999,
+      "p95": 1103.999,
+      "p99": 1727.999,
+      "p999": 2783.9990000000003,
+      "max": 5379.499,
+      "mean": 286.9151746409646
+    },
+    "utilization": {
+      "p50": 0.307199,
+      "p99": 2.5886709999999997,
+      "max": 6.501246
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10Hz"
+  },
+  {
+    "rate_hz": 10,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.194495797,
+    "commands": 595,
+    "status": {
+      "applied": 595
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 1669.199,
+      "max": 5108.912,
+      "mean": 2396.5545781512606,
+      "p50": 2107.072,
+      "p90": 3324.3340000000003,
+      "p99": 4642.602,
+      "p99.9": 5108.912
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 1669.199,
+      "max": 5108.912,
+      "mean": 2396.5545781512606,
+      "p50": 2107.072,
+      "p90": 3324.3340000000003,
+      "p99": 4642.602,
+      "p99.9": 5108.912
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 1330.727,
+      "max": 4598.814,
+      "mean": 1961.3952823529412,
+      "p50": 1851.142,
+      "p90": 2507.859,
+      "p99": 3420.907
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2159.4819999677384,
+      "p90": 3320.072999997592,
+      "p99": 4925.887000013063,
+      "p99.9": 6139.008999980433,
+      "max": 6139.008999980433
+    },
+    "pacer_t0_ns": 338388122078,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 1039662,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 640,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 1039022,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 645
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2159.4819999677384,
+        "p90": 3320.072999997592,
+        "p99": 4925.887000013063,
+        "p99.9": 6139.008999980433,
+        "max": 6139.008999980433
+      },
+      "wall_s": 64.40209221200001,
+      "achieved_rate_hz": 10.015202578773014
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.0634274547952453,
+      "5ms": 0.00024746349913387774
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 138.541,
+      "p50": 159.999,
+      "p95": 1103.999,
+      "p99": 1759.999,
+      "p999": 3007.9990000000003,
+      "max": 13525.498,
+      "mean": 291.53006777939913
+    },
+    "utilization": {
+      "p50": 0.311295,
+      "p99": 2.5886709999999997,
+      "max": 25.682346
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10Hz"
+  },
+  {
+    "rate_hz": 10,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.20961671200001,
+    "commands": 595,
+    "status": {
+      "applied": 595
+    },
+    "lateness_samples": {
+      "n": 1190.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 595.0,
+      "min": 1716.3110000000001,
+      "max": 8209.471,
+      "mean": 2427.4298117647063,
+      "p50": 2163.821,
+      "p90": 3198.0480000000002,
+      "p99": 5079.009,
+      "p99.9": 8209.471
+    },
+    "visible_minus_recv_us": {
+      "n": 595.0,
+      "min": 1716.3110000000001,
+      "max": 8209.471,
+      "mean": 2427.4298117647063,
+      "p50": 2163.821,
+      "p90": 3198.0480000000002,
+      "p99": 5079.009,
+      "p99.9": 8209.471
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 595.0,
+      "min": 1262.417,
+      "max": 5848.567,
+      "mean": 1956.1226672268906,
+      "p50": 1890.979,
+      "p90": 2374.165,
+      "p99": 3145.4320000000002
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 645,
+      "p50": 2315.361999990273,
+      "p90": 3560.6220000090616,
+      "p99": 5329.753000012261,
+      "p99.9": 8298.604000003706,
+      "max": 8298.604000003706
+    },
+    "pacer_t0_ns": 403682676588,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 1293676,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 768,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 1292908,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 645,
+      "target": 645,
+      "status": {
+        "scheduled": 645
+      },
+      "rtt_us": {
+        "n": 645,
+        "p50": 2315.361999990273,
+        "p90": 3560.6220000090616,
+        "p99": 5329.753000012261,
+        "p99.9": 8298.604000003706,
+        "max": 8298.604000003706
+      },
+      "wall_s": 64.40208304299995,
+      "achieved_rate_hz": 10.015204004649148
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.061772009318280724,
+      "5ms": 4.266612054032375e-05
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 138.574,
+      "p50": 159.999,
+      "p95": 1103.999,
+      "p99": 1727.999,
+      "p999": 2719.9990000000003,
+      "max": 5887.804,
+      "mean": 285.4085777590047
+    },
+    "utilization": {
+      "p50": 0.307199,
+      "p99": 2.5886709999999997,
+      "max": 8.618770999999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 9.916666666666666,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.18320155700002,
+    "commands": 5950,
+    "status": {
+      "applied": 5878,
+      "late_applied": 72
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 1872.0,
+      "mean": 6.765714285714286,
+      "p50": 0.0,
+      "p99": 176.0,
+      "p99.9": 1120.0
+    },
+    "lateness_nonzero": 144,
+    "lateness_max": 1872,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 1872,
+      "rx001.rx0": 1872
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 2334.052,
+      "max": 15894.822,
+      "mean": 3483.5159678991595,
+      "p50": 3386.7980000000002,
+      "p90": 4084.993,
+      "p99": 4796.442,
+      "p99.9": 7149.400000000001
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 2334.052,
+      "max": 15894.822,
+      "mean": 3483.5159678991595,
+      "p50": 3386.7980000000002,
+      "p90": 4084.993,
+      "p99": 4796.442,
+      "p99.9": 7149.400000000001
+    },
+    "late_fraction": 0.012100840336134453,
+    "exact_fraction": 0.9878991596638655,
+    "virtual_margin_us": {
+      "n": 5950.0,
+      "min": -49.01499998664856,
+      "max": 2301.942000015259,
+      "mean": 2024.4149344596142,
+      "p1": 1667.7180000076294,
+      "p50": 2029.1170000305176,
+      "p99": 2201.762000026703
+    },
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 834.759,
+      "max": 13440.271,
+      "mean": 1185.3422919327732,
+      "p50": 1028.06,
+      "p90": 1746.134,
+      "p99": 2368.005
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1548.8179999465501,
+      "p90": 2259.410000021944,
+      "p99": 4404.696999984026,
+      "p99.9": 5352.2110000017165,
+      "max": 13932.042000078582
+    },
+    "pacer_t0_ns": 468990052930,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 1548511,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 896,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 1547615,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "scheduled": 6365,
+        "late_applied": 85
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1548.8179999465501,
+        "p90": 2259.410000021944,
+        "p99": 4404.696999984026,
+        "p99.9": 5352.2110000017165,
+        "max": 13932.042000078582
+      },
+      "wall_s": 64.49147617299997,
+      "achieved_rate_hz": 100.01321698231433
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.1350041386136924,
+      "5ms": 0.000546126342916144
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 139.185,
+      "p50": 185.999,
+      "p95": 1375.999,
+      "p99": 2015.999,
+      "p999": 4351.999,
+      "max": 13474.005000000001,
+      "mean": 463.20972987225764
+    },
+    "utilization": {
+      "p50": 0.331775,
+      "p99": 2.621439,
+      "max": 25.004815999999998
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 72,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@100Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.19711831500001,
+    "commands": 5950,
+    "status": {
+      "applied": 5825,
+      "late_applied": 125
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 4456.0,
+      "mean": 13.70689075630252,
+      "p50": 0.0,
+      "p99": 585.0,
+      "p99.9": 1657.0
+    },
+    "lateness_nonzero": 250,
+    "lateness_max": 4456,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 4456,
+      "rx001.rx0": 4456
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 2274.399,
+      "max": 16099.11,
+      "mean": 3266.8276677310923,
+      "p50": 3145.009,
+      "p90": 3975.6,
+      "p99": 5001.451,
+      "p99.9": 7709.24
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 2274.399,
+      "max": 16099.11,
+      "mean": 3266.8276677310923,
+      "p50": 3145.009,
+      "p90": 3975.6,
+      "p99": 5001.451,
+      "p99.9": 7709.24
+    },
+    "late_fraction": 0.02100840336134454,
+    "exact_fraction": 0.9789915966386554,
+    "virtual_margin_us": {
+      "n": 5950.0,
+      "min": -1485.2814999694824,
+      "max": 2051.1784999694823,
+      "mean": 1762.8978317616204,
+      "p1": 1391.5515000495911,
+      "p50": 1765.3655000305175,
+      "p99": 1924.9154999542236
+    },
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 894.842,
+      "max": 13888.175000000001,
+      "mean": 1227.051287394958,
+      "p50": 1043.463,
+      "p90": 1844.746,
+      "p99": 2650.763
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1601.352999955452,
+      "p90": 2367.7589999806514,
+      "p99": 4480.443999909767,
+      "p99.9": 6621.106000011423,
+      "max": 13969.86499992181
+    },
+    "pacer_t0_ns": 534346737516,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 1815113,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1024,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 1814089,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "late_applied": 138,
+        "scheduled": 6312
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1601.352999955452,
+        "p90": 2367.7589999806514,
+        "p99": 4480.443999909767,
+        "p99.9": 6621.106000011423,
+        "max": 13969.86499992181
+      },
+      "wall_s": 64.49145093000004,
+      "achieved_rate_hz": 100.01325612910964
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.14440775158077976,
+      "5ms": 0.0007423904974016332
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 139.374,
+      "p50": 185.999,
+      "p95": 1407.999,
+      "p99": 2143.9990000000003,
+      "p999": 4607.999,
+      "max": 13994.443000000001,
+      "mean": 475.06397562057873
+    },
+    "utilization": {
+      "p50": 0.327679,
+      "p99": 2.654207,
+      "max": 9.051389
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 125,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@100Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.19051601800004,
+    "commands": 5950,
+    "status": {
+      "applied": 5860,
+      "late_applied": 90
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 2588.0,
+      "mean": 9.643529411764705,
+      "p50": 0.0,
+      "p99": 332.0,
+      "p99.9": 1596.0
+    },
+    "lateness_nonzero": 180,
+    "lateness_max": 2588,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 2588,
+      "rx001.rx0": 2588
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 2114.9320000000002,
+      "max": 16705.311,
+      "mean": 3200.904031092437,
+      "p50": 3096.405,
+      "p90": 3840.039,
+      "p99": 4807.2080000000005,
+      "p99.9": 9931.462
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 2114.9320000000002,
+      "max": 16705.311,
+      "mean": 3200.904031092437,
+      "p50": 3096.405,
+      "p90": 3840.039,
+      "p99": 4807.2080000000005,
+      "p99.9": 9931.462
+    },
+    "late_fraction": 0.015126050420168067,
+    "exact_fraction": 0.984873949579832,
+    "virtual_margin_us": {
+      "n": 5950.0,
+      "min": 12.878499984741211,
+      "max": 2004.7875000000001,
+      "mean": 1738.851258600139,
+      "p1": 1268.722499923706,
+      "p50": 1765.5304999542236,
+      "p99": 1985.8704999313354
+    },
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 890.048,
+      "max": 14839.492,
+      "mean": 1188.5286,
+      "p50": 998.763,
+      "p90": 1779.371,
+      "p99": 2616.545
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1472.5510000062059,
+      "p90": 2234.317999977975,
+      "p99": 4277.766999962296,
+      "p99.9": 5904.270999963046,
+      "max": 15308.877999927972
+    },
+    "pacer_t0_ns": 599719433788,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 2081776,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1152,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 2080624,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "scheduled": 6351,
+        "late_applied": 99
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1472.5510000062059,
+        "p90": 2234.317999977975,
+        "p99": 4277.766999962296,
+        "p99.9": 5904.270999963046,
+        "max": 15308.877999927972
+      },
+      "wall_s": 64.49148961499998,
+      "achieved_rate_hz": 100.01319613649929
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.13177004667673586,
+      "5ms": 0.0013055832885339068
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 139.203,
+      "p50": 185.999,
+      "p95": 1375.999,
+      "p99": 2111.9990000000003,
+      "p999": 6527.999,
+      "max": 15492.829,
+      "mean": 466.39600314875975
+    },
+    "utilization": {
+      "p50": 0.331775,
+      "p99": 2.621439,
+      "max": 26.538725
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 90,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@100Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.2185469530001,
+    "commands": 5950,
+    "status": {
+      "applied": 5950
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 1465.175,
+      "max": 11297.674,
+      "mean": 2013.6253963025213,
+      "p50": 1823.976,
+      "p90": 2616.875,
+      "p99": 4393.318,
+      "p99.9": 6393.302
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 1465.175,
+      "max": 11297.674,
+      "mean": 2013.6253963025213,
+      "p50": 1823.976,
+      "p90": 2616.875,
+      "p99": 4393.318,
+      "p99.9": 6393.302
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 999.386,
+      "max": 11722.709,
+      "mean": 1606.6775621848742,
+      "p50": 1486.064,
+      "p90": 2088.002,
+      "p99": 3025.885
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1781.470999958401,
+      "p90": 2515.840000000935,
+      "p99": 4368.048999936036,
+      "p99.9": 5823.854000027495,
+      "max": 7320.439999944028
+    },
+    "pacer_t0_ns": 665088296184,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 2347509,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1280,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 2346229,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "scheduled": 6450
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1781.470999958401,
+        "p90": 2515.840000000935,
+        "p99": 4368.048999936036,
+        "p99.9": 5823.854000027495,
+        "max": 7320.439999944028
+      },
+      "wall_s": 64.49246112000003,
+      "achieved_rate_hz": 100.01168955234309
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.19064929302238265,
+      "5ms": 0.00043519442951130225
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 139.216,
+      "p50": 179.999,
+      "p95": 1599.999,
+      "p99": 2399.9990000000003,
+      "p999": 4287.999,
+      "max": 11756.434000000001,
+      "mean": 515.2037431670208
+    },
+    "utilization": {
+      "p50": 0.323583,
+      "p99": 3.0474229999999998,
+      "max": 21.329904
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@100Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.184089922,
+    "commands": 5950,
+    "status": {
+      "applied": 5950
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 1496.38,
+      "max": 12523.339,
+      "mean": 2042.2410270588234,
+      "p50": 1880.867,
+      "p90": 2628.69,
+      "p99": 4486.834,
+      "p99.9": 6150.453
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 1496.38,
+      "max": 12523.339,
+      "mean": 2042.2410270588234,
+      "p50": 1880.867,
+      "p90": 2628.69,
+      "p99": 4486.834,
+      "p99.9": 6150.453
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 1002.162,
+      "max": 12466.797,
+      "mean": 1629.8889768067227,
+      "p50": 1517.596,
+      "p90": 2080.025,
+      "p99": 2978.349
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1548.3209999729297,
+      "p90": 2615.761000015482,
+      "p99": 4201.917999921534,
+      "p99.9": 5602.75099996943,
+      "max": 11598.673000094095
+    },
+    "pacer_t0_ns": 730455901323,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 2601430,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1408,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 2600022,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "scheduled": 6450
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1548.3209999729297,
+        "p90": 2615.761000015482,
+        "p99": 4201.917999921534,
+        "p99.9": 5602.75099996943,
+        "max": 11598.673000094095
+      },
+      "wall_s": 64.49168612899996,
+      "achieved_rate_hz": 100.01289138414433
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.1907090255911391,
+      "5ms": 0.0007082576009693742
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 138.821,
+      "p50": 179.999,
+      "p95": 1631.999,
+      "p99": 2399.9990000000003,
+      "p999": 4543.999,
+      "max": 12501.2,
+      "mean": 517.1596461015966
+    },
+    "utilization": {
+      "p50": 0.31948699999999997,
+      "p99": 3.0801909999999997,
+      "max": 19.989648
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@100Hz"
+  },
+  {
+    "rate_hz": 100,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 65.18619068200007,
+    "commands": 5950,
+    "status": {
+      "applied": 5950
+    },
+    "lateness_samples": {
+      "n": 11900.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": false,
+    "backlog_reasons": [],
+    "visible_latency_us": {
+      "n": 5950.0,
+      "min": 1471.96,
+      "max": 12112.16,
+      "mean": 2097.112551764706,
+      "p50": 1846.6290000000001,
+      "p90": 2825.587,
+      "p99": 4675.232,
+      "p99.9": 6445.228
+    },
+    "visible_minus_recv_us": {
+      "n": 5950.0,
+      "min": 1471.96,
+      "max": 12112.16,
+      "mean": 2097.112551764706,
+      "p50": 1846.6290000000001,
+      "p90": 2825.587,
+      "p99": 4675.232,
+      "p99.9": 6445.228
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 5950.0,
+      "min": 1001.183,
+      "max": 13108.375,
+      "mean": 1652.1861368067227,
+      "p50": 1545.1100000000001,
+      "p90": 2129.978,
+      "p99": 3104.059
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 6450,
+      "p50": 1619.7690000581133,
+      "p90": 2600.83399996347,
+      "p99": 4537.585999969451,
+      "p99.9": 6064.179999953012,
+      "max": 11052.71200003699
+    },
+    "pacer_t0_ns": 795821547563,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 2855588,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1536,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 2854052,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 6450,
+      "target": 6450,
+      "status": {
+        "scheduled": 6450
+      },
+      "rtt_us": {
+        "n": 6450,
+        "p50": 1619.7690000581133,
+        "p90": 2600.83399996347,
+        "p99": 4537.585999969451,
+        "p99.9": 6064.179999953012,
+        "max": 11052.71200003699
+      },
+      "wall_s": 64.49189940899998,
+      "achieved_rate_hz": 100.01256063331093
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 0.20111102577887002,
+      "5ms": 0.0006314585839967915
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 138.326,
+      "p50": 183.999,
+      "p95": 1663.999,
+      "p99": 2431.9990000000003,
+      "p999": 4543.999,
+      "max": 13139.969000000001,
+      "mean": 533.7737951514221
+    },
+    "utilization": {
+      "p50": 0.323583,
+      "p99": 3.0801909999999997,
+      "max": 19.340640999999998
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 99.16666666666667,
+    "engine_bound": false,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@100Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 76.20052836000002,
+    "commands": 18902,
+    "status": {
+      "applied": 18902
+    },
+    "lateness_samples": {
+      "n": 37804.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 9830400 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 18902.0,
+      "min": 1014392.199,
+      "max": 14055786.518000001,
+      "mean": 8374338.309371812,
+      "p50": 9151619.019,
+      "p90": 12994824.848000001,
+      "p99": 14009707.021,
+      "p99.9": 14051467.369
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 18902.0,
+      "min": -3414.7639999237063,
+      "max": 2172.166000061035,
+      "mean": 1804.67384750185,
+      "p1": 922.4760000839234,
+      "p50": 1871.6210000343324,
+      "p99": 2101.555000110626
+    },
+    "apply_delay_us": {
+      "n": 18902.0,
+      "min": 1012102.8790000001,
+      "max": 14054070.72,
+      "mean": 8372274.745367739,
+      "p50": 9149429.841,
+      "p90": 12992737.067,
+      "p99": 14007797.417
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 20524,
+      "p50": 2128.0559999468096,
+      "p90": 5994.405000024017,
+      "p99": 15296.315000000504,
+      "p99.9": 27470.13800001241,
+      "max": 51770.0950000517
+    },
+    "pacer_t0_ns": 861180292236,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 3112689,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1664,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 3111025,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 20524,
+      "target": 64500,
+      "status": {
+        "late_applied": 1,
+        "scheduled": 20523
+      },
+      "rtt_us": {
+        "n": 20524,
+        "p50": 2128.0559999468096,
+        "p90": 5994.405000024017,
+        "p99": 15296.315000000504,
+        "p99.9": 27470.13800001241,
+        "max": 51770.0950000517
+      },
+      "wall_s": 64.50492578500007,
+      "achieved_rate_hz": 318.17725158553145
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 1011127.9940000001,
+      "p50": 9830399.999,
+      "p95": 13762559.999,
+      "p99": 14024703.999,
+      "p999": 14054107.084,
+      "max": 14054107.084,
+      "mean": 8703686.755265307
+    },
+    "utilization": {
+      "p50": 0.6143989999999999,
+      "p99": 4.849663,
+      "max": 99.556902
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 315.03333333333336,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@1000Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 71.09104218999994,
+    "commands": 16630,
+    "status": {
+      "applied": 16630
+    },
+    "lateness_samples": {
+      "n": 33260.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 4718592 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 16630.0,
+      "min": 608164.093,
+      "max": 8083306.958000001,
+      "mean": 4603450.390871377,
+      "p50": 4653707.118,
+      "p90": 7502971.608,
+      "p99": 8000052.234,
+      "p99.9": 8077794.595
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 16630.0,
+      "min": -10999.135499961852,
+      "max": 2038.485500026703,
+      "mean": 1513.0773691910686,
+      "p1": 674.6945000400543,
+      "p50": 1576.9235000686647,
+      "p99": 1885.9974999952317
+    },
+    "apply_delay_us": {
+      "n": 16630.0,
+      "min": 607049.605,
+      "max": 8081542.426,
+      "mean": 4601681.544117498,
+      "p50": 4652431.813,
+      "p90": 7500918.282000001,
+      "p99": 7998690.538
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 18142,
+      "p50": 2625.391999913518,
+      "p90": 6438.633000016125,
+      "p99": 12913.758999957281,
+      "p99.9": 23430.731999951604,
+      "max": 47487.621999948715
+    },
+    "pacer_t0_ns": 937741413537,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 3407661,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1792,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 3405869,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 18142,
+      "target": 64500,
+      "status": {
+        "scheduled": 18142
+      },
+      "rtt_us": {
+        "n": 18142,
+        "p50": 2625.391999913518,
+        "p90": 6438.633000016125,
+        "p99": 12913.758999957281,
+        "p99.9": 23430.731999951604,
+        "max": 47487.621999948715
+      },
+      "wall_s": 64.50312291399996,
+      "achieved_rate_hz": 281.2577000990816
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 605505.0920000001,
+      "p50": 4718591.999,
+      "p95": 7798783.999,
+      "p99": 8060927.999,
+      "p999": 8082406.324,
+      "max": 8082406.324,
+      "mean": 4632661.35987655
+    },
+    "utilization": {
+      "p50": 0.430079,
+      "p99": 4.653055,
+      "max": 71.04611299999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 277.1666666666667,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@1000Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 74.2871959869999,
+    "commands": 17877,
+    "status": {
+      "applied": 17877
+    },
+    "lateness_samples": {
+      "n": 35754.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 6488064 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 17877.0,
+      "min": 812009.677,
+      "max": 11416864.094,
+      "mean": 6425310.566968395,
+      "p50": 6433785.648,
+      "p90": 10967294.126,
+      "p99": 11399173.341,
+      "p99.9": 11412451.88
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 17877.0,
+      "min": -29889.361500038147,
+      "max": 2050.561499988556,
+      "mean": 1645.7048743662172,
+      "p1": 753.1614999904633,
+      "p50": 1709.2325000572205,
+      "p99": 2014.5195
+    },
+    "apply_delay_us": {
+      "n": 17877.0,
+      "min": 810051.113,
+      "max": 11415004.088,
+      "mean": 6423409.427069196,
+      "p50": 6432116.574,
+      "p90": 10965288.849,
+      "p99": 11397282.268000001
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 19398,
+      "p50": 2336.5159997865703,
+      "p90": 6295.295999962036,
+      "p99": 13740.36599986539,
+      "p99.9": 24864.08400000073,
+      "max": 46663.502000001245
+    },
+    "pacer_t0_ns": 1009147424857,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 3697896,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 1920,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 3695976,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 19398,
+      "target": 64500,
+      "status": {
+        "late_applied": 2,
+        "scheduled": 19396
+      },
+      "rtt_us": {
+        "n": 19398,
+        "p50": 2336.5159997865703,
+        "p90": 6295.295999962036,
+        "p99": 13740.36599986539,
+        "p99.9": 24864.08400000073,
+        "max": 46663.502000001245
+      },
+      "wall_s": 64.50163336100002,
+      "achieved_rate_hz": 300.73657036611917
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 809500.6140000001,
+      "p50": 6488063.999,
+      "p95": 11141119.999,
+      "p99": 11403263.999,
+      "p999": 11415193.319,
+      "max": 11415193.319,
+      "mean": 6290688.817120822
+    },
+    "utilization": {
+      "p50": 0.548863,
+      "p99": 4.784127,
+      "max": 80.933779
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 297.95,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@1000Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 76.58563291300015,
+    "commands": 21848,
+    "status": {
+      "applied": 21848
+    },
+    "lateness_samples": {
+      "n": 43696.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 17825792 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 21848.0,
+      "min": 1527.365,
+      "max": 53860.736000000004,
+      "mean": 2879.7112189674112,
+      "p50": 2539.951,
+      "p90": 4237.78,
+      "p99": 6451.539,
+      "p99.9": 8055.88
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 21848.0,
+      "min": 4543195.195,
+      "max": 27148824.538,
+      "mean": 15691005.740435692,
+      "p50": 15800092.281,
+      "p90": 24819707.156,
+      "p99": 26907501.617000002
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 26012,
+      "p50": 2071.284000066953,
+      "p90": 3688.222999926438,
+      "p99": 5836.068000007799,
+      "p99.9": 7292.991999975129,
+      "max": 53153.78599993892
+    },
+    "pacer_t0_ns": 1083784349225,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 3987545,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2048,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 3985497,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 26012,
+      "target": 64500,
+      "status": {
+        "scheduled": 26012
+      },
+      "rtt_us": {
+        "n": 26012,
+        "p50": 2071.284000066953,
+        "p90": 3688.222999926438,
+        "p99": 5836.068000007799,
+        "p99.9": 7292.991999975129,
+        "max": 53153.78599993892
+      },
+      "wall_s": 64.502200077,
+      "achieved_rate_hz": 403.2730661736805
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 4541717.964,
+      "p50": 17825791.999,
+      "p95": 26476543.999,
+      "p99": 27000831.999,
+      "p999": 27148877.841000002,
+      "max": 27148877.841000002,
+      "mean": 17243748.48243597
+    },
+    "utilization": {
+      "p50": 0.331775,
+      "p99": 4.915198999999999,
+      "max": 99.954539
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 364.1333333333333,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@1000Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 78.79374030400004,
+    "commands": 23933,
+    "status": {
+      "applied": 23933
+    },
+    "lateness_samples": {
+      "n": 47866.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 21495808 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 23933.0,
+      "min": 1536.272,
+      "max": 62083.859000000004,
+      "mean": 2729.9978157773785,
+      "p50": 2355.734,
+      "p90": 3997.0860000000002,
+      "p99": 6201.713,
+      "p99.9": 7991.701
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 23933.0,
+      "min": 5471484.0370000005,
+      "max": 31944954.407,
+      "mean": 18711327.65494054,
+      "p50": 18801838.982,
+      "p90": 29436371.968000002,
+      "p99": 31659236.742000002
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 28771,
+      "p50": 1830.509000001257,
+      "p90": 3305.0639999601117,
+      "p99": 5582.383999808371,
+      "p99.9": 6981.773000006797,
+      "max": 62071.693000007144
+    },
+    "pacer_t0_ns": 1160671760503,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 4241558,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2176,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 4239382,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 28771,
+      "target": 64500,
+      "status": {
+        "scheduled": 28771
+      },
+      "rtt_us": {
+        "n": 28771,
+        "p50": 1830.509000001257,
+        "p90": 3305.0639999601117,
+        "p99": 5582.383999808371,
+        "p99.9": 6981.773000006797,
+        "max": 62071.693000007144
+      },
+      "wall_s": 64.50245613300012,
+      "achieved_rate_hz": 446.045030295838
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 5470034.488,
+      "p50": 21495807.999,
+      "p95": 30932991.999,
+      "p99": 31719423.999,
+      "p999": 31945173.698,
+      "max": 31945173.698,
+      "mean": 21009158.100875765
+    },
+    "utilization": {
+      "p50": 0.327679,
+      "p99": 4.784127,
+      "max": 120.67195699999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 398.8833333333333,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@1000Hz"
+  },
+  {
+    "rate_hz": 1000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 76.64587647899998,
+    "commands": 23372,
+    "status": {
+      "applied": 23372
+    },
+    "lateness_samples": {
+      "n": 46744.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 17301504 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 23372.0,
+      "min": 1540.306,
+      "max": 48498.364,
+      "mean": 2738.6636621598495,
+      "p50": 2406.17,
+      "p90": 4061.149,
+      "p99": 6202.4310000000005,
+      "p99.9": 7884.783
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 23372.0,
+      "min": 2278460.428,
+      "max": 26916427.998,
+      "mean": 14509070.066859791,
+      "p50": 14534597.23,
+      "p90": 24413575.119,
+      "p99": 26677127.498
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 26014,
+      "p50": 2057.554000202799,
+      "p90": 3655.4129999331053,
+      "p99": 5766.110999957164,
+      "p99.9": 7421.214000032705,
+      "max": 48054.037999918364
+    },
+    "pacer_t0_ns": 1239938994032,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 4495571,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2304,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 4493267,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 26014,
+      "target": 64500,
+      "status": {
+        "scheduled": 26014
+      },
+      "rtt_us": {
+        "n": 26014,
+        "p50": 2057.554000202799,
+        "p90": 3655.4129999331053,
+        "p99": 5766.110999957164,
+        "p99.9": 7421.214000032705,
+        "max": 48054.037999918364
+      },
+      "wall_s": 64.50258627799985,
+      "achieved_rate_hz": 403.30165813634505
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 2277394.534,
+      "p50": 17301503.999,
+      "p95": 26214399.999,
+      "p99": 26738687.999,
+      "p999": 26916467.742000002,
+      "max": 26916467.742000002,
+      "mean": 16581966.00668236
+    },
+    "utilization": {
+      "p50": 0.33996699999999996,
+      "p99": 4.915198999999999,
+      "max": 92.37683
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 389.53333333333336,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@1000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 71.933256003,
+    "commands": 16518,
+    "status": {
+      "applied": 16518
+    },
+    "lateness_samples": {
+      "n": 33036.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 6029312 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 16518.0,
+      "min": 1136845.833,
+      "max": 9272343.791,
+      "mean": 5660780.623583061,
+      "p50": 5815720.256,
+      "p90": 8591374.111,
+      "p99": 9221987.902,
+      "p99.9": 9267485.648
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 16518.0,
+      "min": -4715.586000052453,
+      "max": 2122.9310000743867,
+      "mean": 1627.6110303598405,
+      "p1": 722.4419999618531,
+      "p50": 1684.59500006485,
+      "p99": 2027.8680001001358
+    },
+    "apply_delay_us": {
+      "n": 16518.0,
+      "min": 1134721.19,
+      "max": 9270797.749,
+      "mean": 5658898.682241615,
+      "p50": 5813650.907,
+      "p90": 8589776.909,
+      "p99": 9220191.02
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 18184,
+      "p50": 2605.1810000353726,
+      "p90": 6508.645999929286,
+      "p99": 13026.04399984375,
+      "p99.9": 20330.35999988897,
+      "max": 41731.449000053544
+    },
+    "pacer_t0_ns": 1316949865347,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 4752910,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2432,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 4750478,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 18184,
+      "target": 645000,
+      "status": {
+        "scheduled": 18184
+      },
+      "rtt_us": {
+        "n": 18184,
+        "p50": 2605.1810000353726,
+        "p90": 6508.645999929286,
+        "p99": 13026.04399984375,
+        "p99.9": 20330.35999988897,
+        "max": 41731.449000053544
+      },
+      "wall_s": 64.50031856400005,
+      "achieved_rate_hz": 281.9210882184564
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 1133087.2750000001,
+      "p50": 6029311.999,
+      "p95": 9043967.999,
+      "p99": 9270830.503,
+      "p999": 9270830.503,
+      "max": 9270830.503,
+      "mean": 5774424.220539752
+    },
+    "utilization": {
+      "p50": 0.425983,
+      "p99": 4.718591,
+      "max": 79.51024799999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 275.3,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 72.16410159399993,
+    "commands": 16620,
+    "status": {
+      "applied": 16620
+    },
+    "lateness_samples": {
+      "n": 33240.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 6029312 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 16620.0,
+      "min": 1462307.107,
+      "max": 9388422.907,
+      "mean": 5850440.429204392,
+      "p50": 5938044.545,
+      "p90": 8702573.445,
+      "p99": 9332641.964,
+      "p99.9": 9385701.803
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 16620.0,
+      "min": -2037.0914999313354,
+      "max": 2237.440500061035,
+      "mean": 1728.5539941089053,
+      "p1": 807.6045000839233,
+      "p50": 1789.5025001659394,
+      "p99": 2098.31050015831
+    },
+    "apply_delay_us": {
+      "n": 16620.0,
+      "min": 1459979.587,
+      "max": 9387085.414,
+      "mean": 5848454.427446269,
+      "p50": 5935846.3950000005,
+      "p90": 8700488.138,
+      "p99": 9330665.836000001
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 18511,
+      "p50": 2510.022000024037,
+      "p90": 6463.605000135431,
+      "p99": 13354.340999967462,
+      "p99.9": 23467.879000008907,
+      "max": 55639.80100009758
+    },
+    "pacer_t0_ns": 1389234031612,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 5043666,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2560,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 5041106,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 18511,
+      "target": 645000,
+      "status": {
+        "scheduled": 18510,
+        "late_applied": 1
+      },
+      "rtt_us": {
+        "n": 18511,
+        "p50": 2510.022000024037,
+        "p90": 6463.605000135431,
+        "p99": 13354.340999967462,
+        "p99.9": 23467.879000008907,
+        "max": 55639.80100009758
+      },
+      "wall_s": 64.50218348500016,
+      "achieved_rate_hz": 286.9825329913784
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 1458978.639,
+      "p50": 6029311.999,
+      "p95": 9175039.999,
+      "p99": 9387529.463,
+      "p999": 9387529.463,
+      "max": 9387529.463,
+      "mean": 5948578.608346279
+    },
+    "utilization": {
+      "p50": 0.425983,
+      "p99": 4.718591,
+      "max": 84.465898
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 277.0,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "timed",
+    "lead_s": 0.002,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 75.81523525400007,
+    "commands": 18434,
+    "status": {
+      "applied": 18434
+    },
+    "lateness_samples": {
+      "n": 36868.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 6946816 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 18434.0,
+      "min": 1248512.062,
+      "max": 12379826.588,
+      "mean": 7406117.573096778,
+      "p50": 7270163.763,
+      "p90": 12177636.764,
+      "p99": 12364348.354,
+      "p99.9": 12375914.378
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {
+      "n": 18434.0,
+      "min": -12275.518999980926,
+      "max": 2001.4510001602173,
+      "mean": 1626.8343184979467,
+      "p1": 704.4360002212525,
+      "p50": 1683.869000026703,
+      "p99": 1968.9630001602172
+    },
+    "apply_delay_us": {
+      "n": 18434.0,
+      "min": 1246099.848,
+      "max": 12377898.548,
+      "mean": 7404232.281467832,
+      "p50": 7268014.074,
+      "p90": 12175615.261,
+      "p99": 12362416.298
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 20150,
+      "p50": 2231.626000138931,
+      "p90": 5961.50100000159,
+      "p99": 13931.077000052028,
+      "p99.9": 25845.787999969616,
+      "max": 60981.20000001472
+    },
+    "pacer_t0_ns": 1461675463944,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 5334475,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2688,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 5331787,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 20150,
+      "target": 645000,
+      "status": {
+        "scheduled": 20150
+      },
+      "rtt_us": {
+        "n": 20150,
+        "p50": 2231.626000138931,
+        "p90": 5961.50100000159,
+        "p99": 13931.077000052028,
+        "p99.9": 25845.787999969616,
+        "max": 60981.20000001472
+      },
+      "wall_s": 64.50082924899993,
+      "achieved_rate_hz": 312.3990843933595
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 1245157.969,
+      "p50": 6946815.999,
+      "p95": 12320767.999,
+      "p99": 12377953.501,
+      "p999": 12377953.501,
+      "max": 12377953.501,
+      "mean": 7204941.7062515
+    },
+    "utilization": {
+      "p50": 0.581631,
+      "p99": 4.849663,
+      "max": 102.15755899999999
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 307.23333333333335,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "timed@10000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 0,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 77.60344145099998,
+    "commands": 24757,
+    "status": {
+      "applied": 24757
+    },
+    "lateness_samples": {
+      "n": 49514.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 18874368 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 24757.0,
+      "min": 1570.026,
+      "max": 61429.309,
+      "mean": 2793.108253423274,
+      "p50": 2407.074,
+      "p90": 4093.761,
+      "p99": 6368.857,
+      "p99.9": 8119.312
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 24757.0,
+      "min": 2292656.231,
+      "max": 29348681.667,
+      "mean": 15925115.498250153,
+      "p50": 16001586.142,
+      "p90": 26724468.77,
+      "p99": 29129947.21
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 27364,
+      "p50": 1932.9340000240336,
+      "p90": 3523.6460000760417,
+      "p99": 5707.487999870864,
+      "p99.9": 7247.685000038473,
+      "max": 59030.027000062546
+    },
+    "pacer_t0_ns": 1537923985364,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 5625230,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2816,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 5622414,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 27364,
+      "target": 645000,
+      "status": {
+        "scheduled": 27364
+      },
+      "rtt_us": {
+        "n": 27364,
+        "p50": 1932.9340000240336,
+        "p90": 3523.6460000760417,
+        "p99": 5707.487999870864,
+        "p99.9": 7247.685000038473,
+        "max": 59030.027000062546
+      },
+      "wall_s": 64.50061173099994,
+      "achieved_rate_hz": 424.24403839953754
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 2290946.012,
+      "p50": 18874367.999,
+      "p95": 28573695.999,
+      "p99": 29348723.257,
+      "p999": 29348723.257,
+      "max": 29348723.257,
+      "mean": 18655047.636639696
+    },
+    "utilization": {
+      "p50": 0.331775,
+      "p99": 4.915198999999999,
+      "max": 114.39908
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 412.6166666666667,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 1,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 77.5470442620001,
+    "commands": 23084,
+    "status": {
+      "applied": 23084
+    },
+    "lateness_samples": {
+      "n": 46168.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 19136512 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 23084.0,
+      "min": 1549.201,
+      "max": 62775.777,
+      "mean": 2906.7764736614104,
+      "p50": 2518.017,
+      "p90": 4263.4580000000005,
+      "p99": 6493.249,
+      "p99.9": 8238.589
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 23084.0,
+      "min": 3899385.79,
+      "max": 28815296.626000002,
+      "mean": 16233569.130306317,
+      "p50": 16237760.538,
+      "p90": 26524277.16,
+      "p99": 28489040.508
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 26781,
+      "p50": 1982.2009999188595,
+      "p90": 3598.9059999792516,
+      "p99": 5840.622000050644,
+      "p99.9": 7323.242999973445,
+      "max": 61943.42500020866
+    },
+    "pacer_t0_ns": 1615884949497,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 5879216,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 2944,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 5876272,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 26781,
+      "target": 645000,
+      "status": {
+        "scheduled": 26781
+      },
+      "rtt_us": {
+        "n": 26781,
+        "p50": 1982.2009999188595,
+        "p90": 3598.9059999792516,
+        "p99": 5840.622000050644,
+        "p99.9": 7323.242999973445,
+        "max": 61943.42500020866
+      },
+      "wall_s": 64.50308516500013,
+      "achieved_rate_hz": 415.189442977707
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 3897580.377,
+      "p50": 19136511.999,
+      "p95": 27787263.999,
+      "p99": 28815356.516,
+      "p999": 28815356.516,
+      "max": 28815356.516,
+      "mean": 18333678.72701146
+    },
+    "utilization": {
+      "p50": 0.335871,
+      "p99": 4.915198999999999,
+      "max": 119.834842
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 384.73333333333335,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10000Hz"
+  },
+  {
+    "rate_hz": 10000,
+    "mode": "asap",
+    "lead_s": null,
+    "page_samples": 512,
+    "page_s": 0.000512,
+    "page_target_s": "5e-4",
+    "rep": 2,
+    "warmup_s": 5.0,
+    "measure_s": 60.0,
+    "warmup_restart_ok": true,
+    "wall_s": 77.57964123400006,
+    "commands": 23391,
+    "status": {
+      "applied": 23391
+    },
+    "lateness_samples": {
+      "n": 46782.0,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "p50": 0.0,
+      "p99": 0.0,
+      "p99.9": 0.0
+    },
+    "lateness_nonzero": 0,
+    "lateness_max": 0,
+    "lateness_by_rx_max": {
+      "rx000.rx0": 0,
+      "rx001.rx0": 0
+    },
+    "backlogged": true,
+    "backlog_reasons": [
+      "page latency p50 19136512 us > one page (512 us)",
+      "miss rate at 5 ms 1 > 0.01"
+    ],
+    "visible_latency_us": {},
+    "visible_minus_recv_us": {
+      "n": 23391.0,
+      "min": 1507.457,
+      "max": 55945.133,
+      "mean": 2858.144706211791,
+      "p50": 2453.87,
+      "p90": 4235.484,
+      "p99": 6433.874,
+      "p99.9": 8372.754
+    },
+    "late_fraction": 0.0,
+    "exact_fraction": 1.0,
+    "virtual_margin_us": {},
+    "apply_delay_us": {
+      "n": 23391.0,
+      "min": 4132048.114,
+      "max": 29000350.967,
+      "mean": 16508719.260267198,
+      "p50": 16497282.225,
+      "p90": 26530202.864,
+      "p99": 28772927.232
+    },
+    "send_to_schedule_rtt_us": {
+      "n": 27236,
+      "p50": 1927.0630000391975,
+      "p90": 3582.45799998258,
+      "p99": 5810.151000105179,
+      "p99.9": 7223.024000040823,
+      "max": 55559.692999850085
+    },
+    "pacer_t0_ns": 1693913016505,
+    "d_lag_ns": 1000000,
+    "threading": {
+      "layer": "omp",
+      "layer_config": "default",
+      "num_threads": 16,
+      "omp_wait_policy": "PASSIVE",
+      "os_threads": 52,
+      "render": {
+        "parallel_min_work": 65536,
+        "paced_parallel_min_work": 262144,
+        "calls": {
+          "serial": 6133215,
+          "parallel": 0
+        },
+        "calls_by_min_work": {
+          "65536": {
+            "serial": 3072,
+            "parallel": 0
+          },
+          "262144": {
+            "serial": 6130143,
+            "parallel": 0
+          }
+        },
+        "parallel_threads": [],
+        "parallel_threads_alive": []
+      }
+    },
+    "render_min_work": 262144,
+    "client": {
+      "sent": 27236,
+      "target": 645000,
+      "status": {
+        "scheduled": 27236
+      },
+      "rtt_us": {
+        "n": 27236,
+        "p50": 1927.0630000391975,
+        "p90": 3582.45799998258,
+        "p99": 5810.151000105179,
+        "p99.9": 7223.024000040823,
+        "max": 55559.692999850085
+      },
+      "wall_s": 64.50236186200004,
+      "achieved_rate_hz": 422.2481040038537
+    },
+    "pages": 117189,
+    "miss_rate": {
+      "0ms": 1.0,
+      "1ms": 1.0,
+      "5ms": 1.0
+    },
+    "page_latency_us": {
+      "count": 117189,
+      "min": 4130705.795,
+      "p50": 19136511.999,
+      "p95": 28049407.999,
+      "p99": 29000755.938,
+      "p999": 29000755.938,
+      "max": 29000755.938,
+      "mean": 18532047.24657111
+    },
+    "utilization": {
+      "p50": 0.331775,
+      "p99": 4.915198999999999,
+      "max": 104.484803
+    },
+    "counters": {
+      "late_samples": 0,
+      "underflow_slip_samples": 0,
+      "overflow_pages": 0,
+      "bad_packets": 0,
+      "schema_errors": 0,
+      "seq_errors": 0,
+      "rec_dropped": 0,
+      "stall_zero_samples": 0,
+      "late_commands": 0,
+      "rejected_commands": 0,
+      "rate_limited_commands": 0,
+      "deadline_misses": 117189
+    },
+    "sustainable": false,
+    "commands_per_virtual_s": 389.85,
+    "engine_bound": true,
+    "n_controls": 240,
+    "min_ris_minus_los_db": -25.811013242260444,
+    "scenario_sha256": "d1d78bb0e67d2f44f1f2c8446605e86afdb3caed931352ce6d942fb800ed6f1f",
+    "key": "asap@10000Hz"
+  }
+]

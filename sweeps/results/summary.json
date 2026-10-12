@@ -242,8 +242,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.0018931595913400656",
         "diff_iq_minus_run_batch_db": "-0.09226532383213026",
         "accept": "True",
-        "iq_wall_s": "604.499040153",
-        "rtf": "1.7444071216216344",
+        "iq_wall_s": "581.5435048830001",
+        "rtf": "1.8171488667277909",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.02594456536129492",
@@ -254,9 +254,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -275,8 +275,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.0018934796929812592",
         "diff_iq_minus_run_batch_db": "-0.09226500373048907",
         "accept": "True",
-        "iq_wall_s": "580.313655007",
-        "rtf": "1.8226133548528705",
+        "iq_wall_s": "580.604023458",
+        "rtf": "1.8216916909555183",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.02594456536129492",
@@ -287,9 +287,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -308,8 +308,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.0006082927942472338",
         "diff_iq_minus_run_batch_db": "-0.019490521711233555",
         "accept": "True",
-        "iq_wall_s": "537.910421361",
-        "rtf": "1.9721538896773012",
+        "iq_wall_s": "534.627345251",
+        "rtf": "1.9849755964789955",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.020170333172551833",
@@ -320,9 +320,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -341,8 +341,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.0006082212578348845",
         "diff_iq_minus_run_batch_db": "-0.019490593247645904",
         "accept": "True",
-        "iq_wall_s": "543.611666189",
-        "rtf": "1.9518999672838229",
+        "iq_wall_s": "537.050774075",
+        "rtf": "1.977150998950367",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.020170333172551833",
@@ -353,9 +353,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -374,8 +374,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.00022495339536732217",
         "diff_iq_minus_run_batch_db": "-0.00022882633109588824",
         "accept": "True",
-        "iq_wall_s": "576.013718959",
-        "rtf": "1.8355978797929393",
+        "iq_wall_s": "597.896918238",
+        "rtf": "1.7647228585332027",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.016131925409921113",
@@ -386,9 +386,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -407,8 +407,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.00022546686587077147",
         "diff_iq_minus_run_batch_db": "-0.00022831286059243894",
         "accept": "True",
-        "iq_wall_s": "596.040996801",
-        "rtf": "1.7718652255300902",
+        "iq_wall_s": "579.9688555179999",
+        "rtf": "1.8237566202055595",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.016131925409921113",
@@ -419,9 +419,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -440,8 +440,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.00021677120901131275",
         "diff_iq_minus_run_batch_db": "-4.635539480091211e-05",
         "accept": "True",
-        "iq_wall_s": "530.088716496",
-        "rtf": "2.003076401876474",
+        "iq_wall_s": "559.8069182239999",
+        "rtf": "1.890495490377964",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.014881218827727662",
@@ -452,9 +452,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -473,8 +473,8 @@
         "diff_iq_minus_vectorized_mid_db": "0.00021737013919675974",
         "diff_iq_minus_run_batch_db": "-4.575646461546512e-05",
         "accept": "True",
-        "iq_wall_s": "553.7209716489999",
-        "rtf": "1.9140846599882608",
+        "iq_wall_s": "535.758909214",
+        "rtf": "1.9823778639226068",
         "late_records": "0",
         "nondeterministic_inputs": "False",
         "verify_interp_max_rel": "0.014881218827727662",
@@ -485,9 +485,9 @@
         "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
         "aws_instance_type": "c7i.48xlarge",
-        "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "git_dirty": "False",
-        "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "ea_iq_py_sha256": "8ae4b105da0e2716252f46577fc843463b21a43bb45430c826cab1b01634e420",
         "batch_source": "local",
         "batch_cpu_model": "Intel(R) Xeon(R) Platinum 8488C"
@@ -2756,7 +2756,7 @@
         "ls64_ci95_high": "0.08095166441987772",
         "ls64_theory_in_ci95": "False",
         "tx_dbm": "-72.48532893111309",
-        "rtf": "0.19389779483855774"
+        "rtf": "0.19132399161597793"
       },
       {
         "modulation": "bpsk",
@@ -2774,7 +2774,7 @@
         "ls64_ci95_high": "0.0387673364826494",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-70.48532893111309",
-        "rtf": "0.19150816996805312"
+        "rtf": "0.19274520758262853"
       },
       {
         "modulation": "bpsk",
@@ -2792,7 +2792,7 @@
         "ls64_ci95_high": "0.013421438106769112",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-68.48532893111309",
-        "rtf": "0.19165459022345463"
+        "rtf": "0.19226051202172034"
       },
       {
         "modulation": "bpsk",
@@ -2810,7 +2810,7 @@
         "ls64_ci95_high": "0.0027375078331629433",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-66.48532893111307",
-        "rtf": "0.19150433251665136"
+        "rtf": "0.1924127878393877"
       },
       {
         "modulation": "bpsk",
@@ -2828,7 +2828,7 @@
         "ls64_ci95_high": "0.0002288539077540468",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-64.48532893111307",
-        "rtf": "0.8519541971852891"
+        "rtf": "0.8504547339620132"
       },
       {
         "modulation": "bpsk",
@@ -2846,7 +2846,7 @@
         "ls64_ci95_high": "4.20768447943289e-06",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-62.48532893111309",
-        "rtf": "4.909362887579087"
+        "rtf": "4.8590080571508825"
       },
       {
         "modulation": "qpsk",
@@ -2864,7 +2864,7 @@
         "ls64_ci95_high": "0.08077598196465018",
         "ls64_theory_in_ci95": "False",
         "tx_dbm": "-69.47502897447328",
-        "rtf": "0.19135497020772668"
+        "rtf": "0.18690321902625423"
       },
       {
         "modulation": "qpsk",
@@ -2882,7 +2882,7 @@
         "ls64_ci95_high": "0.038870359355900254",
         "ls64_theory_in_ci95": "False",
         "tx_dbm": "-67.47502897447328",
-        "rtf": "0.19105259269119798"
+        "rtf": "0.19007158209444508"
       },
       {
         "modulation": "qpsk",
@@ -2900,7 +2900,7 @@
         "ls64_ci95_high": "0.013304519187840915",
         "ls64_theory_in_ci95": "False",
         "tx_dbm": "-65.47502897447328",
-        "rtf": "0.1930174367615271"
+        "rtf": "0.19344012030879865"
       },
       {
         "modulation": "qpsk",
@@ -2918,7 +2918,7 @@
         "ls64_ci95_high": "0.002746076137356559",
         "ls64_theory_in_ci95": "False",
         "tx_dbm": "-63.47502897447327",
-        "rtf": "0.19146125758888963"
+        "rtf": "0.18738122386725706"
       },
       {
         "modulation": "qpsk",
@@ -2936,7 +2936,7 @@
         "ls64_ci95_high": "0.00023372372301184015",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-61.47502897447326",
-        "rtf": "0.5460943764342453"
+        "rtf": "0.5420102888440035"
       },
       {
         "modulation": "qpsk",
@@ -2954,7 +2954,7 @@
         "ls64_ci95_high": "4.761627965538815e-06",
         "ls64_theory_in_ci95": "True",
         "tx_dbm": "-59.475028974473275",
-        "rtf": "3.786084654519001"
+        "rtf": "3.799052594279191"
       }
     ],
     "n_points": 12,
@@ -2972,37 +2972,37 @@
     "buffer_samples": 1000,
     "inproc_send": {
       "n": 5000,
-      "p50_us": 21.162999999546628,
-      "p95_us": 24.516049996492484,
-      "p99_us": 38.018909997816785,
-      "max_us": 87.03099999252117,
-      "mean_us": 21.794391199935607
+      "p50_us": 21.204000006491697,
+      "p95_us": 24.594299996039126,
+      "p99_us": 37.931159994286645,
+      "max_us": 298.1960000028039,
+      "mean_us": 21.9796999999744
     },
     "inproc_recv": {
       "n": 5000,
-      "p50_us": 291.335499994716,
-      "p95_us": 725.3810499982194,
-      "p99_us": 972.5896199965895,
-      "max_us": 5890.667000002736,
-      "mean_us": 337.98691560004386
+      "p50_us": 294.7764999987612,
+      "p95_us": 713.9242999961937,
+      "p99_us": 844.3035799992065,
+      "max_us": 4230.8370000085915,
+      "mean_us": 326.95412020012213
     },
-    "inproc_sustained_msps": 2.8512953798451335,
+    "inproc_sustained_msps": 2.7222696707776324,
     "zmq_round_trip": {
       "n": 3000,
-      "p50_us": 1768.2379999968134,
-      "p95_us": 5560.674249999655,
-      "p99_us": 6801.582450010385,
-      "max_us": 17661.114999995676,
-      "mean_us": 2034.2694813334153
+      "p50_us": 1754.7715000034714,
+      "p95_us": 5388.913700008396,
+      "p99_us": 6783.185480010161,
+      "max_us": 10159.486999995694,
+      "mean_us": 2020.308386333137
     },
-    "zmq_sustained_msps": 1.4352460382218215,
+    "zmq_sustained_msps": 1.499810990069496,
     "zmq_sustained_buffer_samples": 10000
   },
   "meta": {
-    "generated_utc": "2026-10-12T00:22:05.250889Z",
+    "generated_utc": "2026-10-12T03:17:21.371412Z",
     "smoke": false,
     "sremu_git": {
-      "commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
       "dirty": false,
       "dirty_patch_sha256": null
     },
@@ -3013,24 +3013,24 @@
         ],
         "description": "E-A aggregation: gains over RisAbsent, retention rho(tau), tau_half and the pre-registered hypotheses H-A1..H-A3 (paper/preregistration/E-A.md)",
         "manifest": {
-          "sha256": "564e8576ccc304427a5e51c5d2fc71ad9dd4036479544f9c667299d8d80baf5b",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "32c73079ec45b95a6483c9e4aa90ee0bd07c22822c018fc5da3e2cf9661c2d99",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:03:23.989506Z"
+          "t_end_utc": "2026-10-12T02:58:24.452137Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
           "gains.csv": "92e901bffb8f186f64120657c63a3c50e20263213f8568b6e1267b3b261d73e5",
           "hypotheses.json": "ed4583243fe6bfebbc33f19e9f5fd68f65f9edaa8838687c9b54beb3e04412c4",
-          "manifest.json": "564e8576ccc304427a5e51c5d2fc71ad9dd4036479544f9c667299d8d80baf5b",
-          "meta.json": "706ec9db7e9c71e5d713d032bba4c6c5d1050c36990573f749f3a3a91785cb67",
+          "manifest.json": "32c73079ec45b95a6483c9e4aa90ee0bd07c22822c018fc5da3e2cf9661c2d99",
+          "meta.json": "d31bcf378383e58ad5241d048abdfd933c6b3644e0765ea057295670a7ff607a",
           "retention.csv": "7ae0755f8a5907808dd3aa032a8b44b4d3ddc74c8bb3a7225248ee7892046509",
           "tau_half.csv": "116c8e32147980becb62969c8916173f25df47204dd6d96f2d9062832405da4d"
         }
@@ -3041,23 +3041,23 @@
         ],
         "description": "VA-1/W5 IQ consistency subset: served IQ runs (external controller process in barrier mode, external RX app, 10 ms windows) vs the batch evaluators over 1000 s",
         "manifest": {
-          "sha256": "62d16fd3b1aa1e62da22c9b6e4037e1ec19819ca63ee4b0ed6a4221fc00cf0f8",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "ff77e1467e02d96cb62a937b54ba29d891cc69e32a0342e55608a8b872bb5007",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:22:04.428602Z"
+          "t_end_utc": "2026-10-12T03:17:20.547177Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
-          "manifest.json": "62d16fd3b1aa1e62da22c9b6e4037e1ec19819ca63ee4b0ed6a4221fc00cf0f8",
-          "meta.json": "3f7e46220788f9fef3de1e6d074beca617ec377abc855e8db166260ff9f32fdd",
-          "va1.csv": "4d76b4b96ecd7f91c2e73ca3b2d373f81a3168fd350ffce6d5fff0afc42a2503"
+          "manifest.json": "ff77e1467e02d96cb62a937b54ba29d891cc69e32a0342e55608a8b872bb5007",
+          "meta.json": "fc6f4595ad38ef0ed1701b9a022f665118ac756a5ae6905b5172dcf4e5b9f3d7",
+          "va1.csv": "a1ad16d1c23f043b9f3901e6a4b0e85c61b8d9ffa6ee5b6b1f0c9bcdabfa389c"
         }
       },
       "E-B1": {
@@ -3067,24 +3067,24 @@
         ],
         "description": "E-B1 aggregation: per-symbol EVM traces (F9a), per-packet EVM/BER, VA-5",
         "manifest": {
-          "sha256": "9de8a355a63cfa63b87dfc52f9465be9c02b9e3f08cc7b3e9285082ecc84d6b8",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "820e9803802441556a96ee3f853eda33a3e5f828d2e42b5bf3b0fd8c5c171d34",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:22:04.950053Z"
+          "t_end_utc": "2026-10-12T03:17:21.070341Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
           "eb1_points.csv": "096212a320806e455e74cc1f1d8c272f14242df99feb4c7e96bbbb88705292c4",
           "eb1_traces.csv": "4c018b7573cfab192834418dca20b5bb9b9ac759dda5ff9db391e1b7363deb18",
-          "manifest.json": "9de8a355a63cfa63b87dfc52f9465be9c02b9e3f08cc7b3e9285082ecc84d6b8",
-          "meta.json": "dfb56c3136ac10e9ef537deb933ceef7b10430e49ef94dad9460d78c5ae94762",
+          "manifest.json": "820e9803802441556a96ee3f853eda33a3e5f828d2e42b5bf3b0fd8c5c171d34",
+          "meta.json": "589814a9b91cf447beeda870d8b570bf2b4fd7f34986ca06413799e3ffe51d05",
           "va5.json": "4058649d050b443fdf0cea9a7a57171894c485982c02d3b46cb26b3576467c66"
         }
       },
@@ -3095,23 +3095,23 @@
         ],
         "description": "E-B2 aggregation: PER (Clopper-Pearson 95 %) and mean EVM vs latency jitter, guard and command semantics (F9b)",
         "manifest": {
-          "sha256": "bb7f41904580173ac3f5fb4547e1b00dbcca31046f463dfd793455974bfddb61",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "020afaac993324900638e86dff5ece8bf0864a46e24379008c623769a9acf593",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:22:04.962453Z"
+          "t_end_utc": "2026-10-12T03:17:21.082706Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
           "eb2_per.csv": "dcfcbaea14b7a29205c12d2f8dd0f70836b6406da09ef3332a0bb2609f47f499",
-          "manifest.json": "bb7f41904580173ac3f5fb4547e1b00dbcca31046f463dfd793455974bfddb61",
-          "meta.json": "40cd1f63828b00ea2773f118eb13a1304a565fb11903c034121a6b01cc89f077"
+          "manifest.json": "020afaac993324900638e86dff5ece8bf0864a46e24379008c623769a9acf593",
+          "meta.json": "73a91b0867349e50dd1d691be5d8d55e5beb8aa5a07ca4a71ace73b011bc3fee"
         }
       },
       "E-C": {
@@ -3123,23 +3123,23 @@
         ],
         "description": "E-C non-ideality ablation (Table VIII / F11): loss vs ideal continuous phase per geometry, large-N eta, binary m/d decomposition and mirror share",
         "manifest": {
-          "sha256": "6d66005eb3c00be7d5eb1c247cc1a510f8201cf92514d384bfd1bb85926b7725",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "162622956580c43bcef630ab8a5925728f69b8549dbc36d623c5164b2b919aad",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:06:12.537953Z"
+          "t_end_utc": "2026-10-12T03:01:29.076768Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
           "geometries.json": "401538c05bf4ac1f7fb06a32fa3ec437d3fc3aaa4bebe747039e4bee7d12cc2f",
-          "manifest.json": "6d66005eb3c00be7d5eb1c247cc1a510f8201cf92514d384bfd1bb85926b7725",
-          "meta.json": "a4d66280d3864b25ee524c37d25e0484c3c2b6e16c0648bfa449dc33e4849d59",
+          "manifest.json": "162622956580c43bcef630ab8a5925728f69b8549dbc36d623c5164b2b919aad",
+          "meta.json": "0d7f58d56744e00a8ea1de8bef89eaf2255397c62d636baf02d861e0a8a843a8",
           "per_point.csv": "839247dfe453329e24cd6f86f318e008fdf0b38e4dd9ec75d4cc50dcc3aef74f",
           "scenario.resolved.yaml": "ac2b5a85c2572578f9f98af1dc33f406b74995691d0572c75378be3de701569d",
           "table8.csv": "e0e8ccac4e6bd05535a2685e4e13ed3090365f8ef8d8ac5d847aa9631a8bd4a6"
@@ -3153,23 +3153,23 @@
         ],
         "description": "E-F BER vs Eb/N0 through the emulator (physical noise), genie and 64-pilot LS detection, Clopper-Pearson 95 % intervals, theory Q(sqrt(2 Eb/N0)) (F5c data)",
         "manifest": {
-          "sha256": "afe33448869899206779395bcfb2485b66f9c468e18623b5498e63104808216b",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "f8b5256d72a5f8dd24672c20e4b24a0d50765024011573cf6fddcb56697064e6",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:22:04.986084Z"
+          "t_end_utc": "2026-10-12T03:17:21.106238Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
-          "ber.csv": "ba11e3dbe65b42edeb055c1691217b63eea63b6877d473993d8d1ab628459b88",
-          "manifest.json": "afe33448869899206779395bcfb2485b66f9c468e18623b5498e63104808216b",
-          "meta.json": "f3244c2f78de61b0ff41994133668b4c69e4975d025cac1423bae92e57014bad"
+          "ber.csv": "75e7784bdca15e07aee90ee14454606f44035397aca932ca9f870a51b502ff3a",
+          "manifest.json": "f8b5256d72a5f8dd24672c20e4b24a0d50765024011573cf6fddcb56697064e6",
+          "meta.json": "45fe83ebfbd12debd2ccf57b4e259bf8114c2a896c9bc9961e3469556fce1c4f"
         }
       },
       "E-F/latency": {
@@ -3178,25 +3178,25 @@
         ],
         "description": "E-F API latency: in-process send/recv (1000-sample buffers), native-ZMQ two-process round trip, sustained MS/s; the recording host only",
         "manifest": {
-          "sha256": "9732153411905ee70f537e8f725087f095462d37bbc5e198b301d800329c1a3b",
-          "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+          "sha256": "4ca0d960ee832bf413995184948f3f23c097a9c453509d9684e27e177af73fda",
+          "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
           "git_dirty": false,
           "dirty_patch_sha256": null,
           "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
           "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
           "aws_instance": {
             "type": "c7i.48xlarge",
-            "id": "i-0b61314ac0dcfeb18"
+            "id": "i-08e220489c936dc18"
           },
-          "t_end_utc": "2026-10-12T00:00:01.250196Z"
+          "t_end_utc": "2026-10-12T02:55:10.513035Z"
         },
-        "code_src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7",
+        "code_src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010",
         "files_sha256": {
           "ef_latency.yaml": "ab873cff3c921ed8cc9edb5226a8bb15e74581d7e64f2a1461d33f70f833f0db",
-          "latency.csv": "15435afdb5915148d4c22d5e7ec1e302c73df493bf452c4f94abac2316408558",
-          "latency.json": "a1f279d3a5713acef2e7916c34a31bb218aec2e258264d4bc87ba789e03a7791",
-          "manifest.json": "9732153411905ee70f537e8f725087f095462d37bbc5e198b301d800329c1a3b",
-          "meta.json": "fe747ebeed9af8fa23987e40720e2583ca9153377a109bd93a88dac7a2b11dd8",
+          "latency.csv": "b6809e1a41e4d41476cc49156386bb58a44b59a5371b7e439634ed67895bd841",
+          "latency.json": "b8772f03b364a83c5dc4e88a490880d64983eaa82e35a139c0331af552a0ded1",
+          "manifest.json": "4ca0d960ee832bf413995184948f3f23c097a9c453509d9684e27e177af73fda",
+          "meta.json": "cb5c9c11aa55da345043557a980b2df4090544dcc251a6377330a6b47274949d",
           "scenario.resolved.yaml": "ab873cff3c921ed8cc9edb5226a8bb15e74581d7e64f2a1461d33f70f833f0db"
         }
       }

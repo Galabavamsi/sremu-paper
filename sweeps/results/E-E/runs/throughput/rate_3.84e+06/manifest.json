@@ -21,7 +21,7 @@
   "gpu": [],
   "aws_instance": {
     "type": "c7i.48xlarge",
-    "id": "i-0b61314ac0dcfeb18"
+    "id": "i-08e220489c936dc18"
   },
   "scenario_name": "gr_ris_ber",
   "scenario_sha256": "0efe62379da70e3160a91dac181461bae5a187895de3bdc20b597a1e89d34bdb",
@@ -33,7 +33,7 @@
     }
   ],
   "assumptions": [
-    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:35591', 'pub': None, 'tx': 'tcp://127.0.0.1:47973'}"
+    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:38997', 'pub': None, 'tx': 'tcp://127.0.0.1:57683'}"
   ],
   "seed": 7,
   "rng_scheme": "philox4x32-10/blake2b-v1",
@@ -86,25 +86,25 @@
     "/opt/job/sremu/src/sremu/commands/serve.py",
     "/opt/job/out/ee/throughput/rate_3.84e+06/scene.yaml",
     "--serve",
-    "tcp://127.0.0.1:35591",
+    "tcp://127.0.0.1:38997",
     "--pub",
     "none",
     "--tx",
-    "tcp://127.0.0.1:47973",
+    "tcp://127.0.0.1:57683",
     "--out",
     "/opt/job/out/ee/throughput/rate_3.84e+06/rec",
     "--exit-when-done",
     "--raw-peer",
-    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:52363,rx_port=tcp://127.0.0.1:60651,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:34431,rx_port=tcp://127.0.0.1:42075,tx_stream=gr.tx0,rx_stream=grrx.rx0"
   ],
-  "t_start_utc": "2026-10-12T00:22:16.439354Z",
-  "t_end_utc": "2026-10-12T00:22:22.875101Z",
-  "wall_s": 6.449128688999963,
+  "t_start_utc": "2026-10-12T03:17:33.474970Z",
+  "t_end_utc": "2026-10-12T03:17:40.719276Z",
+  "wall_s": 7.258093447999954,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-12T00:22:22.875002Z",
-      "cpu_busy_fraction": 0.02039249905066615,
-      "loadavg_1min": 1.5322265625
+      "t_utc": "2026-10-12T03:17:40.719187Z",
+      "cpu_busy_fraction": 0.02702236903522315,
+      "loadavg_1min": 1.5986328125
     }
   ],
   "threading": {
@@ -117,8 +117,14 @@
       "parallel_min_work": 65536,
       "paced_parallel_min_work": 262144,
       "calls": {
-        "serial": 1110,
-        "parallel": 3376
+        "serial": 2771,
+        "parallel": 2650
+      },
+      "calls_by_min_work": {
+        "65536": {
+          "serial": 2771,
+          "parallel": 2650
+        }
       },
       "parallel_threads": [
         "sremu-engine"

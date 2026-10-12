@@ -6,13 +6,15 @@
 % checked on every blocked cell by gen_results) plus
 % the measured cost of exposure; E-A as the primary geometry's constant within the range over
 % the computed geometries, the classical lambda/v scaling; Tang as agreement of the model class
-% with no timing validation. The served-path sentence (C-WC-PACEDCMD) is rewritten in part 3
-% with the new B4 results. The next validation step is stated in Section IX (C-NEXT-VALIDATION).
+% with no timing validation. The served-path sentence (C-WC-PACEDCMD) states the B4 result at
+% the pinned code commit (exact-sample fraction at the 4 ms lead; Sustainable rule failed) and
+% C-LOCKSTEP-EXACT is scoped to lockstep, in process (E-B) and over the control socket (VA-1,
+% B4 lockstep), must-fix 1. The next validation step is stated in Section IX (C-NEXT-VALIDATION).
 \section{Conclusion}\label{sec:conclusion}
 
 \claim{C-TIMED-CMD}In \sremu{} a RIS command takes effect at a requested and logged sample on
-every receiver, \claim{C-LOCKSTEP-EXACT}and lockstep runs with controllers in the loop are
-deterministic. \claim{C-EB-TIMING}With the line of sight blocked, the packet error rate followed
+every receiver, \claim{C-LOCKSTEP-EXACT}and lockstep runs with barrier controllers, in
+process or over the control socket, are deterministic. \claim{C-EB-TIMING}With the line of sight blocked, the packet error rate followed
 the closed form of the semantics: commands applied on arrival lost no packet while their worst
 latency stayed below the guard plus the preamble (\numEbTpreMs~ms here), timed ones below their lead
 plus half the guard plus the preamble; with a line of sight, the waveform set the cost.
@@ -23,10 +25,11 @@ decorrelation predicts~\cite{Clarke1968,Jakes1974}: half of the RIS benefit was 
 states rather than an ideal alphabet recovered up to \numEcDesignPenaltyMaxDb~dB in the geometries
 studied (magnitudes assumed).
 
-\claim{C-WC-PACEDCMD}Command timing must be measured on the path that the controller will use:
-over the served control socket the visible latency reached a p99 of
-\numBfourVisPninetynineMaxMs~ms, above the latencies modelled in lockstep, so a lead that
-suffices in a lockstep study need not suffice there. \claim{C-ABS-LAB}A laboratory comparison
+\claim{C-WC-PACEDCMD}Served on one AWS host at
+\numBfourRateLowHz--\numBfourRateMidHz~commands/s, at least \numBfourExactOkMinPct~\% of
+commands timed \numBfourLeadOkMs~ms ahead took effect at their exact sample, though page
+deadlines failed our Sustainable rule; leads must cover the measured latency of the
+controller's path. \claim{C-ABS-LAB}A laboratory comparison
 under a pre-specified plan hash-locked before unblinding \txtVLabOutcome;
 \claim{C-LAB-LESSON}at \numLabFreqGHz~GHz a RIS map needs its geometry recorded to about a
 millimetre. \claim{C-ABS-TANG}Third-party chamber data test the model class, whose published

@@ -22,8 +22,7 @@ reconfiguration and one channel coefficient per block. Hardware departs from eac
 have state- and angle-dependent responses~\cite{Tang2021PathLoss,Tang2022mmWave} with coupled
 amplitude and phase~\cite{Abeywickrama2020Practical}; the specification GS RIS 008 of the
 European Telecommunications Standards Institute (ETSI) lists reconfiguration time and
-modulated-signal quality among the parameters a RIS test has to measure~\cite{ETSI_GS_RIS008};
-and a command travels over a control link with its own delay, so a position-driven controller
+modulated-signal quality among the parameters of a RIS test~\cite{ETSI_GS_RIS008}; and a command travels over a control link with its own delay, so a position-driven controller
 acts on a stale position~\cite{Mishra2025WCL}. A reconfiguration inside a packet shows in the
 received samples, not in a per-block coefficient.
 
@@ -53,25 +52,28 @@ both the requested and the applied sample are logged. The paper makes four contr
 \item \emph{Timed RIS control in an IQ-level emulator} (Section~\ref{sec:design}).
   \claim{C-CONTRIB-1}The switch time is defined at the surface and applied per receiver, a
   late command keeps one physical switch time for all receivers, and every command is logged;
-  in lockstep mode, virtual-time barriers make controller-in-the-loop runs deterministic, and a
-  paced mode measures its own timing. The interfaces are a Python application programming
+  in lockstep mode, virtual-time barriers make controller-in-the-loop runs deterministic, in
+  process and over the control socket, and a paced mode measures its own timing. The
+  interfaces are a Python application programming
   interface (API) shaped after the USRP Hardware Driver (UHD)~\cite{UHDManual}, a framed ZeroMQ
   (ZMQ) data plane, and a response-table schema aligned with the parameters of ETSI GS RIS
   008~\cite{ETSI_GS_RIS008}.
 \item \emph{A verified physical model with stated validity limits}
   (Sections~\ref{sec:model},~\ref{sec:vv}). \claim{C-CONTRIB-2}An area-tied aperture kernel
   with a cell model and a model card; an import path for per-state tables, tested but not
-  used here with a measured table; \numOracleCount{} analytic oracle checks; MATLAB
+  used here with a measured table; \numOracleCount{} analytic oracle checks and MATLAB
   code-to-code checks; agreement of the model class with third-party chamber measurements,
   inherited from a published path-loss model that the emulator reproduces~\cite{Tang2022mmWave};
-  a consistency check against a laboratory measurement collected by the authors, under a
-  pre-specified plan hash-locked before unblinding, with its null result and
-  measurement-design lesson; and carrier-frequency-offset (CFO) and bit-error-rate checks
-  against the Cram\'er--Rao bound and theory.
+  a consistency check against the authors' own laboratory measurement under a pre-specified
+  plan hash-locked before unblinding, with its null result and measurement-design lesson; and
+  carrier-frequency-offset (CFO) and bit-error-rate checks against the Cram\'er--Rao bound and
+  theory.
 \item \emph{Characterized wall-clock behaviour} (Section~\ref{sec:wallclock}).
-  \claim{C-CONTRIB-3}Definitions of lockstep and paced operation, the real-time factor (RTF),
-  deadline misses and latency percentiles; scaling over links, elements, surfaces, sample rates and feature sets
-  on AWS Linux servers; and the latency of commands served over the control socket.
+  \claim{C-CONTRIB-3}Definitions of lockstep, paced, headless and served operation, the
+  real-time factor (RTF) and deadline misses; scaling over links, elements, surfaces, threads,
+  sample rates and feature sets, including the native ZMQ data plane, on AWS Linux servers;
+  and, for a controller served over the control socket, command latency and timed-command
+  exactness, though page deadlines fail our Sustainable rule.
 \item \emph{Case studies of timed control} (Section~\ref{sec:cases}).
   \claim{C-CONTRIB-4}At the sample level, in lockstep with an in-process controller and a
   modelled command latency: what a reconfiguration inside a packet does to the symbols, and
@@ -79,8 +81,7 @@ both the requested and the applied sample are logged. The paper makes four contr
   timer lose packets. On channel coefficients (for E-A an offline evaluator that agrees with
   the sample-level VA-1 runs within the pre-specified tolerance): the time scale on
   which signaling delay erodes position-driven binary control in a blocked corridor, and a
-  non-ideality ablation. Appendix~\ref{app:cases} adds a model-based dimensioning of an
-  FM-band surface.
+  non-ideality ablation.
 \end{itemize}
 
 \emph{Scope.} \claim{C-SCOPE}\sremu{} is not a UHD drop-in: it offers a UHD-shaped API, and

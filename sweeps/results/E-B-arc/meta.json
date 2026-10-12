@@ -24,11 +24,11 @@
     "free space with LOS plus the RIS; isotropic antennas in the horizontal plane [ENG]"
   ],
   "run": {
-    "run_id": "regen_2026-10-11T23:59:37Z",
+    "run_id": "regen_2026-10-12T02:54:47Z",
     "source_dir": "/opt/job/out/eb_arc",
-    "t_start_utc": "2026-10-12T00:03:50.257465Z",
-    "t_end_utc": "2026-10-12T00:04:47.705470Z",
-    "wall_s": 57.502407635,
+    "t_start_utc": "2026-10-12T02:58:51.293772Z",
+    "t_end_utc": "2026-10-12T02:59:50.520387Z",
+    "wall_s": 59.280949694000014,
     "points": {
       "eb1": 72,
       "eb2_lab": 150,
@@ -49,24 +49,24 @@
       "--threads-per-job",
       "1"
     ],
-    "aws_run_id": "20261011T235822Z_regen_37a552",
+    "aws_run_id": "20261012T025330Z_regen_35b184",
     "launch": {
-      "run_id": "20261011T235822Z_regen_37a552",
-      "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+      "run_id": "20261012T025330Z_regen_35b184",
+      "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
       "git_dirty": "0",
-      "instance_id": "i-0b61314ac0dcfeb18",
+      "instance_id": "i-08e220489c936dc18",
       "type": "c7i.48xlarge",
       "ami": "ami-065d2b03fb493085a",
-      "bundle_sha256": "a51a145f6c1635b05a51eafea42b4808f5d19c27f2dbde47512f5747a54689ab",
-      "results_key": "sremu/jobs/20261011T235822Z_regen_37a552/results.tgz",
-      "cmd": "export SREMU_GIT_COMMIT=4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24 SREMU_GIT_DIRTY=0; bash experiments/regenerate_paper_data.sh --jobs 192 --deadline-min 100 --collect-latency",
+      "bundle_sha256": "244f66a804262acc1fe7319564ac793be7c185dd901a9e3540a2af0a4da0b0f2",
+      "results_key": "sremu/jobs/20261012T025330Z_regen_35b184/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0; bash experiments/regenerate_paper_data.sh --jobs 192 --deadline-min 100 --collect-latency",
       "maxmin": 130
     }
   },
   "host": {
     "provider": "AWS EC2",
     "instance_type": "c7i.48xlarge",
-    "instance_id": "i-0b61314ac0dcfeb18",
+    "instance_id": "i-08e220489c936dc18",
     "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
     "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
     "logical_cpus": 192,
@@ -84,7 +84,7 @@
     ]
   },
   "sremu": {
-    "commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+    "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
     "dirty": false,
     "dirty_patch_sha256": null,
     "commit_source": "the run's git state, recorded in git_state.json and in every point manifest (run_manifests.json 'shared'); in a regeneration job it is the state fixed once in _regen/git_state.json (SREMU_GIT_COMMIT/SREMU_GIT_DIRTY of the AWS job bundle, or the work tree)",
@@ -109,33 +109,33 @@
         "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
         "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
       },
-      "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
+      "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010"
     }
   },
   "not_in_wp11_index": "this run is not part of sweeps/results/summary.json (the WP11 index); tools/gen_results.py reads E-B-arc directly",
   "files": {
     "E-B1/eb1_points.csv": "124a7c579583f265f8b2a5ddb3511330046daa989533c25522f31d495a1136e5",
     "E-B1/eb1_traces.csv": "c60a211ed28e1ac930c8436996a31e18c51f92166b132e6f926cb1fbcf8a8b20",
-    "E-B1/manifest.json": "521cd2de0fc73fd7feac18a8b5c841bfc970f8f58fee66e5373c3045b02ae720",
-    "E-B1/meta.json": "6eb97c8cda0cfaf6b79c72eddc57025247716cffefe8b02a9f9a7e1c792c6591",
+    "E-B1/manifest.json": "d64c10634ed1fe8fbb691689af3fed8cbd6eb8189e16fad9fb62f38409aca633",
+    "E-B1/meta.json": "fe6e31d5d39f165681512e9f796653e1f7dce44fe1e0ee6471d6c354151b839a",
     "E-B1/va5.json": "b13554e2eca1bb903b876fb809c1f9dc110e76522c6ae8f181f2fd8c1ebcba0a",
     "E-B2/eb2_per.csv": "de35647c0bbb8dad274c5011ebf644b1d28def8007058e620a7e85bd19b1be66",
-    "E-B2/manifest.json": "85acc13770adf8d123f26b096ab794a7375b0431d4443d2539b3a583aca9b5b7",
-    "E-B2/meta.json": "96801f2d37953963c0837104969ece783896c9f4fdb86056cbb4cfae16b5cc16",
-    "eb_plan.json": "3e24a643bc7fbbc5899fba5032085bdd457ebab35c6664e9e4447946e29108ed",
-    "eb_summary.json": "0f076382089fda399172247740bec8f0ce17cc795cf68abad5e74ce2cff24d43",
-    "git_state.json": "34ac2cb85eb4713248c2ab74efaad185187f8bbf8139b045561d2bb88de05e35",
-    "run_manifests.json": "0b951e1f2f067ceb15f51494ed2de27390f4f50229c38e46dd58d044b6894fe7",
-    "sweeps/eb1/index.csv": "1c457ee2fce5f72cc6cf00fbbd3d7076ed3dd3bf289801b372de6afa6377914f",
-    "sweeps/eb1/sweep.json": "e4cbfff278e5af5f31cc331baecbe8275979b5c7b6df56ed2e3c1ab9e7cb6e0e",
-    "sweeps/eb2_ideal1/index.csv": "f93d5b25e0c30544611d21b43092ca0c2cfcd3691d61dc5b91ddab5048bf150d",
-    "sweeps/eb2_ideal1/sweep.json": "d1dd0da904dd9d4646220862138db73e93817f73e5b1ba634875518779d1ae80",
-    "sweeps/eb2_ideal1_es15/index.csv": "de39a7d4fadd3b998dabce4a8afc6d6568802d649c702803dcdf1751b68562b1",
-    "sweeps/eb2_ideal1_es15/sweep.json": "c1097dba6d8fd76c4c5ec51329798143f63d8d66ea47d51599848f0bf9232fef",
-    "sweeps/eb2_lab/index.csv": "8d243d4d0c226baef84f65a662828847116655664bf2d9e20d51de4d6328d6c9",
-    "sweeps/eb2_lab/sweep.json": "89c24dc23fdd5480fa61cd38614ba5b9e0df69c5f7d13691a4704cc55fcede42",
-    "sweeps/eb2_lab_es15/index.csv": "25f4fa22315ee8fbc86154cb5b4a83c192abab09b803f6b09c04b69dcde1992f",
-    "sweeps/eb2_lab_es15/sweep.json": "96cfdad01f5bd2fa828ab2d46c83fa22d406344d410759f0bdfb290548009149"
+    "E-B2/manifest.json": "282b63a00aade926299d57dce439876c9bb16c5a2a6163bf51e4f8e3d96f593b",
+    "E-B2/meta.json": "45c49b249322971a02fbeaa2b45a7abfb21e448b4c176c653bfe45ef0c76ba17",
+    "eb_plan.json": "495a2ad7d523fc60bf301b5c3133b5e7916a6445d46123e30518d84c57abb1e8",
+    "eb_summary.json": "d8c19d65605e703dd9eed372a9c77d08f6df444473ce2f1c25ac19ece3c844d5",
+    "git_state.json": "8a30aad7076a16c527c83f1cb47d4f57628731aba29cc0af3d5ccc7200dce2c6",
+    "run_manifests.json": "6dc3994698f97fea3fd0f86cbc623e5195ebce78bebc1bc8df0f317576d6eec9",
+    "sweeps/eb1/index.csv": "c3d85f55d212e42511b915301ddf711a3c023d57df0fedff76a9776521885166",
+    "sweeps/eb1/sweep.json": "de3f65322a48a24c32e920ce647d83600cadaf6822ad8316393edcfe63cae3c8",
+    "sweeps/eb2_ideal1/index.csv": "aaada0de488572370b1195d09532e5ae0b9c6565b4e3b51f81dbcb5a96cfe554",
+    "sweeps/eb2_ideal1/sweep.json": "de952de2570566bc619b5541564c0f9a1c718e7d5023a117272636686d6eefab",
+    "sweeps/eb2_ideal1_es15/index.csv": "cf2ed3699bb571d35603ae5c3ae1b8a29256847ec71fc864754952f7747eb9ea",
+    "sweeps/eb2_ideal1_es15/sweep.json": "79558a671536f2e3213b3ce22e8c60399812c32cb41c517e3c3e8c3b2e2e391a",
+    "sweeps/eb2_lab/index.csv": "d1e70e758bf54c8675c42940f7e7ff6ae79584b26d527c31e3a5e174d68da12a",
+    "sweeps/eb2_lab/sweep.json": "75ca3285d9958b3e040249147cdbe7ef700102f1144c981d1ada23d8a94f298d",
+    "sweeps/eb2_lab_es15/index.csv": "24dd90d3215108f33aaeeab8e4d4e8b780f9b4b1dd07c9521ba9e0fe06a14b52",
+    "sweeps/eb2_lab_es15/sweep.json": "81b0d36b4a18ed62fa39cd4ebc5cfde536492911cc2c490a133d6cf1d058f896"
   },
-  "written_utc": "2026-10-12T00:22:05.018337Z"
+  "written_utc": "2026-10-12T03:17:21.138442Z"
 }

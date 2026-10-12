@@ -1,5 +1,5 @@
 {
-  "commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+  "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
   "dirty": false,
   "dirty_patch_sha256": null,
   "dirty_patch_path": null,
@@ -25,6 +25,6 @@
       "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
       "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
     },
-    "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
+    "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010"
   }
 }

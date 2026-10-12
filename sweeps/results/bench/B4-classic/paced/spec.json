@@ -1,0 +1,68 @@
+{
+  "suite": "b4",
+  "sha256": "98ba137214948c5cba949ef4e8f63973f331db9c3c973a9c20f58ee17ea20240",
+  "threads": null,
+  "part": "paced",
+  "quick": false,
+  "scene": "B2 base, L=2, N=240, 1 panel, 1 MS/s, F1",
+  "links": 2,
+  "controller": "Urap(p=0.5), L_min=1e-4 s, latency L_min+U[0,L_min] (lockstep)",
+  "rates_hz": [
+    10,
+    100,
+    1000,
+    10000
+  ],
+  "modes": [
+    "asap",
+    "timed"
+  ],
+  "reps": 3,
+  "warmup_s": "5",
+  "measure_s": "60",
+  "omp_wait_policy": "PASSIVE",
+  "plan": "classic",
+  "page_target_s": "5e-4",
+  "combos": [
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "1/500"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "asap",
+      "lead_s": null
+    },
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "1/500"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "asap",
+      "lead_s": null
+    },
+    {
+      "rate_hz": 1000,
+      "mode": "timed",
+      "lead_s": "1/500"
+    },
+    {
+      "rate_hz": 1000,
+      "mode": "asap",
+      "lead_s": null
+    },
+    {
+      "rate_hz": 10000,
+      "mode": "timed",
+      "lead_s": "1/500"
+    },
+    {
+      "rate_hz": 10000,
+      "mode": "asap",
+      "lead_s": null
+    }
+  ]
+}

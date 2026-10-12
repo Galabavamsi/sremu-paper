@@ -1,29 +1,34 @@
 {
   "lockstep_points": 12,
   "lockstep_all_lateness_zero": true,
-  "lockstep_check_ok": false,
-  "lockstep_check_problems": {
-    "inproc@10000Hz": [
-      "statuses other than applied: {'scheduled': 1}"
-    ],
-    "remote@10000Hz": [
-      "statuses other than applied: {'scheduled': 1}"
-    ]
-  },
+  "lockstep_check_ok": true,
+  "lockstep_check_problems": {},
   "lockstep_commands_total": 22800,
+  "lockstep_scheduled_at_end": {
+    "inproc@10000Hz": {
+      "scheduled": 1,
+      "after_end": 1,
+      "after_end_bound": 2
+    },
+    "remote@10000Hz": {
+      "scheduled": 1,
+      "after_end": 1,
+      "after_end_bound": 2
+    }
+  },
   "lockstep_rtf": {
-    "none@10Hz": 2.704253363606954,
-    "inproc@10Hz": 2.3810314949756437,
-    "remote@10Hz": 1.4671218732404385,
-    "none@100Hz": 2.6810977395963898,
-    "inproc@100Hz": 1.9167207986155976,
-    "remote@100Hz": 0.4132851728071266,
-    "none@1000Hz": 2.713601634308916,
-    "inproc@1000Hz": 0.5789841880367781,
-    "remote@1000Hz": 0.1275446232644211,
-    "none@10000Hz": 2.708573887987474,
-    "inproc@10000Hz": 0.07774757667287657,
-    "remote@10000Hz": 0.020855517459788205
+    "none@10Hz": 2.600175061414321,
+    "inproc@10Hz": 2.313779894810489,
+    "remote@10Hz": 1.395686396979999,
+    "none@100Hz": 2.5062706515761835,
+    "inproc@100Hz": 1.8612854600984676,
+    "remote@100Hz": 0.398246638092781,
+    "none@1000Hz": 2.6142755186485385,
+    "inproc@1000Hz": 0.5642648805380996,
+    "remote@1000Hz": 0.11574518459223238,
+    "none@10000Hz": 2.526833978754956,
+    "inproc@10000Hz": 0.07123507357818784,
+    "remote@10000Hz": 0.01836709462756016
   },
   "suite": "b4",
   "part": "lockstep",

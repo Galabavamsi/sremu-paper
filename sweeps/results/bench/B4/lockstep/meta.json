@@ -19,17 +19,17 @@
     "lockstep.json"
   ],
   "background_load": {
-    "n_samples": 59,
+    "n_samples": 65,
     "period_s": 2.0,
-    "baseline_busy_fraction": 0.00010418837257762034,
+    "baseline_busy_fraction": 0.0006250651109490572,
     "background_busy": {
-      "n": 57.0,
+      "n": 63.0,
       "min": 0.0,
-      "max": 0.02236441067016028,
-      "mean": 0.00403425780778702,
-      "p50": 0.0044456440305210565,
-      "p90": 0.0057684715870046435,
-      "p99": 0.02236441067016028
+      "max": 0.023513272274224506,
+      "mean": 0.003461005669562995,
+      "p50": 0.0031482468496935798,
+      "p90": 0.004421675831095102,
+      "p99": 0.023513272274224506
     },
     "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
   },
@@ -45,5 +45,5 @@
     },
     "power_plan_or_governor": null
   },
-  "created_utc": "2026-10-11T07:46:38Z"
+  "created_utc": "2026-10-12T02:57:14Z"
 }

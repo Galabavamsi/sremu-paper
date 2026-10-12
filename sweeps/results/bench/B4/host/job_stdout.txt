@@ -1,9 +1,15 @@
-+ export SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621 SREMU_GIT_DIRTY=0
-+ SREMU_GIT_COMMIT=309c6335d639c16b8d2f62b50c1d521114d58621
++ export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0
++ SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4
 + SREMU_GIT_DIRTY=0
-+ bash bench/aws/job.sh b4 --deadline-min 95
++ bash bench/aws/job.sh b4 --deadline-min 110
 [job.sh] job=b4 governor=unavailable out=/opt/job/out python=/opt/venv/bin/python
-[run_job] b4_lockstep: taskset -c 1-8,17-24 /opt/venv/bin/python -m bench.b4_control --part lockstep --out /opt/job/out/runs (timeout 2009.9999794960022)
-[run_job] b4_paced: taskset -c 1-8,17-24 /opt/venv/bin/python -m bench.b4_control --part paced --budget-min 88 --out /opt/job/out/runs (timeout 5493.351430177689)
-[run_job] done rc=1 wall=1783s
-JOB_EXIT=1
+[run_job] b4_lockstep: taskset -c 1-8,17-24 /opt/venv/bin/python -m bench.b4_control --part lockstep --out /opt/job/out/runs (timeout 2609.9999759197235)
+[run_job] b4_paced: taskset -c 1-8,17-24 /opt/venv/bin/python -m bench.b4_control --part paced --plan served-1ms --budget-min 103 --out /opt/job/out/runs (timeout 6381.4933359622955)
+[run_job] done rc=0 wall=2891s
++ echo JOB_EXIT=0
+JOB_EXIT=0
++ python -m bench.summarize --root /opt/job/out/runs --out /opt/job/out/bench_summary.json
+wrote /opt/job/out/bench_summary.json
++ echo SUM_EXIT=0
+SUM_EXIT=0
+JOB_EXIT=0

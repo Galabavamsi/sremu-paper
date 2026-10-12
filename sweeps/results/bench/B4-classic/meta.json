@@ -1,0 +1,139 @@
+{
+  "benchmark": "B4-classic",
+  "description": "B4 served paced part with the original plan (classic: 0.5 ms page target = 512 samples at 1 MS/s, rates 10, 100, 1000 and 10000 commands/s, timed with a 2 ms lead and asap) at the pinned code commit, on a third c7i.8xlarge instance; copied unchanged",
+  "data_classes": [
+    "MEAS"
+  ],
+  "data_class_notes": {
+    "MEAS": "wall-clock and paced timing on the stated Linux host"
+  },
+  "runs": {
+    "paced": {
+      "run_id": "20261012T033849Z_b4_paced_classic",
+      "source_dir": "D:\\projects\\ris\\research\\aws\\results\\20261012T033733Z_b4classic_9e754b\\out\\runs\\20261012T033849Z_b4_paced_classic",
+      "t_start_utc": "2026-10-12T03:38:49.576091Z",
+      "t_end_utc": "2026-10-12T04:07:12.280051Z",
+      "argv": [
+        "/opt/job/sremu/bench/b4_control.py",
+        "--part",
+        "paced",
+        "--plan",
+        "classic",
+        "--tag",
+        "paced_classic",
+        "--budget-min",
+        "95",
+        "--out",
+        "/opt/job/out/runs"
+      ],
+      "plan": "classic",
+      "protocol": {
+        "warmup_s": 5.0,
+        "measure_s": 60.0,
+        "reps": 3,
+        "min_pages_per_rep": 117189,
+        "meets_12_3": true
+      },
+      "backlog_rule": "a repetition is backlogged when its page latency p50 exceeds one page or its miss rate at 5 ms slack exceeds 0.01; its visible - recv time (lead + lag for timed commands) is not reported as latency and it is left out of the per-key latency, late and exact fractions"
+    },
+    "job": "20261012T033733Z_b4classic_9e754b"
+  },
+  "host": {
+    "provider": "AWS EC2",
+    "instance_type": "c7i.8xlarge",
+    "instance_id": "i-036f5ed30654f02d2",
+    "region": "ap-south-1 (inferred from the apt mirror in the job log, not recorded by the manifests)",
+    "os": "Ubuntu 24.04 LTS (kernel 7.0.0-1014-aws, #14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026)",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+    "lscpu": {
+      "model_name": "Intel(R) Xeon(R) Platinum 8488C",
+      "logical_cpus": 32,
+      "threads_per_core": 2,
+      "cores_per_socket": 16,
+      "sockets": 1,
+      "numa_nodes": 1,
+      "l3": "105 MiB (1 instance)",
+      "hypervisor": "KVM"
+    },
+    "memory": "MemTotal:       64765940 kB",
+    "governor": "unavailable (no cpufreq exposed)",
+    "versions": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "numba": "0.68.0",
+      "pydantic": "2.14.0",
+      "pyzmq": "27.2.0",
+      "torch": null
+    },
+    "cpu_plan": {
+      "engine": "1-8,17-24",
+      "clients": "9-10,25-26",
+      "reserved": "0,16"
+    },
+    "pinning": {
+      "affinity": "1-8,17-24",
+      "affinity_supported": true,
+      "env": {
+        "NUMBA_NUM_THREADS": "16",
+        "SREMU_CPUS": "1-8,17-24",
+        "SREMU_CLIENT_CPUS": "9-10,25-26",
+        "SREMU_GOVERNOR": "unavailable"
+      },
+      "power_plan_or_governor": null
+    },
+    "background_load": {
+      "n": 850.0,
+      "min": 0.0,
+      "max": 0.02769686838321076,
+      "mean": 0.00324769575719483,
+      "p50": 0.0026322017823844496,
+      "p90": 0.006200329487602747,
+      "p99": 0.022820829745683665
+    },
+    "job_results_tgz_sha256": "eb9479d560b2f767bf5df5e08e133ec00f5ceaee4bf3abde5fd578a57bef84bb",
+    "launch": {
+      "run_id": "20261012T033733Z_b4classic_9e754b",
+      "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
+      "git_dirty": "0",
+      "instance_id": "i-036f5ed30654f02d2",
+      "type": "c7i.8xlarge",
+      "ami": "ami-065d2b03fb493085a",
+      "bundle_sha256": "27abb781e2146eed0edd21fcacfd62cc438eecfdcc6f7a88b5eff1e07eb5b2b8",
+      "results_key": "sremu/jobs/20261012T033733Z_b4classic_9e754b/results.tgz",
+      "cmd": "export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0; bash bench/aws/job.sh b4classic --deadline-min 100; echo JOB_EXIT=$?; python -m bench.summarize --root $SREMU_JOB_OUT/runs --out $SREMU_JOB_OUT/bench_summary.json; echo SUM_EXIT=$?",
+      "maxmin": 120
+    }
+  },
+  "sremu": {
+    "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
+    "dirty_flag_recorded": false,
+    "commit_source": "SREMU_GIT_COMMIT / SREMU_GIT_DIRTY=0 exported by the AWS job (host/job_stdout.txt line 1; launches.jsonl); manifests record git_dirty false"
+  },
+  "supersedes": "the classic served paced runs at 309c633 (20261011T074639Z_b4_paced) and 4ec4c2b (20261012T004053Z_b4classic_d633de; not in the paper tree)",
+  "caveats": [
+    "No repetition is Sustainable (1 ms-slack miss rate 5.7-6.3 % at 10 and 13-20 % at 100 commands/s); every repetition at >= 1000 commands/s is backlogged.",
+    "Same scene and client as B4; another instance of the same type."
+  ],
+  "used_by": [
+    "tools/bench_results.py (App. E)"
+  ],
+  "files": {
+    "host/job_host_prep.txt": "63d39632d64324dc907a863e19517bbab2862a18c36d4dd7b3d2af451e71ce01",
+    "host/job_stdout.txt": "0e2766c1a80d749c9749447ff9a233e292626627e288f6d4ec83e5dc353af8fa",
+    "host/lscpu.txt": "02fd2043eb0ab35f498ce55199ec586db7a63df0fbd7584117500ce1568c5bda",
+    "host/meminfo.txt": "a5d7ce0f82ac3399e2dc3db5cea4a0426979a1a6b683fe686c50d35091bd993a",
+    "host/status.json": "4a6c916f089dd881e2962a43bb5dd9870492798046028defab5985dbed5d5f9c",
+    "host/sysinfo.json": "c4ee72ade675d1df65cc857ac41f6f1096e70ea247dca785f2493e3138825f8b",
+    "host/b4_paced_classic.log": "85dd0a4b7580076438dacea39c328140da285bb06e9181b8c41d4b427b74becd",
+    "host/bench_summary.json": "a536d76f0fecf967e19750b4503159f098c2931e232c4a5cd0fd1cb383445e64",
+    "paced/manifest.json": "40fe3745452494effafd8f499a44d2442104ca8ba6d5d9ac112804fd48b522c0",
+    "paced/meta.json": "f70bc23af705020199352726be51e44a21409f8f131653ce25cf102a6f854609",
+    "paced/paced.csv": "6855adc985536b7aff1b921ee05247c513b4ad38886efed74284c040d043ffb0",
+    "paced/paced.json": "56ccda1f17272f8d4da6135b6c0bef531d159829f76728343963de3bba78ad43",
+    "paced/spec.json": "c7c2e0e5f4851fb6dfc42333f3d7824311082a94c55e557dbe0037a3813a0037",
+    "paced/summary.json": "9dbb597aee6275ded2fa3320a05018b9d5f7aafdc850d71a68a7ccf7f91a91f6"
+  },
+  "written_utc": "2026-10-12T04:30:48Z"
+}

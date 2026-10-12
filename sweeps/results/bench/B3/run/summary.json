@@ -10,68 +10,75 @@
   },
   "largest_sustainable": {
     "fs1e6_page5e-4_N240_R1_F1": {
-      "L": 1,
-      "median_of_median_latency_us": 80.999,
-      "worst_p99_latency_us": 371.999,
-      "worst_miss_rate_1ms": 0.00015359803394516551,
+      "L": 4,
+      "median_of_median_latency_us": 189.999,
+      "worst_p99_latency_us": 631.999,
+      "worst_miss_rate_1ms": 2.559967232419425e-05,
       "min_pages_per_rep": 117189,
       "reps": 3
     },
     "fs1e6_page1e-3_N240_R1_F1": {
       "L": 8,
-      "median_of_median_latency_us": 399.999,
-      "worst_p99_latency_us": 903.999,
-      "worst_miss_rate_1ms": 0.0001706630258554484,
+      "median_of_median_latency_us": 387.999,
+      "worst_p99_latency_us": 847.999,
+      "worst_miss_rate_1ms": 5.119890775663452e-05,
       "min_pages_per_rep": 58595,
       "reps": 3
     },
     "fs1e6_page2.5e-4_N240_R1_F1": {
       "L": 2,
-      "median_of_median_latency_us": 110.999,
-      "worst_p99_latency_us": 575.999,
-      "worst_miss_rate_1ms": 0.0007765300201385808,
+      "median_of_median_latency_us": 111.99900000000001,
+      "worst_p99_latency_us": 551.999,
+      "worst_miss_rate_1ms": 0.00040959825238078983,
       "min_pages_per_rep": 234376,
       "reps": 3
     },
     "fs5.76e6_page5e-4_N240_R1_F1": {
       "L": 2,
-      "median_of_median_latency_us": 185.999,
-      "worst_p99_latency_us": 475.999,
+      "median_of_median_latency_us": 189.999,
+      "worst_p99_latency_us": 479.999,
       "worst_miss_rate_1ms": 0.0,
       "min_pages_per_rep": 168751,
       "reps": 3
     },
     "fs23.04e6_page1e-3_N240_R1_F1": {
       "L": 1,
-      "median_of_median_latency_us": 615.999,
-      "worst_p99_latency_us": 679.999,
-      "worst_miss_rate_1ms": 0.0004266616099364748,
+      "median_of_median_latency_us": 583.999,
+      "worst_p99_latency_us": 671.999,
+      "worst_miss_rate_1ms": 3.55551341613729e-05,
       "min_pages_per_rep": 84376,
       "reps": 3
     },
     "fs1e6_page5e-4_N4096_R1_F1": {
       "L": 1,
-      "median_of_median_latency_us": 79.999,
-      "worst_p99_latency_us": 371.999,
-      "worst_miss_rate_1ms": 0.00028159639556613676,
+      "median_of_median_latency_us": 77.999,
+      "worst_p99_latency_us": 363.999,
+      "worst_miss_rate_1ms": 0.00012799836162097125,
       "min_pages_per_rep": 117189,
       "reps": 3
     },
     "fs1e6_page5e-4_N240_R1_F3": null,
     "fs1e6_page5e-4_N240_R4_F1": {
       "L": 4,
-      "median_of_median_latency_us": 197.999,
-      "worst_p99_latency_us": 679.999,
-      "worst_miss_rate_1ms": 9.386546518871225e-05,
+      "median_of_median_latency_us": 203.999,
+      "worst_p99_latency_us": 671.999,
+      "worst_miss_rate_1ms": 1.70664482161295e-05,
       "min_pages_per_rep": 117189,
       "reps": 3
     },
-    "fs1e5_page1e-3_N240_R1_F1": null
+    "fs1e5_page1e-3_N240_R1_F1": {
+      "L": 8,
+      "median_of_median_latency_us": 223.999,
+      "worst_p99_latency_us": 743.999,
+      "worst_miss_rate_1ms": 0.0,
+      "min_pages_per_rep": 46876,
+      "reps": 3
+    }
   },
-  "points": 54,
+  "points": 74,
   "points_failed": 0,
   "failed": [],
-  "dropped": 49,
-  "wall_s": 3548.606008194,
+  "dropped": 43,
+  "wall_s": 4850.4289695279995,
   "interrupted": null
 }

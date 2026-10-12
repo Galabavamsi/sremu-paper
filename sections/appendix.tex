@@ -37,14 +37,17 @@ failures.
 wrong variant and must reject it, for example a kernel without the factor $j$, a
 fractional-delay filter that is too short, or a replay that drops a command. A guard that accepts its wrong
 variant is broken. Section~\ref{sec:vv} and Appendix~\ref{app:vv} summarize every check with
-its status as recorded in the test record of commit \txtProvRegenCommit{}
+its status as recorded in the test record of commit \txtProvTestCommit{}
 (Appendix~\ref{app:repro}); a spec identifier counts as
 passed when at least one of its implementation tests passed and none failed or was skipped,
 and the tests of the rendering path count once per backend.
 
 \claim{C-ID-TABLE}Tables~\ref{tab:ids-ph} and~\ref{tab:ids-rt} list every verification
 identifier cited in this paper with the property it checks, its oracle or reference and its
-tolerance. They are generated from a transcription that the pipeline checks against the
+tolerance. Apart from VA-1 and VA-4 on the batch path, Sections~\ref{sec:design}
+and~\ref{sec:model} cite no identifiers in place, so the tables also name, for each identifier, the subsections of
+those sections whose statements it checks, taken from the evidence that the pipeline's claim
+file records for each statement and from the identifiers cited there. They are generated from a transcription that the pipeline checks against the
 emulator's specification, its table of oracle values and the docstrings of the tests that
 carry each identifier: a number found in none of them, an identifier cited without a row and
 an identifier that did not pass in the test record all stop the pipeline. The VA identifiers
@@ -81,16 +84,17 @@ Table~\ref{tab:provenance} lists them. Neither repository is public yet; the sec
 Data Availability states the conditions of their release.
 
 \claim{C-REPRO-RUNS}The results produced at emulator commit \txtProvRegenCommit{} from a clean
-tree are \txtProvRegenResults; all of them except benchmarks come from one regeneration job on
-an \txtProvRegenHost{} instance. The lock commit adds nothing but result files to its parent
-commit, and each result keeps the commit at which it was produced
-(Table~\ref{tab:provenance}); for the other results these are \txtProvOtherCommits. The benchmarks are measurements on dedicated hosts
-(Appendix~\ref{app:bench}) and run as separate jobs. V-LAB is not rerun, because its analysis
-plan is locked: it ran once, at \txtLabCodeCommit{} from a clean tree, on predictions computed
-before the lock. The regeneration job checked that at \txtProvRegenCommit{} the V-LAB protocol
-and analysis files are byte-identical to those of \txtLabCodeCommit{} and that the protocol
-hash still equals the lock; emulator modules that the analysis imports have changed since, so
-we do not claim that a rerun would reproduce it.
+tree are \txtProvRegenResults; all of them except the benchmarks come from one regeneration job
+on an \txtProvRegenHost{} instance, and the benchmarks are measurements on dedicated hosts, run
+as separate jobs (Appendix~\ref{app:bench}). The test record was made at
+\txtProvTestCommit{}, and the build checks that the installed emulator's package source (a hash
+over all its modules) equals the one these results record. Each result keeps the commit at which
+it was produced (Table~\ref{tab:provenance}); for the other results these are
+\txtProvOtherCommits. V-LAB is not rerun, because its analysis plan is locked: it ran once, at
+\txtLabCodeCommit{} from a clean tree, on predictions computed before the lock. A check at
+\txtProvTestCommit{} found the V-LAB protocol and analysis files byte-identical to those of
+\txtLabCodeCommit{} and the protocol hash equal to the lock; emulator modules that the analysis
+imports have changed since, so we do not claim that a rerun would reproduce it.
 
 \section{Data Provenance}\label{app:provenance}
 \claim{C-PROVENANCE}Every input and every figure carries data classes: MEAS (measured

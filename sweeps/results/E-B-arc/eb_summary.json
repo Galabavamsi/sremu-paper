@@ -6,7 +6,7 @@
       "n_failed": 0,
       "n_resumed": 0,
       "failed": [],
-      "wall_s": 2.2959649709999894
+      "wall_s": 2.3296834829999966
     },
     "eb2_lab": {
       "n_points": 150,
@@ -14,7 +14,7 @@
       "n_failed": 0,
       "n_resumed": 0,
       "failed": [],
-      "wall_s": 15.134901040999978
+      "wall_s": 15.525335460000008
     },
     "eb2_ideal1": {
       "n_points": 75,
@@ -22,7 +22,7 @@
       "n_failed": 0,
       "n_resumed": 0,
       "failed": [],
-      "wall_s": 13.014507588000015
+      "wall_s": 13.712331939000023
     },
     "eb2_lab_es15": {
       "n_points": 75,
@@ -30,7 +30,7 @@
       "n_failed": 0,
       "n_resumed": 0,
       "failed": [],
-      "wall_s": 13.457946013000026
+      "wall_s": 13.985812022000005
     },
     "eb2_ideal1_es15": {
       "n_points": 75,
@@ -38,11 +38,11 @@
       "n_failed": 0,
       "n_resumed": 0,
       "failed": [],
-      "wall_s": 12.984699239000008
+      "wall_s": 13.089658547999989
     }
   },
   "plan": "eb_plan.json",
-  "t_start_utc": "2026-10-12T00:03:50.257465Z",
+  "t_start_utc": "2026-10-12T02:58:51.293772Z",
   "va5": {
     "n_points": 72,
     "n_failed_points": 0,
@@ -64,6 +64,6 @@
   "results": "results",
   "n_failed": 0,
   "ok": true,
-  "t_end_utc": "2026-10-12T00:04:47.705470Z",
-  "wall_s": 57.502407635
+  "t_end_utc": "2026-10-12T02:59:50.520387Z",
+  "wall_s": 59.280949694000014
 }

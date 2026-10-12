@@ -18,24 +18,24 @@
   "sremu.commands.serve",
   "/opt/job/out/ee/rep2/switching/scene.yaml",
   "--serve",
-  "tcp://127.0.0.1:34005",
+  "tcp://127.0.0.1:39989",
   "--pub",
   "none",
   "--tx",
-  "tcp://127.0.0.1:33661",
+  "tcp://127.0.0.1:43787",
   "--out",
   "/opt/job/out/ee/rep2/switching/rec",
   "--exit-when-done",
   "--raw-peer",
-  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:41601,rx_port=tcp://127.0.0.1:42793,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+  "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:53765,rx_port=tcp://127.0.0.1:33309,tx_stream=gr.tx0,rx_stream=grrx.rx0"
  ],
  "gr_cmd": [
   "/usr/bin/python3",
   "/opt/job/sremu/examples/gnuradio_zmq/gr_dqpsk_modem.py",
   "--tx",
-  "tcp://127.0.0.1:41601",
+  "tcp://127.0.0.1:53765",
   "--rx",
-  "tcp://127.0.0.1:42793",
+  "tcp://127.0.0.1:33309",
   "--n",
   "1650000",
   "--out",
@@ -45,14 +45,14 @@
  ],
  "request_items": null,
  "af_pred_db": {
-  "random": -23.714951583859033,
   "uniform": -8.323217586916435,
+  "random": -23.714951583859033,
   "focus": 0.0
  },
  "python": "3.12.3",
  "numpy": "2.5.3",
  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
- "t_start_unix": 1791763573.9655588,
+ "t_start_unix": 1791774071.5091984,
  "commands_sent": [
   {
    "config": "focus",
@@ -67,7 +67,7 @@
     "k_req": {
      "grrx.rx0": 400000
     },
-    "t_wall_recv_ns": 463595276157
+    "t_wall_recv_ns": 453054394692
    }
   },
   {
@@ -83,7 +83,7 @@
     "k_req": {
      "grrx.rx0": 800000
     },
-    "t_wall_recv_ns": 463597140959
+    "t_wall_recv_ns": 453056340163
    }
   },
   {
@@ -99,13 +99,13 @@
     "k_req": {
      "grrx.rx0": 1200000
     },
-    "t_wall_recv_ns": 463598609750
+    "t_wall_recv_ns": 453057902224
    }
   }
  ],
- "t_resume_wall_s": 0.6635771969999951,
+ "t_resume_wall_s": 0.6638129329999742,
  "gr_exit": 0,
- "t_gr_done_wall_s": 4.336247292999985,
+ "t_gr_done_wall_s": 4.335897557999999,
  "serve_exit": 0,
- "wall_s": 4.336294169999974
+ "wall_s": 4.335948096999971
 }

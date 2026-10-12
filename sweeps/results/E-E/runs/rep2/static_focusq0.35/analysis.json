@@ -35,7 +35,7 @@
   },
   "git_commit": null,
   "git_dirty": null,
-  "wall_s": 1.1325506929999847,
+  "wall_s": 1.2336688199999912,
   "sremu_version": "0.1.0.dev0",
   "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
   "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39"
@@ -67,9 +67,9 @@
   }
  ],
  "throughput": {
-  "sremu_rtf_median": 2.7385810688785326,
+  "sremu_rtf_median": 2.6122297646377195,
   "sremu_rtf_windows": 2,
-  "gr_rtf_steady": 0.9351666666666666,
+  "gr_rtf_steady": 1.0170799999999998,
   "gr_wall_first_to_last_s": 0.20000000000000007
  },
  "ok": true

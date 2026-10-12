@@ -1,11 +1,11 @@
 {
   "figure": "F4",
   "title": "Lab consistency check: digitized map, prior-median prediction and residual on identical polar axes; distribution of the RMSE difference M0 - M2 over the prior draws with the decoy C2 detection rate",
-  "content_key": "ca30e77e7ad140fe769cc18142c30ef118291464ecf964a39afa9c449ba8ea50",
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "content_key": "5b74617fd6c752b24b405d5d626ed9955b85c4c904527a23cfed18ffafd72b32",
+  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
-  "lock_commit": "UNPINNED",
+  "lock_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "data_classes": [
     "ASSUMED",
     "DIG",
@@ -70,7 +70,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T01:04:33Z",
+  "generated_utc": "2026-10-12T06:58:54Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

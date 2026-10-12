@@ -246,7 +246,7 @@
       ]
     }
   ],
-  "written_utc": "2026-10-12T00:03:50.257027Z",
+  "written_utc": "2026-10-12T02:58:51.293341Z",
   "argv": [
     "/opt/job/sremu/experiments/eb.py",
     "--scenario",

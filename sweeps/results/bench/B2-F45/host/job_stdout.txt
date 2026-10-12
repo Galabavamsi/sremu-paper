@@ -1,0 +1,37 @@
++ export SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4 SREMU_GIT_DIRTY=0
++ SREMU_GIT_COMMIT=bf0826812891043b8ce5d76acb9595d06307d4c4
++ SREMU_GIT_DIRTY=0
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop unattended-upgrades.service
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop apt-daily.timer
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop apt-daily-upgrade.timer
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop snapd.service
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop snapd.socket
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop fwupd-refresh.timer
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop motd-news.timer
++ for u in unattended-upgrades.service apt-daily.timer apt-daily-upgrade.timer snapd.service snapd.socket fwupd-refresh.timer motd-news.timer man-db.timer
++ systemctl stop man-db.timer
+++ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+++ echo unavailable
++ export SREMU_GOVERNOR=unavailable
++ SREMU_GOVERNOR=unavailable
++ python -m bench.b2_lockstep --plan server --features F4,F5 --workers auto --cpus-per-point 16 --reserve-cores 1 --f5-clients separate --budget-min 45 --out /opt/job/out/runs
++ echo B2_EXIT=0
+B2_EXIT=0
++ python -m bench.f5_stress --runs 100 --concurrency 10 --cpus-per-worker 16 --f5-clients separate --reps 3 --rep-wall-s 6 --timeout-min 12 --out /opt/job/out/stress_separate
++ echo S2_EXIT=0
+S2_EXIT=0
++ python -m bench.f5_stress --runs 30 --concurrency 10 --cpus-per-worker 16 --reps 1 --rep-wall-s 2 --rx-pause-s 3 --timeout-min 6 --out /opt/job/out/stress_pause3
++ echo S3_EXIT=0
+S3_EXIT=0
++ python -m bench.summarize --root /opt/job/out/runs --out /opt/job/out/bench_summary.json
+wrote /opt/job/out/bench_summary.json
++ echo SUM_EXIT=0
+SUM_EXIT=0
+JOB_EXIT=0

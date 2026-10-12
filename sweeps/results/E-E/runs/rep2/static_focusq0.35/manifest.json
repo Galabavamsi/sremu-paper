@@ -21,7 +21,7 @@
   "gpu": [],
   "aws_instance": {
     "type": "c7i.48xlarge",
-    "id": "i-0b61314ac0dcfeb18"
+    "id": "i-08e220489c936dc18"
   },
   "scenario_name": "gr_ris_ber",
   "scenario_sha256": "7162e17196b8466da6f442ae68b168078e9d9760ae7a8245f94090e131109463",
@@ -33,7 +33,7 @@
     }
   ],
   "assumptions": [
-    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:50035', 'pub': None, 'tx': 'tcp://127.0.0.1:51003'}"
+    "served run (WP8): inputs arrived over the control socket and the native data plane at {'control': 'tcp://127.0.0.1:34259', 'pub': None, 'tx': 'tcp://127.0.0.1:41747'}"
   ],
   "seed": 7,
   "rng_scheme": "philox4x32-10/blake2b-v1",
@@ -86,25 +86,25 @@
     "/opt/job/sremu/src/sremu/commands/serve.py",
     "/opt/job/out/ee/rep2/static_focusq0.35/scene.yaml",
     "--serve",
-    "tcp://127.0.0.1:50035",
+    "tcp://127.0.0.1:34259",
     "--pub",
     "none",
     "--tx",
-    "tcp://127.0.0.1:51003",
+    "tcp://127.0.0.1:41747",
     "--out",
     "/opt/job/out/ee/rep2/static_focusq0.35/rec",
     "--exit-when-done",
     "--raw-peer",
-    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:51649,rx_port=tcp://127.0.0.1:54685,tx_stream=gr.tx0,rx_stream=grrx.rx0"
+    "name=gr,format=gnuradio_count,tx_port=tcp://127.0.0.1:33675,rx_port=tcp://127.0.0.1:56221,tx_stream=gr.tx0,rx_stream=grrx.rx0"
   ],
-  "t_start_utc": "2026-10-12T00:05:54.482436Z",
-  "t_end_utc": "2026-10-12T00:05:55.601125Z",
-  "wall_s": 1.1325506929999847,
+  "t_start_utc": "2026-10-12T03:00:53.989389Z",
+  "t_end_utc": "2026-10-12T03:00:55.209188Z",
+  "wall_s": 1.2336688199999912,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-12T00:05:55.601069Z",
-      "cpu_busy_fraction": 0.06755760368663595,
-      "loadavg_1min": 33.5947265625
+      "t_utc": "2026-10-12T03:00:55.209124Z",
+      "cpu_busy_fraction": 0.06606810096561071,
+      "loadavg_1min": 36.53759765625
     }
   ],
   "threading": {
@@ -117,8 +117,14 @@
       "parallel_min_work": 65536,
       "paced_parallel_min_work": 262144,
       "calls": {
-        "serial": 588,
+        "serial": 589,
         "parallel": 0
+      },
+      "calls_by_min_work": {
+        "65536": {
+          "serial": 589,
+          "parallel": 0
+        }
       },
       "parallel_threads": [],
       "parallel_threads_alive": []

@@ -45,19 +45,19 @@ $\hat r^i_q$, $\hat r^s_q$ are the unit vectors from transmitter to point and fr
 receiver; $o=\sqrt{\cos\theta_i\cos\theta_s}$ is the default obliquity, the cosine pattern
 measured by Tang et al.~\cite{Tang2022mmWave}; $j$ is the Huygens (physical-optics) factor; and
 the indicator keeps front-side incidence and reflection, so a path to the back of a panel
-contributes exactly zero (PH-09).
+contributes exactly zero.
 
 \claim{C-K1-AREA}Because each cell's contribution is tied to its area, subdividing a fixed
-aperture into more cells leaves the received power unchanged (PH-04,
-Section~\ref{sec:vv-tang}), whereas a fixed per-cell gain would grow with every subdivision;
+aperture into more cells leaves the received power unchanged
+(Section~\ref{sec:vv-tang}), whereas a fixed per-cell gain would grow with every subdivision;
 and the factor $j$ sets the phase of the RIS path relative to the LOS path, which would
-otherwise be a quarter turn off (PH-05, image theory).
+otherwise be a quarter turn off (image theory).
 \claim{C-K1-FORMS}For one quadrature point per cell, K1 is algebraically equal to three
 published forms: the cell model of Tang et al.~\cite{Tang2022mmWave} times $j$, the general
 path-loss model of ETSI GR RIS 003~\cite[clause 6.3.1.2]{ETSI_GR_RIS003_v121} with its
 recommended gain $4\pi d_xd_y/\lambda^2$ of a $d_x\times d_y$ cell, and the model of
 Ellingson~\cite{Ellingson2021PathLoss} with an element gain tied to the cell area,
-$G_e(\psi)=(4\pi A/\lambda^2)\cos\psi$, to double precision (PH-02).
+$G_e(\psi)=(4\pi A/\lambda^2)\cos\psi$, to double precision.
 
 \subsection{Cell model}\label{sec:model-cells}
 % physics/quadrature.py (resolve_cell_model, build_quadrature, representative_links,
@@ -69,7 +69,7 @@ cell's $\Gamma$, a uniform-patch model; or \texttt{auto} (default): \texttt{poin
 pitches up to \numPointMaxPitch$\lambda$, else \texttt{po\_patch}. A patch carries a
 sub-aperture factor that a point omits: for a half-wavelength cell \numCellRetroADb~dB and
 \numCellRetroBDb~dB at \numCellRetroAngleA$^\circ$ and \numCellRetroAngleB$^\circ$
-retro-reflection, none at specular reflection (PH-26). Every case study uses \texttt{point},
+retro-reflection, none at specular reflection. Every case study uses \texttt{point},
 though the laboratory tiles of \numLabPitchMm~mm lie \numLabPitchMarginMm~mm below the
 threshold; forcing \texttt{po\_patch} on them in E-B and E-C moves no loss or switch effect by
 more than \numCellSensSwitchMaxDb~dB (Appendix~\ref{app:model}).
@@ -80,14 +80,13 @@ more than \numCellSensSwitchMaxDb~dB (Appendix~\ref{app:model}).
 \claim{C-NONIDEAL}Each cell's reflection coefficient comes from its response table through a
 fixed pipeline: expansion by the panel's control granularity, quantization of continuous
 phases by $s=\arg\max_s\mathrm{Re}\{\bar\Gamma(s)e^{-j\phi}\}$, with $\bar\Gamma$ the table at
-the panel's reference geometry, correct for unequal amplitudes (PH-30), a failure map, the
+the panel's reference geometry, correct for unequal amplitudes, a failure map, the
 table at the cell's angles, an efficiency factor, and a coupling hook, implemented as no
 coupling. Mutual coupling is not modelled beyond the locally periodic coupling that a per-state
 table taken with identical neighbours contains~\cite{ETSI_GR_RIS003_v121}. Closed-form losses of finite alphabets and the mirror and
-steerable parts $m$, $d$ of a binary alphabet $\Gamma=m\pm d$ check the pipeline (PH-13,
-PH-15, PH-25). \claim{C-OPTIMUM}An exact maximizer of $|z_0+\sum_n Z[s_n,n]|$ over any finite
+steerable parts $m$, $d$ of a binary alphabet $\Gamma=m\pm d$ check the pipeline. \claim{C-OPTIMUM}An exact maximizer of $|z_0+\sum_n Z[s_n,n]|$ over any finite
 alphabet, a sweep over sorted critical angles (Appendix~\ref{app:model}), bounds controllers
-and studies and matches exhaustive search in every tested instance (PH-24, PH-29); optimal discrete-phase
+and studies and matches exhaustive search in every tested instance; optimal discrete-phase
 beamforming has been solved before~\cite{Zhang2022OptimalBinary,Zhao2024OptimalDiscrete}.
 
 \subsection{Mobility, delay and noise}\label{sec:model-doppler}\label{sec:model-noise}
@@ -101,12 +100,12 @@ RIS panel row is split into render tiles with a reference delay and an interpola
 Configuration switches are never interpolated across. \claim{C-INTERP-BOUND}One target,
 $\varepsilon_{\mathrm{rel}}=\numEpsRel$ for $|\Delta h|/|h|$, sets both the snapshot period
 and the tile size, \claim{C-VERIFY-INTERP}and each run checks it at the midpoint of every
-\numVerifyStride{}th snapshot interval (PH-18; Appendix~\ref{app:model}). \claim{C-FD}Paths whose delay spread is too large for one envelope
+\numVerifyStride{}th snapshot interval (Appendix~\ref{app:model}). \claim{C-FD}Paths whose delay spread is too large for one envelope
 delay get Kaiser-windowed sinc fractional-delay (FD) filters~\cite{Laakso1996FracDelay} with
-an in-band error below \numFdTargetDb~dB (PH-20). \claim{C-NOISE}Thermal noise of power
+an in-band error below \numFdTargetDb~dB. \claim{C-NOISE}Thermal noise of power
 $k_BT_0Ff_s$, with $T_0=\numTzeroK$~K and the receiver noise factor $F$ ($k_BT_0$ is
-\numThermalDbmHz~dBm/Hz), is added once per receiver, not per link (PH-21). \claim{C-RNG}Every
+\numThermalDbmHz~dBm/Hz), is added once per receiver, not per link. \claim{C-RNG}Every
 random variate is a keyed pure function of the seed and an absolute sample or step index, so
-adding a node or chunking a run changes no other variate (RT-14). Oscillator offsets, phase noise and a
+adding a node or chunking a run changes no other variate. Oscillator offsets, phase noise and a
 front end with optional clipping complete the impairments; Appendix~\ref{app:model} gives the model card
 with the validity domain, evidence and default of every component.

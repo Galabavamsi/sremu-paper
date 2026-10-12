@@ -1,6 +1,6 @@
 {
   "suite": "b4",
-  "sha256": "ab9992cad930bd74af0d49ad77f45a9ba23ad67519c4c770f45eb8ab1b9b2282",
+  "sha256": "d37f4039fc5f9b12a3cb69dd40e1ff124fc45c93f2841509acc555bde8181777",
   "threads": null,
   "part": "paced",
   "quick": false,
@@ -10,14 +10,88 @@
   "rates_hz": [
     10,
     100,
-    1000,
-    10000
+    1000
   ],
   "modes": [
-    "timed",
-    "asap"
+    "asap",
+    "timed"
   ],
   "reps": 3,
   "warmup_s": "5",
-  "measure_s": "60"
+  "measure_s": "60",
+  "omp_wait_policy": "PASSIVE",
+  "plan": "served-1ms",
+  "page_target_s": "1e-3",
+  "combos": [
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "2e-3"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "4e-3"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "6e-3"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "8e-3"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "timed",
+      "lead_s": "12e-3"
+    },
+    {
+      "rate_hz": 100,
+      "mode": "asap",
+      "lead_s": null
+    },
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "2e-3"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "4e-3"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "6e-3"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "8e-3"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "timed",
+      "lead_s": "12e-3"
+    },
+    {
+      "rate_hz": 10,
+      "mode": "asap",
+      "lead_s": null
+    },
+    {
+      "rate_hz": 1000,
+      "mode": "timed",
+      "lead_s": "8e-3"
+    },
+    {
+      "rate_hz": 1000,
+      "mode": "asap",
+      "lead_s": null
+    }
+  ]
 }

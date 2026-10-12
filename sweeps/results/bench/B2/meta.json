@@ -118,13 +118,13 @@
     "commit_source": "SREMU_GIT_COMMIT exported by the AWS job script (bundle without .git)"
   },
   "caveats": [
-    "F5 (native ZMQ transport): 3 points failed with an RX recv TIMEOUT (a transport stall being fixed by another track) and 1 point crashed in the benchmark on a below-floor pilot (fixed in bench/_engine_point.py). F5 results of this run are NOT reported; F5 is to be rerun after the transport fix.",
+    "F5 (native ZMQ transport): 3 points failed with an RX recv TIMEOUT (a benchmark configuration error: the served run ended before the clients' streams) and 1 point crashed in the benchmark on a below-floor pilot (fixed in bench/_engine_point.py). F5 results of this run are NOT reported; F5 was rerun at bf08268 (paper/sweeps/results/bench/B2-F45).",
     "Isolation: points ran 11 at a time; six reference points rerun alone were 0.99-1.16x faster (run/isolation.csv). Packed RTFs are conservative by up to 16 %.",
     "aggregate_msps_median in run/points.csv is overstated (~2x): the engine's RtfMeter.report() counts samples produced before reset_metrics() (sremu metrics/rt.py). The paper recomputes aggregate throughput as n_rx * f_s * RTF (exact for these single-rate-group scenes); research/analysis/bench_findings.md h.",
     "9 below-floor points (heaviest F3, L >= 64) carry only a pilot RTF and are not reported as measured."
   ],
   "used_by": [
-    "figures/src/f07_lockstep.py (F7)",
+    "figures/src/f07_lockstep.py (F7 a-e)",
     "tools/bench_results.py"
   ],
   "files": {
@@ -155,5 +155,6 @@
     "run/spec.json": "e15f71c3d7972e0a86fb405415cd3f1716015e71afa6ed3c2a24a8b82a9bb633",
     "run/summary.json": "9ef69b3b2c46f342937f0788301818a1a48e7770f2189cee6a27070e549d172a"
   },
-  "written_utc": "2026-10-11T10:33:19Z"
+  "written_utc": "2026-10-11T10:33:19Z",
+  "f5_rerun": "B2-F45 (20261012T032501Z_b2_server, sremu bf08268, another c7i.48xlarge)"
 }

@@ -1,0 +1,285 @@
+{
+ "runs_requested": 30,
+ "runs_finished": 30,
+ "runs_ok": 30,
+ "runs_failed": 0,
+ "runs_stalled_or_lost": 0,
+ "workers": 10,
+ "workers_killed_at_timeout": [],
+ "worker_exit_codes": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "concurrency": 10,
+ "point": {
+  "L": 1,
+  "N": 240,
+  "R": 1,
+  "fs": "1e6"
+ },
+ "settings": {
+  "reps": 1,
+  "rep_wall_s": 2.0,
+  "min_virtual_s": "0.3",
+  "point_cap_s": 150.0,
+  "rx_pause_s": 3.0
+ },
+ "pinning": {
+  "mode": "separate",
+  "worker_cpus": [
+   "1-8,97-104",
+   "9-16,105-112",
+   "17-24,113-120",
+   "25-32,121-128",
+   "33-40,129-136",
+   "48-55,144-151",
+   "56-63,152-159",
+   "64-71,160-167",
+   "72-79,168-175",
+   "80-87,176-183"
+  ],
+  "client_cpus": [
+   "41-42,137-138",
+   "43-44,139-140",
+   "45,141",
+   "46,142",
+   "47,143",
+   "88-89,184-185",
+   "90-91,186-187",
+   "92-93,188-189",
+   "94,190",
+   "95,191"
+  ],
+  "threads": null
+ },
+ "rtf_end_to_end": {
+  "n": 30.0,
+  "min": 0.099984852810666,
+  "median": 0.10139569095876597,
+  "max": 0.10230639882820627
+ },
+ "rtf_rx_client": {
+  "n": 30.0,
+  "min": 8.799848611819424,
+  "median": 56.04000011002658,
+  "max": 65.70211647742826
+ },
+ "rtf_server": {
+  "n": 30.0,
+  "min": 0.1000237792840119,
+  "median": 0.8893199170337257,
+  "max": 1.1296656942650418
+ },
+ "ratio_rx_client_over_end_to_end_reps": {
+  "n": 30.0,
+  "min": 87.31299720441031,
+  "median": 549.5783166282163,
+  "max": 643.498522773867
+ },
+ "ratio_rx_client_over_end_to_end_pilots": {
+  "n": 30.0,
+  "min": 1270.1916056480095,
+  "median": 1713.0729980462029,
+  "max": 1951.0592239560312
+ },
+ "reps_with_ratio_gt_1.25": 30,
+ "pilots_with_ratio_gt_1.25": 30,
+ "reps_truncated": 0,
+ "points_over_cap": 0,
+ "clock_shared_all": true,
+ "bad_packets_or_seq_errors": 0,
+ "errors": [],
+ "wall_s": 22.408479420999925,
+ "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+ "platform": "linux",
+ "worker_records": [
+  {
+   "kind": "worker",
+   "worker": 0,
+   "pid": 415188,
+   "pin": {
+    "requested": "1-8,97-104",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "1-8,97-104",
+    "thread_affinities": [
+     "1-8,97-104"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "41-42,137-138",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 1,
+   "pid": 415189,
+   "pin": {
+    "requested": "9-16,105-112",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "9-16,105-112",
+    "thread_affinities": [
+     "9-16,105-112"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "43-44,139-140",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 2,
+   "pid": 415190,
+   "pin": {
+    "requested": "17-24,113-120",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "17-24,113-120",
+    "thread_affinities": [
+     "17-24,113-120"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "45,141",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 3,
+   "pid": 415191,
+   "pin": {
+    "requested": "25-32,121-128",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "25-32,121-128",
+    "thread_affinities": [
+     "25-32,121-128"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "46,142",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 4,
+   "pid": 415192,
+   "pin": {
+    "requested": "33-40,129-136",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "33-40,129-136",
+    "thread_affinities": [
+     "33-40,129-136"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "47,143",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 5,
+   "pid": 415193,
+   "pin": {
+    "requested": "48-55,144-151",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "48-55,144-151",
+    "thread_affinities": [
+     "48-55,144-151"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "88-89,184-185",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 6,
+   "pid": 415194,
+   "pin": {
+    "requested": "56-63,152-159",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "56-63,152-159",
+    "thread_affinities": [
+     "56-63,152-159"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "90-91,186-187",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 7,
+   "pid": 415195,
+   "pin": {
+    "requested": "64-71,160-167",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "64-71,160-167",
+    "thread_affinities": [
+     "64-71,160-167"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "92-93,188-189",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 8,
+   "pid": 415196,
+   "pin": {
+    "requested": "72-79,168-175",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "72-79,168-175",
+    "thread_affinities": [
+     "72-79,168-175"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "94,190",
+   "rc": 0
+  },
+  {
+   "kind": "worker",
+   "worker": 9,
+   "pid": 415197,
+   "pin": {
+    "requested": "80-87,176-183",
+    "applied": true,
+    "threads_pinned": 1,
+    "note": "sched_setaffinity (all threads)",
+    "affinity": "80-87,176-183",
+    "thread_affinities": [
+     "80-87,176-183"
+    ]
+   },
+   "numba_threads": 16,
+   "client_cpus": "95,191",
+   "rc": 0
+  }
+ ]
+}

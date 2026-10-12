@@ -1,11 +1,11 @@
 {
   "figure": "F5",
   "title": "(a) CFO estimation error vs applied offset, noise off, with the generic integer-samples-per-tick pitfall; (b) estimator RMSE vs the Cramer-Rao bound; (c) BER vs Eb/N0 with Clopper-Pearson intervals",
-  "content_key": "5d7e371d12de9b5cd34bf9d508f17f51ca15334fff98894fd25415f1398b39eb",
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "content_key": "9d3d0c185f04a997203ad4bd7fb467d560a5a852d0cde0f9e8e5c90d40e9ae81",
+  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
-  "lock_commit": "UNPINNED",
+  "lock_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "data_classes": [
     "ANALYTIC",
     "ASSUMED",
@@ -18,13 +18,13 @@
   ],
   "inputs": [
     {
-      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo_sweep_noise_free.csv",
+      "path": "../sremu/validation/cfo/results/20261012T025950Z_vcfo/vcfo_sweep_noise_free.csv",
       "data_class": "SIM-sremu",
       "note": "engine_* and legacy_* columns plotted (legacy_* = sremu output re-timed by the integer-samples-per-tick adapter); dig_* columns not plotted (D24)",
       "provenance": {
-        "sremu_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+        "sremu_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
         "sremu_dirty": false,
-        "run_dir": "/opt/job/out/validation/cfo/20261012T000448Z_vcfo",
+        "run_dir": "/opt/job/out/validation/cfo/20261012T025950Z_vcfo",
         "study": "V-CFO",
         "dirty_patch_sha256": null,
         "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
@@ -33,15 +33,15 @@
       "sha256": "eb3ad82a0ff39a66c5e9a2a3cadfbfc7742ff5e6454a191bad4452c19786c41d"
     },
     {
-      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/vcfo4_rmse_vs_crb.csv",
+      "path": "../sremu/validation/cfo/results/20261012T025950Z_vcfo/vcfo4_rmse_vs_crb.csv",
       "data_class": "SIM-sremu",
       "note": "CRB columns are ANALYTIC",
       "sha256": "abf166f2345032bd3e3b6644e62ca77b3485480e8d19f3e6d645acbdabdd9ec8"
     },
     {
-      "path": "../sremu/validation/cfo/results/20261012T000448Z_vcfo/meta.json",
+      "path": "../sremu/validation/cfo/results/20261012T025950Z_vcfo/meta.json",
       "data_class": "SIM-sremu",
-      "sha256": "6fb2fb03c94f16f1240de008efeb92b4013d29020e9ce5d446d1202537df3bc5"
+      "sha256": "32a677e8e97440c50617d7fe2cfc4fe055c84adc1ca42c4f08434fc3deb9d44b"
     },
     {
       "path": "sweeps/results/E-F/ber/ber.csv",
@@ -50,13 +50,13 @@
       "provenance": {
         "experiment": "E-F"
       },
-      "sha256": "ba11e3dbe65b42edeb055c1691217b63eea63b6877d473993d8d1ab628459b88"
+      "sha256": "75e7784bdca15e07aee90ee14454606f44035397aca932ca9f870a51b502ff3a"
     },
     {
       "path": "sweeps/results/E-F/ber/meta.json",
       "data_class": "ASSUMED",
       "note": "lab |Gamma| ASSUMED; genie = oracle CSI",
-      "sha256": "f3244c2f78de61b0ff41994133668b4c69e4975d025cac1423bae92e57014bad"
+      "sha256": "45fe83ebfbd12debd2ccf57b4e259bf8114c2a896c9bc9961e3469556fce1c4f"
     }
   ],
   "assumptions": [
@@ -66,7 +66,7 @@
   ],
   "profile": "full",
   "script": "figures/src/f05_cfo_ber.py",
-  "script_sha256": "aca2306dd577ee0c381efc733d5d9d0da1d30c25fb85c21775ce28b44c7d1ebe",
+  "script_sha256": "bec5d3032a2ef8f6ad7a3a9e10f85444717887abc70335e26450869cececac3a",
   "outputs": {
     "figures/out/F5.pdf": "afdf91b3604c54e73872b7c1a606b12d003c77efe24d52050c4eae52e91c5c88",
     "figures/data/F5.csv": "49d8e4a631bfc968a09ba7cd54b3e11914f6d7573d8e9d3bffba8249137b3742"
@@ -78,7 +78,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T01:23:49Z",
+  "generated_utc": "2026-10-12T06:58:57Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,

@@ -156,5 +156,109 @@ c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,16,aggregate_msps,14.8
 c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,32,aggregate_msps,16.70244151383847,,,L32_N240_R1_fs23.04e6_F1; n_rx=8 x f_s x RTF=0.09061654467143267 (points.csv aggregate_msps_median not used)
 c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,64,aggregate_msps,9.444295679025897,,,L64_N240_R1_fs23.04e6_F1; n_rx=8 x f_s x RTF=0.051238583328048495 (points.csv aggregate_msps_median not used)
 c,aggregate RX throughput f_s=23.04e6 N=240 R=1 F1,MEAS,L,128,aggregate_msps,10.919072027943876,,,L128_N240_R1_fs23.04e6_F1; n_rx=16 x f_s x RTF=0.029619878548024836 (points.csv aggregate_msps_median not used)
+d,RTF one link F1 f_s=1e6 N=240,MEAS,surfaces R,0,rtf_median,6.4195182966245525,,,L1_N240_R0_fs1e6_F1
+d,RTF one link F1 f_s=1e6 N=240,MEAS,surfaces R,1,rtf_median,5.141615196035678,,,L1_N240_R1_fs1e6_F1
+d,RTF one link F1 f_s=1e6 N=240,MEAS,surfaces R,2,rtf_median,5.052107640485622,,,L1_N240_R2_fs1e6_F1
+d,RTF one link F1 f_s=1e6 N=240,MEAS,surfaces R,4,rtf_median,4.926151391000254,,,L1_N240_R4_fs1e6_F1
+d,RTF one link F1 f_s=23.04e6 N=240,MEAS,surfaces R,0,rtf_median,1.1616753944874643,,,L1_N240_R0_fs23.04e6_F1
+d,RTF one link F1 f_s=23.04e6 N=240,MEAS,surfaces R,1,rtf_median,1.159874077476265,,,L1_N240_R1_fs23.04e6_F1
+d,RTF one link F1 f_s=23.04e6 N=240,MEAS,surfaces R,2,rtf_median,1.010363244427436,,,L1_N240_R2_fs23.04e6_F1
+d,RTF one link F1 f_s=23.04e6 N=240,MEAS,surfaces R,4,rtf_median,0.9394654292755177,,,L1_N240_R4_fs23.04e6_F1
+d,RTF one link F3 f_s=1e6 N=240,MEAS,surfaces R,0,rtf_median,3.415039124885979,,,L1_N240_R0_fs1e6_F3
+d,RTF one link F3 f_s=1e6 N=240,MEAS,surfaces R,1,rtf_median,1.5552752315732599,,,L1_N240_R1_fs1e6_F3
+d,RTF one link F3 f_s=1e6 N=240,MEAS,surfaces R,2,rtf_median,1.1178706751869534,,,L1_N240_R2_fs1e6_F3
+d,RTF one link F3 f_s=1e6 N=240,MEAS,surfaces R,4,rtf_median,0.8927850297281704,,,L1_N240_R4_fs1e6_F3
+e,RTF L=1 N=240 R=1 1 MS/s F1,MEAS,numba threads,1,rtf_median,4.955753796010374,,,L1_N240_R1_fs1e6_F1_T1; tier 0; slot 16 vCPUs
+e,RTF L=1 N=240 R=1 1 MS/s F1,MEAS,numba threads,2,rtf_median,5.430487653718438,,,L1_N240_R1_fs1e6_F1_T2; tier 0; slot 16 vCPUs
+e,RTF L=1 N=240 R=1 1 MS/s F1,MEAS,numba threads,4,rtf_median,5.60106241914649,,,L1_N240_R1_fs1e6_F1_T4; tier 0; slot 16 vCPUs
+e,RTF L=1 N=240 R=1 1 MS/s F1,MEAS,numba threads,8,rtf_median,5.587490324188295,,,L1_N240_R1_fs1e6_F1_T8; tier 0; slot 16 vCPUs
+e,RTF L=1 N=240 R=1 1 MS/s F1,MEAS,numba threads,16,rtf_median,5.141615196035678,,,L1_N240_R1_fs1e6_F1; tier 0; slot 16 vCPUs; default grid point
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,1,rtf_median,1.0724013617695156,,,L8_N240_R1_fs1e6_F1_T1; tier 0; slot 16 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,2,rtf_median,1.1990938952364643,,,L8_N240_R1_fs1e6_F1_T2; tier 0; slot 16 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,4,rtf_median,1.4035402103841037,,,L8_N240_R1_fs1e6_F1_T4; tier 0; slot 16 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,8,rtf_median,1.520483149699708,,,L8_N240_R1_fs1e6_F1_T8; tier 0; slot 16 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,16,rtf_median,1.2651430384816262,,,L8_N240_R1_fs1e6_F1; tier 0; slot 16 vCPUs; default grid point
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,32,rtf_median,1.3851055177292542,,,L8_N240_R1_fs1e6_F1_T32; tier 4; slot 32 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,48,rtf_median,1.371458811483106,,,L8_N240_R1_fs1e6_F1_T48; tier 4; slot 48 vCPUs
+e,RTF L=8 N=240 R=1 1 MS/s F1,MEAS,numba threads,96,rtf_median,1.0507252218660021,,,L8_N240_R1_fs1e6_F1_T96; tier 4; slot 96 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,1,rtf_median,0.22408852009732047,,,L64_N240_R1_fs1e6_F1_T1; tier 0; slot 16 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,2,rtf_median,0.2605046160576278,,,L64_N240_R1_fs1e6_F1_T2; tier 0; slot 16 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,4,rtf_median,0.3233168122557957,,,L64_N240_R1_fs1e6_F1_T4; tier 0; slot 16 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,8,rtf_median,0.4154039407070253,,,L64_N240_R1_fs1e6_F1_T8; tier 0; slot 16 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,16,rtf_median,0.3062596612279436,,,L64_N240_R1_fs1e6_F1; tier 0; slot 16 vCPUs; default grid point
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,32,rtf_median,0.34442230548737396,,,L64_N240_R1_fs1e6_F1_T32; tier 4; slot 32 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,48,rtf_median,0.3373336574376047,,,L64_N240_R1_fs1e6_F1_T48; tier 4; slot 48 vCPUs
+e,RTF L=64 N=240 R=1 1 MS/s F1,MEAS,numba threads,96,rtf_median,0.2695152359311159,,,L64_N240_R1_fs1e6_F1_T96; tier 4; slot 96 vCPUs
+e,RTF L=128 N=240 R=1 1 MS/s F1,MEAS,numba threads,16,rtf_median,0.15974675549162767,,,L128_N240_R1_fs1e6_F1; tier 0; slot 16 vCPUs; default grid point
+e,RTF L=128 N=240 R=1 1 MS/s F1,MEAS,numba threads,32,rtf_median,0.17253574120641182,,,L128_N240_R1_fs1e6_F1_T32; tier 4; slot 32 vCPUs
+e,RTF L=128 N=240 R=1 1 MS/s F1,MEAS,numba threads,48,rtf_median,0.1692668181893508,,,L128_N240_R1_fs1e6_F1_T48; tier 4; slot 48 vCPUs
+e,RTF L=128 N=240 R=1 1 MS/s F1,MEAS,numba threads,96,rtf_median,0.1427238262080408,,,L128_N240_R1_fs1e6_F1_T96; tier 4; slot 96 vCPUs
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,1,rtf_median,1.4179727112265053,,,L1_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,2,rtf_median,0.8652323271496288,,,L2_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,4,rtf_median,0.5455063383819425,,,L4_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,8,rtf_median,0.2954253288603705,,,L8_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,16,rtf_median,0.20660843044306945,,,L16_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,32,rtf_median,0.10621536107098635,,,L32_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,64,rtf_median,0.06704652709263656,,,L64_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,128,rtf_median,0.03483008184702512,,,L128_N240_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,1,rtf_median,0.9019439297822037,,,L1_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,2,rtf_median,0.5584069086079424,,,L2_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,4,rtf_median,0.4334783344752831,,,L4_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,8,rtf_median,0.19255409807219198,,,L8_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,16,rtf_median,0.17374812403494397,,,L16_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,32,rtf_median,0.0744936361993915,,,L32_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,64,rtf_median,0.05019405343902568,,,L64_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=1e6 (B2-F45),MEAS,L,128,rtf_median,0.029579159898864584,,,L128_N240_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,1,rtf_median,0.7646055619013231,,,L1_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,2,rtf_median,0.466885654303412,,,L2_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,4,rtf_median,0.2584811004434119,,,L4_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,8,rtf_median,0.144357196722956,,,L8_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,16,rtf_median,0.08898398016279456,,,L16_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,32,rtf_median,0.050124605168761875,,,L32_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,64,rtf_median,0.03280794883605803,,,L64_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,128,rtf_median,0.018189757383447382,,,L128_N4096_R1_fs1e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,1,rtf_median,0.6145730709792615,,,L1_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,2,rtf_median,0.4074580033514904,,,L2_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,4,rtf_median,0.24194894166177036,,,L4_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,8,rtf_median,0.13187633353372288,,,L8_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,16,rtf_median,0.08872623453007256,,,L16_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,32,rtf_median,0.04464519560408975,,,L32_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,64,rtf_median,0.02819760457351154,,,L64_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=4096 R=1 f_s=1e6 (B2-F45),MEAS,L,128,rtf_median,0.014986744635163005,,,L128_N4096_R1_fs1e6_F5; end-to-end: virtual time after the warm-
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,1,rtf_median,0.7675434751436111,,,L1_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,2,rtf_median,0.45635812023523,,,L2_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,4,rtf_median,0.31496512903333734,,,L4_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,8,rtf_median,0.17874884416147155,,,L8_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,16,rtf_median,0.12528041888008037,,,L16_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,32,rtf_median,0.06811216343856653,,,L32_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,64,rtf_median,0.04356502564198414,,,L64_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,128,rtf_median,0.02394965574137365,,,L128_N240_R1_fs5.76e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,1,rtf_median,0.5874395469415743,,,L1_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,2,rtf_median,0.3493141945987737,,,L2_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,4,rtf_median,0.26182134345472874,,,L4_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,8,rtf_median,0.14731052154293064,,,L8_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,16,rtf_median,0.10030721512718373,,,L16_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,32,rtf_median,0.0488053085352817,,,L32_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,64,rtf_median,0.03168221020463342,,,L64_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=1 f_s=5.76e6 (B2-F45),MEAS,L,128,rtf_median,0.016853470751449842,,,L128_N240_R1_fs5.76e6_F5; end-to-end: virtual time after the warm-
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,1,rtf_median,0.33332258287543387,,,L1_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,2,rtf_median,0.19032259933696472,,,L2_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,4,rtf_median,0.14771469818161245,,,L4_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,8,rtf_median,0.08090896418928137,,,L8_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,16,rtf_median,0.05901545637866403,,,L16_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,32,rtf_median,0.03018150281301477,,,L32_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,64,rtf_median,0.020126483036023147,,,L64_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F4 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,128,rtf_median,0.01046136767765165,,,L128_N240_R2_fs23.04e6_F4; engine RtfMeter (min over RX streams)
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,1,rtf_median,0.2727420835631584,,,L1_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,2,rtf_median,0.15777148942414207,,,L2_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,4,rtf_median,0.12231583742507024,,,L4_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,8,rtf_median,0.06246161794753218,,,L8_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,16,rtf_median,0.039453180450455295,,,L16_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,32,rtf_median,0.018011122681997695,,,L32_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,64,rtf_median,0.01248515095042606,,,L64_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,RTF F5 N=240 R=2 f_s=23.04e6 (B2-F45),MEAS,L,128,rtf_median,0.006677791423936057,,,L128_N240_R2_fs23.04e6_F5; end-to-end: virtual time after the warm-
+f,"F5 base point, stress runs (end-to-end)",MEAS,L,1,min,0.7887387586154266,,,"n=100, 10 concurrent workers"
+f,"F5 base point, stress runs (end-to-end)",MEAS,L,1,median,0.8562061615489256,,,"n=100, 10 concurrent workers"
+f,"F5 base point, stress runs (end-to-end)",MEAS,L,1,max,0.9014119803351855,,,"n=100, 10 concurrent workers"
 a,RTF = 1 reference,MEAS,,,rtf,1.0,,,
 a,"max L with RTF >= 1 (F1, 1 MS/s, every N; summary)",MEAS,,,links,8.0,,,"{""N40"": 8, ""N240"": 8, ""N900"": 8, ""N4096"": 8, ""N16384"": 8}"

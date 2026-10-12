@@ -1,57 +1,73 @@
-% Appendix E -- benchmark protocol and further results (moved from Section VI for length,
-% 2026-10-12; text unchanged apart from joins). Every number is a macro of numbers.yaml filled
-% by tools/gen_results.py (via tools/bench_results.py) from paper/sweeps/results/bench (MEAS).
-% No number is compared across instance types or with the laptop.
+% Appendix E -- benchmark protocol and further results (extends Section VI; rewritten
+% 2026-10-12 with the runs at the pinned code commit, mock-review must-fix 13 and 18). Every
+% number is a macro of numbers.yaml filled by tools/gen_results.py (via tools/bench_results.py)
+% from paper/sweeps/results/bench and sweeps/results/E-F/latency (MEAS). No number is compared
+% across instance types, commits or with the laptop. Adversarial review 2026-10-12: the
+% virtual-margin p1 is given as per-repetition ranges (the 2 ms p1 exceeded one page at
+% 100 commands/s), the late-command threshold as a bracket inferred from them; pooled and
+% single-repetition late fractions; the 130 ms page stall of one repetition behind the largest
+% apply delay; achieved rates per repetition.
 \section{Benchmark Protocol and Further Results}\label{app:bench}
 
 This appendix extends Section~\ref{sec:wallclock}.
 
 \subsection{Hosts and protocol}
 \input{generated/tables/table7_platforms}
-\claim{C-WC-HOSTS}Table~\ref{tab:platforms} lists the hosts; the cross-tool
-context (B6) comes from a laptop. The AWS runs B1--B4 used one emulator commit; B1 and B2
-recorded a dirty flag, although their uploaded file tree equals that commit's
-(Appendix~\ref{app:provenance}). B2 packed up to \numBtwoSlots{} points onto the server at a time, each
-pinned to \numBtwoSlotCpus{} logical CPUs of whole cores in one NUMA node. A B3 point runs up
-to \numBthreeReps{} repetitions of \numBthreeMeasureS~s, each with at least
-\numBthreeMinPages{} pages, and counts as Sustainable when every repetition is; an
-unsustainable repetition ends the point. The benchmark scenes have one carrier and a non-zero
-surface path on every link; the rest of each host was idle apart from the B4 command client,
-and the laptop of B6 was not idle. A scene with $L$ links has
-$n_{\mathrm{tx}}n_{\mathrm{rx}}=L$; for example,
-\numBtwoMaxLinks{} links are \numBtwoLimTx{} transmitters and \numBtwoLimRx{} receivers.
-\claim{C-WC-DEFS}Because a page is computed from its release on, every page misses a deadline
-of zero slack. \claim{C-WC-LIMITS}Another host needs its own runs.
+\claim{C-WC-HOSTS}Table~\ref{tab:platforms} lists the hosts and the emulator commit of each run;
+the cross-tool context (B6) comes from a laptop. The lockstep scaling runs B1 and B2 predate the
+pinned code commit, at which B2-F45, B3, B4 and B4-classic ran; B1 and B2 recorded a dirty flag,
+although their uploaded file tree equals their commit's (Appendix~\ref{app:provenance}). B2 and
+B2-F45 packed up to \numBtwoSlots{} points onto the server at a time, each pinned to
+\numBtwoSlotCpus{} logical CPUs of whole cores in one NUMA node. A B3 point runs up to
+\numBthreeReps{} repetitions of \numBthreeMeasureS~s, each with at least \numBthreeMinPages{}
+pages, and counts as Sustainable when every repetition is; the link count of a series is doubled
+while it is Sustainable, and an unsustainable repetition ends the point and the series.
+Headless runs have no external inputs, so their late-input condition holds trivially. The
+benchmark scenes have one carrier and a non-zero surface path on every link; the rest of each
+host was idle apart from the B4 command client, and the laptop of B6 was not idle.
+\claim{C-WC-DEFS}In the benchmark scenes, \numBtwoMaxLinks{} links are, for example,
+\numBtwoLimTx{} transmitters and \numBtwoLimRx{} receivers. Because a page is computed from its
+release on, every page misses a deadline of zero slack. \claim{C-WC-LIMITS}Another host needs its own runs.
 
-\subsection{Lockstep points and isolation}
+\subsection{Lockstep points, surfaces and threads}
 \claim{C-WC-LOCKSTEP}Fig.~\ref{fig:F7} shows the lockstep scaling of
 Section~\ref{sec:wallclock}: the RTF over links and element counts, static and with mobility
 (a); the cumulative feature sets at one link (b), with RTF \numBtwoRtfFzero{} without noise
 (F0), \numBtwoBaseRtf{} with noise (F1), \numBtwoRtfFtwo{} with oscillator impairments (F2),
-\numBtwoRtfFthree{} with mobility (F3) and \numBtwoRtfFfour{} with recording (F4); and the
+\numBtwoRtfFthree{} with mobility (F3) and \numBtwoRtfFfour{} with recording (F4); the
 aggregate throughput, which peaks with noise (F1) at \numBtwoAggMaxMsps~MS/s with
-\numBtwoAggMaxRx{} receivers at \numBtwoAggMaxRate~MS/s and an RTF below one (c).
+\numBtwoAggMaxRx{} receivers at \numBtwoAggMaxRate~MS/s and an RTF below one (c); the surface
+count (d) and the thread count (e). One link with one surface keeps up at \numBtwoTopMsps~MS/s
+(RTF \numBtwoTopRtf), and with two surfaces (RTF \numBtwoTopRtwoRtf) but not with four
+(\numBtwoTopRfourRtf). Thread counts above the slot size ran on slots of as many logical CPUs.
+At \numBtwoMaxLinks{} and \numBtwoThrLinksBig{} links the best count, \numBtwoThrBest{} threads,
+gives \numBtwoThrGain{} and \numBtwoThrGainSixtyfour{} times the one-thread RTF, and every
+larger count was slower.
 
 \begin{figure*}[t]
 \centering
-\sremufigure{F7}{\textwidth}{Lockstep scaling on one AWS \txtHostServer{} instance (B2;
-MEAS), up to \numBtwoSlots{} points running concurrently. (a) RTF versus the number of links $L$ at
-\numBtwoBaseMsps~MS/s with one surface, for every element count $N$, static (F1, solid) and
+\sremufigure{F7}{\textwidth}{Lockstep scaling on AWS \txtHostServer{} instances (MEAS). (a)--(e):
+B2, up to \numBtwoSlots{} points running concurrently. (a) RTF versus the number of links $L$
+at \numBtwoBaseMsps~MS/s with one surface, for every element count $N$, static (F1, solid) and
 with mobility (F3, dashed); open markers: isolation reference points run alone; dotted:
 $\mathrm{RTF}=1$. (b) RTF versus $L$ for the cumulative feature sets F0--F4 at
 $N=\numBtwoBaseN$. (c) Aggregate received throughput, $n_{\mathrm{rx}}f_s\,\mathrm{RTF}$ with
-$n_{\mathrm{rx}}$ receivers among the $L$ links, for four sample rates. Feature set F5 (native
-ZMQ data plane) awaits its rerun at the pinned commit.}{fig:F7}
+$n_{\mathrm{rx}}$ receivers among the $L$ links, for four sample rates. (d) One-link RTF versus
+the number of surfaces $R$ ($N=\numBtwoBaseN$). (e) RTF versus the numba thread count
+($N=\numBtwoBaseN$, one surface, \numBtwoBaseMsps~MS/s, F1; open markers: the default grid
+points). (f) B2-F45, another instance at another commit: RTF of the native ZMQ data plane to
+a transmitting and a receiving client process (F5, end to end, dashed) and of the same scenes
+in process (F4, solid) in the same run; bar: range and median of the
+\numBtwoFfiveStressRuns{} stress runs of the F5 base point.}{fig:F7}
 \end{figure*}
 
 \claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran:
 \numBtwoOk{} completed, \numBtwoBelowFloor{} of the heaviest mobility points fell below the
 pilot floor and were not measured, and \numBtwoFailed{} failed. Every failure was a point
-with the native ZMQ data plane (feature set F5): three receive time-outs came from an error
-of the benchmark, whose served run ended before the clients' streams, and one benchmark error
-hit a point below the floor. Both are fixed in the benchmark, not in the emulator. F5 is
-therefore left out of Fig.~\ref{fig:F7}, and its RTF at the base point (\numBtwoFfiveRtf)
-comes from the rerun at the pinned commit.
+with the native ZMQ data plane (F5): three receive time-outs came from an error of the
+benchmark, whose served run ended before the clients' streams, and one benchmark error hit a
+point below the floor. Both were fixed in the benchmark, not in the emulator, and F5 was rerun
+(B2-F45).
 
 \claim{C-WC-ISOLATION}Concurrent points share the last-level cache, memory bandwidth and the
 power budget of the host. Rerun alone, the \numBtwoIsoPoints{} reference points of the
@@ -62,65 +78,102 @@ over $N$, while the same base configuration measured alone in B1 reached \numBon
 We therefore state the limit as \numBtwoMaxLinks{} links packed and between \numBtwoMaxLinks{}
 and \numBtwoLsixteen{} links alone.
 
-\subsection{Paced series and short pages}
-\claim{C-WC-PACED}The single link at \numBthreeTopMsps~MS/s uses pages of
-\numBthreeTopPageUs~$\mu$s and has a miss rate of \numBthreeTopMiss. With pages of
-\numBthreeHalfPageUs~$\mu$s the emulator
-sustains one link (p99 \numBthreeHalfPninetynineUs~$\mu$s), and with pages of
-\numBthreeQuarterPageUs~$\mu$s \numBthreeQuarterLinks{} links. At
-\numBthreeMidMsps~MS/s (pages of \numBthreeMidPageUs~$\mu$s) the limit is \numBthreeMidLinks{}
-links. With pages of \numBthreeHalfPageUs~$\mu$s, four surfaces sustain
-\numBthreeFourRisLinks{} links, more than one surface does, and $N=\numBthreeBigN$ one link:
-at such pages the limit is not set by the computation alone.
+\subsection{Data plane}
+\claim{C-WC-DATAPLANE}The F5 figure is end to end: the virtual time delivered to the receiving
+client process divided by the wall time from the served engine's warm-up boundary to the
+client's last sample, so a client cannot shorten it. The \numBtwoFfiveStressRuns{} stress runs
+of the base point reached RTF \numBtwoFfiveStressMin--\numBtwoFfiveStressMax{} (median
+\numBtwoFfiveStressMed) with no stall and no bad packet. In \numBtwoFfivePauseRuns{} runs whose
+receiving clients paused \numBtwoFfivePauseS~s before their warm-up completed, it fell to
+\numBtwoFfivePauseRtf{} (median), while the client's own read rate, a figure of the client
+alone that such a pause inflates, reached \numBtwoFfivePauseClientRtf. The single isolation reference point of
+B2-F45 ran \numBtwoFfiveIsoRatio{} times faster alone. In the E-F measurement (lockstep, on a
+busy \txtHostServer{}), through the UHD-shaped API a buffer of \numApiBufferSamples{} samples
+took \numApiSendPfiftyUs~$\mu$s to send in process and \numZmqRttPfiftyUs~$\mu$s to send and
+receive across two processes (medians; p99 \numApiSendPninetynineUs{} and
+\numZmqRttPninetynineUs~$\mu$s), and streaming over native ZMQ sustained
+\numApiThroughputMsps~MS/s; receiving a buffer in
+process, which includes computing it, took \numApiRecvPfiftyUs~$\mu$s (median), alternating
+send and receive sustained \numApiInprocMsps~MS/s, and the ZMQ rate was measured with buffers of
+\numApiZmqBufferSamples{} samples. Other work of the regeneration job kept the host up to
+\numEfLatencyBusyMaxPct~\% busy during these measurements.
 
-\claim{C-WC-SHORTPAGES}Two links with \numBthreeHalfPageUs~$\mu$s pages keep the engine busy
-for a median fraction
-\numBthreeTwoLinkUtil{} of each page, yet one of the three repetitions missed
-\numBthreeTwoLinkMissMax{} of the deadlines (the other two at most
-\numBthreeTwoLinkMissOther): a few stalls of up to \numBthreeStallMaxMs~ms each delay dozens of
-short pages. With mobility (F3) one link misses \numBthreeFthreeMissPct~\% of the deadlines at
-\numBthreeHalfPageUs~$\mu$s pages.
-The geometry snapshot is recomputed every \numBthreeFthreeTuMs~ms, and the page that holds the
-recomputation takes up to \numBthreeFthreeUtilMs~ms (p99) although the mean load stays below
-the wall clock. The fraction of pages that hold a snapshot, \numBthreeFthreeSnapPct~\%, is close
-to the miss rate: the snapshot work is not spread over pages. At \numBthreeLowMsps~MS/s a page
-holds \numBthreeLowPage{} samples (\numBthreeLowPageMs~ms) and the engine works for
-\numBthreeLowUtilPct~\% of it (median), yet \numBthreeLowMissPages{} pages had latencies of
-\numSustainSlackMs~ms to \numBthreeLowMaxMs~ms. The resulting miss rate,
-\numBthreeLowMiss{}, misses the threshold in the single repetition run. These delays are not
-explained by per-page cost or by timer resolution, since the engine spins rather than
-sleeps before releases closer than \numPacedSpinMs~ms; the runs record no stage breakdown that
-would identify them.
+\subsection{Paced series and short pages}
+\claim{C-WC-PACED}The \numBthreeOneLinks{} links with \numBthreeOnePageUs~$\mu$s pages missed
+at most a fraction \numBthreeOneMiss{} of the deadlines at \numSustainSlackMs~ms slack in a
+repetition. The single link at \numBthreeTopMsps~MS/s uses pages of
+\numBthreeTopPageUs~$\mu$s (p99 \numBthreeTopPninetynineUs~$\mu$s, miss rate
+\numBthreeTopMiss); at \numBthreeMidMsps~MS/s the pages last \numBthreeMidPageUs~$\mu$s and at
+\numBthreeLowMsps~MS/s \numBthreeLowPageMs~ms. With pages of \numBthreeHalfPageUs~$\mu$s the
+\numBthreeHalfLinks{} links have a worst p99 of \numBthreeHalfPninetynineUs~$\mu$s; four
+surfaces sustain as many links (\numBthreeFourRisLinks), and $N=\numBthreeBigN$ one.
+
+\claim{C-WC-SHORTPAGES}Two mechanisms end the short-page series. At \numBthreeHalfPageUs~$\mu$s,
+\numBthreeHalfFailLinks{} links keep the engine busy for a median \numBthreeHalfFailUtil{} of
+each page and miss \numBthreeHalfFailMissPct~\% of the deadlines: computation. The
+\numBthreeQuarterPageUs~$\mu$s series and the $N=\numBthreeBigN$ series instead passed two
+repetitions of their last point and failed the third, through stalls of up to
+\numBthreeQuarterStallMs~ms (miss rate \numBthreeQuarterFailMiss) and
+\numBthreeBigNStallMs~ms; the runs record no stage breakdown that would identify the stalls.
+With mobility (F3), one link misses \numBthreeFthreeMissPct~\% of the deadlines at
+\numBthreeHalfPageUs~$\mu$s pages in the single repetition run: the geometry snapshot is
+recomputed every \numBthreeFthreeTuMs~ms, \numBthreeFthreeSnapPct~\% of the pages hold a
+recomputation, and such a page takes up to \numBthreeFthreeUtilMs~ms (p99), although the mean
+load stays below the wall clock. Not tried: mobility at other page durations or link counts,
+more than one surface with mobility, and paced runs with client processes on the data plane.
 
 \subsection{Control loop}
-\claim{C-WC-LOCKCMD}At
-the highest lockstep rate the last command of a run switches after the end of the run and is never
-applied; the benchmark's original check counted it as a failure, and the corrected check,
-recomputed offline from the same records, passes. The per-command engine cost of
-Section~\ref{sec:wc-loop} (barrier, decision and configuration change) holds at
-\numBfourRateMidHz~Hz and above, and is computed from the RTF with and without the loop.
+\claim{C-WC-LOCKCMD}At the highest lockstep rate the last command of a run switches after the
+end of the run and is never applied; the check counts such commands as scheduled after the end,
+not as failures. The per-command engine cost of Section~\ref{sec:wc-loop} (barrier, decision and
+configuration change) holds at \numBfourRateMidHz~Hz and above, and is computed from the RTF
+with and without the loop. It includes splitting the page at the switch and rebuilding the
+link statics; the laptop run B6 times a configuration change with the geometry cached at
+\numBsixCombMinUs--\numBsixCombMaxUs~$\mu$s, and these runs record no stage breakdown that
+would apportion the rest.
 
-\claim{C-WC-PACEDCMD}In the served paced runs, at \numBfourRateMidHz~commands/s
-\numBfourMissMidMinPct--\numBfourMissMidMaxPct~\% of the pages missed the deadline. A
-configuration change costs
-the engine about as much time as the slack (see the lockstep cost), so the page that
-holds it, and
-often the next, miss their deadlines; at the lower rate this explains a part of the misses,
-so the served process also misses deadlines between commands. The paced schedule accounts
-for at most one page of the visible latency, because an asap command takes effect at the
-earliest uncomputed sample and the page holding it is released at most one page later. The
-floor of about \numBfourVisMinMs~ms matches the engine's work on the page with the configuration
-change, and the spread is consistent with the hand-over between the control-socket thread and
-the paced loop. In numbers, \numBfourLateLow{} of
-\numBfourCmdsLow{} timed commands at \numBfourRateLowHz~commands/s (the per-repetition fraction
-depends on the error of the client's clock estimate) and \numBfourLateMid{} of \numBfourCmdsMid{} at
-\numBfourRateMidHz~commands/s arrived after their switch sample had been computed. At
-\numBfourRateHighKHz~kHz and above the engine is the bottleneck: the request-reply client
-achieved \numBfourAchievedMin--\numBfourAchievedMax{} commands/s, page latencies grew to as
-much as \numBfourPageLatMaxS~s, and a repetition took up to \numBfourLagPct~\% longer than its
-virtual duration because the engine caught up after the client had stopped. Timed commands then
-lay in the virtual future of the lagging engine, and some became visible as late as
-\numBfourTimedVisMaxS~s after their receipt.
+\claim{C-WC-PACEDCMD}Served paced engines render small pages serially, let idle OpenMP workers
+sleep and exempt their objects from garbage collection during the loop. A served repetition is
+\emph{backlogged} when its median page latency exceeds one page or more than
+\numBacklogMissPct~\% of its pages miss a slack of \numBacklogSlackMs~ms; a backlogged
+repetition's command latencies measure the backlog, so its late and exact fractions are not
+counted. In the served-1ms plan, timed commands carried leads of
+\numBfourLeadMinMs--\numBfourLeadMaxMs~ms. A timed command is late when the engine takes it
+after its switch sample was computed. At its receipt the switch lies a margin ahead of the
+pacer's schedule: the lead minus the delay to the server and the error of the client's
+estimate of virtual time. The p1 of this margin per repetition was
+\numBfourMarginTwoPoneMs--\numBfourMarginTwoPoneMaxMs~ms with a \numBfourLeadMinMs~ms lead,
+where the late fraction of every repetition exceeded the share of commands below its p1, and
+\numBfourMarginFourPoneMs--\numBfourMarginFourPoneMaxMs~ms with \numBfourLeadOkMs~ms, where it
+fell short of that share in every repetition. A single margin threshold would thus lie between
+about
+\numBfourMarginTwoPoneMaxMs{} and \numBfourMarginFourPoneMs~ms, of the order of one page plus its
+computation; the runs do not record when the engine took each command, so this is an
+inference. Pooled over the repetitions, late fractions were at most
+\numBfourLateFourMaxPct~\% (\numBfourLeadOkMs~ms; \numBfourLateFourRepMaxPct~\% in one
+repetition) and \numBfourLateSixMaxPct~\% (\numBfourLeadSixMs--\numBfourLeadMaxMs~ms).
+The client's round trip of a command reached a p99 of up to \numBfourRttPninetynineMaxMs~ms;
+the apply delay (Fig.~\ref{fig:F8}(d)), which excludes the lead, had medians up to
+\numBfourApplyPfiftyMaxMs~ms and a p99 up to \numBfourApplyPninetynineMaxMs~ms; its largest
+value, \numBfourApplyMaxMs~ms, came with a page stall of about that length in one repetition,
+and asap commands had rare visible-latency outliers of up to \numBfourVisMaxMs~ms. The latency floor
+is consistent with the engine's work on the page with the configuration change; that the spread comes
+from the hand-over between the control-socket thread and the paced loop, which share one
+Python interpreter, is a hypothesis. Page deadlines are missed between commands too: at
+\numBfourRateLowHz~commands/s the miss rate at \numBacklogSlackMs~ms slack was at most
+\numBfourMissFiveLowMax. At \numBfourRateHighHz~commands/s page latencies grew to
+\numBfourPageLatMaxS~s.
+
+The original plan (B4-classic, another instance) gives the same picture with pages of
+\numBfourClassicPageUs~$\mu$s and a lead of \numBfourLeadMinMs~ms:
+\numBfourClassicMissMinPct--\numBfourClassicMissMaxPct~\% of the pages missed the
+\numSustainSlackMs~ms deadline at \numBfourRateLowHz{} and \numBfourRateMidHz~commands/s,
+against at most \numBthreeClassicRefMiss{} for the same links and pages headless (B3), so the
+served baseline is not marginal headless; \numBfourClassicLateMinPct--\numBfourClassicLateMaxPct~\%
+of the timed commands were late, the asap visible-latency p99 stayed at or below
+\numBfourClassicVisPninetynineMaxMs~ms, and from \numBfourRateHighHz~commands/s on every
+repetition was backlogged, with \numBfourClassicAchievedMin--\numBfourClassicAchievedMax{}
+commands/s achieved.
 
 \subsection{Cost model}
 \claim{C-WC-COSTMODEL}B1 fits a page cost model, a constant plus linear terms

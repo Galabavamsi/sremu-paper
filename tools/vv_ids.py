@@ -10,10 +10,15 @@ Called by gen_results.py. Two parts:
   tolerances of that spec id) or in the docstrings of the test modules that carry it. An
   identifier cited in the paper without a row, a row that did not pass in the test record
   (unless marked experimental or study) and the words legacy/v1/v2 (framing D24) are refused.
+  The column "Sec." names the subsections of Sections III and IV whose statements each
+  identifier checks (``statement_sections``: the test evidence that claims.yaml lists for the
+  claim markers there, plus identifiers cited in place), because those sections state their
+  properties without inline identifiers (mock review should-fix 5).
   It also writes ``numVaFourRelTol`` (Section III-B), read from the VA-4 test itself.
 * ``provenance_values``: the commit summary of Appendix H, grouped from the rows of the
-  provenance table (Appendix I), so that text and table cannot disagree; and the check of the
-  regeneration job's V-LAB file comparison (sweeps/results/V-LAB-provenance).
+  provenance table (Appendix I), so that text and table cannot disagree: the regeneration
+  commit (the E-A row) and the test record's commit (junit sidecar); and the check of the V-LAB
+  file comparison made at the test record's commit (sweeps/results/V-LAB-provenance).
 
 Standard library plus PyYAML (through paper_common); never imports sremu, never runs git.
 """
@@ -39,7 +44,14 @@ from paper_common import (
 
 IDS_FILE = "verification_ids.yaml"
 IDS_TABLE = "tableA_ids.tex"
-VLAB_CHECK = "sweeps/results/V-LAB-provenance/vlab_check_regen_20261011T235822Z.json"
+CLAIMS_FILE = "claims.yaml"
+# Sections whose statements carry no inline identifiers; the column "Sec." of the identifier
+# tables maps each identifier to their subsections (statement_sections).
+TRACE_FILES = ("sections/03_design.tex", "sections/04_physical_model.tex")
+_HEADING_OR_CLAIM = re.compile(
+    r"\\(section|subsection)\*?\{(?:[^{}]|\{[^{}]*\})*\}((?:\\label\{[^}]*\})*)"
+    r"|\\claim\{([^}]*)\}")
+VLAB_CHECK = "sweeps/results/V-LAB-provenance/vlab_check_lock_1e1fcab.json"
 VLAB_META = "sweeps/results/V-LAB-provenance/meta.json"
 
 # identifiers in the paper text: singles and ranges (PH-02--07, PH-01--PH-11, G1--3, VA-3--VA-5)
@@ -62,6 +74,18 @@ def _strip_comments(tex: str) -> str:
     return "\n".join(re.sub(r"(?<!\\)%.*", "", line) for line in tex.splitlines())
 
 
+def _ids_in(tex: str) -> set[str]:
+    """Identifiers cited in a stretch of comment-free TeX; ranges are expanded."""
+    found: set[str] = set()
+    for m in _ID_RANGE.finditer(tex):
+        found |= {f"{m.group(1)}-{i:02d}" for i in range(int(m.group(2)), int(m.group(3)) + 1)}
+    for m in _G_RANGE.finditer(tex):
+        found |= {f"G{i}" for i in range(int(m.group(1)), int(m.group(2)) + 1)}
+    for m in _VA_RANGE.finditer(tex):
+        found |= {f"VA-{i}" for i in range(int(m.group(1)), int(m.group(2)) + 1)}
+    return found | set(_ID_SINGLE.findall(tex))
+
+
 def cited_ids(paper_root: Path) -> dict[str, list[str]]:
     """Identifier -> files that cite it (sections, hand tables, generated tables except the
     identifier tables themselves); ranges are expanded."""
@@ -70,16 +94,44 @@ def cited_ids(paper_root: Path) -> dict[str, list[str]]:
     out: dict[str, list[str]] = {}
     for f in files:
         tex = _strip_comments(f.read_text(encoding="utf-8")).replace(r"\_", "_")
-        found: set[str] = set()
-        for m in _ID_RANGE.finditer(tex):
-            found |= {f"{m.group(1)}-{i:02d}" for i in range(int(m.group(2)), int(m.group(3)) + 1)}
-        for m in _G_RANGE.finditer(tex):
-            found |= {f"G{i}" for i in range(int(m.group(1)), int(m.group(2)) + 1)}
-        for m in _VA_RANGE.finditer(tex):
-            found |= {f"VA-{i}" for i in range(int(m.group(1)), int(m.group(2)) + 1)}
-        found |= set(_ID_SINGLE.findall(tex))
-        for i in found:
+        for i in _ids_in(tex):
             out.setdefault(i, []).append(f.relative_to(paper_root).as_posix())
+    return out
+
+
+def statement_sections(paper_root: Path) -> dict[str, list[str]]:
+    """Identifier -> labels of the subsections of TRACE_FILES whose statements it checks, in
+    document order: a subsection counts when one of its claim markers lists the identifier as
+    test evidence in claims.yaml or when its text cites the identifier. Sections III and IV
+    state properties without inline identifiers (mock review should-fix 5), so this column of
+    the identifier tables is their traceability. A subsection without a label counts under its
+    section's label."""
+    claims = (read_yaml(paper_root / CLAIMS_FILE) or {}).get("claims") or {}
+    evidence = {cid: {str(e).split(":", 1)[1] for e in (c.get("evidence") or [])
+                      if str(e).startswith("test:")} for cid, c in claims.items()}
+    out: dict[str, list[str]] = {}
+
+    def add(ids: set[str], label: str | None) -> None:
+        for i in sorted(ids):
+            if label and label not in out.setdefault(i, []):
+                out[i].append(label)
+
+    for rel in TRACE_FILES:
+        tex = _strip_comments((paper_root / rel).read_text(encoding="utf-8")).replace(r"\_", "_")
+        section = current = None
+        pos = 0
+        for m in _HEADING_OR_CLAIM.finditer(tex):
+            add(_ids_in(tex[pos:m.start()]), current)
+            pos = m.end()
+            if m.group(1):
+                labels = re.findall(r"\\label\{([^}]*)\}", m.group(2))
+                if m.group(1) == "section":
+                    section = current = labels[0] if labels else None
+                else:
+                    current = labels[0] if labels else section
+            else:
+                add(evidence.get(m.group(3), set()), current)
+        add(_ids_in(tex[pos:]), current)
     return out
 
 
@@ -207,10 +259,11 @@ def _table(label: str, caption: str, rows: list[dict[str, str]]) -> list[str]:
         r"\setlength{\tabcolsep}{3pt}",
         r"\renewcommand{\arraystretch}{1.05}",
         r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.42in}"
-        r">{\raggedright\arraybackslash}p{1.95in}>{\raggedright\arraybackslash}p{2.68in}"
-        r">{\raggedright\arraybackslash}p{1.45in}>{\raggedleft\arraybackslash}p{0.3in}@{}}",
+        r">{\raggedright\arraybackslash}p{1.85in}>{\raggedright\arraybackslash}p{2.2in}"
+        r">{\raggedright\arraybackslash}p{1.45in}>{\raggedright\arraybackslash}p{0.48in}"
+        r">{\raggedleft\arraybackslash}p{0.3in}@{}}",
         r"\toprule",
-        r"Id & Property & Oracle or reference & Tolerance & Tests \\",
+        r"Id & Property & Oracle or reference & Tolerance & Sec. & Tests \\",
     ]
     tier = None
     for r in rows:
@@ -218,7 +271,7 @@ def _table(label: str, caption: str, rows: list[dict[str, str]]) -> list[str]:
             tier = _tier(r["id"])
             lines.append(r"\midrule")
         lines.append(" & ".join([r["id"], tex(r["property"]), tex(r["oracle"]), tex(r["tol"]),
-                                 r["tests"]]) + r" \\")
+                                 r["secs"], r["tests"]]) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}"]
     return lines
 
@@ -251,6 +304,7 @@ def ids_tables(paper_root: Path, sremu_root: Path, cases: list[Any], commit: str
     for ident, where in sorted(cited.items()):
         if ident not in by_id:
             errors.append(f"{ident} is cited ({', '.join(where)}) but has no row in {IDS_FILE}")
+    secs = statement_sections(paper_root)
     out_rows: list[dict[str, str]] = []
     for r in rows_in:
         ident = r["id"]
@@ -281,7 +335,8 @@ def ids_tables(paper_root: Path, sremu_root: Path, cases: list[Any], commit: str
         else:
             tests = str(n)
         out_rows.append({"id": ident, "property": r["property"], "oracle": r["oracle"],
-                         "tol": r["tol"], "tests": tests})
+                         "tol": r["tol"], "tests": tests,
+                         "secs": ", ".join(rf"\ref{{{s}}}" for s in secs.get(ident, [])) or "--"})
     if errors:
         raise SystemExit("vv_ids: " + "; ".join(errors))
     order = {t: i for i, t in enumerate(TIERS_A + TIERS_B)}
@@ -289,9 +344,11 @@ def ids_tables(paper_root: Path, sremu_root: Path, cases: list[Any], commit: str
     a = [r for r in out_rows if _tier(r["id"]) in TIERS_A]
     b = [r for r in out_rows if _tier(r["id"]) in TIERS_B]
     common = (r" Tolerances in dB, degrees, Hz or samples are absolute; rel.: relative to the"
-              r" reference magnitude; bitwise: identical samples. Tests: implementation tests"
-              r" in the test record of commit " + commit[:7] + r" that carry the"
-              r" identifier.")
+              r" reference magnitude; bitwise: identical samples. Sec.: subsections of"
+              r" Sections~\ref{sec:design} and~\ref{sec:model} whose statements the identifier"
+              r" checks (those sections cite few identifiers in place); --: none."
+              r" Tests: implementation tests in the test record of commit " + commit[:7]
+              + r" that carry the identifier.")
     cap_a = (r"Physics identifiers (PH) and MATLAB code-to-code references (G): the property"
              r" checked, its oracle or reference, and the acceptance tolerance, transcribed from"
              r" the emulator's specification and test modules (the pipeline requires each number"
@@ -323,12 +380,29 @@ def _join(items: list[str], sep: str = ", ") -> str:
     return items[0] if len(items) == 1 else sep.join(items[:-1]) + " and " + items[-1]
 
 
+REGEN_ROW = "E-A (aggregate)"
+"""The provenance row that identifies the regeneration job: E-A is produced by the pinned
+regeneration job alone (experiments/regenerate_paper_data.sh), never by a benchmark."""
+
+
 def provenance_values(paper_root: Path, rows: list[dict[str, str]],
                       junit_meta: dict[str, Any]) -> dict[str, str]:
-    """Commit summary of Appendix H from the provenance rows (Table tab:provenance)."""
-    regen = str(junit_meta.get("sremu_commit") or "")[:7]
-    if not regen or junit_meta.get("sremu_dirty") is not False:
+    """Commit summary of Appendix H from the provenance rows (Table tab:provenance).
+
+    Two commits are named: the regeneration commit (the commit of the regeneration job's
+    results, identified by the row :data:`REGEN_ROW`; ``txtProvRegenCommit`` and the host of
+    that row, ``txtProvRegenHost``) and the commit of the test record (the junit sidecar;
+    ``txtProvTestCommit``, ``txtProvTestHost``), which may be a later commit with the same
+    emulator source (gen_results checks the source hash of the installed checkout against
+    the regeneration results). The V-LAB file check must be made at the test record's
+    commit."""
+    test = str(junit_meta.get("sremu_commit") or "")[:7]
+    if not test or junit_meta.get("sremu_dirty") is not False:
         raise SystemExit("vv_ids: the test record has no clean commit; Appendix H names it")
+    reg = [r for r in rows if r["result"] == REGEN_ROW]
+    if len(reg) != 1 or reg[0]["tree"] != "clean" or reg[0]["commit"] in ("", "n/r"):
+        raise SystemExit("vv_ids: the regeneration job's E-A row has no clean commit")
+    regen = reg[0]["commit"]
     at = [_short(r["result"]) for r in rows if r["commit"] == regen and r["tree"] == "clean"]
     groups: dict[tuple[str, str], list[str]] = {}
     for r in rows:
@@ -356,7 +430,7 @@ def provenance_values(paper_root: Path, rows: list[dict[str, str]],
             and chk.get("files_not_at_7a63287") == [] and chk.get("run_git_dirty") is False):
         raise SystemExit("vv_ids: Appendix H says the V-LAB files at the regeneration commit "
                          "equal the locked analysis commit; the job's check does not show it")
-    if entry["checked_commit"][:7] != regen:
+    if entry["checked_commit"][:7] != test:
         raise SystemExit("vv_ids: the V-LAB check was made at another commit than the test record")
     lab_code = {m.macro: m.value for m in load_numbers_spec(paper_root / "numbers.yaml")
                 }.get("txtLabCodeCommit")
@@ -364,7 +438,9 @@ def provenance_values(paper_root: Path, rows: list[dict[str, str]],
         raise SystemExit("vv_ids: the V-LAB check names another run commit than txtLabCodeCommit")
     return {
         "txtProvRegenCommit": regen,
-        "txtProvRegenHost": str(junit_meta.get("host") or "host not recorded"),
+        "txtProvRegenHost": reg[0].get("host") or "host not recorded",
         "txtProvRegenResults": _join(at),
         "txtProvOtherCommits": "; ".join(other),
+        "txtProvTestCommit": test,
+        "txtProvTestHost": str(junit_meta.get("host") or "host not recorded"),
     }

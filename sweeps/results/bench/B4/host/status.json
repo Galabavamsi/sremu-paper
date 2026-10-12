@@ -1,6 +1,6 @@
 {
  "job": "b4",
- "deadline_min": 95.0,
+ "deadline_min": 110.0,
  "cpu_plan": {
   "engine": "1-8,17-24",
   "clients": "9-10,25-26",
@@ -28,9 +28,9 @@
     "SREMU_CLIENT_CPUS": "9-10,25-26"
    },
    "budget_min": null,
-   "timeout_s": 2009.9999794960022,
-   "rc": 1,
-   "wall_s": 116.64814591407776,
+   "timeout_s": 2609.9999759197235,
+   "rc": 0,
+   "wall_s": 128.5061264038086,
    "log": "b4_lockstep.log",
    "interrupted_by": null
   },
@@ -45,8 +45,10 @@
     "bench.b4_control",
     "--part",
     "paced",
+    "--plan",
+    "served-1ms",
     "--budget-min",
-    "88",
+    "103",
     "--out",
     "/opt/job/out/runs"
    ],
@@ -56,14 +58,14 @@
     "SREMU_CPUS": "1-8,17-24",
     "SREMU_CLIENT_CPUS": "9-10,25-26"
    },
-   "budget_min": 88.05585716962814,
-   "timeout_s": 5493.351430177689,
+   "budget_min": 102.85822226603825,
+   "timeout_s": 6381.4933359622955,
    "rc": 0,
-   "wall_s": 1666.3816645145416,
+   "wall_s": 2762.26730966568,
    "log": "b4_paced.log",
    "interrupted_by": null
   }
  ],
- "wall_s": 1783.0306482315063,
- "rc": 1
+ "wall_s": 2890.774496078491,
+ "rc": 0
 }

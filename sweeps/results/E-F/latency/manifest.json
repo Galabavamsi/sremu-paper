@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "sremu_version": "0.1.0.dev0",
-  "git_commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+  "git_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
   "git_dirty": false,
   "dirty_patch_sha256": null,
   "contract_version": "1.1",
@@ -21,7 +21,7 @@
   "gpu": [],
   "aws_instance": {
     "type": "c7i.48xlarge",
-    "id": "i-0b61314ac0dcfeb18"
+    "id": "i-08e220489c936dc18"
   },
   "scenario_name": "ef_latency",
   "scenario_sha256": "b54951e866526d5d511cd78d0f9f2bdc3fe68951c20543d45fe508b4aef4642a",
@@ -67,29 +67,29 @@
     "-c",
     "/opt/job/out/ef_latency"
   ],
-  "t_start_utc": "2026-10-11T23:59:40.052536Z",
-  "t_end_utc": "2026-10-12T00:00:01.250196Z",
-  "wall_s": 21.1976777,
+  "t_start_utc": "2026-10-12T02:54:49.784421Z",
+  "t_end_utc": "2026-10-12T02:55:10.513035Z",
+  "wall_s": 20.728635912,
   "host_load_samples": [
     {
-      "t_utc": "2026-10-11T23:59:40.055708Z",
-      "cpu_busy_fraction": 0.017857142857142856,
-      "loadavg_1min": 0.58642578125
-    },
-    {
-      "t_utc": "2026-10-11T23:59:47.230262Z",
-      "cpu_busy_fraction": 0.3702576366996413,
-      "loadavg_1min": 0.61962890625
-    },
-    {
-      "t_utc": "2026-10-12T00:00:01.240611Z",
-      "cpu_busy_fraction": 0.19185800346151846,
-      "loadavg_1min": 0.94482421875
-    },
-    {
-      "t_utc": "2026-10-12T00:00:01.241868Z",
+      "t_utc": "2026-10-12T02:54:49.787548Z",
       "cpu_busy_fraction": 0.0,
-      "loadavg_1min": 0.94482421875
+      "loadavg_1min": 0.70849609375
+    },
+    {
+      "t_utc": "2026-10-12T02:54:56.792375Z",
+      "cpu_busy_fraction": 0.37250081696919285,
+      "loadavg_1min": 11.00341796875
+    },
+    {
+      "t_utc": "2026-10-12T02:55:10.502700Z",
+      "cpu_busy_fraction": 0.18741118448549696,
+      "loadavg_1min": 9.625
+    },
+    {
+      "t_utc": "2026-10-12T02:55:10.504109Z",
+      "cpu_busy_fraction": 0.0,
+      "loadavg_1min": 9.625
     }
   ],
   "threading": null

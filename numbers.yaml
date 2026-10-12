@@ -46,6 +46,20 @@ macros:
     source: {type: definition, id: "DESIGN-12.1-Sustainable"}
     value: "60"
     max_chars: 2
+  - macro: numBacklogSlackMs
+    kind: number
+    description: "Slack of the backlog rule of the served benchmark (bench/b4_control.py BACKLOG_MISS_5MS: a repetition is backlogged when its page latency p50 exceeds one page or more than numBacklogMissPct % of its pages miss this slack); also the second default slack of paced mode"
+    unit: ms
+    source: {type: definition, id: "bench-b4-backlog-rule"}
+    value: "5"
+    max_chars: 1
+  - macro: numBacklogMissPct
+    kind: number
+    description: "Miss-rate threshold of the backlog rule at numBacklogSlackMs ms slack (bench/b4_control.py BACKLOG_MISS_5MS = 0.01)"
+    unit: "%"
+    source: {type: definition, id: "bench-b4-backlog-rule"}
+    value: "1"
+    max_chars: 1
   - macro: numLabFreqGHz
     kind: number
     description: Carrier frequency of the digitized laboratory map (laboratory measurement collected by the authors, DIG)
@@ -353,21 +367,14 @@ macros:
     source: {type: definition, id: "DESIGN-12.1-Sustainable"}
     value: "5"
     max_chars: 1
-  - macro: numBfourLeadMs
-    kind: number
-    description: "Lead of the B4 timed commands over the client's estimate of virtual time (dataset fact: bench/b4_control.py paced_point passes --lead-s 2e-3 at commit 309c633; not recorded in the run files)"
-    unit: ms
-    source: {type: data, id: "B4-timed-lead"}
-    value: "2"
-    max_chars: 1
   - macro: numBtwoFfiveRtf
     kind: number
-    description: "AWAITING THE PINNED RERUN (do not type a value): lockstep RTF of the B2 base point served over the native ZMQ data plane (F5). The three F5 receive time-outs of the B2 run of 20261011 were a benchmark configuration error (served run shorter than the clients' streams; fixed in the benchmark, sremu 60d0e6d), not a transport stall. Plan: after the transport fix is committed (pinned commit C1), rerun B2's F5 points with bench/aws/job.sh b1b2 per sremu/bench/README.md, copy the run with its provenance to sweeps/results/bench/B2, add the F5 code path to tools/bench_results.py (today it skips F5) and redraw F7 with F5"
+    description: "B2-F45 (bf08268): end-to-end RTF of the B2 base point (1 link, N = 240, one surface, 1 MS/s) served over the native ZMQ data plane to a TX and an RX client process (F5): virtual time delivered to the RX client over the wall time from the served engine's warm-up boundary to the client's last sample"
     source: {type: benchmark, id: "B2-F5-rerun"}
     max_chars: 5
   - macro: txtHostServer
     kind: text
-    description: "AWS instance type of the lockstep benchmarks B1 and B2"
+    description: "AWS instance type of the lockstep benchmarks B1, B2 and B2-F45 (B2-F45 on another instance of the type) and of the E-F latency measurement"
     source: {type: benchmark, id: "B2"}
     max_chars: 18
   - macro: numBtwoPlanned
@@ -690,7 +697,7 @@ macros:
     max_chars: 5
   - macro: numBthreeHalfPninetynineUs
     kind: number
-    description: "Worst p99 page latency, 1 MS/s, 0.5 ms pages, one link"
+    description: "Worst p99 page latency, 1 MS/s, 0.5 ms pages, at the largest Sustainable link count"
     unit: us
     source: {type: benchmark, id: "B3"}
     max_chars: 5
@@ -755,27 +762,6 @@ macros:
     description: "Element count of the large-surface B3 series"
     source: {type: benchmark, id: "B3"}
     max_chars: 6
-  - macro: numBthreeTwoLinkMissOther
-    kind: number
-    description: "Larger 1 ms-slack miss rate of the two passing repetitions of the two-link 0.5 ms point"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 11
-  - macro: numBthreeTwoLinkMissMax
-    kind: number
-    description: "Largest 1 ms-slack miss rate of the two-link 0.5 ms point over its repetitions"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 11
-  - macro: numBthreeTwoLinkUtil
-    kind: number
-    description: "Median page utilization of the two-link 0.5 ms point"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 6
-  - macro: numBthreeStallMaxMs
-    kind: number
-    description: "Longest page latency of the two-link 0.5 ms point"
-    unit: ms
-    source: {type: benchmark, id: "B3"}
-    max_chars: 4
   - macro: numBthreeFthreeMissPct
     kind: number
     description: "1 ms-slack miss rate of one mobile (F3) link at 0.5 ms pages"
@@ -806,39 +792,12 @@ macros:
     unit: MS/s
     source: {type: benchmark, id: "B3"}
     max_chars: 5
-  - macro: numBthreeLowPage
-    kind: number
-    description: "Page size at the lowest rate, samples"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 5
   - macro: numBthreeLowPageMs
     kind: number
     description: "Page duration at the lowest rate"
     unit: ms
     source: {type: benchmark, id: "B3"}
     max_chars: 6
-  - macro: numBthreeLowUtilPct
-    kind: number
-    description: "Median page utilization at the lowest rate"
-    unit: "%"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 3
-  - macro: numBthreeLowMiss
-    kind: number
-    description: "1 ms-slack miss rate at the lowest rate (one repetition)"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 11
-  - macro: numBthreeLowMissPages
-    kind: number
-    description: "Pages above 1 ms latency at the lowest rate"
-    source: {type: benchmark, id: "B3"}
-    max_chars: 4
-  - macro: numBthreeLowMaxMs
-    kind: number
-    description: "Longest page latency at the lowest rate"
-    unit: ms
-    source: {type: benchmark, id: "B3"}
-    max_chars: 5
   - macro: numBfourLockCommands
     kind: number
     description: "Lockstep commands issued in B4 (all variants and rates)"
@@ -888,12 +847,6 @@ macros:
     description: "Links of the B4 scene"
     source: {type: benchmark, id: "B4"}
     max_chars: 3
-  - macro: numBfourPageMs
-    kind: number
-    description: "Page duration of the B4 paced runs"
-    unit: ms
-    source: {type: benchmark, id: "B4"}
-    max_chars: 7
   - macro: numBfourRateLowHz
     kind: number
     description: "Lower paced command rate discussed"
@@ -906,12 +859,6 @@ macros:
     unit: Hz
     source: {type: benchmark, id: "B4"}
     max_chars: 5
-  - macro: numBfourRateHighKHz
-    kind: number
-    description: "Command rate from which B4 paced runs are engine-bound"
-    unit: kHz
-    source: {type: benchmark, id: "B4"}
-    max_chars: 3
   - macro: numBfourMissLowMinPct
     kind: number
     description: "Smallest 1 ms-slack miss rate at the lower rate (6 repetitions)"
@@ -936,38 +883,6 @@ macros:
     unit: "%"
     source: {type: benchmark, id: "B4"}
     max_chars: 6
-  - macro: numBfourLateLow
-    kind: number
-    description: "Timed commands applied late at the lower rate (3 repetitions)"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 5
-  - macro: numBfourCmdsLow
-    kind: number
-    description: "Timed commands at the lower rate (3 repetitions)"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 6
-  - macro: numBfourLateMid
-    kind: number
-    description: "Timed commands applied late at the middle rate"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 8
-  - macro: numBfourCmdsMid
-    kind: number
-    description: "Timed commands at the middle rate"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 8
-  - macro: numBfourLateRepMinPct
-    kind: number
-    description: "Smallest per-repetition late share of timed commands at the lower rate"
-    unit: "%"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 3
-  - macro: numBfourLateRepMaxPct
-    kind: number
-    description: "Largest per-repetition late share of timed commands at the lower rate"
-    unit: "%"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 4
   - macro: numBfourVisPfiftyMinMs
     kind: number
     description: "Smallest per-repetition median visible latency of asap commands (lower and middle rate)"
@@ -992,46 +907,28 @@ macros:
     unit: ms
     source: {type: benchmark, id: "B4"}
     max_chars: 5
-  - macro: numBfourVisMinMs
-    kind: number
-    description: "Smallest visible latency of an asap command"
-    unit: ms
-    source: {type: benchmark, id: "B4"}
-    max_chars: 5
   - macro: numBfourVisMaxMs
     kind: number
-    description: "Largest visible latency of an asap command at 10 and 100 commands/s (rare outliers)"
+    description: "Largest asap visible latency (outliers) at 10 and 100 commands/s"
     unit: ms
     source: {type: benchmark, id: "B4"}
     max_chars: 5
   - macro: numBfourAchievedMin
     kind: number
-    description: "Smallest median command rate the client achieved at >= 1 kHz requested"
+    description: "Smallest achieved command rate of a repetition at 1000 commands/s (client)"
     source: {type: benchmark, id: "B4"}
     max_chars: 5
   - macro: numBfourAchievedMax
     kind: number
-    description: "Largest median command rate the client achieved at >= 1 kHz requested"
+    description: "Largest achieved command rate of a repetition at 1000 commands/s (client)"
     source: {type: benchmark, id: "B4"}
     max_chars: 5
-  - macro: numBfourLagPct
-    kind: number
-    description: "Largest stretch of a whole paced repetition at >= 1 kHz (wall/virtual - 1); the engine catches up after the client stops, so the lag during the run is larger (numBfourPageLatMaxS)"
-    unit: "%"
-    source: {type: benchmark, id: "B4"}
-    max_chars: 4
   - macro: numBfourPageLatMaxS
     kind: number
-    description: "Largest page latency of a paced repetition at >= 1 kHz (engine-bound backlog)"
+    description: "Largest page latency at 1000 commands/s (backlog)"
     unit: s
     source: {type: benchmark, id: "B4"}
     max_chars: 4
-  - macro: numBfourTimedVisMaxS
-    kind: number
-    description: "Worst p99 visible latency of timed commands at >= 1 kHz (backlog)"
-    unit: s
-    source: {type: benchmark, id: "B4"}
-    max_chars: 5
   - macro: txtBsixMatlab
     kind: text
     description: "MATLAB release of B6"
@@ -1120,36 +1017,445 @@ macros:
     source: {type: benchmark, id: "B6"}
     max_chars: 4
 
-  # E-F API latency (DESIGN 11 E-F): AWAITING THE PINNED RERUN. Plan: the regeneration job
-  # (sremu experiments/regenerate_paper_data.sh --collect-latency, after the transport fix, at
-  # C1) writes E-F/latency (MEAS, host recorded); then add the gen_results code for these four
-  # macros (latency.json: inproc send p50/p99, zmq round trip p50; numApiThroughputMsps = the
-  # ZMQ sustained rate, not the in-process one) and a "data plane" paragraph in Section VI.
-  # Do not type values; until then they stay placeholders and are not used in the text.
+  # Added 2026-10-12 (benchmark integration at bf08268; must-fix 1, 13, 18, MAJOR-11):
+  # B2 surface-count and thread scans (309c633 run), B2-F45 (F4/F5 rerun and F5 stress),
+  # B3 short pages and stopping rule, B4 served-1ms plan (lead sweep, apply delay,
+  # backlog), B4-classic (0.5 ms pages). Filled by tools/bench_results.py.
+  - macro: numBtwoRzeroStaticRtf
+    kind: number
+    description: "B2: one-link RTF at 1 MS/s, N = 240, static (F1), no surface (R = 0)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoRfourStaticRtf
+    kind: number
+    description: "B2: the same with four surfaces (R = 4)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoRzeroMobileRtf
+    kind: number
+    description: "B2: one-link RTF at 1 MS/s, N = 240, mobility (F3), no surface"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoRfourMobileRtf
+    kind: number
+    description: "B2: the same with four surfaces"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoTopRtwoRtf
+    kind: number
+    description: "B2: one link at 23.04 MS/s, static, two surfaces"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoTopRfourRtf
+    kind: number
+    description: "B2: one link at 23.04 MS/s, static, four surfaces (below 1)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoThrOneRtf
+    kind: number
+    description: "B2 thread scan: RTF at the static link limit (8 links, 1 MS/s, N = 240) with one numba thread"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoThrBest
+    kind: number
+    description: "B2 thread scan: thread count with the highest RTF at 8 links"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 3
+  - macro: numBtwoThrBestRtf
+    kind: number
+    description: "B2 thread scan: that highest RTF at 8 links"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoThrMax
+    kind: number
+    description: "B2 thread scan: largest thread count run (8 links)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 3
+  - macro: numBtwoThrMaxRtf
+    kind: number
+    description: "B2 thread scan: RTF at 8 links with the largest thread count"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
+  - macro: numBtwoThrGain
+    kind: number
+    description: "B2 thread scan: best RTF over the one-thread RTF at 8 links"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 4
+  - macro: numBtwoThrGainSixtyfour
+    kind: number
+    description: "B2 thread scan: best RTF over the one-thread RTF at 64 links"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 4
+  - macro: numBtwoThrLinksBig
+    kind: number
+    description: "B2 thread scan: the larger link count of the scan (64 links)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 3
+  - macro: numBtwoFfiveFfourRtf
+    kind: number
+    description: "B2-F45: F4 (in-process, recording) RTF of the base point in the same run as the F5 figure"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfivePoints
+    kind: number
+    description: "B2-F45: F5 points (each with an F4 twin)"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 3
+  - macro: numBtwoFfiveRatioMin
+    kind: number
+    description: "B2-F45: smallest F5/F4 RTF ratio over the twin points (rounded down)"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfiveRatioMax
+    kind: number
+    description: "B2-F45: largest F5/F4 RTF ratio (rounded up)"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfiveStressRuns
+    kind: number
+    description: "B2-F45 stress: F5 base-point runs"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 4
+  - macro: numBtwoFfiveStressWorkers
+    kind: number
+    description: "B2-F45 stress: concurrent workers"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 3
+  - macro: numBtwoFfiveStressMed
+    kind: number
+    description: "B2-F45 stress: median end-to-end RTF"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfiveStressMin
+    kind: number
+    description: "B2-F45 stress: smallest end-to-end RTF"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfiveStressMax
+    kind: number
+    description: "B2-F45 stress: largest end-to-end RTF"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfivePauseRuns
+    kind: number
+    description: "B2-F45 starved-client check: runs"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 3
+  - macro: numBtwoFfivePauseS
+    kind: number
+    description: "B2-F45 starved-client check: pause of every RX client before its warm-up completes"
+    unit: s
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 3
+  - macro: numBtwoFfivePauseRtf
+    kind: number
+    description: "B2-F45 starved-client check: median end-to-end RTF"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfivePauseClientRtf
+    kind: number
+    description: "B2-F45 starved-client check: median of the client-only (pre-fix) figure"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBtwoFfiveIsoRatio
+    kind: number
+    description: "B2-F45: isolated over packed RTF of its reference point"
+    source: {type: benchmark, id: "B2-F45"}
+    max_chars: 5
+  - macro: numBthreeHalfLinks
+    kind: number
+    description: "B3: largest Sustainable L, 1 MS/s, 0.5 ms page target"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 3
+  - macro: numBthreeLowLinks
+    kind: number
+    description: "B3: largest Sustainable L at 0.1 MS/s (1.28 ms pages)"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 3
+  - macro: numBthreeSeries
+    kind: number
+    description: "B3: series in the plan"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 3
+  - macro: numBthreeSingleRepEnds
+    kind: number
+    description: "B3: series whose ending (unsustainable) point ran a single repetition"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 3
+  - macro: numBthreeHalfFailLinks
+    kind: number
+    description: "B3: links of the point that ended the 0.5 ms series"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 3
+  - macro: numBthreeHalfFailMissPct
+    kind: number
+    description: "B3: its 1 ms-slack miss rate"
+    unit: "%"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 5
+  - macro: numBthreeHalfFailUtil
+    kind: number
+    description: "B3: its median utilization (compute time over page duration)"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 5
+  - macro: numBthreeQuarterFailMiss
+    kind: number
+    description: "B3: miss rate of the failed third repetition that ended the 0.25 ms series"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 11
+  - macro: numBthreeQuarterStallMs
+    kind: number
+    description: "B3: largest page latency in that repetition"
+    unit: ms
+    source: {type: benchmark, id: "B3"}
+    max_chars: 4
+  - macro: numBthreeBigNStallMs
+    kind: number
+    description: "B3: largest page latency in the failed third repetition that ended the N = 4096 series"
+    unit: ms
+    source: {type: benchmark, id: "B3"}
+    max_chars: 4
+  - macro: numBthreeClassicRefMiss
+    kind: number
+    description: "B3: worst 1 ms-slack miss rate of two links with 0.512 ms pages (the B4-classic configuration), headless"
+    source: {type: benchmark, id: "B3"}
+    max_chars: 11
+  - macro: numBfourPageUs
+    kind: number
+    description: "B4 served-1ms: page duration"
+    unit: us
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourRateHighHz
+    kind: number
+    description: "B4: highest served command rate requested"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourMissFiveLowMax
+    kind: number
+    description: "B4: worst 5 ms-slack miss rate at 10 commands/s"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 11
+  - macro: numBfourMissFiveMidMax
+    kind: number
+    description: "B4: worst 5 ms-slack miss rate at 100 commands/s"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 11
+  - macro: numBfourLeadMinMs
+    kind: number
+    description: "B4: smallest timed lead (paced.json lead_s)"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 3
+  - macro: numBfourLeadOkMs
+    kind: number
+    description: "B4: second lead of the sweep, from which >= 99.8 % were exact"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 3
+  - macro: numBfourLeadSixMs
+    kind: number
+    description: "B4: third lead of the sweep"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 3
+  - macro: numBfourLeadMaxMs
+    kind: number
+    description: "B4: largest lead of the sweep"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 3
+  - macro: numBfourLateTwoMinPct
+    kind: number
+    description: "B4: late fraction with the smallest lead, lower of the two rates"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourLateTwoMaxPct
+    kind: number
+    description: "B4: late fraction with the smallest lead, higher of the two rates"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourLateFourMaxPct
+    kind: number
+    description: "B4: largest late fraction with the second lead (rounded up)"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourLateSixMaxPct
+    kind: number
+    description: "B4: largest late fraction with the third lead or more (rounded up)"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourExactOkMinPct
+    kind: number
+    description: "B4: smallest fraction applied on the exact sample with the second lead or more (rounded down)"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourMarginTwoPoneMs
+    kind: number
+    description: "B4: smallest per-repetition p1 of the virtual margin with the smallest lead"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourMarginFourPoneMs
+    kind: number
+    description: "B4: smallest per-repetition p1 of the virtual margin with the second lead"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourMarginTwoPoneMaxMs
+    kind: number
+    description: "B4: largest per-repetition p1 of the virtual margin with the smallest lead"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourMarginFourPoneMaxMs
+    kind: number
+    description: "B4: largest per-repetition p1 of the virtual margin with the second lead"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourLateFourRepMaxPct
+    kind: number
+    description: "B4: largest late fraction of a single repetition with the second lead (rounded up)"
+    unit: "%"
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourApplyPfiftyMaxMs
+    kind: number
+    description: "B4: largest per-repetition median apply delay at 10 and 100 commands/s"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourApplyPninetynineMaxMs
+    kind: number
+    description: "B4: largest per-repetition p99 apply delay at 10 and 100 commands/s"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourApplyMaxMs
+    kind: number
+    description: "B4: largest apply delay at 10 and 100 commands/s (one repetition's page stall of about that length; checked)"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourRttPninetynineMaxMs
+    kind: number
+    description: "B4: largest per-repetition p99 of the client's set_config round trip at 10 and 100 commands/s"
+    unit: ms
+    source: {type: benchmark, id: "B4"}
+    max_chars: 5
+  - macro: numBfourClassicPageUs
+    kind: number
+    description: "B4-classic: page duration"
+    unit: us
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicMissMinPct
+    kind: number
+    description: "B4-classic: smallest 1 ms-slack miss rate at 10 and 100 commands/s"
+    unit: "%"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicMissMaxPct
+    kind: number
+    description: "B4-classic: largest 1 ms-slack miss rate at 10 and 100 commands/s"
+    unit: "%"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicLateMinPct
+    kind: number
+    description: "B4-classic: late fraction of timed commands (2 ms lead), lower of the two rates"
+    unit: "%"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicLateMaxPct
+    kind: number
+    description: "B4-classic: the same, higher of the two rates"
+    unit: "%"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicVisPninetynineMaxMs
+    kind: number
+    description: "B4-classic: worst asap visible-latency p99 at 10 and 100 commands/s"
+    unit: ms
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicAchievedMin
+    kind: number
+    description: "B4-classic: smallest achieved command rate of a repetition at >= 1000 commands/s (client)"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  - macro: numBfourClassicAchievedMax
+    kind: number
+    description: "B4-classic: largest achieved command rate of a repetition at >= 1000 commands/s (client)"
+    source: {type: benchmark, id: "B4-classic"}
+    max_chars: 5
+  # E-F API latency (DESIGN 11 E-F): measured by the pinned regeneration job
+  # (experiments/regenerate_paper_data.sh --collect-latency, bf08268, AWS c7i.48xlarge;
+  # sweeps/results/E-F/latency, MEAS) and read by tools/bench_results.py; Section VI data plane.
   - macro: numApiSendPfiftyUs
     kind: number
-    description: "PENDING (AWS): in-process send/recv call latency p50, 1000-sample buffers"
+    description: "E-F latency (regeneration job, bf08268): in-process send of one buffer through the UHD-shaped API, p50"
     unit: "us"
     source: {type: benchmark, id: "E-F-latency"}
     max_chars: 6
   - macro: numApiSendPninetynineUs
     kind: number
-    description: "PENDING (AWS): in-process send/recv call latency p99, 1000-sample buffers"
+    description: "E-F latency: the same, p99"
     unit: "us"
     source: {type: benchmark, id: "E-F-latency"}
     max_chars: 6
   - macro: numZmqRttPfiftyUs
     kind: number
-    description: "PENDING (AWS): native-ZMQ two-process round trip p50"
+    description: "E-F latency: native-ZMQ two-process round trip (send one buffer, receive one buffer), p50"
     unit: "us"
     source: {type: benchmark, id: "E-F-latency"}
     max_chars: 6
   - macro: numApiThroughputMsps
     kind: number
-    description: "PENDING (AWS): sustained API throughput"
+    description: "E-F latency: sustained native-ZMQ two-process rate with the larger buffer (not the in-process rate)"
     unit: "MS/s"
     source: {type: benchmark, id: "E-F-latency"}
     max_chars: 5
+  - macro: numApiBufferSamples
+    kind: number
+    description: "E-F latency: buffer of the send/recv and round-trip measurements"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numApiRecvPfiftyUs
+    kind: number
+    description: "E-F latency: in-process recv of one buffer (includes its computation), p50"
+    unit: us
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numApiInprocMsps
+    kind: number
+    description: "E-F latency: in-process sustained rate (send, recv alternating)"
+    unit: MS/s
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 5
+  - macro: numZmqRttPninetynineUs
+    kind: number
+    description: "E-F latency: native-ZMQ two-process round trip, p99"
+    unit: us
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 6
+  - macro: numApiZmqBufferSamples
+    kind: number
+    description: "E-F latency: buffer of the ZMQ sustained-rate measurement"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 7
+  - macro: numEfLatencyBusyMaxPct
+    kind: number
+    description: "E-F latency: largest host CPU busy share sampled during the measurement (other work of the regeneration job)"
+    unit: "%"
+    source: {type: benchmark, id: "E-F-latency"}
+    max_chars: 4
 
   # ================================================================== Sections V and VII
   # Filled by tools/gen_results.py from committed result files (study/experiment/test/
@@ -1578,13 +1884,13 @@ macros:
     max_chars: 8
   - macro: txtProvRegenCommit
     kind: text
-    description: "Emulator commit of the regeneration job (the test record's sidecar; clean tree required)"
-    source: {type: test, id: "junit-sidecar"}
+    description: "Emulator commit of the pinned regeneration job (the E-A row of the provenance table; clean tree required)"
+    source: {type: study, id: "provenance"}
     max_chars: 7
   - macro: txtProvRegenHost
     kind: text
-    description: "Host of the regeneration job, as the test record's sidecar names it"
-    source: {type: test, id: "junit-sidecar"}
+    description: "Host of the regeneration job (the E-A row of the provenance table)"
+    source: {type: study, id: "provenance"}
     max_chars: 30
   - macro: txtProvRegenResults
     kind: text
@@ -1596,6 +1902,16 @@ macros:
     description: "The other results of Table tab:provenance with their commit and tree state (grouped by tools/vv_ids.py from the provenance rows)"
     source: {type: study, id: "provenance"}
     max_chars: 420
+  - macro: txtProvTestCommit
+    kind: text
+    description: "Emulator commit of the test record (the junit sidecar; clean tree required; the V-LAB file check is made at it)"
+    source: {type: test, id: "junit-sidecar"}
+    max_chars: 7
+  - macro: txtProvTestHost
+    kind: text
+    description: "Host of the test record, as its sidecar names it"
+    source: {type: test, id: "junit-sidecar"}
+    max_chars: 40
   - macro: numLabSpearmanLo
     kind: number
     description: "Lower limit of the 95 % (Fieller) interval of the C2 Spearman rho"

@@ -13,11 +13,10 @@ state~\cite{Rossanese2022WiNTECH} rather than an ideal alphabet, and the descrip
 of the data has already been seen, so the comparison can be pre-specified but not blind. A
 measured reconfiguration transient would move parts of the model card from consistency
 checks to validation. \emph{Unmodified radio software.} A virtual-USRP layer of the kind ACHEM
-provides~\cite{Gurses2026ACHEM} would let unmodified UHD applications use the emulator. srsRAN
-would need a source build and a lockstep peer that offsets its transmit and receive streams,
-which its ZMQ driver~\cite{srsRANZMQ} ties together (from reading the driver, not tested;
-Appendix~\ref{app:cases}); an attach test at LTE sample rates would run slower than the wall
-clock. \emph{Network control.} An E2 service model adapter for
+provides~\cite{Gurses2026ACHEM} would let unmodified UHD applications use the emulator, and
+srsRAN would need a lockstep peer that offsets the transmit and receive streams its ZMQ
+driver~\cite{srsRANZMQ} ties together (from reading the driver, not tested;
+Appendix~\ref{app:cases}). \emph{Network control.} An E2 service model adapter for
 RIS~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX} would connect O-RAN applications, and
 authenticated sockets would allow control across hosts. \emph{Physics.} Candidates are mutual
 coupling through a mutual-impedance model~\cite{Gradoni2021MutualCoupling}, RIS--RIS paths, frequency-dependent

@@ -27,17 +27,17 @@
     "times.csv"
   ],
   "background_load": {
-    "n_samples": 55,
+    "n_samples": 50,
     "period_s": 0.5,
-    "baseline_busy_fraction": 0.19303385416666666,
+    "baseline_busy_fraction": 0.16097560975609757,
     "background_busy": {
-      "n": 34.0,
-      "min": 0.1821113406271571,
-      "max": 0.7632575757575758,
-      "mean": 0.34413724263498674,
-      "p50": 0.29296875,
-      "p90": 0.5549242424242424,
-      "p99": 0.7632575757575758
+      "n": 43.0,
+      "min": 0.07868671242472956,
+      "max": 0.470703125,
+      "mean": 0.18795672858977394,
+      "p50": 0.16098484848484848,
+      "p90": 0.38825757575757575,
+      "p99": 0.470703125
     },
     "note": "background_busy = system busy fraction minus this process's CPU share; child processes (MATLAB, ZMQ clients, controller processes, parallel point workers) count as background"
   },
@@ -45,8 +45,8 @@
     "max_busy": 0.2,
     "window_s": 3.0,
     "timeout_s": 600.0,
-    "waited_s": 60.011340299999574,
-    "last_busy_fraction": 0.19303385416666666,
+    "waited_s": 18.003738900006283,
+    "last_busy_fraction": 0.16097560975609757,
     "met": true
   },
   "pinning": {
@@ -60,5 +60,5 @@
     },
     "power_plan_or_governor": "Balanced"
   },
-  "created_utc": "2026-10-11T03:13:22Z"
+  "created_utc": "2026-10-11T18:56:05Z"
 }

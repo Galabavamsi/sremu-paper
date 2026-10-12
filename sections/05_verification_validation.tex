@@ -19,7 +19,7 @@ verification. Data read off a published figure are labelled DIG with their digit
 uncertainty, and every caption names the classes of its data (Appendix~\ref{app:provenance}).
 
 \subsection{Analytic oracles}\label{sec:vv-oracles}
-\claim{C-VV-TABLE}The test record of emulator commit \txtProvRegenCommit{} is summarized per
+\claim{C-VV-TABLE}The test record of emulator commit \txtProvTestCommit{} is summarized per
 tier in Appendix~\ref{app:vv}. Each identifier (Appendix~\ref{app:oracles}) names one property,
 its oracle (a closed form or exact property, kept in a test package that may not import the
 code under test) and a fixed tolerance. All \numOracleCount{} analytic
@@ -45,10 +45,9 @@ integral, while one point per cell converges slowly (Appendix~\ref{app:vv}).
 
 \claim{C-ABS-TANG}Tang et al.\ measured the path loss of millimeter-wave surfaces in an
 anechoic chamber and fitted a model to it~\cite{Tang2022mmWave}. We extracted the curves and
-points of their Fig.~10 from the vector graphics of arXiv version
-2101.08607v2~\cite{Tang2022mmWave} (DIG) and
-ran the same \numTangMeasN{} links through the emulator with the default cell model and
-the reported unit-cell state and link budget (REPORTED). The emulator reproduces the
+points of their Fig.~10~\cite{Tang2022mmWave} (DIG; Appendix~\ref{app:tang}) and ran the same \numTangMeasN{} links
+through the emulator with the default cell model and the reported unit-cell state and link
+budget (REPORTED). The emulator reproduces the
 published model curves within \numTangCurveMaxDevDb~dB; since K1 equals that model for one
 point per cell, this checks the implementation and bounds the digitization error. Against the
 chamber measurements the emulator's received power is low by \numTangMeasBiasDb~dB on
@@ -87,13 +86,13 @@ data: \numLabDraws{} geometries drawn from a prior over the unknowns, five model
 offsets, among them line of sight alone (M0), a log-distance fit (M0n) and the laboratory
 configuration (M2), fitted on three rings and scored on two, and three decision rules: C1
 (level consistent), C2 (the RIS model explains spatial structure better than M0) and C3
-(better than a uniform mirror). The data loader refuses the map unless the hash of the
-protocol files matches; GitHub's push log dates the hash before any comparison but after a
-descriptive inspection of the map (Appendix~\ref{app:vv}), so the plan is pre-specified and
-hash-locked before unblinding, not blind.
-\claim{C-LAB-POWER}Before unblinding, the plan ran
-the full analysis on \numLabDecoys{} synthetic maps drawn from M2 itself: C2 held in
-\numLabDecoyDetections{} of them (\numCiPct\,\% upper limit \numLabDecoyCiHighPct~\%), far
+(better than a uniform mirror). The plan's hash, which the data loader checks, was pushed after
+a descriptive inspection of the map but before any RIS model was fitted to it
+(Appendix~\ref{app:vv}): the plan
+is pre-specified and hash-locked before unblinding, not blind.
+\claim{C-LAB-POWER}In a power analysis on \numLabDecoys{} synthetic maps drawn from M2 itself,
+the full analysis found C2 in \numLabDecoyDetections{} of them (\numCiPct\,\% upper limit
+\numLabDecoyCiHighPct~\%), far
 below the pre-set threshold of \numLabUnderpoweredRate{}, so the study was labelled
 underpowered before the data were opened.
 

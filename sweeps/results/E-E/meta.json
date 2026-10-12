@@ -17,652 +17,652 @@
   "inputs": [
     {
       "path": "runs/rep1/static_focus/analysis.json",
-      "sha256": "56c1939fcecdccc624f85d870602dd493f9aeee955b7c485f4d07830c0e62cad",
+      "sha256": "3658d63830b1aabcf4e88c50f8a0a9f1d9413d03689e555bf1540f34747d37d2",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focus/events.jsonl",
-      "sha256": "995643721874d3ed8080476f4f62a9d652716f5623b5fd69786d0562f50d3d19",
+      "sha256": "6ee4a4e5d3011fd05cf9765d66bb8989d96e272664f195668191cd8e2aefac02",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focus/manifest.json",
-      "sha256": "8daf0680f5fdbf02d096c4acf720dae9cdc11959f6071ed93114704175d2c85f",
+      "sha256": "e4007e4f3e2572a445042ca062c4b1a0c0965f987df49f585dc40a04dbed00fb",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focus/metrics.jsonl",
-      "sha256": "ce3c64a4ff567ce5ee7b57a93d50921ae673a523373e643d96401f8375274654",
+      "sha256": "e752490672c4eea126b20be7e17f01d7e9037744ed819196a61c82c77187d93f",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focus/run.json",
-      "sha256": "3039ce77b6a19ba4c0260e333b9d702ca5a5c88497ecd6bdcfa366f212c36c7f",
+      "sha256": "1754629d057e8661d9b38ec6c6a3a727ab5c798b9c46802c3f65736c900d1fdb",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.10/analysis.json",
-      "sha256": "8f4dfef70fc0cf8fc2b2f602003d4ceff80c41a82dfad6841830bbd529bb2e4f",
+      "sha256": "9b309ea94aaf3c1b0487d31eb5e11d659eb005e5215833ed239535ef5e77ae24",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.10/events.jsonl",
-      "sha256": "4a3b280093400a8e5e7371cb20331bcb546d831ad28880d26e851639acb6e795",
+      "sha256": "8ad91eb31db180626a61bc31cee0939d14a48f1e222ef503777853943bec335d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.10/manifest.json",
-      "sha256": "54537d139e1b36ab530cbcb4712fff432e2c7efb36395a17d6043c8e50c38f22",
+      "sha256": "0fb23d45782f0e804239fd426f39ce4b80f6af96ab35529b23e693bd337a9dc0",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.10/metrics.jsonl",
-      "sha256": "85e56ac4f5812828efe0b728dd1e721ccb993f0a0cd847ae2f58e7969327af15",
+      "sha256": "cf82b2292533b96327c495dfd1bc172d7caad71563b6d5883d558a9bd2133f90",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.10/run.json",
-      "sha256": "8284265fb15d948772919b20ff8647f48013f930d3087b8998d474326f36a0a3",
+      "sha256": "6622f74c9a5bf4aa4c047f5c99c45db2f857b6a9220021a65cc84ffcf1487219",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.20/analysis.json",
-      "sha256": "2890827666531c2372eb2cda97247ab4c68ae5fc86c6a1567e73d7cd102751cb",
+      "sha256": "3f2ce2aa72673856a9674e0af09b89ecac626f3fedf9a7b5cc01788fd192dda8",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.20/events.jsonl",
-      "sha256": "0c03b922db0a92d34bf1a6382c64a47872a5c242be52a5e73282a87f9b1bce17",
+      "sha256": "19cb18da39c4d7c4c7a0307843ac9d133d890b369420e44f1157115bb1ec2228",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.20/manifest.json",
-      "sha256": "70d4c9aeae5008c9e24afd6cc2660adbc1ad4d34dc1230b4c4499343506153d9",
+      "sha256": "02ab770b25dcf54d88167cc3e7a60828fd952671b037e8afbc8f93ea4a881a9f",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.20/metrics.jsonl",
-      "sha256": "a8369d814806610b22ab39e75daed5c0b79297b26c7f62624c21a1ee5ed06f35",
+      "sha256": "47b77e8550f6194131ce61252a2acad66d05beeb3c60e6e1f54b66e006110d72",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.20/run.json",
-      "sha256": "d3b54d6b31cc4093bf9445136c9379089be9a4da031dcffc6dadf95d04fea073",
+      "sha256": "d6c3e64dbccfaaf516947583a2319a1f0c75b8c3559d6d515bbfa32520b73639",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.25/analysis.json",
-      "sha256": "b75b66f553c03a55b74d19e5dba90783fb2fd6017e09184285ccb8e98772520b",
+      "sha256": "71901abe9c5af6480d0cb84a72af256e10cf587844a8ccc1506dae975a7a7ac1",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.25/events.jsonl",
-      "sha256": "277c177d04d1aaa858b47bbc6326fb1f3f6533c6a7bb524afed7fd56cfb9c07b",
+      "sha256": "d6e83097e505b5226f39bddc56f1447209a40b85be2982d2be2c83e27a0adb33",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.25/manifest.json",
-      "sha256": "2af1d4235b73de89cb7682eb39247bbf3d0d3512e1af0eec7ba8680857587e43",
+      "sha256": "9222080bce26d1fac71718b20f9690a8a0f9cb67dca771f517ca224b2d99ba10",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.25/metrics.jsonl",
-      "sha256": "0fee7183e35c14f2bebe5fbe600f4221374c5b7593714d5a824fe3f6a6744f26",
+      "sha256": "390995fc912b5f58240035f240fe917c812823d0b290df1777df81fcedf176c2",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.25/run.json",
-      "sha256": "d7fc87ff5ef6fcad9b79bd10b630677ed1d03fcc9a09fa9d35ae3de6157e259e",
+      "sha256": "0bd66893ff90f0a61760c598e2eaf17fe0769d61a4ccc66aabf30c4b083443aa",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.30/analysis.json",
-      "sha256": "0557f6e6506ffd2fb8a95b9cdac75e5b77eacb6b39aa2dfa3d116820f1daf51b",
+      "sha256": "871d484f5707e2dfabdf760646ec135419bd7a325dd22c5b014d24c4369fe212",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.30/events.jsonl",
-      "sha256": "7862392d0ac37ad6c6e3eb8e63d21e4688578ac946fd81f5bdaee8d8a47fbd4d",
+      "sha256": "f8324e2ecb9695e8f5bdb1eb59880b6a596c1f5c0669f76f41907a92792ed00e",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.30/manifest.json",
-      "sha256": "cfa1c89427c5775a2fcf858073f37a6cae97c2deeec2b0c84884d5a6f5f920e6",
+      "sha256": "9b774672feec59f9421d93e0b520e3b4e05c76c9870eff0ce3c9e7a390243805",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.30/metrics.jsonl",
-      "sha256": "5b3e786661c34628fa0686f3944ac24a01d462ebd0abbb8949fe26a2d6eb0f8f",
+      "sha256": "b8cc1d49ad6cba72b739516feb5e5fecc5fbf6d720c7c3f3ea13815a6e675ddd",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.30/run.json",
-      "sha256": "e1673c1c9197485a139cc345e1a9a01b689103d6764954e297da99fcd89491bf",
+      "sha256": "e2956ea62347d60f21f63a1d3c23e4ab327411054916225618d8a6f8f0613770",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.35/analysis.json",
-      "sha256": "e7aef0718bdee4230744b6b1aa3e585c577aad48d087029acf132ff74e6cb682",
+      "sha256": "6d5df163ba9677a27b0c95e0fc48d3f5a2c43293928568c03f1e5d365ea0e324",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.35/events.jsonl",
-      "sha256": "a32b177a0ea8b49443f87cb71d72e08d9a93a89430c9f9f43f6aa94a6a25fb1c",
+      "sha256": "cc21dbf391051475b3ed83234f81c82048311cb2a5e9faee6d7118278b6e290e",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.35/manifest.json",
-      "sha256": "e4b1ebab581efb6d3fbb0d21ba264c8d059c9c153a6f471274c86daf13d4c87f",
+      "sha256": "f19ef8467fd622056bdef34c2a58aebe93a9033badcd39cce991f2176665623d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.35/metrics.jsonl",
-      "sha256": "50dc67a44317162a492a7de4408664fd15cb2a1cad7202d6777435978723a428",
+      "sha256": "2b9db66715dbaa2ff1be6a3a225e163fac1f818360d2d3d81159df9cf8648cc8",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.35/run.json",
-      "sha256": "019104cb3af205ae044cdb0868293d22440413bc68f5202fbf06cd26059da71f",
+      "sha256": "d2a8063421d67e5a3b8a6eaee2dd17ec9f7ffed5fe4c4678367a59ef28c0f84d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.40/analysis.json",
-      "sha256": "3d50ce65dd576cf0e75e69a75b07f91027ba295f35f2ed752669915c018e7f0d",
+      "sha256": "7c31bac93af430f89e81297a8c03a31a9c8690b5a0b159dc7eb1986a71071322",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.40/events.jsonl",
-      "sha256": "a01fb3bb199a8e90faef882cd80dea3ce797c24ad118215e483ec197088088ab",
+      "sha256": "4d69dbe455233018ffc4acc9a00191412deb836945460ec0e87842b640e3ed47",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.40/manifest.json",
-      "sha256": "c12415b316c2a9007c686a5582ebc8763e4818ed0bfececd4d12101539a075ef",
+      "sha256": "668ffbde19129c104187394ddcbd6e528d56da8d6e9f980c8c1616c537101be6",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.40/metrics.jsonl",
-      "sha256": "b5d1adb2e6b3b2f1cfa138d63ce3296ff12604cc14d216d59bb4dd961208ff70",
+      "sha256": "bac92d790c68e8313c1dd4113cada2fb2c8ba5987b474e2b0b7c2c0a9a0eeda0",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.40/run.json",
-      "sha256": "5b4b6c942c9b5ad0498dc8663d19a5b0a01e054174149846346042c97c57be6c",
+      "sha256": "52e369237e56ee7dfab53b732e6d2aa0a3eb4dd91a82f12d61cfed9e895e2402",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.50/analysis.json",
-      "sha256": "acf982686d15234ddea936cc4a5ab0be8fc345cec6698999de98da0b64dfb894",
+      "sha256": "81c8cc581f7d207279e3925a901dbe7e97f668b69336d8e729abfa3b4f716d0c",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.50/events.jsonl",
-      "sha256": "cba69772f8261d2b951006cf64548139339dca9e6f046614591c8eea67e2ba91",
+      "sha256": "6c4d3e7218999273565ade0212e0f9f653d435f48bb987850fac27dc43bf14ee",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.50/manifest.json",
-      "sha256": "73fb6fab635f4532353d4e94733a0775e8cf336d5250178bf245a68252546bc5",
+      "sha256": "93bb81d0d6d1938146dda79f3200ac918a99b2c4825203680094ae97750635f6",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.50/metrics.jsonl",
-      "sha256": "36112df83f342c10972afe77f029767ff5f67d0ecb8899e2c2fa7f64cce9cb22",
+      "sha256": "2f4015d8893f96496a24e931b1b83ac06110f02079376b8e9df143b657627d37",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_focusq0.50/run.json",
-      "sha256": "14c1a6cd8fe5cb22179d906bcf3a6ce0479eb83a2aee2c70981ae6beb6b9a120",
+      "sha256": "79838653fe96f97762ab4a20ae943fde7adc8fe9bd782d0b8e18f8312ec3fdae",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_random/analysis.json",
-      "sha256": "91801b1a6a6010d40d9afb4c5fb96f6bb533ebe4acf211c9a99d881c2b406e22",
+      "sha256": "fefa429c61759b1e5c0c997e28fefdbdd5f30b9213ec1ec7564535003d8115ec",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_random/events.jsonl",
-      "sha256": "e4cc881ebcd21a67d34fdba77b3c445114cb6c3ca11272cdea3b447b21fec844",
+      "sha256": "16202285e2f751be5e75b3ed57cbc963b3056aa28cc196ec52c7c889841290af",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_random/manifest.json",
-      "sha256": "32577e469926cd6f54af760d3e7b1e3b7eb274046684eeb80741742757c03d10",
+      "sha256": "7128b166fa6df57b09f10cc00c8a3010233c94c3fefd3e4e7965c400cac327fb",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_random/metrics.jsonl",
-      "sha256": "64c1823fa348f803ff72af435690f370e6bd07f18aaf77fa57fd15b5b0894c47",
+      "sha256": "7a441de972926a2d03b171fd0dfaeb69fd6b4cd4267fefaaadc1e25498767740",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_random/run.json",
-      "sha256": "80dba7d5e38a1a8756816cf9abac897b7632e49993dda6dc9b3220444e60cc5e",
+      "sha256": "59c497c98e59a81be7aebfb229ebec6a079300d66777e6f54760d6895757854a",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_uniform/analysis.json",
-      "sha256": "57b0745182715d0160182e46aca83856649059afb0018632eb49eca5230ed217",
+      "sha256": "57ed9e76b0741d1f1f089cf6d7beaacb143ffbaae9fe1ed6c752f926993fd2ed",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_uniform/events.jsonl",
-      "sha256": "9bb3799540934403889b86798ac9127c40162fdcfde942da2d053e7a7f34fffb",
+      "sha256": "53679da2efd825bfedaf5e663f4ac3bb4906e12f535ace479fe556e5d60c2421",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_uniform/manifest.json",
-      "sha256": "cdb59cf0d4228a2a6e0c4bd9ca399e17069f1d8f9529bf7ca069fb0d983cf4e2",
+      "sha256": "378a901a3b05039351b7abeef891e8a957a553b6e014514a70b591685dda0740",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_uniform/metrics.jsonl",
-      "sha256": "bc082caf9481d302db7112295bbc54f06b741c14e92caa4f7db10b608a5c57a7",
+      "sha256": "fcb5da9314af04f7d6a9855540e1d5c61f2d6cbdfa2fca292b40f0cb4261d572",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/static_uniform/run.json",
-      "sha256": "8acc114db068205b4d4fbb0638f09ec39a42c10f4aff586b424b6eccbc4c244c",
+      "sha256": "0cbc5693ed05cba13b95b20f7df4f3f67547ff946ff7a9f648c418ee2f517cfc",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/switching/analysis.json",
-      "sha256": "e1c549acc5db66af6fd1553aaeb962f8ccc0ee5a00d159b9b41b365bd29fa387",
+      "sha256": "67b0bf08c6785203d4a955be59e1d7490c25502893059879aa2edb72ba4d97d3",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/switching/events.jsonl",
-      "sha256": "aeb509de4d4868f4461d1f15c46b81603d0dfc3c979661ad00e98dc1008fa0aa",
+      "sha256": "be24f4ed1e0de699259cffdbd498dc3b73d173e8c0c866b1d2f0c261c36a42a3",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/switching/manifest.json",
-      "sha256": "82c27c0ef81ebf81b3007cd4d7ed039d52047b6f5f9f29d74921b61f85498db2",
+      "sha256": "20408123f3650294952a67c8ebe5bd511bc92da66ab3987847f99bc88e2f0ec9",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/switching/metrics.jsonl",
-      "sha256": "bafedcf86f6bce8011ff576cc66e248d11a6cc306b3078b8222e378b6b8b0a46",
+      "sha256": "6fdd7305f48c1c32e5fc7b0b78aae4ff4fa29e0c087df5d84e9bed01eb4fb8e7",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep1/switching/run.json",
-      "sha256": "6328f95c107aa7b4baccd8c1a35d65baccd3c292d0f79198af9dc7c8d69aa5b0",
+      "sha256": "0655bf4e79be7e44b49c0cac1b508e37baced3ce36edc8d091913dc288a7a8cc",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focus/analysis.json",
-      "sha256": "42943232bd2bb90efcad28c85255ad3a5c48b36366d00fe6de79b78b4d2882fb",
+      "sha256": "95e7087855f58098c0d020446d27df1d01d13f9bf6967d059157b097c09074b1",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focus/events.jsonl",
-      "sha256": "e2fea08dfe976caeae7b1ee295648849dcd9a80e113a0f9ee37406d740d2ae27",
+      "sha256": "fa5ca37a30705c39b2d36ec2a9f2fe32d6882c8cae51d599e57bb6293125d0de",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focus/manifest.json",
-      "sha256": "3f90b4a7db0bce011d9e82f1c3bf2655a213252184df63434d77086de9a18579",
+      "sha256": "36e9646f83615122df82a09a0931113f15329f601e6e8c26286b89776c7a8171",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focus/metrics.jsonl",
-      "sha256": "837da5280b1ffb2c6c5a3128580a44a35879181433546c823eba6d9741184eb0",
+      "sha256": "1ba44517f910cbd74645e3436ba9b4f64cc9497b58c0af0254e12cb2150e680d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focus/run.json",
-      "sha256": "5cce2dceb15bf0cfebbcd65a02636a5e2e1a47ba687b7f3ffe06d3260e8f391b",
+      "sha256": "3629994795e889f488afdf46bfc464a9238e1740649e9eda3f773837b9d34ad1",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.10/analysis.json",
-      "sha256": "393fb8b65b28b76130959c95f55cc9cc2ef030297c7328418fa0b5ace61d5c64",
+      "sha256": "d58811686b9d2029e431ce3fc5de1437d78921ad8c2d4fa778b8fd7d2ef4a0b0",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.10/events.jsonl",
-      "sha256": "495945f0693ab8cbcd5b3a63e87bb44f72211d46c887408ef314bf86e5c9ae66",
+      "sha256": "e9e0890ab8685f59435ec72763e122d75e15196943fbc22201ebde5cd1c33d0b",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.10/manifest.json",
-      "sha256": "1a88b5f759e63aacb4a5c0be02ae69e57db2b041c9a674b6ed9d393136e02793",
+      "sha256": "d52702cc81f2e946119c5dd82686fd79aa413e9e4332c845289c835b900588c4",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.10/metrics.jsonl",
-      "sha256": "1741b9babb6d530e249b1ba82c3ae23d073ee924631287f54c8d9eed84ee022f",
+      "sha256": "f64829a01f2f721df99a7928c710b61c472990bf661860e606a97fb9df36f724",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.10/run.json",
-      "sha256": "25151565ae53089152af4f6af25715c60383691c55d002cc4f3ef46744a27538",
+      "sha256": "9b40fe3b7dab1154cfe0f659bff5603b5e95b7176c4f5572b994f7db048892ea",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.20/analysis.json",
-      "sha256": "da7b65dc63a980ccad554ac099d3971304395483cae76f003e8fd8f08383d206",
+      "sha256": "6ecf0fe926770a950217812e3e871d68c3d2167776d8d0a90b069cd130b4d7e1",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.20/events.jsonl",
-      "sha256": "5da6541a5f6ae72ef93d9fafebcb7a2be68c50302d88209d7c9a3cd8ab69f046",
+      "sha256": "b0c1e745c2227b15cd69b29c28cd51788c65af368e92afbe9e2b792caf60dd38",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.20/manifest.json",
-      "sha256": "6b6788e5e5b9baffe00fdf23d934fcd9dc4755ae65f61afd2fd660f0c8d39e40",
+      "sha256": "bf1067dc1c8af7f539049a1825efde905250f7d036027a5408f8faf15ee7318f",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.20/metrics.jsonl",
-      "sha256": "7cd84b65fd5437e0ec226c519803d0f505e0e369454dc5b1159b8cda292539eb",
+      "sha256": "36b6a82b2148c3f62d215d00a76417ee1358b3f5212b0cb5e617b10401f471a7",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.20/run.json",
-      "sha256": "0ef52b0a023a612e01e05e9df8f9431af92d08dbcfd4907fc6fe0f837180b3ce",
+      "sha256": "6817e3843f144e365dcde571868dfce722cb4465de35309c54a1db6182503e27",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.25/analysis.json",
-      "sha256": "b89ba44a99c89b4c7edc2c553592123c5e7c8352141843cd04835e495fa4a79b",
+      "sha256": "273ec2f6d9715cbebaafdfc54a71c48f2a0655603b13d79e48c8bd8e99935f74",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.25/events.jsonl",
-      "sha256": "f1abbb902fefa69db0648455738d25fc1af808999d657fb214b8949b683f3860",
+      "sha256": "7ec3c3c325219de083662d6c928bd5263dd0f2fd7e0f471b4465abd44900a1c4",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.25/manifest.json",
-      "sha256": "847a9a4318eb0452fd38bf0482cc924ac45a24a801eb6eef212e721f91e4e521",
+      "sha256": "4d3f77fa86d71a38322f6e26853a9828c1feaf86f45f24177d6788d32dbecd13",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.25/metrics.jsonl",
-      "sha256": "0446717aec198b241772fc8428ce05062ee72572125f559f4a5073831c46bdf7",
+      "sha256": "ea60bb13e23fe4f03535c7f5e65de70134cce75f21d86c8b765d2ad93be21d31",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.25/run.json",
-      "sha256": "26d372cc39a9d2da7fb778ea025f136960de6d6bdf2e920bf947a75e2dad8902",
+      "sha256": "8715750e2908da04b12db8b8ca014254bbff3848ca892f7b0a425e8c5ddd8993",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.30/analysis.json",
-      "sha256": "486212e45bad19a042ba7aa4e6c324ce2c01e625d1ad1373ad21a0a126e6bdb2",
+      "sha256": "b2b3172c1aeece18055d01031d0dca93692bf0341d3caa316e8e3bc19f526140",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.30/events.jsonl",
-      "sha256": "616d7f52280cb114482c454ec39a4dda655bc8f42b629d66cea63040d30ffe5b",
+      "sha256": "83708cb6308c154070d2da3e6569df96af8702d27f5a4aafd9f6457616c70d35",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.30/manifest.json",
-      "sha256": "931b910157856cb668e1f176d7cfcf1a350b19b7806e6741f6dd646bb8807627",
+      "sha256": "1dad655753fe26131ea43d59f7cd7b77d28da8d5ec8a0d69ee33c9f5370ff01d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.30/metrics.jsonl",
-      "sha256": "da6f0b4e09367ad6049959c30d5623eca82096b7c47637f957e45214c96ef974",
+      "sha256": "d690ca44ba5afcf98e853587c242a450e964f83bb0514c377f0b49bb75713de2",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.30/run.json",
-      "sha256": "164fcc1fb0e2fcff8d5560adc7f01fc0e6b02e16d0e4b19cb832c9b194e91000",
+      "sha256": "16b5ccaad7b4803b49c07eeecfd8d7a426e1dcbbd68e9e89506198f91fd1b4e4",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.35/analysis.json",
-      "sha256": "1dd59e42643fb70c3c8c7e4d5473deca2148ff01c8423fa6e5e5ed7a6d5b68f0",
+      "sha256": "62580b7b23ab0c608c66f08ab49e386523b7ea6b75c58bd586d36da97824d70b",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.35/events.jsonl",
-      "sha256": "36ba21e70e202a4215c31284586cbb0d9504d78aa1373ec45a1f9e3b7cb24d79",
+      "sha256": "8f34c6f9aa8d419940aaab1ac4cdcb2773c8293cd41386069e60805703a2a895",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.35/manifest.json",
-      "sha256": "b8b5c441f588843a62637be672b5928b0a26443fc90371658c2c0b304380da69",
+      "sha256": "65331ebd32573110d082df3b8dea22a0fb2ac50ca724f3583fe6f53b3e1912b3",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.35/metrics.jsonl",
-      "sha256": "855faa4956232d0ae7533c16bdd13fe515ff7e7c766cc43569db74e9836307a8",
+      "sha256": "a27f84d8619cebea0d563bc69020151712d7284354a9c1488c06d8cffaeda297",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.35/run.json",
-      "sha256": "f3c5b778356758e05e7b604c4d006e1e78ac56ed7bc9e245dc6fcaff13743939",
+      "sha256": "e22a391f2b2246ce144bea1bf4cc015f02d5d41ef95f89d53611e0d0a7936b25",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.40/analysis.json",
-      "sha256": "361e93b3bdfc9969121fa22b065c0ebf32e0a51ac3a76b828a9492ca0040b0db",
+      "sha256": "0632b23696d604fa91090d78fcf3d58080119ea1b2ef9018d55fdcce1936c7bb",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.40/events.jsonl",
-      "sha256": "d0f81163c467644e971df77aa5fe3da15a10c20da03924e1a1e2f5a4dfeab78b",
+      "sha256": "1a917f1dcd621cdbe89eb7d1c0da5062ccc6ecf8f95b52ca081c05be47aba6be",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.40/manifest.json",
-      "sha256": "808f881fd27963d39d7d88902f6b7388fdb184e7d924303b03b10f4c59ed03cf",
+      "sha256": "07789928686da32feb48d63685a7a88e4f452a42371353ccf400a1cbbd8e386e",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.40/metrics.jsonl",
-      "sha256": "9ecaf71b471908ce3ac97870f392dd319b3c21096cc75cfe95a8f524c08fa068",
+      "sha256": "b3b0ca1abcf0fe62434e87aa8aa69b696031ffa42d51195e83affebb9aec6ad3",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.40/run.json",
-      "sha256": "128b1d1f8c14da41a38607bda893ad86799d1af64a1128c4cf711c6c7450ade7",
+      "sha256": "6761b99b3bcf403ce82bb594347fcd7807cb198b4c83c98ae0b26b1b3095dd3e",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.50/analysis.json",
-      "sha256": "d45396f798703d78e5038b982d4d190fa43bfb35e4793d178ae60ab6c73b23e4",
+      "sha256": "445a00a1128fb785443a3790f3de602aa0ed6d81455f7d2c0cff00c46243a0ad",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.50/events.jsonl",
-      "sha256": "4741da51f281fdbafdebb0e2a3ee9742c0f883f7769641fc0f7becbf6d304116",
+      "sha256": "743bcbe83ceafc7ce6a2fb92755ff57cde8e0108dcd2ab65474975b844e2dc79",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.50/manifest.json",
-      "sha256": "4fb0fbce6895088522e2298be60ca7eaab44002e058d43f2d28a113417ca6a98",
+      "sha256": "c8f3be78cbb8fed6e05d3bcb67031405662459b2a18387dea32a396bffca5e5c",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.50/metrics.jsonl",
-      "sha256": "d7bafa3d920dafa384c06fae68c6f3e45513cc24df149587934cc4c8efed6236",
+      "sha256": "28a153adbcd3cf4fddaef766d2b341f65c07bd0a9ff135027b8146caa2467331",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_focusq0.50/run.json",
-      "sha256": "8fb852f582436fd3084bbbf4c16c73a5cb5f9d3bfc7411b84ca334fac6d872b5",
+      "sha256": "11a88411551e9d9ed51a4be3d7131fa6d1794263bbf842da05e2d0ecde1f527d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_random/analysis.json",
-      "sha256": "7364ce016bdb94bee576c6885cc4553857db510ab21d705d0c3cf2af4d4b8efa",
+      "sha256": "6a1e306ebd41df92c0c2ad60be9c96a42e3cce729ac88e22e0acfdef4632cbf5",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_random/events.jsonl",
-      "sha256": "61001da9507d2ab27b54659c4ebe550f634a555854bdf5ec4b48c81f5e1c23e6",
+      "sha256": "ef11b9fa8d9ee1f0afb81d72d4b52dae01dd770a9235742a6838c9626759cf0d",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_random/manifest.json",
-      "sha256": "be3174c47a26cb10fc70f9fbac8c9b3e7d3e1614e3960137a6b2dacc17883e9a",
+      "sha256": "6c06548713dd27f3ba3e635a8cfe874eb380c6f4dc32e22f8da2a4a79a6ae407",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_random/metrics.jsonl",
-      "sha256": "e4dc28c5737b4bd802d177218b5508a282ddd6b67ded4cd11464b8cb4c827ba8",
+      "sha256": "89fa1e18f92d4a8401119c4f7a68eda2e590e850ac7ef577dcee22df406296a5",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_random/run.json",
-      "sha256": "7c9879f07e5e35e5b96191fc89034e7724f874e5e20e64876785b8d0065b1af0",
+      "sha256": "6af565196674f664a6a74704879b89e392f1fb18cf70eb971f3a7bbd86556a3f",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_uniform/analysis.json",
-      "sha256": "188543cff3bf509a6fa02e3b8741f2c168debf90fbbac4b119644c86444ee018",
+      "sha256": "7792fe732528a01e0e3801ecb545e655ecf9a4d71df764d68bd2de9f380e6bd6",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_uniform/events.jsonl",
-      "sha256": "9dc76d0f897697a58dbdeaf49c599e0e3cf05955535cafff4f0de4231ead9315",
+      "sha256": "82cd431137610acc54840fe95fd9d11cbb0f8ec37ad968493d6c1949a8839c3e",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_uniform/manifest.json",
-      "sha256": "6f79846e2a85813b6e24335b6896e38437bbf992df2c47e71e74e748268ede58",
+      "sha256": "65709373a916add7322f12e763090514af35d61341c779647a32328132d58d1f",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_uniform/metrics.jsonl",
-      "sha256": "8ffcf2688ab575605bb67551d461389fbd67c72d29cf6a2ceab371bc9ea1ae4c",
+      "sha256": "128627190a915759bf5207f19ed949d14bf61b2810b8a67ee733d836901105a9",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/static_uniform/run.json",
-      "sha256": "a4827581c46980aee16ecc802e3240f216023e8b153238249beb8b4fdc1fdfd7",
+      "sha256": "5c43306ef9241c4a27adc8c62f9cb403eb743ae140fab4643a61bdf4afb62692",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/switching/analysis.json",
-      "sha256": "623b84e6e9e5c15f70e2c2c0d823240d8b10acc08fae025b5ec1672dbb015e6b",
+      "sha256": "d427ce785d027fa4b440e2d4c84d06c02ab9e5170d1561eb17b9e56d8949a5e5",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/switching/events.jsonl",
-      "sha256": "105e6a45cd567da1e4f5ba70f020dd2f3f653a268efbcf5c80173ae65bea1a5e",
+      "sha256": "0e1cbd86c639b8bfa29a34922bca232eded7163d6ecbbea1cf524476e1ac0cd3",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/switching/manifest.json",
-      "sha256": "482f0fce8ea9bd20484fe3f2b9df018a2fc062e895fddb4d0610a264971cc0c2",
+      "sha256": "e9389cde167abfcfafe54e8510de1c319127e9e59360689440501bd85ed68645",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/switching/metrics.jsonl",
-      "sha256": "4285155945fe486525cf933b58db727ccc7408ce90ffac439fa0361298f7f32b",
+      "sha256": "901964a32d1bef55ef92e3dd8e5f422b101dc57e36e2eeb1446dc5abf88acc41",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/rep2/switching/run.json",
-      "sha256": "a86523b34329e2afc188639bebb9db7e1ab3e79478a2f59e9d4f7cfdb3524b66",
+      "sha256": "d71eed34bcff84bb914eea17c7b8434590cee41e5fb6384829ae1a0de9353e82",
       "data_class": "SIM-sremu"
     },
     {
       "path": "runs/throughput/rate_1.92e+06/analysis.json",
-      "sha256": "6aaa857cf48496746617b0f285171e1c98e9a9322df5b641e6eccc2b318440d2",
+      "sha256": "80bbdb52b72e7bd37058ff99a8357316b4da7a7755f0a274f4975e6242046539",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1.92e+06/events.jsonl",
-      "sha256": "67a9357da5fd072a29d9de8fb20d1947371178c1105e66cfe6ea4648000ed4c4",
+      "sha256": "be54aa2d33fefcc4ffa9a8b501484b3ba5d4d2a981b1f0a857a61f512942e0a9",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1.92e+06/manifest.json",
-      "sha256": "854e1e2be1f50c10efa7969babac5b7810815dd75fb1300077a1f4b52134a587",
+      "sha256": "3c3715fd60a753a143c990de73d64f81d059e5e05852c440ed4f47f753cd760f",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1.92e+06/metrics.jsonl",
-      "sha256": "81b492baf6dd8da6a210b1f6811c15a209904f16afabd0a305dd7ef6f6a121aa",
+      "sha256": "94db44810eeb11a1d10ed020a74532f8d5b045304aefc05443a76b33ed833790",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1.92e+06/run.json",
-      "sha256": "1e49042155d20a99782feacb52d345b3eae3bf6a760038d2e8d799d005ce99df",
+      "sha256": "73aa3ff828c3ce4d6f7a9abb59e4eb0504f54dea8a6f05a332acb6b8b6c5ea7c",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1e+06/analysis.json",
-      "sha256": "d7685787d7b87922654b3e07a7ad98b49d24840ddf5c09d8f8533f8c5d438247",
+      "sha256": "42c64a7cf74d42cfaa3d6afe1f7df99959dd734daf83d6919f4844a23b58a103",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1e+06/events.jsonl",
-      "sha256": "5fcf0c325b6f21f4d425a8f2f9838bc92db9d2379068e7291027443b5f98d34c",
+      "sha256": "0334f4f6d3c4899630973b89c518d7cc4913db1344cdd4541fa1a20a25708d2a",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1e+06/manifest.json",
-      "sha256": "2d358546166ff7fdd90f815e51843166da1a7a5fbcf4b497e57be4f03f46aff7",
+      "sha256": "109e0ebb3f81ee039b1e4890f3a9ea9a0f339dedf8443d09c84dc872f96f8336",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1e+06/metrics.jsonl",
-      "sha256": "daa4eece82fe0e01f57ecb7cf087d76b4ee61520a87778fb83972010cf3a4dbb",
+      "sha256": "7b87792f9232fe774fbec7cefa4716e7a69a499141beb929b2dfe40239de106f",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_1e+06/run.json",
-      "sha256": "3a42fe1fb56b896372c0207a772c71054b1d5c3a88816eec956b6ee8f28691dd",
+      "sha256": "1a4391f474837f4ec20c43dee54a7e84d5ad7f6f62b3c554737cf8964f7eaeca",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_3.84e+06/analysis.json",
-      "sha256": "6c12d393bfc5b3f3ab814d7cff79b37998fce12083f27c08bca98a74d07175fd",
+      "sha256": "124848dd1158a6afd2eb84140c6c399086ab05811f7283288fadc0cd837347ce",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_3.84e+06/events.jsonl",
-      "sha256": "f74d65bfb8d639f36893073e96ee6326d2fdf1c0a2d24451fc27b8ebe9ae75d1",
+      "sha256": "892bd10128632a40d302ba8b7246365499ead9a572dc0fa05099171d3a54e17d",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_3.84e+06/manifest.json",
-      "sha256": "697a1cc7aa9a1965fa31c6281e3e2e94cc5b7d99901297798f2b186269ed757b",
+      "sha256": "23d3a016829831a886ef7207102d51ea7d6234f36ee2cd768db2ba23573a13c6",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_3.84e+06/metrics.jsonl",
-      "sha256": "3854e3db0fb51c1b9767e82c81c24186072fc3a42033b9463ccc2d81a505656b",
+      "sha256": "7ea2c9a71ee5b8e66ac6348693c0a2aa7aa369d0fe3b4d4b8202849dbcf6fc49",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_3.84e+06/run.json",
-      "sha256": "878d682c193a00dcdbf2390a5f5b1d54e7def2e52e9cb1815ad526edd3bccbf0",
+      "sha256": "b9611f06dca6bcfa98fd388b373891fa169bee65818141ce70c177ff6e3ca45a",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_5.76e+06/analysis.json",
-      "sha256": "8c0f1f5a13e5a74e4b7d9ae7178b4dbae18e591ede4aeac269d05445bb9785a2",
+      "sha256": "d4d0ee66e3f31ba0fa85fc43e322a9f65de3b4821d43bcbd223d9db66d73dea4",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_5.76e+06/events.jsonl",
-      "sha256": "3c44e7948f81da4396b310ca65ae8745aea18bcf349481c44c29341dc5225914",
+      "sha256": "8239c5a5d41dc93de9a038c9e08b5546cd4d296f8b018a2c399896486282fc2c",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_5.76e+06/manifest.json",
-      "sha256": "2e8d6e8cc8151286d5caa3196612ded94e3353ef0206ca7e5b90abb0254d73d9",
+      "sha256": "83e3d987b9aa3d26f44c2b062595cf77e65ccb21e4886b96469b778b3484e862",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_5.76e+06/metrics.jsonl",
-      "sha256": "33246cf453c930d15e38a285a57947e4cb69648e787f621efb3f274180dbecbc",
+      "sha256": "0b5c7c44877de2c7b267f65cc77067a25be1c0f82bd34f196e84230dbc809cbb",
       "data_class": "MEAS"
     },
     {
       "path": "runs/throughput/rate_5.76e+06/run.json",
-      "sha256": "d38a30c153b323f855e9e7cac85ec1f28481db50d55ec1e1882bc5eb8b4cf5f2",
+      "sha256": "fbcab8090b33cb2f654e203ad8a04b755972a50587f0e6215c2d688b59b3158d",
       "data_class": "MEAS"
     }
   ],
@@ -692,9 +692,9 @@
       "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
       "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
     },
-    "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
+    "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010"
   },
-  "written_utc": "2026-10-12T00:22:37.571478Z",
+  "written_utc": "2026-10-12T03:17:55.408789Z",
   "examples_gnuradio_zmq_sha256": {
     "README.md": "1365e500b0a8b4b74878600b07bef9a925a3a3e3f72aa7588ef49caddd0407ef",
     "analyze_ris_ber.py": "8a06b1a9a9564444f6fde3077d352ac41dc56f967c7cae514bd97805465e2292",
@@ -709,7 +709,7 @@
     "run_ris_ber.py": "a7ac3b870dbadf881f8dbb6e588edb794df59d9dd59baad54dbcf607b679a6c5"
   },
   "git": {
-    "commit": "4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24",
+    "commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
     "dirty": false,
     "dirty_patch_sha256": null,
     "dirty_patch_path": null,
@@ -735,9 +735,9 @@
         "scenarios/studies/lab_arc.yaml": "f78c4c8615746d899eabd4b5f1cbdefbd82a2e70993f6643a28c23ea5beb060a",
         "scenarios/lab_like_A.yaml": "086f28d80a1270efcbe324d40bdfc17cee3b26fd71360d86a529e11e19acfe3d"
       },
-      "src_sremu_tree_sha256": "9185ef7ae6dc94bc984798f6d968829bc25acd02d220c454d199a15b756c5ab7"
+      "src_sremu_tree_sha256": "861576b0a2bbf982d7f2d274064b0d1647f9beed7abbf0da5407d811cf94c010"
     }
   },
-  "note": "pinned regeneration job (experiments/regenerate_paper_data.sh, mode full) at sremu 4ec4c2b6ed06f8f85fd04a350959053fbb3f6f24 on ip-172-31-39-198 (1 logical CPUs); GNU Radio 3.10.9.2 from the Ubuntu archive (_regen/gnuradio.json); served engine NUMBA_NUM_THREADS=16; repetitions run beside the VA-1 and E-C processes (lockstep: values and hashes do not depend on load); throughput runs alone on the otherwise idle host after every other experiment (MEAS of this host)",
+  "note": "pinned regeneration job (experiments/regenerate_paper_data.sh, mode full) at sremu bf0826812891043b8ce5d76acb9595d06307d4c4 on ip-172-31-34-109 (1 logical CPUs); GNU Radio 3.10.9.2 from the Ubuntu archive (_regen/gnuradio.json); served engine NUMBA_NUM_THREADS=16; repetitions run beside the VA-1 and E-C processes (lockstep: values and hashes do not depend on load); throughput runs alone on the otherwise idle host after every other experiment (MEAS of this host)",
   "root": "/opt/job/out/ee"
 }

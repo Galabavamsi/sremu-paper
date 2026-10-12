@@ -29,9 +29,11 @@ macro's ``max_chars`` budget (text macros are checked against it here).
 
 Rounding: decimals are rounded half-even on the exact decimal value of the source
 (``Decimal(repr(x))``); the Tang curve deviation is a bound (max rounded UP to 0.01 dB).
-Section VI values and Table VII come from ``sweeps/results/bench`` through
-``tools/bench_results.py``. Macros of results AWAITING the pinned rerun (F5 native-ZMQ RTF,
-E-F latency) are deliberately absent: they stay placeholders. With availability.yaml
+Section VI values and Table VII come from ``sweeps/results/bench`` and
+``sweeps/results/E-F/latency`` through ``tools/bench_results.py`` (F5 from the B2-F45 rerun,
+E-F latency from the regeneration job). Appendix H's statement that the installed emulator has
+the package source of the regeneration commit is checked here (src/sremu hash against the hash
+the regeneration results record). With availability.yaml
 ``status: conditional`` the availability macros expand to ``\\sremuUnreleased`` (the text
 prints no licence, URL or DOI); with ``status: released`` PENDING fields stay placeholders.
 
@@ -66,9 +68,9 @@ from paper_common import (
     spec_id_status,
 )
 
-TANG_RUN = "validation/tang/results/20261012T000448Z_vtang"
-CFO_RUN = "validation/cfo/results/20261012T000448Z_vcfo"
-FM_RUN = "validation/fm/results/20261012T000448Z_vfm"
+TANG_RUN = "validation/tang/results/20261012T025951Z_vtang"
+CFO_RUN = "validation/cfo/results/20261012T025950Z_vcfo"
+FM_RUN = "validation/fm/results/20261012T025951Z_vfm"
 LAB_RUN = "validation/ants_fig4b/results/20261011T003044Z_vlab_unblinded"
 LAB_PROTOCOL = "validation/ants_fig4b/protocol.json"
 LAB_PUSH_LOG = "sweeps/results/V-LAB-provenance/sremu_activity_20261011T1426Z.json"
@@ -563,18 +565,21 @@ def provenance_rows(paper_root: Path, sremu_root: Path) -> list[dict[str, str]]:
         add("Test record", r"Table~\ref{tab:vv}", meta.get("sremu_commit"),
             _tree(meta.get("sremu_dirty")), str(meta.get("host") or "n/r"), ts, _tt(p.name))
 
+    # The regeneration job's own record: the E-B arc run of that job names the AWS instance
+    # (sweeps/results/E-B-arc/meta.json, run.aws_run_id and host.instance_type).
+    arc_meta = read_json(sw / "E-B-arc" / "meta.json")
+
     def job_host(m: dict[str, Any]) -> str | None:
         """The validation records name the platform, not the instance. A record made in the
-        test record's regeneration job (same commit, same job git-state file, AWS kernel) ran
-        on the host that the test record's sidecar names."""
-        def state(s: object) -> str | None:
-            hit = re.search(r"(/\S*?git_state\.json)", str(s or ""))
-            return hit.group(1) if hit else None
-        same = (state(m.get("git_state_source")) is not None
-                and state(m.get("git_state_source")) == state(jmeta.get("git_state_source"))
-                and m.get("sremu_commit") == jmeta.get("sremu_commit")
+        pinned regeneration job (the job's git-state file _regen/git_state.json, the commit of
+        that job's E-B arc record, AWS kernel) ran on the host that the job's E-B arc record
+        names."""
+        same = ("/_regen/git_state.json" in str(m.get("git_state_source") or "")
+                and m.get("sremu_commit") == arc_meta["sremu"].get("commit")
+                and arc_meta["run"].get("aws_run_id")
                 and "-aws-" in str(m.get("platform") or ""))
-        return str(jmeta.get("host")) if same and jmeta.get("host") else None
+        host = (arc_meta.get("host") or {}).get("instance_type")
+        return f"AWS {host}" if same and host else None
 
     for name, used, run in (("V-TANG", r"Fig.~\ref{fig:F3}(b), Table~\ref{tab:tang}", TANG_RUN),
                             ("V-CFO", r"Fig.~\ref{fig:F5}(a, b)", CFO_RUN),
@@ -628,10 +633,21 @@ def provenance_rows(paper_root: Path, sremu_root: Path) -> list[dict[str, str]]:
     add("E-B, arc geometry", r"Fig.~\ref{fig:F9}(a, b)", arc["sremu"].get("commit"),
         _tree(arc["sremu"].get("dirty")), _host(None, arc["host"].get("instance_type")),
         arc["run"].get("t_start_utc"), _tt(arc["run"]["run_id"]))
+    efm = read_json(sw / "E-F" / "latency" / "manifest.json")
+    add("E-F latency", r"Section~\ref{sec:wc-data}", efm.get("git_commit"),
+        _tree(efm.get("git_dirty")),
+        _host(efm.get("platform"), _aws_type(efm.get("aws_instance") or {})),
+        efm.get("t_start_utc"), _tt("sweeps/results/E-F/latency"))
     bench = sw / "bench"
-    for b, used in (("B1", r"Section~\ref{sec:wallclock}"), ("B2", r"Fig.~\ref{fig:F7}"),
-                    ("B3", r"Fig.~\ref{fig:F8}(a, b)"), ("B4", r"Fig.~\ref{fig:F8}(c, d)"),
-                    ("B6", r"Section~\ref{sec:wallclock}")):
+    # B1 (cost model, isolation reference) and B6 (cross-tool context) are quoted only in
+    # Appendix E; the B4 lockstep part is quoted in Section VI-C (control loop)
+    for b, used in (("B1", r"Appendix~\ref{app:bench}"),
+                    ("B2", r"Fig.~\ref{fig:F7}(a--e)"),
+                    ("B2-F45", r"Fig.~\ref{fig:F7}(f), Section~\ref{sec:wc-data}"),
+                    ("B3", r"Fig.~\ref{fig:F8}(a, b)"),
+                    ("B4", r"Fig.~\ref{fig:F8}(c, d), Section~\ref{sec:wc-loop}"),
+                    ("B4-classic", r"Appendix~\ref{app:bench}"),
+                    ("B6", r"Appendix~\ref{app:bench}")):
         m = read_json(bench / b / "meta.json")
         run = m.get("run") or (m.get("runs") or {}).get("paced") or {}
         host = m.get("host") or {}
@@ -1752,12 +1768,29 @@ def compute(paper_root: Path, sremu_root: Path) -> tuple[dict[str, str], dict[st
     # ---------------------------------------------------------------- appendix: provenance table
     prow = provenance_rows(paper_root, sremu_root)
     tables["tableA_provenance.tex"] = render_provenance_table(prow)
+    # Appendix H says the locked (installed) checkout has the emulator source of the
+    # regeneration commit: the combined hash of src/sremu/**/*.py (experiments/common.py
+    # code_hashes) recorded by the regeneration results must equal the installed checkout's.
+    src = hashlib.sha256()
+    for p in sorted((sremu_root / "src" / "sremu").rglob("*.py")):
+        src.update(p.relative_to(sremu_root).as_posix().encode())
+        src.update(bytes(1))
+        src.update(p.read_bytes())
+    recorded = {(read_json(sw / rel).get("code") or {}).get("src_sremu_tree_sha256")
+                for rel in ("meta.json", "E-F/latency/meta.json", "E-C/meta.json")
+                if (sw / rel).is_file()}
+    if len(recorded) != 1 or src.hexdigest() not in recorded:
+        raise SystemExit("gen_results: Appendix H says the installed emulator checkout has the "
+                         "source (src/sremu) of the regeneration commit; the hash recorded by "
+                         f"the regeneration results {sorted(map(str, recorded))} differs from "
+                         f"the checkout's {src.hexdigest()}")
+    prov["src_sremu_tree_sha256"] = src.hexdigest()
     # Appendix H: the commit summary, grouped from the same rows (tools/vv_ids.py)
     v.update(provenance_values(paper_root, prow,
                                next(iter(js["meta"].values()), {})))
 
     # ---------------------------------------------------------------- VI: B1-B6, Table VII
-    from bench_results import bench_values  # sweeps/results/bench (MEAS; F5 stays pending)
+    from bench_results import bench_values  # sweeps/results/bench and E-F/latency (MEAS)
 
     bv, bprov, btables = bench_values(paper_root)
     clash = sorted(set(bv) & set(v))

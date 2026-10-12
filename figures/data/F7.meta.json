@@ -1,11 +1,11 @@
 {
   "figure": "F7",
-  "title": "Lockstep scalability on one AWS c7i.48xlarge (B2): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates",
-  "content_key": "6e92d6ee2e0b0840138cbebb6aba2e173857f35eaaceda6179408f907e2fa893",
-  "sremu_commit": "0f067930169f68b282fa318888bec467b81b6bfc",
+  "title": "Lockstep scalability on AWS c7i.48xlarge (B2, B2-F45): (a) RTF vs links (log-log) for every element count N, static (F1) and with mobility (F3), with the RTF = 1 line and the isolation reference points run alone; (b) RTF vs links for the feature sets F0-F4 at N = 240; (c) aggregate RX throughput vs links for four sample rates; (d) one-link RTF vs the number of surfaces; (e) RTF vs numba threads; (f) F5 (native ZMQ data plane, end to end) vs F4 of the same rerun",
+  "content_key": "525ed576da178aac1c518c1c08ee9392ba8cec9011bff1eae0e3167eb8eef325",
+  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "sremu_dirty": null,
   "sremu_dirty_note": "not determined: figure scripts start no git process; a final build checks clean trees before it runs any script",
-  "lock_commit": "UNPINNED",
+  "lock_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
   "data_classes": [
     "MEAS"
   ],
@@ -34,22 +34,41 @@
     {
       "path": "sweeps/results/bench/B2/meta.json",
       "data_class": "MEAS",
-      "sha256": "fb90e0643bad266a81e4bf81df4aa033bc5f82866fdb4f43405fdf0f8cf9fc10"
+      "sha256": "9049238f791591bd81dafde5b230f5b15f0d8f68d3a95304eaca0d5bdf580191"
+    },
+    {
+      "path": "sweeps/results/bench/B2-F45/run/points.csv",
+      "data_class": "MEAS",
+      "run_id": "20261012T032501Z_b2_server",
+      "host": "c7i.48xlarge",
+      "sremu_commit": "bf0826812891043b8ce5d76acb9595d06307d4c4",
+      "sha256": "ee1229eacf9321adb80681b67ab58aec3ffec616fe58284e9881877f89c59f8c"
+    },
+    {
+      "path": "sweeps/results/bench/B2-F45/stress_separate/summary.json",
+      "data_class": "MEAS",
+      "sha256": "d6e58fd6b1cc31f792c58e497d5f8944b448fb5271656b4561567dc499e8acf6"
+    },
+    {
+      "path": "sweeps/results/bench/B2-F45/meta.json",
+      "data_class": "MEAS",
+      "sha256": "088bf6c383324b0ba107e9abfcfee98463e4132bee23e7ae42633bd035039498"
     }
   ],
   "assumptions": [
     "SIM benchmark scenes (LOS and RIS paths, one carrier at 3.5 GHz, non-zero RIS path asserted per scene); the workload is not a physics result",
     "11 points ran concurrently (16 vCPUs each); isolation reference points rerun alone were 0.99-1.16x faster (open markers)",
     "aggregate throughput = n_rx * f_s * RTF (one rate group per scene)",
-    "F5 (native ZMQ) omitted: pending rerun after the transport fix",
+    "(a)-(e): B2 run at 309c633; (f): B2-F45 rerun at bf08268 on another instance of the same type, F5 end-to-end RTF against F4 of the same run (not compared with (a)-(e))",
+    "(e): thread counts above 16 ran in tier-4 slots of as many vCPUs, the others in 16-vCPU slots; all points packed",
     "points below the pilot floor (9 heavy F3 points) and failed points are not drawn"
   ],
   "profile": "full",
   "script": "figures/src/f07_lockstep.py",
-  "script_sha256": "bb2cd28f25dd741ae381e1961a80efcc292873aee5c5613058d23aa0c635fb35",
+  "script_sha256": "12e94eb2dfa1f3897030a924befe1f3902c316ac6b54612d2cf5c6b0b0f3def0",
   "outputs": {
-    "figures/out/F7.pdf": "616b90261b0046392a6db29078b4a91bed8c06956ed2f6b71f5de25ade04c6c2",
-    "figures/data/F7.csv": "ddaa75105555fffe77211354ea5cc03184ac85b70dd02c52287c3785e66928bb"
+    "figures/out/F7.pdf": "0431fbb7e2cb199e0f5b043f7d347dfc9cc1d7d1871f25fb26d4979c564730d1",
+    "figures/data/F7.csv": "72a30f320df9cda724c7ed5bee254f8095be38da76aab6dfab056c69f3e35e73"
   },
   "versions": {
     "python": "3.12.4",
@@ -58,7 +77,7 @@
     "matplotlib": "3.11.2"
   },
   "platform": "Windows-11-10.0.26200-SP0",
-  "generated_utc": "2026-10-12T01:15:46Z",
+  "generated_utc": "2026-10-12T06:59:09Z",
   "print": {
     "registry_width": "double",
     "target_width_in": 7.16,
