@@ -25,7 +25,7 @@ def _errors_after(paper_copy: Path, text: str) -> list[str]:
 def test_real_paper_passes_in_draft_mode() -> None:
     rep = check_claims(PAPER_ROOT, "draft", junit=[])
     assert rep.ok, rep.render()
-    assert any("C-OPEN pending: gate H-2 open" in n for n in rep.notes)
+    assert not any("C-OPEN pending" in n for n in rep.notes)  # H-2 closed 2026-10-15
 
 
 def test_final_mode_refuses_pending_claims() -> None:

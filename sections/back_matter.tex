@@ -1,29 +1,37 @@
-% Back matter (BLOCKER-3, MINOR-11). Code and data availability: the conditional statement of
-% availability.yaml (status: conditional; the release waits for the licence decision, human
-% gate H-2). It prints no licence, URL or DOI, so it is complete as it stands; the availability
-% macros expand to \sremuUnreleased while the status is conditional and must not be used here.
-% When the code is public (status: released, every field filled), the first sentence becomes
-% "... are available at \txtRepoUrl{} under the \txtLicence{} licence (archived at
-% \txtArchiveDoi)" and the data sentence names \txtDataDoi.
-% Acknowledgment: laboratory, funding and the generative-AI disclosure (IEEE: in the
-% acknowledgments; arXiv: report significant use) are a planned-content stub that the authors
-% write; a final build refuses it.
+% Back matter: code and data availability (availability.yaml, status released) and the
+% acknowledgment with the work's origins and the generative-AI disclosure.
 \section*{Code and Data Availability}
-\claim{C-OPEN}The emulator \sremu{} and the pipeline that builds this paper from recorded
-results (sweep specifications, result files with their provenance, figure scripts) will be
-released under an open-source licence once all authors and IIT Bhilai have approved the
-release; until then they are available from the corresponding author on request. The exact
-versions used here, the analysis plans of Sections~\ref{sec:vv-lab} and~\ref{sec:cases-ea}
-and their lock records will be archived with the release, together with the authors' own data
-files; the digitized laboratory map of Section~\ref{sec:vv-lab} will be released if the
-laboratory permits it. Third-party values, such as the curves and points
-of~\cite{Tang2022mmWave}, were digitized from published figures and are kept in the emulator
-repository with their source and digitization record.
+\claim{C-OPEN}The emulator \sremu{} is available at \txtRepoUrl{} under the \txtLicence{}
+licence. The pipeline that builds this paper from recorded results (sweep specifications,
+result files with their provenance, figure scripts and checks) and the paper sources are at
+\url{https://github.com/Galabavamsi/sremu-paper} under the same licence; \texttt{sremu.lock}
+names the emulator commit the results come from. The analysis plans of
+Sections~\ref{sec:vv-lab} and~\ref{sec:cases-ea}, their lock records and the digitized
+laboratory map of Section~\ref{sec:vv-lab} are in the same repositories. Third-party values,
+such as the curves and points of~\cite{Tang2022mmWave}, were digitized from published figures
+and are kept in the emulator repository with their source and digitization record.
 
 \section*{Acknowledgment}
-\claim{C-ACK}The benchmark and case-study runs marked AWS in
-Appendix~\ref{app:provenance} used Amazon Web Services EC2 instances. \sremustub{Pending author
-input: the laboratory where the measurement of Section~\ref{sec:vv-lab} was collected, any
-funding, and the use of generative AI (which assistant, for which sections and code, and how
-its output was checked; IEEE requires this disclosure in the acknowledgments, and arXiv asks
-authors to report significant use of text-generating tools).}
+\claim{C-ACK}This work builds on the author's earlier emulator for smart radio environments,
+written during a 2025 research internship at IIT Bhilai on a COMET Foundation-sponsored
+project on smart radio environments advised by Dr.~Arzad Alam Kherani: a time-stepped Python
+link-level emulator with node mobility, line-of-sight and RIS channel functions, a USRP-style
+IQ interface and external traffic interfaces
+(\url{https://github.com/Galabavamsi/RIS-SIM}), its 2026 rewrite with a browser dashboard and
+scenario library (\url{https://github.com/Galabavamsi/RIM-SIM-V2}), and the conference
+manuscript built on them, an unpublished ANTS 2025 submission with S.~Mishra, A.~Jaiswal,
+S.~Kumar, M.~Ambwani and A.~A.~Kherani. The problem statement, the requirements (sample-level
+timing of RIS commands, an SDR-style interface, controllers in the loop), the laboratory and
+FM scenarios and the reviewer feedback that shaped this paper come from that work. The author
+thanks Dr.~Kherani for advising it and the co-authors of the earlier submission, whose
+laboratory measurement is used in Section~\ref{sec:vv-lab}. The runs marked AWS in
+Appendix~\ref{app:provenance} used Amazon Web Services EC2 instances.
+
+\emph{Use of generative AI.} \sremu{}, its tests and analysis scripts, the paper pipeline and
+drafts of this manuscript were written with substantial assistance from Anthropic's Claude
+(Claude Code), working under the author's direction; the author set the scope, the
+requirements and the decisions recorded in the paper. Every reported number is produced by
+code from recorded results and is checked by automated tests, independent analytic and MATLAB
+references and recorded provenance (Section~\ref{sec:vv}, Appendices~\ref{app:vv}--\ref{app:provenance}); a review panel
+emulated with the same assistant preceded the final revision. The author takes full
+responsibility for the content.

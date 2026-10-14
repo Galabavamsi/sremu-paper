@@ -104,11 +104,9 @@ def test_author_block_order_and_corresponding_author() -> None:
     assert authors is not None
     names = [n.strip() for n in re.split(r",|\band~", authors.group(1).replace("%", ""))]
     names = [n.replace("~", " ") for n in names if n]
-    assert names == ["Galaba Vamsi", "Shubhika Mishra", "Anurag Jaiswal", "Smriti Kumar",
-                     "Mansi Ambwani", "Arzad Alam Kherani"]
+    assert names == ["Galaba Vamsi"]  # sole author (advisor's decision relayed 2026-10-15)
     thanks = [" ".join(t.split()) for t in re.findall(r"\\thanks\{([^{}]*)\}", _main())]
-    assert "Corresponding author: Galaba Vamsi (e-mail: galabav@iitbhilai.ac.in)." in thanks
-    assert any("Department of Electrical Engineering, Indian Institute of Technology Bhilai"
-               in t for t in thanks)
+    assert any("Indian Institute of Technology Bhilai" in t and "galabav@iitbhilai.ac.in" in t
+               for t in thanks)
     # the claim-checker drops \thanks, so affiliation text never trips the number rule
     assert "galabavamsi" not in remove_command(_main(), "thanks", 1)

@@ -64,11 +64,11 @@ terms or from the reported amplitude of the coding state, $|\Gamma|=\numTangGamm
 amplitude would raise the model by \numTangGammaLossDb~dB~\cite{Tang2022mmWave}.
 
 \subsection{Laboratory consistency check: protocol and outcome}
-\claim{C-LAB-DATA}The authors measured the map with two Ettus B200 radios and vertical whip
-antennas in front of six binary tiles fabricated by their group, whose RIS hardware includes
+\claim{C-LAB-DATA}The map was measured at IIT Bhilai with two Ettus B200 radios and vertical whip
+antennas in front of six binary tiles fabricated by the RIS group there, whose RIS hardware includes
 the switched unit cells of~\cite{Khan2025INDICON}. The map and the two state phases of
-Section~\ref{sec:vv-lab} appeared in the authors' unpublished ANTS 2025 conference
-submission, which drew a qualitative validation claim from the map; this study digitized that
+Section~\ref{sec:vv-lab} appeared in an unpublished ANTS 2025 conference
+submission by the author and colleagues, which drew a qualitative validation claim from the map; this study digitized that
 colour map, the form in which the measurement was available to it, and its pre-specified null
 result supersedes that claim. The geometry of the measurement was not recorded to the
 precision a model needs: the distance from the transmitter to the tiles, the angular span of
@@ -118,7 +118,7 @@ scale, has a residual of \numLabResidualOutlierDb~dB.
 \begin{figure*}[t]
 \centering
 \sremufigure{F4}{\textwidth}{Laboratory consistency check under geometric uncertainty.
-(a) Digitized map of a laboratory measurement collected by the authors. (b) Median
+(a) Digitized map of a laboratory measurement collected at IIT Bhilai. (b) Median
 prediction of the laboratory-configuration model M2 over the prior draws. (c) Measured minus
 predicted; the colour scale is clipped and the outlier is marked. Test-ring cells are
 outlined. (d) RMSE gain of M2 over the line-of-sight model M0 on the test rings over the prior
@@ -143,7 +143,7 @@ detection rate stays close to the pre-set threshold.
 used a BPSK burst of \numCfoBurstSamples{} samples at \numCfoRateSps~S/s; besides the
 least-squares phase estimator, a lag-1 estimator recovers $f$ within \numCfoLagMaxErrHz~Hz
 (Fig.~\ref{fig:F5}(a)). \claim{C-LINEAGE-DATA}The sweep, with its offset grid and its BPSK
-burst, appeared in the authors' unpublished ANTS 2025 submission (Section~\ref{sec:related});
+burst, appeared in the unpublished ANTS 2025 submission (Section~\ref{sec:related});
 the emulator regenerates it here.
 
 \claim{C-CFO-LESSON}Fig.~\ref{fig:F5}(a) also shows the generic pitfall. At

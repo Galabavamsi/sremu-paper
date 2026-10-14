@@ -26,8 +26,8 @@
 #                becomes "... are available at \txtRepoUrl{} under the \txtLicence{} licence
 #                (archived at \txtArchiveDoi)" (sections/back_matter.tex).
 
-status: conditional
-licence: PENDING
-repo_url: PENDING
-archive_doi: PENDING
-data_doi: PENDING
+status: released
+licence: MIT
+repo_url: https://github.com/Galabavamsi/sremu
+archive_doi: not archived yet
+data_doi: not archived yet

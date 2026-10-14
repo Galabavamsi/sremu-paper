@@ -273,8 +273,7 @@ def test_title_and_authors_of_main_tex() -> None:
     main = (PAPER_ROOT / "main.tex").read_text(encoding="utf-8")
     assert paper_title(main) == ("Timed RIS Control in the Loop: A Sample-Accurate IQ-Level "
                                  "Emulator with Characterized Timing")
-    assert paper_authors(main) == ["Galaba Vamsi", "Shubhika Mishra", "Anurag Jaiswal",
-                                   "Smriti Kumar", "Mansi Ambwani", "Arzad Alam Kherani"]
+    assert paper_authors(main) == ["Galaba Vamsi"]  # sole author (decision 2026-10-15)
 
 
 @unit

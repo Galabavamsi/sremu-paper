@@ -208,6 +208,9 @@ def test_final_refuses_placeholders_even_with_green_gates(paper_copy: Path, tmp_
     doc = json.loads(res.read_text(encoding="utf-8"))
     doc["values"].pop("numBtwoFfiveRtf")
     res.write_text(json.dumps(doc), encoding="utf-8")
+    # the paper itself has no section stub left since 2026-10-15: add one to this copy
+    bm = paper_copy / "sections" / "back_matter.tex"
+    bm.write_text(bm.read_text(encoding="utf-8") + "\n\\sremustub{test stub}\n", encoding="utf-8")
     junit = _green_junit(tmp_path / "junit.xml", props=pinned(sha))
     rec = Recorder(git_head=sha, clean=True, allow_git=True)
     rep = build(paper_copy, mode="final", latex=False, junit=[junit], sremu_root=SREMU_ROOT,

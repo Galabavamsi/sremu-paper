@@ -19,7 +19,8 @@ gates:
     title: Licence (MIT vs Apache-2.0) and arXiv licence
     who: Six authors + IIT Bhilai
     blocks: Public repository, CITATION.cff licence field, the words "open-source"/"Open" in title and abstract, arXiv posting
-    status: open
+    status: closed
+    closed_by: "Galaba Vamsi, 2026-10-15, on his advisor's instruction (Dr. A. A. Kherani): make the repositories public under the MIT licence and publish the preprint draft with Galaba Vamsi as sole author; arXiv submission to follow"
   H-3:
     title: WCL Eq. (2) dimensional check
     who: Mishra, Kherani
