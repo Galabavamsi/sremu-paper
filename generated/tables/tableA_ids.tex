@@ -22,14 +22,14 @@ PH-06 & Monostatic radar cross section of a plate & 1 m$^2$ at 400 m: $-126.067$
 PH-07 & Near-field focusing saturation, passivity & $d=1$ m: $-23.864$ dB ($L=1$ m), $-6.021$ dB ($L\to\infty$); $|h|\le 0.5$ & $\pm$0.01 dB; bound exact & -- & 5 \\
 PH-08 & Reciprocity of the full scene & LOS, ground, two walls, knife edge, RIS with a symmetric table & rel. $10^{-12}$ & \ref{sec:model-stack} & 20 \\
 PH-09 & Visibility of the panel & node behind the panel & RIS term exactly 0 & \ref{sec:model-k1} & 5 \\
-PH-10 & Flat ground, Fresnel coefficients & two-ray 139.10 dB (52 km, 100 MHz); Brewster angle 26.565$^\circ$; PEC & $\pm$0.01 dB; $10^{-12}$; exact & \ref{sec:model-stack} & 17 \\
+PH-10 & Flat ground, Fresnel coefficients & two-ray loss 139.10 dB (52 km, 100 MHz); Brewster angle 26.565$^\circ$; PEC & $\pm$0.01 dB; $10^{-12}$; exact & \ref{sec:model-stack} & 17 \\
 PH-11 & Single knife edge $F(\nu)$ & $|F(0)|=0.5$; approximation $J(\nu)$ vs exact loss; $\nu=10$: 32.95 dB & $10^{-12}$; 0.15 dB; $\pm$0.01 dB & \ref{sec:model-stack} & 29 \\
 PH-12 & Smooth-earth P.526 path (experimental tier) & regression: excess loss 37.14 and 20.28 dB at 52 km & $\pm$0.01 dB & -- & exp. \\
 PH-13 & Large-$N$ quantization loss & $\eta(b)=-3.922$, $-0.912$, $-0.224$ dB; lab pair $-4.105$ dB; Monte Carlo & $\pm$0.001 dB; Monte Carlo $\pm$0.15 dB & \ref{sec:model-nonideal} & 11 \\
 PH-14 & Phase-dependent amplitude model & $(\beta_{\min},\alpha)=(0.2,1.6)$: $-5.508$ dB; $(0.8,1.6)$: $-1.085$ dB & $\pm$0.01 dB & -- & 5 \\
 PH-15 & Efficiency and dead cells & $\eta=0.5$: $-3.0103$ dB; 10\% dead cells, $N=1024$: $-0.915$ dB & $10^{-9}$; $\pm$0.10 dB & \ref{sec:model-nonideal} & 6 \\
 PH-16 & Phase-wrap invariance & phases shifted by whole turns & $|\Delta h|\le$ $10^{-15}\,|h|$ & -- & 14 \\
-PH-17 & Geometric Doppler shift & LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz & $10^{-6}$ rad, $\pm$0.001 Hz; $\pm$0.01 Hz & \ref{sec:model-doppler} & 10 \\
+PH-17 & Geometric Doppler shift & LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz & LOS: $10^{-6}$ rad, $\pm$0.001 Hz; RIS path: $\pm$0.01 Hz & \ref{sec:model-doppler} & 10 \\
 PH-18 & Snapshot interpolation and render tiles & brute force per element and sample, three scenes & $|\Delta h|/|h|\le$ $10^{-3}$ & \ref{sec:model-doppler} & 27 \\
 PH-19 & Invariance to snapshot period and chunking & $T_u$ = auto, auto/2, auto/4; client chunks of 0.25, 1, 3.7 ms & rel. $2\times10^{-3}$; chunks bitwise & \ref{sec:model-doppler} & 9 \\
 PH-20 & Fractional delay, wideband rendering & every filter row in band; known delay of 37.4 samples & $\le$ $-60$ dB; 0.01 samples & \ref{sec:model-doppler} & 41 \\
@@ -37,7 +37,7 @@ PH-21 & Thermal noise power, independence & $-113.975$ dBm at 1 MS/s, $F=0$ dB; 
 PH-22 & Linearity, time shift, seeds & exact algebraic identities & $10^{-12}$ & -- & 10 \\
 PH-23 & Energy bound of a panel & scattered vs incident power, every tested configuration & scattered $\le$ incident & -- & 21 \\
 PH-24 & Exact binary optimum & brute force: $N=20$ ($2^{20}$ configurations), 100 positions & rel. $10^{-12}$ & \ref{sec:model-nonideal} & 2 \\
-PH-25 & Binary decomposition $\Gamma=m+ds$ & decomposed vs direct; lab pair: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB & $10^{-12}$; $\pm$0.01 dB & \ref{sec:model-nonideal} & 6 \\
+PH-25 & Binary decomposition $\Gamma=m\pm d$ & decomposed vs direct; lab pair, unit magnitudes assumed: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB & $10^{-12}$; $\pm$0.01 dB & \ref{sec:model-nonideal} & 6 \\
 PH-26 & Point vs patch cell model & $16\times16$ panel, 3.5 GHz: specular; 45$^\circ$ retro, 8.11 dB in the far field & 0.05 dB; $\pm$0.1 dB & \ref{sec:model-cells} & 7 \\
 PH-27 & Occluders and partitions & segment-polygon cases; partition of $L$ dB on the LOS & exact & \ref{sec:model-stack} & 24 \\
 PH-28 & Extension of incidence-angle tables & symmetry and specular entry of the extended table & exact & \ref{sec:design-states} & 2 \\

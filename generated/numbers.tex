@@ -59,6 +59,7 @@
 \newcommand{\txtHostServer}{c7i.48xlarge}% benchmark:B2
 \newcommand{\numBtwoPlanned}{909}% benchmark:B2
 \newcommand{\numBtwoRun}{889}% benchmark:B2
+\newcommand{\numBtwoPruned}{20}% benchmark:B2
 \newcommand{\numBtwoOk}{876}% benchmark:B2
 \newcommand{\numBtwoBelowFloor}{9}% benchmark:B2
 \newcommand{\numBtwoFailed}{4}% benchmark:B2
@@ -586,7 +587,7 @@
 \newcommand{\numSchemaVersion}{1}% code:sremu.transport.messages:SCHEMA_VERSION
 \newcommand{\numMaxMessageMiB}{1}% code:sremu.contracts:MAX_MESSAGE_BYTES / 2**20
 \newcommand{\numHardMessageMiB}{16}% code:sremu.transport.control_server:HARD_MESSAGE_LIMIT / 2**20
-\newcommand{\numMaxElements}{65,536}% code:sremu.contracts:MAX_ELEMENTS_PER_COMMAND
+\newcommand{\numMaxElements}{65\,536}% code:sremu.contracts:MAX_ELEMENTS_PER_COMMAND
 \newcommand{\numMaxCmdRateKHz}{10}% code:sremu.contracts:DEFAULT_MAX_COMMAND_RATE_HZ / 1e3
 \newcommand{\numEpsRel}{\ensuremath{10^{-3}}}% code:sremu.channel.interp:EPS_REL
 \newcommand{\numTuMaxMs}{10}% code:sremu.channel.interp:float(T_U_MAX_S * 1000)

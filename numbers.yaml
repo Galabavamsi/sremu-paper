@@ -387,6 +387,11 @@ macros:
     description: "B2 points run (the rest dropped by series pruning)"
     source: {type: benchmark, id: "B2"}
     max_chars: 5
+  - macro: numBtwoPruned
+    kind: number
+    description: "B2 points not started (series pruned after a point below the floor or a failure)"
+    source: {type: benchmark, id: "B2"}
+    max_chars: 5
   - macro: numBtwoOk
     kind: number
     description: "B2 points completed"
@@ -3371,7 +3376,7 @@ macros:
   - macro: numMaxElements
     kind: number
     description: Largest number of elements (states, phases, indices) in one command
-    source: {type: code, id: sremu.contracts, expr: "MAX_ELEMENTS_PER_COMMAND", fmt: ",d"}
+    source: {type: code, id: sremu.contracts, expr: "MAX_ELEMENTS_PER_COMMAND", fmt: "thin"}
     max_chars: 7
   - macro: numMaxCmdRateKHz
     kind: number

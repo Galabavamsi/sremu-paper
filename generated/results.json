@@ -1,5 +1,5 @@
 {
-  "sremu_commit": "1e1fcab3b8f6c2db3edf5273923e145c49014eae",
+  "sremu_commit": "39a2543699dc68f2e2c5c16fd5a85aed04520a1c",
   "note": "values computed by tools/gen_results.py from committed result files; each result ran at the commit its own record names (Table tab:provenance, summarized in Appendix H by txtProvRegenCommit / txtProvOtherCommits); V-LAB keeps its locked analysis commit by design",
   "values": {
     "numApiBufferSamples": "1000",
@@ -174,6 +174,7 @@
     "numBtwoNspreadPct": "3",
     "numBtwoOk": "876",
     "numBtwoPlanned": "909",
+    "numBtwoPruned": "20",
     "numBtwoRfourMobileRtf": "0.89",
     "numBtwoRfourStaticRtf": "4.93",
     "numBtwoRtfFfour": "1.46",

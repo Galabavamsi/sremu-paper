@@ -83,9 +83,14 @@ The time of a command is an exact surface time, a sample of a named RX stream, o
 possible' (asap), the earliest time that every receiver can still honour.
 \claim{C-LATE-CMD}The frontier of a receiver is its earliest uncomputed sample, and a command
 is late when a switch sample falls below a frontier. The default policy,
-\texttt{apply\_on\_arrival} as in UHD, moves the switch to the single surface time
-$t'=\max_{r,j}(\mathrm{frontier}_r/f_r-\tau_{r,j})$ and maps every receiver again
-with~\eqref{eq:kr}, so all receivers still see one physical switch; the policy
+\texttt{apply\_on\_arrival} as in UHD, moves the switch to a single surface time $t'$. It
+starts from $t'=\max_{r,j}(\mathrm{frontier}_r/f_r-\tau_{r,j})$, with the delays taken at the
+requested time (at the latest frontier for asap), maps every receiver again
+with~\eqref{eq:kr}, which takes the delays at $t'$, and raises $t'$ until every $k_{r,j}$
+reaches $\mathrm{frontier}_r$, so under mobility no switch lands in the past and all receivers
+still see one physical switch. The binding receiver's switch arrives at its frontier instant
+rather than up to half a sample earlier, so a receiver with a higher rate may switch a few
+samples later than rounding alone would allow; the policy
 \texttt{reject} returns \texttt{LATE\_COMMAND} and applies nothing.
 \claim{C-RECORDS}Each command yields one record with requested and applied surface times and
 samples per receiver, their difference (the lateness), wall-clock receipt and delivery times,

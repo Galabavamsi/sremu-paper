@@ -8,7 +8,7 @@
 \caption{Surveyed tools against the four properties of Section~\ref{sec:intro} (as of 10 Oct
 2026): (i) level and interface, (ii) run-time RIS control, (iii) RIS model and measured
 per-state responses, (iv) wall-clock behaviour. nv: not verified from a primary source; no
-evid.: a primary source does not mention it. Coef.: channel coefficients; TS: time series;
+evid.: a primary source does not mention it. Coef.: channel coefficients; CIR: channel impulse response; TS: time series;
 IQ: complex-baseband samples; DES: discrete-event simulation; PO: physical optics.
 Appendix~\ref{app:survey} gives versions, dates, mobility and licences.}
 \label{tab:toolsmain}
@@ -49,7 +49,7 @@ TRACE~\cite{Kumar2026TRACE} & Symbols & Yes (UDP) & Ideal phase; no & nv & On ac
 \midrule
 \sremu{} (this work) & IQ, UHD-shaped API & Yes, at a logged sample & Area-tied kernel;
   one-plane $\Gamma(s,f,\theta_i,\theta_s)$ tables; import tested, not with measured data &
-  Lockstep exact; paced measured & Not yet (on request) \\
+  Lockstep exact; paced measured & Yes (\txtLicence) \\
 \bottomrule
 \end{tabular}
 \end{table*}

@@ -17,6 +17,7 @@ expression must evaluate to an int, Fraction, float, str or a tuple/list of thos
 is joined as "a, b and c"). Formats (`fmt`):
   * None      int -> "64"; Fraction -> its integer or a %g float; float -> %g; str -> as is
               (TeX-escaped); bool is refused;
+  * "thin"    integer grouped by thin spaces: 65536 -> 65\\,536;
   * "sci"     power-of-ten LaTeX: 1e-3 -> \\ensuremath{10^{-3}},
               2e-5 -> \\ensuremath{2\\times10^{-5}};
   * any other Python format spec applied to every element (".3f", ",d", "g").
@@ -72,6 +73,11 @@ def format_scalar(v: Any, fmt: str | None) -> str:
         raise TypeError(f"unsupported value type {type(v).__name__}")
     if fmt == "sci":
         return _sci(float(v))
+    if fmt == "thin":
+        if not isinstance(v, int):
+            raise TypeError("the thin format applies to integers")
+        text = format(v, ",d").replace(",", "\\,")
+        return f"\\ensuremath{{{text}}}" if v < 0 else text
     if fmt:
         text = format(v, fmt)
     elif isinstance(v, int):

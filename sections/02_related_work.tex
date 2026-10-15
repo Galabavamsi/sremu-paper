@@ -31,7 +31,7 @@ offline~\cite{MathWorksRectangularRIS,MathWorksRISCDL}. Electromagnetic models w
 coupling~\cite{Faqiri2023PhysFad,Gradoni2021MutualCoupling} and macroscopic reradiation
 models~\cite{DegliEsposti2022Reradiation} describe the surface rather than a running link. Here the
 RIS configuration is an input to an offline computation, not a command received while a link
-runs; a systematic review co-authored by three of the present authors covers this group in
+runs; a systematic review co-authored by the author covers this group in
 more breadth~\cite{Kaur2026SLR}.
 
 \subsection{Network simulators and controller-in-the-loop frameworks}
@@ -75,7 +75,7 @@ validation step for \sremu{} (Section~\ref{sec:future}); this paper compares aga
 chamber measurements of Tang et al.~\cite{Tang2022mmWave} (Section~\ref{sec:vv-tang}).
 
 \subsection{TRACE}
-\claim{C-TRACE}TRACE~\cite{Kumar2026TRACE}, by some of the present authors, is a
+\claim{C-TRACE}TRACE~\cite{Kumar2026TRACE}, by colleagues of the author, is a
 socket-based modular framework that decouples transmitter, radio environment, controller
 and receiver through separate control-plane and data-plane interfaces. It evaluates minimum mean-square-error
 (MMSE) and orthogonal-matching-pursuit (OMP) channel estimation and a differential channel-aware update (DCAR) on symbol-level
@@ -90,8 +90,7 @@ drive \sremu{}'s control plane.
 \claim{C-GAP}We surveyed RIS simulators, ray tracers, network simulators, controller
 frameworks, IQ-level emulators and open RIS hardware and data releases up to 10 Oct 2026
 (method in Appendix~\ref{app:survey}). Table~\ref{tab:toolsmain} shows that each of properties (i)--(iv) of
-Section~\ref{sec:intro} appears in some row and no surveyed tool has all four (\sremu{} is
-not yet open). ACHEM
+Section~\ref{sec:intro} appears in some row and no surveyed tool has all four. ACHEM
 has (i) at a stronger level than \sremu{}, since it runs unmodified UHD applications, and
 (iv), but no RIS~\cite{Gurses2026ACHEM}; GoSimRIS and ORIX have (ii) at the level of channel
 coefficients~\cite{ElGhalbzouri2025GoSimRIS,Kayraklik2026ORIX}; QRIS accepts measured unit-cell

@@ -56,7 +56,7 @@ ids:
     tol: RIS term exactly 0
   - id: PH-10
     property: Flat ground, Fresnel coefficients
-    oracle: "two-ray 139.10 dB (52 km, 100 MHz); Brewster angle 26.565 deg; PEC"
+    oracle: "two-ray loss 139.10 dB (52 km, 100 MHz); Brewster angle 26.565 deg; PEC"
     tol: "+-0.01 dB; 1e-12; exact"
   - id: PH-11
     property: "Single knife edge $F(\\nu)$"
@@ -86,7 +86,7 @@ ids:
   - id: PH-17
     property: Geometric Doppler shift
     oracle: "LOS at 30 m/s, 3.5 GHz: 350.242 Hz; RIS path: 325.192 Hz"
-    tol: "1e-6 rad, +-0.001 Hz; +-0.01 Hz"
+    tol: "LOS: 1e-6 rad, +-0.001 Hz; RIS path: +-0.01 Hz"
   - id: PH-18
     property: Snapshot interpolation and render tiles
     oracle: brute force per element and sample, three scenes
@@ -116,8 +116,8 @@ ids:
     oracle: "brute force: $N=20$ ($2^{20}$ configurations), 100 positions"
     tol: rel. 1e-12
   - id: PH-25
-    property: "Binary decomposition $\\Gamma=m+ds$"
-    oracle: "decomposed vs direct; lab pair: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB"
+    property: "Binary decomposition $\\Gamma=m\\pm d$"
+    oracle: "decomposed vs direct; lab pair, unit magnitudes assumed: $|d|$: $-0.18$ dB, $|m|$: $-13.86$ dB"
     tol: "1e-12; +-0.01 dB"
   - id: PH-26
     property: Point vs patch cell model

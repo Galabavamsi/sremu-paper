@@ -73,15 +73,18 @@ installed emulator is the locked commit, both working trees are clean, every ide
 both verification gates passed in a test record of the locked code, every figure is current,
 every number is a macro written by the pipeline and every claim is supported. A figure is
 current when its stored content key, a hash of the emulator commit, the sweep specification,
-the input files and the figure script, matches. The constants and defaults quoted in
+the input files and the figure script, matches. The build does not rerun studies: a result
+file enters the key as recorded, so a result produced at another commit, or from a tree whose
+state was not recorded, is accepted, and Table~\ref{tab:provenance} shows its commit and
+tree state. The constants and defaults quoted in
 Sections~\ref{sec:design} and~\ref{sec:model} and Appendices~\ref{app:interfaces}
 and~\ref{app:model} are read from the locked code at build time,
 so the text cannot drift from the code. Every run directory carries the manifest of
 Section~\ref{sec:design-arch}, and a replay reproduces its received samples bit for bit. The
 build checks the lock commit, the test record and the figure content keys; the results
 themselves record the commit, tree state and host they were produced on, and
-Table~\ref{tab:provenance} lists them. Neither repository is public yet; the section Code and
-Data Availability states the conditions of their release.
+Table~\ref{tab:provenance} lists them. Both repositories are public (section Code and Data
+Availability).
 
 \claim{C-REPRO-RUNS}The results produced at emulator commit \txtProvRegenCommit{} from a clean
 tree are \txtProvRegenResults; all of them except the benchmarks come from one regeneration job
@@ -104,8 +107,10 @@ the laboratory states), ENG (an engineering choice made for a study, such as rec
 positions or the transition shape), SIM-sremu (outputs of this emulator), ANALYTIC (closed
 forms) and MATLAB (code-to-code references). Run manifests list the hash and data class of
 every input, and every figure caption names the classes it shows. Input files are copied into
-the repositories with their hashes and provenance; data not yet cleared for publication are
-read from a private location, and the tests that need them are skipped when it is absent.
+the repositories with their hashes and provenance, with one exception: the raw input file of
+the laboratory map of Section~\ref{sec:vv-lab} is read from a location outside the repositories that
+an environment variable names, and the tests that need it are skipped when it is absent; its
+per-cell values are in the published V-LAB result files.
 Response tables keep their own provenance (Section~\ref{sec:design-states}). The laboratory
 measurement of Section~\ref{sec:vv-lab} is a measurement collected at IIT Bhilai and enters
 as a digitized map (DIG); Appendix~\ref{app:vv} states its origin. Process records carry no

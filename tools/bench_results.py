@@ -196,6 +196,7 @@ def bench_values(paper_root: Path = PAPER_ROOT) -> tuple[dict[str, str], dict[st
                          f"{[r['error'][:60] for r in failed]}")
     v["numBtwoPlanned"] = str(b2s["points_planned"])
     v["numBtwoRun"] = str(b2s["points_run"])
+    v["numBtwoPruned"] = str(int(b2s["points_planned"]) - int(b2s["points_run"]))
     v["numBtwoOk"] = str(b2s["points_ok"])
     v["numBtwoBelowFloor"] = str(b2s["points_below_floor"])
     v["numBtwoFailed"] = str(b2s["points_failed"])

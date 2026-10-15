@@ -324,7 +324,10 @@ def render_table8(tab: dict[str, dict[str, str]]) -> str:
         r"\begin{table}[t]",
         r"\caption{Non-ideality ablation (E-C): loss of the optimized RIS term relative to ideal"
         r" continuous phase, in dB, per geometry, and the large-$N$ closed-form loss $\eta$."
-        r" SIM-sremu; ideal alphabets ANALYTIC; lab amplitudes ASSUMED; Tang states REPORTED.}",
+        r" SIM-sremu; ideal alphabets ANALYTIC; lab amplitudes ASSUMED; Tang states REPORTED."
+        r" $|\Gamma_2|$: magnitude of the second laboratory state, the other having unit"
+        r" magnitude; ---: no closed form for stuck cells, whose fixed term depends on the"
+        r" random draw.}",
         r"\label{tab:ablation}",
         r"\centering",
         r"\scriptsize",

@@ -86,13 +86,15 @@ data: \numLabDraws{} geometries drawn from a prior over the unknowns, five model
 offsets, among them line of sight alone (M0), a log-distance fit (M0n) and the laboratory
 configuration (M2), fitted on three rings and scored on two, and three decision rules: C1
 (level consistent), C2 (the RIS model explains spatial structure better than M0) and C3
-(better than a uniform mirror). The plan's hash, which the data loader checks, was pushed after
+(better than a uniform mirror). The SHA-256 hash of the analysis plan, which the data loader checks, was pushed to the
+repository after
 a descriptive inspection of the map but before any RIS model was fitted to it
 (Appendix~\ref{app:vv}): the plan
-is pre-specified and hash-locked before unblinding, not blind.
+is pre-specified and hash-locked before unblinding, not blind, and the lock rests on the
+repository's push log, not on an external registry.
 \claim{C-LAB-POWER}In a power analysis on \numLabDecoys{} synthetic maps drawn from M2 itself,
-the full analysis found C2 in \numLabDecoyDetections{} of them (\numCiPct\,\% upper limit
-\numLabDecoyCiHighPct~\%), far
+the full analysis found C2 in \numLabDecoyDetections{} of them (upper limit of the two-sided \numCiPct\,\%
+Clopper--Pearson interval \numLabDecoyCiHighPct~\%), far
 below the pre-set threshold of \numLabUnderpoweredRate{}, so the study was labelled
 underpowered before the data were opened.
 

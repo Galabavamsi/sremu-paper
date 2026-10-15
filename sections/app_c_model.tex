@@ -20,10 +20,13 @@ without angle dependence use a separable form of
 the coefficient tensor. Tables with angle dependence are cuts in one plane of incidence: a
 direction $\mathbf d$ from a cell enters as the signed angle
 $\mathrm{atan2}(\mathbf d\cdot\mathbf u,\mathbf d\cdot\mathbf n)$ in the plane of the panel
-normal $\mathbf n$ and its axis $\mathbf u$, and its component along the other axis is
+normal $\mathbf n$ and its axis $\mathbf u$; $\theta_i$ uses the direction from the cell to
+the transmitter and $\theta_s$ the direction from the cell to the receiver, both outward, so
+specular reflection is $\theta_s=-\theta_i$ in the table schema $\Gamma(s,f,\theta_i,\theta_s)$, and its component along the other axis is
 projected out (a panel option refuses off-plane geometry instead), while the obliquity and the
-front-side indicator of K1 use the full cosines. Tables of the incidence angle alone,
-$g(\theta)$, enter through the reciprocal extension $\Gamma(\theta_i,\theta_s)=g(|\theta_i-\theta_s|/2)$, an engineering choice (ENG). A table is read
+front-side indicator of K1 use the full cosines. With this convention the reciprocal extension of a table of the incidence angle alone
+(Appendix~\ref{app:interfaces}, PH-28) returns $g(|\theta|)$ at specular reflection and
+$g(0)$ at retro-reflection, an engineering choice (ENG). A table is read
 at the carrier of the link (linear in frequency between its grid points) and held over the
 signal's band, which may not exceed the table's validity bandwidth; there is no $\Gamma$ filter.
 No measured angle-dependent table is used in this paper. Channel coefficients are dimensionless and normalized as in the Friis
@@ -109,7 +112,7 @@ the delay of a path without a RIS is a chord, linear in time between its delays 
 snapshots, and its amplitude is complex-linear; the residual of a tile is the sum of its
 cells' coefficients relative to the tile's reference delay, interpolated complex-linearly.
 \claim{C-INTERP-BOUND}Half of the target $\varepsilon_{\mathrm{rel}}$ goes to each source of
-error. The chord error of a path with range $r$ is $k\ddot rT_u^2/8$ with $\ddot r\le
+error. The chord error of a path with range $r$ is $k|\ddot r|T_u^2/8$ with $|\ddot r|\le
 v_\perp^2/r_{\min}$, which gives
 \begin{equation}
 T_{\mathrm{curv}}=\sqrt{8(\varepsilon_{\mathrm{rel}}/2)\,r_{\min}/(k\,v_\perp^2)}.

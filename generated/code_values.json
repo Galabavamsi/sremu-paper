@@ -16,7 +16,7 @@
     "numLabStateOnePhaseDeg": "49.64",
     "numLabStateTwoPhaseDeg": "\\ensuremath{-153.77}",
     "numMaxCmdRateKHz": "10",
-    "numMaxElements": "65,536",
+    "numMaxElements": "65\\,536",
     "numMaxMessageMiB": "1",
     "numMetricsWindowMs": "100",
     "numNarrowbandRad": "0.05",

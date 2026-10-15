@@ -133,7 +133,8 @@ on a grid of \numEaFineGridMm~mm or finer, decisions on a \numEaCoarseGridCm~cm 
 \numEaGainOptLo--\numEaGainOptHi~dB, mean of the per-batch dB gains), and \numEaGainOptTwo~dB
 at \numEaFcTwoGHz~GHz. We measure the decay with delay (Fig.~\ref{fig:F10}) by the retention
 $\rho(\tau)=(P(\tau)-P_{\mathrm{stale}})/(P(0)-P_{\mathrm{stale}})$ in linear power, where
-$P_{\mathrm{stale}}$ uses a configuration optimal for an unrelated position. Half the benefit
+$P_{\mathrm{stale}}$ applies at each step the exact optimum for the position half the run away
+along the trajectory. Half the benefit
 is lost at $\tau_{1/2}=\numEaTauHalf$~s (\numCiPct\,\% interval
 \numEaTauHalfLo--\numEaTauHalfHi~s), and at \numEaFcTwoGHz~GHz at
 $\tau_{1/2}=\numEaTauHalfTwo$~s. In units of $\lambda/v$ the two half-lives are
@@ -150,7 +151,8 @@ or with one acting on both paths (Appendix~\ref{app:cases}), the optimum gains
 positions, the
 bandit beats URAP
 at every delay from \numEaTauBanditMinS~s by \numEaBanditMinDb--\numEaBanditMaxDb~dB (H-A3) but
-stays near the stale level (\numEaGainBandit~dB against \numEaGainStale~dB).
+stays near the stale level (the bandit gains \numEaGainBandit~dB, the stale configuration
+\numEaGainStale~dB).
 
 \claim{C-VA1}As a consistency check, not a finding, \numVaOneRows{} runs of
 \numVaOneDurS~s through the served engine, with an external controller in barrier mode and an

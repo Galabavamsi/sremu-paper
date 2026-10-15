@@ -61,12 +61,14 @@ in process (F4, solid) in the same run; bar: range and median of the
 \numBtwoFfiveStressRuns{} stress runs of the F5 base point.}{fig:F7}
 \end{figure*}
 
-\claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran:
-\numBtwoOk{} completed, \numBtwoBelowFloor{} of the heaviest mobility points fell below the
-pilot floor and were not measured, and \numBtwoFailed{} failed. Every failure was a point
-with the native ZMQ data plane (F5): three receive time-outs came from an error of the
-benchmark, whose served run ended before the clients' streams, and one benchmark error hit a
-point below the floor. Both were fixed in the benchmark, not in the emulator, and F5 was rerun
+\claim{C-WC-LOCKSTEP}Of \numBtwoPlanned{} planned B2 points, \numBtwoRun{} ran; the other
+\numBtwoPruned{} were not started because a smaller point of their series had fallen below the
+pilot floor or failed. Of the points that ran, \numBtwoOk{} completed, \numBtwoBelowFloor{} of
+the heaviest mobility points fell below the pilot floor (a pilot estimate, no measurement),
+and \numBtwoFailed{} failed. Every failure was a point with the native ZMQ data plane (F5):
+three receive time-outs came from an error of the benchmark, whose served run ended before
+the clients' streams, and the fourth, also a benchmark error, came from summarizing a point
+whose pilot was below the floor. Both were fixed in the benchmark, not in the emulator, and F5 was rerun
 (B2-F45).
 
 \claim{C-WC-ISOLATION}Concurrent points share the last-level cache, memory bandwidth and the
